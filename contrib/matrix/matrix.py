@@ -643,6 +643,7 @@ def svg_style():
     return (
         f"<style>text{{font-family:{FONT};font-size:12px;fill:#1f2328}}.head{{font-weight:600}}"
         f".cell{{font-size:11px;font-weight:700;text-anchor:middle}}.rule{{stroke:#d0d7de}}{colours}"
+        ".id{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}"
         ".none{stroke:#8c959f;stroke-dasharray:2 2}.hit{fill:transparent}a.row:hover .hit{fill:#eaeef2}a.row:hover .name{text-decoration:underline}"
         '</style><rect width="100%" height="100%" fill="#ffffff"/>'
     )
@@ -723,7 +724,7 @@ def svg(results, cases, link=None):
             out.append(f'<a class="row" href="{esc(link(case))}"><rect class="hit" x="10" '
                        f'y="{y - gap / 2}" width="{end - 10}" height="{ch + gap}" rx="3"/>')
         ident, name = label(case, info).split(" ", 1)
-        out.append(f'<text class="name" x="{left - 10}" y="{y + ch / 2 + 4}" text-anchor="end">'
+        out.append(f'<text class="name id" x="{left - 10}" y="{y + ch / 2 + 4}" text-anchor="end">'
                    f'{esc(ident)}</text><text class="name" x="{right}" y="{y + ch / 2 + 4}">'
                    f"{esc(name)}</text>")
         cells, letters = case_cells(info, results["cases"].get(case, {}), names)
