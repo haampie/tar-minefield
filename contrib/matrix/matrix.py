@@ -670,27 +670,31 @@ def legend_svg(x, y):
 
 def svg(results, cases, link=None):
     """Every implementation in columns; in rows, the outcomes of all cases first, as a bar per
-    implementation, then every case, labelled by its identifier and name, and with link(case) a link
-    to its page. Links work where the SVG is part of the page, not where it is an image."""
+    implementation, then every case, labelled by its identifier on the left and its name on the
+    right, so that on a narrow screen the cells come right after the identifiers; and with
+    link(case) a link to its page. Links work where the SVG is part of the page, not where it is
+    an image."""
     names = columns(results)
     counts = {n: {} for n in names}
     for case, info in cases.items():
         for n in names:
             symbol = outcome(info, results["cases"].get(case, {}).get(n))[0]
             counts[n][symbol] = counts[n].get(symbol, 0) + 1
-    left = 20 + 7 * max(len(label(c, i)) for c, i in cases.items())
+    left = 20 + 7 * max(len(i["id"]) for i in cases.values())
     cw, ch, gap, top = 22, 16, 2, 230
     xs, x, previous = {}, left, None
     for n in names:
         if previous is not None and group(n) != group(previous):
             x += 10
         xs[n], previous, x = x, n, x + cw + gap
+    right = x - gap + 10
+    end = right + 7 * max(len(label(c, i).split(" ", 1)[1]) for c, i in cases.items())
     out, y = [], top
     for n in names:
         out.append(f'<text transform="translate({xs[n] + cw / 2 + 4},{top - 8}) rotate(-60)">{esc(n)}</text>')
     # the bars: outcomes stacked from the bottom, with the number of each where it fits
     bar = 2 * len(cases)
-    out.append(f'<text x="{left - 10}" y="{y + bar / 2 + 4}" text-anchor="end">all {len(cases)} cases</text>')
+    out.append(f'<text x="{right}" y="{y + bar / 2 + 4}">all {len(cases)} cases</text>')
     for n in names:
         bottom = y + bar
         for symbol in ORDER:
@@ -711,15 +715,17 @@ def svg(results, cases, link=None):
     for case, info in cases.items():
         if category(info) != previous:
             previous = category(info)
-            out.append(f'<line class="rule" x1="10" x2="{x - gap}" y1="{y + 10}" y2="{y + 10}"/>'
+            out.append(f'<line class="rule" x1="10" x2="{end}" y1="{y + 10}" y2="{y + 10}"/>'
                        f'<text class="head" x="10" y="{y + 26}">{esc(GROUPS[previous])}</text>')
             y += 34
         # with links, the whole row is one, over a rect that highlights it on hover
         if link:
             out.append(f'<a class="row" href="{esc(link(case))}"><rect class="hit" x="10" '
-                       f'y="{y - gap / 2}" width="{x - gap - 10}" height="{ch + gap}" rx="3"/>')
+                       f'y="{y - gap / 2}" width="{end - 10}" height="{ch + gap}" rx="3"/>')
+        ident, name = label(case, info).split(" ", 1)
         out.append(f'<text class="name" x="{left - 10}" y="{y + ch / 2 + 4}" text-anchor="end">'
-                   f"{esc(label(case, info))}</text>")
+                   f'{esc(ident)}</text><text class="name" x="{right}" y="{y + ch / 2 + 4}">'
+                   f"{esc(name)}</text>")
         cells, letters = case_cells(info, results["cases"].get(case, {}), names)
         trees = {v: k for k, v in letters.items()}
         for n in names:
@@ -732,7 +738,7 @@ def svg(results, cases, link=None):
     legend, y = legend_svg(left, y + 24)
     out.append(legend)
     # the rotated name of the last column reaches past it, by the cosine of 60°
-    width, height = int(x + 20 + 7 * len(names[-1]) / 2), y + 4
+    width, height = int(max(x + 20 + 7 * len(names[-1]) / 2, end + 10)), y + 4
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
             f'viewBox="0 0 {width} {height}" role="img"><title>What implementations make of every '
             f'case of the test suite</title>{svg_style()}{"".join(out)}</svg>\n')
