@@ -32,7 +32,7 @@ import sys
 import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from report import load, origin, tidy_tables  # noqa: E402
+from report import ecosystems, load, origin, tidy_tables  # noqa: E402
 
 SITE = "https://stoppels.ch/tar/"
 
@@ -484,7 +484,7 @@ def reject_table(names, short, rated, union):
 def readme(path, datasets, names, short, rated, rows, union):
     default = sum(not passes_default(r) for r in union)
     block = (
-        f"Of the {len(union):,} source tarballs of Spack, nixpkgs, Guix and live-bootstrap, it "
+        f"Of the {len(union):,} source tarballs of {ecosystems(names)}, it "
         f"accepts {percent(len(union) - default, len(union))} ([per ecosystem]({SITE}#tarballs))."
     )
     text = open(path).read()

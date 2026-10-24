@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this test suite or its data, please cite it as below."
 title: "Tar file extraction test suite"
-abstract: "Test cases for ambiguities in the tar format, what implementations make of them, and a default policy based on scans of 62,622 source tarballs."
+abstract: "Test cases for ambiguities in the tar format, what implementations make of them, and a default policy based on scans of 72,587 source tarballs."
 type: software
 authors:
   - family-names: Stoppels

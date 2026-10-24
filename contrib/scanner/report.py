@@ -93,6 +93,19 @@ def counter(c, n=4):
     return ", ".join(f"{k} {v}" for k, v in c.most_common(n))
 
 
+# Ecosystems as the reports name them, by the directory of their scans, in the order they name them
+ECOSYSTEMS = {"spack": "Spack", "nix": "nixpkgs", "guix": "Guix", "live-bootstrap": "live-bootstrap",
+              "pypi": "PyPI"}
+
+
+def ecosystems(names):
+    """The ecosystems of datasets, by their names, as text, such as "Spack, nixpkgs and Guix"."""
+    dirs = sorted({n.split("/")[0] for n in names},
+                  key=lambda d: (list(ECOSYSTEMS).index(d) if d in ECOSYSTEMS else len(ECOSYSTEMS), d))
+    words = [ECOSYSTEMS.get(d, d) for d in dirs]
+    return ", ".join(words[:-1]) + " and " + words[-1] if len(words) > 1 else "".join(words)
+
+
 def dataset_name(path):
     parts = os.path.abspath(path).split(os.sep)
     if "data" in parts[:-1]:

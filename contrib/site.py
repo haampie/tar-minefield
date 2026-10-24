@@ -25,7 +25,7 @@ sys.path.insert(0, os.path.join(HERE, "scanner"))
 import matrix  # noqa: E402
 import strict  # noqa: E402
 import tarscan  # noqa: E402
-from report import load  # noqa: E402
+from report import ecosystems, load  # noqa: E402
 
 REPO = "https://github.com/haampie/tar-minefield"
 # The DOI of every version on Zenodo, as CITATION.cff has it
@@ -392,7 +392,7 @@ def data_section(ident, features, names, short, rated, union):
             'for all of them: see <a href="' + REPO + '/blob/main/contrib/data/STRICT.md#not-measured">'
             "STRICT.md</a>.</p>\n" if old else "")
     return (
-        "<p>Release tarballs of Spack, nixpkgs, Guix and live-bootstrap with "
+        f"<p>Release tarballs of {ecosystems(names)} with "
         + ", ".join(f"<code>{f}</code>" for f in features) + "." + policy + "</p>\n"
         + table("data-policy" if mixed else "data", rows) + "\n" + note
         + ("" if not k else f'<p>See <a href="seen-in.html#{ident}">'
@@ -557,8 +557,8 @@ def tarballs_section(names, short, rated, union):
     accepted = strict.percent(len(union) - rejected, len(union))
     svg, fixed, unknown = mtimes_svg(union)
     return (f'<h2 id="tarballs">Data to support the default policy</h2>\n<p>The default policy accepts '
-            f"{accepted} of the {len(union):,} distinct release tarballs of Spack, nixpkgs, Guix and "
-            f'live-bootstrap. See <a href="seen-in.html#rejected">the list of the {rejected:,} it rejects</a>, '
+            f"{accepted} of the {len(union):,} distinct release tarballs of {ecosystems(names)}. "
+            f'See <a href="seen-in.html#rejected">the list of the {rejected:,} it rejects</a>, '
             "and why.</p>\n"
             + table("tarballs", rows)
             + f"<p>The tarballs by the median mtime of their members, a rough check that the data "
@@ -662,7 +662,7 @@ def seen_page(cases, data):
                         f"{html.escape(name)}: {len(picks)} of {len(has):,}</h3>\n" + table("seen", rows))
     body = f"""<h1>Seen in source tarballs</h1>
 <p>Unlike the test archives, which are crafted, these are real release tarballs: of the
-{len(union):,} distinct ones of Spack, nixpkgs, Guix and live-bootstrap, those that cases are seen
+{len(union):,} distinct ones of {ecosystems(names)}, those that cases are seen
 in. Each links to where it was downloaded from, with the sha256 that its package pins, and an
 example from it where the scan recorded one.</p>
 <h2 id="rejected">Rejected by the default policy</h2>
@@ -719,7 +719,7 @@ common it is in source tarballs.</p>
 <h2 id="policy">Policy</h2>
 <p>This section defines the <em>default policy</em><sup><a href="#stricter">1</a></sup>, which
 accepts, tolerates or rejects each case below, based on <a href="#tarballs">data</a> from the
-{len(union):,} distinct release tarballs of Spack, nixpkgs, Guix and live-bootstrap.</p>
+{len(union):,} distinct release tarballs of {ecosystems(names)}.</p>
 <p>The <em>prevalence</em> column is an estimate of the likelihood of encountering a case in
 practice, from a scan of these tarballs.</p>
 <p class="note" id="stricter"><sup>1</sup> A policy can be stricter and also reject the tolerated

@@ -255,8 +255,12 @@ pinned by checksum.
 - Guix: `https://guix.gnu.org/sources.json` lists the sources of all packages with their
   checksums, for Software Heritage. Disarchive's database records the headers of the tarballs it
   can reassemble, which may allow some analysis without downloads.
+- PyPI: the simple index lists the files of about a million projects, with their checksums, and
+  `files.pythonhosted.org` serves them. Their sdists are millions, too many to scan, so a sample
+  of projects is scanned, one sdist each: the latest of half, an older one of the other half.
 
-Tarballs are deduplicated by checksum, since the three overlap a lot, GNU releases especially.
+Tarballs are deduplicated by checksum, since the repositories overlap a lot, GNU releases
+especially.
 
 ### A scanner, not an extractor
 
