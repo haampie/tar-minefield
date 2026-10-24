@@ -164,7 +164,8 @@ UNMEASURED = ('<p class="note" id="unmeasured">* Not measured in some tarballs, 
 def unmeasured(features, rows):
     """The tarballs of rows that may have one of features, which the version of tarscan.py that
     scanned them did not report, and what else it recorded does not rule out."""
-    return [r for r in rows if strict.unreported(features, r)
+    features = tuple(features)
+    return [r for r in rows if strict.unreported_by(features, r.get("scanner"))
             and any(strict.overlap(f, u) for f in features for u in strict.unmeasured(r))]
 
 
@@ -382,7 +383,7 @@ def data_section(ident, features, names, short, rated, union):
     policy = ("" if not k else " The default policy rejects some of them, as the last column "
               "says, and accepts the others." if mixed else " The default policy rejects all of "
               "them." if j else " The default policy accepts them.")
-    old = sum(1 for r in union if strict.unreported(features, r))
+    old = sum(1 for r in union if strict.unreported_by(tuple(features), r.get("scanner")))
     note = (f'<p class="note">* Not measured in {u:,} tarballs, which an earlier version of '
             "<code>tarscan.py</code> scanned: it did not report this, and what it did record does "
             "not rule it out. They are counted as not having it, so the share may be higher.</p>\n"

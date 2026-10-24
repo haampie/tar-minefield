@@ -287,6 +287,7 @@ UNREPORTED = {
 }
 
 
+@functools.cache
 def overlap(a, b):
     """Whether two features, either of which may be a pattern, can be the same."""
     return fnmatch.fnmatchcase(a, b) or fnmatch.fnmatchcase(b, a)
@@ -294,7 +295,14 @@ def overlap(a, b):
 
 def unreported(features, r):
     """Whether the version of tarscan.py that scanned a tarball did not report some of features."""
-    return any(overlap(f, u) for f in features for u in UNREPORTED.get(r.get("scanner"), ([],))[0])
+    return unreported_by(tuple(features), r.get("scanner"))
+
+
+@functools.cache
+def unreported_by(features, scanner):
+    """Whether a version of tarscan.py did not report some of features: the same for every tarball
+    it scanned, of which there are tens of thousands, and so remembered."""
+    return any(overlap(f, u) for f in features for u in UNREPORTED.get(scanner, ([],))[0])
 
 
 def unmeasured(r):
