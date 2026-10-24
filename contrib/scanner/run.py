@@ -17,11 +17,13 @@ It is in the order of rank, in which `scan` starts downloads, so the tarballs sc
 sample with a large P are the sample with a smaller P: an interrupted scan is a sample too, but
 for the few downloads that were under way.
 
-`scan` downloads each tarball from the first of its `urls` that works, scans it while it
-downloads, checks its sha256, and appends a JSON line to OUT. Tarballs are not written to disk
-unless --cache is given, so tarballs of any size are scanned. Tarballs that are already in OUT
-are skipped, so an interrupted run can continue. Every line records the version of the scanner,
-and of untar, as the start of the sha256 of their source.
+`scan` downloads each tarball from the first of its `urls` that works, scans it while it downloads,
+checks its sha256, and appends a JSON line to OUT. A tarball listed with a `member`, as a gem is
+with `data.tar.gz`, is an archive of the tarball: its sha256 is checked, and the member is scanned
+and extracted, with the features of the outer archive in `member_of`. Tarballs are not written to
+disk unless --cache is given, so tarballs of any size are scanned. Tarballs that are already in OUT
+are skipped, so an interrupted run can continue. Every line records the version of the scanner, and
+of untar, as the start of the sha256 of their source.
 
 With --reuse FILE (repeatable), tarballs that FILE has results for, from the same versions of
 the scanner and untar, are not downloaded: their results are copied. So ecosystems that share
@@ -38,7 +40,10 @@ kept. Tarballs in DIR are scanned from there, so a scan with a new version of th
 untar does not download them again.
 """
 
+import concurrent.futures
 import hashlib
+import http.client
+import io
 import json
 import lzma
 import multiprocessing
@@ -46,6 +51,7 @@ import os
 import subprocess
 import shutil
 import sys
+import tarfile
 import tempfile
 import time
 import traceback
@@ -80,6 +86,42 @@ def rank(seed, key):
     """A random but stable order: the order of most keys does not change when others are added
     or removed, so samples of later package lists overlap with earlier ones."""
     return hashlib.sha256(f"{seed}:{key}".encode()).hexdigest()
+
+
+def fetch(url, accept="*/*"):
+    """The body at url, tried again on errors."""
+    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": accept})
+    for attempt in range(5):
+        try:
+            with urllib.request.urlopen(request, timeout=60) as r:
+                return r.read()
+        except (OSError, http.client.HTTPException):
+            if attempt == 4:
+                raise
+
+
+def list_ranked(names, tarballs, n, seed):
+    """Print the tarballs of packages, as JSON lines, by the function tarballs of a package name, in
+    the order of the rank of packages by seed: only as many as `sample` takes n from, n/2 packages
+    with a latest version and n/2 others with an older one. As the rank of a package does not
+    depend on the others, the sample of this list is the sample of a list of all packages."""
+    names = sorted(names, key=lambda p: rank(seed, p))
+    latest, older = 0, 0
+    with concurrent.futures.ThreadPoolExecutor(8) as pool:
+        # in batches, in order, so that the list stops where the sample does
+        for start in range(0, len(names), 400):
+            for files in pool.map(tarballs, names[start:start + 400]):
+                if latest < n // 2:
+                    latest += any(f["latest"] for f in files)
+                elif older < n - n // 2:
+                    older += any(not f["latest"] for f in files)
+                else:
+                    continue
+                for f in files:
+                    print(json.dumps(f))
+            print(f"{start + 400} packages: {latest} latest, {older} older", file=sys.stderr)
+            if latest >= n // 2 and older >= n - n // 2:
+                break
 
 
 def sample(path, n, seed):
@@ -372,24 +414,41 @@ class Hashing:
         return data
 
 
+def member_of(f, t):
+    """For a tarball listed with a `member`, as a gem is with `data.tar.gz`: the outer archive read
+    from f whole, the member's data to scan, and what the scan finds of the outer archive."""
+    outer = f.read()
+    found = tarscan.scan(io.BytesIO(outer))
+    with tarfile.open(fileobj=io.BytesIO(outer), mode="r:") as archive:
+        data = archive.extractfile(t["member"]).read()
+    return io.BytesIO(data), {"name": t["member"], "features": found["features"],
+                              "error": found.get("error")}
+
+
 def scan_tarball(raw, t, untar_path, workdir, copy=None):
     """Scan the tarball read from raw, and extract it with untar if a path is given. Return the
-    result, or an error if it could not be read or its sha256 is wrong."""
+    result, or an error if it could not be read or its sha256 is wrong. For a tarball listed with a
+    `member`, the sha256 is that of the outer archive, and the member is scanned and extracted."""
     untar = Untar(untar_path, os.path.join(workdir, "untar")) if untar_path else None
     result = {}
-    f = Hashing(raw, copy)
+    downloaded = f = Hashing(raw, copy)
     try:
         start = time.time()
         try:
+            if t.get("member"):
+                inner, result["member_of"] = member_of(downloaded, t)
+                f = Hashing(inner)
             result.update(tarscan.scan(f, untar.write if untar else None))
         except Exception as e:
-            if f.failed is not None:
+            if downloaded.failed is not None:
                 return None, f"{type(e).__name__}: {e}"
             if isinstance(e, (EOFError, zlib.error, lzma.LZMAError, OSError)):
                 result["compression_error"] = f"{type(e).__name__}: {e}"
+            elif isinstance(e, (tarfile.TarError, KeyError)) and "member_of" not in result:
+                result["member_error"] = f"{type(e).__name__}: {e}"
             else:
                 result["scan_crash"] = traceback.format_exc()
-        while f.read(1 << 20):
+        while downloaded.read(1 << 20):
             pass
         result["scan_seconds"] = round(time.time() - start, 2)
     except Exception as e:
@@ -399,9 +458,9 @@ def scan_tarball(raw, t, untar_path, workdir, copy=None):
             result["untar_error"], skipped = untar.result()
             if skipped:
                 result["untar_skipped"] = skipped
-    if f.sha256.hexdigest() != t["sha256"]:
+    if downloaded.sha256.hexdigest() != t["sha256"]:
         return None, "sha256 mismatch"
-    result["bytes"] = f.size
+    result["bytes"] = downloaded.size
     return result, None
 
 

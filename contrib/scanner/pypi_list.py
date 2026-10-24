@@ -14,7 +14,6 @@ projects are left out. A package is a project, by its normalized name, and its l
 its latest sdist upload that is not yanked. A yanked sdist is listed as deprecated.
 """
 
-import concurrent.futures
 import http.client
 import json
 import os
@@ -23,7 +22,7 @@ import sys
 import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from run import USER_AGENT, rank  # noqa: E402
+from run import USER_AGENT, list_ranked  # noqa: E402
 
 INDEX = "https://pypi.org/simple/"
 TAR = re.compile(r"\.(tar|tar\.gz|tgz|tar\.bz2|tbz2|tar\.xz|txz)$", re.IGNORECASE)
@@ -92,23 +91,7 @@ def main():
     n, seed = int(sys.argv[1]), sys.argv[2]
     index = get(INDEX)
     print(f"_last-serial {index['meta']['_last-serial']}", file=sys.stderr)
-    names = sorted((p["name"] for p in index["projects"]), key=lambda p: rank(seed, p))
-    latest, older = 0, 0
-    with concurrent.futures.ThreadPoolExecutor(8) as pool:
-        # in batches, in order, so that the list stops where the sample does
-        for start in range(0, len(names), 400):
-            for files in pool.map(sdists, names[start:start + 400]):
-                if latest < n // 2:
-                    latest += any(f["latest"] for f in files)
-                elif older < n - n // 2:
-                    older += any(not f["latest"] for f in files)
-                else:
-                    continue
-                for f in files:
-                    print(json.dumps(f))
-            print(f"{start + 400} projects: {latest} latest, {older} older", file=sys.stderr)
-            if latest >= n // 2 and older >= n - n // 2:
-                break
+    list_ranked([p["name"] for p in index["projects"]], sdists, n, seed)
 
 
 if __name__ == "__main__":

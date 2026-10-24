@@ -10,8 +10,9 @@ strict parser can be checked against them before anyone adopts them (see
   it. Tarballs are streamed: they are not written to disk, unless they are cached.
 - `report.py` summarizes results as Markdown.
 - `spack_list.py`, `nix_list.py`, `guix_list.py` and `live_bootstrap_list.py` list the tarballs
-  of Spack's builtin repository, nixpkgs, Guix and live-bootstrap. `pypi_list.py` lists the sdists
-  of as many PyPI projects as a sample of them needs. Lists for other ecosystems go next to them,
+  of Spack's builtin repository, nixpkgs, Guix and live-bootstrap. `pypi_list.py`, `crates_list.py`
+  and `rubygems_list.py` list the sdists, crates and gems of as many PyPI projects, crates and gems
+  as a sample of them needs. Lists for other ecosystems go next to them,
   as `<ecosystem>_list.py`.
 
 Run the scripts with `python -I`: they handle untrusted data, and should not import modules from
