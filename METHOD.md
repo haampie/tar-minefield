@@ -258,6 +258,10 @@ pinned by checksum.
 - PyPI: the simple index lists the files of about a million projects, with their checksums, and
   `files.pythonhosted.org` serves them. Their sdists are millions, too many to scan, so a sample
   of projects is scanned, one sdist each: the latest of half, an older one of the other half.
+- crates.io and RubyGems, sampled the same way: crates.io's index has the sha256 of every crate,
+  which `cargo package` writes, and RubyGems' compact index that of every gem. A gem is a tar
+  whose member `data.tar.gz` holds the files it installs, written by RubyGems itself: that member
+  is the tarball measured, of gems for the platform `ruby`.
 
 Tarballs are deduplicated by checksum, since the repositories overlap a lot, GNU releases
 especially.

@@ -30,6 +30,10 @@ def origin(url):
         return "cran/bioconductor"
     if "cpan" in host:
         return "cpan"
+    if host in ("static.crates.io", "crates.io"):
+        return "crates.io"
+    if host in ("rubygems.org", "index.rubygems.org"):
+        return "rubygems"
     if "gnu.org" in host or url.split("/")[3:4] == ["gnu"]:
         return "gnu"
     return "other"
@@ -95,7 +99,7 @@ def counter(c, n=4):
 
 # Ecosystems as the reports name them, by the directory of their scans, in the order they name them
 ECOSYSTEMS = {"spack": "Spack", "nix": "nixpkgs", "guix": "Guix", "live-bootstrap": "live-bootstrap",
-              "pypi": "PyPI"}
+              "pypi": "PyPI", "crates": "crates.io", "rubygems": "RubyGems"}
 
 
 def ecosystems(names):

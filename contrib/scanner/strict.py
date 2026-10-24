@@ -358,10 +358,11 @@ MTIME_BINS = ["1981–1989"] + [f"{y}–{y + 1}" for y in range(1990, 2027, 2)] 
 
 
 def mtime_bin(r, fixed):
-    """The bin of MTIME_BINS of a tarball by the median mtime of its members, "fixed" where all
-    have one of fixed, and "unknown" where none is after 1980."""
+    """The bin of MTIME_BINS of a tarball by the median mtime of its members, "fixed" where that is
+    one of fixed, as where cargo writes its mtime on all but a few members, and "unknown" where it
+    is not after 1980."""
     m = r.get("mtime")
-    if m and m[0] == m[2] and m[0] in fixed and set(r["fingerprint"].get("uname", {})) <= {""}:
+    if m and m[1] in fixed:
         return "fixed"
     y = median_year(r)
     if y is None or y <= 1980:
@@ -432,9 +433,10 @@ def scanned_section(datasets, names, short, rated, rows, union):
         "version of a package in its repository.\n\n"
         "Tarballs by the median mtime of their members, which dates most of them:\n\n"
         f"```\n{chart}\n```\n\n"
-        "Fixed: every member has an mtime that a producer writes in place of the real one, such "
-        "as `cabal sdist` (2001-09-09) on Hackage and hatchling (2020-02-02) on PyPI, so these "
-        f"tarballs are not dated: {dates}. Unknown: no mtime after 1980."
+        "Fixed: the median mtime is one that a producer writes in place of the real one, such as "
+        "`cabal sdist` (2001-09-09) on Hackage, hatchling (2020-02-02) on PyPI and cargo "
+        f"(2006-07-24) on crates.io, so these tarballs are not dated: {dates}. Unknown: a median "
+        "mtime not after 1980, such as the 1980-01-02 of RubyGems."
     )
 
 

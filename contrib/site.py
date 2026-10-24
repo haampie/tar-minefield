@@ -563,8 +563,8 @@ def tarballs_section(names, short, rated, union):
             "and why.</p>\n"
             + table("tarballs", rows)
             + f"<p>The tarballs by the median mtime of their members, a rough check that the data "
-            f"spans enough years, leaving out the {fixed:,} whose mtimes are fixed for "
-            f"reproducibility and the {unknown:,} without one:</p>\n"
+            f"spans enough years, leaving out the {fixed + unknown:,} whose mtimes are fixed for "
+            f"reproducibility or missing:</p>\n"
             f'<div class="wide">{svg}</div>\n')
 
 
@@ -742,9 +742,10 @@ published there.</p>
 def main():
     out, args = sys.argv[1], sys.argv[2:]
     rows, datasets = load(args)
-    names = list(datasets)
+    rated = {n: [r for r in rs if strict.assessed(r)] for n, rs in datasets.items()}
+    # ecosystems in every table from the most tarballs to the fewest
+    names = sorted(datasets, key=lambda n: (-len(rated[n]), n))
     short = strict.labels(names)
-    rated = {n: [r for r in datasets[n] if strict.assessed(r)] for n in names}
     union = [r for r in rows if strict.assessed(r)]
     data = (names, short, rated, union)
     with open(os.path.join(matrix.HERE, "matrix.json")) as f:
