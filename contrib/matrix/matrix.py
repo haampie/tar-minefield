@@ -649,14 +649,13 @@ def svg_style():
     )
 
 
-def cell_svg(x, y, w, h, symbol, title):
-    """A cell, coloured and marked by its outcome. The letters of trees are left to MATRIX.md,
-    which lists the trees: the hover title names the tree."""
+def cell_svg(x, y, w, h, symbol):
+    """A cell, coloured and marked by its outcome. Which tree an implementation extracts is left
+    to MATRIX.md and the page of the case, which list the trees."""
     base = next(c for c in CLASSES if symbol.startswith(c))
     cls, mark = CLASSES[base][0], CLASSES[base][3]
-    return (f'<g><title>{esc(title)}</title><rect class="{cls}" x="{x}" y="{y}" width="{w}" '
-            f'height="{h}" rx="3"/><text class="cell {cls}-ink" x="{x + w / 2}" y="{y + h / 2 + 4}">{mark}'
-            "</text></g>")
+    return (f'<rect class="{cls}" x="{x}" y="{y}" width="{w}" height="{h}" rx="3"/>'
+            f'<text class="cell {cls}-ink" x="{x + w / 2}" y="{y + h / 2 + 4}">{mark}</text>')
 
 
 def legend_svg(x, y):
@@ -727,12 +726,9 @@ def svg(results, cases, link=None):
         out.append(f'<text class="name id" x="{left - 10}" y="{y + ch / 2 + 4}" text-anchor="end">'
                    f'{esc(ident)}</text><text class="name" x="{right}" y="{y + ch / 2 + 4}">'
                    f"{esc(name)}</text>")
-        cells, letters = case_cells(info, results["cases"].get(case, {}), names)
-        trees = {v: k for k, v in letters.items()}
+        cells, _ = case_cells(info, results["cases"].get(case, {}), names)
         for n in names:
-            letter = cells[n].lstrip("✅⚠️⛔❌💥❔\ufe0f")
-            title = f"{n}: {label(case, info)}" + (f", tree {letter}: {trees[letter]}" if letter in trees else "")
-            out.append(cell_svg(xs[n], y, cw, ch, cells[n], title.replace("`", "")))
+            out.append(cell_svg(xs[n], y, cw, ch, cells[n]))
         if link:
             out.append("</a>")
         y += ch + gap

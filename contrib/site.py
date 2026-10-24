@@ -715,7 +715,7 @@ def index_page(cases, results, data):
 <p>A case's page shows its archive block by block, what every implementation makes of it, and how
 common it is in source tarballs.</p>
 <h2>Comparison of different tar implementations</h2>
-<p>Click a case for its page; hover over a cell for the tree.</p>
+<p>Click a case for its page.</p>
 <div class="wide">{matrix.svg(results, cases, lambda case: cases[case]["id"] + ".html")}</div>
 <h2 id="policy">Policy</h2>
 <p>This section defines the <em>default policy</em><sup><a href="#stricter">1</a></sup>, which
