@@ -9,6 +9,7 @@ authors:
     orcid: "https://orcid.org/0009-0001-5266-9502"
   - family-names: Woodruff
     given-names: William
+    orcid: "https://orcid.org/0000-0001-8328-5627"
 doi: 10.5281/zenodo.23617964
 license: MIT
 repository-code: "https://github.com/haampie/tar-minefield"
