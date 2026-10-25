@@ -121,18 +121,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e47fbedb2823cf1ae4d4cdb8273635be2024cb870588e259c9b23d76ae49d484",
-      "size": 7
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -435,18 +423,6 @@
    },
    "Julia Tar.jl": {
     "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "PHP Archive_Tar": {
-    "error": "Invalid checksum for file \"junk after the end of the archive\n\" : 3332 calculated, 0 expected",
     "outside": {},
     "tree": {
      "a": {
@@ -765,18 +741,6 @@
     }
    },
    "Julia Tar.jl": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "PHP Archive_Tar": {
     "error": null,
     "outside": {},
     "tree": {
@@ -1107,18 +1071,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -1424,18 +1376,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -1720,11 +1660,6 @@
     "outside": {},
     "tree": {}
    },
-   "PHP Archive_Tar": {
-    "error": "Invalid checksum for file \"a\" : 4041 calculated, 3785 expected",
-    "outside": {},
-    "tree": {}
-   },
    "PHP PharData, as in Composer": {
     "error": "UnexpectedValueException: phar error: \"suite/archives/F06-checksum-signed.tar\" is a corrupted tar file (checksum mismatch of file \"a\")",
     "outside": {},
@@ -1992,24 +1927,6 @@
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
       "size": 2
-     }
-    }
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     },
-     "hidden": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "150e5c88fd5dcfef2162ad5bb75c0642af06171f3da45dd05411db9d89fc3189",
-      "size": 57
      }
     }
    },
@@ -2330,18 +2247,6 @@
     "outside": {},
     "tree": {}
    },
-   "PHP Archive_Tar": {
-    "error": "Extracted file DEST/a does not have the correct file size '512' (1024 expected). Archive may be corrupted.",
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "64164443bb63e338ef1cfdb12a57117cd1212270cc935a798f6e8a665cdf4659",
-      "size": 512
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": "UnexpectedValueException: phar error: \"suite/archives/F08-end-truncated-in-member.tar\" is a corrupted tar file (truncated)",
     "outside": {},
@@ -2636,24 +2541,6 @@
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
       "size": 2
-     }
-    }
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     },
-     "hidden": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "d688c765ff62a08783917188575f816f66ff404062ba9a40c93afe32709f1a30",
-      "size": 44
      }
     }
    },
@@ -3005,24 +2892,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "long-name": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -3332,18 +3201,6 @@
     "outside": {},
     "tree": {}
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -3651,18 +3508,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": "UnexpectedValueException: phar error: \"suite/archives/F12-number-size-gap.tar\" is a corrupted tar file (invalid entry size)",
     "outside": {},
@@ -3941,18 +3786,6 @@
     "outside": {},
     "tree": {
      "good\n1 path=evil": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "plain": {
       "executable": false,
       "kind": "file",
       "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
@@ -4322,18 +4155,6 @@
       "kind": "file",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "size": 0
-     }
-    }
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
      }
     }
    },
@@ -4726,21 +4547,6 @@
     "outside": {},
     "tree": {}
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "dir": {
-      "kind": "directory"
-     },
-     "dir/smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -5057,18 +4863,6 @@
     "outside": {},
     "tree": {}
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "unknown": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -5355,21 +5149,6 @@
     }
    },
    "Julia Tar.jl": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "project": {
-      "kind": "directory"
-     },
-     "project/README": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03",
-      "size": 6
-     }
-    }
-   },
-   "PHP Archive_Tar": {
     "error": null,
     "outside": {},
     "tree": {
@@ -5823,24 +5602,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -6261,18 +6022,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "header-name": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -6648,24 +6397,6 @@
       "kind": "file",
       "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
       "size": 512
-     }
-    }
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
      }
     }
    },
@@ -7064,18 +6795,6 @@
     "outside": {},
     "tree": {}
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -7410,24 +7129,6 @@
     "error": "invalid extended header size value: \"-512\"",
     "outside": {},
     "tree": {}
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
    },
    "PHP PharData, as in Composer": {
     "error": null,
@@ -7775,24 +7476,6 @@
     "error": "invalid extended header size value: \"+512\"",
     "outside": {},
     "tree": {}
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
    },
    "PHP PharData, as in Composer": {
     "error": null,
@@ -8143,24 +7826,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -8502,24 +8167,6 @@
     "error": "invalid extended header size value: \"\u0665\u0661\u0662\"",
     "outside": {},
     "tree": {}
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
    },
    "PHP PharData, as in Composer": {
     "error": null,
@@ -8909,30 +8556,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "smuggled-1": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "smuggled-2": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -9305,24 +8928,6 @@
     "error": "invalid extended header size value: \"18446744073709552128\"",
     "outside": {},
     "tree": {}
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
    },
    "PHP PharData, as in Composer": {
     "error": null,
@@ -9710,24 +9315,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -10088,18 +9675,6 @@
     "outside": {},
     "tree": {}
    },
-   "PHP Archive_Tar": {
-    "error": "Extracted file DEST/a does not have the correct file size '0' (-512 expected). Archive may be corrupted.",
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": "UnexpectedValueException: phar error: \"suite/archives/F29-number-size-base256-negative.tar\" is a corrupted tar file (invalid entry size)",
     "outside": {},
@@ -10296,18 +9871,6 @@
     "error": "0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\"\n  rest     = \"\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\"",
     "outside": {},
     "tree": {}
-   },
-   "PHP Archive_Tar": {
-    "error": "timeout",
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "81f239e354a6429cb07c5ef18ec9bb6572d0a9b10f919f00e647d8c4b7c3186b",
-      "size": 1536
-     }
-    }
    },
    "PHP PharData, as in Composer": {
     "error": "UnexpectedValueException: phar error: \"suite/archives/F30-number-size-base256-too-large.tar\" is a corrupted tar file (invalid entry size)",
@@ -10547,18 +10110,6 @@
     }
    },
    "Julia Tar.jl": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "PHP Archive_Tar": {
     "error": null,
     "outside": {},
     "tree": {
@@ -10901,18 +10452,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "184294b2fb6512fb777010e132d602fa64c13999e4d8a5537ed6d039b8eb91ff",
-      "size": 13
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -11222,21 +10761,6 @@
     "error": "directory with non-zero size\nTar.Header(\"dir/\", :directory, 0o755, 512, \"\")",
     "outside": {},
     "tree": {}
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "dir": {
-      "kind": "directory"
-     },
-     "dir/smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
    },
    "PHP PharData, as in Composer": {
     "error": null,
@@ -11555,11 +11079,6 @@
     "outside": {},
     "tree": {}
    },
-   "PHP Archive_Tar": {
-    "error": "Error while opening {DEST/a/} in write binary mode",
-    "outside": {},
-    "tree": {}
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -11839,18 +11358,6 @@
     "error": "non-link with link path\nTar.Header(\"a\", :file, 0o644, 19, \"target\")",
     "outside": {},
     "tree": {}
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "bc34584905a5181d95c6e40e9230db4c9e2d85e6e73d3335837078cd12168cb9",
-      "size": 19
-     }
-    }
    },
    "PHP PharData, as in Composer": {
     "error": null,
@@ -12152,15 +11659,6 @@
     "error": "non-directory path ending with '/'\nTar.Header(\"link/\", :symlink, 0o644, 0, \"target\")",
     "outside": {},
     "tree": {}
-   },
-   "PHP Archive_Tar": {
-    "error": "Unable to extract symbolic link {DEST/link/}",
-    "outside": {},
-    "tree": {
-     "target": {
-      "kind": "directory"
-     }
-    }
    },
    "PHP PharData, as in Composer": {
     "error": null,
@@ -12495,21 +11993,6 @@
     }
    },
    "Julia Tar.jl": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd": {
-      "kind": "directory"
-     },
-     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "bbdbb75b415ee9a40f0b3796a8b41a0b7723afe5726b870474ad220a4886d06d",
-      "size": 5
-     }
-    }
-   },
-   "PHP Archive_Tar": {
     "error": null,
     "outside": {},
     "tree": {
@@ -12871,18 +12354,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0e716a5fef4e6dc1bcfff22ad52f73ca4eee3f4ea8292f4a1918daa32592889f",
-      "size": 5
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -13225,21 +12696,6 @@
       "kind": "directory"
      },
      "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "bbdbb75b415ee9a40f0b3796a8b41a0b7723afe5726b870474ad220a4886d06d",
-      "size": 5
-     }
-    }
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd": {
-      "kind": "directory"
-     },
-     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/fffffffffffffffffffffffffffffffffffffff": {
       "executable": false,
       "kind": "file",
       "sha256": "bbdbb75b415ee9a40f0b3796a8b41a0b7723afe5726b870474ad220a4886d06d",
@@ -13656,21 +13112,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp": {
-      "kind": "directory"
-     },
-     "pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/file": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "7dd9c6f93ad04e58505b507580eaf064f0240ce4567f9ca5e741ec09a5cc08be",
-      "size": 9
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -14032,18 +13473,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": "PharException: Extraction from phar \"suite/archives/N05-name-dot.tar\" failed: Cannot extract \".\", internal error",
     "outside": {},
@@ -14349,18 +13778,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -14652,11 +14069,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": "Out-of-path file extraction {DEST/link --> /tar-minefield-nonexistent}",
-    "outside": {},
-    "tree": {}
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -14902,18 +14314,6 @@
     "outside": {},
     "tree": {
      "from-pax": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "from-header": {
       "executable": false,
       "kind": "file",
       "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
@@ -15191,18 +14591,6 @@
     "outside": {},
     "tree": {
      "second": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "header-name": {
       "executable": false,
       "kind": "file",
       "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
@@ -15529,21 +14917,6 @@
     }
    },
    "Julia Tar.jl": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "dir": {
-      "kind": "directory"
-     },
-     "dir/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "PHP Archive_Tar": {
     "error": null,
     "outside": {},
     "tree": {
@@ -15921,21 +15294,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "15000000000": {
-      "kind": "directory"
-     },
-     "15000000000/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -16221,18 +15579,6 @@
     "outside": {},
     "tree": {}
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "tar-minefield-absolute": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
-      "size": 89
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -16492,18 +15838,6 @@
     }
    },
    "Julia Tar.jl": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a\\b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "15acfc3964b079ab6ebbd9d9b221baa8de131a1201dd6938e1bed5779633cc37",
-      "size": 21
-     }
-    }
-   },
-   "PHP Archive_Tar": {
     "error": null,
     "outside": {},
     "tree": {
@@ -16827,18 +16161,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "ef476e8dd053036dc13248a09bb0be746485e3067bb5979943b7d6972be0604e",
-      "size": 10
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -17144,18 +16466,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a\nb": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "93d2f8418e760b244545798b892899921327396ea6913af7482bd1c845b9d2bb",
-      "size": 21
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -17438,11 +16748,6 @@
     "outside": {},
     "tree": {}
    },
-   "PHP Archive_Tar": {
-    "error": "Malicious .tar detected, file \"tar-minefield/../../tar-minefield-escaped\" will not install in desired directory tree",
-    "outside": {},
-    "tree": {}
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -17631,11 +16936,6 @@
    },
    "Julia Tar.jl": {
     "error": "path is empty\nTar.Header(\"\", :file, 0o644, 8, \"\")",
-    "outside": {},
-    "tree": {}
-   },
-   "PHP Archive_Tar": {
-    "error": "Invalid checksum for file \"no name\n\" : 936 calculated, 0 expected",
     "outside": {},
     "tree": {}
    },
@@ -17835,18 +17135,6 @@
     }
    },
    "Julia Tar.jl": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "caf\udce9": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "ff3f1fa3c91cb8860152fd87c5d02ce40fe42fd3b2bbd2f5c22edebd216bbcaa",
-      "size": 8
-     }
-    }
-   },
-   "PHP Archive_Tar": {
     "error": null,
     "outside": {},
     "tree": {
@@ -18114,18 +17402,6 @@
     "outside": {},
     "tree": {}
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "header-name": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "627be4bf9be5c6a4472f8e15498fcc5b4fd213e4f2a04ef9ff443a01e87321c8",
-      "size": 12
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -18387,18 +17663,6 @@
     "outside": {},
     "tree": {
      "second": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "header-name": {
       "executable": false,
       "kind": "file",
       "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
@@ -18758,24 +18022,6 @@
     "outside": {},
     "tree": {
      "global-name": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     },
-     "b": {
       "executable": false,
       "kind": "file",
       "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
@@ -19151,18 +18397,6 @@
     "outside": {},
     "tree": {}
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "from-header": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -19424,18 +18658,6 @@
     "outside": {},
     "tree": {
      "from-gnu": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "from-header": {
       "executable": false,
       "kind": "file",
       "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
@@ -19734,18 +18956,6 @@
     "outside": {},
     "tree": {
      "caf\udce9": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "cafe": {
       "executable": false,
       "kind": "file",
       "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
@@ -20093,21 +19303,6 @@
     }
    },
    "Julia Tar.jl": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "d": {
-      "kind": "directory"
-     },
-     "d/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "PHP Archive_Tar": {
     "error": null,
     "outside": {},
     "tree": {
@@ -20479,18 +19674,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "d": {
-      "kind": "directory"
-     },
-     "d/sub": {
-      "kind": "directory"
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -20741,18 +19924,6 @@
     "outside": {},
     "tree": {}
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "h": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": "UnexpectedValueException: phar error: \"suite/archives/S03-hardlink-missing-target.tar\" is a corrupted tar file - hard link to non-existent file \"missing\"",
     "outside": {},
@@ -20943,18 +20114,6 @@
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
       "size": 2
-     }
-    }
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
      }
     }
    },
@@ -21237,24 +20396,6 @@
     "error": "Tarball contains hardlink with non-existent target:\n- path = \"h\"\n- target = \"f\"\nRefusing to extract \u2014 possible attack!",
     "outside": {},
     "tree": {}
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "f": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
-      "size": 2
-     },
-     "h": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
    },
    "PHP PharData, as in Composer": {
     "error": "UnexpectedValueException: phar error: \"suite/archives/S05-hardlink-to-later-member.tar\" is a corrupted tar file - hard link to non-existent file \"f\"",
@@ -21560,28 +20701,6 @@
     "error": "Tarball contains hardlink with f target:\n- path = \"h\"\n- target = \"s\"\nRefusing to extract \u2014 possible attack!",
     "outside": {},
     "tree": {}
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "f": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
-      "size": 2
-     },
-     "h": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "s": {
-      "kind": "symlink",
-      "target": "f"
-     }
-    }
    },
    "PHP PharData, as in Composer": {
     "error": null,
@@ -22014,18 +21133,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "761d1fb145ca8c7130231412276df60f34dd34554c4d174b973a45e3222475a9",
-      "size": 5
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -22330,18 +21437,6 @@
      }
     }
    },
-   "PHP Archive_Tar": {
-    "error": "Unable to create path for DEST/a/",
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "294e546a0ce055e7407284ba86ac4b30e651ef32238105f76bdbc94d9f4e110a",
-      "size": 13
-     }
-    }
-   },
    "PHP PharData, as in Composer": {
     "error": null,
     "outside": {},
@@ -22625,18 +21720,6 @@
     }
    },
    "Julia Tar.jl": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a6328afc76e9db71da297ebff4b0d3e7a7eb3b01d917c05a6573fef121b6ecb6",
-      "size": 5
-     }
-    }
-   },
-   "PHP Archive_Tar": {
     "error": null,
     "outside": {},
     "tree": {
@@ -22958,22 +22041,6 @@
     "outside": {},
     "tree": {
      "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "d5a04bbbfe088df673a06a4550290ced19ea7d4205c7d21de7567ddf67db0012",
-      "size": 28
-     }
-    }
-   },
-   "PHP Archive_Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "kind": "symlink",
-      "target": "target"
-     },
-     "target": {
       "executable": false,
       "kind": "file",
       "sha256": "d5a04bbbfe088df673a06a4550290ced19ea7d4205c7d21de7567ddf67db0012",
@@ -23312,11 +22379,6 @@
     "outside": {},
     "tree": {}
    },
-   "PHP Archive_Tar": {
-    "error": "Out-of-path file extraction {DEST/d --> ..}",
-    "outside": {},
-    "tree": {}
-   },
    "PHP PharData, as in Composer": {
     "error": "to open stream: No such file or directory in contrib/matrix/runners/php/extract.php on line 13\nPharException: Extraction from phar \"suite/archives/S11-tree-through-symlink.tar\" failed: Cannot extract \"d/tar-minefield-through-symlink\", could not open for writing \"DEST/d/tar-minefield-through-symlink\"",
     "outside": {},
@@ -23614,18 +22676,6 @@
       "kind": "file",
       "sha256": "8e53e3786fd1019a1eaf9a9defce99066a193ce65fe511a2a988cd67cadf6016",
       "size": 13
-     }
-    }
-   },
-   "PHP Archive_Tar": {
-    "error": "Unable to create path for DEST/a/b",
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "da69f286f03c0d2131b3f95afe7c8d31b4f65cbf5ca49a12c41d8bf02d366a34",
-      "size": 7
      }
     }
    },
@@ -23928,11 +22978,6 @@
    "kind": "extract",
    "name": "PHP PharData, as in Composer",
    "version": "PharData of PHP 8.5.4, as Composer's TarDownloader calls it"
-  },
-  {
-   "kind": "extract",
-   "name": "PHP Archive_Tar",
-   "version": "PEAR Archive_Tar 1.6.1, extract, on PHP 8.5.4"
   },
   {
    "kind": "extract",

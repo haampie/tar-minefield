@@ -1,5 +1,0 @@
-# The files of PEAR's Archive_Tar 1.6.1 and of the PEAR base class it extends, from
-# pear/pear-core-minimal 1.10.18, at the commits that Packagist names: path in the include path,
-# URL and sha256.
-Archive/Tar.php https://raw.githubusercontent.com/pear/Archive_Tar/a0d2c458a2ff6ee8943ac4271b7f57d613529ae0/Archive/Tar.php 3e38447f61dc30bac4cdf7c8257c85e9b7ce85a514a7fcfb3d4797ac058c787e
-PEAR.php https://raw.githubusercontent.com/pear/pear-core-minimal/c7b55789d01de0ce090d289b73f1bbd6a2f113b1/src/PEAR.php 1e118ec5b36b847af5d8181c0e34c8482c4fa833ce4f2cea4059c927ee2fdbb8
