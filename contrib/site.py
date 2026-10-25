@@ -853,7 +853,7 @@ def main():
         files[info["id"] + ".html"] = case_page(case, info, results, data)
     # the pages in order, each with links to the one before and after it, by name, and to the index:
     # in columns that do not change, so that clicking through them the links stay where they are
-    sequence = ([("index.html", "all cases")]
+    sequence = ([("index.html", "tar-minefield")]
                 + [(info["id"] + ".html", matrix.label(case, info)) for case, info in cases.items()]
                 + [("seen-in.html", "Seen in source tarballs")])
     for i, (name, _) in enumerate(sequence):
@@ -866,7 +866,7 @@ def main():
                              f"{text}</a>")
             else:
                 cells.append(f'<span class="{rel}"></span>')
-        nav = f'<nav class="wide">{cells[0]}<a href="index.html">all cases</a>{cells[1]}</nav>'
+        nav = f'<nav class="wide">{cells[0]}<a href="index.html">tar-minefield</a>{cells[1]}</nav>'
         # below the draft's band, which on a narrow screen is the top of the page
         top = "<body>\n" + DRAFT if "<body>\n" + DRAFT in files[name] else "<body>\n"
         files[name] = files[name].replace(top, f"{top}{nav}\n", 1)
