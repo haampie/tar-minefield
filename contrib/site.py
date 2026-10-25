@@ -74,6 +74,9 @@ COLUMNS = {
 STYLE = """\
 body { max-width: 66rem; margin: 0 auto; padding: 1rem; font: 16px/1.5 system-ui, sans-serif;
        color: #1f2328; background: #ffffff; }
+/* Text in a column narrow enough to read, on the left; tables, the matrix, block maps and dumps
+   use the width of the page */
+h1, h2, h3, p, ul, ol, dl, summary, .verdict { max-width: 70ch; }
 a { color: #0969da; }
 code, pre { font: 0.875em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 pre { background: #f6f8fa; padding: 0.75rem; overflow-x: auto; }
