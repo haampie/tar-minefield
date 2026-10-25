@@ -9,6 +9,7 @@ stylesheet, and no scripts: the SVGs are part of the pages, so that their hover 
 links of the matrix work.
 """
 
+import ast
 import collections
 import datetime
 import hashlib
@@ -468,10 +469,16 @@ def verdict(info):
     return f'<div class="verdict {v}"><p><span class="badge">{badge}</span> {text}</p></div>'
 
 
+def docstring(case):
+    """The docstring of the script of a case, as Python reads it, as generate.py does: not its
+    source, in which a docstring that is not raw writes a backslash as two."""
+    with open(os.path.join(CASES, case + ".py")) as f:
+        return ast.get_docstring(ast.parse(f.read()), clean=False)
+
+
 def case_page(case, info, results, data):
     ident, name = matrix.label(case, info).split(" ", 1)
-    with open(os.path.join(CASES, case + ".py")) as f:
-        doc = f.read().split('"""')[1]
+    doc = docstring(case)
     with open(os.path.join(matrix.ARCHIVES, case + ".svg")) as f:
         block_map = f.read()
     with open(os.path.join(matrix.ARCHIVES, case + ".txt")) as f:
@@ -521,8 +528,7 @@ def seen_in_problems(cases, union):
     the scans have some, or tarballs where they have none."""
     problems = []
     for case, info in cases.items():
-        with open(os.path.join(CASES, case + ".py")) as f:
-            seen = re.search(r"^Seen in: *(.*)", f.read().split('"""')[1], re.M)
+        seen = re.search(r"^Seen in: *(.*)", docstring(case), re.M)
         features = features_of(case, info)
         if not seen or not features:
             continue
