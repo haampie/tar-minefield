@@ -74,15 +74,15 @@ COLUMNS = {
 STYLE = """\
 body { max-width: 66rem; margin: 0 auto; padding: 1rem; font: 16px/1.5 system-ui, sans-serif;
        color: #1f2328; background: #ffffff; }
-/* Text in a column narrow enough to read, on the left; tables, the matrix, block maps and dumps
-   use the width of the page */
-h1, h2, h3, p, ul, ol, dl, summary, .verdict { max-width: 70ch; }
+/* Text in a column narrow enough to read, on the left; what is marked wide, such as the tables,
+   the matrix, the block maps and the dumps, uses the width of the page */
+body > :not(.wide) { max-width: 70ch; }
 a { color: #0969da; }
 code, pre { font: 0.875em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 pre { background: #f6f8fa; padding: 0.75rem; overflow-x: auto; }
 code { background: #e8ebef; padding: 0.1em 0.3em; border-radius: 4px; }
-/* Code as it is written: spaces in it, such as those of a padded field, are not collapsed */
-code { white-space: pre-wrap; }
+/* Code in text as it is written: spaces in it, such as those of a padded field, are not collapsed */
+p code { white-space: pre-wrap; }
 pre code { background: none; padding: 0; }
 table { border-collapse: collapse; margin: 1rem 0; width: 100%; table-layout: fixed; }
 th, td { border: 1px solid #d0d7de; padding: 0.25rem 0.5rem; text-align: left;
@@ -162,8 +162,8 @@ table.files td:first-child { white-space: nowrap; }
          font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
          text-decoration: none; }
 @media (max-width: 72rem) {
-  .draft { position: static; display: block; margin: 0.5rem -1rem; padding: 0.25rem 1rem;
-           writing-mode: horizontal-tb; transform: none; }
+  body > .draft { position: static; display: block; max-width: none; margin: 0.5rem -1rem;
+                  padding: 0.25rem 1rem; writing-mode: horizontal-tb; transform: none; }
 }
 """
 
@@ -536,7 +536,7 @@ def case_page(case, info, results, data):
     body = DRAFT + f"""<h1><code>{ident}</code> {html.escape(name)}</h1>
 <p>{inline(info["description"])}</p>
 {verdict(info)}
-<dl>
+<dl class="wide">
 <dt>Category</dt><dd>{html.escape(category)}</dd>
 <dt>Default policy</dt><dd>{policy(info, features)}</dd>
 <dt>Files</dt><dd><table class="files">
@@ -553,10 +553,10 @@ def case_page(case, info, results, data):
 <h2>The archive</h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
 <div class="wide">{block_map}</div>
-<details><summary>Every block, as text</summary>
+<details class="wide"><summary>Every block, as text</summary>
 <pre>{html.escape(dump)}</pre>
 </details>
-<details><summary>Every byte, as a hex dump</summary>
+<details class="wide"><summary>Every byte, as a hex dump</summary>
 <p>As <code>xxd</code> writes it: <code>xxd -r</code> makes the archive of it.</p>
 <pre>{html.escape(hexdump(archive))}</pre>
 </details>
