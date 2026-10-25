@@ -48,6 +48,7 @@ OUTCOMES = {
     "⚠️": "accepts",
     "⛔": "rejects",
     "❌": "another tree, or rejects",
+    "⏳": "does not finish",
     "💥": "writes outside the destination",
     "❔": "not run, so not verified",
 }

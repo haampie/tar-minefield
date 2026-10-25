@@ -9,6 +9,7 @@ what `tarscan.py` reports.
 - ⚠️ accepts a case to reject. The letter is the tree it extracts: in one row, the same letter is the same tree, and different letters are trees that differ; [MATRIX.md](MATRIX.md#trees) lists them
 - ⛔ rejects a tolerated case, which a strict parser may
 - ❌ rejects a case to accept, or extracts another tree than its manifest
+- ⏳ does not finish within 60 seconds, so it neither rejects nor extracts the case
 - 💥 writes outside the destination
 - ❔ not run, so not verified: the implementation was not installed where the case was run
 

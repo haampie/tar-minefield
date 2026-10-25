@@ -22,6 +22,7 @@ outcome is compared with the case's verdict:
   different trees of one case have different letters
 - ⛔ rejects a tolerated case, which a strict parser may
 - ❌ rejects a case to accept, or extracts another tree than the manifest
+- ⏳ does not finish within 60 seconds, so it neither rejects nor extracts the case
 - 💥 writes outside the destination
 - ❔ not run: matrix.json has no result of the implementation for the case, which is so not verified,
   as when it was not installed where the case was first run
@@ -46,11 +47,12 @@ SITE = "https://stoppels.ch/tar/"
 
 
 def run(cmd, **kw):
+    """(status, stdout, stderr) of cmd, with status None if it does not finish within TIMEOUT."""
     try:
         p = subprocess.run(cmd, capture_output=True, timeout=TIMEOUT, **kw)
         return p.returncode, p.stdout.decode(errors="replace"), p.stderr.decode(errors="replace")
     except subprocess.TimeoutExpired:
-        return -1, "", "timeout"
+        return None, "", "timeout"
 
 
 def first_line(cmd):
@@ -306,8 +308,8 @@ def walk(top, dest=None):
 
 
 def extract(command, archive, root):
-    """Extract into root/x/y/dest; return (error, tree, outside), where outside is what was
-    written in root but not under dest."""
+    """Extract into root/x/y/dest; return (status, error, tree, outside), where outside is what
+    was written in root but not under dest."""
     dest = os.path.join(root, "x", "y", "dest")
     os.makedirs(dest)
     code, out, err = run(command(archive, dest), cwd=dest)
@@ -319,7 +321,7 @@ def extract(command, archive, root):
         error = (err.strip() or out.strip() or f"status {code}")
         error = error.replace(dest, "DEST").replace(root, "ROOT")
         error = error.replace(ROOT + os.sep, "")[-300:]
-    return error, tree, outside
+    return code, error, tree, outside
 
 
 def apply(members):
@@ -483,7 +485,8 @@ def main():
                             "outside": {}}
         for i, (name, version, kind, command) in enumerate(impls):
             if kind == "extract":
-                error, tree, outside = extract(command, archive, os.path.join(runs, str(i), case))
+                code, error, tree, outside = extract(command, archive,
+                                                     os.path.join(runs, str(i), case))
             else:
                 code, out, err = run(command(archive))
                 try:
@@ -495,6 +498,9 @@ def main():
                     error, tree = (error or f"status {code}")[-300:], {}
                 outside = {}
             row[name] = {"error": error, "tree": tree, "outside": outside}
+            if code is None:
+                # a run that does not finish has not rejected the case, whatever it wrote so far
+                row[name]["timeout"] = True
         results["cases"][case] = row
         print(case, file=sys.stderr)
     with open(os.path.join(HERE, "matrix.json"), "w") as f:
@@ -509,6 +515,8 @@ def outcome(case, r):
         return "❔", None
     if r["outside"]:
         return "💥", None
+    if r.get("timeout"):
+        return "⏳", None
     if case["verdict"] == "reject":
         return ("✅", None) if r["error"] else ("⚠️", r["tree"])
     if r["error"]:
@@ -518,7 +526,7 @@ def outcome(case, r):
     return "❌", r["tree"]
 
 
-ORDER = ["✅", "⚠️", "⛔", "❌", "💥", "❔"]
+ORDER = ["✅", "⚠️", "⛔", "❌", "⏳", "💥", "❔"]
 LEGEND = [
     "- ✅ as the verdict says: rejects a case to reject; extracts the manifest of the others",
     "- ⚠️ accepts a case to reject. The letter is the tree it extracts: in one row, the same letter is"
@@ -526,6 +534,7 @@ LEGEND = [
     " lists them",
     "- ⛔ rejects a tolerated case, which a strict parser may",
     "- ❌ rejects a case to accept, or extracts another tree than its manifest",
+    f"- ⏳ does not finish within {TIMEOUT} seconds, so it neither rejects nor extracts the case",
     "- 💥 writes outside the destination",
     "- ❔ not run, so not verified: the implementation was not installed where the case was run",
 ]
@@ -590,6 +599,9 @@ CLASSES = {
            "rejects a tolerated case, which a strict parser may", "–"),
     "❌": ("bad", ("#ffc1ba", "#a40e26"),
            "rejects a case to accept, or extracts another tree than its manifest", "✗"),
+    "⏳": ("slow", ("#b6e3ff", "#0550ae"),
+           f"does not finish within {TIMEOUT} seconds, so it neither rejects nor extracts the case",
+           "…"),
     "💥": ("boom", ("#dcc8ff", "#6639ba"),
            "writes outside the destination", "↑"),
     "❔": ("none", ("#ffffff", "#59636e"),
