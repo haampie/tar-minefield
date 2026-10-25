@@ -91,6 +91,10 @@ th, td { border: 1px solid #d0d7de; padding: 0.25rem 0.5rem; text-align: left;
          vertical-align: baseline; overflow-wrap: anywhere; }
 th { background: #f6f8fa; }
 td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+/* The total of a table, as in a ledger: in bold, between a rule above and a double rule below. The
+   rule above is the bottom of the row before, which wins over the total's top where they meet */
+tr.total td { font-weight: 600; border-bottom: 3px double #1f2328; }
+tr:has(+ tr.total) td { border-bottom-color: #1f2328; }
 svg { max-width: 100%; height: auto; }
 .wide { overflow-x: auto; }
 /* A table is not narrower than this: on a narrow screen it scrolls, rather than squeezing words */
@@ -455,11 +459,12 @@ def data_section(ident, features, names, short, rated, union):
     _, _, k, j, u = counts[-1]
     mixed = 0 < j < k
     rows = []
-    for n, total, k, j, un in counts:
+    for i, (n, total, k, j, un) in enumerate(counts):
         cells = [html.escape(n), f"{total:,}", f"{k:,}" + ("*" if un else ""),
                  prevalence(k, total) + ("*" if un else "")]
         cells += [str(j)] if mixed else []
-        rows.append("<tr><td>" + "</td><td class=n>".join(cells) + "</td></tr>")
+        tr = '<tr class="total">' if i == len(counts) - 1 else "<tr>"
+        rows.append(tr + "<td>" + "</td><td class=n>".join(cells) + "</td></tr>")
     policy = ("" if not k else " The default policy rejects some of them, as the last column "
               "says, and accepts the others." if mixed else " The default policy rejects all of "
               "them." if j else " The default policy accepts them.")
@@ -668,7 +673,8 @@ def tarballs_section(names, short, rated, union):
     rows = []
     for n, rs in [(short[n], rated[n]) for n in names] + [("all, distinct", union)]:
         j = sum(not strict.passes_default(r) for r in rs)
-        rows.append(f"<tr><td>{html.escape(n)}</td><td class=n>{len(rs):,}</td>"
+        tr = '<tr class="total">' if rs is union else "<tr>"
+        rows.append(f"{tr}<td>{html.escape(n)}</td><td class=n>{len(rs):,}</td>"
                     f"<td class=n>{j:,}</td><td class=n>{prevalence(j, len(rs))}</td></tr>")
     rejected = sum(not strict.passes_default(r) for r in union)
     accepted = strict.percent(len(union) - rejected, len(union))
