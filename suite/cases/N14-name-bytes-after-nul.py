@@ -11,6 +11,7 @@ Seen in: no source tarball.
 VERDICT = "reject"
 ID = "N14"
 FEATURES = ['name.bytes-after-nul']
+POSIX = "name-nul"
 
 
 def build(a):

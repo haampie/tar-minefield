@@ -27,7 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>pax records are delimited by their length, so a value can contain a newline, and in POSIX the path is <code>good\n1 path=evil</code>. Split on lines instead, the extended header has a second record, <code>path=evil</code>. This case is ambiguous in practice because the path is then <code>good</code> or <code>evil</code>, or, with the records discarded as malformed, the header&#x27;s name, <code>plain</code>.</p>
+<p>pax records are delimited by their length, so a value can contain a newline, and in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">POSIX</a> the path is <code>good\n1 path=evil</code>. Split on lines instead, the extended header has a second record, <code>path=evil</code>. This case is ambiguous in practice because the path is then <code>good</code> or <code>evil</code>, or, with the records discarded as malformed, the header&#x27;s name, <code>plain</code>.</p>
 <p><strong>Decision point:</strong> whether a pax record is delimited by its length or by a newline.</p>
 <p><strong>Seen in:</strong> no source tarball. Newlines in pax values are only in xattrs, such as Minion 10.31, which the default policy accepts as xattrs are not extracted.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>

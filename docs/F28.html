@@ -27,7 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>pax records are delimited by their length, so a value can contain a newline. Here the only record is a <code>comment</code>, <code>x\n12 size=512</code>, and in POSIX every comment is ignored, so <code>a</code> has the size of its header, 0, and the next block is the header of <code>smuggled</code>. Split on lines, the extended header has a second record, <code>size=512</code>. This case is ambiguous in practice because, read that way, the block is the data of <code>a</code>.</p>
+<p>pax records are delimited by their length, so a value can contain a newline. Here the only record is a <code>comment</code>, <code>x\n12 size=512</code>, and in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=All%20characters%20in%20the%20%3Cvalue%3E%20field%20shall%20be%20ignored%20by%20pax">POSIX</a> every comment is ignored, so <code>a</code> has the size of its header, 0, and the next block is the header of <code>smuggled</code>. Split on lines, the extended header has a second record, <code>size=512</code>. This case is ambiguous in practice because, read that way, the block is the data of <code>a</code>.</p>
 <p><strong>Decision point:</strong> whether a pax record is delimited by its length or by a newline.</p>
 <p><strong>Seen in:</strong> no source tarball. Newlines in pax values are only in xattrs, such as Minion 10.31, which the default policy accepts as xattrs are not extracted.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>

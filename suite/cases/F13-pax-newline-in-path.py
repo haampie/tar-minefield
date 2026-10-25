@@ -13,6 +13,7 @@ Seen in: no source tarball. Newlines in pax values are only in xattrs, such as M
 VERDICT = "reject"
 ID = "F13"
 FEATURES = ['pax.newline-in-value.path']
+POSIX = "record-length"
 
 
 def build(a):

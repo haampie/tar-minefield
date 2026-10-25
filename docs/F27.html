@@ -27,7 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>pax numbers can be of any length, but implementations keep sizes in 64 bits. In POSIX, the size is 2^64 + 512, which runs past the end of the archive. Read leniently, this case is ambiguous because the size is 512, wrapped around, the header&#x27;s, 0, or 2^64 - 1, clamped. With 512 the next block is the data of <code>a</code>, with 0 the header of <code>smuggled</code>, and with 2^64 - 1 the data runs past the end of the archive.</p>
+<p>pax numbers can be of any length, but implementations keep sizes in 64 bits. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a>, the size is 2^64 + 512, which runs past the end of the archive. Read leniently, this case is ambiguous because the size is 512, wrapped around, the header&#x27;s, 0, or 2^64 - 1, clamped. With 512 the next block is the data of <code>a</code>, with 0 the header of <code>smuggled</code>, and with 2^64 - 1 the data runs past the end of the archive.</p>
 <p><strong>Decision point:</strong> what a pax number too large for the reader means.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>

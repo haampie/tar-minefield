@@ -27,7 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive ends with two zero blocks, as it should, and is followed by a second archive with a file <code>hidden</code>. In POSIX, the archive ends at the marker, and <code>hidden</code> is not part of it. This case is ambiguous in practice because reading on past the marker, as GNU tar does with <code>--ignore-zeros</code>, extracts <code>hidden</code> as well.</p>
+<p>The archive ends with two zero blocks, as it should, and is followed by a second archive with a file <code>hidden</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros">POSIX</a>, the archive ends at the marker, and <code>hidden</code> is not part of it. This case is ambiguous in practice because reading on past the marker, as GNU tar does with <code>--ignore-zeros</code>, extracts <code>hidden</code> as well.</p>
 <p><strong>Decision point:</strong> whether an implementation stops at the end-of-archive marker.</p>
 <p><strong>Seen in:</strong> glibmm 2.16.0, which is the whole archive twice, jmol 14.8.0 and commons-jexl 2.1.1.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>

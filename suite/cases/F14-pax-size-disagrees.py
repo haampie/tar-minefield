@@ -15,6 +15,7 @@ Seen in: no source tarball.
 VERDICT = "tolerate"
 ID = "F14"
 FEATURES = ["pax.size-disagrees"]
+POSIX = "size-override"
 TREE = [
     {"path": "a", "kind": "file", "contents": b"", "executable": False},
     {"path": "smuggled", "kind": "file", "contents": b"", "executable": False},

@@ -27,7 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>In POSIX, the checksum is the sum of the bytes of a header taken as unsigned numbers. Some old tars added them as signed, and many implementations still accept either. With a byte over 127 in the header, here in <code>uname</code>, the two totals differ, and the checksum matches only the signed one. This breaks POSIX, which is why the case is rejected; it is not ambiguous.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20octet%20in%20the%20header%20shall%20be%20treated%20as%20an%20unsigned%20value">POSIX</a>, the checksum is the sum of the bytes of a header taken as unsigned numbers. Some old tars added them as signed, and many implementations still accept either. With a byte over 127 in the header, here in <code>uname</code>, the two totals differ, and the checksum matches only the signed one. This breaks POSIX, which is why the case is rejected; it is not ambiguous.</p>
 <p><strong>Decision point:</strong> whether a signed checksum makes a header valid.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>

@@ -23,6 +23,8 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "matrix"))
 sys.path.insert(0, os.path.join(HERE, "scanner"))
+sys.path.insert(0, HERE)
+import citations  # noqa: E402
 import matrix  # noqa: E402
 import strict  # noqa: E402
 import tarscan  # noqa: E402
@@ -273,14 +275,20 @@ def doc_paragraphs(text):
     return [" ".join(p.strip().split("\n")) for p in text.split("\n\n")]
 
 
-def paragraphs(text):
+def paragraphs(text, cited=None):
+    """The explanation of a case as HTML, with its first "POSIX" a link to the sentence it cites."""
     out = []
     for p in doc_paragraphs(text):
         if p.startswith("See also:"):
             continue
         out.append("<p>" + re.sub(r"^(Decision point|Seen in):", r"<strong>\1:</strong>", inline(p))
                    + "</p>")
-    return "\n".join(out)
+    out = "\n".join(out)
+    if cited:
+        if "POSIX" not in out:
+            sys.exit(f"cites {cited}, but its explanation does not mention POSIX")
+        out = out.replace("POSIX", f'<a href="{html.escape(citations.url(cited))}">POSIX</a>', 1)
+    return out
 
 
 def see_also(text):
@@ -489,6 +497,16 @@ def docstring(case):
         return ast.get_docstring(ast.parse(f.read()), clean=False)
 
 
+def cited(case):
+    """The sentence of POSIX that the script of a case cites, by its key in citations.py."""
+    with open(os.path.join(CASES, case + ".py")) as f:
+        for node in ast.parse(f.read()).body:
+            if isinstance(node, ast.Assign) and any(getattr(t, "id", None) == "POSIX"
+                                                    for t in node.targets):
+                return ast.literal_eval(node.value)
+    return None
+
+
 def case_page(case, info, results, data):
     ident, name = matrix.label(case, info).split(" ", 1)
     doc = docstring(case)
@@ -517,7 +535,7 @@ def case_page(case, info, results, data):
 </table></dd>
 </dl>
 <h2>The case</h2>
-{paragraphs(doc.strip().split(chr(10), 1)[1])}
+{paragraphs(doc.strip().split(chr(10), 1)[1], cited(case))}
 <h2>The archive</h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
 <div class="wide">{block_map}</div>

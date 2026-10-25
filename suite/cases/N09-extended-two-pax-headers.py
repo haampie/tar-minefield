@@ -13,6 +13,7 @@ N20, pax-repeated-key.
 VERDICT = "reject"
 ID = "N09"
 FEATURES = ['extended.two-pax-headers']
+POSIX = "last-wins"
 
 
 def build(a):

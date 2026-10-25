@@ -27,7 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The name field is all NULs. In POSIX, it is implementation-defined whether a member with an invalid name is stored, and under what name. This case is ambiguous because an empty name marks the end of the archive, leaves the member out, or refers to the destination directory itself.</p>
+<p>The name field is all NULs. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=invalid%20filename%2C%20it%20is%20implementation%2Ddefined%20whether%20the%20data%20from%20the%20file%20is%20stored%20on%20the%20file%20hierarchy">POSIX</a>, it is implementation-defined whether a member with an invalid name is stored, and under what name. This case is ambiguous because an empty name marks the end of the archive, leaves the member out, or refers to the destination directory itself.</p>
 <p><strong>Decision point:</strong> what an empty name refers to.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>

@@ -14,6 +14,7 @@ the default policy accepts as xattrs are not extracted.
 VERDICT = "reject"
 ID = "F28"
 FEATURES = ["pax.newline-in-value.comment"]
+POSIX = "comment"
 
 
 def build(a):

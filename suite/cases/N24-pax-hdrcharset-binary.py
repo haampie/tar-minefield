@@ -13,6 +13,7 @@ Seen in: no source tarball.
 VERDICT = "reject"
 ID = "N24"
 FEATURES = ["pax.hdrcharset", "pax.path-not-utf8"]
+POSIX = "hdrcharset"
 
 
 def build(a):

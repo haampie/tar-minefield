@@ -27,7 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The name field contains <code>a</code>, followed by a NUL, followed by <code>b</code>. In POSIX, a name ends at its first NUL, so the name is <code>a</code>. Copied as a whole, the field is <code>a</code> as a C string, which ends at the first NUL, but <code>a\0b</code> in languages whose strings can contain a NUL, and creating the file then fails.</p>
+<p>The name field contains <code>a</code>, followed by a NUL, followed by <code>b</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=name%20is%20terminated%20at%20the%20first%20NUL%20character">POSIX</a>, a name ends at its first NUL, so the name is <code>a</code>. Copied as a whole, the field is <code>a</code> as a C string, which ends at the first NUL, but <code>a\0b</code> in languages whose strings can contain a NUL, and creating the file then fails.</p>
 <p><strong>Decision point:</strong> where a name ends.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>

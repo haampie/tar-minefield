@@ -12,6 +12,7 @@ Seen in: no source tarball.
 VERDICT = "reject"
 ID = "F06"
 FEATURES = ['checksum.signed']
+POSIX = "checksum"
 
 
 def build(a):

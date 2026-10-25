@@ -27,7 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>In POSIX, the records of a global header apply to every later member that does not override them, so the <code>size=512</code> of this one is the size of <code>a</code>, whose size field is 0. No archiver writes a size in a global header. This case is ambiguous in practice because, with global headers or the sizes in them ignored, the next block is not the data of <code>a</code> but the header of another file, <code>smuggled</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">POSIX</a>, the records of a global header apply to every later member that does not override them, so the <code>size=512</code> of this one is the size of <code>a</code>, whose size field is 0. No archiver writes a size in a global header. This case is ambiguous in practice because, with global headers or the sizes in them ignored, the next block is not the data of <code>a</code> but the header of another file, <code>smuggled</code>.</p>
 <p><strong>Decision point:</strong> whether a <code>size</code> in a global header applies.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>

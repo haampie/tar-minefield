@@ -27,7 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>POSIX says that a record with an empty value deletes the field of that name, in the header too, so <code>size=</code> leaves <code>a</code> with no size at all, not even the 512 of its header. It does not say what a member without a size is. This case is ambiguous because the size is then either 0 (and the next block is the header of <code>smuggled</code>) or what the header specifies (and the next block is the data of <code>a</code>).</p>
+<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">POSIX</a> says that a record with an empty value deletes the field of that name, in the header too, so <code>size=</code> leaves <code>a</code> with no size at all, not even the 512 of its header. It does not say what a member without a size is. This case is ambiguous because the size is then either 0 (and the next block is the header of <code>smuggled</code>) or what the header specifies (and the next block is the data of <code>a</code>).</p>
 <p><strong>Decision point:</strong> what an empty pax size means: no size, 0, or the header&#x27;s size.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>

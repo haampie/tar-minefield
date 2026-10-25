@@ -11,6 +11,7 @@ Seen in: no source tarball.
 VERDICT = "reject"
 ID = "S05"
 FEATURES = ['hardlink.to-later-member']
+POSIX = "hardlink"
 
 
 def build(a):

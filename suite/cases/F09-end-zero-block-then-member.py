@@ -13,6 +13,7 @@ See also: F03, one zero block with nothing after it, which is rejected as well.
 VERDICT = "reject"
 ID = "F09"
 FEATURES = ['end.zero-block-before-member']
+POSIX = "end"
 
 
 def build(a):

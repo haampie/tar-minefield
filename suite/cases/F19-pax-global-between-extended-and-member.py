@@ -12,6 +12,7 @@ Seen in: no source tarball.
 VERDICT = "reject"
 ID = "F19"
 FEATURES = ['pax-global.between-extended-and-member']
+POSIX = "extended"
 
 
 def build(a):

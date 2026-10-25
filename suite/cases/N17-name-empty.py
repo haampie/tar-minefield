@@ -11,6 +11,7 @@ Seen in: no source tarball.
 VERDICT = "reject"
 ID = "N17"
 FEATURES = ['name.empty']
+POSIX = "invalid-name"
 
 
 def build(a):

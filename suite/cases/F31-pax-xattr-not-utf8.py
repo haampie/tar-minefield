@@ -12,6 +12,7 @@ Seen in: 31 source tarballs, such as R 4.5.2, Minion 10.31 and keepassxc 2.7.8, 
 
 VERDICT = "accept"
 ID = "F31"
+POSIX = "utf-8"
 TREE = [
     {"path": "a", "kind": "file", "contents": b"a\n", "executable": False},
 ]

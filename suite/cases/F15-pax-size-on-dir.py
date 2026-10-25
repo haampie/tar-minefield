@@ -14,6 +14,7 @@ See also: F33, a size in the ustar header of a directory, which is rejected as w
 VERDICT = "reject"
 ID = "F15"
 FEATURES = ["pax.size-on-dir"]
+POSIX = "no-data"
 
 
 def build(a):

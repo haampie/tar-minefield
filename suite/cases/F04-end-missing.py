@@ -11,6 +11,7 @@ See also: F08, an archive cut short inside the data of a member, which is reject
 VERDICT = "reject"
 ID = "F04"
 FEATURES = ['end.missing']
+POSIX = "end"
 
 
 def build(a):

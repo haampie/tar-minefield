@@ -12,6 +12,7 @@ Seen in: libmygpo-qt 1.2.0, with xattr keys.
 VERDICT = "reject"
 ID = "N20"
 FEATURES = ['pax.repeated-key']
+POSIX = "last-wins"
 
 
 def build(a):

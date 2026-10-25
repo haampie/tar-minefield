@@ -27,7 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The member <code>s</code> is a symlink to <code>f</code>, and <code>h</code> a hardlink to <code>s</code>. In POSIX, the target of a hardlink is a file of any type, so <code>h</code> is a link to the symlink itself, another symlink to <code>f</code>. This case is ambiguous in practice because <code>h</code> is also linked to the file <code>f</code> itself, or left out.</p>
+<p>The member <code>s</code> is a symlink to <code>f</code>, and <code>h</code> a hardlink to <code>s</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file of any type, so <code>h</code> is a link to the symlink itself, another symlink to <code>f</code>. This case is ambiguous in practice because <code>h</code> is also linked to the file <code>f</code> itself, or left out.</p>
 <p><strong>Decision point:</strong> whether a hardlink follows a symlink.</p>
 <p><strong>Seen in:</strong> octa 8.4.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>

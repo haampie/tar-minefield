@@ -12,6 +12,7 @@ Seen in: no source tarball.
 VERDICT = "reject"
 ID = "F12"
 FEATURES = ['number.size.gap-in-digits']
+POSIX = "numeric"
 
 
 def build(a):

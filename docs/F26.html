@@ -27,7 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>A pax size is decimal, and POSIX does not forbid leading zeros, so the size is 777. But a reader that converts with C&#x27;s <code>strtoul(s, NULL, 0)</code>, or that knows the header&#x27;s octal numbers, reads <code>0777</code> as octal, 511. This case is ambiguous in practice because the size is 777, in decimal, 511, in octal, or the header&#x27;s, 0. The data of <code>a</code> then takes two blocks, one, after which <code>smuggled-2</code> is a member, or none, and both <code>smuggled-1</code> and <code>smuggled-2</code> are.</p>
+<p>A pax size is decimal, and <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a> does not forbid leading zeros, so the size is 777. But a reader that converts with C&#x27;s <code>strtoul(s, NULL, 0)</code>, or that knows the header&#x27;s octal numbers, reads <code>0777</code> as octal, 511. This case is ambiguous in practice because the size is 777, in decimal, 511, in octal, or the header&#x27;s, 0. The data of <code>a</code> then takes two blocks, one, after which <code>smuggled-2</code> is a member, or none, and both <code>smuggled-1</code> and <code>smuggled-2</code> are.</p>
 <p><strong>Decision point:</strong> whether a pax number with a leading zero is decimal or octal.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>

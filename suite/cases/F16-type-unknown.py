@@ -13,6 +13,7 @@ Seen in: no source tarball.
 VERDICT = "reject"
 ID = "F16"
 FEATURES = ['type.unknown-Z']
+POSIX = "unknown-type"
 
 
 def build(a):

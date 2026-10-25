@@ -11,6 +11,7 @@ Seen in: bgen 1.1.7.
 VERDICT = "reject"
 ID = "K02"
 FEATURES = ['linkname.on-file']
+POSIX = "linkname"
 
 
 def build(a):

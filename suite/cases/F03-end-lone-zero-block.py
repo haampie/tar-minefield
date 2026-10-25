@@ -11,6 +11,7 @@ See also: F09, one zero block followed by another member, which is rejected as w
 VERDICT = "reject"
 ID = "F03"
 FEATURES = ['end.lone-zero-block']
+POSIX = "end"
 
 
 def build(a):

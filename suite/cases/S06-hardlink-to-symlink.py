@@ -11,6 +11,7 @@ Seen in: octa 8.4.
 VERDICT = "reject"
 ID = "S06"
 FEATURES = ['hardlink.to-symlink']
+POSIX = "hardlink"
 
 
 def build(a):

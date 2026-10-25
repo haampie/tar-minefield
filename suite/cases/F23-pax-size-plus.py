@@ -13,6 +13,7 @@ Seen in: no source tarball.
 VERDICT = "reject"
 ID = "F23"
 FEATURES = ["pax.invalid-size"]
+POSIX = "size-decimal"
 
 
 def build(a):

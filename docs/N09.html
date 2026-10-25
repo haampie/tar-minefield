@@ -27,7 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>Two <code>x</code> headers come before one member, with the paths <code>first</code> and <code>second</code>. POSIX settles conflicting records within one extended header, where the last one wins, but not two extended headers for one file. This case is ambiguous because the name is <code>first</code>, <code>second</code>, or the header&#x27;s own.</p>
+<p>Two <code>x</code> headers come before one member, with the paths <code>first</code> and <code>second</code>. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=When%20extended%20header%20records%20conflict%2C%20the%20last%20one%20given%20in%20the%20header%20shall%20take%20precedence">POSIX</a> settles conflicting records within one extended header, where the last one wins, but not two extended headers for one file. This case is ambiguous because the name is <code>first</code>, <code>second</code>, or the header&#x27;s own.</p>
 <p><strong>Decision point:</strong> which of two extended headers of one kind applies.</p>
 <p><strong>Seen in:</strong> no source tarball. libmygpo-qt 1.2.0 repeats xattr keys within one header, which is N20, pax-repeated-key.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>

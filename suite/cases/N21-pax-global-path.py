@@ -11,6 +11,7 @@ Seen in: no source tarball.
 VERDICT = "reject"
 ID = "N21"
 FEATURES = ['pax-global.path']
+POSIX = "global"
 
 
 def build(a):

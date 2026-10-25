@@ -11,6 +11,7 @@ Seen in: no source tarball.
 VERDICT = "reject"
 ID = "S03"
 FEATURES = ['hardlink.missing-target']
+POSIX = "hardlink"
 
 
 def build(a):

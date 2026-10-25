@@ -13,6 +13,7 @@ See also: F15, a pax `size` on a directory, which is rejected as well.
 VERDICT = "reject"
 ID = "F33"
 FEATURES = ["size.on-dir"]
+POSIX = "no-data"
 
 
 def build(a):

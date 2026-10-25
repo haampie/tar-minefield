@@ -11,6 +11,7 @@ Seen in: no source tarball.
 VERDICT = "reject"
 ID = "F11"
 FEATURES = ['magic.posix-with-odd-version']
+POSIX = "version"
 
 
 def build(a):

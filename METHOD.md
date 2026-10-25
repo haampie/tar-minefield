@@ -11,7 +11,7 @@ cases are produced so that anyone can audit them. It is a working draft.
 | **implementation** | A program or library that turns a tar archive into a tree, by extracting it or by listing its members: GNU tar, Python `tarfile`, Go `archive/tar`, … |
 | **member** | One entry of an archive: a header, its extended headers, and its data. |
 | **tree** | What an implementation extracts: paths, each with a kind (file, directory, symlink, hardlink), the contents of a file or the target of a link, and whether a file is executable. Nothing else, such as mtimes and owners. |
-| **ambiguity** | Something in an archive from which two implementations, each following a defensible reading of POSIX, GNU tar or practice, extract different trees. |
+| **ambiguity** | Something in an archive from which two implementations, each following a defensible reading of [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html), GNU tar or practice, extract different trees. |
 | **category** | What an ambiguity changes in the tree, in no order: **F** framing, **N** names, **K** kinds, **S** order and state. |
 | **strict parser** | An implementation that rejects an archive with an ambiguity, rather than extracting one of its trees. |
 | **feature** | What the scanner reports of an archive, such as `name.leading-dot-slash`. |
@@ -85,18 +85,18 @@ Framing:
 - Checksums: signed versus unsigned sums, and the formats of the checksum field.
 - Sizes of members that carry no data in some implementations: directories, hardlinks, symlinks,
   devices, fifos.
-- Unknown typeflags: POSIX treats them as regular files with data, an implementation may also skip
+- Unknown typeflags: [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file) treats them as regular files with data, an implementation may also skip
   them without data.
 - GNU's old sparse (`S`), multivolume (`M`), volume label (`V`) and dumpdir (`D`) headers, and
   contiguous files (`7`).
-- A pax `size` that disagrees with the header's size (POSIX says the pax size wins: it is how
+- A pax `size` that disagrees with the header's size ([POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20size%20field%20in%20the%20following%20header%20block%28s%29) says the pax size wins: it is how
   sizes over 8 GiB are written), a pax `size` on a member that has no data, and a pax `size`
   applied to an extended header rather than to the member, which is the bug class of
   CVE-2025-62518 (tokio-tar), GHSA-3pv8-6f4r-ffg2 (tar-rs) and CVE-2026-53655 (node-tar).
 - pax numbers, which are ASCII decimal digits: a sign, leading whitespace, other digits of Unicode
   (which conversions of strings to numbers, such as Python's `int`, accept), leading zeros
-  (decimal to POSIX, octal to `strtoul(s, NULL, 0)`), and values past 64 bits.
-- Empty values in pax headers, which in POSIX remove a key: an empty `size` leaves a member
+  (decimal to [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number), octal to `strtoul(s, NULL, 0)`), and values past 64 bits.
+- Empty values in pax headers, which in [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field) remove a key: an empty `size` leaves a member
   without a size, which implementations take as 0, as the header's size, or reject.
 - pax record framing: the length counts itself, leading zeros in the length, data after the last
   record, records not ending in a newline, values that contain a newline (records are delimited by
@@ -122,13 +122,13 @@ Name:
 - pax keys that change the name or kind from inside: `GNU.sparse.name`, `SCHILY.filetype`.
 - NUL inside a pax path or GNU long name, and GNU long names padded with NULs or spaces.
 - `hdrcharset=BINARY`, names that are not UTF-8, and other pax values that are not UTF-8, which
-  POSIX does not allow, but libarchive and star write xattrs as.
+  [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20extended%20header%20records%20shall%20be%20encoded%20according%20to%20the%20ISO%2FIEC%2010646%2D1%3A2020%20standard%20UTF%2D8%20encoding) does not allow, but libarchive and star write xattrs as.
 - An empty pax `path` or `linkpath`, which in POSIX removes it, rather than falling back to the
   header's name.
 - Normalization: `./a` and `a`, `a//b`, `a/./b`, a trailing slash, `.`, an empty name, `\` as a
   separator on Windows, drive letters.
 - The same questions for link targets: `linkpath`, GNU long links (`K`) and the linkname field.
-- A `path` or `linkpath` in a global pax header, and empty values in one, which in POSIX remove an
+- A `path` or `linkpath` in a global pax header, and empty values in one, which in [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=previously%20entered%20extended%20header%20value%2C%20or%20global%20extended%20header%20value%20of%20the%20same%20name) remove an
   earlier global value.
 
 Kind:
@@ -208,7 +208,7 @@ costs. The tolerated cases are:
   says. A strict parser may reject a header whose size field has room for the size but gives
   another, but must not take the header's size.
 
-Everything else in the catalogue is rejected. POSIX requires two zero blocks at the end of an
+Everything else in the catalogue is rejected. [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros) requires two zero blocks at the end of an
 archive: a tar file that ends with a single zero block, or without any, is rejected, although most
 implementations extract it. Duplicate files are rejected even where their copies are identical, as
 they are in most tarballs that have them: in some, a file was changed and appended again, so that

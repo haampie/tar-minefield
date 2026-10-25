@@ -27,7 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>POSIX lets a pax header declare with <code>hdrcharset=BINARY</code> that its names are bytes in no particular encoding, rather than UTF-8, and then no translation is performed. Here the path is <code>caf\xe9</code>, in Latin-1, so the name on disk is those bytes. This case is ambiguous in practice because the path is also decoded as Latin-1, or with the byte replaced, as with N18, or discarded for the header&#x27;s name, <code>cafe</code>. A strict parser rejects names that are not UTF-8.</p>
+<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=values%20recorded%20in%20extended%20headers%20for%20affected%20files%20are%20unencoded%20binary%20data">POSIX</a> lets a pax header declare with <code>hdrcharset=BINARY</code> that its names are bytes in no particular encoding, rather than UTF-8, and then no translation is performed. Here the path is <code>caf\xe9</code>, in Latin-1, so the name on disk is those bytes. This case is ambiguous in practice because the path is also decoded as Latin-1, or with the byte replaced, as with N18, or discarded for the header&#x27;s name, <code>cafe</code>. A strict parser rejects names that are not UTF-8.</p>
 <p><strong>Decision point:</strong> how a name that is not UTF-8 becomes a path.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>

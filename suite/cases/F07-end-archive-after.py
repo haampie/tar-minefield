@@ -13,6 +13,7 @@ See also: F02, junk after the two zero blocks, which is tolerated.
 VERDICT = "reject"
 ID = "F07"
 FEATURES = ['end.archive-after']
+POSIX = "end"
 
 
 def build(a):
