@@ -91,10 +91,8 @@ th, td { border: 1px solid #d0d7de; padding: 0.25rem 0.5rem; text-align: left;
          vertical-align: baseline; overflow-wrap: anywhere; }
 th { background: #f6f8fa; }
 td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
-/* The total of a table, as in a ledger: in bold, between a rule above and a double rule below. The
-   rule above is the bottom of the row before, which wins over the total's top where they meet */
-tr.total td { font-weight: 600; border-bottom: 3px double #1f2328; }
-tr:has(+ tr.total) td { border-bottom-color: #1f2328; }
+/* The total of a table in bold, on the background of its header, which the two frame it with */
+tr.total td { font-weight: 600; background: #f6f8fa; }
 svg { max-width: 100%; height: auto; }
 .wide { overflow-x: auto; }
 /* A table is not narrower than this: on a narrow screen it scrolls, rather than squeezing words */
