@@ -2,8 +2,9 @@ N21-pax-global-path: must reject
 
 A global pax header with a `path`.
 
-A global header applies to every member after it. With a `path`, every member would have the same
-name; implementations apply it, ignore it, or apply it to the next member only.
+In POSIX, a global header applies to every later member, so with a `path` all of them have one name,
+`global-name`. This case is ambiguous in practice because, with the global `path` ignored, the
+members keep their own names, `a` and `b`.
 
 Decision point: whether a global `path` applies.
 Seen in: no source tarball.

@@ -2,8 +2,8 @@ N12-name-absolute: must reject
 
 An absolute name, which points outside the directory the archive is extracted to.
 
-The name `/tar-minefield-absolute` is a path from the root. Depending on the extractor, the member
-is refused, its leading slash is stripped, or it is written to the root. The file is harmless, and
+The name `/tar-minefield-absolute` is a path from the root. The case is rejected because the name,
+taken as it is, leads out of the destination, not because it is ambiguous. The file is harmless, and
 writing to the root fails unless the extractor runs as root.
 
 Decision point: whether an absolute name is rejected, made relative, or followed.

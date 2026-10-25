@@ -1,9 +1,8 @@
 """A regular file whose name ends in a slash: a file, or a directory?
 
 The header says typeflag `0`, a regular file, of size 0, but the name is `a/`. v7 tar had no
-typeflag for directories, and wrote them like this, so implementations that keep that convention
-extract a directory `a`; implementations that follow the typeflag extract an empty file `a`, or fail
-to create a file with a trailing slash.
+typeflag for directories, and wrote them like this. This case is ambiguous because the member is
+either a directory `a`, by the convention of v7, or an empty file `a`, by its typeflag.
 
 Decision point: whether the typeflag or the trailing slash decides the kind.
 Seen in: v7 archives only, such as sendmail 8.18.2, tcp_wrappers 7.6 and unclutter 8.

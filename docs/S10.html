@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The first member is a symlink <code>a</code> to <code>target</code>, the second a file <code>a</code>. An implementation that replaces the link writes the file <code>a</code>; one that opens <code>a</code> for writing follows the link and writes <code>target</code> instead.</p>
+<p>The first member is a symlink <code>a</code> to <code>target</code>, the second a file <code>a</code>. This case is ambiguous because the file either replaces the link, or is written through it, to <code>target</code>.</p>
 <p><strong>Decision point:</strong> whether writing a member follows a symlink in its place.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -38,9 +38,8 @@
 
 A symlink, then a file of the same name: replace the link, or write through it?
 
-The first member is a symlink `a` to `target`, the second a file `a`. An implementation that
-replaces the link writes the file `a`; one that opens `a` for writing follows the link and writes
-`target` instead.
+The first member is a symlink `a` to `target`, the second a file `a`. This case is ambiguous because
+the file either replaces the link, or is written through it, to `target`.
 
 Decision point: whether writing a member follows a symlink in its place.
 Seen in: no source tarball.

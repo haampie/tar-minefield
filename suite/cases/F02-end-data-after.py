@@ -1,8 +1,8 @@
 """Data after the end-of-archive marker that is not a header, which is ignored.
 
 Seen in: tcp_wrappers 7.6, commons-lang 2.6 and xml-commons-resolver 1.2.
-See also: F07, two concatenated archives, as `cat one.tar two.tar` makes them, which are rejected.
-Implementations either stop at the first two zero blocks or extract both archives.
+See also: F07, two concatenated archives, as `cat one.tar two.tar` makes them, which are rejected
+because the second archive is either ignored or extracted as well.
 """
 
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}

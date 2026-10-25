@@ -3,8 +3,8 @@ K03-symlink-trailing-slash: must reject
 A symlink whose name ends in a slash.
 
 The member `link/` is a symlink to `target`. With the slash, the name refers to what the link points
-to, so depending on the implementation, the link `link` is created, the link is written through, or
-extraction fails.
+to. This case is ambiguous because the member is either a symlink `link`, by its typeflag, or a
+directory `link`, by its trailing slash, as in K01.
 
 Decision point: what a trailing slash on a link means.
 Seen in: no source tarball.

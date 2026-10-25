@@ -1,7 +1,9 @@
 r"""A NUL inside a pax `path`.
 
-The pax path is `a\0b`. C implementations end the name at the NUL and extract `a`; others keep the
-NUL, which no filesystem allows, and fail or replace it.
+The pax path is `a\0b`. In POSIX, a NUL in a pax value is data, so the path is invalid, and it is
+implementation-defined whether the member is stored, and under what name. This case is ambiguous
+because the path is `a`, cut at the NUL, `a_b` or the like, with the NUL replaced, or discarded for
+the header's name, `header-name`.
 
 Decision point: where a pax path ends.
 Seen in: no source tarball.

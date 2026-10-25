@@ -1,9 +1,9 @@
-"""A negative pax `size`, which hides a header from the implementations that read it as a number.
+"""A negative pax `size`, which no member can have.
 
-The pax header of `a` says `size=-512`, and its header says size 0. No size can be negative, but the
-grammar of a pax number does not forbid a sign. Implementations reject it; fall back to the header's
-size, and read the next block as the header of `smuggled`; or read it as an unsigned number, and so
-as a size of almost 2^64, which runs past the end of the archive.
+The pax header of `a` says `size=-512`, and its header says size 0. In POSIX, a pax size is decimal
+digits, without a sign. Read leniently, this case is ambiguous because the size is either the
+header's, 0, and the next block the header of `smuggled`, or the pax size read as an unsigned
+number, almost 2^64, which runs past the end of the archive.
 
 Decision point: whether a pax size may be negative, and what a negative one means.
 Seen in: no source tarball.

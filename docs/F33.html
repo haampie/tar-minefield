@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>F33 size-on-dir · Tar file extraction test suite</title>
-<meta name="description" content="A size in the header of a directory, which hides a header from the implementations that honor it.">
+<meta name="description" content="A size in the header of a directory, which takes the next header for its data.">
 <link rel="stylesheet" href="style.css?56c2ed17">
 <link rel="canonical" href="https://stoppels.ch/tar/F33.html">
 </head>
 <body>
 <nav><a class="prev" href="F30.html" rel="prev" title="F30 number-size-base256-too-large">‹ F30 number-size-base256-too-large</a><a href="index.html">all cases</a><a class="next" href="N08.html" rel="next" title="N08 extended-pax-path-and-gnu-long-name">N08 extended-pax-path-and-gnu-long-name ›</a></nav>
 <h1><code>F33</code> size-on-dir</h1>
-<p>A size in the header of a directory, which hides a header from the implementations that honor it.</p>
+<p>A size in the header of a directory, which takes the next header for its data.</p>
 <div class="verdict reject"><p><span class="badge">Must reject</span> A strict parser must reject this archive.</p></div>
 <dl>
 <dt>Category</dt><dd>framing</dd>
@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>F15 with the size in the ustar header rather than a pax header. A directory has no data, but its header says 512 bytes. An implementation that skips the size of every member skips the next block as the directory&#x27;s data; an implementation that knows directories have no data reads that block as the header of a file, <code>smuggled</code>. One implementation then extracts a directory, the other a directory and a file. The same goes for links and devices, which have no data either.</p>
+<p>F15 with the size in the ustar header rather than a pax header. The header of a directory says 512 bytes. In POSIX, no data is stored for a directory, whatever its size, so the next block is the header of a file, <code>smuggled</code>. This case is ambiguous in practice because, if the size applies, that block is the directory&#x27;s data instead, and the tree is a directory alone. The same goes for links and devices, which have no data either.</p>
 <p><strong>Decision point:</strong> whether a size in the header applies to a member that has no data.</p>
 <p><strong>Seen in:</strong> no source tarball has a size on a member without data.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -36,13 +36,13 @@
 <details><summary>Every block, as text</summary>
 <pre>F33-size-on-dir: must reject
 
-A size in the header of a directory, which hides a header from the implementations that honor it.
+A size in the header of a directory, which takes the next header for its data.
 
-F15 with the size in the ustar header rather than a pax header. A directory has no data, but its
-header says 512 bytes. An implementation that skips the size of every member skips the next block
-as the directory&#x27;s data; an implementation that knows directories have no data reads that block as
-the header of a file, `smuggled`. One implementation then extracts a directory, the other a
-directory and a file. The same goes for links and devices, which have no data either.
+F15 with the size in the ustar header rather than a pax header. The header of a directory says 512
+bytes. In POSIX, no data is stored for a directory, whatever its size, so the next block is the
+header of a file, `smuggled`. This case is ambiguous in practice because, if the size applies, that
+block is the directory&#x27;s data instead, and the tree is a directory alone. The same goes for links
+and devices, which have no data either.
 
 Decision point: whether a size in the header applies to a member that has no data.
 Seen in: no source tarball has a size on a member without data.

@@ -1,7 +1,7 @@
 {
  "id": "F28",
  "verdict": "reject",
- "description": "A newline in a pax `comment`, after which an implementation that splits on lines sees a `size`.",
+ "description": "A newline in a pax `comment`, which split on lines leaves a `size` record.",
  "features": [
   "pax.newline-in-value.comment"
  ]

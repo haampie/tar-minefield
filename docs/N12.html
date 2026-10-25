@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The name <code>/tar-minefield-absolute</code> is a path from the root. Depending on the extractor, the member is refused, its leading slash is stripped, or it is written to the root. The file is harmless, and writing to the root fails unless the extractor runs as root.</p>
+<p>The name <code>/tar-minefield-absolute</code> is a path from the root. The case is rejected because the name, taken as it is, leads out of the destination, not because it is ambiguous. The file is harmless, and writing to the root fails unless the extractor runs as root.</p>
 <p><strong>Decision point:</strong> whether an absolute name is rejected, made relative, or followed.</p>
 <p><strong>Seen in:</strong> dtv-scan-tables (<code>/usr/share/dvb/</code>) and masurca 3.3.1.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -38,8 +38,8 @@
 
 An absolute name, which points outside the directory the archive is extracted to.
 
-The name `/tar-minefield-absolute` is a path from the root. Depending on the extractor, the member
-is refused, its leading slash is stripped, or it is written to the root. The file is harmless, and
+The name `/tar-minefield-absolute` is a path from the root. The case is rejected because the name,
+taken as it is, leads out of the destination, not because it is ambiguous. The file is harmless, and
 writing to the root fails unless the extractor runs as root.
 
 Decision point: whether an absolute name is rejected, made relative, or followed.

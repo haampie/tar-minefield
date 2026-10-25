@@ -3,8 +3,8 @@ N08-extended-pax-path-and-gnu-long-name: must reject
 A pax `path` and a GNU long name for one member, and a third name in its header.
 
 The member has the name `from-header`, a GNU long name `from-gnu`, and a pax path `from-pax`.
-Implementations that prefer pax, those that prefer the GNU long name, and those that apply the one
-that comes last extract different names.
+Neither POSIX nor GNU's format defines the two extensions together. This case is ambiguous because
+nothing says which of the three names wins: the member is `from-pax`, `from-gnu` or `from-header`.
 
 Decision point: which of several sources gives a member its name.
 Seen in: no source tarball.

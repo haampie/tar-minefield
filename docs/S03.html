@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The member <code>h</code> is a hardlink to <code>missing</code>. Depending on the implementation, extraction fails, the link is skipped, or it links to a file of that name that already exists where it extracts.</p>
+<p>The member <code>h</code> is a hardlink to <code>missing</code>. In POSIX, a hardlink names a file previously archived, which <code>missing</code> is not. Read leniently, this case is ambiguous because the link is either skipped, or made to a file of that name that already exists where the archive is extracted.</p>
 <p><strong>Decision point:</strong> what a hardlink to nothing does.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -38,8 +38,9 @@
 
 A hardlink to a member that is not in the archive.
 
-The member `h` is a hardlink to `missing`. Depending on the implementation, extraction fails, the
-link is skipped, or it links to a file of that name that already exists where it extracts.
+The member `h` is a hardlink to `missing`. In POSIX, a hardlink names a file previously archived,
+which `missing` is not. Read leniently, this case is ambiguous because the link is either skipped,
+or made to a file of that name that already exists where the archive is extracted.
 
 Decision point: what a hardlink to nothing does.
 Seen in: no source tarball.

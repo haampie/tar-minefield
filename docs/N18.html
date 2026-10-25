@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The name <code>caf\xe9</code> is Latin-1. Depending on the implementation, the bytes are written as they are, or decoded as Latin-1 and written as <code>café</code> in UTF-8, or the byte is replaced, or extraction fails: different names on disk.</p>
+<p>The name <code>caf\xe9</code> is Latin-1, and POSIX does not say how a name in the header is encoded. This case is ambiguous because the name on disk is those bytes, <code>café</code> decoded as Latin-1, or the name with the byte replaced.</p>
 <p><strong>Decision point:</strong> how a name that is not UTF-8 is decoded.</p>
 <p><strong>Seen in:</strong> aspell-is 0.51.1-0 and aspell-nb 0.50.1-0.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -38,9 +38,9 @@
 
 A name that is not UTF-8.
 
-The name `caf\xe9` is Latin-1. Depending on the implementation, the bytes are written as they are,
-or decoded as Latin-1 and written as `café` in UTF-8, or the byte is replaced, or extraction fails:
-different names on disk.
+The name `caf\xe9` is Latin-1, and POSIX does not say how a name in the header is encoded. This case
+is ambiguous because the name on disk is those bytes, `café` decoded as Latin-1, or the name with
+the byte replaced.
 
 Decision point: how a name that is not UTF-8 is decoded.
 Seen in: aspell-is 0.51.1-0 and aspell-nb 0.50.1-0.

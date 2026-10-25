@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The name <code>a\nb</code> is valid on Unix, but listings, manifests and scripts that read names line by line see two names. Implementations that escape or reject control characters disagree with those that write them as they are.</p>
+<p>The name <code>a\nb</code> is valid on Unix, but listings, manifests and scripts that read names line by line see two names. Every implementation that accepts the archive extracts <code>a\nb</code>: the case is rejected because of those tools, not because it is ambiguous.</p>
 <p><strong>Decision point:</strong> whether a name may contain control characters.</p>
 <p><strong>Seen in:</strong> cdrtools 3.02a09, wgrib2 3.6.0 and apktool 2.6.0.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -39,8 +39,8 @@
 A control character in a name, here a newline.
 
 The name `a\nb` is valid on Unix, but listings, manifests and scripts that read names line by line
-see two names. Implementations that escape or reject control characters disagree with those that
-write them as they are.
+see two names. Every implementation that accepts the archive extracts `a\nb`: the case is rejected
+because of those tools, not because it is ambiguous.
 
 Decision point: whether a name may contain control characters.
 Seen in: cdrtools 3.02a09, wgrib2 3.6.0 and apktool 2.6.0.

@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>A record with an empty value deletes the key: <code>size=</code> leaves <code>a</code> with no size at all, not even that of its header, which says 512. Implementations take it as 0, and read the next block as the header of <code>smuggled</code>; or fall back to the header&#x27;s size, and read that block as the data of <code>a</code>; or reject it. Nothing defines what a member without a size is, so a strict parser rejects it.</p>
+<p>A record with an empty value deletes the key: <code>size=</code> leaves <code>a</code> with no size at all, not even that of its header, which says 512. POSIX does not say what a member without a size is. This case is ambiguous because the size is either 0, and the next block the header of <code>smuggled</code>, or the header&#x27;s, and that block the data of <code>a</code>.</p>
 <p><strong>Decision point:</strong> what an empty pax size means: no size, 0, or the header&#x27;s size.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -39,9 +39,9 @@
 An empty pax `size`, which in POSIX removes the size rather than giving one.
 
 A record with an empty value deletes the key: `size=` leaves `a` with no size at all, not even that
-of its header, which says 512. Implementations take it as 0, and read the next block as the header
-of `smuggled`; or fall back to the header&#x27;s size, and read that block as the data of `a`; or reject
-it. Nothing defines what a member without a size is, so a strict parser rejects it.
+of its header, which says 512. POSIX does not say what a member without a size is. This case is
+ambiguous because the size is either 0, and the next block the header of `smuggled`, or the
+header&#x27;s, and that block the data of `a`.
 
 Decision point: what an empty pax size means: no size, 0, or the header&#x27;s size.
 Seen in: no source tarball.

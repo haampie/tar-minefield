@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>POSIX says an implementation treats an unknown typeflag as a regular file, so its size is data. Some implementations skip only the header of a member they do not know, and then read its data as the next header, here that of <code>smuggled</code>.</p>
+<p>POSIX says an unknown typeflag is read as a regular file, so the member has 512 bytes of data. This case is ambiguous in practice because the member is also left out, and the block after its header then either skipped as its data, or read as the header of <code>smuggled</code>.</p>
 <p><strong>Decision point:</strong> whether an unknown typeflag has data.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -38,9 +38,9 @@
 
 An unknown typeflag with a size: data, or no data?
 
-POSIX says an implementation treats an unknown typeflag as a regular file, so its size is data. Some
-implementations skip only the header of a member they do not know, and then read its data as the
-next header, here that of `smuggled`.
+POSIX says an unknown typeflag is read as a regular file, so the member has 512 bytes of data. This
+case is ambiguous in practice because the member is also left out, and the block after its header
+then either skipped as its data, or read as the header of `smuggled`.
 
 Decision point: whether an unknown typeflag has data.
 Seen in: no source tarball.

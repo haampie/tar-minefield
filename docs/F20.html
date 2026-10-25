@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>POSIX applies the records of a global header to every member after it that does not override them, and so a <code>size=512</code> in one to <code>a</code>, whose header says size 0. An implementation that applies it reads the next block as the data of <code>a</code>; one that ignores global headers, or the size in them, reads that block as the header of another file, <code>smuggled</code>. No archiver writes a size in a global header.</p>
+<p>In POSIX, the records of a global header apply to every later member that does not override them, so the <code>size=512</code> of this one holds for <code>a</code>, whose header says size 0. No archiver writes a size in a global header. This case is ambiguous in practice because, with global headers or the sizes in them ignored, the next block is not the data of <code>a</code> but the header of another file, <code>smuggled</code>.</p>
 <p><strong>Decision point:</strong> whether a <code>size</code> in a global header applies.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -38,10 +38,10 @@
 
 A global pax header with a `size`, which frames every member after it, or none.
 
-POSIX applies the records of a global header to every member after it that does not override them,
-and so a `size=512` in one to `a`, whose header says size 0. An implementation that applies it reads
-the next block as the data of `a`; one that ignores global headers, or the size in them, reads that
-block as the header of another file, `smuggled`. No archiver writes a size in a global header.
+In POSIX, the records of a global header apply to every later member that does not override them, so
+the `size=512` of this one holds for `a`, whose header says size 0. No archiver writes a size in a
+global header. This case is ambiguous in practice because, with global headers or the sizes in them
+ignored, the next block is not the data of `a` but the header of another file, `smuggled`.
 
 Decision point: whether a `size` in a global header applies.
 Seen in: no source tarball.

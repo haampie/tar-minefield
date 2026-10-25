@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>F22 pax-size-negative · Tar file extraction test suite</title>
-<meta name="description" content="A negative pax size, which hides a header from the implementations that read it as a number.">
+<meta name="description" content="A negative pax size, which no member can have.">
 <link rel="stylesheet" href="style.css?56c2ed17">
 <link rel="canonical" href="https://stoppels.ch/tar/F22.html">
 </head>
 <body>
 <nav><a class="prev" href="F21.html" rel="prev" title="F21 pax-size-empty">‹ F21 pax-size-empty</a><a href="index.html">all cases</a><a class="next" href="F23.html" rel="next" title="F23 pax-size-plus">F23 pax-size-plus ›</a></nav>
 <h1><code>F22</code> pax-size-negative</h1>
-<p>A negative pax <code>size</code>, which hides a header from the implementations that read it as a number.</p>
+<p>A negative pax <code>size</code>, which no member can have.</p>
 <div class="verdict reject"><p><span class="badge">Must reject</span> A strict parser must reject this archive.</p></div>
 <dl>
 <dt>Category</dt><dd>framing</dd>
@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The pax header of <code>a</code> says <code>size=-512</code>, and its header says size 0. No size can be negative, but the grammar of a pax number does not forbid a sign. Implementations reject it; fall back to the header&#x27;s size, and read the next block as the header of <code>smuggled</code>; or read it as an unsigned number, and so as a size of almost 2^64, which runs past the end of the archive.</p>
+<p>The pax header of <code>a</code> says <code>size=-512</code>, and its header says size 0. In POSIX, a pax size is decimal digits, without a sign. Read leniently, this case is ambiguous because the size is either the header&#x27;s, 0, and the next block the header of <code>smuggled</code>, or the pax size read as an unsigned number, almost 2^64, which runs past the end of the archive.</p>
 <p><strong>Decision point:</strong> whether a pax size may be negative, and what a negative one means.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -36,12 +36,12 @@
 <details><summary>Every block, as text</summary>
 <pre>F22-pax-size-negative: must reject
 
-A negative pax `size`, which hides a header from the implementations that read it as a number.
+A negative pax `size`, which no member can have.
 
-The pax header of `a` says `size=-512`, and its header says size 0. No size can be negative, but the
-grammar of a pax number does not forbid a sign. Implementations reject it; fall back to the header&#x27;s
-size, and read the next block as the header of `smuggled`; or read it as an unsigned number, and so
-as a size of almost 2^64, which runs past the end of the archive.
+The pax header of `a` says `size=-512`, and its header says size 0. In POSIX, a pax size is decimal
+digits, without a sign. Read leniently, this case is ambiguous because the size is either the
+header&#x27;s, 0, and the next block the header of `smuggled`, or the pax size read as an unsigned
+number, almost 2^64, which runs past the end of the archive.
 
 Decision point: whether a pax size may be negative, and what a negative one means.
 Seen in: no source tarball.

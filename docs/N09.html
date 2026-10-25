@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>Two <code>x</code> headers come before one member, with the paths <code>first</code> and <code>second</code>. Depending on the implementation, the first applies, the last, or the two are merged.</p>
+<p>Two <code>x</code> headers come before one member, with the paths <code>first</code> and <code>second</code>. POSIX settles conflicting records within one extended header, where the last one wins, but not two extended headers for one file. This case is ambiguous because the name is <code>first</code>, <code>second</code>, or the header&#x27;s own.</p>
 <p><strong>Decision point:</strong> which of two extended headers of one kind applies.</p>
 <p><strong>Seen in:</strong> no source tarball. libmygpo-qt 1.2.0 repeats xattr keys within one header, which is N20, pax-repeated-key.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -38,8 +38,10 @@
 
 Two pax extended headers for one member, with different paths.
 
-Two `x` headers come before one member, with the paths `first` and `second`. Depending on the
-implementation, the first applies, the last, or the two are merged.
+Two `x` headers come before one member, with the paths `first` and `second`. POSIX settles
+conflicting records within one extended header, where the last one wins, but not two extended
+headers for one file. This case is ambiguous because the name is `first`, `second`, or the header&#x27;s
+own.
 
 Decision point: which of two extended headers of one kind applies.
 Seen in: no source tarball. libmygpo-qt 1.2.0 repeats xattr keys within one header, which is

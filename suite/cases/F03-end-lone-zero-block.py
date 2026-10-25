@@ -6,7 +6,6 @@ they extract it all the same.
 Decision point: whether one zero block is an end-of-archive marker.
 Seen in: eng-rus, srecord 1.64 and cdi2iso 0.1.
 See also: F09, one zero block followed by another member, which is rejected as well.
-Implementations that stop at the zero block do not see the member.
 """
 
 VERDICT = "reject"

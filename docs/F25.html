@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>A pax size is ASCII decimal digits. Python&#x27;s <code>int</code> takes any decimal digit of Unicode, and so reads <code>٥١٢</code> (U+0665 U+0661 U+0662, in UTF-8) as 512, and the next block as the data of <code>a</code>. Implementations that check for ASCII digits reject it, or fall back to the header&#x27;s size, 0, and read that block as the header of <code>smuggled</code>.</p>
+<p>In POSIX, a pax size is ASCII decimal digits. Python&#x27;s <code>int</code> takes any decimal digit of Unicode, and so reads <code>٥١٢</code> (U+0665 U+0661 U+0662, in UTF-8) as 512. Read leniently, this case is ambiguous because the size is either that number, and the next block the data of <code>a</code>, or the header&#x27;s, 0, and that block the header of <code>smuggled</code>.</p>
 <p><strong>Decision point:</strong> which digits a pax number may have.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -38,9 +38,10 @@
 
 A pax `size` in Arabic-Indic digits, `٥١٢`, which some conversions of strings read as 512.
 
-A pax size is ASCII decimal digits. Python&#x27;s `int` takes any decimal digit of Unicode, and so reads
-`٥١٢` (U+0665 U+0661 U+0662, in UTF-8) as 512, and the next block as the data of `a`. Implementations that check for ASCII digits reject it, or fall back to the header&#x27;s
-size, 0, and read that block as the header of `smuggled`.
+In POSIX, a pax size is ASCII decimal digits. Python&#x27;s `int` takes any decimal digit of Unicode, and
+so reads `٥١٢` (U+0665 U+0661 U+0662, in UTF-8) as 512. Read leniently, this case is ambiguous
+because the size is either that number, and the next block the data of `a`, or the header&#x27;s, 0, and
+that block the header of `smuggled`.
 
 Decision point: which digits a pax number may have.
 Seen in: no source tarball.

@@ -1,7 +1,8 @@
 """A hardlink to a member that is not in the archive.
 
-The member `h` is a hardlink to `missing`. Depending on the implementation, extraction fails, the
-link is skipped, or it links to a file of that name that already exists where it extracts.
+The member `h` is a hardlink to `missing`. In POSIX, a hardlink names a file previously archived,
+which `missing` is not. Read leniently, this case is ambiguous because the link is either skipped,
+or made to a file of that name that already exists where the archive is extracted.
 
 Decision point: what a hardlink to nothing does.
 Seen in: no source tarball.

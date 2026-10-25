@@ -1,8 +1,9 @@
 """A pax `size` in Arabic-Indic digits, `٥١٢`, which some conversions of strings read as 512.
 
-A pax size is ASCII decimal digits. Python's `int` takes any decimal digit of Unicode, and so reads
-`٥١٢` (U+0665 U+0661 U+0662, in UTF-8) as 512, and the next block as the data of `a`. Implementations that check for ASCII digits reject it, or fall back to the header's
-size, 0, and read that block as the header of `smuggled`.
+In POSIX, a pax size is ASCII decimal digits. Python's `int` takes any decimal digit of Unicode, and
+so reads `٥١٢` (U+0665 U+0661 U+0662, in UTF-8) as 512. Read leniently, this case is ambiguous
+because the size is either that number, and the next block the data of `a`, or the header's, 0, and
+that block the header of `smuggled`.
 
 Decision point: which digits a pax number may have.
 Seen in: no source tarball.

@@ -1,8 +1,7 @@
 """An archive that ends inside the data of a member.
 
-The header of `a` says 1024 bytes, but the file ends after 512 of them. Depending on the
-implementation, the part it has is extracted, nothing is extracted, or extraction fails. Archives
-that are distributed are pinned by their sha256, so this archive is damaged, not ambiguous: it is
+The header of `a` says 1024 bytes, but the file ends after 512 of them. Archives that are
+distributed are pinned by their sha256, so this archive is damaged rather than ambiguous, and is
 rejected all the same.
 
 Decision point: whether a member that is cut short is extracted.

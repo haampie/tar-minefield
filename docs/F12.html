@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>F12 number-size-gap · Tar file extraction test suite</title>
-<meta name="description" content="A size with a space among its digits: implementations read two sizes.">
+<meta name="description" content="A size with a space among its digits, which reads as two sizes.">
 <link rel="stylesheet" href="style.css?56c2ed17">
 <link rel="canonical" href="https://stoppels.ch/tar/F12.html">
 </head>
 <body>
 <nav><a class="prev" href="F11.html" rel="prev" title="F11 magic-odd-version">‹ F11 magic-odd-version</a><a href="index.html">all cases</a><a class="next" href="F13.html" rel="next" title="F13 pax-newline-in-path">F13 pax-newline-in-path ›</a></nav>
 <h1><code>F12</code> number-size-gap</h1>
-<p>A size with a space among its digits: implementations read two sizes.</p>
+<p>A size with a space among its digits, which reads as two sizes.</p>
 <div class="verdict reject"><p><span class="badge">Must reject</span> A strict parser must reject this archive.</p></div>
 <dl>
 <dt>Category</dt><dd>framing</dd>
@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The size field is <code>000000 1000</code>. An implementation that stops at the first space reads 0; one that skips spaces reads 1000 octal, 512. The 512 bytes that follow are the header of <code>smuggled</code> to the first implementation, and the data of <code>a</code> to the second.</p>
+<p>The size field is <code>000000 1000</code>. In POSIX, a numeric field is octal digits terminated by spaces or NULs, and nothing follows them. Read leniently, this case is ambiguous because the size is either 0, ending at the first blank, or 1000 octal, 512, with the blank skipped. The 512 bytes that follow are then the header of <code>smuggled</code>, or the data of <code>a</code>.</p>
 <p><strong>Decision point:</strong> how a number field with a space among its digits is read.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -36,11 +36,12 @@
 <details><summary>Every block, as text</summary>
 <pre>F12-number-size-gap: must reject
 
-A size with a space among its digits: implementations read two sizes.
+A size with a space among its digits, which reads as two sizes.
 
-The size field is `000000 1000`. An implementation that stops at the first space reads 0; one that
-skips spaces reads 1000 octal, 512. The 512 bytes that follow are the header of `smuggled` to the
-first implementation, and the data of `a` to the second.
+The size field is `000000 1000`. In POSIX, a numeric field is octal digits terminated by spaces or
+NULs, and nothing follows them. Read leniently, this case is ambiguous because the size is either 0,
+ending at the first blank, or 1000 octal, 512, with the blank skipped. The 512 bytes that follow are
+then the header of `smuggled`, or the data of `a`.
 
 Decision point: how a number field with a space among its digits is read.
 Seen in: no source tarball.

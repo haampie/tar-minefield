@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>A record with an empty value deletes the key: <code>path=</code> leaves the member with no name, not even that of its header, <code>from-header</code>. Implementations fall back to the header&#x27;s name, or take the empty name and fail to write it, or write a file of no name into the destination itself.</p>
+<p>A record with an empty value deletes the key: <code>path=</code> leaves the member with no name, not even that of its header, <code>from-header</code>. POSIX does not say what a member without a name is. This case is ambiguous because the name is either the header&#x27;s, or empty, which names the destination itself.</p>
 <p><strong>Decision point:</strong> what an empty pax path means: no name, an empty name, or the header&#x27;s name.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -39,8 +39,8 @@
 An empty pax `path`, which in POSIX removes the path rather than giving one.
 
 A record with an empty value deletes the key: `path=` leaves the member with no name, not even that
-of its header, `from-header`. Implementations fall back to the header&#x27;s name, or take the empty name
-and fail to write it, or write a file of no name into the destination itself.
+of its header, `from-header`. POSIX does not say what a member without a name is. This case is
+ambiguous because the name is either the header&#x27;s, or empty, which names the destination itself.
 
 Decision point: what an empty pax path means: no name, an empty name, or the header&#x27;s name.
 Seen in: no source tarball.

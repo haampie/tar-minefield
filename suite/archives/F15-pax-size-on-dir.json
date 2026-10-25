@@ -1,7 +1,7 @@
 {
  "id": "F15",
  "verdict": "reject",
- "description": "A pax `size` on a directory, which hides a header from the implementations that honor it.",
+ "description": "A pax `size` on a directory, which takes the next header for its data.",
  "features": [
   "pax.size-on-dir"
  ]

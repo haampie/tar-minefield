@@ -1,8 +1,8 @@
 """The same file twice, with different contents: the first copy, or the last?
 
-The archive has two members named `a`, with different contents. Extractors that write members in
-order keep the last copy; implementations that look a name up in an index, or that refuse to
-overwrite, keep the first. The two trees differ in the contents of `a`.
+The archive has two members named `a`, with different contents. Every implementation that accepts it
+keeps the last copy, but a tool that looks a name up, such as a scanner, finds the first, so the two
+see different files.
 
 Decision point: which of two members of one path is the file.
 Seen in: fish 4.7.1, where `Cargo.toml` and `Cargo.lock` are appended again without their last

@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>F27 pax-size-too-large · Tar file extraction test suite</title>
-<meta name="description" content="A pax size of 2^64 + 512, which a 64-bit reader that wraps around reads as 512.">
+<meta name="description" content="A pax size of 2^64 + 512, which wraps around to 512 in 64 bits.">
 <link rel="stylesheet" href="style.css?56c2ed17">
 <link rel="canonical" href="https://stoppels.ch/tar/F27.html">
 </head>
 <body>
 <nav><a class="prev" href="F26.html" rel="prev" title="F26 pax-size-leading-zero">‹ F26 pax-size-leading-zero</a><a href="index.html">all cases</a><a class="next" href="F28.html" rel="next" title="F28 pax-newline-in-comment">F28 pax-newline-in-comment ›</a></nav>
 <h1><code>F27</code> pax-size-too-large</h1>
-<p>A pax <code>size</code> of 2^64 + 512, which a 64-bit reader that wraps around reads as 512.</p>
+<p>A pax <code>size</code> of 2^64 + 512, which wraps around to 512 in 64 bits.</p>
 <div class="verdict reject"><p><span class="badge">Must reject</span> A strict parser must reject this archive.</p></div>
 <dl>
 <dt>Category</dt><dd>framing</dd>
@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>pax numbers have no limit, but implementations keep sizes in 64 bits. One that converts digit by digit without checking for overflow wraps 2^64 + 512 around to 512, and reads the next block as the data of <code>a</code>; one that checks for it rejects the size, or falls back to the header&#x27;s size, 0, and reads that block as the header of <code>smuggled</code>; one that clamps it runs past the end of the archive.</p>
+<p>pax numbers have no limit, but implementations keep sizes in 64 bits. In POSIX, the size is 2^64 + 512, which runs past the end of the archive. Read leniently, this case is ambiguous because the size is 512, wrapped around, the header&#x27;s, 0, or 2^64 - 1, clamped. With 512 the next block is the data of <code>a</code>, with 0 the header of <code>smuggled</code>, and with 2^64 - 1 the data runs past the end of the archive.</p>
 <p><strong>Decision point:</strong> what a pax number too large for the reader means.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -36,12 +36,13 @@
 <details><summary>Every block, as text</summary>
 <pre>F27-pax-size-too-large: must reject
 
-A pax `size` of 2^64 + 512, which a 64-bit reader that wraps around reads as 512.
+A pax `size` of 2^64 + 512, which wraps around to 512 in 64 bits.
 
-pax numbers have no limit, but implementations keep sizes in 64 bits. One that converts digit by
-digit without checking for overflow wraps 2^64 + 512 around to 512, and reads the next block as the
-data of `a`; one that checks for it rejects the size, or falls back to the header&#x27;s size, 0, and
-reads that block as the header of `smuggled`; one that clamps it runs past the end of the archive.
+pax numbers have no limit, but implementations keep sizes in 64 bits. In POSIX, the size is 2^64 +
+512, which runs past the end of the archive. Read leniently, this case is ambiguous because the size
+is 512, wrapped around, the header&#x27;s, 0, or 2^64 - 1, clamped. With 512 the next block is the data
+of `a`, with 0 the header of `smuggled`, and with 2^64 - 1 the data runs past the end of the
+archive.
 
 Decision point: what a pax number too large for the reader means.
 Seen in: no source tarball.

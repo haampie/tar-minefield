@@ -1,9 +1,9 @@
 """An empty pax `size`, which in POSIX removes the size rather than giving one.
 
 A record with an empty value deletes the key: `size=` leaves `a` with no size at all, not even that
-of its header, which says 512. Implementations take it as 0, and read the next block as the header
-of `smuggled`; or fall back to the header's size, and read that block as the data of `a`; or reject
-it. Nothing defines what a member without a size is, so a strict parser rejects it.
+of its header, which says 512. POSIX does not say what a member without a size is. This case is
+ambiguous because the size is either 0, and the next block the header of `smuggled`, or the
+header's, and that block the data of `a`.
 
 Decision point: what an empty pax size means: no size, 0, or the header's size.
 Seen in: no source tarball.

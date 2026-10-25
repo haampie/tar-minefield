@@ -1,8 +1,7 @@
 """A symlink, then a file of the same name: replace the link, or write through it?
 
-The first member is a symlink `a` to `target`, the second a file `a`. An implementation that
-replaces the link writes the file `a`; one that opens `a` for writing follows the link and writes
-`target` instead.
+The first member is a symlink `a` to `target`, the second a file `a`. This case is ambiguous because
+the file either replaces the link, or is written through it, to `target`.
 
 Decision point: whether writing a member follows a symlink in its place.
 Seen in: no source tarball.

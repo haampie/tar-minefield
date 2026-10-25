@@ -1,7 +1,7 @@
 {
  "id": "F22",
  "verdict": "reject",
- "description": "A negative pax `size`, which hides a header from the implementations that read it as a number.",
+ "description": "A negative pax `size`, which no member can have.",
  "features": [
   "pax.invalid-size"
  ]

@@ -1,8 +1,9 @@
 """A global pax header between an extended header and its member.
 
-An `x` header, then a `g` header, then the member. Depending on the implementation, the extended
-header applies to the global header, which is the next header, or the global header is skipped and
-the extended header applies to the member.
+An `x` header, then a `g` header, then the member. In POSIX, an extended header applies to the
+following file, but whether a global header counts as one is left open. This case is ambiguous
+because the extended header applies either to the global header, and the member keeps its name,
+`header-name`, or to the member, as `from-pax`.
 
 Decision point: which header an extended header applies to.
 Seen in: no source tarball.

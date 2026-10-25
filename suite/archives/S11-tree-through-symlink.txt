@@ -2,9 +2,9 @@ S11-tree-through-symlink: must reject
 
 A member written through a symlink, which points out of the destination.
 
-The first member is a symlink `d` to `..`, the second a file `d/tar-minefield-through-symlink`. An
-implementation that follows the link writes the file in the parent of the destination. The file is
-harmless.
+The first member is a symlink `d` to `..`, the second a file `d/tar-minefield-through-symlink`. The
+case is rejected because the file, written through the link, lands in the parent of the destination,
+not because it is ambiguous. The file is harmless.
 
 Decision point: whether a member may be written through a symlink.
 Seen in: no source tarball.

@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The first member is a file <code>a</code>, the second a hardlink <code>a</code> to <code>a</code>. An implementation that removes <code>a</code> before linking has nothing left to link to; one that sees the link is to the same path keeps the file.</p>
+<p>The first member is a file <code>a</code>, the second a hardlink <code>a</code> to <code>a</code>. In POSIX, a hardlink and its target are different directory entries. Read leniently, this case is ambiguous because the link replaces <code>a</code>, which then has nothing to link to, empties it, or leaves it as it is.</p>
 <p><strong>Decision point:</strong> what a link to itself does to the file.</p>
 <p><strong>Seen in:</strong> xscreensaver 6.12 and atari++ 1.85.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -38,9 +38,9 @@
 
 A hardlink to itself.
 
-The first member is a file `a`, the second a hardlink `a` to `a`. An implementation that removes `a`
-before linking has nothing left to link to; one that sees the link is to the same path keeps the
-file.
+The first member is a file `a`, the second a hardlink `a` to `a`. In POSIX, a hardlink and its
+target are different directory entries. Read leniently, this case is ambiguous because the link
+replaces `a`, which then has nothing to link to, empties it, or leaves it as it is.
 
 Decision point: what a link to itself does to the file.
 Seen in: xscreensaver 6.12 and atari++ 1.85.

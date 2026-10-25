@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>F15 pax-size-on-dir · Tar file extraction test suite</title>
-<meta name="description" content="A pax size on a directory, which hides a header from the implementations that honor it.">
+<meta name="description" content="A pax size on a directory, which takes the next header for its data.">
 <link rel="stylesheet" href="style.css?56c2ed17">
 <link rel="canonical" href="https://stoppels.ch/tar/F15.html">
 </head>
 <body>
 <nav><a class="prev" href="F13.html" rel="prev" title="F13 pax-newline-in-path">‹ F13 pax-newline-in-path</a><a href="index.html">all cases</a><a class="next" href="F16.html" rel="next" title="F16 type-unknown">F16 type-unknown ›</a></nav>
 <h1><code>F15</code> pax-size-on-dir</h1>
-<p>A pax <code>size</code> on a directory, which hides a header from the implementations that honor it.</p>
+<p>A pax <code>size</code> on a directory, which takes the next header for its data.</p>
 <div class="verdict reject"><p><span class="badge">Must reject</span> A strict parser must reject this archive.</p></div>
 <dl>
 <dt>Category</dt><dd>framing</dd>
@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>A directory has no data, but its pax extended header says <code>size=512</code>. An implementation that applies the pax size to every member skips the next block as the directory&#x27;s data; an implementation that knows directories have no data reads that block as the header of a file, <code>smuggled</code>. One implementation then extracts a directory, the other a directory and a file. This is the bug class of CVE-2025-62518 (tokio-tar), GHSA-3pv8-6f4r-ffg2 (tar-rs) and CVE-2026-53655 (node-tar), where the hidden block is a header that only one implementation sees.</p>
+<p>The pax extended header of a directory says <code>size=512</code>. In POSIX, no data is stored for a directory, whatever its size, so the next block is the header of a file, <code>smuggled</code>. This case is ambiguous in practice because, if the size applies, that block is the directory&#x27;s data instead, and the tree is a directory alone. This is the bug class of CVE-2025-62518 (tokio-tar), GHSA-3pv8-6f4r-ffg2 (tar-rs) and CVE-2026-53655 (node-tar), where the hidden block is a header that only one implementation sees.</p>
 <p><strong>Decision point:</strong> whether a pax <code>size</code> applies to a member that has no data.</p>
 <p><strong>Seen in:</strong> llama_index_workflows 2.26.0, with a pax size on a directory.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -36,14 +36,13 @@
 <details><summary>Every block, as text</summary>
 <pre>F15-pax-size-on-dir: must reject
 
-A pax `size` on a directory, which hides a header from the implementations that honor it.
+A pax `size` on a directory, which takes the next header for its data.
 
-A directory has no data, but its pax extended header says `size=512`. An implementation that applies
-the pax size to every member skips the next block as the directory&#x27;s data; an implementation that
-knows directories have no data reads that block as the header of a file, `smuggled`. One
-implementation then extracts a directory, the other a directory and a file. This is the bug class of
-CVE-2025-62518 (tokio-tar), GHSA-3pv8-6f4r-ffg2 (tar-rs) and CVE-2026-53655 (node-tar), where the
-hidden block is a header that only one implementation sees.
+The pax extended header of a directory says `size=512`. In POSIX, no data is stored for a directory,
+whatever its size, so the next block is the header of a file, `smuggled`. This case is ambiguous in
+practice because, if the size applies, that block is the directory&#x27;s data instead, and the tree is a
+directory alone. This is the bug class of CVE-2025-62518 (tokio-tar), GHSA-3pv8-6f4r-ffg2 (tar-rs)
+and CVE-2026-53655 (node-tar), where the hidden block is a header that only one implementation sees.
 
 Decision point: whether a pax `size` applies to a member that has no data.
 Seen in: llama_index_workflows 2.26.0, with a pax size on a directory.

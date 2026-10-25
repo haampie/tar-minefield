@@ -2,8 +2,8 @@ S12-tree-under-file: must reject
 
 A member under a file.
 
-The first member is a file `a`, the second a file `a/b` in it. Depending on the implementation,
-extraction fails, the file `a` is replaced with a directory, or `a/b` is skipped.
+The first member is a file `a`, the second a file `a/b` in it. This case is ambiguous because the
+file `a` is either replaced with a directory, or kept, and `a/b` left out.
 
 Decision point: whether a member under a file replaces it.
 Seen in: sendmail 8.18.2 and unclutter 8, where the file is a v7 directory named `a/`.

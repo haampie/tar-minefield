@@ -1,9 +1,10 @@
 """A pax `size` with a plus sign, `+512`, which conversions of strings to numbers accept.
 
-A pax size is a decimal number, which has no sign. But the conversions of strings to numbers that
-implementations use, such as Python's `int`, Go's `strconv.ParseInt` and Rust's `u64::from_str`,
-read `+512` as 512, and the next block as the data of `a`. Implementations that check for digits
-reject it, or fall back to the header's size, 0, and read that block as the header of `smuggled`.
+In POSIX, a pax size is decimal digits, without a sign. But the conversions of strings to numbers
+that implementations use, such as Python's `int`, Go's `strconv.ParseInt` and Rust's
+`u64::from_str`, read `+512` as 512. Read leniently, this case is ambiguous because the size is
+either that number, and the next block the data of `a`, or the header's, 0, and that block the
+header of `smuggled`.
 
 Decision point: whether a pax size may have a sign.
 Seen in: no source tarball.

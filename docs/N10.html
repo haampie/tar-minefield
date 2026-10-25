@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>star writes <code>tar\0</code> at the end of the header, and uses only part of ustar&#x27;s prefix field for the prefix, with times after it. A ustar implementation reads the whole field as the prefix.</p>
+<p>star writes <code>tar\0</code> at the end of the header, and uses only part of ustar&#x27;s prefix field for the prefix, with times after it. In ustar, the prefix is the whole field. This case is ambiguous in practice because the prefix is either the whole field, as ustar defines it, or its first part, as star writes it.</p>
 <p><strong>Decision point:</strong> how long the prefix field is.</p>
 <p><strong>Seen in:</strong> berkeley-db 18.1.40 and ncurses 5.9.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -39,7 +39,9 @@
 star&#x27;s prefix field, which is shorter than ustar&#x27;s.
 
 star writes `tar\0` at the end of the header, and uses only part of ustar&#x27;s prefix field for the
-prefix, with times after it. A ustar implementation reads the whole field as the prefix.
+prefix, with times after it. In ustar, the prefix is the whole field. This case is ambiguous in
+practice because the prefix is either the whole field, as ustar defines it, or its first part, as
+star writes it.
 
 Decision point: how long the prefix field is.
 Seen in: berkeley-db 18.1.40 and ncurses 5.9.

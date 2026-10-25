@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The first member is a symlink <code>d</code> to <code>..</code>, the second a file <code>d/tar-minefield-through-symlink</code>. An implementation that follows the link writes the file in the parent of the destination. The file is harmless.</p>
+<p>The first member is a symlink <code>d</code> to <code>..</code>, the second a file <code>d/tar-minefield-through-symlink</code>. The case is rejected because the file, written through the link, lands in the parent of the destination, not because it is ambiguous. The file is harmless.</p>
 <p><strong>Decision point:</strong> whether a member may be written through a symlink.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -38,9 +38,9 @@
 
 A member written through a symlink, which points out of the destination.
 
-The first member is a symlink `d` to `..`, the second a file `d/tar-minefield-through-symlink`. An
-implementation that follows the link writes the file in the parent of the destination. The file is
-harmless.
+The first member is a symlink `d` to `..`, the second a file `d/tar-minefield-through-symlink`. The
+case is rejected because the file, written through the link, lands in the parent of the destination,
+not because it is ambiguous. The file is harmless.
 
 Decision point: whether a member may be written through a symlink.
 Seen in: no source tarball.

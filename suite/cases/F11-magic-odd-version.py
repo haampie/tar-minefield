@@ -1,8 +1,8 @@
 r"""The POSIX magic with a version that is neither `00` nor NULs.
 
-The magic `ustar\0` is followed by the version `01`. Depending on the implementation, the header is
-read as ustar or as some other format, and its prefix field and other fields accordingly. The
-default policy accepts only the version `00`, and NULs as some Java archivers write.
+The magic `ustar\0` is followed by the version `01`, where POSIX requires `00`. The default policy
+accepts only that version, and NULs as some Java archivers write. This breaks POSIX, which is why
+the case is rejected; it is not ambiguous.
 
 Decision point: which format the header is in.
 Seen in: no source tarball.

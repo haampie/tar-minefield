@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>POSIX lets a pax header declare with <code>hdrcharset=BINARY</code> that its names are bytes in no particular encoding, rather than UTF-8. Here the path is <code>caf\xe9</code>, in Latin-1. Implementations write the bytes as they are, decode them as Latin-1 or with replacement characters, or fail, as they do with N18: the name of the extracted file differs. A strict parser has no use for names that are not UTF-8.</p>
+<p>POSIX lets a pax header declare with <code>hdrcharset=BINARY</code> that its names are bytes in no particular encoding, rather than UTF-8, and then no translation is performed. Here the path is <code>caf\xe9</code>, in Latin-1, so the name on disk is those bytes. This case is ambiguous in practice because the path is also decoded as Latin-1, or with the byte replaced, as with N18, or discarded for the header&#x27;s name, <code>cafe</code>. A strict parser has no use for names that are not UTF-8.</p>
 <p><strong>Decision point:</strong> how a name that is not UTF-8 becomes a path.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -39,9 +39,10 @@
 `hdrcharset=BINARY`, which declares a pax path that is not UTF-8 as bytes.
 
 POSIX lets a pax header declare with `hdrcharset=BINARY` that its names are bytes in no particular
-encoding, rather than UTF-8. Here the path is `caf\xe9`, in Latin-1. Implementations write the bytes
-as they are, decode them as Latin-1 or with replacement characters, or fail, as they do with N18:
-the name of the extracted file differs. A strict parser has no use for names that are not UTF-8.
+encoding, rather than UTF-8, and then no translation is performed. Here the path is `caf\xe9`, in
+Latin-1, so the name on disk is those bytes. This case is ambiguous in practice because the path is
+also decoded as Latin-1, or with the byte replaced, as with N18, or discarded for the header&#x27;s name,
+`cafe`. A strict parser has no use for names that are not UTF-8.
 
 Decision point: how a name that is not UTF-8 becomes a path.
 Seen in: no source tarball.

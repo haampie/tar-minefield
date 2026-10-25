@@ -1,8 +1,9 @@
 r"""Bytes after the NUL that ends a name.
 
-The name field holds `a`, a NUL, and `b`. C implementations stop at the NUL and read `a`; an
-implementation that strips NULs from the end of the field reads `a\0b`, or `ab` once it drops the
-NUL.
+The name field holds `a`, a NUL, and `b`. In POSIX, a name ends at its first NUL, so the name is
+`a`, and every implementation that accepts the archive extracts that. The case is rejected because
+the bytes after the NUL hold a name that only a reader of the whole field sees, not because the
+archive is ambiguous.
 
 Decision point: where a name ends.
 Seen in: no source tarball.

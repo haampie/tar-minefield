@@ -1,8 +1,9 @@
 """A checksum that only matches as the signed sum of the header.
 
-POSIX sums the bytes of a header as unsigned numbers; some old tars summed them as signed, and
-implementations still accept either. With a byte over 127 in the header, here in `uname`, the two
-sums differ, so an implementation that accepts only the unsigned one rejects the header.
+In POSIX, the checksum is the sum of the bytes of a header taken as unsigned numbers. Some old tars
+added them as signed, and many implementations still accept either. With a byte over 127 in the
+header, here in `uname`, the two totals differ, and the checksum matches only the signed one. This
+breaks POSIX, which is why the case is rejected; it is not ambiguous.
 
 Decision point: whether a signed checksum makes a header valid.
 Seen in: no source tarball.

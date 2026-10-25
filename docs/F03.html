@@ -16,7 +16,7 @@
 <dl>
 <dt>Category</dt><dd>framing</dd>
 <dt>Default policy</dt><dd>rejects it</dd>
-<dt>See also</dt><dd><a href="F09.html"><code>F09</code></a>: one zero block followed by another member, which is rejected as well. Implementations that stop at the zero block do not see the member.</dd>
+<dt>See also</dt><dd><a href="F09.html"><code>F09</code></a>: one zero block followed by another member, which is rejected as well.</dd>
 <dt>Files</dt><dd><table class="files">
 <tr><td><a href="https://github.com/haampie/tar-minefield/raw/main/suite/archives/F03-end-lone-zero-block.tar"><code>F03-end-lone-zero-block.tar</code></a></td>
 <td>test archive, 1,536 bytes
@@ -45,7 +45,6 @@ they extract it all the same.
 Decision point: whether one zero block is an end-of-archive marker.
 Seen in: eng-rus, srecord 1.64 and cdi2iso 0.1.
 See also: F09, one zero block followed by another member, which is rejected as well.
-Implementations that stop at the zero block do not see the member.
 
 0x000000  header: regular file
           name     [  0,100)  &quot;a&quot; + 99 NUL

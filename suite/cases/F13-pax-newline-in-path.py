@@ -1,9 +1,9 @@
-r"""A newline in a pax `path`, where implementations that split records on lines see another record.
+r"""A newline in a pax `path`, which split on lines is another record.
 
-pax records are delimited by their length, so a value may hold a newline. An implementation that
-splits the extended header on newlines instead sees the record end at it, and the rest as a record
-of its own: here `path=evil`. The path is `good\n1 path=evil` to one implementation, `good` or
-`evil` to others.
+pax records are delimited by their length, so a value can hold a newline, and in POSIX the path is
+`good\n1 path=evil`. Split on lines instead, the extended header has a second record, `path=evil`.
+This case is ambiguous in practice because the path is then `good` or `evil`, or, with the records
+discarded as malformed, the header's name, `plain`.
 
 Decision point: whether a pax record is delimited by its length or by a newline.
 Seen in: no source tarball. Newlines in pax values are only in xattrs, such as Minion

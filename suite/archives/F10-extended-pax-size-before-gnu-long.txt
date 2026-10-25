@@ -3,9 +3,9 @@ F10-extended-pax-size-before-gnu-long: must reject
 A pax `size` followed by a GNU long name: which of them does the size apply to?
 
 The pax header says `size=512` and is followed by a GNU long name header, then by the member.
-Implementations that apply the pax size to the next header, whatever it is, misread the long name;
-those that apply it to the member read one more block as its data, which here is the header of
-`smuggled`.
+Neither POSIX nor GNU's format defines the two together. This case is ambiguous because the size
+applies either to the long name header, and `smuggled` is a member of its own, or to the member,
+whose data then takes in the header of `smuggled`.
 
 Decision point: which header a pax size applies to, when another extended header follows.
 Seen in: no source tarball.

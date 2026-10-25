@@ -1,7 +1,9 @@
 """One pax key twice in one extended header.
 
-The extended header has the records `path=first` and `path=second`. Implementations that keep the
-first value and those that keep the last extract different names.
+The extended header has the records `path=first` and `path=second`. In POSIX, the last of
+conflicting records in one header takes precedence, so the name is `second`. This case is ambiguous
+in practice because the name is also read as `first`, or as the header's own, with the records
+discarded.
 
 Decision point: which of two values of one key applies.
 Seen in: libmygpo-qt 1.2.0, with xattr keys.

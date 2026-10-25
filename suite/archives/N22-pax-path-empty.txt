@@ -3,8 +3,8 @@ N22-pax-path-empty: must reject
 An empty pax `path`, which in POSIX removes the path rather than giving one.
 
 A record with an empty value deletes the key: `path=` leaves the member with no name, not even that
-of its header, `from-header`. Implementations fall back to the header's name, or take the empty name
-and fail to write it, or write a file of no name into the destination itself.
+of its header, `from-header`. POSIX does not say what a member without a name is. This case is
+ambiguous because the name is either the header's, or empty, which names the destination itself.
 
 Decision point: what an empty pax path means: no name, an empty name, or the header's name.
 Seen in: no source tarball.

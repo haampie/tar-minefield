@@ -1,8 +1,9 @@
 """Another archive after the end-of-archive marker.
 
-The archive ends with two zero blocks, as it should, and is followed by a second archive with a
-file `hidden`. Implementations that stop at the marker extract `a`; those that read on, such as GNU
-tar with `--ignore-zeros`, also extract `hidden`.
+The archive ends with two zero blocks, as it should, and is followed by a second archive with a file
+`hidden`. In POSIX, the archive ends at the marker, and `hidden` is not part of it. This case is
+ambiguous in practice because reading on past the marker, as GNU tar does with `--ignore-zeros`,
+extracts `hidden` as well.
 
 Decision point: whether an implementation stops at the end-of-archive marker.
 Seen in: glibmm 2.16.0, which is the whole archive twice, jmol 14.8.0 and commons-jexl 2.1.1.
