@@ -2,12 +2,10 @@ F08-end-truncated-in-member: must reject
 
 An archive that ends inside the data of a member.
 
-The header of `a` says 1024 bytes, but the file ends after 512 of them. Archives that are
-distributed are pinned by their sha256, so this archive is damaged rather than ambiguous, and is
-rejected all the same.
+The header of `a` says 1024 bytes, but the file ends after 512 of them.
 
 Decision point: whether a member that is cut short is extracted.
-Seen in: no source tarball, where a damaged download fails its sha256.
+Seen in: no source tarball.
 See also: F04, an archive cut short after a complete member, or one without an end-of-archive
 marker, which is rejected as well.
 
