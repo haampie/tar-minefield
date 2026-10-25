@@ -62,6 +62,10 @@ GNU tar documentation or long-standing practice, produce different trees from it
 name the *decision point*: the place in an implementation where implementations make different
 choices. The verdict of the case says which of them a strict parser makes.
 
+A case is ambiguous when it can be read in more than one way, whether or not the implementations
+measured here differ: they can agree because they followed one, such as GNU tar, and an
+implementation written later, or one that is refactored, need not.
+
 Ambiguities fall into four categories, by what they change in the tree:
 
 - **Framing**: where a member's data ends and the next header begins, and which headers belong to

@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has two members named <code>a</code>, with different contents. Every implementation that accepts it keeps the last copy, but a tool that looks a name up, such as a scanner, finds the first, so the two see different files.</p>
+<p>The archive has two members named <code>a</code>, with different contents. This case is ambiguous because either copy can be the file, the first or the last, and the two trees differ in the contents of <code>a</code>.</p>
 <p><strong>Decision point:</strong> which of two members of one path is the file.</p>
 <p><strong>Seen in:</strong> fish 4.7.1, where <code>Cargo.toml</code> and <code>Cargo.lock</code> are appended again without their last newline, and logstash 8.15.2, where <code>build.rb</code> is first a license header and last the build&#x27;s date and commit. Most tarballs with duplicates, mostly from <code>cabal sdist</code>, have identical copies: the default policy rejects those too, as an implementation would have to compare the copies to tell.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -38,9 +38,8 @@
 
 The same file twice, with different contents: the first copy, or the last?
 
-The archive has two members named `a`, with different contents. Every implementation that accepts it
-keeps the last copy, but a tool that looks a name up, such as a scanner, finds the first, so the two
-see different files.
+The archive has two members named `a`, with different contents. This case is ambiguous because
+either copy can be the file, the first or the last, and the two trees differ in the contents of `a`.
 
 Decision point: which of two members of one path is the file.
 Seen in: fish 4.7.1, where `Cargo.toml` and `Cargo.lock` are appended again without their last

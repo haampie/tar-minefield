@@ -1,8 +1,8 @@
 """A regular file with a link target.
 
 The header has typeflag `0` and the linkname `target`. POSIX gives a linkname meaning only for
-links, and every implementation that accepts the archive extracts a file. The case is rejected
-because the linkname contradicts the typeflag, not because it is ambiguous.
+links. This case is ambiguous because the member is either a file, by its typeflag, or a link to
+`target`, by its linkname.
 
 Decision point: whether a linkname makes a member a link.
 Seen in: bgen 1.1.7.
