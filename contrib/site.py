@@ -270,14 +270,16 @@ def paragraphs(text):
 
 
 def see_also(text):
-    """The `See also:` lines of the docstring of a case, as an item of the list at the top of its
-    page, with the identifiers of cases linked to their pages. A line is `F07, what it is`, and is
-    shown as `F07: what it is`."""
+    """The `See also:` lines of the docstring of a case, as the last section of its page, so that
+    they are not read as part of the case, with the identifiers of cases linked to their pages. A
+    line is `F07, what it is`, and is shown as `F07: what it is`."""
     items = [p.split(":", 1)[1].strip() for p in doc_paragraphs(text) if p.startswith("See also:")]
-    return "".join(["\n<dt>See also</dt>"] * bool(items) + [
-        "<dd>" + re.sub(r"\b([FNKS]\d\d)\b", r'<a href="\1.html"><code>\1</code></a>',
-                        re.sub(r"^([FNKS]\d\d),", r"\1:", inline(i))) + "</dd>"
-        for i in items])
+    if not items:
+        return ""
+    return "<h2>See also</h2>\n<ul>\n" + "".join(
+        "<li>" + re.sub(r"\b([FNKS]\d\d)\b", r'<a href="\1.html"><code>\1</code></a>',
+                        re.sub(r"^([FNKS]\d\d),", r"\1:", inline(i))) + "</li>\n"
+        for i in items) + "</ul>\n"
 
 
 TITLE = "Tar file extraction test suite"
@@ -484,7 +486,7 @@ def case_page(case, info, results, data):
 {verdict(info)}
 <dl>
 <dt>Category</dt><dd>{html.escape(category)}</dd>
-<dt>Default policy</dt><dd>{policy(info, features)}</dd>{see_also(doc)}
+<dt>Default policy</dt><dd>{policy(info, features)}</dd>
 <dt>Files</dt><dd><table class="files">
 <tr><td><a href="{REPO}/raw/main/suite/archives/{case}.tar"><code>{case}.tar</code></a></td>
 <td>test archive, {len(archive):,} bytes
@@ -510,6 +512,7 @@ def case_page(case, info, results, data):
     body += ("<h2>What implementations make of it</h2>\n"
              + implementations_section(case, info, results) + "\n")
     body += "<h2>Prevalence in source tarballs</h2>\n" + data_section(ident, features, *data) + "\n"
+    body += see_also(doc)
     return page(f"{ident} {name} · {TITLE}", info["description"].replace("`", ""), body)
 
 
