@@ -35,12 +35,12 @@ REPO = "https://github.com/haampie/tar-minefield"
 with open(os.path.join(os.path.dirname(HERE), "CITATION.cff")) as f:
     DOI = re.search(r"^doi: (\S+)$", f.read(), re.M).group(1)
 CASES = os.path.join(matrix.ROOT, "suite", "cases")
-# The verdict at the top of a case's page: its badge, and what it requires, which for cases with a
-# tree ends with it
+# The verdict at the top of a case's page: its badge, and what it requires
 VERDICTS = {
-    "accept": ("Must accept", "Every implementation must accept this archive, and extract this tree: "),
+    "accept": ("Must accept", "Every implementation must accept this archive, and extract the tree "
+               "below."),
     "tolerate": ("Tolerated", "A strict parser may reject this archive. If it accepts it, it must "
-                 "extract this tree: "),
+                 "extract the tree below."),
     "reject": ("Must reject", "A strict parser must reject this archive."),
 }
 # That the default policy is a draft, at the top of the pages that have its verdicts
@@ -68,6 +68,7 @@ COLUMNS = {
     "reasons": [("why", 80), ("tarballs", 20, "n")],
     "examples": [("case", 8), ("the archive", 36), ("what implementations make of it", 56)],
     "seen": [("tarball", 55), ("packaged by", 12), ("example from the tarball", 33)],
+    "tree": [("path", 40), ("kind", 20), ("contents", 40)],
     "implementations": [("implementation", 21), ("version", 21), ("outcome", 18),
                         ("what it makes of it", 40)],
 }
@@ -143,7 +144,13 @@ table.files td:first-child { white-space: nowrap; }
   table.seen td:nth-child(2):not(:empty)::before { content: "packaged by "; color: #59636e; }
   table.implementations td:first-child { font-weight: 600; }
   table.implementations td:nth-child(2) { color: #59636e; font-size: 0.875em; }
+  /* the tree to extract, which is narrow enough as a table */
+  .wide > table.tree { min-width: 0; }
 }
+/* The tree to extract, part of the explanation of a case: as wide as text, and a kind such as
+   symlink not broken, where the path and contents may be */
+table.tree { max-width: 70ch; table-layout: auto; }
+table.tree td:nth-child(2) { overflow-wrap: normal; }
 /* A sha256: its label, then the hash, which a click selects whole, wherever it wraps */
 .hash { display: block; color: #59636e; font-size: 0.8125em; }
 .hash code { background: none; padding: 0; word-break: break-all; -webkit-user-select: all;
@@ -504,14 +511,34 @@ def implementations_section(case, info, results):
 
 
 def verdict(info):
-    """The verdict of a case, as a banner: what it requires, with the tree unless it is to reject."""
+    """The verdict of a case, as a banner: what it requires."""
     v = info["verdict"]
     badge, text = VERDICTS[v]
-    if v != "reject":
-        text = html.escape(text) + inline(matrix.describe(matrix.expected_tree(info))) + "."
-    else:
-        text = html.escape(text)
-    return f'<div class="verdict {v}"><p><span class="badge">{badge}</span> {text}</p></div>'
+    return (f'<div class="verdict {v}"><p><span class="badge">{badge}</span> {html.escape(text)}'
+            "</p></div>")
+
+
+def with_tree(explanation, info):
+    """The explanation of a case, with the tree to extract before its labelled lines, a row for each
+    path, unless it is to reject."""
+    if info["verdict"] == "reject":
+        return explanation
+    rows = []
+    for e in info["tree"]:
+        path = matrix.text(e["path"]) + ("/" if e["kind"] == "directory" else "")
+        kind, contents = e["kind"], ""
+        if kind == "file":
+            kind += ", executable" if e["executable"] else ""
+            contents = (f'{e["size"]:,} byte{"" if e["size"] == 1 else "s"}, sha256 '
+                        f'<code title="{e["sha256"]}">{e["sha256"][:8]}</code>')
+        elif kind == "symlink":
+            contents = f"→ <code>{html.escape(matrix.text(e['target']))}</code>"
+        rows.append(f"<tr><td><code>{html.escape(path)}</code></td><td>{kind}</td>"
+                    f"<td>{contents}</td></tr>")
+    tree = "<p>The tree to extract:</p>\n" + table("tree", rows) + "\n"
+    at = re.search(r"^<p><strong>(Decision point|Seen in):", explanation, re.M)
+    i = at.start() if at else len(explanation) + 1
+    return explanation[:i] + tree + explanation[i:]
 
 
 def docstring(case):
@@ -559,7 +586,7 @@ def case_page(case, info, results, data):
 </table></dd>
 </dl>
 <h2>The case</h2>
-{paragraphs(doc.strip().split(chr(10), 1)[1], cited(case))}
+{with_tree(paragraphs(doc.strip().split(chr(10), 1)[1], cited(case)), info)}
 <h2>The archive</h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
 <div class="wide">{block_map}</div>

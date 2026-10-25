@@ -69,7 +69,13 @@ table.files td:first-child { white-space: nowrap; }
   table.seen td:nth-child(2):not(:empty)::before { content: "packaged by "; color: #59636e; }
   table.implementations td:first-child { font-weight: 600; }
   table.implementations td:nth-child(2) { color: #59636e; font-size: 0.875em; }
+  /* the tree to extract, which is narrow enough as a table */
+  .wide > table.tree { min-width: 0; }
 }
+/* The tree to extract, part of the explanation of a case: as wide as text, and a kind such as
+   symlink not broken, where the path and contents may be */
+table.tree { max-width: 70ch; table-layout: auto; }
+table.tree td:nth-child(2) { overflow-wrap: normal; }
 /* A sha256: its label, then the hash, which a click selects whole, wherever it wraps */
 .hash { display: block; color: #59636e; font-size: 0.8125em; }
 .hash code { background: none; padding: 0; word-break: break-all; -webkit-user-select: all;

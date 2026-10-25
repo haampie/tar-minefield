@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N01 gnu-long-name · Tar file extraction test suite">
 <meta property="og:description" content="A name over 100 bytes, in a GNU long name.">
-<link rel="stylesheet" href="style.css?b0c28188">
+<link rel="stylesheet" href="style.css?e08d4253">
 <link rel="canonical" href="https://stoppels.ch/tar/N01.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N01.html">
 </head>
@@ -18,7 +18,7 @@
 <nav class="wide"><a class="prev" href="F31.html" rel="prev" title="F31 pax-xattr-not-utf8">‹ F31 pax-xattr-not-utf8</a><a href="index.html">tar-minefield</a><a class="next" href="N02.html" rel="next" title="N02 name-fills-field">N02 name-fills-field ›</a></nav>
 <h1><code>N01</code> gnu-long-name</h1>
 <p>A name over 100 bytes, in a GNU long name.</p>
-<div class="verdict accept"><p><span class="badge">Must accept</span> Every implementation must accept this archive, and extract this tree: <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/</code>, <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</code> (5 B, bbdbb75b).</p></div>
+<div class="verdict accept"><p><span class="badge">Must accept</span> Every implementation must accept this archive, and extract the tree below.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>name</dd>
 <dt>Default policy</dt><dd>accepts it</dd>
@@ -33,6 +33,10 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>GNU tar&#x27;s own format: a header of typeflag <code>L</code> whose data is the name of the next member.</p>
+<p>The tree to extract:</p>
+<div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
+<tr><td><code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/</code></td><td>directory</td><td></td></tr>
+<tr><td><code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</code></td><td>file</td><td>5 bytes, sha256 <code title="bbdbb75b415ee9a40f0b3796a8b41a0b7723afe5726b870474ad220a4886d06d">bbdbb75b</code></td></tr></table></div>
 <p><strong>Seen in:</strong> most tarballs that GNU tar wrote in its default format.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>

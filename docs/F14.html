@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F14 pax-size-disagrees · Tar file extraction test suite">
 <meta property="og:description" content="A pax size that disagrees with the header&#x27;s size, which hides a header from one implementation.">
-<link rel="stylesheet" href="style.css?b0c28188">
+<link rel="stylesheet" href="style.css?e08d4253">
 <link rel="canonical" href="https://stoppels.ch/tar/F14.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F14.html">
 </head>
@@ -18,7 +18,7 @@
 <nav class="wide"><a class="prev" href="F05.html" rel="prev" title="F05 magic-version-nuls">‹ F05 magic-version-nuls</a><a href="index.html">tar-minefield</a><a class="next" href="F18.html" rel="next" title="F18 pax-global-comment-after-members">F18 pax-global-comment-after-members ›</a></nav>
 <h1><code>F14</code> pax-size-disagrees</h1>
 <p>A pax <code>size</code> that disagrees with the header&#x27;s size, which hides a header from one implementation.</p>
-<div class="verdict tolerate"><p><span class="badge">Tolerated</span> A strict parser may reject this archive. If it accepts it, it must extract this tree: <code>a</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442).</p></div>
+<div class="verdict tolerate"><p><span class="badge">Tolerated</span> A strict parser may reject this archive. If it accepts it, it must extract the tree below.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>framing</dd>
 <dt>Default policy</dt><dd>accepts <code>pax.size-disagrees</code>: the pax size frames the member, as POSIX says: it is how sizes over 8 GiB are written</dd>
@@ -33,6 +33,10 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The size field in the header of <code>a</code> is 512, and its pax extended header has <code>size=0</code>. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20size%20field%20in%20the%20following%20header%20block%28s%29">POSIX</a> says that the pax size overrides the header&#x27;s: it is how sizes over 8 GiB, which do not fit in the header&#x27;s size field, are written, and archivers write various sizes in the header then. An implementation that takes the pax size, as it must, reads the next block as the header of another file, <code>smuggled</code>; an implementation that takes the header&#x27;s size, or does not know pax, reads that block as the data of <code>a</code>. A strict parser may reject a header whose size field has room for the size but gives another, but must not extract <code>a</code> with 512 bytes.</p>
+<p>The tree to extract:</p>
+<div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
+<tr><td><code>a</code></td><td>file</td><td>0 bytes, sha256 <code title="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855">e3b0c442</code></td></tr>
+<tr><td><code>smuggled</code></td><td>file</td><td>0 bytes, sha256 <code title="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855">e3b0c442</code></td></tr></table></div>
 <p><strong>Decision point:</strong> which of two sizes frames the member.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>

@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N04 ustar-prefix · Tar file extraction test suite">
 <meta property="og:description" content="A long name split between the ustar prefix and name fields.">
-<link rel="stylesheet" href="style.css?b0c28188">
+<link rel="stylesheet" href="style.css?e08d4253">
 <link rel="canonical" href="https://stoppels.ch/tar/N04.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N04.html">
 </head>
@@ -18,7 +18,7 @@
 <nav class="wide"><a class="prev" href="N03.html" rel="prev" title="N03 pax-long-name">‹ N03 pax-long-name</a><a href="index.html">tar-minefield</a><a class="next" href="S01.html" rel="next" title="S01 tree-dir-after-contents">S01 tree-dir-after-contents ›</a></nav>
 <h1><code>N04</code> ustar-prefix</h1>
 <p>A long name split between the ustar prefix and name fields.</p>
-<div class="verdict accept"><p><span class="badge">Must accept</span> Every implementation must accept this archive, and extract this tree: <code>pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/</code>, <code>pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/file</code> (9 B, 7dd9c6f9).</p></div>
+<div class="verdict accept"><p><span class="badge">Must accept</span> Every implementation must accept this archive, and extract the tree below.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>name</dd>
 <dt>Default policy</dt><dd>accepts it, as it allows <code>ustar.prefix</code>: the ustar prefix field (to accept)</dd>
@@ -33,6 +33,10 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The prefix field is 120 <code>p</code>s and the name field is <code>file</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=by%20concatenating%20prefix%20%28up%20to%20the%20first%20NUL%20character%29%2C%20a%20%3Cslash%3E%20character%2C%20and%20name">POSIX</a>, the pathname is the prefix, followed by <code>/</code>, followed by the name, so <code>file</code> is in a directory whose name is the 120 <code>p</code>s.</p>
+<p>The tree to extract:</p>
+<div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
+<tr><td><code>pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/</code></td><td>directory</td><td></td></tr>
+<tr><td><code>pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/file</code></td><td>file</td><td>9 bytes, sha256 <code title="7dd9c6f93ad04e58505b507580eaf064f0240ce4567f9ca5e741ec09a5cc08be">7dd9c6f9</code></td></tr></table></div>
 <p><strong>Seen in:</strong> thousands of tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>

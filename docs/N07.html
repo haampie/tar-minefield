@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N07 symlink-absolute · Tar file extraction test suite">
 <meta property="og:description" content="A symlink to an absolute path, created as it is.">
-<link rel="stylesheet" href="style.css?b0c28188">
+<link rel="stylesheet" href="style.css?e08d4253">
 <link rel="canonical" href="https://stoppels.ch/tar/N07.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N07.html">
 </head>
@@ -18,7 +18,7 @@
 <nav class="wide"><a class="prev" href="N06.html" rel="prev" title="N06 name-leading-dot-slash">‹ N06 name-leading-dot-slash</a><a href="index.html">tar-minefield</a><a class="next" href="F03.html" rel="next" title="F03 end-lone-zero-block">F03 end-lone-zero-block ›</a></nav>
 <h1><code>N07</code> symlink-absolute</h1>
 <p>A symlink to an absolute path, created as it is.</p>
-<div class="verdict tolerate"><p><span class="badge">Tolerated</span> A strict parser may reject this archive. If it accepts it, it must extract this tree: <code>link</code> → <code>/tar-minefield-nonexistent</code>.</p></div>
+<div class="verdict tolerate"><p><span class="badge">Tolerated</span> A strict parser may reject this archive. If it accepts it, it must extract the tree below.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>name</dd>
 <dt>Default policy</dt><dd>accepts <code>symlink.absolute</code>: created as it is: writing through a symlink is rejected</dd>
@@ -33,6 +33,9 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The default policy creates the link, and rejects writing through any symlink. The target does not exist.</p>
+<p>The tree to extract:</p>
+<div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
+<tr><td><code>link</code></td><td>symlink</td><td>→ <code>/tar-minefield-nonexistent</code></td></tr></table></div>
 <p><strong>Seen in:</strong> tachyon 0.99.5, notmuch 0.40 and others.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>

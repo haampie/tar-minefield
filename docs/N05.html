@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N05 name-dot · Tar file extraction test suite">
 <meta property="og:description" content="A member named ./, the root of the tree, as tar cf x.tar . writes first.">
-<link rel="stylesheet" href="style.css?b0c28188">
+<link rel="stylesheet" href="style.css?e08d4253">
 <link rel="canonical" href="https://stoppels.ch/tar/N05.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N05.html">
 </head>
@@ -18,7 +18,7 @@
 <nav class="wide"><a class="prev" href="F32.html" rel="prev" title="F32 checksum-leading-space">‹ F32 checksum-leading-space</a><a href="index.html">tar-minefield</a><a class="next" href="N06.html" rel="next" title="N06 name-leading-dot-slash">N06 name-leading-dot-slash ›</a></nav>
 <h1><code>N05</code> name-dot</h1>
 <p>A member named <code>./</code>, the root of the tree, as <code>tar cf x.tar .</code> writes first.</p>
-<div class="verdict tolerate"><p><span class="badge">Tolerated</span> A strict parser may reject this archive. If it accepts it, it must extract this tree: <code>a</code> (2 B, 87428fc5).</p></div>
+<div class="verdict tolerate"><p><span class="badge">Tolerated</span> A strict parser may reject this archive. If it accepts it, it must extract the tree below.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>name</dd>
 <dt>Default policy</dt><dd>normalizes <code>name.dot</code>: <code>.</code> is the root of the tree</dd>
@@ -33,6 +33,9 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The first member is the directory <code>./</code>, then the file <code>a</code>. The directory <code>./</code> is the one the archive is extracted into, and the default policy normalizes it to the root of the tree.</p>
+<p>The tree to extract:</p>
+<div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
+<tr><td><code>a</code></td><td>file</td><td>2 bytes, sha256 <code title="87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7">87428fc5</code></td></tr></table></div>
 <p><strong>Seen in:</strong> guile 2.0.9 and others.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>

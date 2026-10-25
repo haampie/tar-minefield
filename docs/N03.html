@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N03 pax-long-name · Tar file extraction test suite">
 <meta property="og:description" content="A name over 100 bytes, in a pax path.">
-<link rel="stylesheet" href="style.css?b0c28188">
+<link rel="stylesheet" href="style.css?e08d4253">
 <link rel="canonical" href="https://stoppels.ch/tar/N03.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N03.html">
 </head>
@@ -18,7 +18,7 @@
 <nav class="wide"><a class="prev" href="N02.html" rel="prev" title="N02 name-fills-field">‹ N02 name-fills-field</a><a href="index.html">tar-minefield</a><a class="next" href="N04.html" rel="next" title="N04 ustar-prefix">N04 ustar-prefix ›</a></nav>
 <h1><code>N03</code> pax-long-name</h1>
 <p>A name over 100 bytes, in a pax <code>path</code>.</p>
-<div class="verdict accept"><p><span class="badge">Must accept</span> Every implementation must accept this archive, and extract this tree: <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/</code>, <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</code> (5 B, bbdbb75b).</p></div>
+<div class="verdict accept"><p><span class="badge">Must accept</span> Every implementation must accept this archive, and extract the tree below.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>name</dd>
 <dt>Default policy</dt><dd>accepts it</dd>
@@ -33,6 +33,10 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The pax path is the name; the header has a truncated one, as writers put there.</p>
+<p>The tree to extract:</p>
+<div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
+<tr><td><code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/</code></td><td>directory</td><td></td></tr>
+<tr><td><code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</code></td><td>file</td><td>5 bytes, sha256 <code title="bbdbb75b415ee9a40f0b3796a8b41a0b7723afe5726b870474ad220a4886d06d">bbdbb75b</code></td></tr></table></div>
 <p><strong>Seen in:</strong> most tarballs with long names, from Python&#x27;s <code>tarfile</code> and GNU tar in pax format.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>

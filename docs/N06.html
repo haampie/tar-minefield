@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N06 name-leading-dot-slash · Tar file extraction test suite">
 <meta property="og:description" content="The name ./a, which is the path a.">
-<link rel="stylesheet" href="style.css?b0c28188">
+<link rel="stylesheet" href="style.css?e08d4253">
 <link rel="canonical" href="https://stoppels.ch/tar/N06.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N06.html">
 </head>
@@ -18,7 +18,7 @@
 <nav class="wide"><a class="prev" href="N05.html" rel="prev" title="N05 name-dot">‹ N05 name-dot</a><a href="index.html">tar-minefield</a><a class="next" href="N07.html" rel="next" title="N07 symlink-absolute">N07 symlink-absolute ›</a></nav>
 <h1><code>N06</code> name-leading-dot-slash</h1>
 <p>The name <code>./a</code>, which is the path <code>a</code>.</p>
-<div class="verdict tolerate"><p><span class="badge">Tolerated</span> A strict parser may reject this archive. If it accepts it, it must extract this tree: <code>a</code> (2 B, 87428fc5).</p></div>
+<div class="verdict tolerate"><p><span class="badge">Tolerated</span> A strict parser may reject this archive. If it accepts it, it must extract the tree below.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>name</dd>
 <dt>Default policy</dt><dd>normalizes <code>name.leading-dot-slash</code>: <code>./a</code> is <code>a</code></dd>
@@ -33,6 +33,9 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The command <code>tar cf x.tar .</code> writes names that start with <code>./</code>. On a filesystem, <code>./a</code> and <code>a</code> are one path, but implementations that compare names as strings see two: an index of <code>a</code> does not find <code>./a</code>. The default policy normalizes the name to <code>a</code>, and finds duplicates among normalized names, so that <code>./a</code> and <code>a</code> in one archive are a duplicate.</p>
+<p>The tree to extract:</p>
+<div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
+<tr><td><code>a</code></td><td>file</td><td>2 bytes, sha256 <code title="87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7">87428fc5</code></td></tr></table></div>
 <p><strong>Decision point:</strong> whether <code>./a</code> is <code>a</code>.</p>
 <p><strong>Seen in:</strong> hdf5 1.10.11, numdiff 5.9.0 and others.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
