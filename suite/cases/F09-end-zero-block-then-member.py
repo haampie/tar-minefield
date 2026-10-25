@@ -6,6 +6,7 @@ which some implementations extract and others never see.
 
 Decision point: whether one zero block ends the archive.
 Seen in: jakarta-oro 2.0.8, PullParser 2.1.10 and commons-cli 1.2-src.
+See also: F03, one zero block with nothing after it, which is rejected as well.
 """
 
 VERDICT = "reject"

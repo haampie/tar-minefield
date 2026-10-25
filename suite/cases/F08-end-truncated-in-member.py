@@ -7,6 +7,8 @@ rejected all the same.
 
 Decision point: whether a member that is cut short is extracted.
 Seen in: no source tarball, where a damaged download fails its sha256.
+See also: F04, an archive cut short after a complete member, or one without an end-of-archive
+marker, which is rejected as well.
 """
 
 VERDICT = "reject"

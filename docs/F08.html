@@ -16,6 +16,7 @@
 <dl>
 <dt>Category</dt><dd>framing</dd>
 <dt>Default policy</dt><dd>rejects it</dd>
+<dt>See also</dt><dd><a href="F04.html"><code>F04</code></a>: an archive cut short after a complete member, or one without an end-of-archive marker, which is rejected as well.</dd>
 <dt>Files</dt><dd><table class="files">
 <tr><td><a href="https://github.com/haampie/tar-minefield/raw/main/suite/archives/F08-end-truncated-in-member.tar"><code>F08-end-truncated-in-member.tar</code></a></td>
 <td>test archive, 1,024 bytes
@@ -45,6 +46,8 @@ rejected all the same.
 
 Decision point: whether a member that is cut short is extracted.
 Seen in: no source tarball, where a damaged download fails its sha256.
+See also: F04, an archive cut short after a complete member, or one without an end-of-archive
+marker, which is rejected as well.
 
 0x000000  header: regular file, size 1024
           name     [  0,100)  &quot;a&quot; + 99 NUL

@@ -16,7 +16,7 @@
 <dl>
 <dt>Category</dt><dd>framing</dd>
 <dt>Default policy</dt><dd>accepts <code>end.data-after</code>: junk after the two zero blocks is ignored</dd>
-<dt>See also</dt><dd><a href="F07.html">F07</a>, two concatenated archives, as <code>cat one.tar two.tar</code> makes them, which are rejected: implementations either stop at the first two zero blocks or extract both archives.</dd>
+<dt>See also</dt><dd><a href="F07.html"><code>F07</code></a>: two concatenated archives, as <code>cat one.tar two.tar</code> makes them, which are rejected. Implementations either stop at the first two zero blocks or extract both archives.</dd>
 <dt>Files</dt><dd><table class="files">
 <tr><td><a href="https://github.com/haampie/tar-minefield/raw/main/suite/archives/F02-end-data-after.tar"><code>F02-end-data-after.tar</code></a></td>
 <td>test archive, 2,560 bytes
@@ -38,8 +38,8 @@
 Data after the end-of-archive marker that is not a header, which is ignored.
 
 Seen in: tcp_wrappers 7.6, commons-lang 2.6 and xml-commons-resolver 1.2.
-See also: F07, two concatenated archives, as `cat one.tar two.tar` makes them, which are rejected:
-implementations either stop at the first two zero blocks or extract both archives.
+See also: F07, two concatenated archives, as `cat one.tar two.tar` makes them, which are rejected.
+Implementations either stop at the first two zero blocks or extract both archives.
 
 0x000000  header: regular file
           name     [  0,100)  &quot;a&quot; + 99 NUL
