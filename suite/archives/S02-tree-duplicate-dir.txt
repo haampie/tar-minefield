@@ -2,6 +2,9 @@ S02-tree-duplicate-dir: must accept, and extract its tree
 
 The same directory twice, as `tar cf x.tar d d/sub` writes.
 
+The archive has the directory `d/`, then `d/sub/` twice. POSIX says that extracting a directory
+that already exists is not an error.
+
 Seen in: over a hundred tarballs.
 
 0x000000  header: directory

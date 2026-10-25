@@ -18,6 +18,7 @@ import urllib.request
 
 PAGE = "https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html"
 # The sections, by their ids on the page
+DESCRIPTION = "tag_20_94_03"
 END = "tag_20_94_13_01"  # pax Interchange Format
 PAX_HEADER = "tag_20_94_13_02"  # pax Header Block
 PAX_EXTENDED = "tag_20_94_13_03"  # pax Extended Header
@@ -53,6 +54,19 @@ SENTENCES = {
     "name-nul": (USTAR, "name is terminated at the first NUL character"),
     "invalid-name": (USTAR, "invalid filename, it is implementation-defined whether the data from "
                             "the file is stored on the file hierarchy"),
+    "name-full": (USTAR, "except when all characters in the array contain non-NUL characters "
+                         "including the last character"),
+    "prefix": (USTAR, "by concatenating prefix (up to the first NUL character), a <slash> character, "
+                      "and name"),
+    "name-encoding": (USTAR, "characters outside of <slash> and the portable filename character set"),
+    "value-data": (PAX_EXTENDED, "all characters within the <value> field shall be considered data for "
+                                 "the field"),
+    "corresponding": (PAX_EXTENDED, "overrides or deletes a corresponding field in the ustar header "
+                                    "block"),
+    "same-entry": (USTAR, "attempting to extract both pathnames from the resulting archive always "
+                          "causes an error"),
+    "dir-exists": (DESCRIPTION, "If an attempt is made to extract a directory when the directory "
+                                "already exists, this shall not be considered an error"),
     "hardlink": (USTAR, "Represents a file linked to another file, of any type, previously "
                         "archived"),
 }

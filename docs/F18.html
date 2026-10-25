@@ -27,6 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
+<p>Between the members <code>a</code> and <code>b</code> is a global header, typeflag <code>g</code>, with the one record <code>comment=after a</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=All%20characters%20in%20the%20%3Cvalue%3E%20field%20shall%20be%20ignored%20by%20pax">POSIX</a>, the value of a comment is ignored, so the header changes nothing for <code>b</code>.</p>
 <p><strong>Seen in:</strong> rpm 4.20.1 and x42-plugins 20230701.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -36,6 +37,10 @@
 <pre>F18-pax-global-comment-after-members: tolerated: a strict parser may reject it; if it accepts it, it must extract its tree, and the default policy accepts it
 
 A global pax header with only a `comment`, after the first member.
+
+Between the members `a` and `b` is a global header, typeflag `g`, with the one record
+`comment=after a`. In POSIX, the value of a comment is ignored, so the header changes nothing for
+`b`.
 
 Seen in: rpm 4.20.1 and x42-plugins 20230701.
 

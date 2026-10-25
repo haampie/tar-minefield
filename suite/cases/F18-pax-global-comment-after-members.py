@@ -1,5 +1,9 @@
 """A global pax header with only a `comment`, after the first member.
 
+Between the members `a` and `b` is a global header, typeflag `g`, with the one record
+`comment=after a`. In POSIX, the value of a comment is ignored, so the header changes nothing for
+`b`.
+
 Seen in: rpm 4.20.1 and x42-plugins 20230701.
 """
 
@@ -8,6 +12,7 @@ F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, 
 VERDICT = "tolerate"
 ID = "F18"
 FEATURES = ['pax-global.after-members']
+POSIX = "comment"
 TREE = [F('a', b'a\n'), F('b', b'b\n')]
 
 

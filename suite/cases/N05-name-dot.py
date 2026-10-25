@@ -1,5 +1,8 @@
 """A member named `./`, the root of the tree, as `tar cf x.tar .` writes first.
 
+The first member is the directory `./`, then the file `a`. The directory `./` is the one the
+archive is extracted into, and the default policy normalizes it to the root of the tree.
+
 Seen in: guile 2.0.9 and others.
 """
 

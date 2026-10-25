@@ -27,6 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
+<p>After the two zero blocks comes a block that starts with <code>junk after the end of the archive</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros">POSIX</a>, the two zero blocks are the end of the archive, so the junk is not part of it, and the default policy ignores it.</p>
 <p><strong>Seen in:</strong> tcp_wrappers 7.6, commons-lang 2.6 and xml-commons-resolver 1.2.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -36,6 +37,10 @@
 <pre>F02-end-data-after: tolerated: a strict parser may reject it; if it accepts it, it must extract its tree, and the default policy accepts it
 
 Data after the end-of-archive marker that is not a header, which is ignored.
+
+After the two zero blocks comes a block that starts with `junk after the end of the archive`. In
+POSIX, the two zero blocks are the end of the archive, so the junk is not part of it, and the
+default policy ignores it.
 
 Seen in: tcp_wrappers 7.6, commons-lang 2.6 and xml-commons-resolver 1.2.
 See also: F07, two concatenated archives, as `cat one.tar two.tar` makes them, which are rejected

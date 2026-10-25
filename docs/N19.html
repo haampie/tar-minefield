@@ -27,7 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The pax path is <code>a\0b</code>. In POSIX, a NUL in a pax value is data, so the path is invalid, and it is implementation-defined whether the member is stored, and under what name. This case is ambiguous because the path is <code>a</code>, cut at the NUL, <code>a_b</code> or the like, with the NUL replaced, or discarded for the header&#x27;s name, <code>header-name</code>.</p>
+<p>The pax path is <code>a\0b</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=all%20characters%20within%20the%20%3Cvalue%3E%20field%20shall%20be%20considered%20data%20for%20the%20field">POSIX</a>, a NUL in a pax value is data, so the path is invalid. This case is ambiguous because the path is <code>a</code>, cut at the NUL, <code>a_b</code> or the like, with the NUL replaced, or discarded for the header&#x27;s name, <code>header-name</code>.</p>
 <p><strong>Decision point:</strong> where a pax path ends.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -39,10 +39,9 @@
 
 A NUL inside a pax `path`.
 
-The pax path is `a\0b`. In POSIX, a NUL in a pax value is data, so the path is invalid, and it is
-implementation-defined whether the member is stored, and under what name. This case is ambiguous
-because the path is `a`, cut at the NUL, `a_b` or the like, with the NUL replaced, or discarded for
-the header&#x27;s name, `header-name`.
+The pax path is `a\0b`. In POSIX, a NUL in a pax value is data, so the path is invalid. This case
+is ambiguous because the path is `a`, cut at the NUL, `a_b` or the like, with the NUL replaced, or
+discarded for the header&#x27;s name, `header-name`.
 
 Decision point: where a pax path ends.
 Seen in: no source tarball.

@@ -123,7 +123,7 @@ Name:
 - NUL inside a pax path or GNU long name, and GNU long names padded with NULs or spaces.
 - `hdrcharset=BINARY`, names that are not UTF-8, and other pax values that are not UTF-8, which
   [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20extended%20header%20records%20shall%20be%20encoded%20according%20to%20the%20ISO%2FIEC%2010646%2D1%3A2020%20standard%20UTF%2D8%20encoding) does not allow, but libarchive and star write xattrs as.
-- An empty pax `path` or `linkpath`, which in POSIX removes it, rather than falling back to the
+- An empty pax `path` or `linkpath`, which in [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block) removes it, rather than falling back to the
   header's name.
 - Normalization: `./a` and `a`, `a//b`, `a/./b`, a trailing slash, `.`, an empty name, `\` as a
   separator on Windows, drive letters.
@@ -165,7 +165,7 @@ parser would trip over:
 - the global pax header with only a `comment` that `git archive` writes, and so every GitHub
   release tarball,
 - pax headers for long names and links, GNU long names and links, and the ustar prefix,
-- names of exactly 100 bytes, with no NUL,
+- names of exactly 100 bytes, without a NUL,
 - numeric fields padded with leading zeros, and terminated by a space, a NUL, or both,
 - base-256 sizes of files over 8 GiB,
 - vendor pax keys that do not affect the tree, such as `LIBARCHIVE.xattr.*` and `SCHILY.*` from

@@ -27,6 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
+<p>The archive has the directory <code>d/</code>, then <code>d/sub/</code> twice. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=If%20an%20attempt%20is%20made%20to%20extract%20a%20directory%20when%20the%20directory%20already%20exists%2C%20this%20shall%20not%20be%20considered%20an%20error">POSIX</a> says that extracting a directory that already exists is not an error.</p>
 <p><strong>Seen in:</strong> over a hundred tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -36,6 +37,9 @@
 <pre>S02-tree-duplicate-dir: must accept, and extract its tree
 
 The same directory twice, as `tar cf x.tar d d/sub` writes.
+
+The archive has the directory `d/`, then `d/sub/` twice. POSIX says that extracting a directory
+that already exists is not an error.
 
 Seen in: over a hundred tarballs.
 

@@ -27,7 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The name <code>caf\xe9</code> is Latin-1, and POSIX does not say how a name in the header is encoded. This case is ambiguous because the name on disk is those bytes, <code>café</code> decoded as Latin-1, or the name with the byte replaced.</p>
+<p>The name <code>caf\xe9</code> is Latin-1, and <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=characters%20outside%20of%20%3Cslash%3E%20and%20the%20portable%20filename%20character%20set">POSIX</a> leaves how a name in the header is encoded to the implementation. This case is ambiguous because the name on disk is those bytes, <code>café</code> decoded as Latin-1, or the name with the byte replaced.</p>
 <p><strong>Decision point:</strong> how a name that is not UTF-8 is decoded.</p>
 <p><strong>Seen in:</strong> aspell-is 0.51.1-0 and aspell-nb 0.50.1-0.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -39,9 +39,9 @@
 
 A name that is not UTF-8.
 
-The name `caf\xe9` is Latin-1, and POSIX does not say how a name in the header is encoded. This case
-is ambiguous because the name on disk is those bytes, `café` decoded as Latin-1, or the name with
-the byte replaced.
+The name `caf\xe9` is Latin-1, and POSIX leaves how a name in the header is encoded to the
+implementation. This case is ambiguous because the name on disk is those bytes, `café` decoded as
+Latin-1, or the name with the byte replaced.
 
 Decision point: how a name that is not UTF-8 is decoded.
 Seen in: aspell-is 0.51.1-0 and aspell-nb 0.50.1-0.

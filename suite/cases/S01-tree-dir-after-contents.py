@@ -1,5 +1,8 @@
 """A directory after its contents.
 
+The file `d/a` comes before the directory `d/`, so `d` already exists when `d/` is extracted. POSIX
+says that extracting a directory that already exists is not an error.
+
 Seen in: hundreds of tarballs.
 """
 
@@ -9,6 +12,7 @@ D = lambda path: {"path": path, "kind": "directory"}
 VERDICT = "accept"
 ID = "S01"
 FEATURES = []
+POSIX = "dir-exists"
 TREE = [D('d'), F('d/a', b'a\n')]
 
 

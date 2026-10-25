@@ -27,6 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
+<p>The name field is 100 <code>n</code>s, without a NUL. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=except%20when%20all%20characters%20in%20the%20array%20contain%20non%2DNUL%20characters%20including%20the%20last%20character">POSIX</a>, the name field ends with a NUL except when all of its bytes are non-NUL, so the name is all 100 bytes.</p>
 <p><strong>Seen in:</strong> thousands of tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -36,6 +37,9 @@
 <pre>N02-name-fills-field: must accept, and extract its tree
 
 A name of exactly 100 bytes, which fills the name field without a NUL.
+
+The name field is 100 `n`s, without a NUL. In POSIX, the name field ends with a NUL except when all
+of its bytes are non-NUL, so the name is all 100 bytes.
 
 Seen in: thousands of tarballs.
 

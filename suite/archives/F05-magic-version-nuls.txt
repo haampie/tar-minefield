@@ -2,6 +2,9 @@ F05-magic-version-nuls: tolerated: a strict parser may reject it; if it accepts 
 
 The POSIX magic with NULs for its version, `ustar\0\0\0`, as some Java archivers write.
 
+The magic of `a` is `ustar\0` and its version field is two NULs. In POSIX, the version field is
+`00`.
+
 Seen in: commons-lang 2.6, apache-solr 3.6.2 and commons-logging 1.2.
 
 0x000000  header: regular file

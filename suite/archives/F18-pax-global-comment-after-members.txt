@@ -2,6 +2,10 @@ F18-pax-global-comment-after-members: tolerated: a strict parser may reject it; 
 
 A global pax header with only a `comment`, after the first member.
 
+Between the members `a` and `b` is a global header, typeflag `g`, with the one record
+`comment=after a`. In POSIX, the value of a comment is ignored, so the header changes nothing for
+`b`.
+
 Seen in: rpm 4.20.1 and x42-plugins 20230701.
 
 0x000000  header: regular file

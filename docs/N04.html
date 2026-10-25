@@ -27,6 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
+<p>The prefix field is 120 <code>p</code>s and the name field is <code>file</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=by%20concatenating%20prefix%20%28up%20to%20the%20first%20NUL%20character%29%2C%20a%20%3Cslash%3E%20character%2C%20and%20name">POSIX</a>, the pathname is the prefix, followed by <code>/</code>, followed by the name, so <code>file</code> is in a directory whose name is the 120 <code>p</code>s.</p>
 <p><strong>Seen in:</strong> thousands of tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -36,6 +37,9 @@
 <pre>N04-ustar-prefix: must accept, and extract its tree
 
 A long name split between the ustar prefix and name fields.
+
+The prefix field is 120 `p`s and the name field is `file`. In POSIX, the pathname is the prefix,
+followed by `/`, followed by the name, so `file` is in a directory whose name is the 120 `p`s.
 
 Seen in: thousands of tarballs.
 

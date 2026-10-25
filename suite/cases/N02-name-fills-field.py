@@ -1,5 +1,8 @@
 """A name of exactly 100 bytes, which fills the name field without a NUL.
 
+The name field is 100 `n`s, without a NUL. In POSIX, the name field ends with a NUL except when all
+of its bytes are non-NUL, so the name is all 100 bytes.
+
 Seen in: thousands of tarballs.
 """
 
@@ -8,6 +11,7 @@ F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, 
 VERDICT = "accept"
 ID = "N02"
 FEATURES = []
+POSIX = "name-full"
 TREE = [F('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn', b'full\n')]
 
 
