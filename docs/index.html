@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tar file extraction test suite · tar-minefield</title>
-<meta name="description" content="This repo provides an extensive test suite and documentation for tar file extraction, with the goal of ensuring that implementations extract tar archives the same way.">
+<meta name="description" content="This project provides an extensive test suite and documentation for tar file extraction, with the goal of ensuring that implementations extract tar archives the same way.">
 <link rel="stylesheet" href="style.css?bc6f691c">
 <link rel="canonical" href="https://stoppels.ch/tar/">
 </head>
@@ -12,7 +12,7 @@
 <nav><span class="prev"></span><a href="index.html">all cases</a><a class="next" href="F17.html" rel="next" title="F17 pax-global-comment">F17 pax-global-comment ›</a></nav>
 <a class="draft" href="index.html#policy">Working draft</a>
 <h1>Tar file extraction test suite</h1>
-<p>This repo provides an extensive <strong><a href="https://github.com/haampie/tar-minefield/blob/main/suite/">test suite</a></strong> and <strong>documentation</strong> for tar file extraction, with the goal of ensuring that implementations extract tar archives the same way.</p>
+<p>This project provides an extensive <strong><a href="https://github.com/haampie/tar-minefield/blob/main/suite/">test suite</a></strong> and <strong>documentation</strong> for tar file extraction, with the goal of ensuring that implementations extract tar archives the same way.</p>
 <p>There are dozens of implementations of tar file extraction out there, from command line tools to libraries for programming languages. Because the tar file format leaves room for interpretation, different implementations can extract <a href="#examples">certain crafted tar files</a> in different ways.</p>
 <p>This is a security concern: for example, when a security scanner and the extractor use different tar implementations, the scanner could inspect other files than the ones that end up on disk.</p>
 <p>By assigning <a href="#policy">identifiers</a> to these ambiguities, and providing test cases and usage data, this project aims for tar implementations to converge on a strict parser and identical behavior.</p>
