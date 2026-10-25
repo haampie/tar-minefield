@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>N23 extended-gnu-long-then-pax · Tar file extraction test suite</title>
-<meta name="description" content="A GNU long name, then a pax header, then the member: which of them does the long name name?">
+<meta name="description" content="A GNU long name, then a pax header, then the member: which of them does the long name apply to?">
 <link rel="stylesheet" href="style.css?56c2ed17">
 <link rel="canonical" href="https://stoppels.ch/tar/N23.html">
 </head>
 <body>
 <nav><a class="prev" href="N22.html" rel="prev" title="N22 pax-path-empty">‹ N22 pax-path-empty</a><a href="index.html">all cases</a><a class="next" href="N24.html" rel="next" title="N24 pax-hdrcharset-binary">N24 pax-hdrcharset-binary ›</a></nav>
 <h1><code>N23</code> extended-gnu-long-then-pax</h1>
-<p>A GNU long name, then a pax header, then the member: which of them does the long name name?</p>
+<p>A GNU long name, then a pax header, then the member: which of them does the long name apply to?</p>
 <div class="verdict reject"><p><span class="badge">Must reject</span> A strict parser must reject this archive.</p></div>
 <dl>
 <dt>Category</dt><dd>name</dd>
@@ -36,7 +36,7 @@
 <details><summary>Every block, as text</summary>
 <pre>N23-extended-gnu-long-then-pax: must reject
 
-A GNU long name, then a pax header, then the member: which of them does the long name name?
+A GNU long name, then a pax header, then the member: which of them does the long name apply to?
 
 GNU long names and pax headers are two ways of extending the next header, and neither format defines
 the other. Here a GNU long name `from-gnu` is followed by a pax header with only an `mtime`, and

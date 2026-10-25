@@ -1,4 +1,4 @@
-"""A GNU long name, then a pax header, then the member: which of them does the long name name?
+"""A GNU long name, then a pax header, then the member: which of them does the long name apply to?
 
 GNU long names and pax headers are two ways of extending the next header, and neither format defines
 the other. Here a GNU long name `from-gnu` is followed by a pax header with only an `mtime`, and

@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The name field is all NULs. In POSIX, it is implementation-defined whether a member with an invalid name is stored, and under what name. This case is ambiguous because an empty name marks the end of the archive, leaves the member out, or names the destination directory itself.</p>
+<p>The name field is all NULs. In POSIX, it is implementation-defined whether a member with an invalid name is stored, and under what name. This case is ambiguous because an empty name marks the end of the archive, leaves the member out, or refers to the destination directory itself.</p>
 <p><strong>Decision point:</strong> what an empty name refers to.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -40,7 +40,7 @@ A member with an empty name.
 
 The name field is all NULs. In POSIX, it is implementation-defined whether a member with an invalid
 name is stored, and under what name. This case is ambiguous because an empty name marks the end of
-the archive, leaves the member out, or names the destination directory itself.
+the archive, leaves the member out, or refers to the destination directory itself.
 
 Decision point: what an empty name refers to.
 Seen in: no source tarball.

@@ -26,8 +26,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The member <code>h</code> is a hardlink to <code>f</code>, which comes after it. In POSIX, a hardlink names a file previously archived. Read leniently, this case is ambiguous because <code>h</code> either has nothing to link to yet, or is linked to <code>f</code> once the whole archive is read.</p>
-<p><strong>Decision point:</strong> whether a hardlink may name a later member.</p>
+<p>The member <code>h</code> is a hardlink to <code>f</code>, which comes after it. In POSIX, the target of a hardlink is a file previously archived. Read leniently, this case is ambiguous because <code>h</code> either has nothing to link to yet, or is linked to <code>f</code> once the whole archive is read.</p>
+<p><strong>Decision point:</strong> whether the target of a hardlink can be a later member.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -38,11 +38,11 @@
 
 A hardlink to a member that comes later.
 
-The member `h` is a hardlink to `f`, which comes after it. In POSIX, a hardlink names a file
-previously archived. Read leniently, this case is ambiguous because `h` either has nothing to link
-to yet, or is linked to `f` once the whole archive is read.
+The member `h` is a hardlink to `f`, which comes after it. In POSIX, the target of a hardlink is a
+file previously archived. Read leniently, this case is ambiguous because `h` either has nothing to
+link to yet, or is linked to `f` once the whole archive is read.
 
-Decision point: whether a hardlink may name a later member.
+Decision point: whether the target of a hardlink can be a later member.
 Seen in: no source tarball.
 
 0x000000  header: hardlink

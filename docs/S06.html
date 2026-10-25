@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The member <code>s</code> is a symlink to <code>f</code>, and <code>h</code> a hardlink to <code>s</code>. In POSIX, a hardlink names a file of any type, so <code>h</code> is a link to the symlink itself, another symlink to <code>f</code>. This case is ambiguous in practice because <code>h</code> is also linked to the file <code>f</code> itself, or left out.</p>
+<p>The member <code>s</code> is a symlink to <code>f</code>, and <code>h</code> a hardlink to <code>s</code>. In POSIX, the target of a hardlink is a file of any type, so <code>h</code> is a link to the symlink itself, another symlink to <code>f</code>. This case is ambiguous in practice because <code>h</code> is also linked to the file <code>f</code> itself, or left out.</p>
 <p><strong>Decision point:</strong> whether a hardlink follows a symlink.</p>
 <p><strong>Seen in:</strong> octa 8.4.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -38,9 +38,9 @@
 
 A hardlink to a symlink: a link to the symlink, or to its target?
 
-The member `s` is a symlink to `f`, and `h` a hardlink to `s`. In POSIX, a hardlink names a file of
-any type, so `h` is a link to the symlink itself, another symlink to `f`. This case is ambiguous in
-practice because `h` is also linked to the file `f` itself, or left out.
+The member `s` is a symlink to `f`, and `h` a hardlink to `s`. In POSIX, the target of a hardlink is
+a file of any type, so `h` is a link to the symlink itself, another symlink to `f`. This case is
+ambiguous in practice because `h` is also linked to the file `f` itself, or left out.
 
 Decision point: whether a hardlink follows a symlink.
 Seen in: octa 8.4.

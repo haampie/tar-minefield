@@ -59,7 +59,7 @@ strict about every field that shapes the tree and lenient about everything else.
 
 An archive is ambiguous if two implementations, each following a defensible reading of POSIX, the
 GNU tar documentation or long-standing practice, produce different trees from it. For each case we
-name the *decision point*: the place in an implementation where implementations make different
+give the *decision point*: the place in an implementation where implementations make different
 choices. The verdict of the case says which of them a strict parser makes.
 
 A case is ambiguous when it can be read in more than one way, whether or not the implementations
@@ -116,7 +116,7 @@ Name:
   the star prefix, Solaris `X` headers, two extended headers of one kind, one key twice in an
   extended header, or one of each.
 - GNU long names and pax headers for one member, in either order: each extends the next header,
-  and does not know the other, so a GNU long name before a pax header may name the pax header.
+  and does not know the other, so a GNU long name before a pax header can apply to the pax header.
 - The prefix field in a header with GNU magic, which GNU tar uses for times in incremental
   archives (`tarfile` reads it as a prefix: gh-155629).
 - pax keys that change the name or kind from inside: `GNU.sparse.name`, `SCHILY.filetype`.
