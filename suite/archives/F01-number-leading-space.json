@@ -1,8 +1,11 @@
 {
  "id": "F01",
- "verdict": "accept",
+ "verdict": "tolerate",
  "description": "Numeric fields padded with spaces rather than zeros, as old tars wrote them.",
- "features": [],
+ "features": [
+  "number.mode.leading-space",
+  "number.size.leading-space"
+ ],
  "tree": [
   {
    "path": "a",

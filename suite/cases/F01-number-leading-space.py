@@ -8,9 +8,9 @@ Seen in: hundreds of tarballs, many from CPAN.
 
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}
 
-VERDICT = "accept"
+VERDICT = "tolerate"
 ID = "F01"
-FEATURES = []
+FEATURES = ["number.mode.leading-space", "number.size.leading-space"]
 POSIX = "zero-filled"
 TREE = [F('a', b'spaces\n')]
 

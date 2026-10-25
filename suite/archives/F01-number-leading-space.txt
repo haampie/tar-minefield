@@ -1,4 +1,4 @@
-F01-number-leading-space: must accept, and extract its tree
+F01-number-leading-space: tolerated: a strict parser may reject it; if it accepts it, it must extract its tree, and the default policy accepts it
 
 Numeric fields padded with spaces rather than zeros, as old tars wrote them.
 

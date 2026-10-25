@@ -47,10 +47,8 @@ what `tarscan.py` reports.
 | case | strict.py | GNU tar | bsdtar | BusyBox tar | 7-Zip | Python tarfile, filter=data, as in pip | Python tarfile, filter=tar | Python tarfile, filter=fully_trusted | node-tar | node-tar, strict | tar-fs | Java Commons Compress | .NET System.Formats.Tar | PHP PharData, as in Composer | Go archive/tar | Go archive/tar, tarinsecurepath=0 | Go containerd archive.Apply | Rust tar | Rust astral-tokio-tar | Rust tar-codec, as in uv | RubyGems | R untar, internal | Perl Archive::Tar | Haskell tar | Julia Tar.jl | live-bootstrap untar | live-bootstrap untar, --non-strict |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | **to accept** | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| [F01](https://stoppels.ch/tar/F01.html) number-leading-space | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [F17](https://stoppels.ch/tar/F17.html) pax-global-comment | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
 | [F31](https://stoppels.ch/tar/F31.html) pax-xattr-not-utf8 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
-| [F32](https://stoppels.ch/tar/F32.html) checksum-leading-space | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [N01](https://stoppels.ch/tar/N01.html) gnu-long-name | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
 | [N02](https://stoppels.ch/tar/N02.html) name-fills-field | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
 | [N03](https://stoppels.ch/tar/N03.html) pax-long-name | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌A | ✅ | ✅ | ❌B | ❌B |
@@ -58,10 +56,12 @@ what `tarscan.py` reports.
 | [S01](https://stoppels.ch/tar/S01.html) tree-dir-after-contents | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [S02](https://stoppels.ch/tar/S02.html) tree-duplicate-dir | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **tolerated** | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+| [F01](https://stoppels.ch/tar/F01.html) number-leading-space | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [F02](https://stoppels.ch/tar/F02.html) end-data-after | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ |
 | [F05](https://stoppels.ch/tar/F05.html) magic-version-nuls | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ⛔ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ |
 | [F14](https://stoppels.ch/tar/F14.html) pax-size-disagrees | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌A | ❌A | ✅ | ❌B | ❌B |
 | [F18](https://stoppels.ch/tar/F18.html) pax-global-comment-after-members | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
+| [F32](https://stoppels.ch/tar/F32.html) checksum-leading-space | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [N05](https://stoppels.ch/tar/N05.html) name-dot | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [N06](https://stoppels.ch/tar/N06.html) name-leading-dot-slash | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [N07](https://stoppels.ch/tar/N07.html) symlink-absolute | ✅ | ✅ | ✅ | ✅ | ❌A | ⛔ | ✅ | ✅ | ❌B | ⛔ | ⛔ | ❌C | ⛔ | ❌C | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ⛔ | ✅ | ⛔ | ⛔ | ✅ | ✅ | ✅ |
@@ -124,7 +124,7 @@ what `tarscan.py` reports.
 | [S10](https://stoppels.ch/tar/S10.html) tree-symlink-then-file | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️B | ⚠️B |
 | [S11](https://stoppels.ch/tar/S11.html) tree-through-symlink | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 💥 | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️C | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 💥 | 💥 |
 | [S12](https://stoppels.ch/tar/S12.html) tree-under-file | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️C | ⚠️A | ⚠️A |
-| **total** | ✅72 | ✅32 ⚠️40 | ✅31 ⚠️41 | ✅24 ⚠️47 ❌1 | ✅27 ⚠️44 ❌1 | ✅31 ⚠️40 ⛔1 | ✅31 ⚠️41 | ✅30 ⚠️40 💥2 | ✅21 ⚠️50 ❌1 | ✅31 ⚠️40 ⛔1 | ✅33 ⚠️37 ⛔2 | ✅30 ⚠️41 ❌1 | ✅47 ⚠️23 ⛔2 | ✅22 ⚠️45 ⛔1 ❌4 | ✅29 ⚠️43 | ✅32 ⚠️40 | ✅32 ⚠️40 | ✅29 ⚠️43 | ✅36 ⚠️35 ⛔1 | ✅57 ⚠️11 ⛔2 ❌2 | ✅21 ⚠️44 ⛔2 ❌5 | ✅35 ⚠️37 | ✅27 ⚠️42 ⛔1 ❌2 | ✅35 ⚠️33 ⛔3 ❌1 | ✅42 ⚠️30 | ✅17 ⚠️45 ❌8 💥2 | ✅12 ⚠️50 ❌8 💥2 |
+| **total** | ✅72 | ✅32 ⚠️40 | ✅31 ⚠️41 | ✅24 ⚠️47 ❌1 | ✅27 ⚠️44 ❌1 | ✅31 ⚠️40 ⛔1 | ✅31 ⚠️41 | ✅30 ⚠️40 💥2 | ✅21 ⚠️50 ❌1 | ✅31 ⚠️40 ⛔1 | ✅33 ⚠️37 ⛔2 | ✅30 ⚠️41 ❌1 | ✅47 ⚠️23 ⛔2 | ✅22 ⚠️45 ⛔1 ❌4 | ✅29 ⚠️43 | ✅32 ⚠️40 | ✅32 ⚠️40 | ✅29 ⚠️43 | ✅36 ⚠️35 ⛔1 | ✅57 ⚠️11 ⛔4 | ✅21 ⚠️44 ⛔2 ❌5 | ✅35 ⚠️37 | ✅27 ⚠️42 ⛔1 ❌2 | ✅35 ⚠️33 ⛔3 ❌1 | ✅42 ⚠️30 | ✅17 ⚠️45 ❌8 💥2 | ✅12 ⚠️50 ❌8 💥2 |
 
 ## Trees
 

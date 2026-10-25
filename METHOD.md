@@ -166,9 +166,7 @@ parser would trip over:
   release tarball,
 - pax headers for long names and links, GNU long names and links, and the ustar prefix,
 - names of exactly 100 bytes, with no NUL,
-- numeric fields padded with leading zeros or leading spaces, and terminated by a space, a NUL,
-  or both, the checksum too: many CPAN tarballs, and those of old GNU tar, pad with spaces, and
-  [the scans](contrib/data) find no tarball where implementations read such a field differently,
+- numeric fields padded with leading zeros, and terminated by a space, a NUL, or both,
 - base-256 sizes of files over 8 GiB,
 - vendor pax keys that do not affect the tree, such as `LIBARCHIVE.xattr.*` and `SCHILY.*` from
   macOS and star, also with values that are not UTF-8, and the AppleDouble `._` files next to
@@ -203,6 +201,10 @@ costs. The tolerated cases are:
 - a global pax header with only a `comment` after the first member.
 - the POSIX magic with NULs for its version, `ustar\0\0\0`, which some Java archivers write,
   as in the tarballs of Apache's commons-lang, Solr and Hadoop. Any other version is rejected.
+- numeric fields padded with spaces rather than zeros, the checksum too, as `Archive::Tar` and old
+  GNU tar write them, in many CPAN tarballs: [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers) has leading zeros,
+  and [the scans](contrib/data) find no tarball where implementations read such a field
+  differently.
 - newlines in the values of xattr pax keys, which are not extracted.
 - a pax `size` that disagrees with the header's, when the pax size frames the member, as POSIX
   says. A strict parser may reject a header whose size field has room for the size but gives
