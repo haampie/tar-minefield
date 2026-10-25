@@ -1,8 +1,10 @@
 """An unknown typeflag with a size: data, or no data?
 
-POSIX says an unknown typeflag is read as a regular file, so the member has 512 bytes of data. This
-case is ambiguous in practice because the member is also left out, and the block after its header
-then either skipped as its data, or read as the header of `smuggled`.
+POSIX says an unknown typeflag is read as a regular file, so the 512 bytes after the header are the
+data of `unknown`. Those bytes also form a valid header, of an empty file `smuggled`. This case is
+ambiguous in practice because a reader that skips the member has to decide whether it has data. If
+it does, the 512 bytes are skipped with it; if not, they are the header of the next member, and
+`smuggled` is extracted.
 
 Decision point: whether an unknown typeflag has data.
 Seen in: no source tarball.
