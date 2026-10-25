@@ -8,6 +8,7 @@ and CVE-2026-53655 (node-tar), where the hidden block is a header that only one 
 
 Decision point: whether a pax `size` applies to a member that has no data.
 Seen in: llama_index_workflows 2.26.0, with a pax size on a directory.
+See also: F33, a size in the ustar header of a directory, which is rejected as well.
 """
 
 VERDICT = "reject"

@@ -1,13 +1,13 @@
 """A size in the header of a directory, which takes the next header for its data.
 
-F15 with the size in the ustar header rather than a pax header. The header of a directory says 512
-bytes. In POSIX, no data is stored for a directory, whatever its size, so the next block is the
-header of a file, `smuggled`. This case is ambiguous in practice because, if the size applies, that
-block is the directory's data instead, and the tree is a directory alone. The same goes for links
-and devices, which have no data either.
+The ustar header of a directory says 512 bytes. In POSIX, no data is stored for a directory,
+whatever its size, so the next block is the header of a file, `smuggled`. This case is ambiguous in
+practice because, if the size applies, that block is the directory's data instead, and the tree is a
+directory alone. The same goes for links and devices, which have no data either.
 
 Decision point: whether a size in the header applies to a member that has no data.
 Seen in: no source tarball has a size on a member without data.
+See also: F15, a pax `size` on a directory, which is rejected as well.
 """
 
 VERDICT = "reject"
