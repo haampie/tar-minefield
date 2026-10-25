@@ -27,6 +27,7 @@ SENTENCES = {
     "end": (END, "there shall be two 512-byte blocks filled with binary zeros"),
     "version": (USTAR, 'The version field is two octets containing the characters "00"'),
     "checksum": (USTAR, "Each octet in the header shall be treated as an unsigned value"),
+    "zero-filled": (USTAR, "All other fields are leading zero-filled octal numbers"),
     "numeric": (USTAR, "Each numeric field is terminated by one or more <space> or NUL characters"),
     "record-length": (PAX_EXTENDED, "The <length> field shall be the decimal length of the extended "
                                     "header record in octets"),

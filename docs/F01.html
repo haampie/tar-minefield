@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>F01 number-leading-space · Tar file extraction test suite</title>
 <meta name="description" content="Numeric fields padded with spaces rather than zeros, as old tars wrote them.">
-<link rel="stylesheet" href="style.css?0cbf7e1c">
+<link rel="stylesheet" href="style.css?bc6f691c">
 <link rel="canonical" href="https://stoppels.ch/tar/F01.html">
 </head>
 <body>
@@ -27,6 +27,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
+<p>The mode, uid, gid, size and mtime fields are padded with spaces, such as <code>          7 </code> for the size of <code>a</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are leading zero-filled octal numbers.</p>
 <p><strong>Seen in:</strong> hundreds of tarballs, many from CPAN.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -36,6 +37,9 @@
 <pre>F01-number-leading-space: must accept, and extract its tree
 
 Numeric fields padded with spaces rather than zeros, as old tars wrote them.
+
+The mode, uid, gid, size and mtime fields are padded with spaces, such as `          7 ` for the
+size of `a`. In POSIX, numeric fields are leading zero-filled octal numbers.
 
 Seen in: hundreds of tarballs, many from CPAN.
 
