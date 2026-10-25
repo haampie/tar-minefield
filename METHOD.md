@@ -273,8 +273,8 @@ especially.
 Running a dozen extractors over the test suite is slow, and makes every change of policy a new run.
 Instead, a scanner reads only the headers of each tarball, skips the data, and records every
 feature from the catalogue it finds, as one JSON line per tarball keyed by its checksum. It does
-not stop at the first problem. A strictness policy is then a query over that table, and debating
-it costs no downloads.
+not stop at the first problem. A strictness policy is then a query over that table, and it can be
+debated without downloading anything again.
 
 The scanner also records what identifies the producer of a tarball: the magic, how numeric fields
 are padded, the `git archive` comment, uname and gname, the mtimes of the entries (which also date

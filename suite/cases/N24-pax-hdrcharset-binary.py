@@ -4,7 +4,7 @@ POSIX lets a pax header declare with `hdrcharset=BINARY` that its names are byte
 encoding, rather than UTF-8, and then no translation is performed. Here the path is `caf\xe9`, in
 Latin-1, so the name on disk is those bytes. This case is ambiguous in practice because the path is
 also decoded as Latin-1, or with the byte replaced, as with N18, or discarded for the header's name,
-`cafe`. A strict parser has no use for names that are not UTF-8.
+`cafe`. A strict parser rejects names that are not UTF-8.
 
 Decision point: how a name that is not UTF-8 becomes a path.
 Seen in: no source tarball.

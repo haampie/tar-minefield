@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>POSIX says that pax records are UTF-8, apart from names under <code>hdrcharset=BINARY</code>. But xattrs are bytes, and libarchive and star write them in pax headers, as <code>LIBARCHIVE.xattr.*</code> (in base64) and <code>SCHILY.xattr.*</code> (as they are). Here <code>SCHILY.xattr.user.data</code> is <code>\xff\xfe</code>. xattrs are not part of the tree, and implementations that do not extract them have no reason to decode them, so every implementation must extract <code>a</code>.</p>
+<p>POSIX says that pax records are UTF-8, apart from names under <code>hdrcharset=BINARY</code>. But xattrs are bytes, and libarchive and star write them in pax headers, as <code>LIBARCHIVE.xattr.*</code> (in base64) and <code>SCHILY.xattr.*</code> (as they are). Here <code>SCHILY.xattr.user.data</code> is <code>\xff\xfe</code>. xattrs are not part of the tree, and implementations that do not extract them can skip them without decoding them, so every implementation must extract <code>a</code>.</p>
 <p><strong>Seen in:</strong> 31 source tarballs, such as R 4.5.2, Minion 10.31 and keepassxc 2.7.8, all in <code>SCHILY.xattr.*</code>. No source tarball has another pax value that is not UTF-8, apart from names.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -40,8 +40,8 @@ An xattr in a pax header whose value is not UTF-8, as libarchive and star write 
 POSIX says that pax records are UTF-8, apart from names under `hdrcharset=BINARY`. But xattrs are
 bytes, and libarchive and star write them in pax headers, as `LIBARCHIVE.xattr.*` (in base64) and
 `SCHILY.xattr.*` (as they are). Here `SCHILY.xattr.user.data` is `\xff\xfe`. xattrs are not
-part of the tree, and implementations that do not extract them have no reason to decode them, so
-every implementation must extract `a`.
+part of the tree, and implementations that do not extract them can skip them without decoding
+them, so every implementation must extract `a`.
 
 Seen in: 31 source tarballs, such as R 4.5.2, Minion 10.31 and keepassxc 2.7.8, all in
 `SCHILY.xattr.*`. No source tarball has another pax value that is not UTF-8, apart from names.

@@ -49,7 +49,8 @@ directory, into the tests of an implementation.
 - `cases/<case>.py`: the script that writes it, whose docstring explains the case: the decision
   point where implementations differ, where the scans saw it, and what implementations do with it.
 - `blocks.py`: writes archives from raw 512-byte blocks, and describes each block as it writes
-  it. It uses no tar implementation, so that the test suite does not test one against itself.
+  it. It does not use a tar implementation, so that the test suite does not test one against
+  itself.
 
 ## Generating and checking
 
