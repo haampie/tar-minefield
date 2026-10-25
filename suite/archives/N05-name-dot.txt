@@ -2,7 +2,7 @@ N05-name-dot: tolerated: a strict parser may reject it; if it accepts it, it mus
 
 A member named `./`, the root of the tree, as `tar cf x.tar .` writes first.
 
-Seen in: guile 2.0.9 and others: see contrib/data/STRICT.md.
+Seen in: guile 2.0.9 and others.
 
 0x000000  header: directory
           name     [  0,100)  "./" + 98 NUL

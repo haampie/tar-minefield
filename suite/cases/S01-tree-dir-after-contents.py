@@ -1,6 +1,6 @@
 """A directory after its contents.
 
-Seen in: hundreds of tarballs: see `tree.dir-after-contents` in contrib/data/STRICT.md.
+Seen in: hundreds of tarballs.
 """
 
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}

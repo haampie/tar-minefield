@@ -2,7 +2,7 @@ N04-ustar-prefix: must accept, and extract its tree
 
 A long name split between the ustar prefix and name fields.
 
-Seen in: thousands of tarballs: see `ustar.prefix` in contrib/data/STRICT.md.
+Seen in: thousands of tarballs.
 
 0x000000  header: regular file
           name     [  0,100)  "file" + 96 NUL

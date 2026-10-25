@@ -2,7 +2,7 @@ N02-name-fills-field: must accept, and extract its tree
 
 A name of exactly 100 bytes, which fills the name field without a NUL.
 
-Seen in: thousands of tarballs: see `name.fills-field` in contrib/data/STRICT.md.
+Seen in: thousands of tarballs.
 
 0x000000  header: regular file
           name     [  0,100)  "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"

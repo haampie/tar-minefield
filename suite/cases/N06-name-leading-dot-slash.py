@@ -6,7 +6,7 @@ one path, but implementations that compare names as strings see two: an index of
 so that `./a` and `a` in one archive are a duplicate.
 
 Decision point: whether `./a` is `a`.
-Seen in: hdf5 1.10.11, numdiff 5.9.0 and others: see contrib/data/STRICT.md.
+Seen in: hdf5 1.10.11, numdiff 5.9.0 and others.
 """
 
 VERDICT = "tolerate"

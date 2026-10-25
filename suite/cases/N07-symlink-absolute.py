@@ -3,7 +3,7 @@
 The default policy creates the link, and rejects writing through any symlink. The target does
 not exist.
 
-Seen in: tachyon 0.99.5, notmuch 0.40 and others: see contrib/data/STRICT.md.
+Seen in: tachyon 0.99.5, notmuch 0.40 and others.
 """
 
 L = lambda path, target: {"path": path, "kind": "symlink", "target": target}

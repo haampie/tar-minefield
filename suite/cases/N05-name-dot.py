@@ -1,6 +1,6 @@
 """A member named `./`, the root of the tree, as `tar cf x.tar .` writes first.
 
-Seen in: guile 2.0.9 and others: see contrib/data/STRICT.md.
+Seen in: guile 2.0.9 and others.
 """
 
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}

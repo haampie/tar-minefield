@@ -1,7 +1,6 @@
 """Number fields padded with spaces rather than zeros, as old tars wrote them.
 
-Seen in: hundreds of tarballs, many from CPAN: see `number.*.leading-space` in
-contrib/data/STRICT.md.
+Seen in: hundreds of tarballs, many from CPAN.
 """
 
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}

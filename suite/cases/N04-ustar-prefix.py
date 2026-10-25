@@ -1,6 +1,6 @@
 """A long name split between the ustar prefix and name fields.
 
-Seen in: thousands of tarballs: see `ustar.prefix` in contrib/data/STRICT.md.
+Seen in: thousands of tarballs.
 """
 
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}

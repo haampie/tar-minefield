@@ -415,8 +415,7 @@ def data_section(ident, features, names, short, rated, union):
             if u else
             f'<p class="note">{old:,} of these tarballs were scanned by an earlier version of '
             "<code>tarscan.py</code>, which did not report this. What it did record rules it out "
-            'for all of them: see <a href="' + REPO + '/blob/main/contrib/data/STRICT.md#not-measured">'
-            "STRICT.md</a>.</p>\n" if old else "")
+            "for all of them.</p>\n" if old else "")
     return (
         f"<p>Release tarballs of {ecosystems(names)} with "
         + ", ".join(f"<code>{f}</code>" for f in features) + "." + policy + "</p>\n"

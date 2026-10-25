@@ -2,7 +2,7 @@ S02-tree-duplicate-dir: must accept, and extract its tree
 
 The same directory twice, as `tar cf x.tar d d/sub` writes.
 
-Seen in: over a hundred tarballs: see `tree.duplicate.dir-dir` in contrib/data/STRICT.md.
+Seen in: over a hundred tarballs.
 
 0x000000  header: directory
           name     [  0,100)  "d/" + 98 NUL

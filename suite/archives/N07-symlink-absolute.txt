@@ -5,7 +5,7 @@ A symlink to an absolute path, created as it is.
 The default policy creates the link, and rejects writing through any symlink. The target does
 not exist.
 
-Seen in: tachyon 0.99.5, notmuch 0.40 and others: see contrib/data/STRICT.md.
+Seen in: tachyon 0.99.5, notmuch 0.40 and others.
 
 0x000000  header: symlink
           name     [  0,100)  "link" + 96 NUL

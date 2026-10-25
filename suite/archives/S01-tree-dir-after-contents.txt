@@ -2,7 +2,7 @@ S01-tree-dir-after-contents: must accept, and extract its tree
 
 A directory after its contents.
 
-Seen in: hundreds of tarballs: see `tree.dir-after-contents` in contrib/data/STRICT.md.
+Seen in: hundreds of tarballs.
 
 0x000000  header: regular file
           name     [  0,100)  "d/a" + 97 NUL

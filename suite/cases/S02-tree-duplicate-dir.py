@@ -1,6 +1,6 @@
 """The same directory twice, as `tar cf x.tar d d/sub` writes.
 
-Seen in: over a hundred tarballs: see `tree.duplicate.dir-dir` in contrib/data/STRICT.md.
+Seen in: over a hundred tarballs.
 """
 
 D = lambda path: {"path": path, "kind": "directory"}
