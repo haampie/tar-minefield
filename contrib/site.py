@@ -764,7 +764,7 @@ common it is in source tarballs.</p>
 <p>Click a case for its page.</p>
 <div class="wide">{matrix.svg(results, cases, lambda case: cases[case]["id"] + ".html")}</div>
 <h2 id="policy">Policy</h2>
-<p><strong>This policy is a working draft.</strong> This section defines the
+<p>This section defines a <strong>working draft</strong> of the
 <em>default policy</em><sup><a href="#stricter">1</a></sup>, which accepts, tolerates or rejects
 each case below, based on <a href="#tarballs">data</a> from the {len(union):,} distinct release
 tarballs of {ecosystems(names)}.</p>
