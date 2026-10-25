@@ -33,7 +33,7 @@ BASE32 = "0123456789abcdfghijklmnpqrsvwxyz"
 
 
 def from_base32(s):
-    """Decode Nix's base32, in which the last character holds the lowest bits."""
+    """Decode Nix's base32, in which the last character encodes the lowest bits."""
     out = bytearray(len(s) * 5 // 8)
     for n, c in enumerate(reversed(s)):
         digit = BASE32.index(c)

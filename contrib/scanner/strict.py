@@ -6,7 +6,7 @@
 A strict parser rejects every archive with a feature that METHOD.md lists as an ambiguity: the
 criteria below, each a pattern of feature names of tarscan.py. Features of the cases that
 METHOD.md lists to accept, or that are confined to fields outside the tree it describes, are
-allowed. Names that some filesystems cannot hold (`platform.*`) are neither: they are reported
+allowed. Names that some filesystems do not allow (`platform.*`) are neither: they are reported
 apart. A feature that none of these patterns match is reported as unclassified, so that nothing is
 left out unseen.
 
@@ -42,7 +42,7 @@ CATEGORIES = ("framing", "name", "kind", "order and state")
 STRICT = [
     ("scan.error", "framing", "the scanner could not read past a header"),
     ("checksum.*", "framing", "a checksum that matches only one way of summing"),
-    # Number fields that shape the tree are one criterion per problem: see criterion()
+    # Numeric fields that shape the tree are one criterion per problem: see criterion()
     ("number.[*].*", "framing",
      "a size, mode or checksum written in a way that implementations differ on"),
     ("number.size.*", "framing", "a size written in a way that implementations differ on"),
@@ -143,7 +143,7 @@ ALLOWED = [
     ("name.fills-field", "a name of exactly 100 bytes, without NUL (to accept)"),
     ("linkname.no-nul", "a linkname of exactly 100 bytes, without NUL"),
     ("name.non-ascii", "UTF-8 names"),
-    ("name.not-nfc", "names not in NFC: one tree, which macOS may not hold"),
+    ("name.not-nfc", "names not in NFC: one tree, whose names macOS may normalize"),
     ("name.dir-without-trailing-slash", "a directory without a trailing slash: the typeflag says"),
     ("ustar.prefix", "the ustar prefix field (to accept)"),
     ("number.size.base256", "base-256 sizes of files over 8 GiB (to accept)"),
@@ -174,7 +174,7 @@ ALLOWED = [
 # The default policy: the strict criteria that it lets through, and how; it rejects the others.
 # A strict parser normalizes these names to the path they refer to, which is what tarscan.py
 # compares to find duplicates, so normalizing hides none. The rest it accepts as they are, some
-# only if condition() holds.
+# only if condition() is true.
 DEFAULT = [
     ("name.leading-dot-slash", "normalize", "`./a` is `a`"),
     ("name.dot", "normalize", "`.` is the root of the tree"),
@@ -215,7 +215,7 @@ def assessed(r):
 
 
 def criterion(feature):
-    """The criterion of a strict feature: a problem of number fields that shape the tree is one
+    """The criterion of a strict feature: a problem of numeric fields that shape the tree is one
     criterion for all of them, as a strict parser has one rule for it."""
     return re.sub(r"^number\.(size|mode|chksum)\.", "number.*.", feature)
 
@@ -236,7 +236,7 @@ def default_rule(feature):
 
 
 def condition(feature, r):
-    """Whether the conditions of DEFAULT hold for a feature that it accepts, from what the
+    """Whether the conditions of DEFAULT are met for a feature that it accepts, from what the
     fingerprint of the tarball records about all of its headers."""
     fingerprint = r.get("fingerprint", {})
     if feature == "pax-global.after-members":
@@ -660,7 +660,7 @@ def main():
     )
     if platform:
         print(
-            "Names that some filesystems cannot hold, so that extraction fails there only: "
+            "Names that some filesystems do not allow, so that extraction fails there only: "
             + ", ".join(f"`{f}` {c}" for f, c in platform.most_common())
             + ".\n"
         )

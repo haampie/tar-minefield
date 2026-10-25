@@ -1,4 +1,4 @@
-"""Number fields padded with spaces rather than zeros, as old tars wrote them.
+"""Numeric fields padded with spaces rather than zeros, as old tars wrote them.
 
 Seen in: hundreds of tarballs, many from CPAN.
 """

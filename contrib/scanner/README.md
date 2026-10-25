@@ -114,7 +114,7 @@ tarballs.
 | `untar_skipped` | why untar did not finish, where that says nothing about the tarball (no disk space) |
 | `download_error` | instead of all of the above, if no URL worked |
 
-Features under `platform.*` are names that some filesystems cannot hold: they are not ambiguous,
+Features under `platform.*` are names that some filesystems do not allow: they are not ambiguous,
 and untar failing on them depends on the machine (see METHOD.md). The report counts failures
 caused only by the case-insensitive filesystem of the scanning machine apart from rejections, so
 say which filesystem a scan ran on.

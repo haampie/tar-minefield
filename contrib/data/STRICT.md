@@ -156,11 +156,11 @@ Not ambiguous, or confined to fields outside the tree. Tarballs of all ecosystem
 | `linkname.no-nul` | a linkname of exactly 100 bytes, without NUL | 35 |
 | `pax.nul-in-value.SCHILY.xattr.*` | NUL in xattrs, which are outside the tree | 32 |
 | `pax.value-not-utf8.SCHILY.xattr.*` | binary values of vendor pax keys, such as xattrs, outside the tree | 31 |
-| `name.not-nfc` | names not in NFC: one tree, which macOS may not hold | 29 |
+| `name.not-nfc` | names not in NFC: one tree, whose names macOS may normalize | 29 |
 | `pax.LIBARCHIVE.creationtime` | vendor pax keys outside the tree | 21 |
 | `number.uid.no-terminator` | outside the tree | 12 |
 | `number.gid.no-terminator` | outside the tree | 11 |
 | `pax.LIBARCHIVE.symlinktype` | vendor pax keys outside the tree | 2 |
 
-Names that some filesystems cannot hold, so that extraction fails there only: `platform.case-collision` 834, `platform.windows-reserved-name` 507, `platform.windows-invalid-character` 208, `platform.windows-trailing-dot-or-space` 35, `platform.normalization-collision` 20.
+Names that some filesystems do not allow, so that extraction fails there only: `platform.case-collision` 834, `platform.windows-reserved-name` 507, `platform.windows-invalid-character` 208, `platform.windows-trailing-dot-or-space` 35, `platform.normalization-collision` 20.
 

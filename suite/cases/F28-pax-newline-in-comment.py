@@ -1,7 +1,7 @@
 r"""A newline in a pax `comment`, which split on lines leaves a `size` record.
 
-pax records are delimited by their length, so a value can hold a newline. Here the only record is a
-`comment`, `x\n12 size=512`, and in POSIX every comment is ignored, so `a` has the size of its
+pax records are delimited by their length, so a value can contain a newline. Here the only record is
+a `comment`, `x\n12 size=512`, and in POSIX every comment is ignored, so `a` has the size of its
 header, 0, and the next block is the header of `smuggled`. Split on lines, the extended header has a
 second record, `size=512`. This case is ambiguous in practice because, read that way, the block is
 the data of `a`. Unlike F13, the value that hides the record is one that no implementation applies.

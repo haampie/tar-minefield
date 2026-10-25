@@ -78,7 +78,7 @@ def untar_reason(error):
 
 
 def filesystem_only(r):
-    """Whether untar failed only because the scanning machine's filesystem cannot hold the tree:
+    """Whether untar failed only because the scanning machine's filesystem cannot store the tree:
     names that collide there, and no duplicates in the archive itself."""
     features = r.get("features", {})
     collides = any(
@@ -204,7 +204,7 @@ NUMBER = re.compile(r"[\d,]+(\.\d+)?( \(\d+(\.\d+)?%\))?|–")
 
 
 def tidy_tables(text):
-    """Markdown with the columns of its tables that hold only numbers right-aligned, and those
+    """Markdown with the columns of its tables that contain only numbers right-aligned, and those
     numbers with thousands separators."""
     lines, out, i = text.split("\n"), [], 0
     while i < len(lines):

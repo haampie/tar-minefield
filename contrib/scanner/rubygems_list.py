@@ -6,7 +6,7 @@ The names of all gems come from the compact index, rubygems.org/versions, whose 
 written to stderr. Like pypi_list.py, this lists only as many gems as `run.py sample LIST N SEED`
 takes from, in the order of their rank by SEED, with their versions from rubygems.org/info: only
 those of the platform `ruby`, the gems of sources rather than of builds for one platform. A gem
-is an uncompressed tar, whose member `data.tar.gz` holds the files a gem installs: that is the
+is an uncompressed tar, whose member `data.tar.gz` contains the files a gem installs: that is the
 tarball scanned, and the sha256 is that of the gem. A package is a gem, and its latest version
 is its latest that the index has, which leaves out yanked versions.
 """

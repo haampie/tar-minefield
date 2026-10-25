@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The header of <code>a</code> says size 512, and its pax extended header says <code>size=0</code>. POSIX says that the pax size overrides the header&#x27;s: it is how sizes over 8 GiB, which the header cannot hold, are written, and archivers write various sizes in the header then. An implementation that takes the pax size, as it must, reads the next block as the header of another file, <code>smuggled</code>; an implementation that takes the header&#x27;s size, or does not know pax, reads that block as the data of <code>a</code>. A strict parser may reject a header that could hold the size and gives another, but must not extract <code>a</code> with 512 bytes.</p>
+<p>The header of <code>a</code> says size 512, and its pax extended header says <code>size=0</code>. POSIX says that the pax size overrides the header&#x27;s: it is how sizes over 8 GiB, which do not fit in the header&#x27;s size field, are written, and archivers write various sizes in the header then. An implementation that takes the pax size, as it must, reads the next block as the header of another file, <code>smuggled</code>; an implementation that takes the header&#x27;s size, or does not know pax, reads that block as the data of <code>a</code>. A strict parser may reject a header whose size field has room for the size but gives another, but must not extract <code>a</code> with 512 bytes.</p>
 <p><strong>Decision point:</strong> which of two sizes frames the member.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -39,12 +39,12 @@
 A pax `size` that disagrees with the header&#x27;s size, which hides a header from one implementation.
 
 The header of `a` says size 512, and its pax extended header says `size=0`. POSIX says that the pax
-size overrides the header&#x27;s: it is how sizes over 8 GiB, which the header cannot hold, are written,
-and archivers write various sizes in the header then. An implementation that takes the pax size, as
-it must, reads the next block as the header of another file, `smuggled`; an implementation that
-takes the header&#x27;s size, or does not know pax, reads that block as the data of `a`. A strict parser
-may reject a header that could hold the size and gives another, but must not extract `a` with 512
-bytes.
+size overrides the header&#x27;s: it is how sizes over 8 GiB, which do not fit in the header&#x27;s size
+field, are written, and archivers write various sizes in the header then. An implementation that
+takes the pax size, as it must, reads the next block as the header of another file, `smuggled`; an
+implementation that takes the header&#x27;s size, or does not know pax, reads that block as the data of
+`a`. A strict parser may reject a header whose size field has room for the size but gives another,
+but must not extract `a` with 512 bytes.
 
 Decision point: which of two sizes frames the member.
 Seen in: no source tarball.

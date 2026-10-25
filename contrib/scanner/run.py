@@ -216,7 +216,7 @@ class Untar:
 
 class Cache:
     """Tarballs named by their sha256 in a directory, up to a total size: the least recently used
-    are removed first, and tarballs over a tenth of it are not kept. A file holds the URL the
+    are removed first, and tarballs over a tenth of it are not kept. A file contains the URL the
     tarball was downloaded from on its first line, then the tarball. Its mtime is when it was
     last used: atime is unreliable.
 

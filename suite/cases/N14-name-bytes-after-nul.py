@@ -1,6 +1,6 @@
 r"""Bytes after the NUL that ends a name.
 
-The name field holds `a`, a NUL, and `b`. In POSIX, a name ends at its first NUL, so the name is
+The name field contains `a`, a NUL, and `b`. In POSIX, a name ends at its first NUL, so the name is
 `a`. This case is still ambiguous because the name can also be read as the whole field, `a\0b`,
 which is `ab` once the NUL is dropped.
 

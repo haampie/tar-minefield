@@ -79,7 +79,7 @@ Ambiguities fall into four categories, by what they change in the tree:
 
 Framing:
 
-- Number fields: a leading NUL (GNU tar skips it, `tarfile` stops at it), spaces or NULs
+- Numeric fields: a leading NUL (GNU tar skips it, `tarfile` stops at it), spaces or NULs
   between digits, no terminator, digits 8 and 9, an empty field, base-256 (positive and
   negative, and sizes past 64 bits, which some readers wrap around).
 - Checksums: signed versus unsigned sums, and the formats of the checksum field.
@@ -166,7 +166,7 @@ parser would trip over:
   release tarball,
 - pax headers for long names and links, GNU long names and links, and the ustar prefix,
 - names of exactly 100 bytes, with no NUL,
-- number fields padded with leading zeros or leading spaces, and terminated by a space, a NUL,
+- numeric fields padded with leading zeros or leading spaces, and terminated by a space, a NUL,
   or both, the checksum too: many CPAN tarballs, and those of old GNU tar, pad with spaces, and
   [the scans](contrib/data) find no tarball where implementations read such a field differently,
 - base-256 sizes of files over 8 GiB,
@@ -205,8 +205,8 @@ costs. The tolerated cases are:
   as in the tarballs of Apache's commons-lang, Solr and Hadoop. Any other version is rejected.
 - newlines in the values of xattr pax keys, which are not extracted.
 - a pax `size` that disagrees with the header's, when the pax size frames the member, as POSIX
-  says. A strict parser may reject a header that could hold the size and gives another, but must
-  not take the header's size.
+  says. A strict parser may reject a header whose size field has room for the size but gives
+  another, but must not take the header's size.
 
 Everything else in the catalogue is rejected. POSIX requires two zero blocks at the end of an
 archive: a tar file that ends with a single zero block, or without any, is rejected, although most
@@ -218,7 +218,7 @@ logstash 8.15.2, `build.rb` is a license header first and the build's date and c
 
 ## Platform-specific failures
 
-Whether an archive describes one tree, and whether a filesystem can hold that tree, are separate
+Whether an archive describes one tree, and whether a filesystem can store that tree, are separate
 questions. The first is about the archive, and its answer is the same on every platform. The
 second is not:
 
@@ -230,7 +230,7 @@ second is not:
 - symlinks, where a platform or user cannot create them.
 
 Such an archive is not ambiguous: every implementation agrees on its tree, and an extractor that
-never replaces an entry (`O_EXCL`) fails exactly on the filesystems that cannot hold it. So these
+never replaces an entry (`O_EXCL`) fails exactly on the filesystems that cannot store it. So these
 cases are to accept, with the platforms where extraction fails listed in their metadata, and a test
 of them passes on those platforms when extraction fails without writing anything. A failure on one
 platform does not carry over to another: a release tarball of an autotools project with a file
@@ -262,7 +262,7 @@ pinned by checksum.
   of projects is scanned, one sdist each: the latest of half, an older one of the other half.
 - crates.io and RubyGems, sampled the same way: crates.io's index has the sha256 of every crate,
   which `cargo package` writes, and RubyGems' compact index that of every gem. A gem is a tar
-  whose member `data.tar.gz` holds the files it installs, written by RubyGems itself: that member
+  whose member `data.tar.gz` contains the files it installs, written by RubyGems itself: that member
   is the tarball measured, of gems for the platform `ruby`.
 
 Tarballs are deduplicated by checksum, since the repositories overlap a lot, GNU releases
@@ -276,7 +276,7 @@ feature from the catalogue it finds, as one JSON line per tarball keyed by its c
 not stop at the first problem. A strictness policy is then a query over that table, and debating
 it costs no downloads.
 
-The scanner also records what identifies the producer of a tarball: the magic, how number fields
+The scanner also records what identifies the producer of a tarball: the magic, how numeric fields
 are padded, the `git archive` comment, uname and gname, the mtimes of the entries (which also date
 the tarball). "Rule R rejects 0.4% of tarballs, all made by GNU tar 1.13 before 2004" is
 actionable where "0.4%" is not.
@@ -416,7 +416,7 @@ Work on archives specifically:
 - Compression formats: gzip files with several members, which some decoders stop after the first
   of; bzip2 and xz files with several streams; xz stream padding; zstd skippable frames; data
   after the compressed stream; gzip header CRCs and sizes. They interact with tar: a first stream
-  that holds a complete archive, followed by a second stream that holds another, extracts
+  that contains a complete archive, followed by a second stream that contains another, extracts
   differently depending on the decoder, unless the parser refuses data after the end-of-archive
   marker.
 - Polyglots: files that are valid tar and valid ZIP, or tar and something else.

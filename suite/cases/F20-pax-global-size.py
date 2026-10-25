@@ -1,7 +1,7 @@
 """A global pax header with a `size`, which frames every member after it, or none.
 
 In POSIX, the records of a global header apply to every later member that does not override them, so
-the `size=512` of this one holds for `a`, whose header says size 0. No archiver writes a size in a
+the `size=512` of this one is the size of `a`, whose header says 0. No archiver writes a size in a
 global header. This case is ambiguous in practice because, with global headers or the sizes in them
 ignored, the next block is not the data of `a` but the header of another file, `smuggled`.
 
