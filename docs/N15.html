@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The name <code>a\nb</code> is valid on Unix. This case is ambiguous because the member can look like two separate files, <code>a</code> and <code>b</code>, as in the output of <code>ls</code> piped to another command, in manifests and in scripts.</p>
+<p>The name <code>a\nb</code> is valid on Unix, as is any name with a control character, <code>[\x01-\x1f\x7f]</code>. This case is ambiguous because such a name can look like something else: with a newline, the member looks like two separate files, <code>a</code> and <code>b</code>, as in the output of <code>ls</code> piped to another command, in manifests and in scripts; with a carriage return or ESC, a terminal shows a different name.</p>
 <p><strong>Decision point:</strong> whether a name may contain control characters.</p>
 <p><strong>Seen in:</strong> cdrtools 3.02a09, wgrib2 3.6.0 and apktool 2.6.0.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -38,9 +38,10 @@
 
 A control character in a name, here a newline.
 
-The name `a\nb` is valid on Unix. This case is ambiguous because the member can look like two
-separate files, `a` and `b`, as in the output of `ls` piped to another command, in manifests and in
-scripts.
+The name `a\nb` is valid on Unix, as is any name with a control character, `[\x01-\x1f\x7f]`. This
+case is ambiguous because such a name can look like something else: with a newline, the member looks
+like two separate files, `a` and `b`, as in the output of `ls` piped to another command, in
+manifests and in scripts; with a carriage return or ESC, a terminal shows a different name.
 
 Decision point: whether a name may contain control characters.
 Seen in: cdrtools 3.02a09, wgrib2 3.6.0 and apktool 2.6.0.
