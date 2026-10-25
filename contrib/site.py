@@ -359,8 +359,14 @@ def page(title, description, body):
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
         f"<title>{html.escape(title)}</title>\n"
         f'<meta name="description" content="{html.escape(description)}">\n'
+        # what a link to the page shows where it is shared, such as in chats
+        '<meta property="og:type" content="website">\n'
+        '<meta property="og:site_name" content="tar-minefield">\n'
+        f'<meta property="og:title" content="{html.escape(title)}">\n'
+        f'<meta property="og:description" content="{html.escape(description)}">\n'
         f'<link rel="stylesheet" href="style.css?{STYLE_VERSION}">\n</head>\n<body>\n'
-        f'{body}\n<hr class="wide">\n<footer class="wide"><a href="{REPO}">haampie/tar-minefield on GitHub</a>'
+        f'{body}\n<hr class="wide">\n<footer class="wide">'
+        f'<a href="{REPO}">haampie/tar-minefield on GitHub</a>'
         f'<span class="sep">·</span>Last updated {UPDATED}'
         f'<span class="sep">·</span><a class="doi" href="https://doi.org/{DOI}"><span>DOI</span>'
         f"<span>{DOI}</span></a></footer>\n</body>\n</html>\n"
@@ -859,7 +865,8 @@ def main():
     for i, (name, _) in enumerate(sequence):
         cells = []
         for rel, j in (("prev", i - 1), ("next", i + 1)):
-            if 0 <= j < len(sequence):
+            # not the index as the page before the first case: it is the link in the middle
+            if 1 <= j < len(sequence):
                 label = html.escape(sequence[j][1])
                 text = f"‹ {label}" if rel == "prev" else f"{label} ›"
                 cells.append(f'<a class="{rel}" href="{sequence[j][0]}" rel="{rel}" title="{label}">'
@@ -870,26 +877,41 @@ def main():
         # below the draft's band, which on a narrow screen is the top of the page
         top = "<body>\n" + DRAFT if "<body>\n" + DRAFT in files[name] else "<body>\n"
         files[name] = files[name].replace(top, f"{top}{nav}\n", 1)
-    # every page names its address on the site, so that a copy elsewhere is known as one
-    for name in files:
-        if name.endswith(".html"):
-            address = matrix.SITE + ("" if name == "index.html" else name)
-            link = f'<link rel="canonical" href="{address}">\n'
-            files[name] = files[name].replace("</head>", link + "</head>", 1)
     for old, new in MOVED.items():
         files[old + ".html"] = page(f"{old} is {new} · tar-minefield", f"{old} is now {new}.",
                                     f'<meta http-equiv="refresh" content="0; url={new}.html">\n'
                                     f'<p>{old} is now <a href="{new}.html">{new}</a>.</p>')
+    redirects = {"rejected.html": "seen-in.html"}
+    redirects |= {f"{old}.html": f"{new}.html" for old, new in MOVED.items()}
+    # every page names its address on the site, so that a copy elsewhere is known as one, and a
+    # redirect the address of the page it redirects to
+    for name in files:
+        if name.endswith(".html"):
+            target = redirects.get(name, name)
+            address = matrix.SITE + ("" if target == "index.html" else target)
+            link = (f'<link rel="canonical" href="{address}">\n'
+                    f'<meta property="og:url" content="{address}">\n')
+            files[name] = files[name].replace("</head>", link + "</head>", 1)
     anchors = set(re.findall(r'id="([^"]+)"', files["seen-in.html"]))
     for name, text in files.items():
         for a in re.findall(r'href="seen-in\.html#([^"]+)"', text):
             if a not in anchors:
                 sys.exit(f"{name}: seen-in.html#{a} is not an anchor")
+    urls = []
     for name, text in files.items():
         if name.endswith(".html"):
             text = dated(text, old_pages.get(name))
+            if name not in redirects:
+                address = matrix.SITE + ("" if name == "index.html" else name)
+                day = re.search(r'<time datetime="([0-9-]+)">', text).group(1)
+                urls.append(f"<url><loc>{address}</loc><lastmod>{day}</lastmod></url>")
         with open(os.path.join(out, name), "w") as f:
             f.write(text)
+    # the pages for search engines, which otherwise find them by following the links
+    with open(os.path.join(out, "sitemap.xml"), "w") as f:
+        f.write('<?xml version="1.0" encoding="UTF-8"?>\n'
+                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+                + "\n".join(urls) + "\n</urlset>\n")
 
 
 if __name__ == "__main__":
