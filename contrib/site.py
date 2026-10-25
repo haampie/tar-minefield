@@ -91,8 +91,8 @@ th, td { border: 1px solid #d0d7de; padding: 0.25rem 0.5rem; text-align: left;
          vertical-align: baseline; overflow-wrap: anywhere; }
 th { background: #f6f8fa; }
 td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
-/* The total of a table in bold, on the background of its header, which the two frame it with */
-tr.total td { font-weight: 600; background: #f6f8fa; }
+/* The total of a table, in bold */
+tr.total td { font-weight: 600; }
 svg { max-width: 100%; height: auto; }
 .wide { overflow-x: auto; }
 /* A table is not narrower than this: on a narrow screen it scrolls, rather than squeezing words */
@@ -450,7 +450,7 @@ def data_section(ident, features, names, short, rated, union):
         return any(strict.criterion(f) in strict.default_rejects(r) for f in features)
 
     counts = []
-    for n, rs in [(short[n], rated[n]) for n in names] + [("all, distinct", union)]:
+    for n, rs in [(short[n], rated[n]) for n in names] + [("total (distinct)", union)]:
         with_it = [r for r in rs if has(r)]
         counts.append((n, len(rs), len(with_it), sum(rejected(r) for r in with_it),
                        len(unmeasured(features, rs))))
@@ -669,7 +669,7 @@ def mtimes_svg(union):
 def tarballs_section(names, short, rated, union):
     """What the default policy rejects of the source tarballs, per ecosystem."""
     rows = []
-    for n, rs in [(short[n], rated[n]) for n in names] + [("all, distinct", union)]:
+    for n, rs in [(short[n], rated[n]) for n in names] + [("total (distinct)", union)]:
         j = sum(not strict.passes_default(r) for r in rs)
         tr = '<tr class="total">' if rs is union else "<tr>"
         rows.append(f"{tr}<td>{html.escape(n)}</td><td class=n>{len(rs):,}</td>"
