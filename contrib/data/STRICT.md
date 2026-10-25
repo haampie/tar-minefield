@@ -73,7 +73,7 @@ The strict criteria that the default policy lets through, and how; it rejects al
 | `name.dot-component` | normalize | `a/./b` is `a/b` | 10 |
 | `name.double-slash` | normalize | `a//b` is `a/b` | 2 |
 | `symlink.absolute` | accept | created as it is: writing through a symlink is rejected | 89 |
-| `end.data-after` | accept | ignored: a header there is `end.archive-after`, rejected | 25 |
+| `end.data-after` | accept | junk after the two zero blocks is ignored | 25 |
 | `pax-global.after-members` | accept | if every global header has only a `comment` | 82 |
 | `magic.posix-version-nuls` | accept | as some Java archivers write it: `ustar\0\0\0` | 60 |
 | `pax.size-disagrees` | accept | the pax size frames the member, as POSIX says: it is how sizes over 8 GiB are written | 0 |

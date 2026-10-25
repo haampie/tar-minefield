@@ -181,7 +181,7 @@ DEFAULT = [
     ("name.dot-component", "normalize", "`a/./b` is `a/b`"),
     ("name.double-slash", "normalize", "`a//b` is `a/b`"),
     ("symlink.absolute", "accept", "created as it is: writing through a symlink is rejected"),
-    ("end.data-after", "accept", "ignored: a header there is `end.archive-after`, rejected"),
+    ("end.data-after", "accept", "junk after the two zero blocks is ignored"),
     ("pax-global.after-members", "accept", "if every global header has only a `comment`"),
     ("magic.posix-version-nuls", "accept", "as some Java archivers write it: `ustar\\0\\0\\0`"),
     ("pax.size-disagrees", "accept",

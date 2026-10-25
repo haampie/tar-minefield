@@ -253,14 +253,29 @@ def inline(text):
                    for i, p in enumerate(parts))
 
 
+def doc_paragraphs(text):
+    """The paragraphs of the docstring of a case, each of its labelled lines one of its own."""
+    text = re.sub(r"\n(Decision point|Seen in|See also):", r"\n\n\1:", text.strip())
+    return [" ".join(p.strip().split("\n")) for p in text.split("\n\n")]
+
+
 def paragraphs(text):
     out = []
-    text = re.sub(r"\n(Decision point|Seen in):", r"\n\n\1:", text.strip())
-    for p in text.split("\n\n"):
-        p = inline(" ".join(p.strip().split("\n")))
-        out.append("<p>" + re.sub(r"^(Decision point|Seen in):", r"<strong>\1:</strong>", p)
+    for p in doc_paragraphs(text):
+        if p.startswith("See also:"):
+            continue
+        out.append("<p>" + re.sub(r"^(Decision point|Seen in):", r"<strong>\1:</strong>", inline(p))
                    + "</p>")
     return "\n".join(out)
+
+
+def see_also(text):
+    """The `See also:` lines of the docstring of a case, as an item of the list at the top of its
+    page, with the identifiers of cases linked to their pages."""
+    items = [p.split(":", 1)[1].strip() for p in doc_paragraphs(text) if p.startswith("See also:")]
+    return "".join(["\n<dt>See also</dt>"] * bool(items) + [
+        "<dd>" + re.sub(r"\b([FNKS]\d\d)\b", r'<a href="\1.html">\1</a>', inline(i)) + "</dd>"
+        for i in items])
 
 
 TITLE = "Tar file extraction test suite"
@@ -468,7 +483,7 @@ def case_page(case, info, results, data):
 {verdict(info)}
 <dl>
 <dt>Category</dt><dd>{html.escape(category)}</dd>
-<dt>Default policy</dt><dd>{policy(info, features)}</dd>
+<dt>Default policy</dt><dd>{policy(info, features)}</dd>{see_also(doc)}
 <dt>Files</dt><dd><table class="files">
 <tr><td><a href="{REPO}/raw/main/suite/archives/{case}.tar"><code>{case}.tar</code></a></td>
 <td>test archive, {len(archive):,} bytes

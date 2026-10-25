@@ -6,6 +6,7 @@ tar with `--ignore-zeros`, also extract `hidden`.
 
 Decision point: whether an implementation stops at the end-of-archive marker.
 Seen in: glibmm 2.16.0, which is the whole archive twice, jmol 14.8.0 and commons-jexl 2.1.1.
+See also: F02, junk after the two zero blocks, which is tolerated.
 """
 
 VERDICT = "reject"

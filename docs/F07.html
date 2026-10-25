@@ -16,6 +16,7 @@
 <dl>
 <dt>Category</dt><dd>framing</dd>
 <dt>Default policy</dt><dd>rejects it</dd>
+<dt>See also</dt><dd><a href="F02.html">F02</a>, junk after the two zero blocks, which is tolerated.</dd>
 <dt>Files</dt><dd><table class="files">
 <tr><td><a href="https://github.com/haampie/tar-minefield/raw/main/suite/archives/F07-end-archive-after.tar"><code>F07-end-archive-after.tar</code></a></td>
 <td>test archive, 4,096 bytes
@@ -44,6 +45,7 @@ tar with `--ignore-zeros`, also extract `hidden`.
 
 Decision point: whether an implementation stops at the end-of-archive marker.
 Seen in: glibmm 2.16.0, which is the whole archive twice, jmol 14.8.0 and commons-jexl 2.1.1.
+See also: F02, junk after the two zero blocks, which is tolerated.
 
 0x000000  header: regular file
           name     [  0,100)  &quot;a&quot; + 99 NUL
