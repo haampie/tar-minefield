@@ -17551,7 +17551,7 @@
     "tree": null
    },
    "tar-fs": {
-    "error": "TypeError [ERR_INVALID_ARG_VALUE]: The argument 'path' must be a string, Uint8Array, or URL without null bytes. Received '/tmp/claude-1001/-home-bot-temporary-projects-tar-minefield/760aad1d-f863-4aff-a31c-ded0bf9bc447/scratchpad/work-all/runs/26/N1...",
+    "error": "TypeError [ERR_INVALID_ARG_VALUE]: The argument 'path' must be a string, Uint8Array, or URL without null bytes. Received '/tmp/claude-1001/-home-bot-temporary-projects-tar-minefield/30ec30c3-6d57-4e9d-b5db-b133b9e99901/scratchpad/work/runs/25/N19-pa...",
     "outside": {},
     "tree": {}
    }
@@ -22380,7 +22380,7 @@
     "tree": {}
    },
    "PHP PharData, as in Composer": {
-    "error": "to open stream: No such file or directory in contrib/matrix/runners/php/extract.php on line 13\nPharException: Extraction from phar \"suite/archives/S11-tree-through-symlink.tar\" failed: Cannot extract \"d/tar-minefield-through-symlink\", could not open for writing \"DEST/d/tar-minefield-through-symlink\"",
+    "error": "to open stream: No such file or directory in contrib/matrix/runners/php/extract.php on line 10\nPharException: Extraction from phar \"suite/archives/S11-tree-through-symlink.tar\" failed: Cannot extract \"d/tar-minefield-through-symlink\", could not open for writing \"DEST/d/tar-minefield-through-symlink\"",
     "outside": {},
     "tree": {
      "d": {
@@ -22680,7 +22680,7 @@
     }
    },
    "PHP PharData, as in Composer": {
-    "error": "hp on line 13\nWarning: PharData::extractTo(DEST/a/b): Failed to open stream: No such file or directory in contrib/matrix/runners/php/extract.php on line 13\nPharException: Extraction from phar \"suite/archives/S12-tree-under-file.tar\" failed: Cannot extract \"a/b\", could not open for writing \"DEST/a/b\"",
+    "error": "hp on line 10\nWarning: PharData::extractTo(DEST/a/b): Failed to open stream: No such file or directory in contrib/matrix/runners/php/extract.php on line 10\nPharException: Extraction from phar \"suite/archives/S12-tree-under-file.tar\" failed: Cannot extract \"a/b\", could not open for writing \"DEST/a/b\"",
     "outside": {},
     "tree": {
      "a": {
