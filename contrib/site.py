@@ -82,7 +82,8 @@ a { color: #0969da; }
 code, pre { font: 0.875em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 pre { background: #f6f8fa; padding: 0.75rem; overflow-x: auto; }
 code { background: #e8ebef; padding: 0.1em 0.3em; border-radius: 4px; }
-/* Code in text as it is written: spaces in it, such as those of a padded field, are not collapsed */
+/* Code in text as it is written: spaces in it, such as those of a padded field, are not
+   collapsed */
 p code { white-space: pre-wrap; }
 pre code { background: none; padding: 0; }
 table { border-collapse: collapse; margin: 1rem 0; width: 100%; table-layout: fixed; }
@@ -106,8 +107,8 @@ a.doi { font-size: 0.75em; text-decoration: none; white-space: nowrap; }
 a.doi span { padding: 0.125em 0.375rem; color: #ffffff; }
 a.doi span:first-child { background: #555555; border-radius: 3px 0 0 3px; }
 a.doi span + span { background: #0969da; border-radius: 0 3px 3px 0; }
-/* Previous, the index and next in columns that do not move: names that do not fit end in …. Muted,
-   above a rule, as the footer is below one, so that they read as the frame of the page */
+/* Previous, the index and next in columns that do not move: names that do not fit end in ….
+   Muted, above a rule, as the footer is below one, so that they read as the frame of the page */
 nav { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 1rem;
       padding-bottom: 0.5rem; border-bottom: 1px solid #d0d7de; font-size: 0.875em; }
 nav a { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #59636e;
@@ -514,8 +515,8 @@ def verdict(info):
     """The verdict of a case, as a banner: what it requires."""
     v = info["verdict"]
     badge, text = VERDICTS[v]
-    return (f'<div class="verdict {v} wide"><p><span class="badge">{badge}</span> {html.escape(text)}'
-            "</p></div>")
+    return (f'<div class="verdict {v} wide"><p><span class="badge">{badge}</span> '
+            f"{html.escape(text)}</p></div>")
 
 
 def with_tree(explanation, info):
