@@ -81,6 +81,19 @@ def show(raw):
     return " + ".join(parts) if parts else '""'
 
 
+
+def clip(line, n):
+    """A line of at most n characters and an ellipsis, cut where show() has not written an escape:
+    a cut inside one would show a different byte."""
+    out, i = "", 0
+    while i < len(line):
+        width = (4 if line[i + 1:i + 2] == "x" else 2) if line[i] == "\\" else 1
+        if len(out) + width > n:
+            break
+        out += line[i:i + width]
+        i += width
+    return out + "…"
+
 class Archive:
     def __init__(self):
         self.blocks = []  # (bytes, title, [(field, offset, width, raw, meaning)] or text lines)
@@ -341,7 +354,7 @@ def block_map(archive, title):
                 if k == 0:
                     for line in lines[1:]:
                         if len(line) > 116:
-                            line = line[:115] + "…"
+                            line = clip(line, 115)
                         out.append(f'<text class="mono" x="{left}" y="{y + 12}">{esc(line)}</text>')
                         y += 14
             y += 10

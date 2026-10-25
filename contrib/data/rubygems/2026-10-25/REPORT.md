@@ -31,8 +31,8 @@ Number of tarballs with each feature, of which latest versions; their origins, p
 | `name.leading-dot-slash` | 18 | 10 | rubygems 18 | ustar 18 | 1970–2026 | 4 | echolor@0.1.0 `./echolor`; long-decimal@1.00.04 `./Gemfile` |
 | `platform.case-collision` | 4 | 2 | rubygems 4 | ustar 4 | 1970–2025 | 0 | bard-file_field@0.1.6 `dummy/features/support/fixtures/empty.jpeg`; jruby-bundler@0.9.7 `spec/project/settings.xml` |
 | `tree.duplicate.file-file` | 4 | 1 | rubygems 4 | ustar 4 | 1970–2026 | 4 | amar-tui@2.1.6 `amar-tui.rb`; EliteJournal@1.9.480 `./elitejournal` |
-| `name.control-character` | 2 | 1 | rubygems 2 | ustar 2 | 1970–2016 | 0 | fenton_shell@0.1.0 `lib/Icon`; deja-vu@0.4 `example-playback/repo/recordings/DejaVuNS/Recording/bah7aa==` |
-| `platform.windows-invalid-character` | 2 | 1 | rubygems 2 | ustar 2 | 1970–2016 | 0 | fenton_shell@0.1.0 `lib/Icon`; deja-vu@0.4 `example-playback/repo/recordings/DejaVuNS/Recording/bah7aa==` |
+| `name.control-character` | 2 | 1 | rubygems 2 | ustar 2 | 1970–2016 | 0 | fenton_shell@0.1.0 `lib/Icon\x0d`; deja-vu@0.4 `example-playback/repo/recordings/DejaVuNS/Recording/bah7aa==` |
+| `platform.windows-invalid-character` | 2 | 1 | rubygems 2 | ustar 2 | 1970–2016 | 0 | fenton_shell@0.1.0 `lib/Icon\x0d`; deja-vu@0.4 `example-playback/repo/recordings/DejaVuNS/Recording/bah7aa==` |
 | `linkname.no-nul` | 1 | 1 | rubygems 1 | ustar 1 | 2015–2015 | 0 | xlmydsykwnrfbnvjffqcokoorkbskzzhrtgnzxkapmjtffjfkwcvwklmsrzwfiatwigrvmftpbybbeqi@0.1.0 `VERSION_FOR_HUMANS` |
 | `name.absolute` | 1 | 1 | rubygems 1 | ustar 1 | 2016–2016 | 1 | hello_ST@0.1.0 `/home/tata/hello_ST/lib/hello_ST.rb` |
 | `name.trailing-slash-on-file` | 1 | 0 | rubygems 1 | ustar 1 | 1970–1970 | 1 | JEG2-rrdb@0.0.2 `lib/` |

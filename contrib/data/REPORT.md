@@ -243,7 +243,7 @@ Number of tarballs with each feature, of which latest versions; their origins, p
 | `platform.normalization-collision` | 20 | 1 | github-archive 20 | git archive 20 | 2016–2020 | 0 | plexus-archiver@4.2.2 `plexus-archiver-plexus-archiver-4.2.2/src/test/resources/utf`; lmod@7.8.15 `Lmod-7.8.15/contrib/Presentations/Keynote_Lmod_SC14-Calcul_Q` |
 | `number.uid.no-terminator` | 12 | 12 | cpan 12 | ustar 12 | 2014–2022 | 0 | Math-MatrixReal@2.13 `Math-MatrixReal-2.13`; App-rainbarf@1.4 `App-rainbarf-1.4` |
 | `pax.newline-in-value.SCHILY.xattr.*` | 12 | 10 | cpan 5, other 4, github-release 3 | libarchive (pax) 12 | 2018–2025 | 0 | qd@2.3.24 `qd-2.3.24/PaxHeader/NEWS`; libjwt@1.17.2 `libjwt-1.17.2/PaxHeader/CMakeLists.txt` |
-| `name.control-character` | 11 | 4 | github-archive 7, rubygems 2, other 1 | git archive 8, ustar 3 | 1970–2025 | 0 | cdrtools@3.02a09 `cdrtools-3.02/libfind/ifpdi`; fenton_shell@0.1.0 `lib/Icon` |
+| `name.control-character` | 11 | 4 | github-archive 7, rubygems 2, other 1 | git archive 8, ustar 3 | 1970–2025 | 0 | cdrtools@3.02a09 `cdrtools-3.02/libfind/if\x1bpdi`; fenton_shell@0.1.0 `lib/Icon\x0d` |
 | `number.gid.no-terminator` | 11 | 11 | cpan 11 | ustar 11 | 2014–2022 | 0 | App-rainbarf@1.4 `App-rainbarf-1.4`; JSON-WebToken@0.10 `Build.PL` |
 | `name.dot-component` | 10 | 6 | other 10 | GNU format 5, ustar 4, GNU tar (pax) 1 | 2012–2026 | 0 | tuffy@20120614 `tuffy-20120614/./._Tuffy.otf`; privoxy@3.0.34-stable-src `privoxy-3.0.34-stable/./acconfig.h` |
 | `pax.size-on-dir` | 9 | 7 | pypi 9 | GNU tar (pax) 9 | 1970–1970 | 0 | llama_index_workflows@2.26.0 `llama_index_workflows-2.26.0/`; anibridge-mal-provider@0.2.3 `anibridge_mal_provider-0.2.3/` |

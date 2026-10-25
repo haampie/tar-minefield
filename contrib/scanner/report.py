@@ -18,6 +18,19 @@ import time
 import urllib.parse
 
 
+
+def code(name):
+    """A name as it can be shown in Markdown code: bytes that are not UTF-8, control characters and
+    backticks, which would end the code, escaped."""
+    name = name.encode("utf-8", "surrogateescape").decode("utf-8", "backslashreplace")
+    return "".join(c if c.isprintable() and c != "`" else f"\\x{ord(c):02x}" for c in name)
+
+
+def cell(text):
+    """Text in a cell of a Markdown table, in which `|` would end the cell."""
+    return text.replace("|", "\\|")
+
+
 def origin(url):
     host = url.split("/")[2]
     if host in ("github.com", "codeload.github.com"):
@@ -326,10 +339,10 @@ def main():
         span = f"{years[0]}–{years[-1]}" if years else ""
         # a feature that upgrade translated from the fingerprint has no example member
         examples = "; ".join(
-            f"{r['package']}@{r['version']}"
-            + (f" `{r['examples'][f][0][:60]}`" if r["examples"].get(f) else "")
+            cell(f"{r['package']}@{r['version']}")
+            + (f" `{cell(code(r['examples'][f][0][:60]))}`" if r["examples"].get(f) else "")
             for r in rs[:2]
-        ).replace("|", "/")
+        )
         print(
             f"| `{f}` | {len(rs)} | {sum(r.get('latest', False) for r in rs)} | "
             f"{counter(collections.Counter(origin(r['url']) for r in rs), 3)} | "

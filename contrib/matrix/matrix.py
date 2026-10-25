@@ -378,11 +378,10 @@ def same(tree, manifest):
 
 
 def text(name):
-    """A name as it can be shown in a table: other bytes than UTF-8, control characters and `|`
-    escaped."""
+    """A name as it can be shown in code: other bytes than UTF-8, control characters and backticks,
+    which would end the code, escaped."""
     name = name.encode("utf-8", "surrogateescape").decode("utf-8", "backslashreplace")
-    name = "".join(c if c.isprintable() else f"\\x{ord(c):02x}" for c in name)
-    return name.replace("|", "\\|")
+    return "".join(c if c.isprintable() and c != "`" else f"\\x{ord(c):02x}" for c in name)
 
 
 def describe(tree):

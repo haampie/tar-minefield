@@ -374,7 +374,7 @@ def policy(info, features):
     if info["verdict"] == "reject":
         return "rejects it"
     if info["verdict"] == "accept":
-        reasons = [f"<code>{f}</code>: {inline(strict.classify(f)[2])}" for f in features]
+        reasons = [f"<code>{html.escape(f)}</code>: {inline(strict.classify(f)[2])}" for f in features]
         return "accepts it" + (", as it allows " + "; ".join(reasons) if reasons else "")
     rules = [strict.default_rule(f) for f in features]
     return "; ".join(f"{how}s <code>{html.escape(f)}</code>: {inline(why)}"
@@ -421,7 +421,7 @@ def data_section(ident, features, names, short, rated, union):
             "for all of them.</p>\n" if old else "")
     return (
         f"<p>Release tarballs of {ecosystems(names)} with "
-        + ", ".join(f"<code>{f}</code>" for f in features) + "." + policy + "</p>\n"
+        + ", ".join(f"<code>{html.escape(f)}</code>" for f in features) + "." + policy + "</p>\n"
         + table("data-policy" if mixed else "data", rows) + "\n" + note
         + ("" if not k else f'<p>See <a href="seen-in.html#{ident}">'
            + (f"the list of the {j:,} it rejects" if mixed

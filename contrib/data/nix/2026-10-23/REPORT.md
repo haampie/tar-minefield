@@ -5,7 +5,7 @@
 - downloaded from the first of their URLs (a mirror): 9377
 - copied from other scans with `--reuse`: 11, read from `--cache`: 0; sources by host: tarballs.nixos.org 9377, hackage.haskell.org 6139, files.pythonhosted.org 1452, download.kde.org 466, code.call-cc.org 336, download.gnome.org 256
 - size: 78.3 GB compressed
-- origins: other 11987, pypi 3846, cpan 1899, github-release 813, gnu 308, cran/bioconductor 81, github-archive 50, gitlab 28
+- origins: other 11975, pypi 3846, cpan 1899, github-release 813, gnu 308, cran/bioconductor 81, github-archive 50, gitlab 28, crates.io 12
 - producers: ustar 10207, GNU format 4268, Python tarfile (pax) 3087, v7 771, git archive 394, GNU tar (pax) 224, libarchive (pax) 30, none 22, posix-version-0000 9
 - compression: gzip 16300, xz 1555, bzip2 830, none 327
 - scanner stopped early: 22
@@ -61,8 +61,8 @@ Number of tarballs with each feature, of which latest versions; their origins, p
 | `number.size.leading-space` | 545 | 542 | cpan 490, other 50, github-release 3 | ustar 486, GNU format 33, v7 17 | 1992–2026 | 11 | Catalyst-DispatchType-Regex@5.90035 `Catalyst-DispatchType-Regex-5.90035`; Boost-Geometry-Utils@0.15 `Boost-Geometry-Utils-0.15` |
 | `name.non-ascii` | 74 | 56 | other 56, pypi 6, github-release 5 | GNU format 48, Python tarfile (pax) 10, GNU tar (pax) 6 | 2004–2026 | 0 | aisleriot@3.22.35 `aisleriot-3.22.35/cards/README.Атласные`; node@v26.12.1 `node-v26.12.1/test/fixtures/copy/utf/新建文件夹/` |
 | `platform.case-collision` | 66 | 52 | other 53, gnu 6, github-archive 3 | git archive 20, GNU format 17, ustar 12 | 1980–2026 | 1 | onboard@1.4.1 `onboard-1.4.1/onboard`; public-inbox@2.1.0 `public-inbox-2.1.0/install/` |
-| `number.gid.no-digits` | 65 | 58 | pypi 36, other 25, github-release 4 | GNU format 38, ustar 22, posix-version-0000 5 | 1970–2026 | 0 | hadoop@3.4.2-src `hadoop-3.4.2-src/README.txt`; ipv8_rust_tunnels@0.1.53 `ipv8_rust_tunnels-0.1.53/PKG-INFO` |
-| `number.uid.no-digits` | 65 | 58 | pypi 36, other 25, github-release 4 | GNU format 38, ustar 22, posix-version-0000 5 | 1970–2026 | 0 | hadoop@3.4.2-src `hadoop-3.4.2-src/README.txt`; ipv8_rust_tunnels@0.1.53 `ipv8_rust_tunnels-0.1.53/PKG-INFO` |
+| `number.gid.no-digits` | 65 | 58 | pypi 36, other 13, crates.io 12 | GNU format 38, ustar 22, posix-version-0000 5 | 1970–2026 | 0 | hadoop@3.4.2-src `hadoop-3.4.2-src/README.txt`; ipv8_rust_tunnels@0.1.53 `ipv8_rust_tunnels-0.1.53/PKG-INFO` |
+| `number.uid.no-digits` | 65 | 58 | pypi 36, other 13, crates.io 12 | GNU format 38, ustar 22, posix-version-0000 5 | 1970–2026 | 0 | hadoop@3.4.2-src `hadoop-3.4.2-src/README.txt`; ipv8_rust_tunnels@0.1.53 `ipv8_rust_tunnels-0.1.53/PKG-INFO` |
 | `number.gid.leading-space` | 62 | 59 | other 50, cpan 9, gnu 2 | GNU format 33, v7 17, posix-version-0000 8 | 1992–2026 | 11 | hadoop@3.4.2-src `hadoop-3.4.2-src/`; nld-eng@ `nld-eng.dict.dz` |
 | `number.uid.leading-space` | 62 | 59 | other 50, cpan 9, gnu 2 | GNU format 33, v7 17, posix-version-0000 8 | 1992–2026 | 11 | hadoop@3.4.2-src `hadoop-3.4.2-src/`; nld-eng@ `nld-eng.dict.dz` |
 | `tree.duplicate.file-file` | 59 | 54 | other 57, pypi 1, github-release 1 | ustar 50, git archive 4, Python tarfile (pax) 4 | 1970–2026 | 59 | snap-loader-static@1.0.0.1 `snap-loader-static-1.0.0.1/LICENSE`; htn@0.1.0.0 `htn-0.1.0.0/src/Algorithms/Htn.hs` |
@@ -97,7 +97,7 @@ Number of tarballs with each feature, of which latest versions; their origins, p
 | `hardlink.to-itself` | 1 | 1 | other 1 | GNU format 1 | 2020–2020 | 0 | atari++_1.85@ `atari++/winmain.cpp` |
 | `name.absolute` | 1 | 1 | other 1 | git archive 1 | 2024–2024 | 1 | dtv-scan-tables@2024-03-24-7098bdd27548 `/usr/share/dvb/` |
 | `name.backslash` | 1 | 1 | gnu 1 | ustar 1 | 2010–2010 | 0 | texi2html@5.0 `texi2html-5.0/test/info_coverage/f--ile""\.png` |
-| `name.control-character` | 1 | 1 | other 1 | ustar 1 | 2009–2009 | 0 | cdrtools@3.02a09 `cdrtools-3.02/libfind/ifpdi` |
+| `name.control-character` | 1 | 1 | other 1 | ustar 1 | 2009–2009 | 0 | cdrtools@3.02a09 `cdrtools-3.02/libfind/if\x1bpdi` |
 | `name.double-slash` | 1 | 0 | other 1 | GNU format 1 | 2021–2021 | 0 | ghc@9.0.2-x86_64-deb10-linux `ghc-9.0.2/libraries/ghc-bignum/dist-install/build/include//H` |
 | `pax.size-on-dir` | 1 | 1 | pypi 1 | GNU tar (pax) 1 | 1970–1970 | 0 | llama_index_workflows@2.26.0 `llama_index_workflows-2.26.0/` |
 | `tree.duplicate.file-hardlink` | 1 | 1 | other 1 | GNU format 1 | 2020–2020 | 0 | atari++_1.85@ `atari++/winmain.cpp` |
