@@ -1,4 +1,4 @@
-F27-pax-size-too-large: must reject: implementations disagree on its tree
+F27-pax-size-too-large: must reject
 
 A pax `size` of 2^64 + 512, which a 64-bit reader that wraps around reads as 512.
 

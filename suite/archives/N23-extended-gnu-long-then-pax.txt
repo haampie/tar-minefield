@@ -1,4 +1,4 @@
-N23-extended-gnu-long-then-pax: must reject: implementations disagree on its tree
+N23-extended-gnu-long-then-pax: must reject
 
 A GNU long name, then a pax header, then the member: which of them does the long name name?
 

@@ -1,4 +1,4 @@
-S11-tree-through-symlink: must reject: implementations disagree on its tree
+S11-tree-through-symlink: must reject
 
 A member written through a symlink, which points out of the destination.
 

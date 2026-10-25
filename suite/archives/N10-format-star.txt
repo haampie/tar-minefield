@@ -1,4 +1,4 @@
-N10-format-star: must reject: implementations disagree on its tree
+N10-format-star: must reject
 
 star's prefix field, which is shorter than ustar's.
 

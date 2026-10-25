@@ -1,4 +1,4 @@
-S12-tree-under-file: must reject: implementations disagree on its tree
+S12-tree-under-file: must reject
 
 A member under a file.
 

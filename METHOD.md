@@ -194,9 +194,6 @@ costs. The tolerated cases are:
   hides none.
 - absolute symlinks, created as they are: the danger is in following them, and writing through
   any symlink is rejected.
-- no end-of-archive marker, or a marker of one zero block, after a complete member. Archives
-  that are distributed are pinned by their sha256, so one that ends early is caught before it is
-  parsed; one that ends inside a member is rejected.
 - data after the end-of-archive marker that is not a header, which is ignored. A header there,
   another archive or members after a zero block, is rejected: some implementations extract them.
 - a global pax header with only a `comment` after the first member.
@@ -207,12 +204,13 @@ costs. The tolerated cases are:
   says. A strict parser may reject a header that could hold the size and gives another, but must
   not take the header's size.
 
-Everything else in the catalogue is rejected. Duplicate files are rejected even where their copies
-are identical, as they are in most tarballs that have them: in some, a file was changed and appended
-again, so that implementations that keep the first copy and those that keep the last extract
-different trees. In fish 4.7.1, `Cargo.toml` and `Cargo.lock` are appended again without their last
-newline; in logstash 8.15.2, `build.rb` is a license header first and the build's date and commit
-last.
+Everything else in the catalogue is rejected. POSIX requires two zero blocks at the end of an
+archive: a tar file that ends with a single zero block, or without any, is rejected, although most
+implementations extract it. Duplicate files are rejected even where their copies are identical, as
+they are in most tarballs that have them: in some, a file was changed and appended again, so that
+implementations that keep the first copy and those that keep the last extract different trees. In
+fish 4.7.1, `Cargo.toml` and `Cargo.lock` are appended again without their last newline; in
+logstash 8.15.2, `build.rb` is a license header first and the build's date and commit last.
 
 ## Platform-specific failures
 

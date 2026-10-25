@@ -1,4 +1,4 @@
-K03-symlink-trailing-slash: must reject: implementations disagree on its tree
+K03-symlink-trailing-slash: must reject
 
 A symlink whose name ends in a slash.
 

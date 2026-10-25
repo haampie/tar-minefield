@@ -1,4 +1,4 @@
-N20-pax-repeated-key: must reject: implementations disagree on its tree
+N20-pax-repeated-key: must reject
 
 One pax key twice in one extended header.
 

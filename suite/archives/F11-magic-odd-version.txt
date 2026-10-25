@@ -1,4 +1,4 @@
-F11-magic-odd-version: must reject: implementations disagree on its tree
+F11-magic-odd-version: must reject
 
 The POSIX magic with a version that is neither `00` nor NULs.
 

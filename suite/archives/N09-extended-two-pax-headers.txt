@@ -1,4 +1,4 @@
-N09-extended-two-pax-headers: must reject: implementations disagree on its tree
+N09-extended-two-pax-headers: must reject
 
 Two pax extended headers for one member, with different paths.
 

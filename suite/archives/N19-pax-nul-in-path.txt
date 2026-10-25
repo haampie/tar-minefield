@@ -1,4 +1,4 @@
-N19-pax-nul-in-path: must reject: implementations disagree on its tree
+N19-pax-nul-in-path: must reject
 
 A NUL inside a pax `path`.
 

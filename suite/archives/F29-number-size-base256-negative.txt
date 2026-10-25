@@ -1,4 +1,4 @@
-F29-number-size-base256-negative: must reject: implementations disagree on its tree
+F29-number-size-base256-negative: must reject
 
 A negative base-256 size in the header, -512, which no member can have.
 

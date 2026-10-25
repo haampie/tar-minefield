@@ -1,4 +1,4 @@
-F26-pax-size-leading-zero: must reject: implementations disagree on its tree
+F26-pax-size-leading-zero: must reject
 
 A pax `size` with a leading zero, `0777`: 777 in decimal, as POSIX says, or 511 in octal.
 

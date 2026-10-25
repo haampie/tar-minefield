@@ -1,4 +1,4 @@
-N24-pax-hdrcharset-binary: must reject: implementations disagree on its tree
+N24-pax-hdrcharset-binary: must reject
 
 `hdrcharset=BINARY`, which declares a pax path that is not UTF-8 as bytes.
 

@@ -1,4 +1,4 @@
-N21-pax-global-path: must reject: implementations disagree on its tree
+N21-pax-global-path: must reject
 
 A global pax header with a `path`.
 

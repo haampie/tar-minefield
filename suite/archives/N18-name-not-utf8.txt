@@ -1,4 +1,4 @@
-N18-name-not-utf8: must reject: implementations disagree on its tree
+N18-name-not-utf8: must reject
 
 A name that is not UTF-8.
 

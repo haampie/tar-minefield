@@ -1,4 +1,4 @@
-N14-name-bytes-after-nul: must reject: implementations disagree on its tree
+N14-name-bytes-after-nul: must reject
 
 Bytes after the NUL that ends a name.
 

@@ -1,4 +1,4 @@
-F10-extended-pax-size-before-gnu-long: must reject: implementations disagree on its tree
+F10-extended-pax-size-before-gnu-long: must reject
 
 A pax `size` followed by a GNU long name: which of them does the size apply to?
 

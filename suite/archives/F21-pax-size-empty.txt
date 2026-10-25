@@ -1,4 +1,4 @@
-F21-pax-size-empty: must reject: implementations disagree on its tree
+F21-pax-size-empty: must reject
 
 An empty pax `size`, which in POSIX removes the size rather than giving one.
 

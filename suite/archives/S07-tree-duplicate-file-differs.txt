@@ -1,4 +1,4 @@
-S07-tree-duplicate-file-differs: must reject: implementations disagree on its tree
+S07-tree-duplicate-file-differs: must reject
 
 The same file twice, with different contents: the first copy, or the last?
 

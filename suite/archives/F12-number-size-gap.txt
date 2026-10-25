@@ -1,4 +1,4 @@
-F12-number-size-gap: must reject: implementations disagree on its tree
+F12-number-size-gap: must reject
 
 A size with a space among its digits: implementations read two sizes.
 

@@ -1,4 +1,4 @@
-K01-kind-trailing-slash-file: must reject: implementations disagree on its tree
+K01-kind-trailing-slash-file: must reject
 
 A regular file whose name ends in a slash: a file, or a directory?
 

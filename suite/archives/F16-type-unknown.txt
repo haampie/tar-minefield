@@ -1,4 +1,4 @@
-F16-type-unknown: must reject: implementations disagree on its tree
+F16-type-unknown: must reject
 
 An unknown typeflag with a size: data, or no data?
 

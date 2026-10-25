@@ -1,4 +1,4 @@
-S03-hardlink-missing-target: must reject: implementations disagree on its tree
+S03-hardlink-missing-target: must reject
 
 A hardlink to a member that is not in the archive.
 

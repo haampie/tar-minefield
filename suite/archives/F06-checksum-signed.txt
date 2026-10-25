@@ -1,4 +1,4 @@
-F06-checksum-signed: must reject: implementations disagree on its tree
+F06-checksum-signed: must reject
 
 A checksum that only matches as the signed sum of the header.
 

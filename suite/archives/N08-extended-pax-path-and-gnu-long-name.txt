@@ -1,4 +1,4 @@
-N08-extended-pax-path-and-gnu-long-name: must reject: implementations disagree on its tree
+N08-extended-pax-path-and-gnu-long-name: must reject
 
 A pax `path` and a GNU long name for one member, and a third name in its header.
 

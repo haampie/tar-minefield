@@ -1,17 +1,8 @@
 {
  "id": "F03",
- "verdict": "tolerate",
+ "verdict": "reject",
  "description": "An end-of-archive marker of one zero block, not two.",
  "features": [
   "end.lone-zero-block"
- ],
- "tree": [
-  {
-   "path": "a",
-   "kind": "file",
-   "executable": false,
-   "size": 2,
-   "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7"
-  }
  ]
 }

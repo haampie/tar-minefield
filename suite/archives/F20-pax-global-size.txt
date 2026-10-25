@@ -1,4 +1,4 @@
-F20-pax-global-size: must reject: implementations disagree on its tree
+F20-pax-global-size: must reject
 
 A global pax header with a `size`, which frames every member after it, or none.
 

@@ -933,7 +933,7 @@
     }
    },
    "strict.py": {
-    "error": null,
+    "error": "rejected",
     "outside": {},
     "tree": null
    },
@@ -1252,7 +1252,7 @@
     }
    },
    "strict.py": {
-    "error": null,
+    "error": "rejected",
     "outside": {},
     "tree": null
    },

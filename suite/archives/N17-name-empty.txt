@@ -1,4 +1,4 @@
-N17-name-empty: must reject: implementations disagree on its tree
+N17-name-empty: must reject
 
 A member with an empty name.
 

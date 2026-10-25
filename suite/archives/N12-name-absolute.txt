@@ -1,4 +1,4 @@
-N12-name-absolute: must reject: implementations disagree on its tree
+N12-name-absolute: must reject
 
 An absolute name, which points outside the directory the archive is extracted to.
 

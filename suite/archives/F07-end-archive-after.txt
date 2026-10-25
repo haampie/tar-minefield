@@ -1,4 +1,4 @@
-F07-end-archive-after: must reject: implementations disagree on its tree
+F07-end-archive-after: must reject
 
 Another archive after the end-of-archive marker.
 

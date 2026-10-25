@@ -1,4 +1,4 @@
-N22-pax-path-empty: must reject: implementations disagree on its tree
+N22-pax-path-empty: must reject
 
 An empty pax `path`, which in POSIX removes the path rather than giving one.
 

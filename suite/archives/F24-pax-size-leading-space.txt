@@ -1,4 +1,4 @@
-F24-pax-size-leading-space: must reject: implementations disagree on its tree
+F24-pax-size-leading-space: must reject
 
 A pax `size` with a leading space, ` 512`, which conversions of strings to numbers skip.
 

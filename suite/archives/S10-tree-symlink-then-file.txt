@@ -1,4 +1,4 @@
-S10-tree-symlink-then-file: must reject: implementations disagree on its tree
+S10-tree-symlink-then-file: must reject
 
 A symlink, then a file of the same name: replace the link, or write through it?
 

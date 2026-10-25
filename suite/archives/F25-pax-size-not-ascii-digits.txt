@@ -1,4 +1,4 @@
-F25-pax-size-not-ascii-digits: must reject: implementations disagree on its tree
+F25-pax-size-not-ascii-digits: must reject
 
 A pax `size` in Arabic-Indic digits, `٥١٢`, which some conversions of strings read as 512.
 

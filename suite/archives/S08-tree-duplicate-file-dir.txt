@@ -1,4 +1,4 @@
-S08-tree-duplicate-file-dir: must reject: implementations disagree on its tree
+S08-tree-duplicate-file-dir: must reject
 
 A file, then a directory of the same name.
 

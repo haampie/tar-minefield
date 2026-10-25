@@ -1,4 +1,4 @@
-F15-pax-size-on-dir: must reject: implementations disagree on its tree
+F15-pax-size-on-dir: must reject
 
 A pax `size` on a directory, which hides a header from the implementations that honor it.
 

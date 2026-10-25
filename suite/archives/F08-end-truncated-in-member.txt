@@ -1,4 +1,4 @@
-F08-end-truncated-in-member: must reject: implementations disagree on its tree
+F08-end-truncated-in-member: must reject
 
 An archive that ends inside the data of a member.
 

@@ -1,4 +1,4 @@
-F33-size-on-dir: must reject: implementations disagree on its tree
+F33-size-on-dir: must reject
 
 A size in the header of a directory, which hides a header from the implementations that honor it.
 

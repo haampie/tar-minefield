@@ -1,4 +1,4 @@
-F23-pax-size-plus: must reject: implementations disagree on its tree
+F23-pax-size-plus: must reject
 
 A pax `size` with a plus sign, `+512`, which conversions of strings to numbers accept.
 

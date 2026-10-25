@@ -59,8 +59,6 @@ what `tarscan.py` reports.
 | [S02](https://stoppels.ch/tar/S02.html) tree-duplicate-dir | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **tolerated** | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 | [F02](https://stoppels.ch/tar/F02.html) end-data-after | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ |
-| [F03](https://stoppels.ch/tar/F03.html) end-lone-zero-block | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ |
-| [F04](https://stoppels.ch/tar/F04.html) end-missing | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ |
 | [F05](https://stoppels.ch/tar/F05.html) magic-version-nuls | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ⛔ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ |
 | [F14](https://stoppels.ch/tar/F14.html) pax-size-disagrees | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌A | ❌A | ✅ | ❌B | ❌B |
 | [F18](https://stoppels.ch/tar/F18.html) pax-global-comment-after-members | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
@@ -68,6 +66,8 @@ what `tarscan.py` reports.
 | [N06](https://stoppels.ch/tar/N06.html) name-leading-dot-slash | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [N07](https://stoppels.ch/tar/N07.html) symlink-absolute | ✅ | ✅ | ✅ | ✅ | ❌A | ⛔ | ✅ | ✅ | ❌B | ⛔ | ⛔ | ❌C | ⛔ | ❌C | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ⛔ | ✅ | ⛔ | ⛔ | ✅ | ✅ | ✅ |
 | **to reject: framing** | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+| [F03](https://stoppels.ch/tar/F03.html) end-lone-zero-block | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A |
+| [F04](https://stoppels.ch/tar/F04.html) end-missing | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A |
 | [F06](https://stoppels.ch/tar/F06.html) checksum-signed | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A |
 | [F07](https://stoppels.ch/tar/F07.html) end-archive-after | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A | ⚠️A |
 | [F08](https://stoppels.ch/tar/F08.html) end-truncated-in-member | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A |
@@ -124,7 +124,7 @@ what `tarscan.py` reports.
 | [S10](https://stoppels.ch/tar/S10.html) tree-symlink-then-file | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️B | ⚠️B |
 | [S11](https://stoppels.ch/tar/S11.html) tree-through-symlink | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 💥 | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️C | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 💥 | 💥 |
 | [S12](https://stoppels.ch/tar/S12.html) tree-under-file | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️C | ⚠️A | ⚠️A |
-| **total** | ✅72 | ✅34 ⚠️38 | ✅33 ⚠️39 | ✅26 ⚠️45 ❌1 | ✅27 ⚠️43 ⛔1 ❌1 | ✅33 ⚠️38 ⛔1 | ✅33 ⚠️39 | ✅32 ⚠️38 💥2 | ✅23 ⚠️48 ❌1 | ✅33 ⚠️38 ⛔1 | ✅35 ⚠️35 ⛔2 | ✅32 ⚠️39 ❌1 | ✅49 ⚠️21 ⛔2 | ✅24 ⚠️43 ⛔1 ❌4 | ✅31 ⚠️41 | ✅34 ⚠️38 | ✅34 ⚠️38 | ✅31 ⚠️41 | ✅38 ⚠️33 ⛔1 | ✅55 ⚠️11 ⛔4 ❌2 | ✅23 ⚠️42 ⛔2 ❌5 | ✅37 ⚠️35 | ✅29 ⚠️40 ⛔1 ❌2 | ✅33 ⚠️33 ⛔5 ❌1 | ✅44 ⚠️28 | ✅19 ⚠️43 ❌8 💥2 | ✅14 ⚠️48 ❌8 💥2 |
+| **total** | ✅72 | ✅32 ⚠️40 | ✅31 ⚠️41 | ✅24 ⚠️47 ❌1 | ✅27 ⚠️44 ❌1 | ✅31 ⚠️40 ⛔1 | ✅31 ⚠️41 | ✅30 ⚠️40 💥2 | ✅21 ⚠️50 ❌1 | ✅31 ⚠️40 ⛔1 | ✅33 ⚠️37 ⛔2 | ✅30 ⚠️41 ❌1 | ✅47 ⚠️23 ⛔2 | ✅22 ⚠️45 ⛔1 ❌4 | ✅29 ⚠️43 | ✅32 ⚠️40 | ✅32 ⚠️40 | ✅29 ⚠️43 | ✅36 ⚠️35 ⛔1 | ✅57 ⚠️11 ⛔2 ❌2 | ✅21 ⚠️44 ⛔2 ❌5 | ✅35 ⚠️37 | ✅27 ⚠️42 ⛔1 ❌2 | ✅35 ⚠️33 ⛔3 ❌1 | ✅42 ⚠️30 | ✅17 ⚠️45 ❌8 💥2 | ✅12 ⚠️50 ❌8 💥2 |
 
 ## Trees
 
@@ -141,6 +141,8 @@ What the implementations that accept a case extract, where it is not its manifes
 - F14 pax-size-disagrees: A: `a` (512 B, 917dba8e); B: `PaxHeader` (9 B, 33638443), `a` (512 B, 917dba8e)
 - F18 pax-global-comment-after-members: A: `a` (2 B, 87428fc5), `b` (2 B, 02638299), `pax_global_header` (19 B, 89c2f7ac)
 - N07 symlink-absolute: A: `link` → `DEST/tar-minefield-nonexistent`; B: `link` → `tar-minefield-nonexistent`; C: `link` (0 B, e3b0c442)
+- F03 end-lone-zero-block: A: `a` (2 B, 87428fc5)
+- F04 end-missing: A: `a` (2 B, 87428fc5)
 - F06 checksum-signed: A: `a` (2 B, 87428fc5)
 - F07 end-archive-after: A: `a` (2 B, 87428fc5); B: `a` (2 B, 87428fc5), `hidden` (57 B, 150e5c88)
 - F08 end-truncated-in-member: A: `a` (512 B, 64164443)

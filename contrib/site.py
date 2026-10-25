@@ -38,8 +38,7 @@ VERDICTS = {
     "accept": ("Must accept", "Every implementation must accept this archive, and extract this tree: "),
     "tolerate": ("Tolerated", "A strict parser may reject this archive. If it accepts it, it must "
                  "extract this tree: "),
-    "reject": ("Must reject", "A strict parser must reject this archive: implementations disagree on "
-               "its tree."),
+    "reject": ("Must reject", "A strict parser must reject this archive."),
 }
 # Identifiers that a case no longer has, and the one it has now: the pages of the old ones redirect
 MOVED = {"G01": "F17", "G02": "F18", "G03": "F19", "G04": "N21"}

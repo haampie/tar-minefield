@@ -174,16 +174,13 @@ ALLOWED = [
 # The default policy: the strict criteria that it lets through, and how; it rejects the others.
 # A strict parser normalizes these names to the path they refer to, which is what tarscan.py
 # compares to find duplicates, so normalizing hides none. The rest it accepts as they are, some
-# only if condition() holds. Tarballs are pinned by their sha256, so one that ends early is
-# caught before it is parsed.
+# only if condition() holds.
 DEFAULT = [
     ("name.leading-dot-slash", "normalize", "`./a` is `a`"),
     ("name.dot", "normalize", "`.` is the root of the tree"),
     ("name.dot-component", "normalize", "`a/./b` is `a/b`"),
     ("name.double-slash", "normalize", "`a//b` is `a/b`"),
     ("symlink.absolute", "accept", "created as it is: writing through a symlink is rejected"),
-    ("end.missing", "accept", "the archive ends after a member, and its sha256 is pinned"),
-    ("end.lone-zero-block", "accept", "the archive ends after a member, and its sha256 is pinned"),
     ("end.data-after", "accept", "ignored: a header there is `end.archive-after`, rejected"),
     ("pax-global.after-members", "accept", "if every global header has only a `comment`"),
     ("magic.posix-version-nuls", "accept", "as some Java archivers write it: `ustar\\0\\0\\0`"),

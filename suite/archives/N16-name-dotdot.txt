@@ -1,4 +1,4 @@
-N16-name-dotdot: must reject: implementations disagree on its tree
+N16-name-dotdot: must reject
 
 A name with `..`, which climbs out of the directory the archive is extracted to.
 

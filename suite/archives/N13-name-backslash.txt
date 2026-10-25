@@ -1,4 +1,4 @@
-N13-name-backslash: must reject: implementations disagree on its tree
+N13-name-backslash: must reject
 
 A backslash in a name: a character on Unix, a separator on Windows.
 

@@ -1,4 +1,4 @@
-F28-pax-newline-in-comment: must reject: implementations disagree on its tree
+F28-pax-newline-in-comment: must reject
 
 A newline in a pax `comment`, after which an implementation that splits on lines sees a `size`.
 

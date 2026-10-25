@@ -49,18 +49,18 @@ Fixed: the median mtime is one that a producer writes in place of the real one, 
 
 ## What each policy rejects
 
-**The default policy rejects 177 of 82,587 release tarballs (0.21%); rejecting every criterion would reject 687 (0.83%).** The criterion that rejects the most tarballs on its own is `tree.duplicate.file-file` of the default policy, and `name.leading-dot-slash` of every criterion.
+**The default policy rejects 204 of 82,587 release tarballs (0.25%); rejecting every criterion would reject 687 (0.83%).** The criterion that rejects the most tarballs on its own is `tree.duplicate.file-file` of the default policy, and `name.leading-dot-slash` of every criterion.
 
 | ecosystem | tarballs | GB | rejected: every criterion | rejected: default policy |
 |---|---:|---:|---:|---:|
 | crates | 5,000 | 0.8 | 0 (0.00%) | 0 (0.00%) |
-| guix | 10,168 | 76.5 | 101 (0.99%) | 28 (0.28%) |
+| guix | 10,168 | 76.5 | 101 (0.99%) | 34 (0.33%) |
 | live-bootstrap | 171 | 1.1 | 0 (0.00%) | 0 (0.00%) |
-| nix | 18,990 | 77.7 | 157 (0.83%) | 70 (0.37%) |
+| nix | 18,990 | 77.7 | 157 (0.83%) | 79 (0.42%) |
 | pypi | 10,000 | 7.9 | 44 (0.44%) | 19 (0.19%) |
 | rubygems | 5,000 | 1.0 | 22 (0.44%) | 8 (0.16%) |
-| spack | 37,554 | 1,080.9 | 392 (1.04%) | 67 (0.18%) |
-| **all, distinct** | 82,587 | 1,225.4 | 687 (0.83%) | 177 (0.21%) |
+| spack | 37,554 | 1,080.9 | 392 (1.04%) | 79 (0.21%) |
+| **all, distinct** | 82,587 | 1,225.4 | 687 (0.83%) | 204 (0.25%) |
 
 ## The default policy
 
@@ -73,8 +73,6 @@ The strict criteria that the default policy lets through, and how; it rejects al
 | `name.dot-component` | normalize | `a/./b` is `a/b` | 10 |
 | `name.double-slash` | normalize | `a//b` is `a/b` | 2 |
 | `symlink.absolute` | accept | created as it is: writing through a symlink is rejected | 89 |
-| `end.missing` | accept | the archive ends after a member, and its sha256 is pinned | 22 |
-| `end.lone-zero-block` | accept | the archive ends after a member, and its sha256 is pinned | 5 |
 | `end.data-after` | accept | ignored: a header there is `end.archive-after`, rejected | 25 |
 | `pax-global.after-members` | accept | if every global header has only a `comment` | 82 |
 | `magic.posix-version-nuls` | accept | as some Java archivers write it: `ustar\0\0\0` | 60 |
@@ -91,13 +89,13 @@ Tarballs that each criterion rejects, per ecosystem. Default: what the default p
 | framing | `pax-global.after-members`: a global header after the first member | accept | 0 | 6 (0.06%) | 0 | 7 (0.04%) | 0 | 0 | 71 (0.19%) | 81 | rpm@4.20.1, x42-plugins@20230701, openmp@14.0.6.src |
 | framing | `magic.posix-version-nuls`: POSIX magic with NULs as its version | accept | 0 | 18 (0.18%) | 0 | 9 (0.05%) | 0 | 0 | 33 (0.09%) | 34 | commons-lang@2.6-src, apache-solr@3.6.2-src, commons-logging@1.2-src |
 | framing | `end.data-after`: data other than zeros after the end-of-archive marker | accept | 0 | 10 (0.10%) | 0 | 8 (0.04%) | 0 | 0 | 8 (0.02%) | 5 | tcp_wrappers_7.6, commons-lang@2.6-src, xml-commons-resolver@1.2 |
-| framing | `end.missing`: no end-of-archive marker | accept | 0 | 6 (0.06%) | 0 | 4 (0.02%) | 0 | 0 | 12 (0.03%) | 22 | SDL2_image@2.8.8, ruby@4.0.5, fastcap@2.0-18Sep92 |
+| framing | `end.missing`: no end-of-archive marker | reject | 0 | 6 (0.06%) | 0 | 4 (0.02%) | 0 | 0 | 12 (0.03%) | 22 | SDL2_image@2.8.8, ruby@4.0.5, fastcap@2.0-18Sep92 |
 | framing | `pax.newline-in-value.SCHILY.xattr.*`: a newline in a pax value, where implementations split lines | accept | 0 | 2 (0.02%) | 0 | 7 (0.04%) | 0 | 0 | 5 (0.01%) | 12 | qd@2.3.24, libjwt@1.17.2, Minion@10.31 |
 | framing | `pax.size-on-dir`: a pax size on a member without data | reject | 0 | 0 | 0 | 1 (0.01%) | 8 (0.08%) | 0 | 0 | 9 | llama_index_workflows@2.26.0, anibridge-mal-provider@0.2.3, sofias-sdk-lite@0.4.0 |
 | framing | `scan.error`: the scanner could not read past a header | reject | 0 | 4 (0.04%) | 0 | 0 | 0 | 0 | 4 (0.01%) | 1 | jakarta-oro@2.0.8, PullParser@2.1.10, commons-cli@1.2-src |
 | framing | `end.zero-block-before-member`: a zero block, then more members | reject | 0 | 4 (0.04%) | 0 | 0 | 0 | 0 | 3 (0.01%) | 0 | jakarta-oro@2.0.8, PullParser@2.1.10, commons-cli@1.2-src |
 | framing | `end.archive-after`: another archive after the end-of-archive marker | reject | 0 | 1 (0.01%) | 0 | 0 | 0 | 0 | 4 (0.01%) | 3 | commons-jexl@2.1.1-src, jmol@14.8.0, glibmm@2.4.8 |
-| framing | `end.lone-zero-block`: an end-of-archive marker of one zero block, not two | accept | 0 | 0 | 0 | 5 (0.03%) | 0 | 0 | 0 | 5 | eng-rus, srecord@1.64, cdi2iso@0.1-src |
+| framing | `end.lone-zero-block`: an end-of-archive marker of one zero block, not two | reject | 0 | 0 | 0 | 5 (0.03%) | 0 | 0 | 0 | 5 | eng-rus, srecord@1.64, cdi2iso@0.1-src |
 | name | `name.leading-dot-slash`: a name like `./a`, which some implementations make `a` | normalize | 0 | 31 (0.30%) | 0 | 35 (0.18%) | 22 (0.22%) | 18 (0.36%) | 145 (0.39%) | 175 | sqliteodbc@0.99991, numdiff@5.9.0, scanbd@1.5.1 |
 | name | `symlink.absolute`: a symlink to an absolute path | accept | 0 | 13 (0.13%) | 0 | 15 (0.08%) | 3 (0.03%) | 0 | 63 (0.17%) | 85 | tachyon@0.99.5, notmuch@0.40, gnome-autoar@0.4.5 |
 | name | `name.dot`: a member named `.` or `./` | normalize | 0 | 13 (0.13%) | 0 | 18 (0.09%) | 22 (0.22%) | 0 | 11 (0.03%) | 0 | guile@2.0.9, hadrian-bootstrap-sources@9.8.1, linux-libre-headers-stripped@4.14.67-i686-linux |

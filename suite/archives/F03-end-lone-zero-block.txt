@@ -1,7 +1,11 @@
-F03-end-lone-zero-block: tolerated: a strict parser may reject it; if it accepts it, it must extract its tree, and the default policy accepts it
+F03-end-lone-zero-block: must reject
 
 An end-of-archive marker of one zero block, not two.
 
+POSIX requires two zero blocks at the end of an archive; most implementations stop at the first, so
+they extract it all the same.
+
+Decision point: whether one zero block is an end-of-archive marker.
 Seen in: eng-rus, srecord 1.64 and cdi2iso 0.1.
 
 0x000000  header: regular file

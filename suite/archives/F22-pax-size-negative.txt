@@ -1,4 +1,4 @@
-F22-pax-size-negative: must reject: implementations disagree on its tree
+F22-pax-size-negative: must reject
 
 A negative pax `size`, which hides a header from the implementations that read it as a number.
 

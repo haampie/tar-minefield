@@ -1,4 +1,4 @@
-F19-pax-global-between-extended-and-member: must reject: implementations disagree on its tree
+F19-pax-global-between-extended-and-member: must reject
 
 A global pax header between an extended header and its member.
 
