@@ -1,6 +1,6 @@
 """An archive that ends inside the data of a member.
 
-The header of `a` says 1024 bytes, but the file ends after 512 of them.
+The size field in the header of `a` is 1024, but the file ends after 512 bytes.
 
 Decision point: whether a member that is cut short is extracted.
 Seen in: no source tarball.

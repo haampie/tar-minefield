@@ -2,7 +2,7 @@ K01-kind-trailing-slash-file: must reject
 
 A regular file whose name ends in a slash: a file, or a directory?
 
-The header says typeflag `0`, a regular file, of size 0, but the name is `a/`. v7 tar had no
+The header has typeflag `0`, a regular file, and size 0, but the name is `a/`. v7 tar had no
 typeflag for directories, and wrote them like this. This case is ambiguous because the member is
 either a directory `a`, by the convention of v7, or an empty file `a`, by its typeflag.
 

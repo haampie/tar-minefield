@@ -2,7 +2,7 @@ F10-extended-pax-size-before-gnu-long: must reject
 
 A pax `size` followed by a GNU long name: which of them does the size apply to?
 
-The pax header says `size=512` and is followed by a GNU long name header, then by the member.
+The pax header has `size=512` and is followed by a GNU long name header, then by the member.
 Neither POSIX nor GNU's format defines the two together. This case is ambiguous because the size
 applies either to the long name header, and `smuggled` is a member of its own, or to the member,
 whose data then takes in the header of `smuggled`.
@@ -52,7 +52,7 @@ Seen in: no source tarball.
 0x000600  data: GNU long name
           10 bytes: the name and a NUL, then 502 NUL
           "long-name" + NUL
-0x000800  header: regular file, size 0, but the pax size says 512
+0x000800  header: regular file, size 0, but the pax size is 512
           name     [  0,100)  "short-name" + 90 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

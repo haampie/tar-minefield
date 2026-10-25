@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The header says typeflag <code>0</code>, a regular file, of size 0, but the name is <code>a/</code>. v7 tar had no typeflag for directories, and wrote them like this. This case is ambiguous because the member is either a directory <code>a</code>, by the convention of v7, or an empty file <code>a</code>, by its typeflag.</p>
+<p>The header has typeflag <code>0</code>, a regular file, and size 0, but the name is <code>a/</code>. v7 tar had no typeflag for directories, and wrote them like this. This case is ambiguous because the member is either a directory <code>a</code>, by the convention of v7, or an empty file <code>a</code>, by its typeflag.</p>
 <p><strong>Decision point:</strong> whether the typeflag or the trailing slash decides the kind.</p>
 <p><strong>Seen in:</strong> v7 archives only, such as sendmail 8.18.2, tcp_wrappers 7.6 and unclutter 8.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -38,7 +38,7 @@
 
 A regular file whose name ends in a slash: a file, or a directory?
 
-The header says typeflag `0`, a regular file, of size 0, but the name is `a/`. v7 tar had no
+The header has typeflag `0`, a regular file, and size 0, but the name is `a/`. v7 tar had no
 typeflag for directories, and wrote them like this. This case is ambiguous because the member is
 either a directory `a`, by the convention of v7, or an empty file `a`, by its typeflag.
 

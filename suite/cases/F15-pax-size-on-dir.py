@@ -1,6 +1,6 @@
 """A pax `size` on a directory, which takes the next header for its data.
 
-The pax extended header of a directory says `size=512`. In POSIX, no data is stored for a directory,
+The pax extended header of a directory has `size=512`. In POSIX, no data is stored for a directory,
 whatever its size, so the next block is the header of a file, `smuggled`. This case is ambiguous in
 practice because, if the size applies, that block is the directory's data instead, and the tree is a
 directory alone. This is the bug class of CVE-2025-62518 (tokio-tar), GHSA-3pv8-6f4r-ffg2 (tar-rs)
@@ -18,6 +18,6 @@ FEATURES = ["pax.size-on-dir"]
 
 def build(a):
     a.pax([(b"size", b"512")], note="for dir/, with size=512")
-    a.directory(b"dir/", note="no data, but the pax size says 512 bytes")
+    a.directory(b"dir/", note="no data, but the pax size is 512")
     a.file(b"dir/smuggled", b"", note="the block that the pax size covers")
     a.end()

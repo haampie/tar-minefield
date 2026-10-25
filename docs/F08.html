@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The header of <code>a</code> says 1024 bytes, but the file ends after 512 of them.</p>
+<p>The size field in the header of <code>a</code> is 1024, but the file ends after 512 bytes.</p>
 <p><strong>Decision point:</strong> whether a member that is cut short is extracted.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -38,7 +38,7 @@
 
 An archive that ends inside the data of a member.
 
-The header of `a` says 1024 bytes, but the file ends after 512 of them.
+The size field in the header of `a` is 1024, but the file ends after 512 bytes.
 
 Decision point: whether a member that is cut short is extracted.
 Seen in: no source tarball.

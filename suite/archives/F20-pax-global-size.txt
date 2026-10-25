@@ -3,7 +3,7 @@ F20-pax-global-size: must reject
 A global pax header with a `size`, which frames every member after it, or none.
 
 In POSIX, the records of a global header apply to every later member that does not override them, so
-the `size=512` of this one is the size of `a`, whose header says 0. No archiver writes a size in a
+the `size=512` of this one is the size of `a`, whose size field is 0. No archiver writes a size in a
 global header. This case is ambiguous in practice because, with global headers or the sizes in them
 ignored, the next block is not the data of `a` but the header of another file, `smuggled`.
 
@@ -31,7 +31,7 @@ Seen in: no source tarball.
 0x000200  data: pax records
           12 bytes of pax records, then 500 NUL
           "12 size=512\n"
-0x000400  header: regular file, size 0, but the global size says 512
+0x000400  header: regular file, size 0, but the global size is 512
           name     [  0,100)  "a" + 99 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

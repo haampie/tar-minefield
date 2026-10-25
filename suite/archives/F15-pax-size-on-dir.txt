@@ -2,7 +2,7 @@ F15-pax-size-on-dir: must reject
 
 A pax `size` on a directory, which takes the next header for its data.
 
-The pax extended header of a directory says `size=512`. In POSIX, no data is stored for a directory,
+The pax extended header of a directory has `size=512`. In POSIX, no data is stored for a directory,
 whatever its size, so the next block is the header of a file, `smuggled`. This case is ambiguous in
 practice because, if the size applies, that block is the directory's data instead, and the tree is a
 directory alone. This is the bug class of CVE-2025-62518 (tokio-tar), GHSA-3pv8-6f4r-ffg2 (tar-rs)
@@ -33,7 +33,7 @@ See also: F33, a size in the ustar header of a directory, which is rejected as w
 0x000200  data: pax records
           12 bytes of pax records, then 500 NUL
           "12 size=512\n"
-0x000400  header: directory, no data, but the pax size says 512 bytes
+0x000400  header: directory, no data, but the pax size is 512
           name     [  0,100)  "dir/" + 96 NUL
           mode     [100,108)  "0000755" + NUL  755 (octal)
           uid      [108,116)  "0000000" + NUL  0
