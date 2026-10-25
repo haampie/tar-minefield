@@ -41,6 +41,8 @@ VERDICTS = {
                  "extract this tree: "),
     "reject": ("Must reject", "A strict parser must reject this archive."),
 }
+# That the default policy is a draft, at the top of the pages that have its verdicts
+DRAFT = '<a class="draft" href="index.html#policy">Working draft</a>\n'
 # Identifiers that a case no longer has, and the one it has now: the pages of the old ones redirect
 MOVED = {"G01": "F17", "G02": "F18", "G03": "F19", "G04": "N21"}
 OUTCOMES = {
@@ -143,6 +145,17 @@ table.files td:first-child { white-space: nowrap; }
 .accept { border-color: #1a7f37; } .accept .badge { background: #1a7f37; }
 .reject { border-color: #cf222e; } .reject .badge { background: #cf222e; }
 .tolerate { border-color: #59636e; } .tolerate .badge { background: #59636e; }
+/* That the policy is a draft, on every page with verdicts: a strip on the left edge of the window,
+   read from the bottom up, outside the text; on a screen too narrow for that, a band above the
+   title */
+.draft { position: fixed; top: 0; left: 0; padding: 1.25rem 0.375rem; writing-mode: vertical-rl;
+         transform: rotate(180deg); background: #9a6700; color: #ffffff; font-size: 0.875em;
+         font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+         text-decoration: none; }
+@media (max-width: 72rem) {
+  .draft { position: static; display: block; margin: 0.5rem -1rem; padding: 0.25rem 1rem;
+           writing-mode: horizontal-tb; transform: none; }
+}
 """
 
 
@@ -488,7 +501,7 @@ def case_page(case, info, results, data):
     features = features_of(case, info)
     category = strict.CATEGORIES["FNKS".index(ident[0])]
     files = f"{REPO}/blob/main/suite"
-    body = f"""<h1><code>{ident}</code> {html.escape(name)}</h1>
+    body = DRAFT + f"""<h1><code>{ident}</code> {html.escape(name)}</h1>
 <p>{inline(info["description"])}</p>
 {verdict(info)}
 <dl>
@@ -736,7 +749,7 @@ def index_page(cases, results, data):
                         f"<td class=n>{share}</td></tr>")
         sections.append(f"<h3>{html.escape(matrix.GROUPS[group].capitalize())}</h3>\n"
                         + table("cases", rows))
-    body = f"""<h1>{TITLE}</h1>
+    body = DRAFT + f"""<h1>{TITLE}</h1>
 {readme_intro()}
 <p>Each case has a permanent identifier, such as F15, whose letter is its category:</p>
 <ul>
@@ -751,9 +764,10 @@ common it is in source tarballs.</p>
 <p>Click a case for its page.</p>
 <div class="wide">{matrix.svg(results, cases, lambda case: cases[case]["id"] + ".html")}</div>
 <h2 id="policy">Policy</h2>
-<p>This section defines the <em>default policy</em><sup><a href="#stricter">1</a></sup>, which
-accepts, tolerates or rejects each case below, based on <a href="#tarballs">data</a> from the
-{len(union):,} distinct release tarballs of {ecosystems(names)}.</p>
+<p><strong>This policy is a working draft.</strong> This section defines the
+<em>default policy</em><sup><a href="#stricter">1</a></sup>, which accepts, tolerates or rejects
+each case below, based on <a href="#tarballs">data</a> from the {len(union):,} distinct release
+tarballs of {ecosystems(names)}.</p>
 <p>The <em>prevalence</em> column is an estimate of the likelihood of encountering a case in
 practice, from a scan of these tarballs.</p>
 <p class="note" id="stricter"><sup>1</sup> A policy can be stricter and also reject the tolerated
