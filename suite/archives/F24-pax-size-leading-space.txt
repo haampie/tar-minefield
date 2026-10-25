@@ -5,8 +5,8 @@ A pax `size` with a leading space, ` 512`, which conversions of strings to numbe
 A pax record is `<length> <key>=<value>\n`, and its value starts right after the `=`: here, with a
 space. In POSIX, a pax size is decimal digits only, but Python's `int` and C's `strtoull` skip
 leading whitespace, and read 512. Read leniently, this case is ambiguous because the size is either
-that number, and the next block the data of `a`, or the header's, 0, and that block the header of
-`smuggled`.
+that number, 512 (and the next block is the data of `a`), or what the header specifies, 0 (and the
+next block is the header of `smuggled`).
 
 Decision point: whether a pax size may have whitespace.
 Seen in: no source tarball.
