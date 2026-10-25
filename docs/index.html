@@ -44,7 +44,7 @@ published there.</p>
 <tr><td><a href="F01.html"><code>F01</code></a></td><td>number-leading-space</td><td>Number fields padded with spaces rather than zeros, as old tars wrote them.</td><td class=n>0.99%</td></tr>
 <tr><td><a href="F17.html"><code>F17</code></a></td><td>pax-global-comment</td><td>The global pax header with only a <code>comment</code>, as <code>git archive</code> writes it.</td><td class=n>not measured</td></tr>
 <tr><td><a href="F31.html"><code>F31</code></a></td><td>pax-xattr-not-utf8</td><td>An xattr in a pax header whose value is not UTF-8, as libarchive and star write them.</td><td class=n>0.04%</td></tr>
-<tr><td><a href="F32.html"><code>F32</code></a></td><td>checksum-leading-space</td><td>A checksum padded with spaces rather than zeros, as Perl&#x27;s Archive::Tar writes it.</td><td class=n>0.99%</td></tr>
+<tr><td><a href="F32.html"><code>F32</code></a></td><td>checksum-leading-space</td><td>A checksum padded with spaces rather than zeros, as Perl&#x27;s <code>Archive::Tar</code> writes it.</td><td class=n>0.99%</td></tr>
 <tr><td><a href="N01.html"><code>N01</code></a></td><td>gnu-long-name</td><td>A name over 100 bytes, in a GNU long name.</td><td class=n>not measured</td></tr>
 <tr><td><a href="N02.html"><code>N02</code></a></td><td>name-fills-field</td><td>A name of exactly 100 bytes, which fills the name field without a NUL.</td><td class=n>9.53%</td></tr>
 <tr><td><a href="N03.html"><code>N03</code></a></td><td>pax-long-name</td><td>A name over 100 bytes, in a pax <code>path</code>.</td><td class=n>not measured</td></tr>
@@ -140,8 +140,8 @@ published there.</p>
 <h2 id="examples">Motivating examples<a class="anchor" href="#examples" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="examples"><colgroup><col style="width: 8%"><col style="width: 36%"><col style="width: 56%"></colgroup><tr><th>case</th><th>the archive</th><th>what implementations make of it</th></tr>
 <tr><td><a href="N09.html">N09</a></td><td>two pax headers for one file, with <code>path=first</code> and <code>path=second</code></td><td>GNU tar, node-tar and Go extract <code>second</code>; Python and Java extract <code>first</code>; bsdtar, Rust and .NET reject it</td></tr>
-<tr><td><a href="S10.html">S10</a></td><td>a symlink <code>a</code> to <code>target</code>, then a file <code>a</code></td><td>most replace the link with the file; Python's tarfile writes through the link, to <code>target</code></td></tr>
-<tr><td><a href="K01.html">K01</a></td><td>a regular file named <code>a/</code></td><td>GNU tar, bsdtar, node-tar and Java create a directory <code>a</code>; Python, Go, Rust's <code>tar</code> and PHP's PharData an empty file <code>a</code>; tar-fs and .NET reject it</td></tr>
+<tr><td><a href="S10.html">S10</a></td><td>a symlink <code>a</code> to <code>target</code>, then a file <code>a</code></td><td>most replace the link with the file; Python's <code>tarfile</code> writes through the link, to <code>target</code></td></tr>
+<tr><td><a href="K01.html">K01</a></td><td>a regular file named <code>a/</code></td><td>GNU tar, bsdtar, node-tar and Java create a directory <code>a</code>; Python, Go, Rust's <code>tar</code> and PHP's <code>PharData</code> an empty file <code>a</code>; tar-fs and .NET reject it</td></tr>
 <tr><td><a href="F12.html">F12</a></td><td>a size field of <code>000000 1000</code>, with a space</td><td>GNU tar, node-tar and tar-fs read 0, and find a second file <code>smuggled</code> in the data; bsdtar, Python, Go, Rust, Java and .NET reject it</td></tr></table></div>
 <h2 id="contributing">Contributing<a class="anchor" href="#contributing" aria-label="Link to this section">¶</a></h2>
 <p>Issues and pull requests are welcome on <a href="https://github.com/haampie/tar-minefield/issues">GitHub</a>: a new case, an implementation for the comparison, or a tarball that the default policy gets wrong.</p>

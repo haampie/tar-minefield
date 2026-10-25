@@ -153,7 +153,7 @@ Not ambiguous, or confined to fields outside the tree. Tarballs of all ecosystem
 | `number.mode.leading-space` | octal padded with spaces, not zeros, which implementations read alike | 142 |
 | `number.mtime.leading-space` | octal padded with spaces, not zeros, which implementations read alike | 66 |
 | `number.mtime.no-digits` | outside the tree | 40 |
-| `linkname.no-nul` | a link name of exactly 100 bytes, without NUL | 35 |
+| `linkname.no-nul` | a linkname of exactly 100 bytes, without NUL | 35 |
 | `pax.nul-in-value.SCHILY.xattr.*` | NUL in xattrs, which are outside the tree | 32 |
 | `pax.value-not-utf8.SCHILY.xattr.*` | binary values of vendor pax keys, such as xattrs, outside the tree | 31 |
 | `name.not-nfc` | names not in NFC: one tree, which macOS may not hold | 29 |

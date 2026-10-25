@@ -141,7 +141,7 @@ STRICT = [
 
 ALLOWED = [
     ("name.fills-field", "a name of exactly 100 bytes, without NUL (to accept)"),
-    ("linkname.no-nul", "a link name of exactly 100 bytes, without NUL"),
+    ("linkname.no-nul", "a linkname of exactly 100 bytes, without NUL"),
     ("name.non-ascii", "UTF-8 names"),
     ("name.not-nfc", "names not in NFC: one tree, which macOS may not hold"),
     ("name.dir-without-trailing-slash", "a directory without a trailing slash: the typeflag says"),

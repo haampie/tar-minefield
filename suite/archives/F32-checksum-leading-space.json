@@ -1,7 +1,7 @@
 {
  "id": "F32",
  "verdict": "accept",
- "description": "A checksum padded with spaces rather than zeros, as Perl's Archive::Tar writes it.",
+ "description": "A checksum padded with spaces rather than zeros, as Perl's `Archive::Tar` writes it.",
  "features": [],
  "tree": [
   {

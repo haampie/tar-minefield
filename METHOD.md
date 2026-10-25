@@ -322,8 +322,8 @@ People should be able to trust the test suite without trusting its binary files.
   fields, their raw bytes and their meaning. A change to a case is then a readable diff.
 - Expected trees are plain manifests (path, kind, sha256 of the contents, link target,
   executable), rather than a single hash.
-- The interpretation of every case by every implementation we track (GNU tar, bsdtar, busybox,
-  star, CPython's `tarfile`, Go's `archive/tar`, Rust's `tar`, node-tar, 7-Zip, Apache Commons
+- The interpretation of every case by every implementation we track (GNU tar, bsdtar, BusyBox,
+  star, Python's `tarfile`, Go's `archive/tar`, Rust's `tar`, node-tar, 7-Zip, Apache Commons
   Compress, .NET's `System.Formats.Tar`, ...) is produced in CI at pinned versions, and published
   as data. Claims like "GNU tar does X" can then be checked by running them again.
 - Cases are written from scratch, in our own words, also where they reproduce a known CVE: no
@@ -406,7 +406,7 @@ Work on archives specifically:
 - star's [`tartest`](https://freshports.org/archivers/tartest) and test archives, which check
   POSIX.1-1990 conformance. GNU tar can run star's archives in its
   [own tests](https://git.cworth.org/git/tar/tree/tests/star/README), disabled by default.
-- The test suites of libarchive, GNU tar, Go's `archive/tar` and CPython's `tarfile`, each written
+- The test suites of libarchive, GNU tar, Go's `archive/tar` and Python's `tarfile`, each written
   for one implementation.
 - [Multi-interpretable tarballs](https://stoppels.ch/2026/10/22/multi-interpretable-tarballs.html),
   and [untar](https://github.com/haampie/untar), whose rules are the first candidate policy.

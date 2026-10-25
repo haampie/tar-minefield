@@ -28,9 +28,9 @@ applied in order. WORK holds the builds of the programs in `matrix/runners/`, wh
 pinned, and the extractions: each in a directory of its own, two levels below a directory that
 catches what is written outside it. Run it in a throwaway directory, or a container, as some cases
 escape in lenient extractors. It uses what is installed: GNU tar, the untar of live-bootstrap (with
-git and a C compiler), bsdtar, BusyBox, 7-Zip, CPython's `tarfile` with each of its filters, Go
+git and a C compiler), bsdtar, BusyBox, 7-Zip, Python's `tarfile` with each of its filters, Go
 (`archive/tar`, and containerd's `archive.Apply`), Rust, Haskell (cabal), .NET, Java (with the jars
-of `matrix/runners/java/jars.txt`, which it downloads and checks), PHP (its PharData), R (its
+of `matrix/runners/java/jars.txt`, which it downloads and checks), PHP (its `PharData`), R (its
 `Rscript`), Ruby, Perl, Julia and Node.js (node-tar and tar-fs): each on PATH, or in an environment
 variable of its name in capitals, such as `$JULIA` or `$RSCRIPT`. With `--only` and the names
 of columns, only those implementations run, and the other columns of `matrix.json` are kept as they
