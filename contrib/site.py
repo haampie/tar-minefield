@@ -45,6 +45,8 @@ VERDICTS = {
 }
 # That the default policy is a draft, at the top of the pages that have its verdicts
 DRAFT = '<a class="draft" href="index.html#policy">Working draft</a>\n'
+# Sections of the README that the site has too: their anchors on GitHub, and on the site
+ANCHORS = {"#motivating-examples": "#examples", "#contributing": "#contributing"}
 # Identifiers that a case no longer has, and the one it has now: the pages of the old ones redirect
 MOVED = {"G01": "F17", "G02": "F18", "G03": "F19", "G04": "N21"}
 OUTCOMES = {
@@ -210,9 +212,17 @@ def markdown(p):
     def href(url):
         if url.startswith(matrix.SITE.rstrip("/")):
             return url[len(matrix.SITE):] or "index.html"
+        if url in ANCHORS:
+            return ANCHORS[url]
         if url.startswith("#"):
             return f"{REPO}{url}"
         return url if re.match(r"https?:", url) else f"{REPO}/blob/main/{url}"
+
+    def link(m):
+        # the site itself, which the README links to, is the page the reader is on
+        if m.group(2).rstrip("/") == matrix.SITE.rstrip("/"):
+            return m.group(1)
+        return f'<a href="{href(m.group(2))}">{m.group(1)}</a>'
 
     out = []
     for i, part in enumerate(p.split("`")):
@@ -222,8 +232,7 @@ def markdown(p):
         part = html.escape(part, quote=False)
         part = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", part)
         part = re.sub(r"\*(.+?)\*", r"<em>\1</em>", part)
-        out.append(re.sub(r"\[(.+?)\]\((.+?)\)", lambda m: f'<a href="{href(m.group(2))}">'
-                          f"{m.group(1)}</a>", part))
+        out.append(re.sub(r"\[(.+?)\]\((.+?)\)", link, part))
     return "".join(out)
 
 
