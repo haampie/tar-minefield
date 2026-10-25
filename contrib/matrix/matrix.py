@@ -320,6 +320,11 @@ def extract(command, archive, root):
     if code != 0:
         error = (err.strip() or out.strip() or f"status {code}")
         error = error.replace(dest, "DEST").replace(root, "ROOT")
+        # Node shortens a long path in its messages to a prefix and "...", which depends on
+        # where WORK is
+        work = os.path.dirname(os.path.dirname(os.path.dirname(root)))
+        for k in range(len(dest), len(work), -1):
+            error = error.replace(dest[:k] + "...", "DEST...")
         error = error.replace(ROOT + os.sep, "")[-300:]
     return code, error, tree, outside
 

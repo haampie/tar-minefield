@@ -298,7 +298,7 @@ Seen in: no source tarball.
 <tr><td>Python tarfile, filter=fully_trusted</td><td>CPython 3.14.4</td><td>✅ as the verdict says</td><td>error: ValueError: embedded null byte</td></tr>
 <tr><td>node-tar</td><td>tar 7.5.22</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (12 B, 627be4bf)</td></tr>
 <tr><td>node-tar, strict</td><td>tar 7.5.22</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (12 B, 627be4bf)</td></tr>
-<tr><td>tar-fs</td><td>tar-fs 3.1.3, on tar-stream 3.2.2</td><td>✅ as the verdict says</td><td>error: TypeError [ERR_INVALID_ARG_VALUE]: The argument &#x27;path&#x27; must be a string, Uint8Array, or URL without null bytes. Received &#x27;/tmp/claude-1001/-home-bot-temporary-projects-tar-minefield/30ec30c3-6d57-4e9…</td></tr>
+<tr><td>tar-fs</td><td>tar-fs 3.1.3, on tar-stream 3.2.2</td><td>✅ as the verdict says</td><td>error: TypeError [ERR_INVALID_ARG_VALUE]: The argument &#x27;path&#x27; must be a string, Uint8Array, or URL without null bytes. Received &#x27;DEST...</td></tr>
 <tr><td>Java Commons Compress</td><td>Commons Compress 1.28.0, Expander, on Java 25.0.4.1</td><td>✅ as the verdict says</td><td>error: java.nio.file.InvalidPathException: Nul character not allowed: a\x00b</td></tr>
 <tr><td>.NET System.Formats.Tar</td><td>System.Formats.Tar of .NET 10.0.13, ExtractToDirectory</td><td>⚠️ accepts</td><td>tree C: <code>a_b</code> (12 B, 627be4bf)</td></tr>
 <tr><td>PHP PharData, as in Composer</td><td>PharData of PHP 8.5.4, as Composer&#x27;s TarDownloader calls it</td><td>⚠️ accepts</td><td>tree B: <code>header-name</code> (12 B, 627be4bf)</td></tr>

@@ -17551,7 +17551,7 @@
     "tree": null
    },
    "tar-fs": {
-    "error": "TypeError [ERR_INVALID_ARG_VALUE]: The argument 'path' must be a string, Uint8Array, or URL without null bytes. Received '/tmp/claude-1001/-home-bot-temporary-projects-tar-minefield/30ec30c3-6d57-4e9d-b5db-b133b9e99901/scratchpad/work/runs/25/N19-pa...",
+    "error": "TypeError [ERR_INVALID_ARG_VALUE]: The argument 'path' must be a string, Uint8Array, or URL without null bytes. Received 'DEST...",
     "outside": {},
     "tree": {}
    }
