@@ -151,7 +151,7 @@ published there.</p>
 <tr><td><a href="K01.html">K01</a></td><td>a regular file named <code>a/</code></td><td>GNU tar, bsdtar, node-tar and Java create a directory <code>a</code>; Python, Go, Rust's <code>tar</code> and PHP's <code>PharData</code> an empty file <code>a</code>; tar-fs and .NET reject it</td></tr>
 <tr><td><a href="F12.html">F12</a></td><td>a size field of <code>000000 1000</code>, with a space</td><td>GNU tar, node-tar and tar-fs read 0, and find a second file <code>smuggled</code> in the data; bsdtar, Python, Go, Rust, Java and .NET reject it</td></tr></table></div>
 <h2 id="contributing">Contributing<a class="anchor" href="#contributing" aria-label="Link to this section">¶</a></h2>
-<p>Issues and pull requests are welcome on <a href="https://github.com/haampie/tar-minefield/issues">GitHub</a>: a new case, an implementation for the comparison, or a tarball that the default policy gets wrong.</p>
+<p>Issues and pull requests are welcome on <a href="https://github.com/haampie/tar-minefield/issues">GitHub</a>: a new case, an implementation for the comparison, or a tarball that the default policy gets wrong. A case that shows a vulnerability that is not yet disclosed is reported privately first: see <a href="https://github.com/haampie/tar-minefield/blob/main/SECURITY.md">SECURITY.md</a>.</p>
 <p>Contributors:</p>
 <ul>
 <li><a href="https://github.com/haampie">Harmen Stoppels</a></li>
