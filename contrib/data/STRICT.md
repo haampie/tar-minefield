@@ -136,18 +136,18 @@ Not ambiguous, or confined to fields outside the tree. Tarballs of all ecosystem
 
 | feature | why it is allowed | tarballs |
 |---|---|---:|
-| `name.fills-field` | a name of exactly 100 bytes, without NUL (to accept) | 7,869 |
-| `ustar.prefix` | the ustar prefix field (to accept) | 6,317 |
+| `name.fills-field` | a name of exactly 100 bytes, without NUL | 7,869 |
+| `ustar.prefix` | the ustar prefix field | 6,317 |
 | `number.uid.no-digits` | outside the tree | 5,394 |
 | `number.gid.no-digits` | outside the tree | 5,394 |
 | `type.nul` | the typeflag NUL of regular files, from before POSIX | 3,616 |
 | `v7.bytes-after-linkname` | bytes in fields that v7 headers do not use | 2,843 |
 | `name.dir-without-trailing-slash` | a directory without a trailing slash: the typeflag says | 1,269 |
-| `tree.dir-after-contents` | directories after their contents (to accept) | 1,008 |
+| `tree.dir-after-contents` | directories after their contents | 1,008 |
 | `name.non-ascii` | UTF-8 names | 789 |
 | `number.uid.base256` | outside the tree | 214 |
 | `number.gid.base256` | outside the tree | 197 |
-| `tree.duplicate.dir-dir` | the same directory twice (to accept) | 157 |
+| `tree.duplicate.dir-dir` | the same directory twice | 157 |
 | `number.uid.leading-space` | outside the tree | 152 |
 | `number.gid.leading-space` | outside the tree | 152 |
 | `number.mtime.leading-space` | outside the tree | 66 |

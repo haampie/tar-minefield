@@ -140,13 +140,13 @@ STRICT = [
 ]
 
 ALLOWED = [
-    ("name.fills-field", "a name of exactly 100 bytes, without NUL (to accept)"),
+    ("name.fills-field", "a name of exactly 100 bytes, without NUL"),
     ("linkname.no-nul", "a linkname of exactly 100 bytes, without NUL"),
     ("name.non-ascii", "UTF-8 names"),
     ("name.not-nfc", "names not in NFC: one tree, whose names macOS may normalize"),
     ("name.dir-without-trailing-slash", "a directory without a trailing slash: the typeflag says"),
-    ("ustar.prefix", "the ustar prefix field (to accept)"),
-    ("number.size.base256", "base-256 sizes of files over 8 GiB (to accept)"),
+    ("ustar.prefix", "the ustar prefix field"),
+    ("number.size.base256", "base-256 sizes of files over 8 GiB"),
     ("number.uid.*", "outside the tree"),
     ("number.gid.*", "outside the tree"),
     ("number.mtime.*", "outside the tree"),
@@ -154,8 +154,8 @@ ALLOWED = [
     ("number.devminor.*", "outside the tree"),
     ("type.nul", "the typeflag NUL of regular files, from before POSIX"),
     ("v7.bytes-after-linkname", "bytes in fields that v7 headers do not use"),
-    ("tree.dir-after-contents", "directories after their contents (to accept)"),
-    ("tree.duplicate.dir-dir", "the same directory twice (to accept)"),
+    ("tree.dir-after-contents", "directories after their contents"),
+    ("tree.duplicate.dir-dir", "the same directory twice"),
     ("pax.SCHILY.*", "vendor pax keys outside the tree"),
     ("pax.LIBARCHIVE.*", "vendor pax keys outside the tree"),
     ("pax.nul-in-value.SCHILY.xattr.*", "NUL in xattrs, which are outside the tree"),
