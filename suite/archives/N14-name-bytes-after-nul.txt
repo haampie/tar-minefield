@@ -2,9 +2,9 @@ N14-name-bytes-after-nul: must reject
 
 Bytes after the NUL that ends a name.
 
-The name field contains `a`, a NUL, and `b`. In POSIX, a name ends at its first NUL, so the name is
-`a`. This case is still ambiguous because the name can also be read as the whole field, `a\0b`,
-which is `ab` once the NUL is dropped.
+The name field contains `a`, followed by a NUL, followed by `b`. In POSIX, a name ends at its first
+NUL, so the name is `a`. Copied as a whole, the field is `a` as a C string, which ends at the first
+NUL, but `a\0b` in languages whose strings can contain a NUL, and creating the file then fails.
 
 Decision point: where a name ends.
 Seen in: no source tarball.

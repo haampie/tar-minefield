@@ -26,7 +26,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The name field contains <code>a</code>, a NUL, and <code>b</code>. In POSIX, a name ends at its first NUL, so the name is <code>a</code>. This case is still ambiguous because the name can also be read as the whole field, <code>a\0b</code>, which is <code>ab</code> once the NUL is dropped.</p>
+<p>The name field contains <code>a</code>, followed by a NUL, followed by <code>b</code>. In POSIX, a name ends at its first NUL, so the name is <code>a</code>. Copied as a whole, the field is <code>a</code> as a C string, which ends at the first NUL, but <code>a\0b</code> in languages whose strings can contain a NUL, and creating the file then fails.</p>
 <p><strong>Decision point:</strong> where a name ends.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -38,9 +38,9 @@
 
 Bytes after the NUL that ends a name.
 
-The name field contains `a`, a NUL, and `b`. In POSIX, a name ends at its first NUL, so the name is
-`a`. This case is still ambiguous because the name can also be read as the whole field, `a\0b`,
-which is `ab` once the NUL is dropped.
+The name field contains `a`, followed by a NUL, followed by `b`. In POSIX, a name ends at its first
+NUL, so the name is `a`. Copied as a whole, the field is `a` as a C string, which ends at the first
+NUL, but `a\0b` in languages whose strings can contain a NUL, and creating the file then fails.
 
 Decision point: where a name ends.
 Seen in: no source tarball.
