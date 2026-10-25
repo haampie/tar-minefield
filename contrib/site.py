@@ -514,7 +514,7 @@ def verdict(info):
     """The verdict of a case, as a banner: what it requires."""
     v = info["verdict"]
     badge, text = VERDICTS[v]
-    return (f'<div class="verdict {v}"><p><span class="badge">{badge}</span> {html.escape(text)}'
+    return (f'<div class="verdict {v} wide"><p><span class="badge">{badge}</span> {html.escape(text)}'
             "</p></div>")
 
 
