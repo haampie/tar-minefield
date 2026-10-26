@@ -40,6 +40,8 @@ What 20 implementations make of the 74 cases: a row per case, by category, and a
 
 ## Contributing
 
+This project is looking for contributions from people who work on package managers, registries and tar implementations, in the form of discussions in [issues on GitHub](https://github.com/haampie/tar-minefield/issues) or by email to harmen at stoppels dot ch, so that the working draft of the default policy can become a reference.
+
 Issues and pull requests are welcome on [GitHub](https://github.com/haampie/tar-minefield/issues): a new case, an implementation for the comparison, or a tarball that the default policy gets wrong. A case that shows a vulnerability that is not yet disclosed is reported privately first: see [SECURITY.md](SECURITY.md).
 
 Contributors:
