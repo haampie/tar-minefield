@@ -951,7 +951,7 @@ def index_page(cases, results, data):
     body = DRAFT + f"""<h1>{TITLE}</h1>
 {readme_intro()}
 <h2>Comparison of different tar implementations</h2>
-<p>This table shows how different tar implementations behave on each test case. A green ✅ is the
+<p>This table shows how different tar implementations behave on each test case. A green <code>✓</code> is the
 strict behavior that the <a href="#policy">default policy</a> asks for; click a row for details
 about the case.</p>
 <div class="wide">{matrix.svg(results, cases, lambda case: cases[case]["id"] + ".html")}</div>
@@ -970,8 +970,7 @@ common it is in release tarballs.</p>
 each case below, based on <a href="#tarballs">data</a> from the {len(union):,} distinct release
 tarballs of {ecosystems(names)}.</p>
 <p>The <em>prevalence</em> column is the share of these tarballs that have a case: a first-order
-approximation of how common it is in general. A case that is <em>not measured</em> is one that
-<code>tarscan.py</code> does not report on its own; its page says why.</p>
+approximation of how common it is in general.</p>
 <p class="note" id="stricter"><sup>1</sup> A policy can be stricter and also reject the tolerated
 cases, at the cost of rejecting more real tarballs: some tolerated cases are common, such as
 numbers padded with spaces (F01), and others rare. That suits special-purpose tools,

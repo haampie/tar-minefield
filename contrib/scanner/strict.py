@@ -491,7 +491,7 @@ def readme(path, datasets, names, short, rated, rows, union):
     default = sum(not passes_default(r) for r in union)
     block = (
         f"Of the {len(union):,} source tarballs of {ecosystems(names)}, it "
-        f"accepts {percent(len(union) - default, len(union))} ([per ecosystem]({SITE}#tarballs))."
+        f"[accepts {percent(len(union) - default, len(union))}]({SITE}#tarballs)."
     )
     text = open(path).read()
     begin, end = "<!-- begin strict.py -->", "<!-- end strict.py -->"
