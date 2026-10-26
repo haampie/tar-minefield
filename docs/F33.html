@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The size field in the ustar header of a directory is 512. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=No%20data%20logical%20records%20are%20stored%20for%20types%201%2C%202%2C%20or%205">POSIX</a>, no data is stored for a directory, whatever its size, so the next block is the header of a file, <code>smuggled</code>. This case is ambiguous in practice because, if the size applies, that block is the directory&#x27;s data instead, and the tree is a directory alone. The same goes for symlinks and devices, which have no data either.</p>
-<p><strong>Decision point:</strong> whether a size in the header applies to a member that has no data.</p>
+<p>The size field in the ustar header of a directory is 512. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=No%20data%20logical%20records%20are%20stored%20for%20types%201%2C%202%2C%20or%205">POSIX</a>, no data is stored for a directory, whatever its size, so the next block is the header of a file, <code>smuggled</code>. This case is ambiguous in practice because, if the size applies, that block is the directory&#x27;s data instead, and the tree is a directory alone. The same goes for symlinks and devices, which do not have data either, and implementations need not decide alike for every kind: one that skips the size of a directory may take the size of a symlink for its data.</p>
+<p><strong>Decision point:</strong> whether a size in the header applies to a member without data.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -54,9 +54,11 @@ A size in the header of a directory, which takes the next header for its data.
 The size field in the ustar header of a directory is 512. In POSIX, no data is stored for a
 directory, whatever its size, so the next block is the header of a file, `smuggled`. This case is
 ambiguous in practice because, if the size applies, that block is the directory&#x27;s data instead, and
-the tree is a directory alone. The same goes for symlinks and devices, which have no data either.
+the tree is a directory alone. The same goes for symlinks and devices, which do not have data
+either, and implementations need not decide alike for every kind: one that skips the size of a
+directory may take the size of a symlink for its data.
 
-Decision point: whether a size in the header applies to a member that has no data.
+Decision point: whether a size in the header applies to a member without data.
 Seen in: none of the scanned tarballs.
 See also: F15, a pax `size` on a directory, and F34, a size in the header of a hard link, which
 are rejected as well.

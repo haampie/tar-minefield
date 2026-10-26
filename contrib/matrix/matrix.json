@@ -11054,6 +11054,245 @@
     }
    }
   },
+  "F36-pax-record-length-short": {
+   ".NET System.Formats.Tar": {
+    "error": "InvalidDataException: The extended header contains invalid records.",
+    "outside": {},
+    "tree": {}
+   },
+   "7-Zip": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "from-header": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "BusyBox tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "from-pa": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "GNU tar": {
+    "error": "tar: Malformed extended header: missing newline\ntar: Exiting with failure status due to previous errors",
+    "outside": {},
+    "tree": {
+     "from-header": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "Go containerd archive.Apply": {
+    "error": "archive/tar: invalid tar header",
+    "outside": {},
+    "tree": {}
+   },
+   "Haskell tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "from-header": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "Java Commons Compress": {
+    "error": "java.io.IOException: Failed to read Paxheader.Value should end with a newline",
+    "outside": {},
+    "tree": {}
+   },
+   "Julia Tar.jl": {
+    "error": "malformed extended header metadata: \"16 path=from-pax\\n\"",
+    "outside": {},
+    "tree": {}
+   },
+   "PHP PharData, as in Composer": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "from-header": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "Perl Archive::Tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "from-header": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "Python tarfile, filter=data, as in pip": {
+    "error": "ReadError: file could not be opened successfully:\n- method gz: ReadError('not a gzip file')\n- method bz2: ReadError('not a bzip2 file')\n- method xz: ReadError('not an lzma file')\n- method zst: ReadError('not a zstd file')\n- method tar: ReadError('invalid header')",
+    "outside": {},
+    "tree": {}
+   },
+   "Python tarfile, filter=fully_trusted": {
+    "error": "ReadError: file could not be opened successfully:\n- method gz: ReadError('not a gzip file')\n- method bz2: ReadError('not a bzip2 file')\n- method xz: ReadError('not an lzma file')\n- method zst: ReadError('not a zstd file')\n- method tar: ReadError('invalid header')",
+    "outside": {},
+    "tree": {}
+   },
+   "Python tarfile, filter=tar": {
+    "error": "ReadError: file could not be opened successfully:\n- method gz: ReadError('not a gzip file')\n- method bz2: ReadError('not a bzip2 file')\n- method xz: ReadError('not an lzma file')\n- method zst: ReadError('not a zstd file')\n- method tar: ReadError('invalid header')",
+    "outside": {},
+    "tree": {}
+   },
+   "R untar, internal": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "from-pax": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "RubyGems": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "from-header": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "Rust astral-tokio-tar": {
+    "error": "failed to iterate over archive",
+    "outside": {},
+    "tree": {}
+   },
+   "Rust tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "from-header": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "Rust tar-codec, as in uv": {
+    "error": "at byte 0: invalid pax records: record is not newline terminated",
+    "outside": {},
+    "tree": {}
+   },
+   "bsdtar": {
+    "error": "bsdtar: Malformed pax attributes\nbsdtar: Error exit delayed from previous errors",
+    "outside": {},
+    "tree": {
+     "from-header": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "live-bootstrap untar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "PaxHeader": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "51e0903772eb66906fe11e38744adc98dc246f3f570eeea2f615c1e22fa49d18",
+      "size": 17
+     },
+     "from-header": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "live-bootstrap untar, --non-strict": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "PaxHeader": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "51e0903772eb66906fe11e38744adc98dc246f3f570eeea2f615c1e22fa49d18",
+      "size": 17
+     },
+     "from-header": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "node-tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "from-header": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "node-tar, strict": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "from-header": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "from-pa": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   }
+  },
   "K01-kind-trailing-slash-file": {
    ".NET System.Formats.Tar": {
     "error": "IOException: Cannot create 'DEST/a/' because a file or directory with the same name already exists.",
@@ -18500,6 +18739,415 @@
     }
    }
   },
+  "N25-symlink-empty-target": {
+   ".NET System.Formats.Tar": {
+    "error": "ArgumentException: The value cannot be an empty string. (Parameter 'pathToTarget')",
+    "outside": {},
+    "tree": {}
+   },
+   "7-Zip": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "link": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "BusyBox tar": {
+    "error": "killed by SIGSEGV",
+    "outside": {},
+    "signal": 11,
+    "tree": {}
+   },
+   "GNU tar": {
+    "error": "tar: link: Cannot create symlink to \u2018\u2019: No such file or directory\ntar: Exiting with failure status due to previous errors",
+    "outside": {},
+    "tree": {}
+   },
+   "Go containerd archive.Apply": {
+    "error": "symlink  DEST/link: no such file or directory",
+    "outside": {},
+    "tree": {}
+   },
+   "Haskell tar": {
+    "error": "createDirectoryLink:createSymbolicLink '' to 'DEST/link': does not exist (No such file or directory)",
+    "outside": {},
+    "tree": {}
+   },
+   "Java Commons Compress": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "link": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "Julia Tar.jl": {
+    "error": "symlink with empty link path\nTar.Header(\"link\", :symlink, 0o644, 0, \"\")",
+    "outside": {},
+    "tree": {}
+   },
+   "PHP PharData, as in Composer": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "link": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "Perl Archive::Tar": {
+    "error": "Making symbolic link 'DEST/link' to '' failed at contrib/matrix/runners/perl/extract.pl line 14.\nCould not extract 'link' at contrib/matrix/runners/perl/extract.pl line 14.\nCould not extract 'link'",
+    "outside": {},
+    "tree": {}
+   },
+   "Python tarfile, filter=data, as in pip": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "link": {
+      "kind": "symlink",
+      "target": "."
+     }
+    }
+   },
+   "Python tarfile, filter=fully_trusted": {
+    "error": null,
+    "outside": {},
+    "tree": {}
+   },
+   "Python tarfile, filter=tar": {
+    "error": null,
+    "outside": {},
+    "tree": {}
+   },
+   "R untar, internal": {
+    "error": "argument must be coercible to non-negative integer\nWarning message:\nIn max(which(block[158:257] > 0)) :\n  no non-missing arguments to max; returning -Inf",
+    "outside": {},
+    "tree": {}
+   },
+   "RubyGems": {
+    "error": "Gem::Package::SymlinkError: installing symlink 'link' pointing to parent path DEST of DEST is not allowed",
+    "outside": {},
+    "tree": {}
+   },
+   "Rust astral-tokio-tar": {
+    "error": "failed to unpack `DEST/link`",
+    "outside": {},
+    "tree": {}
+   },
+   "Rust tar": {
+    "error": "failed to unpack `DEST/link`",
+    "outside": {},
+    "tree": {}
+   },
+   "Rust tar-codec, as in uv": {
+    "error": "at byte 0: invalid link link -> \"\": link target is empty",
+    "outside": {},
+    "tree": {}
+   },
+   "bsdtar": {
+    "error": "link: Can't create 'link': No such file or directory\nbsdtar: Error exit delayed from previous errors",
+    "outside": {},
+    "tree": {}
+   },
+   "live-bootstrap untar": {
+    "error": "Failed to create symlink",
+    "outside": {},
+    "tree": {}
+   },
+   "live-bootstrap untar, --non-strict": {
+    "error": null,
+    "outside": {},
+    "tree": {}
+   },
+   "node-tar": {
+    "error": "Error: TAR_BAD_ARCHIVE: Unrecognized archive format",
+    "outside": {},
+    "tree": {}
+   },
+   "node-tar, strict": {
+    "error": "Error: TAR_ENTRY_INVALID: linkpath required",
+    "outside": {},
+    "tree": {}
+   },
+   "tar-fs": {
+    "error": "TypeError [ERR_INVALID_ARG_TYPE]: The \"paths[1]\" argument must be of type string. Received null",
+    "outside": {},
+    "tree": {}
+   }
+  },
+  "N26-pax-global-path-then-empty": {
+   ".NET System.Formats.Tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "7-Zip": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "BusyBox tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "GNU tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "Go containerd archive.Apply": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "Haskell tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "Java Commons Compress": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "Julia Tar.jl": {
+    "error": "path is empty\nTar.Header(\"\", :file, 0o644, 12, \"\")",
+    "outside": {},
+    "tree": {}
+   },
+   "PHP PharData, as in Composer": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "Perl Archive::Tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "Python tarfile, filter=data, as in pip": {
+    "error": "IsADirectoryError: [Errno 21] Is a directory: 'DEST'",
+    "outside": {},
+    "tree": {}
+   },
+   "Python tarfile, filter=fully_trusted": {
+    "error": "IsADirectoryError: [Errno 21] Is a directory: 'DEST'",
+    "outside": {},
+    "tree": {}
+   },
+   "Python tarfile, filter=tar": {
+    "error": "IsADirectoryError: [Errno 21] Is a directory: 'DEST'",
+    "outside": {},
+    "tree": {}
+   },
+   "R untar, internal": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "RubyGems": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "Rust astral-tokio-tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "Rust tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "Rust tar-codec, as in uv": {
+    "error": "at byte 0: decode policy rejected input: global pax extended header contains restricted member metadata path",
+    "outside": {},
+    "tree": {}
+   },
+   "bsdtar": {
+    "error": "bsdtar: Unsupported pax global extended header attribute 'path'\nbsdtar: Error exit delayed from previous errors",
+    "outside": {},
+    "tree": {}
+   },
+   "live-bootstrap untar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     },
+     "pax_global_header": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "b6553e3e2de7c599e090b381c85093c3e8ef49624247aa6d879c1dbc8a708430",
+      "size": 8
+     }
+    }
+   },
+   "live-bootstrap untar, --non-strict": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     },
+     "pax_global_header": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "b6553e3e2de7c599e090b381c85093c3e8ef49624247aa6d879c1dbc8a708430",
+      "size": 8
+     }
+    }
+   },
+   "node-tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "node-tar, strict": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   }
+  },
   "S01-tree-dir-after-contents": {
    ".NET System.Formats.Tar": {
     "error": null,
@@ -22032,6 +22680,300 @@
      }
     }
    }
+  },
+  "S13-hardlink-empty-target": {
+   ".NET System.Formats.Tar": {
+    "error": "UnauthorizedAccessException: Access to the path 'DEST/link' is denied.",
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "7-Zip": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     },
+     "link": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "BusyBox tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     },
+     "link": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "GNU tar": {
+    "error": "tar: Substituting `.' for empty hard link target\ntar: link: Cannot hard link to \u2018.\u2019: Operation not permitted\ntar: Exiting with failure status due to previous errors",
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Go containerd archive.Apply": {
+    "error": "link DEST DEST/link: operation not permitted",
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Haskell tar": {
+    "error": "Invalid file name in tar archive: \"\"",
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Java Commons Compress": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     },
+     "link": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "Julia Tar.jl": {
+    "error": "BoundsError: attempt to access empty String at index [1]",
+    "outside": {},
+    "tree": {}
+   },
+   "PHP PharData, as in Composer": {
+    "error": "UnexpectedValueException: phar error: \"suite/archives/S13-hardlink-empty-target.tar\" is a corrupted tar file - hard link to non-existent file \"\"",
+    "outside": {},
+    "tree": {}
+   },
+   "Perl Archive::Tar": {
+    "error": "No such file in archive: '' at contrib/matrix/runners/perl/extract.pl line 14.\nCould not find file '' in memory. at contrib/matrix/runners/perl/extract.pl line 14.\nMaking hard link from '' to 'DEST/link' failed at contrib/matrix/runners/perl/extract.pl line 14.\nCould not extract 'link' at \u2026",
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Python tarfile, filter=data, as in pip": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Python tarfile, filter=fully_trusted": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Python tarfile, filter=tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "R untar, internal": {
+    "error": "argument must be coercible to non-negative integer\nWarning message:\nIn max(which(block[158:257] > 0)) :\n  no non-missing arguments to max; returning -Inf",
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "RubyGems": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Rust astral-tokio-tar": {
+    "error": "failed to unpack `DEST/link`",
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Rust tar": {
+    "error": "failed to unpack `DEST/link`",
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Rust tar-codec, as in uv": {
+    "error": "at byte 1024: invalid link link -> \"\": link target is empty",
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "bsdtar": {
+    "error": "bsdtar: Skipping link: hardlink target becomes empty after removing leading '/'\nbsdtar: Error exit delayed from previous errors",
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "live-bootstrap untar": {
+    "error": "unable to create hardlinks",
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "live-bootstrap untar, --non-strict": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "node-tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "node-tar, strict": {
+    "error": "Error: TAR_ENTRY_INVALID: linkpath required",
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "tar-fs": {
+    "error": "TypeError [ERR_INVALID_ARG_TYPE]: The \"path\" argument must be of type string. Received null",
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   }
   }
  },
  "implementations": [
@@ -22050,10 +22992,6 @@
   {
    "name": "live-bootstrap untar, --non-strict",
    "version": "mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc"
-  },
-  {
-   "name": "BusyBox tar",
-   "version": "BusyBox v1.38.0, defconfig"
   },
   {
    "name": "7-Zip",
@@ -22130,6 +23068,10 @@
   {
    "name": "tar-fs",
    "version": "tar-fs 3.1.3, on tar-stream 3.2.2"
+  },
+  {
+   "name": "BusyBox tar",
+   "version": "BusyBox v1.38.0, defconfig"
   }
  ]
 }

@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>F29 number-size-base256-negative · Tar file extraction test suite</title>
-<meta name="description" content="A negative base-256 size in the header, -512, which no member can have.">
+<meta name="description" content="A negative base-256 size in the header, -512, which a member cannot have.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F29 number-size-base256-negative · Tar file extraction test suite">
-<meta property="og:description" content="A negative base-256 size in the header, -512, which no member can have.">
+<meta property="og:description" content="A negative base-256 size in the header, -512, which a member cannot have.">
 <link rel="stylesheet" href="style.css?487f8630">
 <link rel="canonical" href="https://stoppels.ch/tar/F29.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F29.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/57717744fcb41558.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/455289ed4b93376a.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of F29 number-size-base256-negative">
@@ -24,7 +24,7 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="F28.html" rel="prev" title="F28 pax-newline-in-comment">‹ F28 pax-newline-in-comment</a><a href="index.html">tar-minefield</a><a class="next" href="F30.html" rel="next" title="F30 number-size-base256-too-large">F30 number-size-base256-too-large ›</a></nav>
 <h1><code>F29</code> number-size-base256-negative</h1>
-<p>A negative base-256 size in the header, -512, which no member can have.</p>
+<p>A negative base-256 size in the header, -512, which a member cannot have.</p>
 <div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>framing</dd>
@@ -49,7 +49,7 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>F29-number-size-base256-negative: must reject
 
-A negative base-256 size in the header, -512, which no member can have.
+A negative base-256 size in the header, -512, which a member cannot have.
 
 GNU tar writes numbers too large for octal in base 256: the first byte of the field is 0x80 for a
 positive number, and 0xff for a negative one, in two&#x27;s complement. A negative size is meaningless,

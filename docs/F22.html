@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>F22 pax-size-negative · Tar file extraction test suite</title>
-<meta name="description" content="A negative pax size, which no member can have.">
+<meta name="description" content="A negative pax size, which a member cannot have.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F22 pax-size-negative · Tar file extraction test suite">
-<meta property="og:description" content="A negative pax size, which no member can have.">
+<meta property="og:description" content="A negative pax size, which a member cannot have.">
 <link rel="stylesheet" href="style.css?487f8630">
 <link rel="canonical" href="https://stoppels.ch/tar/F22.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F22.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/8173cfa0307cb72d.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/89b9469838ac62f8.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of F22 pax-size-negative">
@@ -24,7 +24,7 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="F21.html" rel="prev" title="F21 pax-size-empty">‹ F21 pax-size-empty</a><a href="index.html">tar-minefield</a><a class="next" href="F23.html" rel="next" title="F23 pax-size-plus">F23 pax-size-plus ›</a></nav>
 <h1><code>F22</code> pax-size-negative</h1>
-<p>A negative pax <code>size</code>, which no member can have.</p>
+<p>A negative pax <code>size</code>, which a member cannot have.</p>
 <div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>framing</dd>
@@ -49,7 +49,7 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>F22-pax-size-negative: must reject
 
-A negative pax `size`, which no member can have.
+A negative pax `size`, which a member cannot have.
 
 The pax header of `a` has `size=-512`, and the size field of its header is 0. In POSIX, a pax size
 is decimal digits, without a sign. Read leniently, this case is ambiguous because the size is either
@@ -337,7 +337,7 @@ Seen in: none of the scanned tarballs.
 <tr><td>Rust astral-tokio-tar</td><td>astral-tokio-tar 0.7.0, unpack</td><td>✅ as the verdict says</td><td>error: failed to iterate over archive</td></tr>
 <tr><td>Rust tar-codec, as in uv</td><td>tar-codec 0.0.15, with the policies of uv 0.13</td><td>✅ as the verdict says</td><td>error: at byte 0: invalid pax size value: &quot;-512&quot;</td></tr>
 <tr><td>RubyGems</td><td>RubyGems 4.0.20 of Ruby 4.0.9, extract_tar_gz</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
-<tr><td>R untar, internal</td><td>utils::untar of R 4.6.1, tar = &quot;internal&quot;</td><td>✅ as the verdict says</td><td>error: argument must be coercible to non-negative integer</td></tr>
+<tr><td>R untar, internal</td><td>utils::untar of R 4.6.1, tar = &quot;internal&quot;</td><td>⚠️ crashes</td><td>argument must be coercible to non-negative integer</td></tr>
 <tr><td>Perl Archive::Tar</td><td>Archive::Tar 3.12 of Perl v5.44.0</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
 <tr><td>Haskell tar</td><td>tar 0.7.2.0, extract, of GHC 9.14</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
 <tr><td>Julia Tar.jl</td><td>Tar 1.10.0 of Julia 1.13.3</td><td>✅ as the verdict says</td><td>error: invalid extended header size value: &quot;-512&quot;</td></tr>
