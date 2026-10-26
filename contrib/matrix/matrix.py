@@ -547,6 +547,34 @@ POPULARITY = [
     "RubyGems", "R untar, internal", "Perl Archive::Tar", "Haskell tar", "Julia Tar.jl",
     "live-bootstrap untar", "live-bootstrap untar, --non-strict",
 ]
+# The page of every implementation on the site, by a name of its own: the column may be renamed,
+# as its version or how it is called is said more precisely, and the address of its page stays
+SLUGS = {
+    "GNU tar": "gnu-tar",
+    "bsdtar": "bsdtar",
+    "BusyBox tar": "busybox",
+    "7-Zip": "7zip",
+    "Python tarfile, filter=data, as in pip": "tarfile-data",
+    "Python tarfile, filter=tar": "tarfile-tar",
+    "Python tarfile, filter=fully_trusted": "tarfile-trusted",
+    "node-tar": "node-tar",
+    "node-tar, strict": "node-tar-strict",
+    "tar-fs": "tar-fs",
+    "Java Commons Compress": "commons-compress",
+    ".NET System.Formats.Tar": "dotnet",
+    "PHP PharData, as in Composer": "phardata",
+    "Go containerd archive.Apply": "containerd",
+    "Rust tar": "rust-tar",
+    "Rust astral-tokio-tar": "astral-tokio-tar",
+    "Rust tar-codec, as in uv": "tar-codec",
+    "RubyGems": "rubygems",
+    "R untar, internal": "r-untar",
+    "Perl Archive::Tar": "archive-tar",
+    "Haskell tar": "haskell-tar",
+    "Julia Tar.jl": "julia-tar",
+    "live-bootstrap untar": "live-bootstrap",
+    "live-bootstrap untar, --non-strict": "live-bootstrap-nonstrict",
+}
 
 
 def ordered(results):
@@ -667,12 +695,12 @@ def legend_svg(x, y, symbols):
     return "".join(out), y
 
 
-def svg(results, cases, link=None):
+def svg(results, cases, link=None, column_link=None):
     """Every implementation in columns; in rows, the outcomes of all cases first, as a bar per
     implementation, then every case, labelled by its identifier on the left and its name on the
-    right, so that on a narrow screen the cells come right after the identifiers; and with
-    link(case) a link to its page. Links work where the SVG is part of the page, not where it is
-    an image."""
+    right, so that on a narrow screen the cells come right after the identifiers; with link(case)
+    a link to its page, and with column_link(name) one to the page of an implementation, on its
+    name. Links work where the SVG is part of the page, not where it is an image."""
     names = columns(results)
     counts = {n: {} for n in names}
     for case, info in cases.items():
@@ -690,7 +718,11 @@ def svg(results, cases, link=None):
     end = right + 7 * max(len(label(c, i).split(" ", 1)[1]) for c, i in cases.items())
     out, y = [], top
     for n in names:
-        out.append(f'<text transform="translate({xs[n] + cw / 2 + 4},{top - 8}) rotate(-60)">{esc(n)}</text>')
+        name = f'<text transform="translate({xs[n] + cw / 2 + 4},{top - 8}) rotate(-60)">{esc(n)}</text>'
+        out.append(f'<a class="column" href="{esc(column_link(n))}">{name}</a>' if column_link else name)
+    if column_link:
+        # only with the links, so that the SVG without them, and the images made of it, stay the same
+        out.append("<style>a.column:hover text{fill:#0969da;text-decoration:underline}</style>")
     # the bars: outcomes stacked from the bottom, with the number of each where it fits
     bar = 2 * len(cases)
     out.append(f'<text x="{right}" y="{y + bar / 2 + 4}">all {len(cases)} cases</text>')

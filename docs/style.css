@@ -23,6 +23,9 @@ svg { max-width: 100%; height: auto; }
 /* A table is not narrower than this: on a narrow screen it scrolls, rather than squeezing words */
 .wide > table { min-width: 40rem; }
 dt { font-weight: 600; }
+/* a list in a description, such as the other configurations of an implementation, without the
+   margins of a list in the text */
+dd ul { margin: 0; padding-left: 1.25rem; }
 .note { color: #59636e; font-size: 0.875em; }
 /* The footer, muted, of three items with a dot between them */
 footer { color: #59636e; font-size: 0.875em; }
@@ -57,18 +60,21 @@ table.files td:first-child { white-space: nowrap; }
   dd { margin-left: 1rem; }
   table.files, table.files tr, table.files td { display: block; }
   table.files td + td { padding: 0 0 0.375rem 1rem; }
-  /* the tarballs of seen-in.html, the implementations of a case and the motivating examples,
-     one block per row */
+  /* the tarballs of seen-in.html, the implementations of a case, the cases of an implementation
+     and the motivating examples, one block per row */
   table.seen, table.seen tr, table.seen td,
   table.implementations, table.implementations tr, table.implementations td,
+  table.differences, table.differences tr, table.differences td,
   table.examples, table.examples tr, table.examples td { display: block; }
   table.seen colgroup, table.seen th, table.implementations colgroup, table.implementations th,
+  table.differences colgroup, table.differences th,
   table.examples colgroup, table.examples th { display: none; }
-  table.seen tr, table.implementations tr, table.examples tr { margin-bottom: 0.5rem;
-                                                                border: 1px solid #d0d7de; }
-  table.seen td, table.implementations td, table.examples td { border: 0; }
-  .wide > table.seen, .wide > table.implementations, .wide > table.examples { min-width: 0; }
-  table.examples td:first-child { font-weight: 600; }
+  table.seen tr, table.implementations tr, table.differences tr, table.examples tr {
+    margin-bottom: 0.5rem; border: 1px solid #d0d7de; }
+  table.seen td, table.implementations td, table.differences td, table.examples td { border: 0; }
+  .wide > table.seen, .wide > table.implementations, .wide > table.differences,
+  .wide > table.examples { min-width: 0; }
+  table.examples td:first-child, table.differences td:first-child { font-weight: 600; }
   table.seen td:nth-child(2):not(:empty)::before { content: "packaged by "; color: #59636e; }
   table.implementations td:first-child { font-weight: 600; }
   table.implementations td:nth-child(2) { color: #59636e; font-size: 0.875em; }
@@ -106,3 +112,14 @@ table.tree td:nth-child(2) { overflow-wrap: normal; }
   body > .draft { position: static; display: block; max-width: none; margin: -1rem -1rem 0.75rem;
                   padding: 0.25rem 1rem; writing-mode: horizontal-tb; transform: none; }
 }
+.mark { display: inline-block; width: 1.5em; margin-right: 0.5rem; border-radius: 3px;
+        text-align: center; font-size: 0.75em; font-weight: 700; vertical-align: 0.15em; }
+.mark.ok { background: #b4f1c3; color: #116329; }
+.mark.may-accept { background: #e6eaef; color: #424a53; }
+.mark.may-reject { background: #c4ccd4; color: #24292f; }
+.mark.warn { background: #ffe08a; color: #7d4e00; }
+.mark.bad { background: #ffc1ba; color: #a40e26; }
+.mark.slow { background: #b6e3ff; color: #0550ae; }
+.mark.boom { background: #dcc8ff; color: #6639ba; }
+.mark.none { background: #ffffff; color: #59636e; }
+.mark.none { box-shadow: inset 0 0 0 1px #8c959f; }

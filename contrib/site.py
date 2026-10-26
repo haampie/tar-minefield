@@ -75,6 +75,7 @@ COLUMNS = {
     "tree": [("path", 40), ("kind", 20), ("contents", 40)],
     "implementations": [("implementation", 21), ("version", 21), ("outcome", 18),
                         ("what it makes of it", 40)],
+    "differences": [("case", 24), ("what it is", 38), ("what it makes of it", 38)],
 }
 STYLE = """\
 body { max-width: 66rem; margin: 0 auto; padding: 1rem; font: 16px/1.5 system-ui, sans-serif;
@@ -102,6 +103,9 @@ svg { max-width: 100%; height: auto; }
 /* A table is not narrower than this: on a narrow screen it scrolls, rather than squeezing words */
 .wide > table { min-width: 40rem; }
 dt { font-weight: 600; }
+/* a list in a description, such as the other configurations of an implementation, without the
+   margins of a list in the text */
+dd ul { margin: 0; padding-left: 1.25rem; }
 .note { color: #59636e; font-size: 0.875em; }
 /* The footer, muted, of three items with a dot between them */
 footer { color: #59636e; font-size: 0.875em; }
@@ -136,18 +140,21 @@ table.files td:first-child { white-space: nowrap; }
   dd { margin-left: 1rem; }
   table.files, table.files tr, table.files td { display: block; }
   table.files td + td { padding: 0 0 0.375rem 1rem; }
-  /* the tarballs of seen-in.html, the implementations of a case and the motivating examples,
-     one block per row */
+  /* the tarballs of seen-in.html, the implementations of a case, the cases of an implementation
+     and the motivating examples, one block per row */
   table.seen, table.seen tr, table.seen td,
   table.implementations, table.implementations tr, table.implementations td,
+  table.differences, table.differences tr, table.differences td,
   table.examples, table.examples tr, table.examples td { display: block; }
   table.seen colgroup, table.seen th, table.implementations colgroup, table.implementations th,
+  table.differences colgroup, table.differences th,
   table.examples colgroup, table.examples th { display: none; }
-  table.seen tr, table.implementations tr, table.examples tr { margin-bottom: 0.5rem;
-                                                                border: 1px solid #d0d7de; }
-  table.seen td, table.implementations td, table.examples td { border: 0; }
-  .wide > table.seen, .wide > table.implementations, .wide > table.examples { min-width: 0; }
-  table.examples td:first-child { font-weight: 600; }
+  table.seen tr, table.implementations tr, table.differences tr, table.examples tr {
+    margin-bottom: 0.5rem; border: 1px solid #d0d7de; }
+  table.seen td, table.implementations td, table.differences td, table.examples td { border: 0; }
+  .wide > table.seen, .wide > table.implementations, .wide > table.differences,
+  .wide > table.examples { min-width: 0; }
+  table.examples td:first-child, table.differences td:first-child { font-weight: 600; }
   table.seen td:nth-child(2):not(:empty)::before { content: "packaged by "; color: #59636e; }
   table.implementations td:first-child { font-weight: 600; }
   table.implementations td:nth-child(2) { color: #59636e; font-size: 0.875em; }
@@ -186,6 +193,14 @@ table.tree td:nth-child(2) { overflow-wrap: normal; }
                   padding: 0.25rem 1rem; writing-mode: horizontal-tb; transform: none; }
 }
 """
+
+# The mark of an outcome, as a cell of the matrix: its colour and its sign, in the colours of the
+# matrix, which matrix.CLASSES has
+STYLE += (".mark { display: inline-block; width: 1.5em; margin-right: 0.5rem; border-radius: 3px;\n"
+          "        text-align: center; font-size: 0.75em; font-weight: 700; vertical-align: 0.15em; }\n"
+          + "".join(f".mark.{cls} {{ background: {fill}; color: {ink}; }}\n"
+                    for cls, (fill, ink), _, _ in matrix.CLASSES.values())
+          + ".mark.none { box-shadow: inset 0 0 0 1px #8c959f; }\n")
 
 
 # The stylesheet by its contents, so that browsers do not keep an old one
@@ -511,6 +526,31 @@ def data_section(ident, features, names, short, rated, union):
     )
 
 
+def page_of(name):
+    """The page of an implementation, by its slug in matrix.SLUGS, which stays when it is renamed."""
+    if name not in matrix.SLUGS:
+        sys.exit(f"{name} has no slug in matrix.SLUGS, the address of its page")
+    return matrix.SLUGS[name] + ".html"
+
+
+def what_it_makes(info, r, tree=None):
+    """What one run makes of a case, as HTML, with tree the HTML of the tree it extracts where that
+    is not the tree of the case."""
+    if r is None:
+        return "not installed where this case was run"
+    if r["outside"]:
+        return "writes outside: " + inline(matrix.describe(r["outside"]))
+    if matrix.crashed(r):
+        return html.escape(error_line(r["error"]))
+    if r["error"] == "rejected":
+        return "rejects it"
+    if r["error"]:
+        return "error: " + html.escape(error_line(r["error"]))
+    if tree:
+        return tree
+    return "the tree of the case" if info["verdict"] != "reject" else ""
+
+
 def implementations_section(case, info, results):
     names = matrix.columns(results)
     versions = {i["name"]: i["version"] for i in results["implementations"]}
@@ -521,24 +561,110 @@ def implementations_section(case, info, results):
         r = results["cases"].get(case, {}).get(n)
         symbol = next(s for s in matrix.ORDER if cells[n].startswith(s))
         letter = cells[n][len(symbol):].lstrip("️")
-        if r is None:
-            what = "not installed where this case was run"
-        elif r["outside"]:
-            what = "writes outside: " + inline(matrix.describe(r["outside"]))
-        elif matrix.crashed(r):
-            what = html.escape(error_line(r["error"]))
-        elif r["error"] == "rejected":
-            what = "rejects it"
-        elif r["error"]:
-            what = "error: " + html.escape(error_line(r["error"]))
-        elif letter:
-            what = f"tree {letter}: " + inline(trees[letter])
-        else:
-            what = "the tree of the case" if info["verdict"] != "reject" else ""
-        rows.append(f"<tr><td>{html.escape(n)}</td><td>{html.escape(versions.get(n, ''))}</td>"
+        what = what_it_makes(info, r, f"tree {letter}: " + inline(trees[letter]) if letter else None)
+        rows.append(f'<tr><td><a href="{page_of(n)}">{html.escape(n)}</a></td>'
+                    f"<td>{html.escape(versions.get(n, ''))}</td>"
                     f"<td>{symbol} {'crashes' if r and matrix.crashed(r) else OUTCOMES[symbol]}</td>"
                     f"<td>{what}</td></tr>")
     return table("implementations", rows)
+
+
+# The outcomes that are as the default policy says: those of a tolerated case are both
+AS_THE_POLICY_SAYS = ("✅", "➕", "➖")
+# The cases where an implementation does not do as the default policy says, by outcome, in this
+# order, each under its heading, with an anchor that does not change with how many there are:
+# crashes apart from the other outcomes of their symbol
+DIFFERENCES = [("💥", "outside", "Writes outside the destination"), ("crash", "crashes", "Crashes"),
+               ("⚠️", "accepts", "Accepts cases to reject"),
+               ("❌", "rejects", "Rejects cases to accept, or extracts another tree"),
+               ("⏳", "slow", "Does not finish"), ("❔", "not-run", "Not run")]
+
+
+def mark(symbol):
+    """The mark of an outcome, as in the matrix, with what it means as its title."""
+    cls, _, meaning, sign = matrix.CLASSES[symbol]
+    return (f'<span class="mark {cls}" title="{html.escape(meaning)}" role="img" '
+            f'aria-label="{html.escape(meaning)}">{html.escape(sign)}</span>')
+
+
+def counted(k, n, what):
+    """k of n things, in words: all of them, none of them, or k of the n."""
+    return f"all {n} {what}" if k == n else f"none of the {n} {what}" if not k else f"{k} of the {n} {what}"
+
+
+def implementation_summary(name, results, cases):
+    """(how many cases an implementation does as the default policy says, a sentence of it as
+    HTML, and the cases it does not, by heading of DIFFERENCES)."""
+    symbols, trees, differences = {}, {}, {}
+    for case, info in cases.items():
+        r = results["cases"].get(case, {}).get(name)
+        symbols[case], trees[case] = matrix.outcome(info, r)
+        if symbols[case] not in AS_THE_POLICY_SAYS:
+            key = "crash" if r is not None and matrix.crashed(r) else symbols[case]
+            differences.setdefault(key, []).append(case)
+
+    def k(verdict, *outcomes):
+        return sum(1 for c, i in cases.items() if i["verdict"] == verdict and symbols[c] in outcomes)
+
+    def n(verdict):
+        return sum(1 for i in cases.values() if i["verdict"] == verdict)
+
+    agrees = sum(s in AS_THE_POLICY_SAYS for s in symbols.values())
+    accepts, rejects, tolerated = k("tolerate", "➕"), k("tolerate", "➖"), n("tolerate")
+    either = (f"accepts all {tolerated}" if accepts == tolerated else
+              f"rejects all {tolerated}" if rejects == tolerated else
+              f"accepts {accepts}" if not rejects else f"rejects {rejects}" if not accepts else
+              f"accepts {accepts} and rejects {rejects}")
+    sentence = (f"This implementation does as the default policy says on {agrees} of the "
+                f"{len(cases)} cases: it rejects {counted(k('reject', '✅'), n('reject'), 'cases to reject')}, "
+                f"extracts the tree of {counted(k('accept', '✅'), n('accept'), 'cases to accept')}, "
+                f"and of the {tolerated} tolerated cases, which a strict parser may accept or "
+                f"reject, it {either}.")
+    return agrees, sentence, differences, trees
+
+
+def implementation_page(name, results, cases):
+    versions = {i["name"]: i["version"] for i in results["implementations"]}
+    agrees, sentence, differences, trees = implementation_summary(name, results, cases)
+    # the other configurations of the same implementation, such as the filters of tarfile
+    others = [n for n in matrix.columns(results)
+              if n != name and n.split(",")[0] == name.split(",")[0]]
+    also = ("" if not others else "<dt>Other configurations</dt><dd><ul>"
+            + "".join(f'<li><a href="{page_of(n)}">{html.escape(n)}</a></li>' for n in others)
+            + "</ul></dd>")
+    body = DRAFT + f"""<h1>{html.escape(name)}</h1>
+<dl class="wide">
+<dt>Version</dt><dd>{html.escape(versions.get(name, ""))}</dd>
+{also}
+</dl>
+<p>{sentence}</p>
+<p class="note">The default policy is a working draft. Where an implementation does not do as it
+says, that can be a choice rather than a bug.</p>
+"""
+    if not differences:
+        body += "<p>It does as the default policy says on every case.</p>\n"
+    else:
+        body += f"<p>On the other {len(cases) - agrees}, it does not:</p>\n"
+    for key, anchor, heading in DIFFERENCES:
+        rows, symbols = [], set()
+        for case in differences.get(key, []):
+            info = cases[case]
+            ident, case_name = matrix.label(case, info).split(" ", 1)
+            r = results["cases"].get(case, {}).get(name)
+            tree = trees[case]
+            symbols.add(matrix.outcome(info, r)[0])
+            what = what_it_makes(info, r, None if tree is None
+                                 else "extracts " + inline(matrix.describe(tree)))
+            rows.append(f'<tr><td><a href="{ident}.html"><code>{ident}</code></a> '
+                        f"{html.escape(case_name)}</td><td>{inline(info['description'])}</td>"
+                        f"<td>{what}</td></tr>")
+        if rows:
+            marks = "".join(mark(s) for s in matrix.ORDER if s in symbols)
+            body += (f'<h2 id="{anchor}">{marks}{heading} ({len(rows)})</h2>\n'
+                     + table("differences", rows) + "\n")
+    description = (f"What {name} makes of the {len(cases)} cases of the tar-minefield test suite: "
+                   f"as the draft default policy says on {agrees}, and where it does not.")
+    return page(f"{name} · {TITLE}", description, body)
 
 
 def verdict(info):
@@ -952,7 +1078,7 @@ def index_page(cases, results, data):
 <p>This table shows how different tar implementations behave on each test case. A green <code>✓</code> is the
 strict behavior that the <a href="#policy">default policy</a> asks for; click a row for details
 about the case.</p>
-<div class="wide">{matrix.svg(results, cases, lambda case: cases[case]["id"] + ".html")}</div>
+<div class="wide">{matrix.svg(results, cases, lambda case: cases[case]["id"] + ".html", page_of)}</div>
 <p>Each case has a permanent identifier, such as F15, whose letter is its category:</p>
 <ul>
 <li><strong>F</strong> framing: which members an archive has.</li>
@@ -961,7 +1087,8 @@ about the case.</p>
 <li><strong>S</strong> order and state: how members combine into a directory tree.</li>
 </ul>
 <p>A case's page shows its archive block by block, what every implementation makes of it, and how
-common it is in release tarballs.</p>
+common it is in release tarballs. An implementation's page, linked from its name above the matrix,
+lists the cases where it does not do as the policy says.</p>
 <h2 id="policy">Policy</h2>
 <p>This section defines a <strong>working draft</strong> of the
 <em>default policy</em><sup><a href="#stricter">1</a></sup>, which accepts, tolerates or rejects
@@ -1022,10 +1149,18 @@ def main():
                                    '<meta http-equiv="refresh" content="0; url=seen-in.html#rejected">\n')}
     for case, info in cases.items():
         files[info["id"] + ".html"] = case_page(case, info, results, data)
+    implementations = matrix.columns(results)
+    for name in implementations:
+        if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", matrix.SLUGS.get(name, "-")):
+            sys.exit(f"{name}: a slug of lowercase letters, digits and dashes in matrix.SLUGS")
+        if page_of(name) in files:
+            sys.exit(f"{name}: {page_of(name)} is the page of another")
+        files[page_of(name)] = implementation_page(name, results, cases)
     # the pages in order, each with links to the one before and after it, by name, and to the index:
     # in columns that do not change, so that clicking through them the links stay where they are
     sequence = ([("index.html", "tar-minefield")]
                 + [(info["id"] + ".html", matrix.label(case, info)) for case, info in cases.items()]
+                + [(page_of(name), name) for name in implementations]
                 + [("seen-in.html", "Seen in release tarballs")])
     for i, (name, _) in enumerate(sequence):
         cells = []
