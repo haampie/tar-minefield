@@ -18,7 +18,9 @@ import io
 import json
 import os
 import re
+import subprocess
 import sys
+import textwrap
 import urllib.parse
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -807,6 +809,88 @@ as random, and the same on every run.</p>
                 "of those that cases are seen in.", body)
 
 
+# The pictures that a link to a page shows where it is shared, such as in chats: PNGs that
+# rsvg-convert makes of SVGs, named by the SVG, so that generating the site again keeps them
+IMAGES = "img"
+RSVG = os.environ.get("RSVG_CONVERT", "rsvg-convert")
+# The icon of the site: a reel of tape, which tar, the tape archiver, wrote to
+FAVICON = ('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">'
+           '<circle cx="16" cy="16" r="15" fill="#1f2328"/>'
+           '<circle cx="16" cy="16" r="4" fill="#ffffff"/>'
+           '<circle cx="16" cy="6.5" r="3.2" fill="#ffffff"/>'
+           '<circle cx="24.2" cy="20.75" r="3.2" fill="#ffffff"/>'
+           '<circle cx="7.8" cy="20.75" r="3.2" fill="#ffffff"/></svg>\n')
+# The colours of the badges of the verdicts, as in the stylesheet
+BADGES = {"accept": "#1a7f37", "tolerate": "#59636e", "reject": "#cf222e"}
+
+
+def png(out, svg, width, height):
+    """The path of the PNG of an SVG, which rsvg-convert makes unless it is there already."""
+    name = f"{IMAGES}/{hashlib.sha256(svg.encode()).hexdigest()[:16]}.png"
+    path = os.path.join(out, name)
+    if not os.path.exists(path):
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        try:
+            subprocess.run([RSVG, "-w", str(width), "-h", str(height), "-o", path],
+                           input=svg.encode(), check=True)
+        except FileNotFoundError:
+            sys.exit(f"{RSVG} is not found, which makes the PNGs of {IMAGES}/: set $RSVG_CONVERT")
+    return name
+
+
+def index_image(results, cases):
+    """The top of the matrix, at 1200 by 630: the names, the bars of all cases, and the cases of
+    the first group, down to the rule above the second."""
+    svg = matrix.svg(results, cases)
+    width = int(re.search(r'width="(\d+)"', svg).group(1))
+    height = width * 630 / 1200
+    bottom = float(re.findall(r'<line class="rule"[^>]* y1="([\d.]+)"', svg)[1])
+    box = f"0 {bottom - height:.1f} {width} {height:.1f}"
+    return re.sub(r'width="\d+" height="\d+" viewBox="[^"]*"',
+                  f'width="1200" height="630" viewBox="{box}"', svg, count=1)
+
+
+def case_image(case, info, results):
+    """A case at 1200 by 630: its verdict, name and description, and what implementations make
+    of it, as its row of the matrix across the width."""
+    ident, name = matrix.label(case, info).split(" ", 1)
+    names = matrix.columns(results)
+    width, height, left, gap, ch = 1113, 584, 41, 3, 44
+    groups = sum(1 for a, b in zip(names, names[1:]) if matrix.group(a) != matrix.group(b))
+    # the rotated name of the last column reaches past it, by the cosine of 60°
+    cw = (width - left - 3.5 * len(names[-1]) - 10 * groups - gap * (len(names) - 1)) / len(names)
+    xs, x, previous = {}, left, None
+    for n in names:
+        if previous is not None and matrix.group(n) != matrix.group(previous):
+            x += 10
+        xs[n], previous, x = x, n, x + cw + gap
+    badge = VERDICTS[info["verdict"]][0]
+    esc = matrix.esc
+    out = ['<rect width="100%" height="100%" fill="#ffffff"/>',
+           f'<rect x="{left}" y="28" width="{14 * len(badge) + 24}" height="34" rx="4" '
+           f'fill="{BADGES[info["verdict"]]}"/>',
+           f'<text x="{left + 12}" y="52" style="font-size:22px;font-weight:700;fill:#ffffff">'
+           f"{esc(badge)}</text>",
+           f'<text x="{left}" y="112" style="font-size:38px;font-weight:700"><tspan class="id" '
+           f'style="font-weight:400">{esc(ident)}</tspan> {esc(name)}</text>']
+    for i, line in enumerate(textwrap.wrap(info["description"].replace("`", ""), 80)[:2]):
+        out.append(f'<text x="{left}" y="{156 + 30 * i}" style="font-size:22px;fill:#59636e">'
+                   f"{esc(line)}</text>")
+    top = 440
+    for n in names:
+        out.append(f'<text transform="translate({xs[n] + cw / 2 + 4:.1f},{top - 8}) rotate(-60)">'
+                   f"{esc(n)}</text>")
+    cells, _ = matrix.case_cells(info, results["cases"].get(case, {}), names)
+    for n in names:
+        out.append(matrix.cell_svg(round(xs[n], 1), top, round(cw, 1), ch, cells[n])
+                   .replace('<text class="cell ', '<text style="font-size:20px" class="cell '))
+    out.append(f'<text x="{width - left}" y="{height - 30}" text-anchor="end" '
+               f'style="font-size:18px;fill:#59636e">'
+               f'{esc(matrix.SITE.split("//")[1])}{ident}.html</text>')
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" '
+            f'viewBox="0 0 {width} {height}">{matrix.svg_style()}{"".join(out)}</svg>\n')
+
+
 def index_page(cases, results, data):
     names, short, rated, union = data
     groups = {}
@@ -919,6 +1003,13 @@ def main():
         files[old + ".html"] = page(f"{old} is {new} · tar-minefield", f"{old} is now {new}.",
                                     f'<p>{old} is now <a href="{new}.html">{new}</a>.</p>',
                                     f'<meta http-equiv="refresh" content="0; url={new}.html">\n')
+    images = {"index.html": (png(out, index_image(results, cases), 1200, 630),
+                             "What implementations make of every case of the test suite")}
+    for case, info in cases.items():
+        images[info["id"] + ".html"] = (png(out, case_image(case, info, results), 1200, 630),
+                                        f"What implementations make of {matrix.label(case, info)}")
+    files["favicon.svg"] = FAVICON
+    icon = png(out, FAVICON, 32, 32)
     redirects = {"rejected.html": "seen-in.html"}
     redirects |= {f"{old}.html": f"{new}.html" for old, new in MOVED.items()}
     # every page names its address on the site, so that a copy elsewhere is known as one, and a
@@ -927,8 +1018,16 @@ def main():
         if name.endswith(".html"):
             target = redirects.get(name, name)
             address = matrix.SITE + ("" if target == "index.html" else target)
+            image, alt = images.get(target, images["index.html"])
             link = (f'<link rel="canonical" href="{address}">\n'
-                    f'<meta property="og:url" content="{address}">\n')
+                    f'<meta property="og:url" content="{address}">\n'
+                    f'<meta property="og:image" content="{matrix.SITE}{image}">\n'
+                    '<meta property="og:image:width" content="1200">\n'
+                    '<meta property="og:image:height" content="630">\n'
+                    f'<meta property="og:image:alt" content="{html.escape(alt)}">\n'
+                    '<meta name="twitter:card" content="summary_large_image">\n'
+                    f'<link rel="icon" href="{icon}" sizes="32x32">\n'
+                    '<link rel="icon" href="favicon.svg" type="image/svg+xml">\n')
             files[name] = files[name].replace("</head>", link + "</head>", 1)
     anchors = set(re.findall(r'id="([^"]+)"', files["seen-in.html"]))
     for name, text in files.items():
@@ -945,6 +1044,10 @@ def main():
                 urls.append(f"<url><loc>{address}</loc><lastmod>{day}</lastmod></url>")
         with open(os.path.join(out, name), "w") as f:
             f.write(text)
+    used = {image for image, _ in images.values()} | {icon}
+    for name in os.listdir(os.path.join(out, IMAGES)):
+        if f"{IMAGES}/{name}" not in used:
+            os.remove(os.path.join(out, IMAGES, name))
     # the pages for search engines, which otherwise find them by following the links
     with open(os.path.join(out, "sitemap.xml"), "w") as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n'

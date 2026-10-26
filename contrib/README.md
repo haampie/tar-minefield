@@ -45,6 +45,8 @@ $ python -I contrib/site.py docs contrib/data/*/*/results.jsonl
 writes `docs/`, which https://stoppels.ch/tar/ serves as files: an index with the matrix,
 and a page per case with its explanation, its block map and dump, how many tarballs of the scans
 have its feature and how many of those the default policy rejects, and what every implementation
-makes of it, from `matrix.json`. Plain HTML and CSS, without scripts, all of it generated. The `Seen
+makes of it, from `matrix.json`. Plain HTML and CSS, without scripts, all of it generated. The
+pictures that a link to a page shows where it is shared are PNGs in `img/`, which `rsvg-convert`
+(or `$RSVG_CONVERT`) makes, named by their SVG, so that generating the site again keeps them. The `Seen
 in:` of a case is written by hand: site.py fails if it says no tarball where the scans have its
 feature, or names tarballs where they have none.
