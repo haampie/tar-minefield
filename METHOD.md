@@ -90,9 +90,9 @@ Framing:
 - GNU's old sparse (`S`), multivolume (`M`), volume label (`V`) and dumpdir (`D`) headers, and
   contiguous files (`7`).
 - A pax `size` that disagrees with the header's size ([POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20size%20field%20in%20the%20following%20header%20block%28s%29) says the pax size wins: it is how
-  sizes over 8 GiB are written), a pax `size` on a member that has no data, and a pax `size`
-  applied to an extended header rather than to the member, which is the bug class of
-  CVE-2025-62518 (tokio-tar), GHSA-3pv8-6f4r-ffg2 (tar-rs) and CVE-2026-53655 (node-tar).
+  sizes over 8 GiB are written), the bug class of CVE-2025-62518 (tokio-tar), a pax `size` on a
+  member that has no data, and a pax `size` applied to an extended header rather than to the
+  member, the bug class of GHSA-3pv8-6f4r-ffg2 (tar-rs) and CVE-2026-53655 (node-tar).
 - pax numbers, which are ASCII decimal digits: a sign, leading whitespace, other digits of Unicode
   (which conversions of strings to numbers, such as Python's `int`, accept), leading zeros
   (decimal to [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number), octal to `strtoul(s, NULL, 0)`), and values past 64 bits.

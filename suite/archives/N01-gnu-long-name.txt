@@ -4,7 +4,7 @@ A name over 100 bytes, in a GNU long name.
 
 GNU tar's own format: a header of typeflag `L` whose data is the name of the next member.
 
-Seen in: most tarballs that GNU tar wrote in its default format.
+Seen in: tarballs produced by GNU tar.
 
 0x000000  header: GNU long name, for the next member
           name     [  0,100)  "././@LongLink" + 87 NUL

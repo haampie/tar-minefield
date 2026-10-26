@@ -1,10 +1,10 @@
 N11-gnu-prefix-field: must reject
 
-The prefix field of a header with GNU magic, which GNU tar uses for times.
+The prefix field of a header with GNU magic, which GNU tar uses for times in incremental archives.
 
-GNU's format has no prefix field: GNU tar writes the access and change times where ustar has its
-prefix. This case is ambiguous in practice because the field, taken for ustar's prefix, puts `a`
-under a directory `15000000000`, which Python's `tarfile` does (gh-155629).
+GNU's format has no prefix field: in incremental archives, GNU tar writes the access and change
+times where ustar has its prefix. This case is ambiguous in practice because the field, taken for
+ustar's prefix, puts `a` under a directory `15000000000`, which Python's `tarfile` does (gh-155629).
 
 Decision point: whether a header with GNU magic has a prefix.
 Seen in: no source tarball with times there.

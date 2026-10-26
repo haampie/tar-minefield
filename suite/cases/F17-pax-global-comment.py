@@ -1,10 +1,10 @@
 """The global pax header with only a `comment`, as `git archive` writes it.
 
-Every tarball that `git archive` writes starts with a global header whose only record is the commit,
-as a `comment`, which no implementation applies to the tree. GitHub's release tarballs are made this
-way, so a strict parser that rejects global headers rejects most of them.
+A tarball created with `git archive` from a commit or a tag starts with a global header whose only
+record is the commit, as a `comment`, which does not affect extraction. GitHub's release tarballs
+are made this way, so a strict parser that rejects global headers rejects most of them.
 
-Seen in: every tarball that `git archive` made, such as GitHub's release tarballs.
+Seen in: tarballs created with `git archive`, such as GitHub's release tarballs.
 """
 
 VERDICT = "accept"

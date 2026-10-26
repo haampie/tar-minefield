@@ -5,8 +5,9 @@ that the pax size overrides the header's: it is how sizes over 8 GiB, which do n
 header's size field, are written, and archivers write various sizes in the header then. An
 implementation that takes the pax size, as it must, reads the next block as the header of another
 file, `smuggled`; an implementation that takes the header's size, or does not know pax, reads that
-block as the data of `a`. A strict parser may reject a header whose size field has room for the size
-but gives another, but must not extract `a` with 512 bytes.
+block as the data of `a`. An implementation that takes the header's size is the bug of
+CVE-2025-62518 (tokio-tar). A strict parser may reject a header whose size field has room for the
+size but gives another, but must not extract `a` with 512 bytes.
 
 Decision point: which of two sizes frames the member.
 Seen in: no source tarball.

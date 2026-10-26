@@ -3,7 +3,7 @@
 The file `d/a` comes before the directory `d/`, so `d` already exists when `d/` is extracted. POSIX
 says that extracting a directory that already exists is not an error.
 
-Seen in: hundreds of tarballs.
+Seen in: over a thousand tarballs.
 """
 
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}

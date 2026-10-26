@@ -2,7 +2,7 @@
 
 The pax path is the name; the header has a truncated one, as writers put there.
 
-Seen in: most tarballs with long names, from Python's `tarfile` and GNU tar in pax format.
+Seen in: tarballs with long names from Python's `tarfile` and GNU tar in pax format.
 """
 
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}

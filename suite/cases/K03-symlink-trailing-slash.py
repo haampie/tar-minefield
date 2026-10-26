@@ -1,8 +1,8 @@
 """A symlink whose name ends in a slash.
 
-The member `link/` is a symlink to `target`. With the slash, the name refers to what the link points
-to. This case is ambiguous because the member is either a symlink `link`, by its typeflag, or a
-directory `link`, by its trailing slash, as in K01.
+The first member is a directory `target/`, the second a symlink `link/` to `target`. With the slash,
+the name refers to what the link points to. This case is ambiguous because the member is either a
+symlink `link`, by its typeflag, or a directory `link`, by its trailing slash, as in K01.
 
 Decision point: what a trailing slash on a link means.
 Seen in: no source tarball.

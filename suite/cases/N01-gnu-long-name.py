@@ -2,7 +2,7 @@
 
 GNU tar's own format: a header of typeflag `L` whose data is the name of the next member.
 
-Seen in: most tarballs that GNU tar wrote in its default format.
+Seen in: tarballs produced by GNU tar.
 """
 
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}

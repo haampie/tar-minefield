@@ -5,7 +5,7 @@ A directory after its contents.
 The file `d/a` comes before the directory `d/`, so `d` already exists when `d/` is extracted. POSIX
 says that extracting a directory that already exists is not an error.
 
-Seen in: hundreds of tarballs.
+Seen in: over a thousand tarballs.
 
 0x000000  header: regular file
           name     [  0,100)  "d/a" + 97 NUL
