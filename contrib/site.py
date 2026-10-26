@@ -19,6 +19,7 @@ import json
 import os
 import re
 import sys
+import urllib.parse
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "matrix"))
@@ -28,7 +29,7 @@ import citations  # noqa: E402
 import matrix  # noqa: E402
 import strict  # noqa: E402
 import tarscan  # noqa: E402
-from report import ecosystems, load  # noqa: E402
+from report import ECOSYSTEMS, ecosystems, load  # noqa: E402
 
 REPO = "https://github.com/haampie/tar-minefield"
 # The DOI of every version on Zenodo, as CITATION.cff has it
@@ -304,7 +305,8 @@ def doc_paragraphs(text):
 
 
 def paragraphs(text, cited=None):
-    """The explanation of a case as HTML, with its first "POSIX" a link to the sentence it cites."""
+    """The explanation of a case as HTML, with its first "POSIX" a link to the sentence it cites: or,
+    where it cites several, the first of each word that it links to its sentence."""
     out = []
     for p in doc_paragraphs(text):
         if p.startswith("See also:"):
@@ -312,10 +314,10 @@ def paragraphs(text, cited=None):
         out.append("<p>" + re.sub(r"^(Decision point|Seen in):", r"<strong>\1:</strong>", inline(p))
                    + "</p>")
     out = "\n".join(out)
-    if cited:
-        if "POSIX" not in out:
-            sys.exit(f"cites {cited}, but its explanation does not mention POSIX")
-        out = out.replace("POSIX", f'<a href="{html.escape(citations.url(cited))}">POSIX</a>', 1)
+    for word, key in ({"POSIX": cited} if isinstance(cited, str) else cited or {}).items():
+        if word not in out:
+            sys.exit(f"cites {key}, but its explanation does not say {word}")
+        out = out.replace(word, f'<a href="{html.escape(citations.url(key))}">{word}</a>', 1)
     return out
 
 
@@ -362,7 +364,7 @@ def anchored(body):
     return re.sub(r"<(h[23])((?: [^>]*)?)>(.*?)</\1>", heading, body, flags=re.S)
 
 
-def page(title, description, body):
+def page(title, description, body, head=""):
     body = anchored(body)
     return (
         '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
@@ -374,7 +376,7 @@ def page(title, description, body):
         '<meta property="og:site_name" content="tar-minefield">\n'
         f'<meta property="og:title" content="{html.escape(title)}">\n'
         f'<meta property="og:description" content="{html.escape(description)}">\n'
-        f'<link rel="stylesheet" href="style.css?{STYLE_VERSION}">\n</head>\n<body>\n'
+        f'<link rel="stylesheet" href="style.css?{STYLE_VERSION}">\n{head}</head>\n<body>\n'
         f'{body}\n<hr class="wide">\n<footer class="wide">'
         f'<a href="{REPO}">haampie/tar-minefield on GitHub</a>'
         f'<span class="sep">·</span>Last updated {UPDATED}'
@@ -476,7 +478,7 @@ def data_section(ident, features, names, short, rated, union):
             "<code>tarscan.py</code>, which did not report this. What it did record rules it out "
             "for all of them.</p>\n" if old else "")
     return (
-        f"<p>Release tarballs of {ecosystems(names)} with "
+        f"<p>Release tarballs of {ecosystems(names, samples=False)} with "
         + ", ".join(f"<code>{html.escape(f)}</code>" for f in features) + "." + policy + "</p>\n"
         + table("data-policy" if mixed else "data", rows) + "\n" + note
         + ("" if not k else f'<p>See <a href="seen-in.html#{ident}">'
@@ -553,7 +555,8 @@ def docstring(case):
 
 
 def cited(case):
-    """The sentence of POSIX that the script of a case cites, by its key in citations.py."""
+    """The sentence of POSIX that the script of a case cites, by its key in citations.py, or the
+    sentences, by the words of its explanation that link to them."""
     with open(os.path.join(CASES, case + ".py")) as f:
         for node in ast.parse(f.read()).body:
             if isinstance(node, ast.Assign) and any(getattr(t, "id", None) == "POSIX"
@@ -700,7 +703,9 @@ def seen_row(r, short, example, also=""):
     name = f"{r['package']} {r['version']}" if r["version"] else r["package"]
     ecosystems = ", ".join(short[n] for n in r["datasets"] if n in short)
     example = f"<code>{html.escape(printable(example))}</code>" if example else ""
-    return (f'<tr><td><a href="{html.escape(r["url"])}" rel="nofollow">{html.escape(name)}</a>'
+    # a space, as in a directory of SourceForge, is not valid in a URL, which needs it as %20
+    url = urllib.parse.quote(r["url"], safe=":/?#[]@!$&'()*+,;=%~")
+    return (f'<tr><td><a href="{html.escape(url)}" rel="nofollow">{html.escape(name)}</a>'
             f'<span class="hash">sha256 <code>{r["sha256"]}</code></span></td>'
             f"<td>{html.escape(ecosystems)}</td>"
             f"<td>{example}{also}</td></tr>")
@@ -825,6 +830,9 @@ def index_page(cases, results, data):
                         + table("cases", rows))
     body = DRAFT + f"""<h1>{TITLE}</h1>
 {readme_intro()}
+<h2>Comparison of different tar implementations</h2>
+<p>Click a case for its page.</p>
+<div class="wide">{matrix.svg(results, cases, lambda case: cases[case]["id"] + ".html")}</div>
 <p>Each case has a permanent identifier, such as F15, whose letter is its category:</p>
 <ul>
 <li><strong>F</strong> framing: which members an archive has.</li>
@@ -834,9 +842,6 @@ def index_page(cases, results, data):
 </ul>
 <p>A case's page shows its archive block by block, what every implementation makes of it, and how
 common it is in source tarballs.</p>
-<h2>Comparison of different tar implementations</h2>
-<p>Click a case for its page.</p>
-<div class="wide">{matrix.svg(results, cases, lambda case: cases[case]["id"] + ".html")}</div>
 <h2 id="policy">Policy</h2>
 <p>This section defines a <strong>working draft</strong> of the
 <em>default policy</em><sup><a href="#stricter">1</a></sup>, which accepts, tolerates or rejects
@@ -866,7 +871,8 @@ def main():
     rated = {n: [r for r in rs if strict.assessed(r)] for n, rs in datasets.items()}
     # ecosystems in every table from the most tarballs to the fewest
     names = sorted(datasets, key=lambda n: (-len(rated[n]), n))
-    short = strict.labels(names)
+    # in tables as in the text: nixpkgs, not nix
+    short = {n: ECOSYSTEMS.get(label, label) for n, label in strict.labels(names).items()}
     union = [r for r in rows if strict.assessed(r)]
     data = (names, short, rated, union)
     with open(os.path.join(matrix.HERE, "matrix.json")) as f:
@@ -885,8 +891,8 @@ def main():
     files = {".nojekyll": "", "style.css": STYLE, "index.html": index_page(cases, results, data),
              "seen-in.html": seen_page(cases, data),
              "rejected.html": page(f"Seen in source tarballs · {TITLE}", "Now seen-in.html.",
-                                   '<meta http-equiv="refresh" content="0; url=seen-in.html#rejected">\n'
-                                   '<p>Now <a href="seen-in.html#rejected">seen-in.html</a>.</p>')}
+                                   '<p>Now <a href="seen-in.html#rejected">seen-in.html</a>.</p>',
+                                   '<meta http-equiv="refresh" content="0; url=seen-in.html#rejected">\n')}
     for case, info in cases.items():
         files[info["id"] + ".html"] = case_page(case, info, results, data)
     # the pages in order, each with links to the one before and after it, by name, and to the index:
@@ -911,8 +917,8 @@ def main():
         files[name] = files[name].replace(top, f"{top}{nav}\n", 1)
     for old, new in MOVED.items():
         files[old + ".html"] = page(f"{old} is {new} · tar-minefield", f"{old} is now {new}.",
-                                    f'<meta http-equiv="refresh" content="0; url={new}.html">\n'
-                                    f'<p>{old} is now <a href="{new}.html">{new}</a>.</p>')
+                                    f'<p>{old} is now <a href="{new}.html">{new}</a>.</p>',
+                                    f'<meta http-equiv="refresh" content="0; url={new}.html">\n')
     redirects = {"rejected.html": "seen-in.html"}
     redirects |= {f"{old}.html": f"{new}.html" for old, new in MOVED.items()}
     # every page names its address on the site, so that a copy elsewhere is known as one, and a

@@ -3,7 +3,8 @@ utility in POSIX.1-2024, with a text fragment that highlights the sentence, so t
 without text fragments still shows the section.
 
 A case names its sentence as `POSIX = "<key>"`, next to its FEATURES, and the site links the first
-"POSIX" of its explanation to it. Checked against the page as it is published, that every sentence
+"POSIX" of its explanation to it; a case that cites several names them by the word of its
+explanation that links to each, as `POSIX = {"POSIX": "<key>", "permits": "<key>"}`. Checked against the page as it is published, that every sentence
 is in its section, once, and so are the ones that METHOD.md links to:
 
     python -I contrib/citations.py
@@ -19,6 +20,8 @@ import urllib.request
 PAGE = "https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html"
 # The sections, by their ids on the page
 DESCRIPTION = "tag_20_94_03"
+OUTPUT_FILES = "tag_20_94_12"
+APPLICATION_USAGE = "tag_20_94_16"
 END = "tag_20_94_13_01"  # pax Interchange Format
 PAX_HEADER = "tag_20_94_13_02"  # pax Header Block
 PAX_EXTENDED = "tag_20_94_13_03"  # pax Extended Header
@@ -67,6 +70,10 @@ SENTENCES = {
                           "causes an error"),
     "dir-exists": (DESCRIPTION, "If an attempt is made to extract a directory when the directory "
                                 "already exists, this shall not be considered an error"),
+    "file-type": (OUTPUT_FILES, "In read mode, the extracted output files shall be of the archived "
+                                "file type"),
+    "overwrite": (APPLICATION_USAGE, "In read mode, implementations are permitted to overwrite files "
+                                     "when the archive has multiple members with the same name"),
     "hardlink": (USTAR, "Represents a file linked to another file, of any type, previously "
                         "archived"),
 }
@@ -96,7 +103,7 @@ def main():
     with urllib.request.urlopen(PAGE) as f:
         page = f.read().decode("latin-1")
     starts = [(len(text(page[:m.start()])), m.group(1))
-              for m in re.finditer(r'id="(tag_[0-9_]+)"', page)]
+              for m in re.finditer(r'<a\b[^>]*\bid="(tag_[0-9_]+)"', page)]
     whole = text(page)
     with open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                            "METHOD.md")) as f:

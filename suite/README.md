@@ -65,5 +65,6 @@ cases.
 
 A new case is a script in `cases/`, named by its identifier and a few words, with `ID`, `VERDICT`
 (`"reject"`, `"accept"` or `"tolerate"`), `FEATURES`, `TREE` unless it is to reject, `POSIX`, the
-key in `contrib/citations.py` of the sentence its explanation relies on, if any, and a
+key in `contrib/citations.py` of the sentence its explanation relies on, if any (or a dict from
+words of the explanation to keys, where it relies on several), and a
 `build(archive)` function. Its identifier is the next free number of its letter.
