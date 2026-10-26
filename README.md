@@ -10,7 +10,7 @@ This is a security concern: for example, when a security scanner and the extract
 
 By assigning [identifiers](https://stoppels.ch/tar/#policy) to these ambiguities, and providing test cases and usage data, this project aims for tar implementations to converge on a strict parser and identical behavior.
 
-This project proposes a **[default policy](https://stoppels.ch/tar/#policy)** that rejects the vast majority of ambiguities in tar files that could make implementations extract different files, while ensuring that nearly every source tarball already published can still be extracted. <!-- begin strict.py -->Of the 82,587 source tarballs of Spack, nixpkgs, Guix, live-bootstrap, PyPI, crates.io and RubyGems, it accepts 99.75% ([per ecosystem](https://stoppels.ch/tar/#tarballs)).<!-- end strict.py -->
+This project proposes a **[default policy](https://stoppels.ch/tar/#policy)** that rejects the vast majority of ambiguities in tar files that could make implementations extract different files, while ensuring that nearly every source tarball already published can still be extracted. <!-- begin strict.py -->Of the 82,587 source tarballs of Spack, nixpkgs, Guix and live-bootstrap, and samples of PyPI, crates.io and RubyGems, it accepts 99.75% ([per ecosystem](https://stoppels.ch/tar/#tarballs)).<!-- end strict.py -->
 
 ## Motivating examples
 
@@ -26,7 +26,7 @@ Use **[the test suite](suite/)** in your tests, or browse **[the website](https:
 ## Comparison
 
 <!-- begin matrix.py -->
-What 26 implementations make of the 72 cases: a row per case, by category, and a column per implementation, with the outcomes of all cases at the top. [The website](https://stoppels.ch/tar/) has a page per case.
+What over 20 implementations make of the 72 cases: a row per case, by category, and a column per implementation, with the outcomes of all cases at the top. [The website](https://stoppels.ch/tar/) has a page per case.
 
 [![What every implementation makes of every case of the test suite. Outcomes of all cases: strict.py: ✅72; GNU tar: ✅32 ⚠️40; bsdtar: ✅31 ⚠️41; BusyBox tar: ✅24 ⚠️47 ❌1; 7-Zip: ✅27 ⚠️44 ❌1; Python tarfile, filter=data, as in pip: ✅31 ⚠️40 ⛔1; Python tarfile, filter=tar: ✅31 ⚠️41; Python tarfile, filter=fully_trusted: ✅30 ⚠️40 💥2; node-tar: ✅21 ⚠️50 ❌1; node-tar, strict: ✅31 ⚠️40 ⛔1; tar-fs: ✅33 ⚠️37 ⛔2; Java Commons Compress: ✅30 ⚠️41 ❌1; .NET System.Formats.Tar: ✅47 ⚠️23 ⛔2; PHP PharData, as in Composer: ✅22 ⚠️45 ⛔1 ❌4; Go archive/tar: ✅29 ⚠️43; Go archive/tar, tarinsecurepath=0: ✅32 ⚠️40; Go containerd archive.Apply: ✅32 ⚠️40; Rust tar: ✅29 ⚠️43; Rust astral-tokio-tar: ✅36 ⚠️35 ⛔1; Rust tar-codec, as in uv: ✅57 ⚠️11 ⛔4; RubyGems: ✅21 ⚠️44 ⛔2 ❌5; R untar, internal: ✅35 ⚠️37; Perl Archive::Tar: ✅27 ⚠️42 ⛔1 ❌2; Haskell tar: ✅35 ⚠️33 ⛔3 ❌1; Julia Tar.jl: ✅42 ⚠️30; live-bootstrap untar: ✅17 ⚠️45 ❌8 💥2; live-bootstrap untar, --non-strict: ✅12 ⚠️50 ❌8 💥2](contrib/matrix/matrix.svg)](https://stoppels.ch/tar/)
 <!-- end matrix.py -->

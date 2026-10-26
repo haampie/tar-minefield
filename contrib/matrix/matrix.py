@@ -744,9 +744,9 @@ def readme(path, results, cases):
     """The summary in the README: matrix.svg, with the outcomes of every implementation as text."""
     names = columns(results)
     total = totals(results, cases, names)
-    impls = [n for n in names if not n.startswith("strict.py")]
     lines = [
-        f"What {len(impls)} implementations make of the {len(cases)} cases: a row per case, by "
+        # not the number of columns, which counts configurations too, such as the filters of tarfile
+        f"What over 20 implementations make of the {len(cases)} cases: a row per case, by "
         "category, and a column per implementation, with the outcomes of all cases at the top. "
         f"[The website]({SITE}) has a page per case.",
         "",

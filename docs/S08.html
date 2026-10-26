@@ -32,7 +32,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The first member is a file <code>a</code>, the second a directory <code>a/</code>. POSIX does not say what a later member of another kind does to an earlier one. This case is ambiguous because the tree has either the directory, which replaces the file, or the file.</p>
+<p>The first member is a file <code>a</code>, the second a directory <code>a/</code>. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">POSIX</a> says that a member is extracted as a file of its own type, and <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_16:~:text=In%20read%20mode%2C%20implementations%20are%20permitted%20to%20overwrite%20files%20when%20the%20archive%20has%20multiple%20members%20with%20the%20same%20name">permits</a> a later member to overwrite an earlier one of the same name, but does not require it. This case is ambiguous because the tree has either the directory, which replaces the file, or the file.</p>
 <p><strong>Decision point:</strong> whether a later member replaces an earlier one of another kind.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -44,9 +44,10 @@
 
 A file, then a directory of the same name.
 
-The first member is a file `a`, the second a directory `a/`. POSIX does not say what a later member
-of another kind does to an earlier one. This case is ambiguous because the tree has either the
-directory, which replaces the file, or the file.
+The first member is a file `a`, the second a directory `a/`. POSIX says that a member is extracted
+as a file of its own type, and permits a later member to overwrite an earlier one of the same name,
+but does not require it. This case is ambiguous because the tree has either the directory, which
+replaces the file, or the file.
 
 Decision point: whether a later member replaces an earlier one of another kind.
 Seen in: no source tarball.
@@ -290,17 +291,17 @@ Seen in: no source tarball.
 <h2 id="prevalence-in-source-tarballs">Prevalence in source tarballs<a class="anchor" href="#prevalence-in-source-tarballs" aria-label="Link to this section">¶</a></h2>
 <p>Release tarballs of Spack, nixpkgs, Guix, live-bootstrap, PyPI, crates.io and RubyGems with <code>tree.duplicate.file-dir</code>.</p>
 <div class="wide"><table class="data"><colgroup><col style="width: 25%"><col style="width: 25%"><col style="width: 25%"><col style="width: 25%"></colgroup><tr><th>ecosystem</th><th class=n>tarballs</th><th class=n>with it</th><th class=n>share</th></tr>
-<tr><td>spack</td><td class=n>37,554</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>nix</td><td class=n>18,990</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>guix</td><td class=n>10,168</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>pypi</td><td class=n>10,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>crates</td><td class=n>5,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>rubygems</td><td class=n>5,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
+<tr><td>Spack</td><td class=n>37,554</td><td class=n>0</td><td class=n>0.00%</td></tr>
+<tr><td>nixpkgs</td><td class=n>18,990</td><td class=n>0</td><td class=n>0.00%</td></tr>
+<tr><td>Guix</td><td class=n>10,168</td><td class=n>0</td><td class=n>0.00%</td></tr>
+<tr><td>PyPI</td><td class=n>10,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
+<tr><td>crates.io</td><td class=n>5,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
+<tr><td>RubyGems</td><td class=n>5,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
 <tr><td>live-bootstrap</td><td class=n>171</td><td class=n>0</td><td class=n>0.00%</td></tr>
 <tr class="total"><td>total (distinct)</td><td class=n>82,587</td><td class=n>0</td><td class=n>0.00%</td></tr></table></div>
 
 
 <hr class="wide">
-<footer class="wide"><a href="https://github.com/haampie/tar-minefield">haampie/tar-minefield on GitHub</a><span class="sep">·</span>Last updated <time datetime="2026-10-25">2026-10-25</time><span class="sep">·</span><a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide"><a href="https://github.com/haampie/tar-minefield">haampie/tar-minefield on GitHub</a><span class="sep">·</span>Last updated <time datetime="2026-10-26">2026-10-26</time><span class="sep">·</span><a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

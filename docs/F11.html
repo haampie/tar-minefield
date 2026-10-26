@@ -32,7 +32,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The magic <code>ustar\0</code> is followed by the version <code>01</code>, where <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20version%20field%20is%20two%20octets%20containing%20the%20characters%20%2200%22">POSIX</a> requires <code>00</code>. The default policy accepts only that version, and NULs as some Java archivers write. This breaks POSIX, which is why the case is rejected; it is not ambiguous.</p>
+<p>The magic <code>ustar\0</code> is followed by the version <code>01</code>, where <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20version%20field%20is%20two%20octets%20containing%20the%20characters%20%2200%22">POSIX</a> requires <code>00</code>. The default policy accepts only that version, and NULs as some Java archivers write. This case is ambiguous because a reader takes the header in one of three ways: as ustar, ignoring the version; as not in a format that POSIX defines, and stops; or as a v7 header, without the fields that ustar added.</p>
 <p><strong>Decision point:</strong> which format the header is in.</p>
 <p><strong>Seen in:</strong> no source tarball.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -45,8 +45,9 @@
 The POSIX magic with a version that is neither `00` nor NULs.
 
 The magic `ustar\0` is followed by the version `01`, where POSIX requires `00`. The default policy
-accepts only that version, and NULs as some Java archivers write. This breaks POSIX, which is why
-the case is rejected; it is not ambiguous.
+accepts only that version, and NULs as some Java archivers write. This case is ambiguous because a
+reader takes the header in one of three ways: as ustar, ignoring the version; as not in a format
+that POSIX defines, and stops; or as a v7 header, without the fields that ustar added.
 
 Decision point: which format the header is in.
 Seen in: no source tarball.
@@ -240,17 +241,17 @@ Seen in: no source tarball.
 <h2 id="prevalence-in-source-tarballs">Prevalence in source tarballs<a class="anchor" href="#prevalence-in-source-tarballs" aria-label="Link to this section">¶</a></h2>
 <p>Release tarballs of Spack, nixpkgs, Guix, live-bootstrap, PyPI, crates.io and RubyGems with <code>magic.posix-with-odd-version</code>.</p>
 <div class="wide"><table class="data"><colgroup><col style="width: 25%"><col style="width: 25%"><col style="width: 25%"><col style="width: 25%"></colgroup><tr><th>ecosystem</th><th class=n>tarballs</th><th class=n>with it</th><th class=n>share</th></tr>
-<tr><td>spack</td><td class=n>37,554</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>nix</td><td class=n>18,990</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>guix</td><td class=n>10,168</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>pypi</td><td class=n>10,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>crates</td><td class=n>5,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>rubygems</td><td class=n>5,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
+<tr><td>Spack</td><td class=n>37,554</td><td class=n>0</td><td class=n>0.00%</td></tr>
+<tr><td>nixpkgs</td><td class=n>18,990</td><td class=n>0</td><td class=n>0.00%</td></tr>
+<tr><td>Guix</td><td class=n>10,168</td><td class=n>0</td><td class=n>0.00%</td></tr>
+<tr><td>PyPI</td><td class=n>10,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
+<tr><td>crates.io</td><td class=n>5,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
+<tr><td>RubyGems</td><td class=n>5,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
 <tr><td>live-bootstrap</td><td class=n>171</td><td class=n>0</td><td class=n>0.00%</td></tr>
 <tr class="total"><td>total (distinct)</td><td class=n>82,587</td><td class=n>0</td><td class=n>0.00%</td></tr></table></div>
 
 
 <hr class="wide">
-<footer class="wide"><a href="https://github.com/haampie/tar-minefield">haampie/tar-minefield on GitHub</a><span class="sep">·</span>Last updated <time datetime="2026-10-25">2026-10-25</time><span class="sep">·</span><a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide"><a href="https://github.com/haampie/tar-minefield">haampie/tar-minefield on GitHub</a><span class="sep">·</span>Last updated <time datetime="2026-10-26">2026-10-26</time><span class="sep">·</span><a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

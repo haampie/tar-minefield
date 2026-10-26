@@ -115,12 +115,24 @@ ECOSYSTEMS = {"spack": "Spack", "nix": "nixpkgs", "guix": "Guix", "live-bootstra
               "pypi": "PyPI", "crates": "crates.io", "rubygems": "RubyGems"}
 
 
-def ecosystems(names):
-    """The ecosystems of datasets, by their names, as text, such as "Spack, nixpkgs and Guix"."""
+# Ecosystems whose scans are of a sample of their tarballs, as the RUN.md of each says
+SAMPLED = {"pypi", "crates", "rubygems"}
+
+
+def and_join(words):
+    return ", ".join(words[:-1]) + " and " + words[-1] if len(words) > 1 else "".join(words)
+
+
+def ecosystems(names, samples=True):
+    """The ecosystems of datasets, by their names, as text, such as "Spack, nixpkgs and Guix", or,
+    with samples, "Spack and Guix, and samples of PyPI and crates.io"."""
     dirs = sorted({n.split("/")[0] for n in names},
                   key=lambda d: (list(ECOSYSTEMS).index(d) if d in ECOSYSTEMS else len(ECOSYSTEMS), d))
-    words = [ECOSYSTEMS.get(d, d) for d in dirs]
-    return ", ".join(words[:-1]) + " and " + words[-1] if len(words) > 1 else "".join(words)
+    whole = [ECOSYSTEMS.get(d, d) for d in dirs if not samples or d not in SAMPLED]
+    sampled = [ECOSYSTEMS.get(d, d) for d in dirs if samples and d in SAMPLED]
+    if not sampled:
+        return and_join(whole)
+    return (and_join(whole) + ", and " if whole else "") + "samples of " + and_join(sampled)
 
 
 def dataset_name(path):
