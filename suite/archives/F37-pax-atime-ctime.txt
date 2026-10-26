@@ -1,0 +1,57 @@
+F37-pax-atime-ctime: must accept, and extract its tree
+
+pax `atime` and `ctime` records, as GNU tar's posix format writes them.
+
+GNU tar with `--format=posix`, bsdtar and star write the access and change times of every member
+as pax records, next to its `mtime`. `ctime` is no longer a keyword of POSIX, and keywords of
+lowercase letters, digits and periods are reserved, so a strict parser that rejects unknown or
+reserved keys rejects these tarballs. Neither key affects the tree.
+
+Seen in: hundreds of the scanned tarballs, such as gcc 15.2.0 and avahi 0.8.
+
+0x000000  header: pax extended header, the times, as GNU tar writes them
+          name     [  0,100)  "PaxHeaders/file" + 85 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000122" + NUL  82
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "012176\0 "  5246: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "x"  pax extended header
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: pax records
+          82 bytes of pax records, then 430 NUL
+          "30 mtime=1700000000.123456789\n"
+          "22 atime=1700000001.5\n"
+          "30 ctime=1700000000.123456789\n"
+0x000400  header: regular file
+          name     [  0,100)  "file" + 96 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000006" + NUL  6
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "010043\0 "  4131: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          6 bytes, then 506 NUL to the end of the block
+          "hello\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

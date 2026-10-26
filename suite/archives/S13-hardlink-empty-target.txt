@@ -1,0 +1,55 @@
+S13-hardlink-empty-target: must reject
+
+A hardlink with an empty target.
+
+The first member is a file `a`, the second a hardlink `link` whose linkname field is empty. No member
+has the empty name, so as in S03 the link has nothing to link to. This case is ambiguous because
+the link is skipped, or made to the destination directory itself, which fails, or made an empty
+regular file `link`. It is a case of its own because implementations that refuse a hardlink to a
+missing name may still take an empty one for no link at all.
+
+Decision point: what a hardlink to the empty name does.
+Seen in: none of the scanned tarballs.
+See also: S03, a hardlink to a name that no member has.
+
+0x000000  header: regular file
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007340\0 "  3808: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data
+          2 bytes, then 510 NUL to the end of the block
+          "a\n"
+0x000400  header: hardlink, a hardlink whose target is empty
+          name     [  0,100)  "link" + 96 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000000" + NUL  0
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "010054\0 "  4140: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "1"  hardlink
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  2 zero blocks: the end-of-archive marker
+0x000a00  end of file

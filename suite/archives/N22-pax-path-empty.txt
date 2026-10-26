@@ -8,6 +8,10 @@ not say what a member without a name is. This case is ambiguous because the name
 header specifies, `from-header`, or empty (which refers to the destination itself). A reader may
 also skip the member, or name the file after the archive.
 
+An empty `linkpath` asks the same of a link: whether a symlink keeps the target in its header, has
+an empty target (see N25), or is skipped. Implementations need not answer both alike: one that falls
+back to the header's name for an empty `path` may still apply an empty `linkpath`.
+
 Decision point: what an empty pax path means: no name, an empty name, or the header's name.
 Seen in: none of the scanned tarballs.
 

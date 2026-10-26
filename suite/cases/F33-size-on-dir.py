@@ -3,7 +3,9 @@
 The size field in the ustar header of a directory is 512. In POSIX, no data is stored for a
 directory, whatever its size, so the next block is the header of a file, `smuggled`. This case is
 ambiguous in practice because, if the size applies, that block is the directory's data instead, and
-the tree is a directory alone. The same goes for symlinks and devices, which have no data either.
+the tree is a directory alone. The same goes for symlinks and devices, which have no data either,
+and implementations need not decide alike for every kind: one that skips the size of a directory may
+take the size of a symlink for its data.
 
 Decision point: whether a size in the header applies to a member that has no data.
 Seen in: none of the scanned tarballs.
