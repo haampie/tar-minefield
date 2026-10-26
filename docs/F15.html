@@ -58,7 +58,8 @@ directory alone.
 
 Decision point: whether a pax `size` applies to a member that has no data.
 Seen in: llama_index_workflows 2.26.0, with a pax size on a directory.
-See also: F33, a size in the ustar header of a directory, which is rejected as well.
+See also: F33, a size in the ustar header of a directory, and F35, a pax `size` on a hard link,
+which are rejected as well.
 
 0x000000  header: pax extended header, for the next member, for dir/, with size=512
           name     [  0,100)  &quot;PaxHeader&quot; + 91 NUL
@@ -360,7 +361,7 @@ See also: F33, a size in the ustar header of a directory, which is rejected as w
 <p>See <a href="seen-in.html#F15">the list of these 9 tarballs</a>, with the sha256 of each and an example from it.</p>
 <h2 id="see-also">See also<a class="anchor" href="#see-also" aria-label="Link to this section">¶</a></h2>
 <ul>
-<li><a href="F33.html"><code>F33</code></a>: a size in the ustar header of a directory, which is rejected as well.</li>
+<li><a href="F33.html"><code>F33</code></a>: a size in the ustar header of a directory, and <a href="F35.html"><code>F35</code></a>, a pax <code>size</code> on a hard link, which are rejected as well.</li>
 </ul>
 
 <hr class="wide">

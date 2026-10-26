@@ -74,6 +74,8 @@ SENTENCES = {
                                 "file type"),
     "overwrite": (APPLICATION_USAGE, "In read mode, implementations are permitted to overwrite files "
                                      "when the archive has multiple members with the same name"),
+    "link-data": (PAX_HEADER, "data blocks for files of typeflag 1 (the digit one) (hard link) may be "
+                              "included"),
     "hardlink": (USTAR, "Represents a file linked to another file, of any type, previously "
                         "archived"),
 }

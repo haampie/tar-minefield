@@ -9,7 +9,8 @@ directory alone.
 
 Decision point: whether a pax `size` applies to a member that has no data.
 Seen in: llama_index_workflows 2.26.0, with a pax size on a directory.
-See also: F33, a size in the ustar header of a directory, which is rejected as well.
+See also: F33, a size in the ustar header of a directory, and F35, a pax `size` on a hard link,
+which are rejected as well.
 
 0x000000  header: pax extended header, for the next member, for dir/, with size=512
           name     [  0,100)  "PaxHeader" + 91 NUL

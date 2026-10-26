@@ -10980,6 +10980,20 @@
     }
    }
   },
+  "F34-size-on-hardlink": {
+   "strict.py": {
+    "error": "rejected",
+    "outside": {},
+    "tree": null
+   }
+  },
+  "F35-pax-size-on-hardlink": {
+   "strict.py": {
+    "error": "rejected",
+    "outside": {},
+    "tree": null
+   }
+  },
   "K01-kind-trailing-slash-file": {
    ".NET System.Formats.Tar": {
     "error": "IOException: Cannot create 'DEST/a/' because a file or directory with the same name already exists.",

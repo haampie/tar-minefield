@@ -22,7 +22,7 @@
 </head>
 <body>
 <a class="draft" href="index.html#policy">Working draft</a>
-<nav class="wide"><a class="prev" href="F30.html" rel="prev" title="F30 number-size-base256-too-large">‹ F30 number-size-base256-too-large</a><a href="index.html">tar-minefield</a><a class="next" href="N08.html" rel="next" title="N08 extended-pax-path-and-gnu-long-name">N08 extended-pax-path-and-gnu-long-name ›</a></nav>
+<nav class="wide"><a class="prev" href="F30.html" rel="prev" title="F30 number-size-base256-too-large">‹ F30 number-size-base256-too-large</a><a href="index.html">tar-minefield</a><a class="next" href="F34.html" rel="next" title="F34 size-on-hardlink">F34 size-on-hardlink ›</a></nav>
 <h1><code>F33</code> size-on-dir</h1>
 <p>A size in the header of a directory, which takes the next header for its data.</p>
 <div class="verdict reject wide"><p><span class="badge">Must reject</span> A strict parser must reject this archive.</p></div>
@@ -58,7 +58,8 @@ the tree is a directory alone. The same goes for symlinks and devices, which hav
 
 Decision point: whether a size in the header applies to a member that has no data.
 Seen in: no source tarball has a size on a member without data.
-See also: F15, a pax `size` on a directory, which is rejected as well.
+See also: F15, a pax `size` on a directory, and F34, a size in the header of a hard link, which
+are rejected as well.
 
 0x000000  header: directory, no data, but its size field is 512
           name     [  0,100)  &quot;dir/&quot; + 96 NUL
@@ -275,7 +276,7 @@ See also: F15, a pax `size` on a directory, which is rejected as well.
 
 <h2 id="see-also">See also<a class="anchor" href="#see-also" aria-label="Link to this section">¶</a></h2>
 <ul>
-<li><a href="F15.html"><code>F15</code></a>: a pax <code>size</code> on a directory, which is rejected as well.</li>
+<li><a href="F15.html"><code>F15</code></a>: a pax <code>size</code> on a directory, and <a href="F34.html"><code>F34</code></a>, a size in the header of a hard link, which are rejected as well.</li>
 </ul>
 
 <hr class="wide">

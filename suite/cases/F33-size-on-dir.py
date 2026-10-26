@@ -7,7 +7,8 @@ the tree is a directory alone. The same goes for symlinks and devices, which hav
 
 Decision point: whether a size in the header applies to a member that has no data.
 Seen in: no source tarball has a size on a member without data.
-See also: F15, a pax `size` on a directory, which is rejected as well.
+See also: F15, a pax `size` on a directory, and F34, a size in the header of a hard link, which
+are rejected as well.
 """
 
 VERDICT = "reject"
