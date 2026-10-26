@@ -5,7 +5,7 @@ NUL, so the name is `a`. Copied as a whole, the field is `a` as a C string, whic
 NUL, but `a\0b` in languages whose strings can contain a NUL, and creating the file then fails.
 
 Decision point: where a name ends.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

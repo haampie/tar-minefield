@@ -5,7 +5,7 @@ is ambiguous because the path is `a`, cut at the NUL, `a_b` or the like, with th
 discarded for the header's name, `header-name`.
 
 Decision point: where a pax path ends.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

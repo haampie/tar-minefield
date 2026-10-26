@@ -6,7 +6,7 @@ global header. This case is ambiguous in practice because, with global headers o
 ignored, the next block is not the data of `a` but the header of another file, `smuggled`.
 
 Decision point: whether a `size` in a global header applies.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

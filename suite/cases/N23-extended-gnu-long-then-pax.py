@@ -7,7 +7,7 @@ next header, the pax header, and is lost, or to the next member, which is then `
 than `from-header`.
 
 Decision point: whether a GNU long name applies to the next header or to the next member.
-Seen in: no source tarball. No scanned tarball mixes GNU long names and pax headers for one member.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

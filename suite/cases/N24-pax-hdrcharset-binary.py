@@ -7,7 +7,7 @@ also decoded as Latin-1, or with the byte replaced, as with N18, or discarded fo
 `cafe`. A strict parser rejects names that are not UTF-8.
 
 Decision point: how a name that is not UTF-8 becomes a path.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

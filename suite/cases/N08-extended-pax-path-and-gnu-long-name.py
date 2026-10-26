@@ -5,7 +5,7 @@ Neither POSIX nor GNU's format defines the two extensions together. This case is
 nothing says which of the three names wins: the member is `from-pax`, `from-gnu` or `from-header`.
 
 Decision point: which of several sources gives a member its name.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

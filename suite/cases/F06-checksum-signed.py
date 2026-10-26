@@ -7,7 +7,7 @@ case is ambiguous because a reader takes the header in one of three ways: as val
 sum, and extracts `a`; as invalid, and stops; or as invalid, and skips ahead to the next header.
 
 Decision point: whether a signed checksum makes a header valid.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

@@ -7,7 +7,7 @@ without its sign, or the field read as an unsigned number. With 0 the next block
 `smuggled`, with 512 the data of `a`, and the unsigned number runs past the end of the archive.
 
 Decision point: whether a size may be negative, and what a negative one means.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

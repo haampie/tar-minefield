@@ -7,7 +7,7 @@ octal, or the header's, 0. The data of `a` then takes two blocks, one, after whi
 member, or none, and both `smuggled-1` and `smuggled-2` are.
 
 Decision point: whether a pax number with a leading zero is decimal or octal.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

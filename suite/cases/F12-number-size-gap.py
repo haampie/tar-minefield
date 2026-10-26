@@ -6,7 +6,7 @@ if the number ends at the first blank (and the next block is the header of `smug
 octal, 512, if the blank is skipped (and the next block is the data of `a`).
 
 Decision point: how a numeric field with a space among its digits is read.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

@@ -7,7 +7,7 @@ whose data then takes in the header of `smuggled`. This is the bug class of GHSA
 (tar-rs) and CVE-2026-53655 (node-tar).
 
 Decision point: which header a pax size applies to, when another extended header follows.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

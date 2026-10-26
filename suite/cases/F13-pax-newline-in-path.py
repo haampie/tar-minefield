@@ -6,7 +6,7 @@ is `good\n1 path=evil`. Split on lines instead, the extended header has a second
 the records discarded as malformed, the header's name, `plain`.
 
 Decision point: whether a pax record is delimited by its length or by a newline.
-Seen in: no source tarball. Newlines in pax values are only in xattrs, such as Minion
+Seen in: none of the scanned tarballs. Newlines in pax values are only in xattrs, such as Minion
 10.31, which the default policy accepts as xattrs are not extracted.
 """
 

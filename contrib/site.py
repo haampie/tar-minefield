@@ -624,7 +624,7 @@ def seen_in_problems(cases, union):
         if not seen or not features:
             continue
         k = sum(1 for r in union if any(f in r["features"] for f in features))
-        none = seen.group(1).startswith("no source tarball")
+        none = seen.group(1).startswith("none of the scanned tarballs")
         if none and k or not none and not k:
             problems.append(f"{case}: Seen in: {seen.group(1)!r}, but {k} tarballs have "
                             f"{', '.join(features)}")

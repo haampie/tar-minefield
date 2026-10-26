@@ -6,7 +6,7 @@ what the header specifies, 0 (and the next block is the header of `smuggled`), o
 as an unsigned number, almost 2^64 (which runs past the end of the archive).
 
 Decision point: whether a pax size may be negative, and what a negative one means.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

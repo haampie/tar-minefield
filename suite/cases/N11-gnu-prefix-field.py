@@ -5,7 +5,7 @@ times where ustar has its prefix. This case is ambiguous in practice because the
 ustar's prefix, puts `a` under a directory `15000000000`, which Python's `tarfile` does (gh-155629).
 
 Decision point: whether a header with GNU magic has a prefix.
-Seen in: no source tarball with times there.
+Seen in: none of the scanned tarballs with times there.
 """
 
 VERDICT = "reject"

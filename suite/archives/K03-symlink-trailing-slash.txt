@@ -7,7 +7,7 @@ the name refers to what the link points to. This case is ambiguous because the m
 symlink `link`, by its typeflag, or a directory `link`, by its trailing slash, as in K01.
 
 Decision point: what a trailing slash on a link means.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 
 0x000000  header: directory
           name     [  0,100)  "target/" + 93 NUL

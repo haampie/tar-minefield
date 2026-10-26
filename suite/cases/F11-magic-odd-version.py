@@ -6,7 +6,7 @@ reader takes the header in one of three ways: as ustar, ignoring the version; as
 that POSIX defines, and stops; or as a v7 header, without the fields that ustar added.
 
 Decision point: which format the header is in.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

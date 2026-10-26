@@ -7,7 +7,7 @@ block is the header of `smuggled`) or what the header specifies (and the next bl
 `a`).
 
 Decision point: what an empty pax size means: no size, 0, or the header's size.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

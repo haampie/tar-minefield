@@ -4,7 +4,7 @@ The first member is a symlink `a` to `target`, the second a file `a`. This case 
 the file either replaces the link, or is written through it, to `target`.
 
 Decision point: whether writing a member follows a symlink in its place.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

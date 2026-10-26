@@ -5,7 +5,7 @@ name is stored, and under what name. This case is ambiguous because an empty nam
 the archive, leaves the member out, or refers to the destination directory itself.
 
 Decision point: what an empty name refers to.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

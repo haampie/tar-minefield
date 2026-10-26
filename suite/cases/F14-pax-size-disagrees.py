@@ -10,7 +10,7 @@ CVE-2025-62518 (tokio-tar). A strict parser may reject a header whose size field
 size but gives another, but must not extract `a` with 512 bytes.
 
 Decision point: which of two sizes frames the member.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "tolerate"

@@ -7,7 +7,7 @@ it does, the 512 bytes are skipped with it; if not, they are the header of the n
 `smuggled` is extracted.
 
 Decision point: whether an unknown typeflag has data.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

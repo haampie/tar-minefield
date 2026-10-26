@@ -8,7 +8,7 @@ because the size is either that number, 512 (and the next block is the data of `
 header specifies, 0 (and the next block is the header of `smuggled`).
 
 Decision point: which digits a pax number may have.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 
 0x000000  header: pax extended header, for the next member, size=512 in Arabic-Indic digits, for a
           name     [  0,100)  "PaxHeader" + 91 NUL

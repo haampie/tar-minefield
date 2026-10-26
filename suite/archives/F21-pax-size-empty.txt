@@ -9,7 +9,7 @@ block is the header of `smuggled`) or what the header specifies (and the next bl
 `a`).
 
 Decision point: what an empty pax size means: no size, 0, or the header's size.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 
 0x000000  header: pax extended header, for the next member, size=, which removes the size
           name     [  0,100)  "PaxHeader" + 91 NUL

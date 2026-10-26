@@ -5,7 +5,7 @@ case is rejected because the file, written through the link, lands in the parent
 not because it is ambiguous. The file is harmless.
 
 Decision point: whether a member may be written through a symlink.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

@@ -7,7 +7,7 @@ the data of `a`, with 0 the header of `smuggled`, and with 2^64 - 1 the data run
 the archive.
 
 Decision point: what a pax number too large for the reader means.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

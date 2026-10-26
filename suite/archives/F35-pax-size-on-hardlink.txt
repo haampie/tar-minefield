@@ -8,7 +8,7 @@ case is ambiguous because the next block is either the header of a file, `smuggl
 `h`, which replaces the contents of `a`, as libarchive reads it.
 
 Decision point: whether a pax size applies to a hard link.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 See also: F15, a pax size on a directory, and F34, a size in the header of a hard link.
 
 0x000000  header: regular file

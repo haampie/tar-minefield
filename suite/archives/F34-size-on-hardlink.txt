@@ -10,7 +10,7 @@ replaces the contents of `a`. This case is ambiguous because the tree has either
 `smuggled`, or `a` with that block as its contents.
 
 Decision point: whether a size in the header of a hard link applies, in an archive with pax headers.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 See also: F33, a size in the header of a directory, and F35, a pax size on a hard link.
 
 0x000000  header: regular file

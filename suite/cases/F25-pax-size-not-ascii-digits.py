@@ -6,7 +6,7 @@ because the size is either that number, 512 (and the next block is the data of `
 header specifies, 0 (and the next block is the header of `smuggled`).
 
 Decision point: which digits a pax number may have.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

@@ -6,7 +6,7 @@ but does not require it. This case is ambiguous because the tree has either the 
 replaces the file, or the file.
 
 Decision point: whether a later member replaces an earlier one of another kind.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

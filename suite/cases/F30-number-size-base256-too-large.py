@@ -5,7 +5,7 @@ in 64 bits. The whole number, 2^64 + 512, runs past the end of the archive. Read
 case is ambiguous because its low 64 bits are 512, which makes the next block the data of `a`.
 
 Decision point: what a size too large for the reader means.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

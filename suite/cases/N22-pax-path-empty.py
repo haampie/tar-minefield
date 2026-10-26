@@ -6,7 +6,7 @@ not say what a member without a name is. This case is ambiguous because the name
 header specifies, `from-header`, or empty (which refers to the destination itself).
 
 Decision point: what an empty pax path means: no name, an empty name, or the header's name.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

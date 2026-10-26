@@ -7,7 +7,7 @@ either that number, 512 (and the next block is the data of `a`), or what the hea
 (and the next block is the header of `smuggled`).
 
 Decision point: whether a pax size may have a sign.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

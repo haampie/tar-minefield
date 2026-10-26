@@ -5,7 +5,7 @@ In POSIX, a global header applies to every later member, so with a `path` all of
 members keep their own names, `a` and `b`.
 
 Decision point: whether a global `path` applies.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"

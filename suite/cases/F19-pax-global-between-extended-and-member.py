@@ -6,7 +6,7 @@ because the extended header applies either to the global header, and the member 
 `header-name`, or to the member, as `from-pax`.
 
 Decision point: which header an extended header applies to.
-Seen in: no source tarball.
+Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"
