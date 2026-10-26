@@ -54,8 +54,9 @@ ANCHORS = {"#motivating-examples": "#examples", "#contributing": "#contributing"
 MOVED = {"G01": "F17", "G02": "F18", "G03": "F19", "G04": "N21"}
 OUTCOMES = {
     "✅": "as the verdict says",
+    "➕": "accepts",
+    "➖": "rejects",
     "⚠️": "accepts",
-    "⛔": "rejects",
     "❌": "another tree, or rejects",
     "⏳": "does not finish",
     "💥": "writes outside the destination",

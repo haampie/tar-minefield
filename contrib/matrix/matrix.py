@@ -17,10 +17,12 @@ Each implementation either extracts a case, or, for libraries that have no extra
 members, which are then applied in order to an empty tree, as a program that uses it would. The
 outcome is compared with the case's verdict:
 
-- ✅ as the verdict says: rejects a case to reject; extracts the manifest of the others
+- ✅ as the verdict says: rejects a case to reject; extracts the manifest of a case to accept
+- ➕ accepts a tolerated case, and extracts its manifest
+- ➖ rejects a tolerated case. A strict parser may do either, so neither ➕ nor ➖ is better than
+  the other, and the two look alike
 - ⚠️ accepts a case to reject: the letter says which tree, so that implementations that make
   different trees of one case have different letters
-- ⛔ rejects a tolerated case, which a strict parser may
 - ❌ rejects a case to accept, or extracts another tree than the manifest
 - ⏳ does not finish within 60 seconds, so it neither rejects nor extracts the case
 - 💥 writes outside the destination
@@ -530,20 +532,22 @@ def outcome(case, r):
         return "⏳", None
     if case["verdict"] == "reject":
         return ("✅", None) if r["error"] else ("⚠️", r["tree"])
+    tolerated = case["verdict"] == "tolerate"
     if r["error"]:
-        return ("⛔", None) if case["verdict"] == "tolerate" else ("❌", None)
+        return ("➖" if tolerated else "❌"), None
     if r["tree"] is None or same(r["tree"], expected_tree(case)):
-        return "✅", None
+        return ("➕" if tolerated else "✅"), None
     return "❌", r["tree"]
 
 
-ORDER = ["✅", "⚠️", "⛔", "❌", "⏳", "💥", "❔"]
+ORDER = ["✅", "➕", "➖", "⚠️", "❌", "⏳", "💥", "❔"]
 LEGEND = [
-    "- ✅ as the verdict says: rejects a case to reject; extracts the manifest of the others",
+    "- ✅ as the verdict says: rejects a case to reject; extracts the manifest of a case to accept",
+    "- ➕ accepts a tolerated case, and extracts its manifest; ➖ rejects a tolerated case. A strict"
+    " parser may do either, so neither is better than the other, and the two look alike",
     "- ⚠️ accepts a case to reject. The letter is the tree it extracts: in one row, the same letter is"
     " the same tree, and different letters are trees that differ; [MATRIX.md](MATRIX.md#trees)"
     " lists them",
-    "- ⛔ rejects a tolerated case, which a strict parser may",
     "- ❌ rejects a case to accept, or extracts another tree than its manifest",
     f"- ⏳ does not finish within {TIMEOUT} seconds, so it neither rejects nor extracts the case",
     "- 💥 writes outside the destination",
@@ -601,13 +605,17 @@ def totals(results, cases, names):
 # SVG: the classes of outcomes; their colours as (cell, mark): pale cells, as a grid of saturated
 # ones flickers at its crossings; what they mean; and a mark that tells them apart without colour.
 # The SVG has a white background of its own, so that it looks the same in light and dark mode.
+# The two outcomes of a tolerated case are greys, as neither is better than the other; that of
+# accepting is the paler, as most implementations do, so that the few that reject stand out.
 CLASSES = {
     "✅": ("ok", ("#b4f1c3", "#116329"),
-          "as the verdict says: rejects a case to reject, extracts the tree of the others", "✓"),
+          "as the verdict says: rejects a case to reject, extracts the tree of a case to accept", "✓"),
+    "➕": ("may-accept", ("#e6eaef", "#424a53"),
+          "accepts a tolerated case and extracts its tree, which its verdict allows", "+"),
+    "➖": ("may-reject", ("#c4ccd4", "#24292f"),
+          "rejects a tolerated case, which its verdict allows too", "−"),
     "⚠️": ("warn", ("#ffe08a", "#7d4e00"),
            "accepts a case to reject, which a strict parser rejects", "!"),
-    "⛔": ("stop", ("#d0d7de", "#424a53"),
-           "rejects a tolerated case, which a strict parser may", "–"),
     "❌": ("bad", ("#ffc1ba", "#a40e26"),
            "rejects a case to accept, or extracts another tree than its manifest", "✗"),
     "⏳": ("slow", ("#b6e3ff", "#0550ae"),
@@ -638,7 +646,8 @@ def esc(text):
 
 
 def svg_style():
-    colours = "".join(f".{c[0]}{{fill:{c[1][0]}}}.{c[0]}-ink{{fill:{c[1][1]}}}" for c in CLASSES.values())
+    colours = "".join(f".{cls}{{fill:{fill}}}.{cls}-ink{{fill:{ink}}}"
+                      for cls, (fill, ink) in {c[0]: c[1] for c in CLASSES.values()}.items())
     return (
         f"<style>text{{font-family:{FONT};font-size:12px;fill:#1f2328}}.head{{font-weight:600}}"
         f".cell{{font-size:11px;font-weight:700;text-anchor:middle}}.rule{{stroke:#d0d7de}}{colours}"
@@ -707,7 +716,9 @@ def svg(results, cases, link=None):
             if h >= 14:
                 out.append(f'<text class="cell {CLASSES[symbol][0]}-ink" x="{xs[n] + cw / 2}" '
                            f'y="{bottom - h / 2 + 4:.1f}">{k}</text>')
-            out.append("</g>")
+            # a white line between outcomes, which tells apart the two of one colour
+            out.append(f'<line x1="{xs[n]}" x2="{xs[n] + cw}" y1="{bottom - h:.1f}" '
+                       f'y2="{bottom - h:.1f}" stroke="#ffffff"/></g>')
             bottom -= h
     y += bar
     previous = None

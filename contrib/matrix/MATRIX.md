@@ -5,9 +5,9 @@ extracted by every implementation, or for libraries without an extractor listed 
 applied in order. The column `strict.py` is the default policy of `scanner/strict.py`, from
 what `tarscan.py` reports.
 
-- ✅ as the verdict says: rejects a case to reject; extracts the manifest of the others
+- ✅ as the verdict says: rejects a case to reject; extracts the manifest of a case to accept
+- ➕ accepts a tolerated case, and extracts its manifest; ➖ rejects a tolerated case. A strict parser may do either, so neither is better than the other, and the two look alike
 - ⚠️ accepts a case to reject. The letter is the tree it extracts: in one row, the same letter is the same tree, and different letters are trees that differ; [MATRIX.md](MATRIX.md#trees) lists them
-- ⛔ rejects a tolerated case, which a strict parser may
 - ❌ rejects a case to accept, or extracts another tree than its manifest
 - ⏳ does not finish within 60 seconds, so it neither rejects nor extracts the case
 - 💥 writes outside the destination
@@ -56,15 +56,15 @@ what `tarscan.py` reports.
 | [S01](https://stoppels.ch/tar/S01.html) tree-dir-after-contents | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [S02](https://stoppels.ch/tar/S02.html) tree-duplicate-dir | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **tolerated** | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-| [F01](https://stoppels.ch/tar/F01.html) number-leading-space | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [F02](https://stoppels.ch/tar/F02.html) end-data-after | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ |
-| [F05](https://stoppels.ch/tar/F05.html) magic-version-nuls | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ⛔ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ |
-| [F14](https://stoppels.ch/tar/F14.html) pax-size-disagrees | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌A | ❌A | ✅ | ❌B | ❌B |
-| [F18](https://stoppels.ch/tar/F18.html) pax-global-comment-after-members | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
-| [F32](https://stoppels.ch/tar/F32.html) checksum-leading-space | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [N05](https://stoppels.ch/tar/N05.html) name-dot | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [N06](https://stoppels.ch/tar/N06.html) name-leading-dot-slash | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [N07](https://stoppels.ch/tar/N07.html) symlink-absolute | ✅ | ✅ | ✅ | ✅ | ❌A | ⛔ | ✅ | ✅ | ❌B | ⛔ | ⛔ | ❌C | ⛔ | ❌C | ✅ | ✅ | ✅ | ✅ | ✅ | ⛔ | ⛔ | ✅ | ⛔ | ⛔ | ✅ | ✅ | ✅ |
+| [F01](https://stoppels.ch/tar/F01.html) number-leading-space | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
+| [F02](https://stoppels.ch/tar/F02.html) end-data-after | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ |
+| [F05](https://stoppels.ch/tar/F05.html) magic-version-nuls | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ |
+| [F14](https://stoppels.ch/tar/F14.html) pax-size-disagrees | ➕ | ➕ | ➕ | ❌A | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ➕ | ❌A | ❌A | ➕ | ❌B | ❌B |
+| [F18](https://stoppels.ch/tar/F18.html) pax-global-comment-after-members | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ❌A |
+| [F32](https://stoppels.ch/tar/F32.html) checksum-leading-space | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
+| [N05](https://stoppels.ch/tar/N05.html) name-dot | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
+| [N06](https://stoppels.ch/tar/N06.html) name-leading-dot-slash | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
+| [N07](https://stoppels.ch/tar/N07.html) symlink-absolute | ➕ | ➕ | ➕ | ➕ | ❌A | ➖ | ➕ | ➕ | ❌B | ➖ | ➖ | ❌C | ➖ | ❌C | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➖ | ➖ | ➕ | ➕ | ➕ |
 | **to reject: framing** | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 | [F03](https://stoppels.ch/tar/F03.html) end-lone-zero-block | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A |
 | [F04](https://stoppels.ch/tar/F04.html) end-missing | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A |
@@ -126,7 +126,7 @@ what `tarscan.py` reports.
 | [S10](https://stoppels.ch/tar/S10.html) tree-symlink-then-file | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️B | ⚠️B |
 | [S11](https://stoppels.ch/tar/S11.html) tree-through-symlink | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 💥 | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️C | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 💥 | 💥 |
 | [S12](https://stoppels.ch/tar/S12.html) tree-under-file | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️C | ⚠️A | ⚠️A |
-| **total** | ✅74 | ✅32 ⚠️42 | ✅33 ⚠️41 | ✅23 ⚠️50 ❌1 | ✅27 ⚠️46 ❌1 | ✅31 ⚠️42 ⛔1 | ✅31 ⚠️43 | ✅30 ⚠️42 💥2 | ✅21 ⚠️52 ❌1 | ✅31 ⚠️42 ⛔1 | ✅33 ⚠️39 ⛔2 | ✅30 ⚠️43 ❌1 | ✅49 ⚠️23 ⛔2 | ✅22 ⚠️47 ⛔1 ❌4 | ✅29 ⚠️45 | ✅32 ⚠️42 | ✅32 ⚠️42 | ✅29 ⚠️45 | ✅36 ⚠️37 ⛔1 | ✅57 ⚠️13 ⛔4 | ✅24 ⚠️45 ⛔2 ❌3 | ✅35 ⚠️39 | ✅24 ⚠️47 ⛔1 ❌2 | ✅35 ⚠️35 ⛔3 ❌1 | ✅44 ⚠️30 | ✅19 ⚠️45 ❌8 💥2 | ✅12 ⚠️52 ❌8 💥2 |
+| **total** | ✅65 ➕9 | ✅23 ➕9 ⚠️42 | ✅24 ➕9 ⚠️41 | ✅15 ➕8 ⚠️50 ❌1 | ✅19 ➕8 ⚠️46 ❌1 | ✅23 ➕8 ➖1 ⚠️42 | ✅22 ➕9 ⚠️43 | ✅21 ➕9 ⚠️42 💥2 | ✅13 ➕8 ⚠️52 ❌1 | ✅23 ➕8 ➖1 ⚠️42 | ✅26 ➕7 ➖2 ⚠️39 | ✅22 ➕8 ⚠️43 ❌1 | ✅42 ➕7 ➖2 ⚠️23 | ✅16 ➕6 ➖1 ⚠️47 ❌4 | ✅20 ➕9 ⚠️45 | ✅23 ➕9 ⚠️42 | ✅23 ➕9 ⚠️42 | ✅20 ➕9 ⚠️45 | ✅28 ➕8 ➖1 ⚠️37 | ✅52 ➕5 ➖4 ⚠️13 | ✅18 ➕6 ➖2 ⚠️45 ❌3 | ✅26 ➕9 ⚠️39 | ✅17 ➕7 ➖1 ⚠️47 ❌2 | ✅30 ➕5 ➖3 ⚠️35 ❌1 | ✅35 ➕9 ⚠️30 | ✅12 ➕7 ⚠️45 ❌8 💥2 | ✅5 ➕7 ⚠️52 ❌8 💥2 |
 
 ## Trees
 

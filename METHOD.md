@@ -22,7 +22,7 @@ cases are produced so that anyone can audit them. It is a working draft.
 | **case** | An archive of the test suite, named by its identifier (its category and a number) and a few words, such as `F15-pax-size-on-dir`, with a verdict, and a manifest unless it is to reject. |
 | **verdict** | What a case requires: **reject**, a strict parser must reject it; **accept**, every implementation must accept it; **tolerate**, a strict parser may reject it, and the default policy accepts it. See [Verdicts](#verdicts). |
 | **manifest** | The tree an implementation must extract from a case to accept or a tolerated case, if it accepts it. |
-| **outcome** | What an implementation makes of a case: ✅ as its verdict says, ⚠️ accepts a case to reject, ⛔ rejects a tolerated case, ❌ rejects a case to accept or extracts another tree than the manifest, 💥 writes outside its destination. |
+| **outcome** | What an implementation makes of a case: ✅ as its verdict says, ⚠️ accepts a case to reject, ❌ rejects a case to accept or extracts another tree than the manifest, 💥 writes outside its destination; and of a tolerated case, which a strict parser may accept or reject, ➕ accepts it and ➖ rejects it, alike as neither is better. |
 | **tarball** | An archive released by a project and pinned by a package manager, as opposed to a case. |
 
 ## Goal
