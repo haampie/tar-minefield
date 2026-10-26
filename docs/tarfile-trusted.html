@@ -28,7 +28,12 @@
 <dt>Version</dt><dd>CPython 3.15.2</dd>
 <dt>Other configurations</dt><dd><ul><li><a href="tarfile-data.html">Python tarfile, filter=data, as in pip</a></li><li><a href="tarfile-tar.html">Python tarfile, filter=tar</a></li></ul></dd>
 </dl>
-<p>This implementation does as the default policy says on 32 of the 78 cases: it rejects 14 of the 60 cases to reject, extracts the tree of all 8 cases to accept, and of the 10 tolerated cases, which a strict parser may accept or reject, it accepts all 10.</p>
+<p>This implementation follows the <a href="index.html#policy">default policy</a> in 32 of 78 cases:</p>
+<ul>
+<li>it rejects 14 of the 60 cases to reject</li>
+<li>it extracts the tree of all 8 cases to accept</li>
+<li>it accepts all 10 tolerated cases, which a strict parser may accept or reject</li>
+</ul>
 <p class="note">The default policy is a working draft. Where an implementation does not do as it
 says, that can be a choice rather than a bug.</p>
 <p>On the other 46, it does not:</p>

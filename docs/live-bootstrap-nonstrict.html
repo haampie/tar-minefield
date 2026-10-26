@@ -28,7 +28,12 @@
 <dt>Version</dt><dd>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</dd>
 <dt>Other configurations</dt><dd><ul><li><a href="live-bootstrap.html">live-bootstrap untar</a></li></ul></dd>
 </dl>
-<p>This implementation does as the default policy says on 18 of the 78 cases: it rejects 8 of the 60 cases to reject, extracts the tree of 2 of the 8 cases to accept, and of the 10 tolerated cases, which a strict parser may accept or reject, it accepts 8.</p>
+<p>This implementation follows the <a href="index.html#policy">default policy</a> in 18 of 78 cases:</p>
+<ul>
+<li>it rejects 8 of the 60 cases to reject</li>
+<li>it extracts the tree of 2 of the 8 cases to accept</li>
+<li>it accepts 8 of the 10 tolerated cases, which a strict parser may accept or reject</li>
+</ul>
 <p class="note">The default policy is a working draft. Where an implementation does not do as it
 says, that can be a choice rather than a bug.</p>
 <p>On the other 60, it does not:</p>

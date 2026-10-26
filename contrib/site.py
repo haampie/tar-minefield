@@ -613,13 +613,15 @@ def implementation_summary(name, results, cases):
     accepts, rejects, tolerated = k("tolerate", "➕"), k("tolerate", "➖"), n("tolerate")
     either = (f"accepts all {tolerated}" if accepts == tolerated else
               f"rejects all {tolerated}" if rejects == tolerated else
-              f"accepts {accepts}" if not rejects else f"rejects {rejects}" if not accepts else
-              f"accepts {accepts} and rejects {rejects}")
-    sentence = (f"This implementation does as the default policy says on {agrees} of the "
-                f"{len(cases)} cases: it rejects {counted(k('reject', '✅'), n('reject'), 'cases to reject')}, "
-                f"extracts the tree of {counted(k('accept', '✅'), n('accept'), 'cases to accept')}, "
-                f"and of the {tolerated} tolerated cases, which a strict parser may accept or "
-                f"reject, it {either}.")
+              f"accepts {accepts} of the {tolerated}" if not rejects else
+              f"rejects {rejects} of the {tolerated}" if not accepts else
+              f"accepts {accepts} and rejects {rejects} of the {tolerated}")
+    sentence = (f'<p>This implementation follows the <a href="index.html#policy">default policy</a> '
+                f"in {agrees} of {len(cases)} cases:</p>\n<ul>\n"
+                f"<li>it rejects {counted(k('reject', '✅'), n('reject'), 'cases to reject')}</li>\n"
+                f"<li>it extracts the tree of {counted(k('accept', '✅'), n('accept'), 'cases to accept')}</li>\n"
+                f"<li>it {either} tolerated cases, which a strict parser may accept or reject</li>\n"
+                "</ul>")
     return agrees, sentence, differences, trees
 
 
@@ -637,7 +639,7 @@ def implementation_page(name, results, cases):
 <dt>Version</dt><dd>{html.escape(versions.get(name, ""))}</dd>
 {also}
 </dl>
-<p>{sentence}</p>
+{sentence}
 <p class="note">The default policy is a working draft. Where an implementation does not do as it
 says, that can be a choice rather than a bug.</p>
 """

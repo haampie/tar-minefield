@@ -28,7 +28,12 @@
 <dt>Version</dt><dd>Archive::Tar 3.12 of Perl v5.44.0</dd>
 
 </dl>
-<p>This implementation does as the default policy says on 28 of the 78 cases: it rejects 12 of the 60 cases to reject, extracts the tree of 7 of the 8 cases to accept, and of the 10 tolerated cases, which a strict parser may accept or reject, it accepts 8 and rejects 1.</p>
+<p>This implementation follows the <a href="index.html#policy">default policy</a> in 28 of 78 cases:</p>
+<ul>
+<li>it rejects 12 of the 60 cases to reject</li>
+<li>it extracts the tree of 7 of the 8 cases to accept</li>
+<li>it accepts 8 and rejects 1 of the 10 tolerated cases, which a strict parser may accept or reject</li>
+</ul>
 <p class="note">The default policy is a working draft. Where an implementation does not do as it
 says, that can be a choice rather than a bug.</p>
 <p>On the other 50, it does not:</p>

@@ -28,7 +28,12 @@
 <dt>Version</dt><dd>RubyGems 4.0.20 of Ruby 4.0.9, extract_tar_gz</dd>
 
 </dl>
-<p>This implementation does as the default policy says on 28 of the 78 cases: it rejects 13 of the 60 cases to reject, extracts the tree of 6 of the 8 cases to accept, and of the 10 tolerated cases, which a strict parser may accept or reject, it accepts 7 and rejects 2.</p>
+<p>This implementation follows the <a href="index.html#policy">default policy</a> in 28 of 78 cases:</p>
+<ul>
+<li>it rejects 13 of the 60 cases to reject</li>
+<li>it extracts the tree of 6 of the 8 cases to accept</li>
+<li>it accepts 7 and rejects 2 of the 10 tolerated cases, which a strict parser may accept or reject</li>
+</ul>
 <p class="note">The default policy is a working draft. Where an implementation does not do as it
 says, that can be a choice rather than a bug.</p>
 <p>On the other 50, it does not:</p>
