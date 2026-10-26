@@ -12,7 +12,7 @@ Seen in: 31 release tarballs, such as R 4.5.2, Minion 10.31 and keepassxc 2.7.8,
 `SCHILY.xattr.*`. No tarball scanned for it has another pax value that is not UTF-8, apart from
 names.
 
-0x000000  header: pax extended header, for the next member, an xattr of two bytes that are not UTF-8
+0x000000  header: pax extended header, an xattr of two bytes that are not UTF-8
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -20,7 +20,7 @@ names.
           size     [124,136)  "00000000035" + NUL  29
           mtime    [136,148)  "00000000000" + NUL  0
           chksum   [148,156)  "011077\0 "  4671: the unsigned sum of the header, this field as spaces
-          typeflag [156,157)  "x"  pax extended header, for the next member
+          typeflag [156,157)  "x"  pax extended header
           linkname [157,257)  100 NUL
           magic    [257,263)  "ustar" + NUL
           version  [263,265)  "00"

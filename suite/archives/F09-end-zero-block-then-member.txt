@@ -8,7 +8,9 @@ ambiguous because the zero block either ends the archive, as GNU tar takes it by
 skipped, as with `--ignore-zeros`. Only in the second reading is `hidden` extracted.
 
 Decision point: whether one zero block ends the archive.
-Seen in: jakarta-oro 2.0.8, PullParser 2.1.10 and commons-cli 1.2-src.
+Seen in: 7 tarballs that `tarscan.py` counts, such as jakarta-oro 2.0.8 and commons-cli 1.2-src,
+but in none of them is the zero block followed by a member: what follows is not a valid header,
+and in those two, it is stale data, as after F03.
 See also: F03, one zero block with nothing after it, which is rejected as well.
 
 0x000000  header: regular file

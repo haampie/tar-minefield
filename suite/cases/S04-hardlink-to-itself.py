@@ -5,7 +5,8 @@ to the same directory entry is an error. Read leniently, this case is ambiguous 
 replaces `a`, which then has nothing to link to, empties it, or leaves it as it is.
 
 Decision point: what a link to itself does to the file.
-Seen in: xscreensaver 6.12 and atari++ 1.85.
+Seen in: 27 tarballs, 18 of them NVIDIA's cuDNN binaries in Spack, and xscreensaver 6.12 and
+atari++ 1.85.
 """
 
 VERDICT = "reject"

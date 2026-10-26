@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>GNU&#x27;s format has no prefix field: in incremental archives, GNU tar writes the access and change times where ustar has its prefix. This case is ambiguous in practice because the field, taken for ustar&#x27;s prefix, puts <code>a</code> under a directory <code>15000000000</code>, which Python&#x27;s <code>tarfile</code> does (gh-155629).</p>
+<p>GNU&#x27;s format has no prefix field: in incremental archives, GNU tar writes the access and change times where ustar has its prefix. This case is ambiguous in practice because the field, taken for ustar&#x27;s prefix, puts <code>a</code> under a directory <code>15000000000</code>, as BusyBox, 7-Zip, Python&#x27;s <code>tarfile</code> (gh-155629), PharData, Archive::Tar, Haskell&#x27;s tar and Julia&#x27;s Tar.jl do.</p>
 <p><strong>Decision point:</strong> whether a header with GNU magic has a prefix.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs with times there.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -53,7 +53,8 @@ The prefix field of a header with GNU magic, which GNU tar uses for times in inc
 
 GNU&#x27;s format has no prefix field: in incremental archives, GNU tar writes the access and change
 times where ustar has its prefix. This case is ambiguous in practice because the field, taken for
-ustar&#x27;s prefix, puts `a` under a directory `15000000000`, which Python&#x27;s `tarfile` does (gh-155629).
+ustar&#x27;s prefix, puts `a` under a directory `15000000000`, as BusyBox, 7-Zip, Python&#x27;s `tarfile`
+(gh-155629), PharData, Archive::Tar, Haskell&#x27;s tar and Julia&#x27;s Tar.jl do.
 
 Decision point: whether a header with GNU magic has a prefix.
 Seen in: none of the scanned tarballs with times there.

@@ -2,7 +2,8 @@
 
 The header has typeflag `0` and the linkname `target`. POSIX gives a linkname meaning only for
 links. This case is ambiguous because the member is either a file, by its typeflag, or a link to
-`target`, by its linkname.
+`target`, by its linkname. Every implementation that extracts it makes a file; node-tar and Julia's
+Tar.jl reject it for its linkname.
 
 Decision point: whether a linkname makes a member a link.
 Seen in: bgen 1.1.7.

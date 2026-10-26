@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="style.css?487f8630">
 <link rel="canonical" href="https://stoppels.ch/tar/F08.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F08.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/c31b520b3dd6905f.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/abbe31812e60c7f1.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of F08 end-truncated-in-member">
@@ -174,8 +174,8 @@ marker, which is rejected as well.
 <tr><td>Perl Archive::Tar</td><td>Archive::Tar 3.12 of Perl v5.44.0</td><td>✅ as the verdict says</td><td>error: Read error on tarfile (missing data) &#x27;a&#x27; at offset unknown at contrib/matrix/runners/perl/extract.pl line 12. Read error on tarfile (missing data) &#x27;a&#x27; at offset unknown</td></tr>
 <tr><td>Haskell tar</td><td>tar 0.7.2.0, extract, of GHC 9.14</td><td>✅ as the verdict says</td><td>error: TruncatedArchive</td></tr>
 <tr><td>Julia Tar.jl</td><td>Tar 1.10.0 of Julia 1.13.3</td><td>✅ as the verdict says</td><td>error: EOFError: read end of file</td></tr>
-<tr><td>live-bootstrap untar</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (512 B, 64164443)</td></tr>
-<tr><td>live-bootstrap untar, --non-strict</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (512 B, 64164443)</td></tr></table></div>
+<tr><td>live-bootstrap untar</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>✅ as the verdict says</td><td>error: Short read on suite/archives/F08-end-truncated-in-member.tar: Expected 512, got The extraction of suite/archives/F08-end-truncated-in-member.tar produced errors 0</td></tr>
+<tr><td>live-bootstrap untar, --non-strict</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>✅ as the verdict says</td><td>error: non-strict mode enabled, preparing for chaos Short read on suite/archives/F08-end-truncated-in-member.tar: Expected 512, got The extraction of suite/archives/F08-end-truncated-in-member.tar produced …</td></tr></table></div>
 <h2 id="prevalence-in-release-tarballs">Prevalence in release tarballs<a class="anchor" href="#prevalence-in-release-tarballs" aria-label="Link to this section">¶</a></h2>
 <p>This case is not measured in release tarballs: <code>tarscan.py</code> stops at an archive cut short with an error, which none of the scanned tarballs has.</p>
 <h2 id="see-also">See also<a class="anchor" href="#see-also" aria-label="Link to this section">¶</a></h2>

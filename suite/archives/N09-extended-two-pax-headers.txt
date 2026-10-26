@@ -11,7 +11,7 @@ Decision point: which of two extended headers of one kind applies.
 Seen in: none of the scanned tarballs. libmygpo-qt 1.2.0 repeats xattr keys within one header,
 which is N20, pax-repeated-key.
 
-0x000000  header: pax extended header, for the next member
+0x000000  header: pax extended header
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -19,7 +19,7 @@ which is N20, pax-repeated-key.
           size     [124,136)  "00000000016" + NUL  14
           mtime    [136,148)  "00000000000" + NUL  0
           chksum   [148,156)  "011076\0 "  4670: the unsigned sum of the header, this field as spaces
-          typeflag [156,157)  "x"  pax extended header, for the next member
+          typeflag [156,157)  "x"  pax extended header
           linkname [157,257)  100 NUL
           magic    [257,263)  "ustar" + NUL
           version  [263,265)  "00"
@@ -32,7 +32,7 @@ which is N20, pax-repeated-key.
 0x000200  data: pax records
           14 bytes of pax records, then 498 NUL
           "14 path=first\n"
-0x000400  header: pax extended header, for the next member
+0x000400  header: pax extended header
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -40,7 +40,7 @@ which is N20, pax-repeated-key.
           size     [124,136)  "00000000017" + NUL  15
           mtime    [136,148)  "00000000000" + NUL  0
           chksum   [148,156)  "011077\0 "  4671: the unsigned sum of the header, this field as spaces
-          typeflag [156,157)  "x"  pax extended header, for the next member
+          typeflag [156,157)  "x"  pax extended header
           linkname [157,257)  100 NUL
           magic    [257,263)  "ustar" + NUL
           version  [263,265)  "00"

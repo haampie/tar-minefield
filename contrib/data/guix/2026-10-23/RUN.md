@@ -58,8 +58,8 @@ them as not assessed.
 
 ## Scanned again, 2026-10-24
 
-`tarscan.py` `5b9b83abac66` reports features that `25bfa32e6e71` did not, for the cases F20 to F31
-and N22 to N24. `UNREPORTED` in `contrib/scanner/strict.py` lists them, and rules them out from
+`tarscan.py` `5b9b83abac66` reports features that `25bfa32e6e71` did not, for the cases F21, F26,
+F27, F30, F31, N22 and N23. `UNREPORTED` in `contrib/scanner/strict.py` lists them, and rules them out from
 what `25bfa32e6e71` recorded in most tarballs. The 10 tarballs of this scan where it rules out
 neither a strict criterion nor a binary value of a vendor pax key were scanned again, with the
 same untar, and their rows in `results.jsonl` replaced:

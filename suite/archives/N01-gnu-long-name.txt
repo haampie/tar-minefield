@@ -6,7 +6,7 @@ GNU tar's own format: a header of typeflag `L` whose data is the name of the nex
 
 Seen in: tarballs produced by GNU tar.
 
-0x000000  header: GNU long name, for the next member
+0x000000  header: GNU long name
           name     [  0,100)  "././@LongLink" + 87 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -14,7 +14,7 @@ Seen in: tarballs produced by GNU tar.
           size     [124,136)  "00000000172" + NUL  122
           mtime    [136,148)  "00000000000" + NUL  0
           chksum   [148,156)  "011233\0 "  4763: the unsigned sum of the header, this field as spaces
-          typeflag [156,157)  "L"  GNU long name, for the next member
+          typeflag [156,157)  "L"  GNU long name
           linkname [157,257)  100 NUL
           magic    [257,263)  "ustar "
           version  [263,265)  " " + NUL

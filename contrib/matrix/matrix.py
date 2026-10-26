@@ -6,8 +6,8 @@
 Programs are found on PATH, or in an environment variable of their name in capitals, such as
 $JULIA or $BSDTAR. WORK is a directory for builds and extractions: runners are built there, and every case is
 extracted there in a directory of its own, two levels below a directory that catches what is
-written outside it. Some cases do write outside the destination in lenient extractors, so WORK
-should be a throwaway directory. Writes matrix.json, the results, and MATRIX.md, the table made
+written outside it, and N12, whose absolute name is in /tmp, is caught there. Some cases do write
+outside the destination in lenient extractors, so WORK should be a throwaway directory. Writes matrix.json, the results, and MATRIX.md, the table made
 from them, next to this script. With --only, only the implementations of those names are run, and
 their results replace or join those in matrix.json, whose other columns are kept. With --readme, the summary between `<!-- begin matrix.py -->` and
 `<!-- end matrix.py -->` in that file, and MATRIX.md, are generated again from matrix.json, and
@@ -145,10 +145,14 @@ def implementations(work, only=None):
             commit = open(os.path.join(RUNNERS, "mescc-tools-extra", "source.txt")).read().split(
                 "mescc-tools-extra https://github.com/oriansj/mescc-tools-extra ")[1][:12]
             version = f"mescc-tools-extra {commit}, as live-bootstrap pins it, built with cc"
+            # untar exits 0 when it "produced errors", such as a checksum failure: as an error
+            check = ('out=$("$@" 2>&1); code=$?; printf "%s\\n" "$out" >&2; '
+                     'case $out in *"produced errors"*) exit 1;; esac; exit $code')
             found.append(("live-bootstrap untar", version,
-                          lambda a, d, b=binary: [b, "--file", a]))
+                          lambda a, d, b=binary: ["sh", "-c", check, "sh", b, "--file", a]))
             found.append(("live-bootstrap untar, --non-strict", version,
-                          lambda a, d, b=binary: [b, "--non-strict", "--file", a]))
+                          lambda a, d, b=binary: ["sh", "-c", check, "sh", b, "--non-strict",
+                                                  "--file", a]))
     busybox = tool("busybox")
     if busybox:
         # without the time of the build, which a build from source has in its banner
@@ -275,32 +279,38 @@ def implementations(work, only=None):
     return [i for i in found if want(i[0])]
 
 
+def entry(path, dest=None):
+    """The entry of one path, as in the manifests of the cases. Link targets in dest start with
+    `DEST` instead, so that the results do not depend on where they were made."""
+    st = os.lstat(path)
+    if stat.S_ISLNK(st.st_mode):
+        target = os.readlink(path)
+        if dest and (target == dest or target.startswith(dest + os.sep)):
+            target = "DEST" + target[len(dest):]
+        return {"kind": "symlink", "target": target}
+    if stat.S_ISDIR(st.st_mode):
+        return {"kind": "directory"}
+    if stat.S_ISREG(st.st_mode):
+        with open(path, "rb") as f:
+            data = f.read()
+        return {"kind": "file", "size": len(data), "sha256": hashlib.sha256(data).hexdigest(),
+                "executable": bool(st.st_mode & stat.S_IXUSR)}
+    return {"kind": "other"}
+
+
 def walk(top, dest=None):
-    """The tree under top: {path: entry}, as in the manifests of the cases. Link targets in dest
-    start with `DEST` instead, so that the results do not depend on where they were made."""
+    """The tree under top: {path: entry}."""
     tree = {}
     for dirpath, dirnames, filenames in os.walk(top):
         for name in dirnames + filenames:
             path = os.path.join(dirpath, name)
-            rel = os.path.relpath(path, top).replace(os.sep, "/")
-            st = os.lstat(path)
-            if stat.S_ISLNK(st.st_mode):
-                target = os.readlink(path)
-                if dest and (target == dest or target.startswith(dest + os.sep)):
-                    target = "DEST" + target[len(dest):]
-                tree[rel] = {"kind": "symlink", "target": target}
-            elif stat.S_ISDIR(st.st_mode):
-                tree[rel] = {"kind": "directory"}
-            elif stat.S_ISREG(st.st_mode):
-                with open(path, "rb") as f:
-                    data = f.read()
-                tree[rel] = {"kind": "file", "size": len(data),
-                             "sha256": hashlib.sha256(data).hexdigest(),
-                             "executable": bool(st.st_mode & stat.S_IXUSR)}
-            else:
-                tree[rel] = {"kind": "other"}
+            tree[os.path.relpath(path, top).replace(os.sep, "/")] = entry(path, dest)
         dirnames[:] = [d for d in dirnames if not os.path.islink(os.path.join(dirpath, d))]
     return tree
+
+
+# The absolute name of N12: in /tmp, which an extractor that follows it can write without root
+ABSOLUTE = "/tmp/tar-minefield-absolute"
 
 
 def extract(command, archive, root):
@@ -312,6 +322,12 @@ def extract(command, archive, root):
     tree = walk(dest, dest)
     outside = {p: e for p, e in walk(root, dest).items()
                if p not in ("x", "x/y", "x/y/dest") and not p.startswith("x/y/dest/")}
+    if os.path.lexists(ABSOLUTE):
+        outside[ABSOLUTE] = entry(ABSOLUTE)
+        if os.path.isdir(ABSOLUTE) and not os.path.islink(ABSOLUTE):
+            shutil.rmtree(ABSOLUTE)
+        else:
+            os.remove(ABSOLUTE)
     error = None
     if code != 0:
         error = (err.strip() or out.strip() or f"status {code}")
@@ -417,6 +433,9 @@ def main():
         return
     work = os.path.abspath(sys.argv[1])
     only = set(sys.argv[3:]) if sys.argv[2:3] == ["--only"] else None
+    if os.path.lexists(ABSOLUTE):
+        sys.exit(f"{ABSOLUTE} exists, and would count as written by the first extractor: "
+                 "remove it first")
     cases = load_cases()
     impls = implementations(work, only)
     results = {"implementations": [{"name": n, "version": v} for n, v, _ in impls],
@@ -501,7 +520,7 @@ def ordered(results):
     return sorted(results["implementations"], key=lambda i: rank.get(i["name"], len(rank)))
 
 
-def implementations(names):
+def count_implementations(names):
     """How many implementations the columns are: a column is an implementation or one of its
     configurations, such as a filter of tarfile, named after a comma."""
     return len({n.split(",")[0] for n in names})
@@ -699,8 +718,9 @@ def readme(path, results, cases):
     names = columns(results)
     total = totals(results, cases, names)
     lines = [
-        f"What {implementations(names)} implementations make of the {len(cases)} cases: a row per case, by "
-        "category, and a column per implementation, with the outcomes of all cases at the top. "
+        f"What {count_implementations(names)} implementations make of the {len(cases)} cases: a "
+        "row per case, by category, and a column per implementation, with the outcomes of all "
+        "cases at the top. "
         f"[The website]({SITE}) has a page per case.",
         "",
         "[![What every implementation makes of every case of the test suite. Outcomes of all cases: "

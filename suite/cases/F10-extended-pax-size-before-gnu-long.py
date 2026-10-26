@@ -3,7 +3,9 @@
 The pax header has `size=512` and is followed by a GNU long name header, then by the member.
 Neither POSIX nor GNU's format defines the two together. This case is ambiguous because the size
 applies either to the long name header, and `smuggled` is a member of its own, or to the member,
-whose data then takes in the header of `smuggled`. This is the bug class of GHSA-3pv8-6f4r-ffg2
+whose data then takes in the header of `smuggled`. Python's `tarfile` reads both: the member with
+that data, and then `short-name` and `smuggled`. RubyGems drops the long name, and extracts
+`short-name` and `smuggled`. This is the bug class of GHSA-3pv8-6f4r-ffg2
 (tar-rs) and CVE-2026-53655 (node-tar).
 
 Decision point: which header a pax size applies to, when another extended header follows.

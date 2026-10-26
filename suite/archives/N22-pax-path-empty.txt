@@ -5,12 +5,13 @@ An empty pax `path`, which in POSIX removes the path rather than giving one.
 POSIX says that a record with an empty value deletes the corresponding field, in the header too, so
 `path=` leaves the member with no name at all, not even that of its header, `from-header`. It does
 not say what a member without a name is. This case is ambiguous because the name is either what the
-header specifies, `from-header`, or empty (which refers to the destination itself).
+header specifies, `from-header`, or empty (which refers to the destination itself): node-tar and
+Rust's tar skip the member, and 7-Zip names the file after the archive.
 
 Decision point: what an empty pax path means: no name, an empty name, or the header's name.
 Seen in: none of the scanned tarballs.
 
-0x000000  header: pax extended header, for the next member, path=, which removes the path
+0x000000  header: pax extended header, path=, which removes the path
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -18,7 +19,7 @@ Seen in: none of the scanned tarballs.
           size     [124,136)  "00000000010" + NUL  8
           mtime    [136,148)  "00000000000" + NUL  0
           chksum   [148,156)  "011070\0 "  4664: the unsigned sum of the header, this field as spaces
-          typeflag [156,157)  "x"  pax extended header, for the next member
+          typeflag [156,157)  "x"  pax extended header
           linkname [157,257)  100 NUL
           magic    [257,263)  "ustar" + NUL
           version  [263,265)  "00"

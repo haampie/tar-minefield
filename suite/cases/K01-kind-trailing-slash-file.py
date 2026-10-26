@@ -5,7 +5,8 @@ ambiguous because the member is either a directory `a`, by its trailing slash, o
 by its typeflag.
 
 Decision point: whether the typeflag or the trailing slash decides the kind.
-Seen in: old archives, such as sendmail 8.18.2, tcp_wrappers 7.6 and unclutter 8.
+Seen in: archives in the old v7 format, such as sendmail 8.18.2, tcp_wrappers 7.6 and
+unclutter 8.
 """
 
 VERDICT = "reject"

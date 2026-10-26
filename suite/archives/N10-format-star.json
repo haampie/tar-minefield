@@ -1,7 +1,7 @@
 {
  "id": "N10",
  "verdict": "reject",
- "description": "star's prefix field, which is shorter than ustar's.",
+ "description": "A ustar prefix whose end reads as star's times, with star's `tar\\0` at offset 508.",
  "features": [
   "format.star"
  ]

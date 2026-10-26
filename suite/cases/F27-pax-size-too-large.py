@@ -1,10 +1,10 @@
 """A pax `size` of 2^64 + 512, which wraps around to 512 in 64 bits.
 
-pax numbers can be of any length, but implementations keep sizes in 64 bits. In POSIX, the size is
-2^64 + 512, which runs past the end of the archive. Read leniently, this case is ambiguous because
-the size is 512, wrapped around, the header's, 0, or 2^64 - 1, clamped. With 512 the next block is
-the data of `a`, with 0 the header of `smuggled`, and with 2^64 - 1 the data runs past the end of
-the archive.
+pax numbers can be of any length, but many implementations keep sizes in 64 bits. In POSIX, the
+size is 2^64 + 512, which runs past the end of the archive, as Python's `tarfile` and node-tar read
+it. Read leniently, this case is ambiguous because BusyBox, 7-Zip, PharData, Rust's tar, RubyGems,
+Archive::Tar and Haskell's tar take the header's size, 0, instead, and extract the next block as a
+file `smuggled`. Wrapped around to 512 in 64 bits, the next block would be the data of `a`.
 
 Decision point: what a pax number too large for the reader means.
 Seen in: none of the scanned tarballs.

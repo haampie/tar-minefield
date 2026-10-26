@@ -2,21 +2,22 @@ N12-name-absolute: must reject
 
 An absolute name, which points outside the directory the archive is extracted to.
 
-The name `/tar-minefield-absolute` is a path from the root. The case is rejected because the name,
-taken as it is, leads out of the destination, not because it is ambiguous. The file is harmless, and
-writing to the root fails unless the extractor runs as root.
+The name `/tmp/tar-minefield-absolute` is a path from the root. The case is rejected because the
+name, taken as it is, leads out of the destination, not because it is ambiguous. The file is
+harmless, and in `/tmp`, so that an extractor that follows the name writes it without running as
+root.
 
 Decision point: whether an absolute name is rejected, made relative, or followed.
 Seen in: dtv-scan-tables (`/usr/share/dvb/`) and masurca 3.3.1.
 
 0x000000  header: regular file
-          name     [  0,100)  "/tar-minefield-absolute" + 77 NUL
+          name     [  0,100)  "/tmp/tar-minefield-absolute" + 73 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
           gid      [116,124)  "0000000" + NUL  0
           size     [124,136)  "00000000131" + NUL  89
           mtime    [136,148)  "00000000000" + NUL  0
-          chksum   [148,156)  "013536\0 "  5982: the unsigned sum of the header, this field as spaces
+          chksum   [148,156)  "014336\0 "  6366: the unsigned sum of the header, this field as spaces
           typeflag [156,157)  "0"  regular file
           linkname [157,257)  100 NUL
           magic    [257,263)  "ustar" + NUL

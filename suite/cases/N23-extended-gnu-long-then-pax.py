@@ -16,7 +16,7 @@ FEATURES = ["extended.gnu-long-and-pax"]
 
 
 def build(a):
-    a.gnu_long(b"from-gnu", note="the name of the next header, or of the next member")
+    a.gnu_long(b"from-gnu", note="the name of the next header, or of the next member?")
     a.pax([(b"mtime", b"1")], note="only an mtime")
     a.file(b"from-header", b"which name?\n")
     a.end()

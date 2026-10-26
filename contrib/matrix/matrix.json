@@ -1093,7 +1093,7 @@
     }
    },
    "live-bootstrap untar": {
-    "error": null,
+    "error": "Short read on suite/archives/F04-end-missing.tar: expected 512, got 0\nThe extraction of suite/archives/F04-end-missing.tar produced errors",
     "outside": {},
     "tree": {
      "a": {
@@ -1105,7 +1105,7 @@
     }
    },
    "live-bootstrap untar, --non-strict": {
-    "error": null,
+    "error": "non-strict mode enabled, preparing for chaos\nShort read on suite/archives/F04-end-missing.tar: expected 512, got 0\nThe extraction of suite/archives/F04-end-missing.tar produced errors",
     "outside": {},
     "tree": {
      "a": {
@@ -2139,7 +2139,7 @@
     }
    },
    "live-bootstrap untar": {
-    "error": null,
+    "error": "Short read on suite/archives/F08-end-truncated-in-member.tar: Expected 512, got The extraction of suite/archives/F08-end-truncated-in-member.tar produced errors\n0",
     "outside": {},
     "tree": {
      "a": {
@@ -2151,7 +2151,7 @@
     }
    },
    "live-bootstrap untar, --non-strict": {
-    "error": null,
+    "error": "non-strict mode enabled, preparing for chaos\nShort read on suite/archives/F08-end-truncated-in-member.tar: Expected 512, got The extraction of suite/archives/F08-end-truncated-in-member.tar produced errors\n0",
     "outside": {},
     "tree": {
      "a": {
@@ -8974,12 +8974,12 @@
     "tree": {}
    },
    "live-bootstrap untar": {
-    "error": null,
+    "error": "Checksum failure\nThe extraction of suite/archives/F29-number-size-base256-negative.tar produced errors",
     "outside": {},
     "tree": {}
    },
    "live-bootstrap untar, --non-strict": {
-    "error": null,
+    "error": "non-strict mode enabled, preparing for chaos\nChecksum failure\nThe extraction of suite/archives/F29-number-size-base256-negative.tar produced errors",
     "outside": {},
     "tree": {}
    },
@@ -9185,12 +9185,12 @@
     "tree": {}
    },
    "live-bootstrap untar": {
-    "error": null,
+    "error": "Checksum failure\nThe extraction of suite/archives/F30-number-size-base256-too-large.tar produced errors",
     "outside": {},
     "tree": {}
    },
    "live-bootstrap untar, --non-strict": {
-    "error": null,
+    "error": "non-strict mode enabled, preparing for chaos\nChecksum failure\nThe extraction of suite/archives/F30-number-size-base256-too-large.tar produced errors",
     "outside": {},
     "tree": {}
    },
@@ -14492,10 +14492,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14507,10 +14507,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14522,10 +14522,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14537,10 +14537,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14552,10 +14552,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14567,10 +14567,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14582,10 +14582,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14597,10 +14597,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14612,10 +14612,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14632,10 +14632,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14647,10 +14647,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14662,10 +14662,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14677,10 +14677,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14692,10 +14692,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000/a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14707,10 +14707,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14722,10 +14722,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14737,10 +14737,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14752,10 +14752,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14791,10 +14791,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14806,10 +14806,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -14821,10 +14821,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "dir": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 ": {
       "kind": "directory"
      },
-     "dir/a": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a": {
       "executable": false,
       "kind": "file",
       "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
@@ -15138,7 +15138,7 @@
   },
   "N12-name-absolute": {
    ".NET System.Formats.Tar": {
-    "error": "IOException: Extracting the Tar entry '/tar-minefield-absolute' would have resulted in a file outside the specified destination directory: 'DEST/'",
+    "error": "IOException: Extracting the Tar entry '/tmp/tar-minefield-absolute' would have resulted in a file outside the specified destination directory: 'DEST/'",
     "outside": {},
     "tree": {}
    },
@@ -15146,7 +15146,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "tar-minefield-absolute": {
+     "tmp": {
+      "kind": "directory"
+     },
+     "tmp/tar-minefield-absolute": {
       "executable": false,
       "kind": "file",
       "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
@@ -15158,7 +15161,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "tar-minefield-absolute": {
+     "tmp": {
+      "kind": "directory"
+     },
+     "tmp/tar-minefield-absolute": {
       "executable": false,
       "kind": "file",
       "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
@@ -15170,7 +15176,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "tar-minefield-absolute": {
+     "tmp": {
+      "kind": "directory"
+     },
+     "tmp/tar-minefield-absolute": {
       "executable": false,
       "kind": "file",
       "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
@@ -15182,7 +15191,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "tar-minefield-absolute": {
+     "tmp": {
+      "kind": "directory"
+     },
+     "tmp/tar-minefield-absolute": {
       "executable": false,
       "kind": "file",
       "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
@@ -15191,17 +15203,17 @@
     }
    },
    "Haskell tar": {
-    "error": "Absolute file name in tar archive: \"/tar-minefield-absolute\"",
+    "error": "Absolute file name in tar archive: \"/tmp/tar-minefield-absolute\"",
     "outside": {},
     "tree": {}
    },
    "Java Commons Compress": {
-    "error": "java.io.IOException: Zip slip 'DEST' + '/tar-minefield-absolute' -> '/tar-minefield-absolute'",
+    "error": "java.io.IOException: Zip slip 'DEST' + '/tmp/tar-minefield-absolute' -> '/tmp/tar-minefield-absolute'",
     "outside": {},
     "tree": {}
    },
    "Julia Tar.jl": {
-    "error": "path is absolute\nTar.Header(\"/tar-minefield-absolute\", :file, 0o644, 89, \"\")",
+    "error": "path is absolute\nTar.Header(\"/tmp/tar-minefield-absolute\", :file, 0o644, 89, \"\")",
     "outside": {},
     "tree": {}
    },
@@ -15209,7 +15221,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "tar-minefield-absolute": {
+     "tmp": {
+      "kind": "directory"
+     },
+     "tmp/tar-minefield-absolute": {
       "executable": false,
       "kind": "file",
       "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
@@ -15218,7 +15233,7 @@
     }
    },
    "Perl Archive::Tar": {
-    "error": "Entry '/tar-minefield-absolute' is an absolute path. Not extracting absolute paths under SECURE EXTRACT MODE at contrib/matrix/runners/perl/extract.pl line 14.\nCould not extract '/tar-minefield-absolute' at contrib/matrix/runners/perl/extract.pl line 14.\nCould not extract '/tar-minefield-absolute'",
+    "error": "Entry '/tmp/tar-minefield-absolute' is an absolute path. Not extracting absolute paths under SECURE EXTRACT MODE at contrib/matrix/runners/perl/extract.pl line 14.\nCould not extract '/tmp/tar-minefield-absolute' at contrib/matrix/runners/perl/extract.pl line 14.\nCould not extract \u2026",
     "outside": {},
     "tree": {}
    },
@@ -15226,7 +15241,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "tar-minefield-absolute": {
+     "tmp": {
+      "kind": "directory"
+     },
+     "tmp/tar-minefield-absolute": {
       "executable": false,
       "kind": "file",
       "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
@@ -15235,15 +15253,25 @@
     }
    },
    "Python tarfile, filter=fully_trusted": {
-    "error": "PermissionError: [Errno 13] Permission denied: '/tar-minefield-absolute'",
-    "outside": {},
+    "error": null,
+    "outside": {
+     "/tmp/tar-minefield-absolute": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
+      "size": 89
+     }
+    },
     "tree": {}
    },
    "Python tarfile, filter=tar": {
     "error": null,
     "outside": {},
     "tree": {
-     "tar-minefield-absolute": {
+     "tmp": {
+      "kind": "directory"
+     },
+     "tmp/tar-minefield-absolute": {
       "executable": false,
       "kind": "file",
       "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
@@ -15255,7 +15283,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "tar-minefield-absolute": {
+     "tmp": {
+      "kind": "directory"
+     },
+     "tmp/tar-minefield-absolute": {
       "executable": false,
       "kind": "file",
       "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
@@ -15264,7 +15295,7 @@
     }
    },
    "RubyGems": {
-    "error": "Gem::Package::PathError: installing into parent path /tar-minefield-absolute of DEST is not allowed",
+    "error": "Gem::Package::PathError: installing into parent path /tmp/tar-minefield-absolute of DEST is not allowed",
     "outside": {},
     "tree": {}
    },
@@ -15272,7 +15303,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "tar-minefield-absolute": {
+     "tmp": {
+      "kind": "directory"
+     },
+     "tmp/tar-minefield-absolute": {
       "executable": false,
       "kind": "file",
       "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
@@ -15284,7 +15318,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "tar-minefield-absolute": {
+     "tmp": {
+      "kind": "directory"
+     },
+     "tmp/tar-minefield-absolute": {
       "executable": false,
       "kind": "file",
       "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
@@ -15293,7 +15330,7 @@
     }
    },
    "Rust tar-codec, as in uv": {
-    "error": "at byte 0: unsafe member path \"/tar-minefield-absolute\": is absolute",
+    "error": "at byte 0: unsafe member path \"/tmp/tar-minefield-absolute\": is absolute",
     "outside": {},
     "tree": {}
    },
@@ -15301,7 +15338,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "tar-minefield-absolute": {
+     "tmp": {
+      "kind": "directory"
+     },
+     "tmp/tar-minefield-absolute": {
       "executable": false,
       "kind": "file",
       "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
@@ -15311,19 +15351,36 @@
    },
    "live-bootstrap untar": {
     "error": null,
-    "outside": {},
+    "outside": {
+     "/tmp/tar-minefield-absolute": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
+      "size": 89
+     }
+    },
     "tree": {}
    },
    "live-bootstrap untar, --non-strict": {
     "error": null,
-    "outside": {},
+    "outside": {
+     "/tmp/tar-minefield-absolute": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
+      "size": 89
+     }
+    },
     "tree": {}
    },
    "node-tar": {
     "error": null,
     "outside": {},
     "tree": {
-     "tar-minefield-absolute": {
+     "tmp": {
+      "kind": "directory"
+     },
+     "tmp/tar-minefield-absolute": {
       "executable": false,
       "kind": "file",
       "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
@@ -15340,7 +15397,10 @@
     "error": null,
     "outside": {},
     "tree": {
-     "tar-minefield-absolute": {
+     "tmp": {
+      "kind": "directory"
+     },
+     "tmp/tar-minefield-absolute": {
       "executable": false,
       "kind": "file",
       "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
@@ -16736,12 +16796,12 @@
     }
    },
    "live-bootstrap untar": {
-    "error": null,
+    "error": "Checksum failure\nThe extraction of suite/archives/N18-name-not-utf8.tar produced errors",
     "outside": {},
     "tree": {}
    },
    "live-bootstrap untar, --non-strict": {
-    "error": null,
+    "error": "non-strict mode enabled, preparing for chaos\nChecksum failure\nThe extraction of suite/archives/N18-name-not-utf8.tar produced errors",
     "outside": {},
     "tree": {}
    },

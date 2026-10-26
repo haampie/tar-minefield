@@ -11,7 +11,7 @@ block is the header of `smuggled`) or what the header specifies (and the next bl
 Decision point: what an empty pax size means: no size, 0, or the header's size.
 Seen in: none of the scanned tarballs.
 
-0x000000  header: pax extended header, for the next member, size=, which removes the size
+0x000000  header: pax extended header, size=, which removes the size
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -19,7 +19,7 @@ Seen in: none of the scanned tarballs.
           size     [124,136)  "00000000010" + NUL  8
           mtime    [136,148)  "00000000000" + NUL  0
           chksum   [148,156)  "011070\0 "  4664: the unsigned sum of the header, this field as spaces
-          typeflag [156,157)  "x"  pax extended header, for the next member
+          typeflag [156,157)  "x"  pax extended header
           linkname [157,257)  100 NUL
           magic    [257,263)  "ustar" + NUL
           version  [263,265)  "00"

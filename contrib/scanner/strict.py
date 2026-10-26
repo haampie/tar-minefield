@@ -131,7 +131,7 @@ STRICT = [
     ("number.mode.*", "kind", "a mode written in a way that implementations differ on"),
     ("tree.duplicate.file-file", "order and state", "the same file twice"),
     ("tree.duplicate.*", "order and state", "one path as two members"),
-    ("tree.under-*", "order and state", "a member under a file or a symlink"),
+    ("tree.under-*", "order and state", "a member under a file"),
     ("tree.through-symlink", "order and state", "a member written through a symlink"),
     ("tree.*", "order and state", "members that interact"),
     ("hardlink.to-itself", "order and state", "a hardlink to itself"),

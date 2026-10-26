@@ -7,7 +7,9 @@ the size 512 in its ustar header. POSIX says that no data is stored for a hard l
 next block is the header of a file, `smuggled`. It permits data on a hard link in pax, and
 libarchive reads it once an archive has a pax header: the block is then the data of `h`, which
 replaces the contents of `a`. This case is ambiguous because the tree has either `a` as it is and
-`smuggled`, or `a` with that block as its contents.
+`smuggled`, as most implementations read it, or `a` with that block as its contents, as bsdtar and
+tar-codec read it. node-tar, tar-fs, Rust's tar, astral-tokio-tar and Haskell's tar skip the block,
+and Commons Compress and PharData make `h` a file of it.
 
 Decision point: whether a size in the header of a hard link applies, in an archive with pax headers.
 Seen in: none of the scanned tarballs.
@@ -34,7 +36,7 @@ See also: F33, a size in the header of a directory, and F35, a pax size on a har
 0x000200  data
           2 bytes, then 510 NUL to the end of the block
           "a\n"
-0x000400  header: pax extended header, for the next member, for h, which makes the archive pax
+0x000400  header: pax extended header, for h, which makes the archive pax
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -42,7 +44,7 @@ See also: F33, a size in the header of a directory, and F35, a pax size on a har
           size     [124,136)  "00000000013" + NUL  11
           mtime    [136,148)  "00000000000" + NUL  0
           chksum   [148,156)  "011073\0 "  4667: the unsigned sum of the header, this field as spaces
-          typeflag [156,157)  "x"  pax extended header, for the next member
+          typeflag [156,157)  "x"  pax extended header
           linkname [157,257)  100 NUL
           magic    [257,263)  "ustar" + NUL
           version  [263,265)  "00"

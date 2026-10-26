@@ -35,10 +35,10 @@ TYPES = {
     b"1": "hardlink",
     b"2": "symlink",
     b"5": "directory",
-    b"x": "pax extended header, for the next member",
+    b"x": "pax extended header",
     b"g": "pax global header",
-    b"L": "GNU long name, for the next member",
-    b"K": "GNU long link name, for the next member",
+    b"L": "GNU long name",
+    b"K": "GNU long link name",
 }
 
 

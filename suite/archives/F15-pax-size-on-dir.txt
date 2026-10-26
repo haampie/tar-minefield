@@ -12,7 +12,7 @@ Seen in: llama_index_workflows 2.26.0, with a pax size on a directory.
 See also: F33, a size in the ustar header of a directory, and F35, a pax `size` on a hard link,
 which are rejected as well.
 
-0x000000  header: pax extended header, for the next member, for dir/, with size=512
+0x000000  header: pax extended header, for dir/, with size=512
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -20,7 +20,7 @@ which are rejected as well.
           size     [124,136)  "00000000014" + NUL  12
           mtime    [136,148)  "00000000000" + NUL  0
           chksum   [148,156)  "011074\0 "  4668: the unsigned sum of the header, this field as spaces
-          typeflag [156,157)  "x"  pax extended header, for the next member
+          typeflag [156,157)  "x"  pax extended header
           linkname [157,257)  100 NUL
           magic    [257,263)  "ustar" + NUL
           version  [263,265)  "00"

@@ -20,7 +20,7 @@ def build(a):
         [(b"comment", b"0123456789abcdef0123456789abcdef01234567")],
         typeflag=b"g",
         name=b"pax_global_header",
-        note="the commit, as git archive writes it",
+        note="the commit, in the record that git archive writes",
     )
     a.directory(b"project/", mode=0o775)
     a.file(b"project/README", b"hello\n", mode=0o664)

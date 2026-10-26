@@ -430,7 +430,10 @@ UNTOLD = {"S07": "<code>tarscan.py</code> finds the same file twice, but does no
                  "the scanned tarballs has"}
 # What a feature does not say, below the table of the tarballs that have it
 CAVEATS = {"tree.duplicate.file-file": "<code>tarscan.py</code> finds the same file twice, and does "
-           "not compare the contents of the copies: some of these may differ, as in S07."}
+           "not compare the contents of the copies: some of these may differ, as in S07.",
+           "end.zero-block-before-member": "<code>tarscan.py</code> counts a zero block followed "
+           "by any block that is not zero. In all of these, the scan then stops at a block that is "
+           "not a valid header: no member follows the zero block, unlike in F09."}
 
 
 def features_of(case, info):
@@ -984,7 +987,7 @@ published there.</p>
 """
     rejected = sum(not strict.passes_default(r) for r in union)
     description = (f"A test suite of {len(cases)} tar archives, what "
-                   f"{matrix.implementations(matrix.columns(results))} implementations make of "
+                   f"{matrix.count_implementations(matrix.columns(results))} implementations make of "
                    "each, and a draft policy that rejects most of the ambiguous ones "
                    f"and accepts {strict.percent(len(union) - rejected, len(union))} of "
                    f"{len(union):,} real tarballs.")

@@ -2,16 +2,16 @@ F27-pax-size-too-large: must reject
 
 A pax `size` of 2^64 + 512, which wraps around to 512 in 64 bits.
 
-pax numbers can be of any length, but implementations keep sizes in 64 bits. In POSIX, the size is
-2^64 + 512, which runs past the end of the archive. Read leniently, this case is ambiguous because
-the size is 512, wrapped around, the header's, 0, or 2^64 - 1, clamped. With 512 the next block is
-the data of `a`, with 0 the header of `smuggled`, and with 2^64 - 1 the data runs past the end of
-the archive.
+pax numbers can be of any length, but many implementations keep sizes in 64 bits. In POSIX, the
+size is 2^64 + 512, which runs past the end of the archive, as Python's `tarfile` and node-tar read
+it. Read leniently, this case is ambiguous because BusyBox, 7-Zip, PharData, Rust's tar, RubyGems,
+Archive::Tar and Haskell's tar take the header's size, 0, instead, and extract the next block as a
+file `smuggled`. Wrapped around to 512 in 64 bits, the next block would be the data of `a`.
 
 Decision point: what a pax number too large for the reader means.
 Seen in: none of the scanned tarballs.
 
-0x000000  header: pax extended header, for the next member, size=2^64+512, for a
+0x000000  header: pax extended header, size=2^64+512, for a
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -19,7 +19,7 @@ Seen in: none of the scanned tarballs.
           size     [124,136)  "00000000035" + NUL  29
           mtime    [136,148)  "00000000000" + NUL  0
           chksum   [148,156)  "011077\0 "  4671: the unsigned sum of the header, this field as spaces
-          typeflag [156,157)  "x"  pax extended header, for the next member
+          typeflag [156,157)  "x"  pax extended header
           linkname [157,257)  100 NUL
           magic    [257,263)  "ustar" + NUL
           version  [263,265)  "00"

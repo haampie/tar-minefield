@@ -1,8 +1,8 @@
 r"""A name that is not UTF-8.
 
 The name `caf\xe9` is Latin-1, and POSIX leaves how a name in the header is encoded to the
-implementation. This case is ambiguous because the name on disk is those bytes, `café` decoded as
-Latin-1, or the name with the byte replaced.
+implementation. This case is ambiguous because the name on disk is those bytes, or the name with the
+byte replaced, by U+FFFD in node-tar, tar-fs and .NET, and by `?` in Commons Compress.
 
 Decision point: how a name that is not UTF-8 is decoded.
 Seen in: aspell-is 0.51.1-0 and aspell-nb 0.50.1-0.

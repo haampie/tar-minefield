@@ -11,7 +11,7 @@ either that number, 512 (and the next block is the data of `a`), or what the hea
 Decision point: whether a pax size may have a sign.
 Seen in: none of the scanned tarballs.
 
-0x000000  header: pax extended header, for the next member, size=+512, for a
+0x000000  header: pax extended header, size=+512, for a
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -19,7 +19,7 @@ Seen in: none of the scanned tarballs.
           size     [124,136)  "00000000015" + NUL  13
           mtime    [136,148)  "00000000000" + NUL  0
           chksum   [148,156)  "011075\0 "  4669: the unsigned sum of the header, this field as spaces
-          typeflag [156,157)  "x"  pax extended header, for the next member
+          typeflag [156,157)  "x"  pax extended header
           linkname [157,257)  100 NUL
           magic    [257,263)  "ustar" + NUL
           version  [263,265)  "00"

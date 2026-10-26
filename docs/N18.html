@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="style.css?487f8630">
 <link rel="canonical" href="https://stoppels.ch/tar/N18.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N18.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/2d5af60d64169917.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/54994972426c6cbf.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of N18 name-not-utf8">
@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The name <code>caf\xe9</code> is Latin-1, and <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=characters%20outside%20of%20%3Cslash%3E%20and%20the%20portable%20filename%20character%20set">POSIX</a> leaves how a name in the header is encoded to the implementation. This case is ambiguous because the name on disk is those bytes, <code>café</code> decoded as Latin-1, or the name with the byte replaced.</p>
+<p>The name <code>caf\xe9</code> is Latin-1, and <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=characters%20outside%20of%20%3Cslash%3E%20and%20the%20portable%20filename%20character%20set">POSIX</a> leaves how a name in the header is encoded to the implementation. This case is ambiguous because the name on disk is those bytes, or the name with the byte replaced, by U+FFFD in node-tar, tar-fs and .NET, and by <code>?</code> in Commons Compress.</p>
 <p><strong>Decision point:</strong> how a name that is not UTF-8 is decoded.</p>
 <p><strong>Seen in:</strong> aspell-is 0.51.1-0 and aspell-nb 0.50.1-0.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,8 +52,8 @@
 A name that is not UTF-8.
 
 The name `caf\xe9` is Latin-1, and POSIX leaves how a name in the header is encoded to the
-implementation. This case is ambiguous because the name on disk is those bytes, `café` decoded as
-Latin-1, or the name with the byte replaced.
+implementation. This case is ambiguous because the name on disk is those bytes, or the name with the
+byte replaced, by U+FFFD in node-tar, tar-fs and .NET, and by `?` in Commons Compress.
 
 Decision point: how a name that is not UTF-8 is decoded.
 Seen in: aspell-is 0.51.1-0 and aspell-nb 0.50.1-0.
@@ -239,8 +239,8 @@ Seen in: aspell-is 0.51.1-0 and aspell-nb 0.50.1-0.
 <tr><td>Perl Archive::Tar</td><td>Archive::Tar 3.12 of Perl v5.44.0</td><td>⚠️ accepts</td><td>tree A: <code>caf\xe9</code> (8 B, ff3f1fa3)</td></tr>
 <tr><td>Haskell tar</td><td>tar 0.7.2.0, extract, of GHC 9.14</td><td>⚠️ accepts</td><td>tree A: <code>caf\xe9</code> (8 B, ff3f1fa3)</td></tr>
 <tr><td>Julia Tar.jl</td><td>Tar 1.10.0 of Julia 1.13.3</td><td>⚠️ accepts</td><td>tree A: <code>caf\xe9</code> (8 B, ff3f1fa3)</td></tr>
-<tr><td>live-bootstrap untar</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>⚠️ accepts</td><td>tree D: nothing</td></tr>
-<tr><td>live-bootstrap untar, --non-strict</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>⚠️ accepts</td><td>tree D: nothing</td></tr></table></div>
+<tr><td>live-bootstrap untar</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>✅ as the verdict says</td><td>error: Checksum failure The extraction of suite/archives/N18-name-not-utf8.tar produced errors</td></tr>
+<tr><td>live-bootstrap untar, --non-strict</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>✅ as the verdict says</td><td>error: non-strict mode enabled, preparing for chaos Checksum failure The extraction of suite/archives/N18-name-not-utf8.tar produced errors</td></tr></table></div>
 <h2 id="prevalence-in-release-tarballs">Prevalence in release tarballs<a class="anchor" href="#prevalence-in-release-tarballs" aria-label="Link to this section">¶</a></h2>
 <p>Release tarballs of Spack, nixpkgs, Guix and live-bootstrap, and samples of PyPI, crates.io and RubyGems with <code>name.not-utf8</code>. The default policy rejects all of them.</p>
 <div class="wide"><table class="data"><colgroup><col style="width: 25%"><col style="width: 25%"><col style="width: 25%"><col style="width: 25%"></colgroup><tr><th>ecosystem</th><th class=n>tarballs</th><th class=n>with it</th><th class=n>share</th></tr>

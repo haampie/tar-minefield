@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The first member is a directory <code>target/</code>, the second a symlink <code>link/</code> to <code>target</code>. With the slash, the name refers to what the link points to. This case is ambiguous because the member is either a symlink <code>link</code>, by its typeflag, or a directory <code>link</code>, by its trailing slash, as in K01.</p>
+<p>The first member is a directory <code>target/</code>, the second a symlink <code>link/</code> to <code>target</code>. With the slash, the name refers to what the link points to. This case is ambiguous because the member is either a symlink <code>link</code>, by its typeflag, or a directory <code>link</code>, by its trailing slash, as in K01, as Commons Compress makes it. PharData makes an empty file <code>link</code>.</p>
 <p><strong>Decision point:</strong> what a trailing slash on a link means.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -53,7 +53,8 @@ A symlink whose name ends in a slash.
 
 The first member is a directory `target/`, the second a symlink `link/` to `target`. With the slash,
 the name refers to what the link points to. This case is ambiguous because the member is either a
-symlink `link`, by its typeflag, or a directory `link`, by its trailing slash, as in K01.
+symlink `link`, by its typeflag, or a directory `link`, by its trailing slash, as in K01, as Commons
+Compress makes it. PharData makes an empty file `link`.
 
 Decision point: what a trailing slash on a link means.
 Seen in: none of the scanned tarballs.

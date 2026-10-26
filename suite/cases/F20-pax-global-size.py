@@ -3,7 +3,9 @@
 In POSIX, the records of a global header apply to every later member that does not override them, so
 the `size=512` of this one is the size of `a`, whose size field is 0. No archiver writes a size in a
 global header. This case is ambiguous in practice because, with global headers or the sizes in them
-ignored, the next block is not the data of `a` but the header of another file, `smuggled`.
+ignored, the next block is not the data of `a` but the header of another file, `smuggled`. Python's
+`tarfile` reads both: it gives `a` and `smuggled` the global size, but reads the header of
+`smuggled` right after that of `a`, so that the data of `a` is that header.
 
 Decision point: whether a `size` in a global header applies.
 Seen in: none of the scanned tarballs.

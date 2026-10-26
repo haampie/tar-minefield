@@ -8,7 +8,7 @@ are made this way, so a strict parser that rejects global headers rejects most o
 
 Seen in: tarballs created with `git archive`, such as GitHub's release tarballs.
 
-0x000000  header: pax global header, the commit, as git archive writes it
+0x000000  header: pax global header, the commit, in the record that git archive writes
           name     [  0,100)  "pax_global_header" + 83 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

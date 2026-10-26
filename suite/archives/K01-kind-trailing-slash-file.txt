@@ -7,7 +7,8 @@ ambiguous because the member is either a directory `a`, by its trailing slash, o
 by its typeflag.
 
 Decision point: whether the typeflag or the trailing slash decides the kind.
-Seen in: old archives, such as sendmail 8.18.2, tcp_wrappers 7.6 and unclutter 8.
+Seen in: archives in the old v7 format, such as sendmail 8.18.2, tcp_wrappers 7.6 and
+unclutter 8.
 
 0x000000  header: regular file, typeflag of a file, name of a directory
           name     [  0,100)  "a/" + 98 NUL

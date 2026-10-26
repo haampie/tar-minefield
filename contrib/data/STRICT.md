@@ -120,7 +120,7 @@ Tarballs that each criterion rejects, per ecosystem. Default: what the default p
 | order and state | `tree.duplicate.file-file`: the same file twice | reject | 0 | 17 (0.17%) | 0 | 59 (0.31%) | 3 (0.03%) | 4 (0.08%) | 17 (0.05%) | 80 | string-conversions@0.4.0.1, notmuch@0.40, multipart@0.2.1 |
 | order and state | `hardlink.to-itself`: a hardlink to itself | reject | 0 | 2 (0.02%) | 0 | 1 (0.01%) | 0 | 0 | 24 (0.06%) | 0 | xscreensaver@6.12, ghc@7.8.4-x86_64-unknown-linux-deb7, atari++_1.85 |
 | order and state | `tree.duplicate.file-hardlink`: one path as two members | reject | 0 | 2 (0.02%) | 0 | 1 (0.01%) | 0 | 0 | 24 (0.06%) | 0 | xscreensaver@6.12, ghc@7.8.4-x86_64-unknown-linux-deb7, atari++_1.85 |
-| order and state | `tree.under-file`: a member under a file or a symlink | reject | 0 | 1 (0.01%) | 0 | 3 (0.02%) | 0 | 0 | 2 (0.01%) | 0 | tcp_wrappers_7.6, sendmail.8.18.2, unclutter@8 |
+| order and state | `tree.under-file`: a member under a file | reject | 0 | 1 (0.01%) | 0 | 3 (0.02%) | 0 | 0 | 2 (0.01%) | 0 | tcp_wrappers_7.6, sendmail.8.18.2, unclutter@8 |
 | order and state | `hardlink.to-symlink`: a hardlink to a symlink | reject | 0 | 0 | 0 | 0 | 0 | 0 | 1 (0.00%) | 1 | octa@8.4 |
 
 Other criteria reject no tarball here. That is no proof that they cost nothing: with 95% confidence, each rejects less than 0.06% of crates, 0.03% of guix, 1.8% of live-bootstrap, 0.016% of nix, 0.03% of pypi, 0.06% of rubygems, 0.008% of spack.

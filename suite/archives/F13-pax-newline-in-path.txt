@@ -12,7 +12,7 @@ Decision point: whether a pax record is delimited by its length or by a newline.
 Seen in: none of the scanned tarballs. Newlines in pax values are only in xattrs, such as Minion
 10.31, which the default policy accepts as xattrs are not extracted.
 
-0x000000  header: pax extended header, for the next member, a path with a newline
+0x000000  header: pax extended header, a path with a newline
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -20,7 +20,7 @@ Seen in: none of the scanned tarballs. Newlines in pax values are only in xattrs
           size     [124,136)  "00000000031" + NUL  25
           mtime    [136,148)  "00000000000" + NUL  0
           chksum   [148,156)  "011073\0 "  4667: the unsigned sum of the header, this field as spaces
-          typeflag [156,157)  "x"  pax extended header, for the next member
+          typeflag [156,157)  "x"  pax extended header
           linkname [157,257)  100 NUL
           magic    [257,263)  "ustar" + NUL
           version  [263,265)  "00"

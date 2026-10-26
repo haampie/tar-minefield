@@ -11,7 +11,7 @@ than `from-header`.
 Decision point: whether a GNU long name applies to the next header or to the next member.
 Seen in: none of the scanned tarballs.
 
-0x000000  header: GNU long name, for the next member, the name of the next header, or of the next member
+0x000000  header: GNU long name, the name of the next header, or of the next member?
           name     [  0,100)  "././@LongLink" + 87 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -19,7 +19,7 @@ Seen in: none of the scanned tarballs.
           size     [124,136)  "00000000011" + NUL  9
           mtime    [136,148)  "00000000000" + NUL  0
           chksum   [148,156)  "011223\0 "  4755: the unsigned sum of the header, this field as spaces
-          typeflag [156,157)  "L"  GNU long name, for the next member
+          typeflag [156,157)  "L"  GNU long name
           linkname [157,257)  100 NUL
           magic    [257,263)  "ustar "
           version  [263,265)  " " + NUL
@@ -32,7 +32,7 @@ Seen in: none of the scanned tarballs.
 0x000200  data: GNU long name
           9 bytes: the name and a NUL, then 503 NUL
           "from-gnu" + NUL
-0x000400  header: pax extended header, for the next member, only an mtime
+0x000400  header: pax extended header, only an mtime
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -40,7 +40,7 @@ Seen in: none of the scanned tarballs.
           size     [124,136)  "00000000013" + NUL  11
           mtime    [136,148)  "00000000000" + NUL  0
           chksum   [148,156)  "011073\0 "  4667: the unsigned sum of the header, this field as spaces
-          typeflag [156,157)  "x"  pax extended header, for the next member
+          typeflag [156,157)  "x"  pax extended header
           linkname [157,257)  100 NUL
           magic    [257,263)  "ustar" + NUL
           version  [263,265)  "00"

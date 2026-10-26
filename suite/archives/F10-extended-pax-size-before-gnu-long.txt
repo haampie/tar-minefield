@@ -5,13 +5,15 @@ A pax `size` followed by a GNU long name: which of them does the size apply to?
 The pax header has `size=512` and is followed by a GNU long name header, then by the member.
 Neither POSIX nor GNU's format defines the two together. This case is ambiguous because the size
 applies either to the long name header, and `smuggled` is a member of its own, or to the member,
-whose data then takes in the header of `smuggled`. This is the bug class of GHSA-3pv8-6f4r-ffg2
+whose data then takes in the header of `smuggled`. Python's `tarfile` reads both: the member with
+that data, and then `short-name` and `smuggled`. RubyGems drops the long name, and extracts
+`short-name` and `smuggled`. This is the bug class of GHSA-3pv8-6f4r-ffg2
 (tar-rs) and CVE-2026-53655 (node-tar).
 
 Decision point: which header a pax size applies to, when another extended header follows.
 Seen in: none of the scanned tarballs.
 
-0x000000  header: pax extended header, for the next member, size=512
+0x000000  header: pax extended header, size=512
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -19,7 +21,7 @@ Seen in: none of the scanned tarballs.
           size     [124,136)  "00000000014" + NUL  12
           mtime    [136,148)  "00000000000" + NUL  0
           chksum   [148,156)  "011074\0 "  4668: the unsigned sum of the header, this field as spaces
-          typeflag [156,157)  "x"  pax extended header, for the next member
+          typeflag [156,157)  "x"  pax extended header
           linkname [157,257)  100 NUL
           magic    [257,263)  "ustar" + NUL
           version  [263,265)  "00"
@@ -32,7 +34,7 @@ Seen in: none of the scanned tarballs.
 0x000200  data: pax records
           12 bytes of pax records, then 500 NUL
           "12 size=512\n"
-0x000400  header: GNU long name, for the next member, the name of the next member
+0x000400  header: GNU long name, the name of the next member
           name     [  0,100)  "././@LongLink" + 87 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -40,7 +42,7 @@ Seen in: none of the scanned tarballs.
           size     [124,136)  "00000000012" + NUL  10
           mtime    [136,148)  "00000000000" + NUL  0
           chksum   [148,156)  "011224\0 "  4756: the unsigned sum of the header, this field as spaces
-          typeflag [156,157)  "L"  GNU long name, for the next member
+          typeflag [156,157)  "L"  GNU long name
           linkname [157,257)  100 NUL
           magic    [257,263)  "ustar "
           version  [263,265)  " " + NUL
