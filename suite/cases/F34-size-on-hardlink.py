@@ -2,12 +2,11 @@
 
 The first member is a file `a`, the second a hard link `h` to `a`, with a pax extended header and
 the size 512 in its ustar header. POSIX says that no data is stored for a hard link in ustar, so the
-next block is the header of a file, `smuggled`. It permits data on a hard link in pax, and
-libarchive reads it once an archive has a pax header: the block is then the data of `h`, which
-replaces the contents of `a`. This case is ambiguous because the tree has either `a` as it is and
-`smuggled`, as most implementations read it, or `a` with that block as its contents, as bsdtar and
-tar-codec read it. node-tar, tar-fs, Rust's tar, astral-tokio-tar and Haskell's tar skip the block,
-and Commons Compress and PharData make `h` a file of it.
+next block is the header of a file, `smuggled`. It permits data on a hard link in pax, so that
+a reader may take the block, once an archive has a pax header, for the data of `h`, which replaces
+the contents of `a`. This case is ambiguous because the tree has either `a` as it is and
+`smuggled`, or `a` with that block as its contents. A reader may also skip the block, or make `h`
+a file of it.
 
 Decision point: whether a size in the header of a hard link applies, in an archive with pax headers.
 Seen in: none of the scanned tarballs.

@@ -6,8 +6,8 @@ undefined, and splits the prefix field: 131 bytes for the prefix, then the acces
 in octal. star itself ends its prefixes with a NUL at byte 130, so that ustar readers read them
 alike. Here the prefix fills all 155 bytes: 131 `p`s, then `15000000000 15000000000 `, which reads
 as two times. This case is ambiguous because the prefix is either the whole field, as POSIX defines
-it, or its first 131 bytes, as containerd and Commons Compress, which recognize `tar\0`, take it:
-`a` is then under a directory whose name ends in those numbers, or of the 131 `p`s alone.
+it, or its first 131 bytes, as readers that recognize `tar\0` take it: `a` is then under a
+directory whose name ends in those numbers, or of the 131 `p`s alone.
 
 Decision point: whether `tar\0` at offset 508 makes the prefix field shorter.
 Seen in: berkeley-db 18.1.40 and ncurses 5.9, which are in star's format; `tarscan.py` does not

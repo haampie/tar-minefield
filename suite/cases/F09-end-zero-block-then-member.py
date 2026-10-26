@@ -2,8 +2,8 @@
 
 POSIX requires two zero blocks at the end of an archive, so one zero block is neither a header nor
 the end-of-archive marker. Here it is followed by a file, `hidden`. Read leniently, this case is
-ambiguous because the zero block either ends the archive, as GNU tar takes it by default, or is
-skipped, as with `--ignore-zeros`. Only in the second reading is `hidden` extracted.
+ambiguous because the zero block either ends the archive, or is skipped, and only in the second
+reading is `hidden` extracted.
 
 Decision point: whether one zero block ends the archive.
 Seen in: 7 tarballs that `tarscan.py` counts, such as jakarta-oro 2.0.8 and commons-cli 1.2-src,

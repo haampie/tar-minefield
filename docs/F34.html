@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The first member is a file <code>a</code>, the second a hard link <code>h</code> to <code>a</code>, with a pax extended header and the size 512 in its ustar header. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=No%20data%20logical%20records%20are%20stored%20for%20types%201%2C%202%2C%20or%205">POSIX</a> says that no data is stored for a hard link in ustar, so the next block is the header of a file, <code>smuggled</code>. It <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=data%20blocks%20for%20files%20of%20typeflag%201%20%28the%20digit%20one%29%20%28hard%20link%29%20may%20be%20included">permits</a> data on a hard link in pax, and libarchive reads it once an archive has a pax header: the block is then the data of <code>h</code>, which replaces the contents of <code>a</code>. This case is ambiguous because the tree has either <code>a</code> as it is and <code>smuggled</code>, as most implementations read it, or <code>a</code> with that block as its contents, as bsdtar and tar-codec read it. node-tar, tar-fs, Rust&#x27;s tar, astral-tokio-tar and Haskell&#x27;s tar skip the block, and Commons Compress and PharData make <code>h</code> a file of it.</p>
+<p>The first member is a file <code>a</code>, the second a hard link <code>h</code> to <code>a</code>, with a pax extended header and the size 512 in its ustar header. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=No%20data%20logical%20records%20are%20stored%20for%20types%201%2C%202%2C%20or%205">POSIX</a> says that no data is stored for a hard link in ustar, so the next block is the header of a file, <code>smuggled</code>. It <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=data%20blocks%20for%20files%20of%20typeflag%201%20%28the%20digit%20one%29%20%28hard%20link%29%20may%20be%20included">permits</a> data on a hard link in pax, so that a reader may take the block, once an archive has a pax header, for the data of <code>h</code>, which replaces the contents of <code>a</code>. This case is ambiguous because the tree has either <code>a</code> as it is and <code>smuggled</code>, or <code>a</code> with that block as its contents. A reader may also skip the block, or make <code>h</code> a file of it.</p>
 <p><strong>Decision point:</strong> whether a size in the header of a hard link applies, in an archive with pax headers.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -53,12 +53,11 @@ A size in the header of a hard link, in a pax archive, which takes the next head
 
 The first member is a file `a`, the second a hard link `h` to `a`, with a pax extended header and
 the size 512 in its ustar header. POSIX says that no data is stored for a hard link in ustar, so the
-next block is the header of a file, `smuggled`. It permits data on a hard link in pax, and
-libarchive reads it once an archive has a pax header: the block is then the data of `h`, which
-replaces the contents of `a`. This case is ambiguous because the tree has either `a` as it is and
-`smuggled`, as most implementations read it, or `a` with that block as its contents, as bsdtar and
-tar-codec read it. node-tar, tar-fs, Rust&#x27;s tar, astral-tokio-tar and Haskell&#x27;s tar skip the block,
-and Commons Compress and PharData make `h` a file of it.
+next block is the header of a file, `smuggled`. It permits data on a hard link in pax, so that
+a reader may take the block, once an archive has a pax header, for the data of `h`, which replaces
+the contents of `a`. This case is ambiguous because the tree has either `a` as it is and
+`smuggled`, or `a` with that block as its contents. A reader may also skip the block, or make `h`
+a file of it.
 
 Decision point: whether a size in the header of a hard link applies, in an archive with pax headers.
 Seen in: none of the scanned tarballs.

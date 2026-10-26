@@ -8,7 +8,8 @@ accepts the archive must extract `a`, also one that checks the checksum before t
 
 Decision point: whether the checksum field may start with a space.
 Seen in: 819 release tarballs, 674 of them from CPAN, such as Starman 0.4015, and PyPDF2 1.26.0,
-which Spack fetches from PyPI: every tarball whose numeric fields are padded with spaces, the same as F01.
+which Spack fetches from PyPI: every tarball whose numeric fields are padded with spaces, the same
+as F01.
 """
 
 VERDICT = "tolerate"

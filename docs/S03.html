@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The member <code>h</code> is a hardlink to <code>missing</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file previously archived, which <code>missing</code> is not. Read leniently, this case is ambiguous because the link is skipped, made to a file of that name that already exists where the archive is extracted, or, by Commons Compress, made an empty file.</p>
+<p>The member <code>h</code> is a hardlink to <code>missing</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file previously archived, which <code>missing</code> is not. Read leniently, this case is ambiguous because the link is skipped, made to a file of that name that already exists where the archive is extracted, or made an empty file.</p>
 <p><strong>Decision point:</strong> what a hardlink to nothing does.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -53,8 +53,8 @@ A hardlink to a member that is not in the archive.
 
 The member `h` is a hardlink to `missing`. In POSIX, the target of a hardlink is a file previously
 archived, which `missing` is not. Read leniently, this case is ambiguous because the link is
-skipped, made to a file of that name that already exists where the archive is extracted, or, by
-Commons Compress, made an empty file.
+skipped, made to a file of that name that already exists where the archive is extracted, or made
+an empty file.
 
 Decision point: what a hardlink to nothing does.
 Seen in: none of the scanned tarballs.

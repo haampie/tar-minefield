@@ -2,10 +2,9 @@
 
 A pax size is decimal, and POSIX does not forbid leading zeros, so the size is 777. But a reader
 that converts with C's `strtoul(s, NULL, 0)`, or that knows the header's octal numbers, reads `0777`
-as octal, 511. This case is ambiguous in practice because BusyBox, PharData, RubyGems, Archive::Tar
-and Haskell's tar take the header's size, 0, instead of 777, so that both `smuggled-1` and
-`smuggled-2` are members. Read as octal, the data of `a` takes one block, and `smuggled-2` is a
-member.
+as octal, 511. This case is ambiguous in practice because the size is 777, in decimal, 511, in
+octal, or the header's, 0, with the pax size discarded. The data of `a` then takes two blocks, one,
+after which `smuggled-2` is a member, or none, and both `smuggled-1` and `smuggled-2` are.
 
 Decision point: whether a pax number with a leading zero is decimal or octal.
 Seen in: none of the scanned tarballs.

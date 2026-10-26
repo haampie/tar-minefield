@@ -1,9 +1,9 @@
 """A pax `size` on a directory, which takes the next header for its data.
 
 The pax extended header of a directory has `size=512`. In POSIX, no data is stored for a directory,
-whatever its size, so the next block is the header of a file, `dir/smuggled`. This case is ambiguous in
-practice because, if the size applies, that block is the directory's data instead, and the tree is a
-directory alone.
+whatever its size, so the next block is the header of a file, `dir/smuggled`. This case is
+ambiguous in practice because, if the size applies, that block is the directory's data instead, and
+the tree is a directory alone.
 
 Decision point: whether a pax `size` applies to a member that has no data.
 Seen in: llama_index_workflows 2.26.0, with a pax size on a directory.

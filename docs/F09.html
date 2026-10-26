@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros">POSIX</a> requires two zero blocks at the end of an archive, so one zero block is neither a header nor the end-of-archive marker. Here it is followed by a file, <code>hidden</code>. Read leniently, this case is ambiguous because the zero block either ends the archive, as GNU tar takes it by default, or is skipped, as with <code>--ignore-zeros</code>. Only in the second reading is <code>hidden</code> extracted.</p>
+<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros">POSIX</a> requires two zero blocks at the end of an archive, so one zero block is neither a header nor the end-of-archive marker. Here it is followed by a file, <code>hidden</code>. Read leniently, this case is ambiguous because the zero block either ends the archive, or is skipped, and only in the second reading is <code>hidden</code> extracted.</p>
 <p><strong>Decision point:</strong> whether one zero block ends the archive.</p>
 <p><strong>Seen in:</strong> 7 tarballs that <code>tarscan.py</code> counts, such as jakarta-oro 2.0.8 and commons-cli 1.2-src, but in none of them is the zero block followed by a member: what follows is not a valid header, and in those two, it is stale data, as after F03.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -53,8 +53,8 @@ A zero block, then another member: the end of the archive, or not?
 
 POSIX requires two zero blocks at the end of an archive, so one zero block is neither a header nor
 the end-of-archive marker. Here it is followed by a file, `hidden`. Read leniently, this case is
-ambiguous because the zero block either ends the archive, as GNU tar takes it by default, or is
-skipped, as with `--ignore-zeros`. Only in the second reading is `hidden` extracted.
+ambiguous because the zero block either ends the archive, or is skipped, and only in the second
+reading is `hidden` extracted.
 
 Decision point: whether one zero block ends the archive.
 Seen in: 7 tarballs that `tarscan.py` counts, such as jakarta-oro 2.0.8 and commons-cli 1.2-src,

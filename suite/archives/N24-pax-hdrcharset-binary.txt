@@ -5,8 +5,8 @@ N24-pax-hdrcharset-binary: must reject
 POSIX lets a pax header declare with `hdrcharset=BINARY` that its names are bytes in no particular
 encoding, rather than UTF-8, and then no translation is performed. Here the path is `caf\xe9`, in
 Latin-1, so the name on disk is those bytes. This case is ambiguous in practice because the path is
-also decoded as Latin-1, `café`, by Haskell's tar, or with the byte replaced by U+FFFD, or discarded
-for the header's name, `cafe`. A strict parser rejects names that are not UTF-8.
+also decoded as Latin-1, `café`, or with the byte replaced by U+FFFD, or discarded for the
+header's name, `cafe`. A strict parser rejects names that are not UTF-8.
 
 Decision point: how a name that is not UTF-8 becomes a path.
 Seen in: none of the scanned tarballs.

@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The first member is a file <code>a</code>, the second a hard link <code>h</code> to <code>a</code>, whose pax extended header has <code>size=512</code>. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=No%20data%20logical%20records%20are%20stored%20for%20types%201%2C%202%2C%20or%205">POSIX</a> says that no data is stored for a hard link in ustar, but <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=data%20blocks%20for%20files%20of%20typeflag%201%20%28the%20digit%20one%29%20%28hard%20link%29%20may%20be%20included">permits</a> it in pax. This case is ambiguous because the next block is either the header of a file, <code>smuggled</code>, or the data of <code>h</code>, which replaces the contents of <code>a</code>, as libarchive, and so bsdtar, and tar-codec read it. 7-Zip, node-tar, tar-fs, Rust&#x27;s tar and astral-tokio-tar skip the block, Commons Compress makes <code>h</code> a file of it, and R gives <code>smuggled</code> the size of <code>h</code>.</p>
+<p>The first member is a file <code>a</code>, the second a hard link <code>h</code> to <code>a</code>, whose pax extended header has <code>size=512</code>. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=No%20data%20logical%20records%20are%20stored%20for%20types%201%2C%202%2C%20or%205">POSIX</a> says that no data is stored for a hard link in ustar, but <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=data%20blocks%20for%20files%20of%20typeflag%201%20%28the%20digit%20one%29%20%28hard%20link%29%20may%20be%20included">permits</a> it in pax. This case is ambiguous because the next block is either the header of a file, <code>smuggled</code>, or the data of <code>h</code>, which replaces the contents of <code>a</code>. A reader may also skip the block, make <code>h</code> a file of it, or give <code>smuggled</code> the size of <code>h</code>.</p>
 <p><strong>Decision point:</strong> whether a pax size applies to a hard link.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -54,9 +54,8 @@ A pax `size` on a hard link, which takes the next header for its data.
 The first member is a file `a`, the second a hard link `h` to `a`, whose pax extended header has
 `size=512`. POSIX says that no data is stored for a hard link in ustar, but permits it in pax. This
 case is ambiguous because the next block is either the header of a file, `smuggled`, or the data of
-`h`, which replaces the contents of `a`, as libarchive, and so bsdtar, and tar-codec read it. 7-Zip,
-node-tar, tar-fs, Rust&#x27;s tar and astral-tokio-tar skip the block, Commons Compress makes `h` a file
-of it, and R gives `smuggled` the size of `h`.
+`h`, which replaces the contents of `a`. A reader may also skip the block, make `h` a file of it,
+or give `smuggled` the size of `h`.
 
 Decision point: whether a pax size applies to a hard link.
 Seen in: none of the scanned tarballs.

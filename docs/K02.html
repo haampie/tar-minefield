@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The header has typeflag <code>0</code> and the linkname <code>target</code>. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20linked%2Dto%20name%20is%20specified%20in%20the%20linkname%20field">POSIX</a> gives a linkname meaning only for links. This case is ambiguous because the member is either a file, by its typeflag, or a link to <code>target</code>, by its linkname. Every implementation that extracts it makes a file; node-tar and Julia&#x27;s Tar.jl reject it for its linkname.</p>
+<p>The header has typeflag <code>0</code> and the linkname <code>target</code>. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20linked%2Dto%20name%20is%20specified%20in%20the%20linkname%20field">POSIX</a> gives a linkname meaning only for links. This case is ambiguous because the member is either a file, by its typeflag, or a link to <code>target</code>, by its linkname.</p>
 <p><strong>Decision point:</strong> whether a linkname makes a member a link.</p>
 <p><strong>Seen in:</strong> bgen 1.1.7.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -53,8 +53,7 @@ A regular file with a link target.
 
 The header has typeflag `0` and the linkname `target`. POSIX gives a linkname meaning only for
 links. This case is ambiguous because the member is either a file, by its typeflag, or a link to
-`target`, by its linkname. Every implementation that extracts it makes a file; node-tar and Julia&#x27;s
-Tar.jl reject it for its linkname.
+`target`, by its linkname.
 
 Decision point: whether a linkname makes a member a link.
 Seen in: bgen 1.1.7.

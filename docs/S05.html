@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The member <code>h</code> is a hardlink to <code>f</code>, which comes after it. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file previously archived. Read leniently, this case is ambiguous because <code>h</code> either has nothing to link to yet, or is linked to <code>f</code> once the whole archive is read; Commons Compress makes it an empty file.</p>
+<p>The member <code>h</code> is a hardlink to <code>f</code>, which comes after it. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file previously archived. Read leniently, this case is ambiguous because <code>h</code> either has nothing to link to yet, or is linked to <code>f</code> once the whole archive is read; a reader may also make it an empty file.</p>
 <p><strong>Decision point:</strong> whether the target of a hardlink can be a later member.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -53,8 +53,8 @@ A hardlink to a member that comes later.
 
 The member `h` is a hardlink to `f`, which comes after it. In POSIX, the target of a hardlink is a
 file previously archived. Read leniently, this case is ambiguous because `h` either has nothing to
-link to yet, or is linked to `f` once the whole archive is read; Commons Compress makes it an empty
-file.
+link to yet, or is linked to `f` once the whole archive is read; a reader may also make it an
+empty file.
 
 Decision point: whether the target of a hardlink can be a later member.
 Seen in: none of the scanned tarballs.

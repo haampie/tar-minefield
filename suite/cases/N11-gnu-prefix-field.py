@@ -2,8 +2,7 @@
 
 GNU's format has no prefix field: in incremental archives, GNU tar writes the access and change
 times where ustar has its prefix. This case is ambiguous in practice because the field, taken for
-ustar's prefix, puts `a` under a directory `15000000000`, as BusyBox, 7-Zip, Python's `tarfile`
-(gh-155629), PharData, Archive::Tar, Haskell's tar and Julia's Tar.jl do.
+ustar's prefix, puts `a` under a directory `15000000000`.
 
 Decision point: whether a header with GNU magic has a prefix.
 Seen in: none of the scanned tarballs with times there.

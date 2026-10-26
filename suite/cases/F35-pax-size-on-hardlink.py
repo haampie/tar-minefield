@@ -3,9 +3,8 @@
 The first member is a file `a`, the second a hard link `h` to `a`, whose pax extended header has
 `size=512`. POSIX says that no data is stored for a hard link in ustar, but permits it in pax. This
 case is ambiguous because the next block is either the header of a file, `smuggled`, or the data of
-`h`, which replaces the contents of `a`, as libarchive, and so bsdtar, and tar-codec read it. 7-Zip,
-node-tar, tar-fs, Rust's tar and astral-tokio-tar skip the block, Commons Compress makes `h` a file
-of it, and R gives `smuggled` the size of `h`.
+`h`, which replaces the contents of `a`. A reader may also skip the block, make `h` a file of it,
+or give `smuggled` the size of `h`.
 
 Decision point: whether a pax size applies to a hard link.
 Seen in: none of the scanned tarballs.

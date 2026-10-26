@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The member <code>s</code> is a symlink to <code>f</code>, and <code>h</code> a hardlink to <code>s</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file of any type, so <code>h</code> is a link to the symlink itself, another symlink to <code>f</code>, as GNU tar, bsdtar, BusyBox, .NET, R, Rust&#x27;s tar, astral-tokio-tar and containerd make it. But POSIX also leaves it <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/link.html#:~:text=If%20path1%20names%20a%20symbolic%20link%2C%20it%20is%20implementation%2Ddefined">implementation-defined</a> whether <code>link()</code> follows a symlink, so an extractor that links <code>h</code> to <code>s</code> with <code>link()</code> makes either tree, depending on the system; <code>linkat()</code> takes a flag for it. Other implementations make other trees: Python&#x27;s <code>tarfile</code> and tar-fs link <code>h</code> to the file <code>f</code> itself; Archive::Tar makes <code>h</code> an empty file, and Commons Compress and PharData make both <code>h</code> and <code>s</code> empty files; node-tar, RubyGems and live-bootstrap&#x27;s untar with <code>--non-strict</code> leave <code>h</code> out.</p>
+<p>The member <code>s</code> is a symlink to <code>f</code>, and <code>h</code> a hardlink to <code>s</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file of any type, so <code>h</code> is a link to the symlink itself, another symlink to <code>f</code>. But POSIX also leaves it <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/link.html#:~:text=If%20path1%20names%20a%20symbolic%20link%2C%20it%20is%20implementation%2Ddefined">implementation-defined</a> whether <code>link()</code> follows a symlink, so an extractor that links <code>h</code> to <code>s</code> with <code>link()</code> makes either tree, depending on the system; <code>linkat()</code> takes a flag for it. Readers also link <code>h</code> to the file <code>f</code> itself, make <code>h</code>, or both <code>h</code> and <code>s</code>, empty files, or leave <code>h</code> out.</p>
 <p><strong>Decision point:</strong> whether a hardlink follows a symlink.</p>
 <p><strong>Seen in:</strong> octa 8.4.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,14 +52,11 @@
 A hardlink to a symlink: a link to the symlink, or to its target?
 
 The member `s` is a symlink to `f`, and `h` a hardlink to `s`. In POSIX, the target of a hardlink is
-a file of any type, so `h` is a link to the symlink itself, another symlink to `f`, as GNU tar,
-bsdtar, BusyBox, .NET, R, Rust&#x27;s tar, astral-tokio-tar and containerd make it. But POSIX also leaves
-it [implementation-defined](https://pubs.opengroup.org/onlinepubs/9799919799/functions/link.html#:~:text=If%20path1%20names%20a%20symbolic%20link%2C%20it%20is%20implementation%2Ddefined)
+a file of any type, so `h` is a link to the symlink itself, another symlink to `f`. But POSIX also
+leaves it [implementation-defined](https://pubs.opengroup.org/onlinepubs/9799919799/functions/link.html#:~:text=If%20path1%20names%20a%20symbolic%20link%2C%20it%20is%20implementation%2Ddefined)
 whether `link()` follows a symlink, so an extractor that links `h` to `s` with `link()` makes either
-tree, depending on the system; `linkat()` takes a flag for it. Other implementations make other
-trees: Python&#x27;s `tarfile` and tar-fs link `h` to the file `f` itself; Archive::Tar makes `h` an
-empty file, and Commons Compress and PharData make both `h` and `s` empty files; node-tar, RubyGems
-and live-bootstrap&#x27;s untar with `--non-strict` leave `h` out.
+tree, depending on the system; `linkat()` takes a flag for it. Readers also link `h` to the file
+`f` itself, make `h`, or both `h` and `s`, empty files, or leave `h` out.
 
 Decision point: whether a hardlink follows a symlink.
 Seen in: octa 8.4.

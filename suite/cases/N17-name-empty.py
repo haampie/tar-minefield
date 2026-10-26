@@ -2,10 +2,9 @@
 
 The name field is all NULs. In POSIX, it is implementation-defined whether a member with an invalid
 name is stored, and under what name. This case is ambiguous because implementations read an empty
-name in different ways: Rust's tar, astral-tokio-tar, containerd and live-bootstrap skip the member,
-7-Zip names the file after the archive, GNU tar, Python's `tarfile`, tar-fs, Commons Compress, .NET
-and RubyGems take it for the destination directory itself, and fail to write a file there, and
-BusyBox takes it for the end of the archive.
+name in different ways: a reader skips the member, names the file after the archive, takes the name
+for the destination directory itself, and fails to write a file there, or takes the header for the
+end of the archive.
 
 Decision point: what an empty name refers to.
 Seen in: none of the scanned tarballs.

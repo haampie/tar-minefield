@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file">POSIX</a> says an unknown typeflag is read as a regular file, so the 512 bytes after the header are the data of <code>unknown</code>. Those bytes also form a valid header, of an empty file <code>smuggled</code>. This case is ambiguous in practice because a reader that skips the member has to decide whether it has data. If it does, the 512 bytes are skipped with it, as Haskell&#x27;s tar, RubyGems and node-tar skip them; if not, they are the header of the next member, and <code>smuggled</code> is extracted, which none of the implementations here does.</p>
+<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file">POSIX</a> says an unknown typeflag is read as a regular file, so the 512 bytes after the header are the data of <code>unknown</code>. Those bytes also form a valid header, of an empty file <code>smuggled</code>. This case is ambiguous in practice because a reader that skips the member, rather than extract it as a file, has to decide whether it has data. If it does, the 512 bytes are skipped with it; if not, they are the header of the next member, and <code>smuggled</code> is extracted.</p>
 <p><strong>Decision point:</strong> whether an unknown typeflag has data.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -53,10 +53,9 @@ An unknown typeflag with a size: data, or no data?
 
 POSIX says an unknown typeflag is read as a regular file, so the 512 bytes after the header are the
 data of `unknown`. Those bytes also form a valid header, of an empty file `smuggled`. This case is
-ambiguous in practice because a reader that skips the member has to decide whether it has data. If
-it does, the 512 bytes are skipped with it, as Haskell&#x27;s tar, RubyGems and node-tar skip them; if
-not, they are the header of the next member, and `smuggled` is extracted, which none of the
-implementations here does.
+ambiguous in practice because a reader that skips the member, rather than extract it as a file, has
+to decide whether it has data. If it does, the 512 bytes are skipped with it; if not, they are the
+header of the next member, and `smuggled` is extracted.
 
 Decision point: whether an unknown typeflag has data.
 Seen in: none of the scanned tarballs.

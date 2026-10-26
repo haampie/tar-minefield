@@ -3,10 +3,9 @@ F27-pax-size-too-large: must reject
 A pax `size` of 2^64 + 512, which wraps around to 512 in 64 bits.
 
 pax numbers can be of any length, but many implementations keep sizes in 64 bits. In POSIX, the
-size is 2^64 + 512, which runs past the end of the archive, as Python's `tarfile` and node-tar read
-it. Read leniently, this case is ambiguous because BusyBox, 7-Zip, PharData, Rust's tar, RubyGems,
-Archive::Tar and Haskell's tar take the header's size, 0, instead, and extract the next block as a
-file `smuggled`. Wrapped around to 512 in 64 bits, the next block would be the data of `a`.
+size is 2^64 + 512, which runs past the end of the archive. Read leniently, this case is ambiguous
+because the size is also the header's, 0, with the pax size discarded, which makes the next block
+the header of `smuggled`, or 512, wrapped around in 64 bits, which makes it the data of `a`.
 
 Decision point: what a pax number too large for the reader means.
 Seen in: none of the scanned tarballs.
