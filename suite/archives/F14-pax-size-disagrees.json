@@ -1,7 +1,7 @@
 {
  "id": "F14",
  "verdict": "tolerate",
- "description": "A pax `size` that disagrees with the header's size, which hides a header from one implementation.",
+ "description": "A pax `size` that disagrees with the header's, so that a reader of the header's misses a member.",
  "features": [
   "pax.size-disagrees"
  ],

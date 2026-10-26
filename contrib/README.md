@@ -23,13 +23,12 @@ $ python -I contrib/matrix/matrix.py WORK
 
 extracts every case of [suite/](../suite) with every implementation it finds, and writes
 [matrix/matrix.json](matrix/matrix.json) and the table in [matrix/MATRIX.md](matrix/MATRIX.md) from
-it. Libraries without an extractor, such as Go's `archive/tar`, list the members, which are then
-applied in order. WORK contains the builds of the programs in `matrix/runners/`, whose dependencies
-are pinned, and the extractions: each in a directory of its own, two levels below a directory that
-catches what is written outside it. Run it in a throwaway directory, or a container, as some cases
+it. WORK contains the builds of the programs in `matrix/runners/`, whose dependencies are pinned,
+and the extractions: each in a directory of its own, two levels below a directory that catches what
+is written outside it. Run it in a throwaway directory, or a container, as some cases
 escape in lenient extractors. It uses what is installed: GNU tar, the untar of live-bootstrap (with
 git and a C compiler), bsdtar, BusyBox, 7-Zip, Python's `tarfile` with each of its filters, Go
-(`archive/tar`, and containerd's `archive.Apply`), Rust, Haskell (cabal), .NET, Java (with the jars
+(containerd's `archive.Apply`, which reads with `archive/tar`), Rust, Haskell (cabal), .NET, Java (with the jars
 of `matrix/runners/java/jars.txt`, which it downloads and checks), PHP (its `PharData`), R (its
 `Rscript`), Ruby, Perl, Julia and Node.js (node-tar and tar-fs): each on PATH, or in an environment
 variable of its name in capitals, such as `$JULIA` or `$RSCRIPT`. With `--only` and the names of

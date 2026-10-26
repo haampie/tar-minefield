@@ -9,10 +9,10 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="S06 hardlink-to-symlink · Tar file extraction test suite">
 <meta property="og:description" content="A hardlink to a symlink: a link to the symlink, or to its target?">
-<link rel="stylesheet" href="style.css?96a01d71">
+<link rel="stylesheet" href="style.css?487f8630">
 <link rel="canonical" href="https://stoppels.ch/tar/S06.html">
 <meta property="og:url" content="https://stoppels.ch/tar/S06.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/ed0fd7d5e38c2c62.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/c2cda816ebba7481.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of S06 hardlink-to-symlink">
@@ -25,7 +25,7 @@
 <nav class="wide"><a class="prev" href="S05.html" rel="prev" title="S05 hardlink-to-later-member">‹ S05 hardlink-to-later-member</a><a href="index.html">tar-minefield</a><a class="next" href="S07.html" rel="next" title="S07 tree-duplicate-file-differs">S07 tree-duplicate-file-differs ›</a></nav>
 <h1><code>S06</code> hardlink-to-symlink</h1>
 <p>A hardlink to a symlink: a link to the symlink, or to its target?</p>
-<div class="verdict reject wide"><p><span class="badge">Must reject</span> A strict parser must reject this archive.</p></div>
+<div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>order and state</dd>
 <dt>Default policy</dt><dd>rejects it</dd>
@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The member <code>s</code> is a symlink to <code>f</code>, and <code>h</code> a hardlink to <code>s</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file of any type, so <code>h</code> is a link to the symlink itself, another symlink to <code>f</code>. This case is ambiguous in practice because <code>h</code> is also linked to the file <code>f</code> itself, or left out.</p>
+<p>The member <code>s</code> is a symlink to <code>f</code>, and <code>h</code> a hardlink to <code>s</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file of any type, so <code>h</code> is a link to the symlink itself, another symlink to <code>f</code>, as GNU tar, bsdtar, BusyBox, .NET, R, Rust&#x27;s tar and containerd make it. But POSIX also leaves it [implementation-defined](https://pubs.opengroup.org/onlinepubs/9799919799/functions/link.html#:~:text=If%20path1%20names%20a%20symbolic%20link%2C%20it%20is%20implementation%2Ddefined) whether <code>link()</code> follows a symlink, so an extractor that links <code>h</code> to <code>s</code> makes either tree, depending on the system. Other implementations make other trees: Python&#x27;s <code>tarfile</code> and tar-fs link <code>h</code> to the file <code>f</code> itself, Commons Compress, PharData and Archive::Tar make it an empty file, and node-tar and RubyGems leave it out.</p>
 <p><strong>Decision point:</strong> whether a hardlink follows a symlink.</p>
 <p><strong>Seen in:</strong> octa 8.4.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,8 +52,13 @@
 A hardlink to a symlink: a link to the symlink, or to its target?
 
 The member `s` is a symlink to `f`, and `h` a hardlink to `s`. In POSIX, the target of a hardlink is
-a file of any type, so `h` is a link to the symlink itself, another symlink to `f`. This case is
-ambiguous in practice because `h` is also linked to the file `f` itself, or left out.
+a file of any type, so `h` is a link to the symlink itself, another symlink to `f`, as GNU tar,
+bsdtar, BusyBox, .NET, R, Rust&#x27;s tar and containerd make it. But POSIX also leaves it
+[implementation-defined](https://pubs.opengroup.org/onlinepubs/9799919799/functions/link.html#:~:text=If%20path1%20names%20a%20symbolic%20link%2C%20it%20is%20implementation%2Ddefined)
+whether `link()` follows a symlink, so an extractor that links `h` to `s` makes either tree,
+depending on the system. Other implementations make other trees: Python&#x27;s `tarfile` and tar-fs link
+`h` to the file `f` itself, Commons Compress, PharData and Archive::Tar make it an empty file, and
+node-tar and RubyGems leave it out.
 
 Decision point: whether a hardlink follows a symlink.
 Seen in: octa 8.4.
@@ -317,10 +322,9 @@ Seen in: octa 8.4.
 </details>
 <h2 id="what-implementations-make-of-it">What implementations make of it<a class="anchor" href="#what-implementations-make-of-it" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="implementations"><colgroup><col style="width: 21%"><col style="width: 21%"><col style="width: 18%"><col style="width: 40%"></colgroup><tr><th>implementation</th><th>version</th><th>outcome</th><th>what it makes of it</th></tr>
-<tr><td>strict.py</td><td></td><td>✅ as the verdict says</td><td>rejects it</td></tr>
 <tr><td>GNU tar</td><td>tar (GNU tar) 1.35</td><td>⚠️ accepts</td><td>tree A: <code>f</code> (2 B, 092fcfbb), <code>h</code> → <code>f</code>, <code>s</code> → <code>f</code></td></tr>
 <tr><td>bsdtar</td><td>bsdtar 3.8.10 - libarchive 3.8.10</td><td>⚠️ accepts</td><td>tree A: <code>f</code> (2 B, 092fcfbb), <code>h</code> → <code>f</code>, <code>s</code> → <code>f</code></td></tr>
-<tr><td>BusyBox tar</td><td>BusyBox v1.38.0</td><td>⚠️ accepts</td><td>tree A: <code>f</code> (2 B, 092fcfbb), <code>h</code> → <code>f</code>, <code>s</code> → <code>f</code></td></tr>
+<tr><td>BusyBox tar</td><td>BusyBox v1.38.0, defconfig</td><td>⚠️ accepts</td><td>tree A: <code>f</code> (2 B, 092fcfbb), <code>h</code> → <code>f</code>, <code>s</code> → <code>f</code></td></tr>
 <tr><td>7-Zip</td><td>7-Zip (z) 26.05 (x64)</td><td>✅ as the verdict says</td><td>error: ERROR: Dangerous link via another link was ignored : h : s</td></tr>
 <tr><td>Python tarfile, filter=data, as in pip</td><td>CPython 3.15.2</td><td>⚠️ accepts</td><td>tree B: <code>f</code> (2 B, 092fcfbb), <code>h</code> (2 B, 092fcfbb), <code>s</code> → <code>f</code></td></tr>
 <tr><td>Python tarfile, filter=tar</td><td>CPython 3.15.2</td><td>⚠️ accepts</td><td>tree B: <code>f</code> (2 B, 092fcfbb), <code>h</code> (2 B, 092fcfbb), <code>s</code> → <code>f</code></td></tr>
@@ -331,8 +335,6 @@ Seen in: octa 8.4.
 <tr><td>Java Commons Compress</td><td>Commons Compress 1.28.0, Expander, on Java 27.0.1.0.2</td><td>⚠️ accepts</td><td>tree D: <code>f</code> (2 B, 092fcfbb), <code>h</code> (0 B, e3b0c442), <code>s</code> (0 B, e3b0c442)</td></tr>
 <tr><td>.NET System.Formats.Tar</td><td>System.Formats.Tar of .NET 10.0.14, ExtractToDirectory</td><td>⚠️ accepts</td><td>tree A: <code>f</code> (2 B, 092fcfbb), <code>h</code> → <code>f</code>, <code>s</code> → <code>f</code></td></tr>
 <tr><td>PHP PharData, as in Composer</td><td>PharData of PHP 8.5.12, as Composer&#x27;s TarDownloader calls it</td><td>⚠️ accepts</td><td>tree D: <code>f</code> (2 B, 092fcfbb), <code>h</code> (0 B, e3b0c442), <code>s</code> (0 B, e3b0c442)</td></tr>
-<tr><td>Go archive/tar</td><td>archive/tar of go1.27.3</td><td>⚠️ accepts</td><td>tree A: <code>f</code> (2 B, 092fcfbb), <code>h</code> → <code>f</code>, <code>s</code> → <code>f</code></td></tr>
-<tr><td>Go archive/tar, tarinsecurepath=0</td><td>archive/tar of go1.27.3</td><td>⚠️ accepts</td><td>tree A: <code>f</code> (2 B, 092fcfbb), <code>h</code> → <code>f</code>, <code>s</code> → <code>f</code></td></tr>
 <tr><td>Go containerd archive.Apply</td><td>containerd v2.4.2, archive.Apply, of go1.27.3</td><td>⚠️ accepts</td><td>tree A: <code>f</code> (2 B, 092fcfbb), <code>h</code> → <code>f</code>, <code>s</code> → <code>f</code></td></tr>
 <tr><td>Rust tar</td><td>tar 0.4.46, unpack</td><td>⚠️ accepts</td><td>tree A: <code>f</code> (2 B, 092fcfbb), <code>h</code> → <code>f</code>, <code>s</code> → <code>f</code></td></tr>
 <tr><td>Rust astral-tokio-tar</td><td>astral-tokio-tar 0.7.0, unpack</td><td>⚠️ accepts</td><td>tree A: <code>f</code> (2 B, 092fcfbb), <code>h</code> → <code>f</code>, <code>s</code> → <code>f</code></td></tr>
@@ -342,20 +344,20 @@ Seen in: octa 8.4.
 <tr><td>Perl Archive::Tar</td><td>Archive::Tar 3.12 of Perl v5.44.0</td><td>⚠️ accepts</td><td>tree E: <code>f</code> (2 B, 092fcfbb), <code>h</code> (0 B, e3b0c442), <code>s</code> → <code>f</code></td></tr>
 <tr><td>Haskell tar</td><td>tar 0.7.2.0, extract, of GHC 9.14</td><td>✅ as the verdict says</td><td>error: DEST/s: copyFile:atomicCopyFileContents:withReplacementFile:copyFileToHandle:openFileWithCloseOnExec: does not exist (No such file or directory)</td></tr>
 <tr><td>Julia Tar.jl</td><td>Tar 1.10.0 of Julia 1.13.3</td><td>✅ as the verdict says</td><td>error: Tarball contains hardlink with f target: - path = &quot;h&quot; - target = &quot;s&quot; Refusing to extract — possible attack!</td></tr>
-<tr><td>live-bootstrap untar</td><td>mescc-tools-extra a151c245e512, built with cc</td><td>✅ as the verdict says</td><td>error: unable to create hardlinks</td></tr>
-<tr><td>live-bootstrap untar, --non-strict</td><td>mescc-tools-extra a151c245e512, built with cc</td><td>⚠️ accepts</td><td>tree C: <code>f</code> (2 B, 092fcfbb), <code>s</code> → <code>f</code></td></tr></table></div>
-<h2 id="prevalence-in-source-tarballs">Prevalence in source tarballs<a class="anchor" href="#prevalence-in-source-tarballs" aria-label="Link to this section">¶</a></h2>
-<p>Release tarballs of Spack, nixpkgs, Guix, live-bootstrap, PyPI, crates.io and RubyGems with <code>hardlink.to-symlink</code>. The default policy rejects all of them.</p>
+<tr><td>live-bootstrap untar</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>✅ as the verdict says</td><td>error: unable to create hardlinks</td></tr>
+<tr><td>live-bootstrap untar, --non-strict</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>⚠️ accepts</td><td>tree C: <code>f</code> (2 B, 092fcfbb), <code>s</code> → <code>f</code></td></tr></table></div>
+<h2 id="prevalence-in-release-tarballs">Prevalence in release tarballs<a class="anchor" href="#prevalence-in-release-tarballs" aria-label="Link to this section">¶</a></h2>
+<p>Release tarballs of Spack, nixpkgs, Guix and live-bootstrap, and samples of PyPI, crates.io and RubyGems with <code>hardlink.to-symlink</code>. The default policy rejects all of them.</p>
 <div class="wide"><table class="data"><colgroup><col style="width: 25%"><col style="width: 25%"><col style="width: 25%"><col style="width: 25%"></colgroup><tr><th>ecosystem</th><th class=n>tarballs</th><th class=n>with it</th><th class=n>share</th></tr>
-<tr><td>Spack</td><td class=n>37,554</td><td class=n>1</td><td class=n>&lt;0.01%</td></tr>
-<tr><td>nixpkgs</td><td class=n>18,990</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>Guix</td><td class=n>10,168</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>PyPI</td><td class=n>10,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>crates.io</td><td class=n>5,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>RubyGems</td><td class=n>5,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>live-bootstrap</td><td class=n>171</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr class="total"><td>total (distinct)</td><td class=n>82,587</td><td class=n>1</td><td class=n>&lt;0.01%</td></tr></table></div>
-<p>See <a href="seen-in.html#S06">the list of these 1 tarballs</a>, with the sha256 of each and an example from it.</p>
+<tr><td>Spack</td><td class=n>37,553</td><td class=n>1</td><td class=n>&lt;0.01%</td></tr>
+<tr><td>nixpkgs</td><td class=n>18,990</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>Guix</td><td class=n>10,168</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>PyPI</td><td class=n>10,000</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>crates.io</td><td class=n>5,000</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>RubyGems</td><td class=n>5,000</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>live-bootstrap</td><td class=n>171</td><td class=n>0</td><td class=n>none</td></tr>
+<tr class="total"><td>total (distinct)</td><td class=n>82,586</td><td class=n>1</td><td class=n>&lt;0.01%</td></tr></table></div>
+<p>See <a href="seen-in.html#S06">the tarball</a>, with its sha256 and an example.</p>
 
 <hr class="wide">
 <footer class="wide"><a href="https://github.com/haampie/tar-minefield">haampie/tar-minefield on GitHub</a><span class="sep">·</span>Last updated <time datetime="2026-10-26">2026-10-26</time><span class="sep">·</span><a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>

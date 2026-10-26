@@ -93,6 +93,8 @@ table.tree td:nth-child(2) { overflow-wrap: normal; }
 .accept { border-color: #1a7f37; } .accept .badge { background: #1a7f37; }
 .reject { border-color: #cf222e; } .reject .badge { background: #cf222e; }
 .tolerate { border-color: #59636e; } .tolerate .badge { background: #59636e; }
+/* that the verdicts are of a draft, after the badge, in grey */
+.badge-draft { margin-right: 0.5rem; color: #59636e; }
 /* That the policy is a draft, on every page with verdicts: a strip on the left edge of the window,
    read from the bottom up, outside the text; on a screen too narrow for that, a band above the
    title */

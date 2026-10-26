@@ -43,6 +43,11 @@ Downloads: mirror.spack.io first, then the upstream URL. REPORT.md counts the do
 Every tarball that could not be downloaded failed with 404 on the mirror, and upstream mostly
 with 404 too, or with a file of a different sha256.
 
+One file is no tar archive: py-multiprocess 0.70.12.2, `multiprocess-0.70.12.2.tar.gz` from PyPI,
+is a zip (it starts with `PK\3\4`), which `tarscan.py` stops at with `invalid checksum at offset
+0`. `strict.py` does not assess a file that it cannot read the first header of, so it is not
+counted as rejected.
+
 ## Scanned again, 2026-10-24
 
 `tarscan.py` `5b9b83abac66` reports features that `25bfa32e6e71` did not, for the cases F20 to F31

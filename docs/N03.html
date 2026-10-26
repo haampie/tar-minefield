@@ -9,10 +9,10 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N03 pax-long-name · Tar file extraction test suite">
 <meta property="og:description" content="A name over 100 bytes, in a pax path.">
-<link rel="stylesheet" href="style.css?96a01d71">
+<link rel="stylesheet" href="style.css?487f8630">
 <link rel="canonical" href="https://stoppels.ch/tar/N03.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N03.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/35d1414d24c61f80.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/3a8258e6fca546dd.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of N03 pax-long-name">
@@ -25,7 +25,7 @@
 <nav class="wide"><a class="prev" href="N02.html" rel="prev" title="N02 name-fills-field">‹ N02 name-fills-field</a><a href="index.html">tar-minefield</a><a class="next" href="N04.html" rel="next" title="N04 ustar-prefix">N04 ustar-prefix ›</a></nav>
 <h1><code>N03</code> pax-long-name</h1>
 <p>A name over 100 bytes, in a pax <code>path</code>.</p>
-<div class="verdict accept wide"><p><span class="badge">Must accept</span> Every implementation must accept this archive, and extract the tree below.</p></div>
+<div class="verdict accept wide"><p><span class="badge">Accept</span><span class="badge-draft">(draft)</span> Every implementation must accept this archive, and extract the tree below.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>name</dd>
 <dt>Default policy</dt><dd>accepts it</dd>
@@ -302,10 +302,9 @@ Seen in: tarballs with long names from Python&#x27;s `tarfile` and GNU tar in pa
 </details>
 <h2 id="what-implementations-make-of-it">What implementations make of it<a class="anchor" href="#what-implementations-make-of-it" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="implementations"><colgroup><col style="width: 21%"><col style="width: 21%"><col style="width: 18%"><col style="width: 40%"></colgroup><tr><th>implementation</th><th>version</th><th>outcome</th><th>what it makes of it</th></tr>
-<tr><td>strict.py</td><td></td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
 <tr><td>GNU tar</td><td>tar (GNU tar) 1.35</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
 <tr><td>bsdtar</td><td>bsdtar 3.8.10 - libarchive 3.8.10</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td>BusyBox tar</td><td>BusyBox v1.38.0</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
+<tr><td>BusyBox tar</td><td>BusyBox v1.38.0, defconfig</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
 <tr><td>7-Zip</td><td>7-Zip (z) 26.05 (x64)</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
 <tr><td>Python tarfile, filter=data, as in pip</td><td>CPython 3.15.2</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
 <tr><td>Python tarfile, filter=tar</td><td>CPython 3.15.2</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
@@ -316,8 +315,6 @@ Seen in: tarballs with long names from Python&#x27;s `tarfile` and GNU tar in pa
 <tr><td>Java Commons Compress</td><td>Commons Compress 1.28.0, Expander, on Java 27.0.1.0.2</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
 <tr><td>.NET System.Formats.Tar</td><td>System.Formats.Tar of .NET 10.0.14, ExtractToDirectory</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
 <tr><td>PHP PharData, as in Composer</td><td>PharData of PHP 8.5.12, as Composer&#x27;s TarDownloader calls it</td><td>❌ another tree, or rejects</td><td>tree A: <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/</code>, <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/fffffffffffffffffffffffffffffffffffffff</code> (5 B, bbdbb75b)</td></tr>
-<tr><td>Go archive/tar</td><td>archive/tar of go1.27.3</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td>Go archive/tar, tarinsecurepath=0</td><td>archive/tar of go1.27.3</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
 <tr><td>Go containerd archive.Apply</td><td>containerd v2.4.2, archive.Apply, of go1.27.3</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
 <tr><td>Rust tar</td><td>tar 0.4.46, unpack</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
 <tr><td>Rust astral-tokio-tar</td><td>astral-tokio-tar 0.7.0, unpack</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
@@ -327,10 +324,10 @@ Seen in: tarballs with long names from Python&#x27;s `tarfile` and GNU tar in pa
 <tr><td>Perl Archive::Tar</td><td>Archive::Tar 3.12 of Perl v5.44.0</td><td>❌ another tree, or rejects</td><td>tree A: <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/</code>, <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/fffffffffffffffffffffffffffffffffffffff</code> (5 B, bbdbb75b)</td></tr>
 <tr><td>Haskell tar</td><td>tar 0.7.2.0, extract, of GHC 9.14</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
 <tr><td>Julia Tar.jl</td><td>Tar 1.10.0 of Julia 1.13.3</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td>live-bootstrap untar</td><td>mescc-tools-extra a151c245e512, built with cc</td><td>❌ another tree, or rejects</td><td>tree B: <code>PaxHeader</code> (131 B, 8cc43c67), <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/</code>, <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/fffffffffffffffffffffffffffffffffffffff0000644</code> (5 B, bbdbb75b)</td></tr>
-<tr><td>live-bootstrap untar, --non-strict</td><td>mescc-tools-extra a151c245e512, built with cc</td><td>❌ another tree, or rejects</td><td>tree B: <code>PaxHeader</code> (131 B, 8cc43c67), <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/</code>, <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/fffffffffffffffffffffffffffffffffffffff0000644</code> (5 B, bbdbb75b)</td></tr></table></div>
-<h2 id="prevalence-in-source-tarballs">Prevalence in source tarballs<a class="anchor" href="#prevalence-in-source-tarballs" aria-label="Link to this section">¶</a></h2>
-<p>This case is not measured in source tarballs on its own.</p>
+<tr><td>live-bootstrap untar</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>❌ another tree, or rejects</td><td>tree B: <code>PaxHeader</code> (131 B, 8cc43c67), <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/</code>, <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/fffffffffffffffffffffffffffffffffffffff0000644</code> (5 B, bbdbb75b)</td></tr>
+<tr><td>live-bootstrap untar, --non-strict</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>❌ another tree, or rejects</td><td>tree B: <code>PaxHeader</code> (131 B, 8cc43c67), <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/</code>, <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/fffffffffffffffffffffffffffffffffffffff0000644</code> (5 B, bbdbb75b)</td></tr></table></div>
+<h2 id="prevalence-in-release-tarballs">Prevalence in release tarballs<a class="anchor" href="#prevalence-in-release-tarballs" aria-label="Link to this section">¶</a></h2>
+<p>This case is not measured in release tarballs: <code>tarscan.py</code> reports no feature of it on its own.</p>
 
 <hr class="wide">
 <footer class="wide"><a href="https://github.com/haampie/tar-minefield">haampie/tar-minefield on GitHub</a><span class="sep">·</span>Last updated <time datetime="2026-10-26">2026-10-26</time><span class="sep">·</span><a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>

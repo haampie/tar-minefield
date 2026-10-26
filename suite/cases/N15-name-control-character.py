@@ -1,17 +1,21 @@
-r"""A control character in a name, here a newline.
+r"""A control character in a name, here a newline, created as it is.
 
-The name `a\nb` is valid on Unix, as is any name with a control character, `[\x01-\x1f\x7f]`. This
-case is ambiguous because such a name can look like something else: with a newline, the member looks
-like two separate files, `a` and `b`, as in the output of `ls` piped to another command, in
-manifests and in scripts; with a carriage return or ESC, a terminal shows a different name.
+The name `a\nb` is valid on Unix, as is any name with a control character, `[\x01-\x1f\x7f]`, and
+every implementation that extracts it creates that name. A tar reader has no other way to read it:
+the risk is in what is done with the name afterwards, where a newline makes it look like two names,
+`a` and `b`, in the output of `ls` piped to another command, in manifests and in scripts, and a
+carriage return or ESC makes a terminal show another name. A strict parser may reject it; the
+default policy creates it as it is.
 
-Decision point: whether a name may contain control characters.
 Seen in: cdrtools 3.02a09, wgrib2 3.6.0 and apktool 2.6.0.
 """
 
-VERDICT = "reject"
+F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}
+
+VERDICT = "tolerate"
 ID = "N15"
 FEATURES = ['name.control-character']
+TREE = [F('a\nb', b'a newline in my name\n')]
 
 
 def build(a):

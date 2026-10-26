@@ -4,6 +4,10 @@ The name field contains `a`, followed by a NUL, followed by `b`. In POSIX, a nam
 NUL, so the name is `a`. Copied as a whole, the field is `a` as a C string, which ends at the first
 NUL, but `a\0b` in languages whose strings can contain a NUL, and creating the file then fails.
 
+Every implementation that extracts it makes `a`; R and RubyGems fail on `a\0b`. The bytes after
+the NUL have no meaning and no writer puts them there (none of the scanned tarballs has them), so a
+strict parser rejects them rather than guess what they are for.
+
 Decision point: where a name ends.
 Seen in: none of the scanned tarballs.
 """

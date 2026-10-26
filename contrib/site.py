@@ -3,7 +3,7 @@
     python -I contrib/site.py docs contrib/data/*/*/results.jsonl
 
 Every page is generated, from what the rest of the repository has: the case's script and archive,
-what implementations make of it (matrix/matrix.json), and how many source tarballs have
+what implementations make of it (matrix/matrix.json), and how many release tarballs have
 its feature, of which the default policy of scanner/strict.py rejects how many. Static HTML with a
 stylesheet, and no scripts: the SVGs are part of the pages, so that their hover titles and the
 links of the matrix work.
@@ -40,11 +40,11 @@ with open(os.path.join(os.path.dirname(HERE), "CITATION.cff")) as f:
 CASES = os.path.join(matrix.ROOT, "suite", "cases")
 # The verdict at the top of a case's page: its badge, and what it requires
 VERDICTS = {
-    "accept": ("Must accept", "Every implementation must accept this archive, and extract the tree "
+    "accept": ("Accept", "Every implementation must accept this archive, and extract the tree "
                "below."),
-    "tolerate": ("Tolerated", "A strict parser may reject this archive. If it accepts it, it must "
+    "tolerate": ("Tolerate", "A strict parser may reject this archive. If it accepts it, it must "
                  "extract the tree below."),
-    "reject": ("Must reject", "A strict parser must reject this archive."),
+    "reject": ("Reject", "A strict parser must reject this archive."),
 }
 # That the default policy is a draft, at the top of the pages that have its verdicts
 DRAFT = '<a class="draft" href="index.html#policy">Working draft</a>\n'
@@ -172,6 +172,8 @@ table.tree td:nth-child(2) { overflow-wrap: normal; }
 .accept { border-color: #1a7f37; } .accept .badge { background: #1a7f37; }
 .reject { border-color: #cf222e; } .reject .badge { background: #cf222e; }
 .tolerate { border-color: #59636e; } .tolerate .badge { background: #59636e; }
+/* that the verdicts are of a draft, after the badge, in grey */
+.badge-draft { margin-right: 0.5rem; color: #59636e; }
 /* That the policy is a draft, on every page with verdicts: a strip on the left edge of the window,
    read from the bottom up, outside the text; on a screen too narrow for that, a band above the
    title */
@@ -192,8 +194,8 @@ STYLE_VERSION = hashlib.sha256(STYLE.encode()).hexdigest()[:8]
 
 def prevalence(k, n):
     """A share of tarballs with two decimals, so that a right-aligned column lines up on the
-    point; one that would round to 0 says so."""
-    return "&lt;0.01%" if 0 < 10000 * k < n else f"{100 * k / n:.2f}%"
+    point; one that would round to 0 says so, and none is none."""
+    return "none" if not k else "&lt;0.01%" if 10000 * k < n else f"{100 * k / n:.2f}%"
 
 
 # The footnote of the index for a prevalence marked with *
@@ -419,9 +421,23 @@ def error_line(error):
     return line if len(line) <= 200 else line[:199] + "…"
 
 
+# Cases that tarscan.py does not report as a feature of their own, and why: one it does not tell
+# apart from another, and one it stops at with an error
+UNTOLD = {"S07": "<code>tarscan.py</code> finds the same file twice, but does not compare the "
+                 "contents of the copies, so it does not tell this case from S09",
+          "F08": "<code>tarscan.py</code> stops at an archive cut short with an error, which none of "
+                 "the scanned tarballs has"}
+# What a feature does not say, below the table of the tarballs that have it
+CAVEATS = {"tree.duplicate.file-file": "<code>tarscan.py</code> finds the same file twice, and does "
+           "not compare the contents of the copies: some of these may differ, as in S07."}
+
+
 def features_of(case, info):
     """The features a case is about: those of its script, or for cases to accept, which have none
-    to reject, the allowed features that tarscan.py reports of it."""
+    to reject, the allowed features that tarscan.py reports of it; none for a case that it does
+    not tell apart from another."""
+    if info["id"] in UNTOLD:
+        return []
     if info["features"]:
         return info["features"]
     with open(os.path.join(matrix.ARCHIVES, case + ".tar"), "rb") as f:
@@ -446,7 +462,8 @@ def data_section(ident, features, names, short, rated, union):
     with them: a sentence where it rejects all or none of them for the features, and a column
     where it rejects some. seen-in.html lists them: all that it rejects, or else examples."""
     if not features:
-        return "<p>This case is not measured in source tarballs on its own.</p>"
+        why = UNTOLD.get(ident, "<code>tarscan.py</code> reports no feature of it on its own")
+        return f"<p>This case is not measured in release tarballs: {why}.</p>"
 
     def has(r):
         return any(f in r["features"] for f in features)
@@ -480,15 +497,18 @@ def data_section(ident, features, names, short, rated, union):
             f'<p class="note">{old:,} of these tarballs were scanned by an earlier version of '
             "<code>tarscan.py</code>, which did not report this. What it did record rules it out "
             "for all of them.</p>\n" if old else "")
+    caveats = "".join(f'<p class="note">{CAVEATS[f]}</p>\n' for f in features if f in CAVEATS)
     return (
-        f"<p>Release tarballs of {ecosystems(names, samples=False)} with "
+        f"<p>Release tarballs of {ecosystems(names)} with "
         + ", ".join(f"<code>{html.escape(f)}</code>" for f in features) + "." + policy + "</p>\n"
-        + table("data-policy" if mixed else "data", rows) + "\n" + note
+        + table("data-policy" if mixed else "data", rows) + "\n" + note + caveats
         + ("" if not k else f'<p>See <a href="seen-in.html#{ident}">'
            + (f"the list of the {j:,} it rejects" if mixed
+              else "the tarball" if k == 1
               else f"the list of these {k:,} tarballs" if j or k <= EXAMPLES
               else f"a sample of these {k:,} tarballs")
-           + "</a>, with the sha256 of each and an example from it.</p>")
+           + "</a>, with " + ("its sha256 and an example" if k == 1 and not mixed
+                              else "the sha256 of each and an example from it") + ".</p>")
     )
 
 
@@ -523,8 +543,8 @@ def verdict(info):
     """The verdict of a case, as a banner: what it requires."""
     v = info["verdict"]
     badge, text = VERDICTS[v]
-    return (f'<div class="verdict {v} wide"><p><span class="badge">{badge}</span> '
-            f"{html.escape(text)}</p></div>")
+    return (f'<div class="verdict {v} wide"><p><span class="badge">{badge}</span>'
+            f'<span class="badge-draft">(draft)</span> {html.escape(text)}</p></div>')
 
 
 def with_tree(explanation, info):
@@ -610,7 +630,7 @@ def case_page(case, info, results, data):
 """
     body += ("<h2>What implementations make of it</h2>\n"
              + implementations_section(case, info, results) + "\n")
-    body += "<h2>Prevalence in source tarballs</h2>\n" + data_section(ident, features, *data) + "\n"
+    body += "<h2>Prevalence in release tarballs</h2>\n" + data_section(ident, features, *data) + "\n"
     body += see_also(doc)
     return page(f"{ident} {name} · {TITLE}", info["description"].replace("`", ""), body)
 
@@ -657,7 +677,7 @@ def mtimes_svg(union):
         # rounded at the top, square on the baseline
         out.append(f'<path d="M{x:.1f},{base}v{-(h - r):.1f}q0,{-r:.1f} {r:.1f},{-r:.1f}'
                    f'h{w - 2 * r:.1f}q{r:.1f},0 {r:.1f},{r:.1f}v{h - r:.1f}z">'
-                   f"<title>{b}: {counts[b]:,} tarballs</title></path>")
+                   f"<title>{b}: {counts[b]:,} tarball{'s' if counts[b] != 1 else ''}</title></path>")
         start = b.split("–")[0]
         if start.endswith("0"):
             # a decade at the left edge of its first bin
@@ -673,7 +693,7 @@ def mtimes_svg(union):
 
 
 def tarballs_section(names, short, rated, union):
-    """What the default policy rejects of the source tarballs, per ecosystem."""
+    """What the default policy rejects of the release tarballs, per ecosystem."""
     rows = []
     for n, rs in [(short[n], rated[n]) for n in names] + [("total (distinct)", union)]:
         j = sum(not strict.passes_default(r) for r in rs)
@@ -701,21 +721,25 @@ def printable(name):
 
 
 def seen_row(r, short, example, also=""):
-    """A source tarball: its name, as a link to where it was downloaded from, with its sha256; the
-    ecosystems that package it; and an example from it."""
+    """A release tarball: its name, as a link to its upstream URL, with its sha256; the
+    ecosystems that package it; and an example from it. An ftp:// URL, which browsers no longer
+    open, is given as text."""
     name = f"{r['package']} {r['version']}" if r["version"] else r["package"]
     ecosystems = ", ".join(short[n] for n in r["datasets"] if n in short)
     example = f"<code>{html.escape(printable(example))}</code>" if example else ""
     # a space, as in a directory of SourceForge, is not valid in a URL, which needs it as %20
     url = urllib.parse.quote(r["url"], safe=":/?#[]@!$&'()*+,;=%~")
-    return (f'<tr><td><a href="{html.escape(url)}" rel="nofollow">{html.escape(name)}</a>'
+    link = (f'<a href="{html.escape(url)}" rel="nofollow">{html.escape(name)}</a>'
+            if not url.startswith("ftp://") else
+            f'{html.escape(name)}<span class="hash"><code>{html.escape(url)}</code></span>')
+    return (f'<tr><td>{link}'
             f'<span class="hash">sha256 <code>{r["sha256"]}</code></span></td>'
             f"<td>{html.escape(ecosystems)}</td>"
             f"<td>{example}{also}</td></tr>")
 
 
 def seen_page(cases, data):
-    """The source tarballs that cases are seen in: every one that the default policy rejects, by
+    """The release tarballs that cases are seen in: every one that the default policy rejects, by
     why, under the cases of the criterion where there are some; and for the other cases, examples
     of tarballs that have their feature. Each listed with an example from the tarball where the
     scan recorded one."""
@@ -789,11 +813,12 @@ def seen_page(cases, data):
         ident, name = matrix.label(case, info).split(" ", 1)
         examples.append(f'<h3 id="{ident}"><a href="{ident}.html"><code>{ident}</code></a> '
                         f"{html.escape(name)}: {len(picks)} of {len(has):,}</h3>\n" + table("seen", rows))
-    body = f"""<h1>Seen in source tarballs</h1>
+    body = f"""<h1>Seen in release tarballs</h1>
 <p>Unlike the test archives, which are crafted, these are real release tarballs: of the
 {len(union):,} distinct ones of {ecosystems(names)}, those that cases are seen
-in. Each links to where it was downloaded from, with the sha256 that its package pins, and an
-example from it where the scan recorded one.</p>
+in. Each links to its upstream URL, with the sha256 that its package pins, which is that of the
+file scanned: for some, a copy from the ecosystem's mirror. Some are binaries, such as NVIDIA's
+cuDNN in Spack. Each has an example from it where the scan recorded one.</p>
 <h2 id="rejected">Rejected by the default policy</h2>
 <p>All {len(rejected)} tarballs that the default policy rejects, by why. A tarball with more than
 one reason is listed under each.</p>
@@ -805,9 +830,12 @@ of how many there are, listed by name. The sample is those with the lowest sha25
 as random, and the same on every run.</p>
 {chr(10).join(examples)}
 """
-    return page(f"Seen in source tarballs · {TITLE}",
-                f"The {len(rejected)} source tarballs that the default policy rejects, and examples "
-                "of those that cases are seen in.", body)
+    return page(f"Seen in release tarballs · {TITLE}", seen_description(len(rejected)), body)
+
+
+def seen_description(rejected):
+    return (f"The {rejected} release tarballs that the default policy rejects, and examples of "
+            "those that cases are seen in.")
 
 
 # The pictures that a link to a page shows where it is shared, such as in chats: PNGs that
@@ -868,10 +896,12 @@ def case_image(case, info, results):
     badge = VERDICTS[info["verdict"]][0]
     esc = matrix.esc
     out = ['<rect width="100%" height="100%" fill="#ffffff"/>',
-           f'<rect x="{left}" y="28" width="{14 * len(badge) + 24}" height="34" rx="4" '
+           f'<rect x="{left}" y="28" width="{12.5 * len(badge) + 24}" height="34" rx="4" '
            f'fill="{BADGES[info["verdict"]]}"/>',
            f'<text x="{left + 12}" y="52" style="font-size:22px;font-weight:700;fill:#ffffff">'
            f"{esc(badge)}</text>",
+           f'<text x="{left + 12.5 * len(badge) + 34}" y="52" style="font-size:22px;fill:#59636e">'
+           "(draft)</text>",
            f'<text x="{left}" y="112" style="font-size:38px;font-weight:700"><tspan class="id" '
            f'style="font-weight:400">{esc(ident)}</tspan> {esc(name)}</text>']
     for i, line in enumerate(textwrap.wrap(info["description"].replace("`", ""), 80)[:2]):
@@ -916,26 +946,31 @@ def index_page(cases, results, data):
     body = DRAFT + f"""<h1>{TITLE}</h1>
 {readme_intro()}
 <h2>Comparison of different tar implementations</h2>
-<p>Click a case for its page.</p>
+<p>A row per case, grouped by verdict: to accept, tolerated, and to reject by category. A column
+per implementation, at its latest release. ✓ is as the verdict says; ! accepts a case to reject,
+which is lenient rather than a bug; ✗ rejects a case to accept, or extracts another tree; ↑ writes
+outside the destination. The legend below the matrix has the rest. Click a case for its page.</p>
 <div class="wide">{matrix.svg(results, cases, lambda case: cases[case]["id"] + ".html")}</div>
 <p>Each case has a permanent identifier, such as F15, whose letter is its category:</p>
 <ul>
 <li><strong>F</strong> framing: which members an archive has.</li>
 <li><strong>N</strong> names: what path each member has.</li>
-<li><strong>K</strong> kinds: the mode of each member: file, directory, link or executable.</li>
+<li><strong>K</strong> kinds: the kind of each member: file, directory or link.</li>
 <li><strong>S</strong> order and state: how members combine into a directory tree.</li>
 </ul>
 <p>A case's page shows its archive block by block, what every implementation makes of it, and how
-common it is in source tarballs.</p>
+common it is in release tarballs.</p>
 <h2 id="policy">Policy</h2>
 <p>This section defines a <strong>working draft</strong> of the
 <em>default policy</em><sup><a href="#stricter">1</a></sup>, which accepts, tolerates or rejects
 each case below, based on <a href="#tarballs">data</a> from the {len(union):,} distinct release
 tarballs of {ecosystems(names)}.</p>
-<p>The <em>prevalence</em> column is an estimate of the likelihood of encountering a case in
-practice, from a scan of these tarballs.</p>
+<p>The <em>prevalence</em> column is the share of these tarballs that have a case: a first-order
+approximation of how common it is in general. A case that is <em>not measured</em> is one that
+<code>tarscan.py</code> does not report on its own; its page says why.</p>
 <p class="note" id="stricter"><sup>1</sup> A policy can be stricter and also reject the tolerated
-cases, at the cost of rejecting tarballs that are fairly common. That suits special-purpose tools,
+cases, at the cost of rejecting more real tarballs: some tolerated cases are common, such as
+numbers padded with spaces (F01), and others rare. That suits special-purpose tools,
 such as an extractor for a single ecosystem, where it can be checked against every tarball ever
 published there.</p>
 {chr(10).join(sections)}
@@ -946,8 +981,12 @@ published there.</p>
 <h2 id="contributing">Contributing</h2>
 {readme_section("Contributing")}
 """
-    intro = re.sub(r"<[^>]+>", "", readme_intro().split("</p>", 1)[0])
-    return page(f"{TITLE} · tar-minefield", html.unescape(intro), body)
+    rejected = sum(not strict.passes_default(r) for r in union)
+    description = (f"A test suite of {len(cases)} tar archives, what over 20 implementations make of "
+                   "each, and a draft policy that rejects the ambiguous ones "
+                   f"and accepts {strict.percent(len(union) - rejected, len(union))} of "
+                   f"{len(union):,} real tarballs.")
+    return page(f"{TITLE} · tar-minefield", description, body)
 
 
 def main():
@@ -975,7 +1014,8 @@ def main():
             os.remove(os.path.join(out, name))
     files = {".nojekyll": "", "style.css": STYLE, "index.html": index_page(cases, results, data),
              "seen-in.html": seen_page(cases, data),
-             "rejected.html": page(f"Seen in source tarballs · {TITLE}", "Now seen-in.html.",
+             "rejected.html": page(f"Seen in release tarballs · {TITLE}",
+                                   seen_description(sum(not strict.passes_default(r) for r in union)),
                                    '<p>Now <a href="seen-in.html#rejected">seen-in.html</a>.</p>',
                                    '<meta http-equiv="refresh" content="0; url=seen-in.html#rejected">\n')}
     for case, info in cases.items():
@@ -984,7 +1024,7 @@ def main():
     # in columns that do not change, so that clicking through them the links stay where they are
     sequence = ([("index.html", "tar-minefield")]
                 + [(info["id"] + ".html", matrix.label(case, info)) for case, info in cases.items()]
-                + [("seen-in.html", "Seen in source tarballs")])
+                + [("seen-in.html", "Seen in release tarballs")])
     for i, (name, _) in enumerate(sequence):
         cells = []
         for rel, j in (("prev", i - 1), ("next", i + 1)):

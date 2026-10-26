@@ -12,8 +12,8 @@ How many release tarballs a strict tar parser rejects: with every criterion, eac
 | nix | 19,086 | 19,012 | 22 | 17,955 | 78.3 | 11,659,428 | other 11,975, pypi 3,846, cpan 1,899 |
 | pypi | 10,000 | 10,000 | 0 | 5,000 | 7.9 | 722,380 | pypi 10,000 |
 | rubygems | 5,000 | 5,000 | 0 | 2,500 | 1.0 | 220,587 | rubygems 5,000 |
-| spack | 37,757 | 37,554 | 0 | 7,723 | 1,080.9 | 127,668,354 | github-archive 11,999, pypi 9,237, other 6,683 |
-| all, distinct | 82,912 | 82,635 | 48 | 41,619 | 1,225.4 | 153,936,711 | |
+| spack | 37,757 | 37,554 | 1 | 7,723 | 1,080.9 | 127,668,354 | github-archive 11,999, pypi 9,237, other 6,683 |
+| all, distinct | 82,912 | 82,635 | 49 | 41,619 | 1,225.4 | 153,936,711 | |
 
 Tarballs that are not scanned could not be downloaded from any URL. Not assessed: in a compression that the scanner does not read (`.tar.lz`, `.tar.zst`). Latest: the latest version of a package in its repository.
 
@@ -49,18 +49,18 @@ Fixed: the median mtime is one that a producer writes in place of the real one, 
 
 ## What each policy rejects
 
-**The default policy rejects 204 of 82,587 release tarballs (0.25%); rejecting every criterion would reject 1432 (1.73%).** The criterion that rejects the most tarballs on its own is `tree.duplicate.file-file` of the default policy, and `number.*.leading-space` of every criterion.
+**The default policy rejects 192 of 82,586 release tarballs (0.23%); rejecting every criterion would reject 1431 (1.73%).** The criterion that rejects the most tarballs on its own is `tree.duplicate.file-file` of the default policy, and `number.*.leading-space` of every criterion.
 
 | ecosystem | tarballs | GB | rejected: every criterion | rejected: default policy |
 |---|---:|---:|---:|---:|
 | crates | 5,000 | 0.8 | 0 (0.00%) | 0 (0.00%) |
 | guix | 10,168 | 76.5 | 354 (3.48%) | 34 (0.33%) |
 | live-bootstrap | 171 | 1.1 | 8 (4.68%) | 0 (0.00%) |
-| nix | 18,990 | 77.7 | 682 (3.59%) | 79 (0.42%) |
+| nix | 18,990 | 77.7 | 682 (3.59%) | 78 (0.41%) |
 | pypi | 10,000 | 7.9 | 44 (0.44%) | 19 (0.19%) |
-| rubygems | 5,000 | 1.0 | 22 (0.44%) | 8 (0.16%) |
-| spack | 37,554 | 1,080.9 | 552 (1.47%) | 79 (0.21%) |
-| **all, distinct** | 82,587 | 1,225.4 | 1,432 (1.73%) | 204 (0.25%) |
+| rubygems | 5,000 | 1.0 | 22 (0.44%) | 6 (0.12%) |
+| spack | 37,553 | 1,080.9 | 551 (1.47%) | 70 (0.19%) |
+| **all, distinct** | 82,586 | 1,225.4 | 1,431 (1.73%) | 192 (0.23%) |
 
 ## The default policy
 
@@ -76,6 +76,7 @@ The strict criteria that the default policy lets through, and how; it rejects al
 | `end.data-after` | accept | junk after the two zero blocks is ignored | 25 |
 | `pax-global.after-members` | accept | if every global header has only a `comment` | 82 |
 | `magic.posix-version-nuls` | accept | as some Java archivers write it: `ustar\0\0\0` | 60 |
+| `name.control-character` | accept | created as it is: every implementation reads the name alike, and the risk is in its use | 11 |
 | `number.*.leading-space` | accept | octal padded with spaces, not zeros, which implementations read alike | 819 |
 | `pax.size-disagrees` | accept | the pax size frames the member, as POSIX says: it is how sizes over 8 GiB are written | 0 |
 | `pax.newline-in-value.SCHILY.xattr.*` | accept | xattrs are not extracted | 12 |
@@ -94,14 +95,14 @@ Tarballs that each criterion rejects, per ecosystem. Default: what the default p
 | framing | `end.missing`: no end-of-archive marker | reject | 0 | 6 (0.06%) | 0 | 4 (0.02%) | 0 | 0 | 12 (0.03%) | 22 | SDL2_image@2.8.8, ruby@4.0.5, fastcap@2.0-18Sep92 |
 | framing | `pax.newline-in-value.SCHILY.xattr.*`: a newline in a pax value, where implementations split lines | accept | 0 | 2 (0.02%) | 0 | 7 (0.04%) | 0 | 0 | 5 (0.01%) | 12 | qd@2.3.24, libjwt@1.17.2, Minion@10.31 |
 | framing | `pax.size-on-dir`: a pax size on a member without data | reject | 0 | 0 | 0 | 1 (0.01%) | 8 (0.08%) | 0 | 0 | 9 | llama_index_workflows@2.26.0, anibridge-mal-provider@0.2.3, sofias-sdk-lite@0.4.0 |
-| framing | `scan.error`: the scanner could not read past a header | reject | 0 | 4 (0.04%) | 0 | 0 | 0 | 0 | 4 (0.01%) | 1 | jakarta-oro@2.0.8, PullParser@2.1.10, commons-cli@1.2-src |
 | framing | `end.zero-block-before-member`: a zero block, then more members | reject | 0 | 4 (0.04%) | 0 | 0 | 0 | 0 | 3 (0.01%) | 0 | jakarta-oro@2.0.8, PullParser@2.1.10, commons-cli@1.2-src |
+| framing | `scan.error`: the scanner could not read past a header | reject | 0 | 4 (0.04%) | 0 | 0 | 0 | 0 | 3 (0.01%) | 0 | jakarta-oro@2.0.8, PullParser@2.1.10, commons-cli@1.2-src |
 | framing | `end.archive-after`: another archive after the end-of-archive marker | reject | 0 | 1 (0.01%) | 0 | 0 | 0 | 0 | 4 (0.01%) | 3 | commons-jexl@2.1.1-src, jmol@14.8.0, glibmm@2.4.8 |
 | framing | `end.lone-zero-block`: an end-of-archive marker of one zero block, not two | reject | 0 | 0 | 0 | 5 (0.03%) | 0 | 0 | 0 | 0 | eng-rus, srecord@1.64, cdi2iso@0.1-src |
 | name | `name.leading-dot-slash`: a name like `./a`, which some implementations make `a` | normalize | 0 | 31 (0.30%) | 0 | 35 (0.18%) | 22 (0.22%) | 18 (0.36%) | 145 (0.39%) | 173 | sqliteodbc@0.99991, numdiff@5.9.0, scanbd@1.5.1 |
 | name | `symlink.absolute`: a symlink to an absolute path | accept | 0 | 13 (0.13%) | 0 | 15 (0.08%) | 3 (0.03%) | 0 | 63 (0.17%) | 85 | tachyon@0.99.5, notmuch@0.40, gnome-autoar@0.4.5 |
 | name | `name.dot`: a member named `.` or `./` | normalize | 0 | 13 (0.13%) | 0 | 18 (0.09%) | 22 (0.22%) | 0 | 11 (0.03%) | 0 | guile@2.0.9, hadrian-bootstrap-sources@9.8.1, linux-libre-headers-stripped@4.14.67-i686-linux |
-| name | `name.control-character`: a control character in a name | reject | 0 | 0 | 0 | 1 (0.01%) | 0 | 2 (0.04%) | 8 (0.02%) | 10 | cdrtools@3.02a09, fenton_shell@0.1.0, deja-vu@0.4 |
+| name | `name.control-character`: a control character in a name | accept | 0 | 0 | 0 | 1 (0.01%) | 0 | 2 (0.04%) | 8 (0.02%) | 10 | cdrtools@3.02a09, fenton_shell@0.1.0, deja-vu@0.4 |
 | name | `name.dot-component`: a name like `a/./b` | normalize | 0 | 4 (0.04%) | 0 | 5 (0.03%) | 0 | 0 | 1 (0.00%) | 8 | tuffy@20120614, privoxy@3.0.34-stable-src, ghc@7.8.4-x86_64-unknown-linux-deb7 |
 | name | `name.backslash`: a backslash, `\`, which is a separator on Windows | reject | 0 | 2 (0.02%) | 0 | 1 (0.01%) | 2 (0.02%) | 0 | 3 (0.01%) | 7 | texi2html@5.0, gstreamer-docs@1.28.1, sdb-debugger@0.6.0 |
 | name | `name.dotdot`: a name with `..` | reject | 0 | 0 | 0 | 0 | 4 (0.04%) | 0 | 0 | 4 | spdk@26.9, claude-code-relay@0.0.9, boldi-cli@0.9.4 |
@@ -126,7 +127,7 @@ Other criteria reject no tarball here. That is no proof that they cost nothing: 
 
 ## Not measured
 
-Of the 82,587 tarballs, 62,537 were scanned by `25bfa32e6e71`, a version of `tarscan.py` that did not report `pax.empty-value.*`, `pax-global.empty-value.*`, `pax.value-not-utf8.*`, `pax-global.value-not-utf8.*`, `pax.size-leading-zero`, `pax.size-too-large`, `extended.gnu-long-and-pax`, `number.*.base256-too-large`; the other 20,050 were scanned by a later version. What the earlier versions did record rules out most of these features: a tarball without a pax `size` has no pax size with a leading zero. `UNREPORTED` in `contrib/scanner/strict.py` says how, for each version.
+Of the 82,586 tarballs, 62,536 were scanned by `25bfa32e6e71`, a version of `tarscan.py` that did not report `pax.empty-value.*`, `pax-global.empty-value.*`, `pax.value-not-utf8.*`, `pax-global.value-not-utf8.*`, `pax.size-leading-zero`, `pax.size-too-large`, `extended.gnu-long-and-pax`, `number.*.base256-too-large`; the other 20,050 were scanned by a later version. What the earlier versions did record rules out most of these features: a tarball without a pax `size` has no pax size with a leading zero. `UNREPORTED` in `contrib/scanner/strict.py` says how, for each version.
 
 It rules out every strict criterion for every one of them, so the tables above measure every tarball. It does not rule out these allowed features, in fields outside the tree, which the table below counts only where they were reported: `pax.value-not-utf8.mtime` in 10,787, `pax.value-not-utf8.atime` in 703, `pax.value-not-utf8.ctime` in 687, `number.uid.base256-too-large` in 143, `number.gid.base256-too-large` in 136, `pax.value-not-utf8.uid` in 100, `pax.value-not-utf8.gid` in 67.
 

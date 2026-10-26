@@ -9,10 +9,10 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F10 extended-pax-size-before-gnu-long · Tar file extraction test suite">
 <meta property="og:description" content="A pax size followed by a GNU long name: which of them does the size apply to?">
-<link rel="stylesheet" href="style.css?96a01d71">
+<link rel="stylesheet" href="style.css?487f8630">
 <link rel="canonical" href="https://stoppels.ch/tar/F10.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F10.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/b882e2e1882862e1.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/47349a9bfb8b622a.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of F10 extended-pax-size-before-gnu-long">
@@ -25,7 +25,7 @@
 <nav class="wide"><a class="prev" href="F09.html" rel="prev" title="F09 end-zero-block-then-member">‹ F09 end-zero-block-then-member</a><a href="index.html">tar-minefield</a><a class="next" href="F11.html" rel="next" title="F11 magic-odd-version">F11 magic-odd-version ›</a></nav>
 <h1><code>F10</code> extended-pax-size-before-gnu-long</h1>
 <p>A pax <code>size</code> followed by a GNU long name: which of them does the size apply to?</p>
-<div class="verdict reject wide"><p><span class="badge">Must reject</span> A strict parser must reject this archive.</p></div>
+<div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>framing</dd>
 <dt>Default policy</dt><dd>rejects it</dd>
@@ -404,10 +404,9 @@ Seen in: none of the scanned tarballs.
 </details>
 <h2 id="what-implementations-make-of-it">What implementations make of it<a class="anchor" href="#what-implementations-make-of-it" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="implementations"><colgroup><col style="width: 21%"><col style="width: 21%"><col style="width: 18%"><col style="width: 40%"></colgroup><tr><th>implementation</th><th>version</th><th>outcome</th><th>what it makes of it</th></tr>
-<tr><td>strict.py</td><td></td><td>✅ as the verdict says</td><td>rejects it</td></tr>
 <tr><td>GNU tar</td><td>tar (GNU tar) 1.35</td><td>⚠️ accepts</td><td>tree A: <code>long-name</code> (512 B, 917dba8e)</td></tr>
 <tr><td>bsdtar</td><td>bsdtar 3.8.10 - libarchive 3.8.10</td><td>⚠️ accepts</td><td>tree A: <code>long-name</code> (512 B, 917dba8e)</td></tr>
-<tr><td>BusyBox tar</td><td>BusyBox v1.38.0</td><td>⚠️ accepts</td><td>tree B: <code>long-name</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
+<tr><td>BusyBox tar</td><td>BusyBox v1.38.0, defconfig</td><td>⚠️ accepts</td><td>tree B: <code>long-name</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
 <tr><td>7-Zip</td><td>7-Zip (z) 26.05 (x64)</td><td>⚠️ accepts</td><td>tree A: <code>long-name</code> (512 B, 917dba8e)</td></tr>
 <tr><td>Python tarfile, filter=data, as in pip</td><td>CPython 3.15.2</td><td>⚠️ accepts</td><td>tree C: <code>long-name</code> (512 B, 917dba8e), <code>short-name</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
 <tr><td>Python tarfile, filter=tar</td><td>CPython 3.15.2</td><td>⚠️ accepts</td><td>tree C: <code>long-name</code> (512 B, 917dba8e), <code>short-name</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
@@ -418,8 +417,6 @@ Seen in: none of the scanned tarballs.
 <tr><td>Java Commons Compress</td><td>Commons Compress 1.28.0, Expander, on Java 27.0.1.0.2</td><td>⚠️ accepts</td><td>tree A: <code>long-name</code> (512 B, 917dba8e)</td></tr>
 <tr><td>.NET System.Formats.Tar</td><td>System.Formats.Tar of .NET 10.0.14, ExtractToDirectory</td><td>✅ as the verdict says</td><td>error: InvalidDataException: A metadata entry of type &#x27;LongPath&#x27; was unexpectedly found after a metadata entry of type &#x27;ExtendedAttributes&#x27;.</td></tr>
 <tr><td>PHP PharData, as in Composer</td><td>PharData of PHP 8.5.12, as Composer&#x27;s TarDownloader calls it</td><td>⚠️ accepts</td><td>tree B: <code>long-name</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
-<tr><td>Go archive/tar</td><td>archive/tar of go1.27.3</td><td>⚠️ accepts</td><td>tree A: <code>long-name</code> (512 B, 917dba8e)</td></tr>
-<tr><td>Go archive/tar, tarinsecurepath=0</td><td>archive/tar of go1.27.3</td><td>⚠️ accepts</td><td>tree A: <code>long-name</code> (512 B, 917dba8e)</td></tr>
 <tr><td>Go containerd archive.Apply</td><td>containerd v2.4.2, archive.Apply, of go1.27.3</td><td>⚠️ accepts</td><td>tree A: <code>long-name</code> (512 B, 917dba8e)</td></tr>
 <tr><td>Rust tar</td><td>tar 0.4.46, unpack</td><td>⚠️ accepts</td><td>tree A: <code>long-name</code> (512 B, 917dba8e)</td></tr>
 <tr><td>Rust astral-tokio-tar</td><td>astral-tokio-tar 0.7.0, unpack</td><td>⚠️ accepts</td><td>tree A: <code>long-name</code> (512 B, 917dba8e)</td></tr>
@@ -429,19 +426,19 @@ Seen in: none of the scanned tarballs.
 <tr><td>Perl Archive::Tar</td><td>Archive::Tar 3.12 of Perl v5.44.0</td><td>⚠️ accepts</td><td>tree B: <code>long-name</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
 <tr><td>Haskell tar</td><td>tar 0.7.2.0, extract, of GHC 9.14</td><td>⚠️ accepts</td><td>tree B: <code>long-name</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
 <tr><td>Julia Tar.jl</td><td>Tar 1.10.0 of Julia 1.13.3</td><td>⚠️ accepts</td><td>tree A: <code>long-name</code> (512 B, 917dba8e)</td></tr>
-<tr><td>live-bootstrap untar</td><td>mescc-tools-extra a151c245e512, built with cc</td><td>✅ as the verdict says</td><td>error: unable to create long symlink</td></tr>
-<tr><td>live-bootstrap untar, --non-strict</td><td>mescc-tools-extra a151c245e512, built with cc</td><td>✅ as the verdict says</td><td>error: non-strict mode enabled, preparing for chaos unable to create long symlink</td></tr></table></div>
-<h2 id="prevalence-in-source-tarballs">Prevalence in source tarballs<a class="anchor" href="#prevalence-in-source-tarballs" aria-label="Link to this section">¶</a></h2>
-<p>Release tarballs of Spack, nixpkgs, Guix, live-bootstrap, PyPI, crates.io and RubyGems with <code>extended.pax-size-before-gnu-long</code>.</p>
+<tr><td>live-bootstrap untar</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>✅ as the verdict says</td><td>error: unable to create long symlink</td></tr>
+<tr><td>live-bootstrap untar, --non-strict</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>✅ as the verdict says</td><td>error: non-strict mode enabled, preparing for chaos unable to create long symlink</td></tr></table></div>
+<h2 id="prevalence-in-release-tarballs">Prevalence in release tarballs<a class="anchor" href="#prevalence-in-release-tarballs" aria-label="Link to this section">¶</a></h2>
+<p>Release tarballs of Spack, nixpkgs, Guix and live-bootstrap, and samples of PyPI, crates.io and RubyGems with <code>extended.pax-size-before-gnu-long</code>.</p>
 <div class="wide"><table class="data"><colgroup><col style="width: 25%"><col style="width: 25%"><col style="width: 25%"><col style="width: 25%"></colgroup><tr><th>ecosystem</th><th class=n>tarballs</th><th class=n>with it</th><th class=n>share</th></tr>
-<tr><td>Spack</td><td class=n>37,554</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>nixpkgs</td><td class=n>18,990</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>Guix</td><td class=n>10,168</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>PyPI</td><td class=n>10,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>crates.io</td><td class=n>5,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>RubyGems</td><td class=n>5,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>live-bootstrap</td><td class=n>171</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr class="total"><td>total (distinct)</td><td class=n>82,587</td><td class=n>0</td><td class=n>0.00%</td></tr></table></div>
+<tr><td>Spack</td><td class=n>37,553</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>nixpkgs</td><td class=n>18,990</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>Guix</td><td class=n>10,168</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>PyPI</td><td class=n>10,000</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>crates.io</td><td class=n>5,000</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>RubyGems</td><td class=n>5,000</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>live-bootstrap</td><td class=n>171</td><td class=n>0</td><td class=n>none</td></tr>
+<tr class="total"><td>total (distinct)</td><td class=n>82,586</td><td class=n>0</td><td class=n>none</td></tr></table></div>
 
 
 <hr class="wide">

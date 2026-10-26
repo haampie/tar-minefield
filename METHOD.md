@@ -8,7 +8,7 @@ cases are produced so that anyone can audit them. It is a working draft.
 
 | term | meaning |
 |---|---|
-| **implementation** | A program or library that turns a tar archive into a tree, by extracting it or by listing its members: GNU tar, Python `tarfile`, Go `archive/tar`, … |
+| **implementation** | A program or library that extracts a tar archive into a tree: GNU tar, Python `tarfile`, containerd's `archive.Apply`, … |
 | **member** | One entry of an archive: a header, its extended headers, and its data. |
 | **tree** | What an implementation extracts: paths, each with a kind (file, directory, symlink, hardlink), the contents of a file or the target of a link, and whether a file is executable. Nothing else, such as mtimes and owners. |
 | **ambiguity** | Something in an archive from which two implementations, each following a defensible reading of [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html), GNU tar or practice, extract different trees. |
@@ -196,6 +196,9 @@ costs. The tolerated cases are:
   hides none.
 - absolute symlinks, created as they are: the danger is in following them, and writing through
   any symlink is rejected.
+- control characters in names, such as a newline, created as they are: every implementation
+  reads the name alike, and the risk is in what is done with it afterwards, where a newline makes
+  one name look like two.
 - data after the end-of-archive marker that is not a header, which is ignored. A header there,
   another archive or members after a zero block, is rejected: some implementations extract them.
 - a global pax header with only a `comment` after the first member.

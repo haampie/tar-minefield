@@ -8,27 +8,27 @@ There are dozens of implementations of tar file extraction out there, from comma
 
 This is a security concern: for example, when a security scanner and the extractor use different tar implementations, the scanner could inspect other files than the ones that end up on disk.
 
-By assigning [identifiers](https://stoppels.ch/tar/#policy) to these ambiguities, and providing test cases and usage data, this project aims for tar implementations to converge on a strict parser and identical behavior.
+By assigning [identifiers](https://stoppels.ch/tar/#policy) to these ambiguities, and providing test cases and usage data, this project aims for tar implementations to converge on strict parsing and identical behavior.
 
-This project proposes a **[default policy](https://stoppels.ch/tar/#policy)** that rejects the vast majority of ambiguities in tar files that could make implementations extract different files, while ensuring that nearly every source tarball already published can still be extracted. <!-- begin strict.py -->Of the 82,587 source tarballs of Spack, nixpkgs, Guix and live-bootstrap, and samples of PyPI, crates.io and RubyGems, it accepts 99.75% ([per ecosystem](https://stoppels.ch/tar/#tarballs)).<!-- end strict.py -->
+This project proposes a **[default policy](https://stoppels.ch/tar/#policy)** that rejects the vast majority of ambiguities in tar files that could make implementations extract different files, while ensuring that nearly every source tarball already published can still be extracted. <!-- begin strict.py -->Of the 82,586 source tarballs of Spack, nixpkgs, Guix and live-bootstrap, and samples of PyPI, crates.io and RubyGems, it accepts 99.77% ([per ecosystem](https://stoppels.ch/tar/#tarballs)).<!-- end strict.py -->
 
 ## Motivating examples
 
 | case | the archive | what implementations make of it |
 |---|---|---|
-| [N09](https://stoppels.ch/tar/N09.html) | two pax headers for one file, with `path=first` and `path=second` | GNU tar, node-tar and Go extract `second`; Python and Java extract `first`; bsdtar, Rust and .NET reject it |
+| [N09](https://stoppels.ch/tar/N09.html) | two pax headers for one file, with `path=first` and `path=second` | GNU tar, BusyBox, 7-Zip, node-tar, tar-fs, Go, R and Julia extract `second`; Python and Java extract `first`; PHP, RubyGems, Perl and live-bootstrap extract `header-name`, the name in the ustar header; bsdtar, Rust, .NET and Haskell reject it |
 | [S10](https://stoppels.ch/tar/S10.html) | a symlink `a` to `target`, then a file `a` | most replace the link with the file; Python's `tarfile` writes through the link, to `target` |
 | [K01](https://stoppels.ch/tar/K01.html) | a regular file named `a/` | GNU tar, bsdtar, node-tar and Java create a directory `a`; Python, Go, Rust's `tar` and PHP's `PharData` an empty file `a`; tar-fs and .NET reject it |
-| [F12](https://stoppels.ch/tar/F12.html) | a size field of `000000 1000`, with a space | GNU tar, node-tar and tar-fs read 0, and find a second file `smuggled` in the data; bsdtar, Python, Go, Rust, Java and .NET reject it |
+| [F12](https://stoppels.ch/tar/F12.html) | a size field of `000000 1000`, with a space | GNU tar, BusyBox, 7-Zip, node-tar, tar-fs, Perl, Haskell, Julia and live-bootstrap read 0, and find a second file `smuggled` in the data; R reads 512, and extracts it as the data of `a`; bsdtar, Python, Go, Rust, Java, .NET, PHP and RubyGems reject it |
 
-Use **[the test suite](suite/)** in your tests, or browse **[the website](https://stoppels.ch/tar/)** for what each case means, what implementations make of it, and how often it occurs in source tarballs.
+Use **[the test suite](suite/)** in your tests, or browse **[the website](https://stoppels.ch/tar/)** for what each case means, what implementations make of it, and how often it occurs in release tarballs.
 
 ## Comparison
 
 <!-- begin matrix.py -->
 What over 20 implementations make of the 74 cases: a row per case, by category, and a column per implementation, with the outcomes of all cases at the top. [The website](https://stoppels.ch/tar/) has a page per case.
 
-[![What every implementation makes of every case of the test suite. Outcomes of all cases: strict.py: ✅65 ➕9; GNU tar: ✅23 ➕9 ⚠️42; bsdtar: ✅24 ➕9 ⚠️41; BusyBox tar: ✅15 ➕8 ⚠️50 ❌1; 7-Zip: ✅19 ➕8 ⚠️46 ❌1; Python tarfile, filter=data, as in pip: ✅23 ➕8 ➖1 ⚠️42; Python tarfile, filter=tar: ✅22 ➕9 ⚠️43; Python tarfile, filter=fully_trusted: ✅21 ➕9 ⚠️42 💥2; node-tar: ✅13 ➕8 ⚠️52 ❌1; node-tar, strict: ✅23 ➕8 ➖1 ⚠️42; tar-fs: ✅26 ➕7 ➖2 ⚠️39; Java Commons Compress: ✅22 ➕8 ⚠️43 ❌1; .NET System.Formats.Tar: ✅42 ➕7 ➖2 ⚠️23; PHP PharData, as in Composer: ✅16 ➕6 ➖1 ⚠️47 ❌4; Go archive/tar: ✅20 ➕9 ⚠️45; Go archive/tar, tarinsecurepath=0: ✅23 ➕9 ⚠️42; Go containerd archive.Apply: ✅23 ➕9 ⚠️42; Rust tar: ✅20 ➕9 ⚠️45; Rust astral-tokio-tar: ✅28 ➕8 ➖1 ⚠️37; Rust tar-codec, as in uv: ✅52 ➕5 ➖4 ⚠️13; RubyGems: ✅18 ➕6 ➖2 ⚠️45 ❌3; R untar, internal: ✅26 ➕9 ⚠️39; Perl Archive::Tar: ✅17 ➕7 ➖1 ⚠️47 ❌2; Haskell tar: ✅30 ➕5 ➖3 ⚠️35 ❌1; Julia Tar.jl: ✅35 ➕9 ⚠️30; live-bootstrap untar: ✅12 ➕7 ⚠️45 ❌8 💥2; live-bootstrap untar, --non-strict: ✅5 ➕7 ⚠️52 ❌8 💥2](contrib/matrix/matrix.svg)](https://stoppels.ch/tar/)
+[![What every implementation makes of every case of the test suite. Outcomes of all cases: GNU tar: ✅23 ➕10 ⚠️41; bsdtar: ✅24 ➕10 ⚠️40; BusyBox tar: ✅15 ➕9 ⚠️49 ❌1; 7-Zip: ✅19 ➕9 ⚠️45 ❌1; Python tarfile, filter=data, as in pip: ✅23 ➕9 ➖1 ⚠️41; Python tarfile, filter=tar: ✅22 ➕10 ⚠️42; Python tarfile, filter=fully_trusted: ✅21 ➕10 ⚠️41 💥2; node-tar: ✅13 ➕9 ⚠️51 ❌1; node-tar, strict: ✅23 ➕9 ➖1 ⚠️41; tar-fs: ✅26 ➕8 ➖2 ⚠️38; Java Commons Compress: ✅22 ➕9 ⚠️42 ❌1; .NET System.Formats.Tar: ✅42 ➕8 ➖2 ⚠️22; PHP PharData, as in Composer: ✅17 ➕7 ➖1 ⚠️46 ❌3; Go containerd archive.Apply: ✅23 ➕10 ⚠️41; Rust tar: ✅20 ➕10 ⚠️44; Rust astral-tokio-tar: ✅28 ➕9 ➖1 ⚠️36; Rust tar-codec, as in uv: ✅51 ➕5 ➖5 ⚠️13; RubyGems: ✅18 ➕7 ➖2 ⚠️44 ❌3; R untar, internal: ✅26 ➕10 ⚠️38; Perl Archive::Tar: ✅17 ➕8 ➖1 ⚠️46 ❌2; Haskell tar: ✅30 ➕6 ➖3 ⚠️34 ❌1; Julia Tar.jl: ✅35 ➕10 ⚠️29; live-bootstrap untar: ✅12 ➕8 ⚠️44 ❌8 💥2; live-bootstrap untar, --non-strict: ✅5 ➕8 ⚠️51 ❌8 💥2](contrib/matrix/matrix.svg)](https://stoppels.ch/tar/)
 <!-- end matrix.py -->
 
 ## Contents

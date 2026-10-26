@@ -49,30 +49,6 @@
      }
     }
    },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e47fbedb2823cf1ae4d4cdb8273635be2024cb870588e259c9b23d76ae49d484",
-      "size": 7
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e47fbedb2823cf1ae4d4cdb8273635be2024cb870588e259c9b23d76ae49d484",
-      "size": 7
-     }
-    }
-   },
    "Go containerd archive.Apply": {
     "error": null,
     "outside": {},
@@ -294,11 +270,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -350,30 +321,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -613,11 +560,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: Invalid tar header. Maybe the tar is corrupted or it needs to be gunzipped?",
     "outside": {},
@@ -669,30 +611,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -932,11 +850,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -988,30 +901,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -1251,11 +1140,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -1300,30 +1184,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -1542,11 +1402,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -1598,30 +1453,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -1805,11 +1636,6 @@
     "outside": {},
     "tree": {}
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: Invalid tar header. Maybe the tar is corrupted or it needs to be gunzipped?",
     "outside": {},
@@ -1854,30 +1680,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -2123,11 +1925,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -2193,30 +1990,6 @@
       "kind": "file",
       "sha256": "64164443bb63e338ef1cfdb12a57117cd1212270cc935a798f6e8a665cdf4659",
       "size": 512
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": "unexpected EOF",
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "",
-      "size": 1024
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": "unexpected EOF",
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "",
-      "size": 1024
      }
     }
    },
@@ -2413,11 +2186,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: Unexpected end of data",
     "outside": {},
@@ -2469,30 +2237,6 @@
    },
    "GNU tar": {
     "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": "archive/tar: invalid tar header",
     "outside": {},
     "tree": {
      "a": {
@@ -2749,11 +2493,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -2810,30 +2549,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "long-name": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "long-name": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -3126,11 +2841,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -3175,30 +2885,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -3417,11 +3103,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -3494,16 +3175,6 @@
       "size": 0
      }
     }
-   },
-   "Go archive/tar": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {}
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {}
    },
    "Go containerd archive.Apply": {
     "error": "archive/tar: invalid tar header",
@@ -3698,11 +3369,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -3753,30 +3419,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "good\n1 path=evil": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "good\n1 path=evil": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -4014,11 +3656,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -4082,42 +3719,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -4453,11 +4054,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -4508,36 +4104,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "dir": {
-      "kind": "directory"
-     },
-     "dir/smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "dir": {
-      "kind": "directory"
-     },
-     "dir/smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -4811,11 +4377,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -4864,24 +4425,6 @@
       "kind": "file",
       "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
       "size": 512
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "unknown": {
-      "kind": "other"
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "unknown": {
-      "kind": "other"
      }
     }
    },
@@ -5050,11 +4593,6 @@
     "outside": {},
     "tree": {}
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: unsupported type for DEST/unknown (null)",
     "outside": {},
@@ -5108,36 +4646,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "project": {
-      "kind": "directory"
-     },
-     "project/README": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03",
-      "size": 6
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "project": {
-      "kind": "directory"
-     },
-     "project/README": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03",
-      "size": 6
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -5448,11 +4956,6 @@
       "size": 6
      }
     }
-   },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
    },
    "tar-fs": {
     "error": null,
@@ -5543,42 +5046,6 @@
      }
     }
    },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
    "Go containerd archive.Apply": {
     "error": null,
     "outside": {},
@@ -5933,11 +5400,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -5992,30 +5454,6 @@
     "outside": {},
     "tree": {
      "from-pax": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "header-name": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "header-name": {
       "executable": false,
       "kind": "file",
       "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
@@ -6268,11 +5706,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -6350,42 +5783,6 @@
       "kind": "file",
       "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
       "size": 512
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
      }
     }
    },
@@ -6693,11 +6090,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -6756,30 +6148,6 @@
    },
    "GNU tar": {
     "error": "tar: Malformed extended header: invalid size=\ntar: Exiting with failure status due to previous errors",
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
     "outside": {},
     "tree": {
      "a": {
@@ -7045,11 +6413,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -7122,16 +6485,6 @@
       "size": 0
      }
     }
-   },
-   "Go archive/tar": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {}
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {}
    },
    "Go containerd archive.Apply": {
     "error": "archive/tar: invalid tar header",
@@ -7364,11 +6717,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: Invalid header",
     "outside": {},
@@ -7439,30 +6787,6 @@
       "kind": "file",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "size": 0
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
      }
     }
    },
@@ -7727,11 +7051,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -7811,16 +7130,6 @@
       "size": 0
      }
     }
-   },
-   "Go archive/tar": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {}
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {}
    },
    "Go containerd archive.Apply": {
     "error": "archive/tar: invalid tar header",
@@ -8076,11 +7385,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -8153,16 +7457,6 @@
       "size": 0
      }
     }
-   },
-   "Go archive/tar": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {}
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {}
    },
    "Go containerd archive.Apply": {
     "error": "archive/tar: invalid tar header",
@@ -8436,11 +7730,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: Invalid header",
     "outside": {},
@@ -8497,30 +7786,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "b09d25161a2990a7163088040a304f9088036bb36a9ec27b787e3a07e154fbb4",
-      "size": 777
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "b09d25161a2990a7163088040a304f9088036bb36a9ec27b787e3a07e154fbb4",
-      "size": 777
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -8844,11 +8109,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -8921,16 +8181,6 @@
       "size": 0
      }
     }
-   },
-   "Go archive/tar": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {}
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {}
    },
    "Go containerd archive.Apply": {
     "error": "archive/tar: invalid tar header",
@@ -9172,11 +8422,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: Unexpected end of data",
     "outside": {},
@@ -9226,42 +8471,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -9615,11 +8824,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -9674,16 +8878,6 @@
      }
     }
    },
-   "Go archive/tar": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {}
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {}
-   },
    "Go containerd archive.Apply": {
     "error": "archive/tar: invalid tar header",
     "outside": {},
@@ -9707,7 +8901,7 @@
     "tree": {}
    },
    "Julia Tar.jl": {
-    "error": "0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\"\n  rest     = \"\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\"",
+    "error": "binary integer size value too large: \"\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xfe\\0\"\n[header block data]:\n  name     = \u2026",
     "outside": {},
     "tree": {}
    },
@@ -9825,11 +9019,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: Invalid header",
     "outside": {},
@@ -9871,16 +9060,6 @@
      }
     }
    },
-   "Go archive/tar": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {}
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {}
-   },
    "Go containerd archive.Apply": {
     "error": "archive/tar: invalid tar header",
     "outside": {},
@@ -9904,7 +9083,7 @@
     "tree": {}
    },
    "Julia Tar.jl": {
-    "error": "0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\"\n  rest     = \"\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\"",
+    "error": "binary integer size value too large: \"\\0\\0\\x01\\0\\0\\0\\0\\0\\0\\x02\\0\"\n[header block data]:\n  name     = \u2026",
     "outside": {},
     "tree": {}
    },
@@ -10032,11 +9211,6 @@
     "outside": {},
     "tree": {}
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: Unexpected end of data",
     "outside": {},
@@ -10081,30 +9255,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -10356,11 +9506,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -10412,30 +9557,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "184294b2fb6512fb777010e132d602fa64c13999e4d8a5537ed6d039b8eb91ff",
-      "size": 13
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "184294b2fb6512fb777010e132d602fa64c13999e4d8a5537ed6d039b8eb91ff",
-      "size": 13
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -10668,11 +9789,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -10723,36 +9839,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "dir": {
-      "kind": "directory"
-     },
-     "dir/smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "dir": {
-      "kind": "directory"
-     },
-     "dir/smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -11002,11 +10088,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -11085,54 +10166,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     },
-     "h": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     },
-     "h": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -11521,11 +10554,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -11601,54 +10629,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     },
-     "h": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     },
-     "h": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -12055,11 +11035,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -12113,30 +11088,6 @@
     "tree": {
      "a": {
       "kind": "directory"
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
      }
     }
    },
@@ -12330,11 +11281,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: EISDIR: illegal operation on a directory, open 'DEST/a/'",
     "outside": {},
@@ -12379,30 +11325,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "bc34584905a5181d95c6e40e9230db4c9e2d85e6e73d3335837078cd12168cb9",
-      "size": 19
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "bc34584905a5181d95c6e40e9230db4c9e2d85e6e73d3335837078cd12168cb9",
-      "size": 19
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -12621,11 +11543,6 @@
     "outside": {},
     "tree": {}
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -12679,32 +11596,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "link": {
-      "kind": "symlink",
-      "target": "target"
-     },
-     "target": {
-      "kind": "directory"
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "link": {
-      "kind": "symlink",
-      "target": "target"
-     },
-     "target": {
-      "kind": "directory"
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -12937,11 +11828,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: ENOENT: no such file or directory, symlink 'target' -> 'DEST/link/'",
     "outside": {},
@@ -12999,36 +11885,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd": {
-      "kind": "directory"
-     },
-     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "bbdbb75b415ee9a40f0b3796a8b41a0b7723afe5726b870474ad220a4886d06d",
-      "size": 5
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd": {
-      "kind": "directory"
-     },
-     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "bbdbb75b415ee9a40f0b3796a8b41a0b7723afe5726b870474ad220a4886d06d",
-      "size": 5
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -13308,11 +12164,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -13367,30 +12218,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0e716a5fef4e6dc1bcfff22ad52f73ca4eee3f4ea8292f4a1918daa32592889f",
-      "size": 5
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0e716a5fef4e6dc1bcfff22ad52f73ca4eee3f4ea8292f4a1918daa32592889f",
-      "size": 5
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -13629,11 +12456,6 @@
       "size": 5
      }
     }
-   },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
    },
    "tar-fs": {
     "error": null,
@@ -13709,36 +12531,6 @@
      }
     }
    },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd": {
-      "kind": "directory"
-     },
-     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "bbdbb75b415ee9a40f0b3796a8b41a0b7723afe5726b870474ad220a4886d06d",
-      "size": 5
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd": {
-      "kind": "directory"
-     },
-     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "bbdbb75b415ee9a40f0b3796a8b41a0b7723afe5726b870474ad220a4886d06d",
-      "size": 5
-     }
-    }
-   },
    "Go containerd archive.Apply": {
     "error": null,
     "outside": {},
@@ -14035,11 +12827,6 @@
       "size": 5
      }
     }
-   },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
    },
    "tar-fs": {
     "error": null,
@@ -14118,36 +12905,6 @@
      }
     }
    },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp": {
-      "kind": "directory"
-     },
-     "pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/file": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "7dd9c6f93ad04e58505b507580eaf064f0240ce4567f9ca5e741ec09a5cc08be",
-      "size": 9
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp": {
-      "kind": "directory"
-     },
-     "pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/file": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "7dd9c6f93ad04e58505b507580eaf064f0240ce4567f9ca5e741ec09a5cc08be",
-      "size": 9
-     }
-    }
-   },
    "Go containerd archive.Apply": {
     "error": null,
     "outside": {},
@@ -14427,11 +13184,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -14486,30 +13238,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -14735,11 +13463,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -14791,30 +13514,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -15054,11 +13753,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -15099,26 +13793,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "link": {
-      "kind": "symlink",
-      "target": "/tar-minefield-nonexistent"
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "link": {
-      "kind": "symlink",
-      "target": "/tar-minefield-nonexistent"
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -15292,11 +13966,6 @@
     "outside": {},
     "tree": {}
    },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: DEST/link is not a valid symlink",
     "outside": {},
@@ -15345,30 +14014,6 @@
     "outside": {},
     "tree": {
      "from-pax": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "from-gnu": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "from-gnu": {
       "executable": false,
       "kind": "file",
       "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
@@ -15569,11 +14214,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -15618,30 +14258,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "second": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "second": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -15858,11 +14474,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -15923,36 +14534,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "dir": {
-      "kind": "directory"
-     },
-     "dir/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "dir": {
-      "kind": "directory"
-     },
-     "dir/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -16236,11 +14817,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -16301,30 +14877,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -16571,11 +15123,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -16630,23 +15177,6 @@
       "size": 89
      }
     }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "/tar-minefield-absolute": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
-      "size": 89
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": "archive/tar: insecure file path",
-    "outside": {},
-    "tree": {}
    },
    "Go containerd archive.Apply": {
     "error": null,
@@ -16806,11 +15336,6 @@
     "outside": {},
     "tree": {}
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -16862,30 +15387,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a\\b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "15acfc3964b079ab6ebbd9d9b221baa8de131a1201dd6938e1bed5779633cc37",
-      "size": 21
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a\\b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "15acfc3964b079ab6ebbd9d9b221baa8de131a1201dd6938e1bed5779633cc37",
-      "size": 21
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -17118,11 +15619,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -17174,30 +15670,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "ef476e8dd053036dc13248a09bb0be746485e3067bb5979943b7d6972be0604e",
-      "size": 10
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "ef476e8dd053036dc13248a09bb0be746485e3067bb5979943b7d6972be0604e",
-      "size": 10
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -17423,11 +15895,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -17479,30 +15946,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a\nb": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "93d2f8418e760b244545798b892899921327396ea6913af7482bd1c845b9d2bb",
-      "size": 21
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a\nb": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "93d2f8418e760b244545798b892899921327396ea6913af7482bd1c845b9d2bb",
-      "size": 21
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -17735,11 +16178,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -17791,32 +16229,6 @@
     "outside": {},
     "tree": {}
    },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "tar-minefield": {
-      "kind": "directory"
-     },
-     "tar-minefield/..": {
-      "kind": "directory"
-     },
-     "tar-minefield/../..": {
-      "kind": "directory"
-     },
-     "tar-minefield/../../tar-minefield-escaped": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "fc503701b7c2d35ae68aaa9df3f75232b90d497dc21bbba36c43d5d91194ec27",
-      "size": 85
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": "archive/tar: insecure file path",
-    "outside": {},
-    "tree": {}
-   },
    "Go containerd archive.Apply": {
     "error": null,
     "outside": {},
@@ -17857,7 +16269,7 @@
     }
    },
    "Perl Archive::Tar": {
-    "error": "ve the current working directory. Not extracting under SECURE EXTRACT MODE at contrib/matrix/runners/perl/extract.pl line 14.\nCould not extract 'tar-minefield/../../tar-minefield-escaped' at contrib/matrix/runners/perl/extract.pl line 14.\nCould not extract 'tar-minefield/../../tar-minefield-escaped'",
+    "error": "Entry 'tar-minefield/../../tar-minefield-escaped' is attempting to leave the current working directory. Not extracting under SECURE EXTRACT MODE at contrib/matrix/runners/perl/extract.pl line 14.\nCould not extract 'tar-minefield/../../tar-minefield-escaped' at \u2026",
     "outside": {},
     "tree": {}
    },
@@ -17959,11 +16371,6 @@
     "outside": {},
     "tree": {}
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -18002,16 +16409,6 @@
    },
    "GNU tar": {
     "error": "tar: Substituting `.' for empty member name\ntar: .: Cannot open: File exists\ntar: Exiting with failure status due to previous errors",
-    "outside": {},
-    "tree": {}
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {}
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": "archive/tar: insecure file path",
     "outside": {},
     "tree": {}
    },
@@ -18110,11 +16507,6 @@
     "outside": {},
     "tree": {}
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: EISDIR: illegal operation on a directory, open 'DEST/'",
     "outside": {},
@@ -18163,30 +16555,6 @@
     "outside": {},
     "tree": {
      "caf\udce9": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "ff3f1fa3c91cb8860152fd87c5d02ce40fe42fd3b2bbd2f5c22edebd216bbcaa",
-      "size": 8
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "caf\ufffd": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "ff3f1fa3c91cb8860152fd87c5d02ce40fe42fd3b2bbd2f5c22edebd216bbcaa",
-      "size": 8
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "caf\ufffd": {
       "executable": false,
       "kind": "file",
       "sha256": "ff3f1fa3c91cb8860152fd87c5d02ce40fe42fd3b2bbd2f5c22edebd216bbcaa",
@@ -18401,11 +16769,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -18467,16 +16830,6 @@
       "size": 12
      }
     }
-   },
-   "Go archive/tar": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {}
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": "archive/tar: invalid tar header",
-    "outside": {},
-    "tree": {}
    },
    "Go containerd archive.Apply": {
     "error": "archive/tar: invalid tar header",
@@ -18641,11 +16994,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "TypeError [ERR_INVALID_ARG_VALUE]: The argument 'path' must be a string, Uint8Array, or URL without null bytes. Received 'DEST...",
     "outside": {},
@@ -18683,30 +17031,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "second": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "second": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -18944,11 +17268,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -19022,42 +17341,6 @@
     "outside": {},
     "tree": {
      "global-name": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     },
-     "b": {
       "executable": false,
       "kind": "file",
       "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
@@ -19363,11 +17646,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -19411,30 +17689,6 @@
     "tree": {}
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "from-header": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "from-header": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -19609,11 +17863,6 @@
     "outside": {},
     "tree": {}
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -19665,30 +17914,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "from-gnu": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "from-gnu": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -19907,11 +18132,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -19967,30 +18187,6 @@
     "outside": {},
     "tree": {
      "caf\udce9": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "caf\ufffd": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
-      "size": 12
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "caf\ufffd": {
       "executable": false,
       "kind": "file",
       "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
@@ -20231,11 +18427,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -20310,36 +18501,6 @@
      }
     }
    },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "d": {
-      "kind": "directory"
-     },
-     "d/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "d": {
-      "kind": "directory"
-     },
-     "d/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
    "Go containerd archive.Apply": {
     "error": null,
     "outside": {},
@@ -20624,11 +18785,6 @@
       "size": 2
      }
     }
-   },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
    },
    "tar-fs": {
     "error": null,
@@ -20656,6 +18812,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20668,6 +18830,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20680,6 +18848,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20692,30 +18866,12 @@
      },
      "d/sub": {
       "kind": "directory"
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "d": {
-      "kind": "directory"
      },
-     "d/sub": {
-      "kind": "directory"
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "d": {
-      "kind": "directory"
-     },
-     "d/sub": {
-      "kind": "directory"
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20728,6 +18884,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20740,6 +18902,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20752,6 +18920,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20764,6 +18938,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20773,6 +18953,15 @@
     "tree": {
      "d": {
       "kind": "directory"
+     },
+     "d/sub": {
+      "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20785,6 +18974,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20797,6 +18992,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20809,6 +19010,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20821,6 +19028,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20833,6 +19046,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20845,6 +19064,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20857,6 +19082,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20869,6 +19100,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20881,6 +19118,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20893,6 +19136,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20905,6 +19154,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20917,6 +19172,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20929,6 +19190,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    },
@@ -20941,13 +19208,14 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
-   },
-   "strict.py": {
-    "error": null,
-    "outside": {},
-    "tree": null
    },
    "tar-fs": {
     "error": null,
@@ -20958,6 +19226,12 @@
      },
      "d/sub": {
       "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    }
@@ -20980,16 +19254,6 @@
    },
    "GNU tar": {
     "error": "tar: h: Cannot hard link to \u2018missing\u2019: No such file or directory\ntar: Exiting with failure status due to previous errors",
-    "outside": {},
-    "tree": {}
-   },
-   "Go archive/tar": {
-    "error": "hardlink to 'missing', which is not there",
-    "outside": {},
-    "tree": {}
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": "hardlink to 'missing', which is not there",
     "outside": {},
     "tree": {}
    },
@@ -21026,7 +19290,7 @@
     "tree": {}
    },
    "Perl Archive::Tar": {
-    "error": "pl line 14.\nCould not find file 'missing' in memory. at contrib/matrix/runners/perl/extract.pl line 14.\nMaking hard link from 'missing' to 'DEST/h' failed at contrib/matrix/runners/perl/extract.pl line 14.\nCould not extract 'h' at contrib/matrix/runners/perl/extract.pl line 14.\nCould not extract 'h'",
+    "error": "No such file in archive: 'missing' at contrib/matrix/runners/perl/extract.pl line 14.\nCould not find file 'missing' in memory. at contrib/matrix/runners/perl/extract.pl line 14.\nMaking hard link from 'missing' to 'DEST/h' failed at contrib/matrix/runners/perl/extract.pl line 14.\nCould not extract \u2026",
     "outside": {},
     "tree": {}
    },
@@ -21095,11 +19359,6 @@
     "outside": {},
     "tree": {}
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: DEST/h is not a valid hardlink",
     "outside": {},
@@ -21137,30 +19396,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -21372,11 +19607,6 @@
     "outside": {},
     "tree": {}
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: DEST/a is not a valid hardlink",
     "outside": {},
@@ -21427,30 +19657,6 @@
    },
    "GNU tar": {
     "error": "tar: h: Cannot hard link to \u2018f\u2019: No such file or directory\ntar: Exiting with failure status due to previous errors",
-    "outside": {},
-    "tree": {
-     "f": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": "hardlink to 'f', which is not there",
-    "outside": {},
-    "tree": {
-     "f": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
-      "size": 2
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": "hardlink to 'f', which is not there",
     "outside": {},
     "tree": {
      "f": {
@@ -21630,11 +19836,6 @@
     "outside": {},
     "tree": {}
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: DEST/h is not a valid hardlink",
     "outside": {},
@@ -21705,46 +19906,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "f": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
-      "size": 2
-     },
-     "h": {
-      "kind": "symlink",
-      "target": "f"
-     },
-     "s": {
-      "kind": "symlink",
-      "target": "f"
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "f": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
-      "size": 2
-     },
-     "h": {
-      "kind": "symlink",
-      "target": "f"
-     },
-     "s": {
-      "kind": "symlink",
-      "target": "f"
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -22109,11 +20270,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -22175,30 +20331,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "761d1fb145ca8c7130231412276df60f34dd34554c4d174b973a45e3222475a9",
-      "size": 5
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "761d1fb145ca8c7130231412276df60f34dd34554c4d174b973a45e3222475a9",
-      "size": 5
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -22438,11 +20570,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -22494,24 +20621,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "kind": "directory"
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "kind": "directory"
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -22720,11 +20829,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: ENOTDIR: not a directory, stat 'DEST/a/'",
     "outside": {},
@@ -22776,30 +20880,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a6328afc76e9db71da297ebff4b0d3e7a7eb3b01d917c05a6573fef121b6ecb6",
-      "size": 5
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "a6328afc76e9db71da297ebff4b0d3e7a7eb3b01d917c05a6573fef121b6ecb6",
-      "size": 5
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -23039,11 +21119,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -23093,30 +21168,6 @@
     }
    },
    "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "d5a04bbbfe088df673a06a4550290ced19ea7d4205c7d21de7567ddf67db0012",
-      "size": 28
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "d5a04bbbfe088df673a06a4550290ced19ea7d4205c7d21de7567ddf67db0012",
-      "size": 28
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
     "error": null,
     "outside": {},
     "tree": {
@@ -23376,11 +21427,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": null,
     "outside": {},
@@ -23437,38 +21483,6 @@
      }
     }
    },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "d": {
-      "kind": "symlink",
-      "target": ".."
-     },
-     "d/tar-minefield-through-symlink": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
-      "size": 89
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "d": {
-      "kind": "symlink",
-      "target": ".."
-     },
-     "d/tar-minefield-through-symlink": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "3b7f22a5047de6b9d309eaf4177f04f29cf5fb3ddd008137ce35ac23f466b13b",
-      "size": 89
-     }
-    }
-   },
    "Go containerd archive.Apply": {
     "error": null,
     "outside": {},
@@ -23508,7 +21522,7 @@
     "tree": {}
    },
    "PHP PharData, as in Composer": {
-    "error": "to open stream: No such file or directory in contrib/matrix/runners/php/extract.php on line 10\nPharException: Extraction from phar \"suite/archives/S11-tree-through-symlink.tar\" failed: Cannot extract \"d/tar-minefield-through-symlink\", could not open for writing \"DEST/d/tar-minefield-through-symlink\"",
+    "error": "Warning: PharData::extractTo(DEST/d/tar-minefield-through-symlink): Failed to open stream: No such file or directory in contrib/matrix/runners/php/extract.php on line 10\nPharException: Extraction from phar \"suite/archives/S11-tree-through-symlink.tar\" failed: Cannot extract \u2026",
     "outside": {},
     "tree": {
      "d": {
@@ -23660,11 +21674,6 @@
     "outside": {},
     "tree": {}
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: DEST/d is not a valid symlink",
     "outside": {},
@@ -23717,42 +21726,6 @@
       "kind": "file",
       "sha256": "da69f286f03c0d2131b3f95afe7c8d31b4f65cbf5ca49a12c41d8bf02d366a34",
       "size": 7
-     }
-    }
-   },
-   "Go archive/tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "da69f286f03c0d2131b3f95afe7c8d31b4f65cbf5ca49a12c41d8bf02d366a34",
-      "size": 7
-     },
-     "a/b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "8e53e3786fd1019a1eaf9a9defce99066a193ce65fe511a2a988cd67cadf6016",
-      "size": 13
-     }
-    }
-   },
-   "Go archive/tar, tarinsecurepath=0": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "da69f286f03c0d2131b3f95afe7c8d31b4f65cbf5ca49a12c41d8bf02d366a34",
-      "size": 7
-     },
-     "a/b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "8e53e3786fd1019a1eaf9a9defce99066a193ce65fe511a2a988cd67cadf6016",
-      "size": 13
      }
     }
    },
@@ -23987,11 +21960,6 @@
      }
     }
    },
-   "strict.py": {
-    "error": "rejected",
-    "outside": {},
-    "tree": null
-   },
    "tar-fs": {
     "error": "Error: DEST/a is not a valid path",
     "outside": {},
@@ -24008,134 +21976,100 @@
  },
  "implementations": [
   {
-   "kind": "extract",
-   "name": "bsdtar",
-   "version": "bsdtar 3.8.10 - libarchive 3.8.10"
-  },
-  {
-   "kind": "extract",
-   "name": "live-bootstrap untar",
-   "version": "mescc-tools-extra a151c245e512, built with cc"
-  },
-  {
-   "kind": "extract",
-   "name": "live-bootstrap untar, --non-strict",
-   "version": "mescc-tools-extra a151c245e512, built with cc"
-  },
-  {
-   "kind": "extract",
-   "name": "7-Zip",
-   "version": "7-Zip (z) 26.05 (x64)"
-  },
-  {
-   "kind": "extract",
-   "name": "Python tarfile, filter=fully_trusted",
-   "version": "CPython 3.15.2"
-  },
-  {
-   "kind": "extract",
-   "name": "Python tarfile, filter=tar",
-   "version": "CPython 3.15.2"
-  },
-  {
-   "kind": "extract",
-   "name": "Python tarfile, filter=data, as in pip",
-   "version": "CPython 3.15.2"
-  },
-  {
-   "kind": "list",
-   "name": "Go archive/tar",
-   "version": "archive/tar of go1.27.3"
-  },
-  {
-   "kind": "list",
-   "name": "Go archive/tar, tarinsecurepath=0",
-   "version": "archive/tar of go1.27.3"
-  },
-  {
-   "kind": "extract",
-   "name": "Go containerd archive.Apply",
-   "version": "containerd v2.4.2, archive.Apply, of go1.27.3"
-  },
-  {
-   "kind": "extract",
-   "name": "Haskell tar",
-   "version": "tar 0.7.2.0, extract, of GHC 9.14"
-  },
-  {
-   "kind": "extract",
-   "name": "Java Commons Compress",
-   "version": "Commons Compress 1.28.0, Expander, on Java 27.0.1.0.2"
-  },
-  {
-   "kind": "extract",
-   "name": ".NET System.Formats.Tar",
-   "version": "System.Formats.Tar of .NET 10.0.14, ExtractToDirectory"
-  },
-  {
-   "kind": "extract",
-   "name": "RubyGems",
-   "version": "RubyGems 4.0.20 of Ruby 4.0.9, extract_tar_gz"
-  },
-  {
-   "kind": "extract",
-   "name": "PHP PharData, as in Composer",
-   "version": "PharData of PHP 8.5.12, as Composer's TarDownloader calls it"
-  },
-  {
-   "kind": "extract",
-   "name": "R untar, internal",
-   "version": "utils::untar of R 4.6.1, tar = \"internal\""
-  },
-  {
-   "kind": "extract",
-   "name": "Perl Archive::Tar",
-   "version": "Archive::Tar 3.12 of Perl v5.44.0"
-  },
-  {
-   "kind": "extract",
-   "name": "Julia Tar.jl",
-   "version": "Tar 1.10.0 of Julia 1.13.3"
-  },
-  {
-   "kind": "extract",
    "name": "GNU tar",
    "version": "tar (GNU tar) 1.35"
   },
   {
-   "kind": "extract",
+   "name": "bsdtar",
+   "version": "bsdtar 3.8.10 - libarchive 3.8.10"
+  },
+  {
+   "name": "live-bootstrap untar",
+   "version": "mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc"
+  },
+  {
+   "name": "live-bootstrap untar, --non-strict",
+   "version": "mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc"
+  },
+  {
+   "name": "BusyBox tar",
+   "version": "BusyBox v1.38.0, defconfig"
+  },
+  {
+   "name": "7-Zip",
+   "version": "7-Zip (z) 26.05 (x64)"
+  },
+  {
+   "name": "Python tarfile, filter=fully_trusted",
+   "version": "CPython 3.15.2"
+  },
+  {
+   "name": "Python tarfile, filter=tar",
+   "version": "CPython 3.15.2"
+  },
+  {
+   "name": "Python tarfile, filter=data, as in pip",
+   "version": "CPython 3.15.2"
+  },
+  {
+   "name": "Go containerd archive.Apply",
+   "version": "containerd v2.4.2, archive.Apply, of go1.27.3"
+  },
+  {
    "name": "Rust tar",
    "version": "tar 0.4.46, unpack"
   },
   {
-   "kind": "extract",
    "name": "Rust astral-tokio-tar",
    "version": "astral-tokio-tar 0.7.0, unpack"
   },
   {
-   "kind": "extract",
    "name": "Rust tar-codec, as in uv",
    "version": "tar-codec 0.0.15, with the policies of uv 0.13"
   },
   {
-   "kind": "extract",
+   "name": "Haskell tar",
+   "version": "tar 0.7.2.0, extract, of GHC 9.14"
+  },
+  {
+   "name": "Java Commons Compress",
+   "version": "Commons Compress 1.28.0, Expander, on Java 27.0.1.0.2"
+  },
+  {
+   "name": ".NET System.Formats.Tar",
+   "version": "System.Formats.Tar of .NET 10.0.14, ExtractToDirectory"
+  },
+  {
+   "name": "RubyGems",
+   "version": "RubyGems 4.0.20 of Ruby 4.0.9, extract_tar_gz"
+  },
+  {
+   "name": "PHP PharData, as in Composer",
+   "version": "PharData of PHP 8.5.12, as Composer's TarDownloader calls it"
+  },
+  {
+   "name": "R untar, internal",
+   "version": "utils::untar of R 4.6.1, tar = \"internal\""
+  },
+  {
+   "name": "Perl Archive::Tar",
+   "version": "Archive::Tar 3.12 of Perl v5.44.0"
+  },
+  {
+   "name": "Julia Tar.jl",
+   "version": "Tar 1.10.0 of Julia 1.13.3"
+  },
+  {
    "name": "node-tar",
    "version": "tar 7.5.22"
   },
   {
-   "kind": "extract",
    "name": "node-tar, strict",
    "version": "tar 7.5.22"
   },
   {
-   "kind": "extract",
    "name": "tar-fs",
    "version": "tar-fs 3.1.3, on tar-stream 3.2.2"
-  },
-  {
-   "kind": "extract",
-   "name": "BusyBox tar",
-   "version": "BusyBox v1.38.0"
   }
  ]
 }

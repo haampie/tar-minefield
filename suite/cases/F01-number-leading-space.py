@@ -3,7 +3,7 @@
 The mode, uid, gid, size and mtime fields are padded with spaces, such as `          7 ` for the
 size of `a`. In POSIX, numeric fields are leading zero-filled octal numbers.
 
-Seen in: hundreds of tarballs, many from CPAN.
+Seen in: hundreds of tarballs, many from CPAN: the same as F32, whose checksum is padded too.
 """
 
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}

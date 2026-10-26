@@ -7,8 +7,8 @@ the digits and a NUL. The sum is the same as that of any other header, so an imp
 accepts the archive must extract `a`, also one that checks the checksum before the other fields.
 
 Decision point: whether the checksum field may start with a space.
-Seen in: 819 source tarballs, 674 of them from CPAN, such as Starman 0.4015, and PyPDF2 1.26.0
-from PyPI: every tarball whose numeric fields are padded with spaces.
+Seen in: 819 release tarballs, 674 of them from CPAN, such as Starman 0.4015, and PyPDF2 1.26.0
+from PyPI: every tarball whose numeric fields are padded with spaces, the same as F01.
 """
 
 VERDICT = "tolerate"

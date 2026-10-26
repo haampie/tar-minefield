@@ -9,10 +9,10 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="S03 hardlink-missing-target · Tar file extraction test suite">
 <meta property="og:description" content="A hardlink to a member that is not in the archive.">
-<link rel="stylesheet" href="style.css?96a01d71">
+<link rel="stylesheet" href="style.css?487f8630">
 <link rel="canonical" href="https://stoppels.ch/tar/S03.html">
 <meta property="og:url" content="https://stoppels.ch/tar/S03.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/8af66424df9fb864.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/018d04245c117fb0.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of S03 hardlink-missing-target">
@@ -25,7 +25,7 @@
 <nav class="wide"><a class="prev" href="K03.html" rel="prev" title="K03 symlink-trailing-slash">‹ K03 symlink-trailing-slash</a><a href="index.html">tar-minefield</a><a class="next" href="S04.html" rel="next" title="S04 hardlink-to-itself">S04 hardlink-to-itself ›</a></nav>
 <h1><code>S03</code> hardlink-missing-target</h1>
 <p>A hardlink to a member that is not in the archive.</p>
-<div class="verdict reject wide"><p><span class="badge">Must reject</span> A strict parser must reject this archive.</p></div>
+<div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>order and state</dd>
 <dt>Default policy</dt><dd>rejects it</dd>
@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The member <code>h</code> is a hardlink to <code>missing</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file previously archived, which <code>missing</code> is not. Read leniently, this case is ambiguous because the link is either skipped, or made to a file of that name that already exists where the archive is extracted.</p>
+<p>The member <code>h</code> is a hardlink to <code>missing</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file previously archived, which <code>missing</code> is not. Read leniently, this case is ambiguous because the link is skipped, made to a file of that name that already exists where the archive is extracted, or, by Commons Compress, made an empty file.</p>
 <p><strong>Decision point:</strong> what a hardlink to nothing does.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,8 +52,9 @@
 A hardlink to a member that is not in the archive.
 
 The member `h` is a hardlink to `missing`. In POSIX, the target of a hardlink is a file previously
-archived, which `missing` is not. Read leniently, this case is ambiguous because the link is either
-skipped, or made to a file of that name that already exists where the archive is extracted.
+archived, which `missing` is not. Read leniently, this case is ambiguous because the link is
+skipped, made to a file of that name that already exists where the archive is extracted, or, by
+Commons Compress, made an empty file.
 
 Decision point: what a hardlink to nothing does.
 Seen in: none of the scanned tarballs.
@@ -182,10 +183,9 @@ Seen in: none of the scanned tarballs.
 </details>
 <h2 id="what-implementations-make-of-it">What implementations make of it<a class="anchor" href="#what-implementations-make-of-it" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="implementations"><colgroup><col style="width: 21%"><col style="width: 21%"><col style="width: 18%"><col style="width: 40%"></colgroup><tr><th>implementation</th><th>version</th><th>outcome</th><th>what it makes of it</th></tr>
-<tr><td>strict.py</td><td></td><td>✅ as the verdict says</td><td>rejects it</td></tr>
 <tr><td>GNU tar</td><td>tar (GNU tar) 1.35</td><td>✅ as the verdict says</td><td>error: tar: h: Cannot hard link to ‘missing’: No such file or directory tar: Exiting with failure status due to previous errors</td></tr>
 <tr><td>bsdtar</td><td>bsdtar 3.8.10 - libarchive 3.8.10</td><td>✅ as the verdict says</td><td>error: h: Hard-link target &#x27;missing&#x27; does not exist: No such file or directory bsdtar: Error exit delayed from previous errors</td></tr>
-<tr><td>BusyBox tar</td><td>BusyBox v1.38.0</td><td>✅ as the verdict says</td><td>error: tar: can&#x27;t create hardlink &#x27;h&#x27; to &#x27;missing&#x27;</td></tr>
+<tr><td>BusyBox tar</td><td>BusyBox v1.38.0, defconfig</td><td>✅ as the verdict says</td><td>error: tar: can&#x27;t create hardlink &#x27;h&#x27; to &#x27;missing&#x27;</td></tr>
 <tr><td>7-Zip</td><td>7-Zip (z) 26.05 (x64)</td><td>✅ as the verdict says</td><td>error: ERROR: Cannot create hard link : errno=2 : No such file or directory : DEST/h : DEST/missing</td></tr>
 <tr><td>Python tarfile, filter=data, as in pip</td><td>CPython 3.15.2</td><td>✅ as the verdict says</td><td>error: KeyError: &quot;linkname &#x27;missing&#x27; not found&quot;</td></tr>
 <tr><td>Python tarfile, filter=tar</td><td>CPython 3.15.2</td><td>✅ as the verdict says</td><td>error: KeyError: &quot;linkname &#x27;missing&#x27; not found&quot;</td></tr>
@@ -196,30 +196,28 @@ Seen in: none of the scanned tarballs.
 <tr><td>Java Commons Compress</td><td>Commons Compress 1.28.0, Expander, on Java 27.0.1.0.2</td><td>⚠️ accepts</td><td>tree B: <code>h</code> (0 B, e3b0c442)</td></tr>
 <tr><td>.NET System.Formats.Tar</td><td>System.Formats.Tar of .NET 10.0.14, ExtractToDirectory</td><td>✅ as the verdict says</td><td>error: FileNotFoundException: Could not find file &#x27;DEST/h&#x27;.</td></tr>
 <tr><td>PHP PharData, as in Composer</td><td>PharData of PHP 8.5.12, as Composer&#x27;s TarDownloader calls it</td><td>✅ as the verdict says</td><td>error: UnexpectedValueException: phar error: &quot;suite/archives/S03-hardlink-missing-target.tar&quot; is a corrupted tar file - hard link to non-existent file &quot;missing&quot;</td></tr>
-<tr><td>Go archive/tar</td><td>archive/tar of go1.27.3</td><td>✅ as the verdict says</td><td>error: hardlink to &#x27;missing&#x27;, which is not there</td></tr>
-<tr><td>Go archive/tar, tarinsecurepath=0</td><td>archive/tar of go1.27.3</td><td>✅ as the verdict says</td><td>error: hardlink to &#x27;missing&#x27;, which is not there</td></tr>
 <tr><td>Go containerd archive.Apply</td><td>containerd v2.4.2, archive.Apply, of go1.27.3</td><td>✅ as the verdict says</td><td>error: link DEST/missing DEST/h: no such file or directory</td></tr>
 <tr><td>Rust tar</td><td>tar 0.4.46, unpack</td><td>✅ as the verdict says</td><td>error: failed to unpack `DEST/h`</td></tr>
 <tr><td>Rust astral-tokio-tar</td><td>astral-tokio-tar 0.7.0, unpack</td><td>✅ as the verdict says</td><td>error: failed to unpack `DEST/h`</td></tr>
 <tr><td>Rust tar-codec, as in uv</td><td>tar-codec 0.0.15, with the policies of uv 0.13</td><td>✅ as the verdict says</td><td>error: at byte 0: invalid link h -&gt; &quot;missing&quot;: hard-link target is not a previously extracted file</td></tr>
 <tr><td>RubyGems</td><td>RubyGems 4.0.20 of Ruby 4.0.9, extract_tar_gz</td><td>⚠️ accepts</td><td>tree A: nothing</td></tr>
 <tr><td>R untar, internal</td><td>utils::untar of R 4.6.1, tar = &quot;internal&quot;</td><td>⚠️ accepts</td><td>tree A: nothing</td></tr>
-<tr><td>Perl Archive::Tar</td><td>Archive::Tar 3.12 of Perl v5.44.0</td><td>✅ as the verdict says</td><td>error: pl line 14. Could not find file &#x27;missing&#x27; in memory. at contrib/matrix/runners/perl/extract.pl line 14. Making hard link from &#x27;missing&#x27; to &#x27;DEST/h&#x27; failed at contrib/matrix/runners/perl/extract.pl li…</td></tr>
+<tr><td>Perl Archive::Tar</td><td>Archive::Tar 3.12 of Perl v5.44.0</td><td>✅ as the verdict says</td><td>error: No such file in archive: &#x27;missing&#x27; at contrib/matrix/runners/perl/extract.pl line 14. Could not find file &#x27;missing&#x27; in memory. at contrib/matrix/runners/perl/extract.pl line 14. Making hard link from…</td></tr>
 <tr><td>Haskell tar</td><td>tar 0.7.2.0, extract, of GHC 9.14</td><td>✅ as the verdict says</td><td>error: DEST/missing: copyFile:atomicCopyFileContents:withReplacementFile:copyFileToHandle:openFileWithCloseOnExec: does not exist (No such file or directory)</td></tr>
 <tr><td>Julia Tar.jl</td><td>Tar 1.10.0 of Julia 1.13.3</td><td>✅ as the verdict says</td><td>error: Tarball contains hardlink with non-existent target: - path = &quot;h&quot; - target = &quot;missing&quot; Refusing to extract — possible attack!</td></tr>
-<tr><td>live-bootstrap untar</td><td>mescc-tools-extra a151c245e512, built with cc</td><td>✅ as the verdict says</td><td>error: unable to create hardlinks</td></tr>
-<tr><td>live-bootstrap untar, --non-strict</td><td>mescc-tools-extra a151c245e512, built with cc</td><td>⚠️ accepts</td><td>tree A: nothing</td></tr></table></div>
-<h2 id="prevalence-in-source-tarballs">Prevalence in source tarballs<a class="anchor" href="#prevalence-in-source-tarballs" aria-label="Link to this section">¶</a></h2>
-<p>Release tarballs of Spack, nixpkgs, Guix, live-bootstrap, PyPI, crates.io and RubyGems with <code>hardlink.missing-target</code>.</p>
+<tr><td>live-bootstrap untar</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>✅ as the verdict says</td><td>error: unable to create hardlinks</td></tr>
+<tr><td>live-bootstrap untar, --non-strict</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>⚠️ accepts</td><td>tree A: nothing</td></tr></table></div>
+<h2 id="prevalence-in-release-tarballs">Prevalence in release tarballs<a class="anchor" href="#prevalence-in-release-tarballs" aria-label="Link to this section">¶</a></h2>
+<p>Release tarballs of Spack, nixpkgs, Guix and live-bootstrap, and samples of PyPI, crates.io and RubyGems with <code>hardlink.missing-target</code>.</p>
 <div class="wide"><table class="data"><colgroup><col style="width: 25%"><col style="width: 25%"><col style="width: 25%"><col style="width: 25%"></colgroup><tr><th>ecosystem</th><th class=n>tarballs</th><th class=n>with it</th><th class=n>share</th></tr>
-<tr><td>Spack</td><td class=n>37,554</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>nixpkgs</td><td class=n>18,990</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>Guix</td><td class=n>10,168</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>PyPI</td><td class=n>10,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>crates.io</td><td class=n>5,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>RubyGems</td><td class=n>5,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr><td>live-bootstrap</td><td class=n>171</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr class="total"><td>total (distinct)</td><td class=n>82,587</td><td class=n>0</td><td class=n>0.00%</td></tr></table></div>
+<tr><td>Spack</td><td class=n>37,553</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>nixpkgs</td><td class=n>18,990</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>Guix</td><td class=n>10,168</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>PyPI</td><td class=n>10,000</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>crates.io</td><td class=n>5,000</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>RubyGems</td><td class=n>5,000</td><td class=n>0</td><td class=n>none</td></tr>
+<tr><td>live-bootstrap</td><td class=n>171</td><td class=n>0</td><td class=n>none</td></tr>
+<tr class="total"><td>total (distinct)</td><td class=n>82,586</td><td class=n>0</td><td class=n>none</td></tr></table></div>
 
 
 <hr class="wide">

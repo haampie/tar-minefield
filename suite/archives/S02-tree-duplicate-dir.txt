@@ -2,8 +2,10 @@ S02-tree-duplicate-dir: must accept, and extract its tree
 
 The same directory twice, as `tar cf x.tar d d/sub` writes.
 
-The archive has the directory `d/`, then `d/sub/` twice. POSIX says that extracting a directory
-that already exists is not an error.
+The archive has the directory `d/`, then `d/sub/` twice, then the file `d/sub/f`. POSIX says that
+extracting a directory that already exists is not an error. The file is there so that no directory
+is empty, which some implementations leave out; `tar cf x.tar d d/sub` also writes the files in
+`d/sub` twice, which S09 rejects.
 
 Seen in: over a hundred tarballs.
 
@@ -61,5 +63,26 @@ Seen in: over a hundred tarballs.
           devminor [337,345)  "0000000" + NUL  0
           prefix   [345,500)  155 NUL
           pad      [500,512)  12 NUL
-0x000600  2 zero blocks: the end-of-archive marker
-0x000a00  end of file
+0x000600  header: regular file
+          name     [  0,100)  "d/sub/f" + 93 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "010361\0 "  4337: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000800  data
+          2 bytes, then 510 NUL to the end of the block
+          "f\n"
+0x000a00  2 zero blocks: the end-of-archive marker
+0x000e00  end of file

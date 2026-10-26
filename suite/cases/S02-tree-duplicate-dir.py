@@ -1,22 +1,26 @@
 """The same directory twice, as `tar cf x.tar d d/sub` writes.
 
-The archive has the directory `d/`, then `d/sub/` twice. POSIX says that extracting a directory
-that already exists is not an error.
+The archive has the directory `d/`, then `d/sub/` twice, then the file `d/sub/f`. POSIX says that
+extracting a directory that already exists is not an error. The file is there so that no directory
+is empty, which some implementations leave out; `tar cf x.tar d d/sub` also writes the files in
+`d/sub` twice, which S09 rejects.
 
 Seen in: over a hundred tarballs.
 """
 
 D = lambda path: {"path": path, "kind": "directory"}
+F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}
 
 VERDICT = "accept"
 ID = "S02"
 FEATURES = []
 POSIX = "dir-exists"
-TREE = [D('d'), D('d/sub')]
+TREE = [D('d'), D('d/sub'), F('d/sub/f', b'f\n')]
 
 
 def build(a):
     a.directory(b"d/")
     a.directory(b"d/sub/")
     a.directory(b"d/sub/")
+    a.file(b"d/sub/f", b"f\n")
     a.end()

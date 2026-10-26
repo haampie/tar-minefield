@@ -13,9 +13,7 @@ their results replace or join those in matrix.json, whose other columns are kept
 `<!-- end matrix.py -->` in that file, and MATRIX.md, are generated again from matrix.json, and
 nothing is run.
 
-Each implementation either extracts a case, or, for libraries that have no extractor, lists its
-members, which are then applied in order to an empty tree, as a program that uses it would. The
-outcome is compared with the case's verdict:
+Each implementation extracts every case, and the outcome is compared with the case's verdict:
 
 - ✅ as the verdict says: rejects a case to reject; extracts the manifest of a case to accept
 - ➕ accepts a tolerated case, and extracts its manifest
@@ -31,7 +29,6 @@ outcome is compared with the case's verdict:
 """
 
 import hashlib
-import io
 import json
 import os
 import re
@@ -126,20 +123,20 @@ def build_mescc_untar(build):
 
 
 def implementations(work, only=None):
-    """(name, version, kind, command) for every implementation found, or of those named in only:
-    kind is "extract", with a command of the archive and the destination, or "list", with a
-    command of the archive. Runners of implementations that are not wanted are not built."""
+    """(name, version, command) for every implementation found, or of those named in only, with
+    command a function of the archive and the destination. Runners of implementations that are
+    not wanted are not built."""
 
     def want(*names):
         return only is None or any(n in only for n in names)
 
     found = []
     if shutil.which("tar"):
-        found.append(("GNU tar", first_line(["tar", "--version"]), "extract",
+        found.append(("GNU tar", first_line(["tar", "--version"]),
                       lambda a, d: ["tar", "-xf", a, "-C", d]))
     bsdtar = tool("bsdtar")
     if bsdtar:
-        found.append(("bsdtar", first_line([bsdtar, "--version"]).split(" zlib")[0], "extract",
+        found.append(("bsdtar", first_line([bsdtar, "--version"]).split(" zlib")[0],
                       lambda a, d, b=bsdtar: [b, "-xf", a, "-C", d]))
     if want("live-bootstrap untar", "live-bootstrap untar, --non-strict") and shutil.which("git") \
             and tool("cc"):
@@ -147,47 +144,37 @@ def implementations(work, only=None):
         if binary:
             commit = open(os.path.join(RUNNERS, "mescc-tools-extra", "source.txt")).read().split(
                 "mescc-tools-extra https://github.com/oriansj/mescc-tools-extra ")[1][:12]
-            version = f"mescc-tools-extra {commit}, built with cc"
-            found.append(("live-bootstrap untar", version, "extract",
+            version = f"mescc-tools-extra {commit}, as live-bootstrap pins it, built with cc"
+            found.append(("live-bootstrap untar", version,
                           lambda a, d, b=binary: [b, "--file", a]))
-            found.append(("live-bootstrap untar, --non-strict", version, "extract",
+            found.append(("live-bootstrap untar, --non-strict", version,
                           lambda a, d, b=binary: [b, "--non-strict", "--file", a]))
     busybox = tool("busybox")
     if busybox:
         # without the time of the build, which a build from source has in its banner
         version = re.sub(r" \(\d{4}-\d\d-\d\d [^)]*\)", "",
                          first_line([busybox]).split(" multi-call")[0])
-        found.append(("BusyBox tar", version, "extract",
+        found.append(("BusyBox tar", version + ", defconfig",
                       lambda a, d: [busybox, "tar", "-xf", a, "-C", d]))
     sevenzip = tool("7z")
     if sevenzip:
         code, out, _ = run([sevenzip])
         version = next((l for l in out.splitlines() if l.startswith("7-Zip")), "7-Zip").split(" :")[0]
-        found.append(("7-Zip", version, "extract",
+        found.append(("7-Zip", version,
                       lambda a, d: [sevenzip, "x", "-y", "-bd", f"-o{d}", a]))
     python = sys.executable
     pyversion = f"CPython {sys.version.split()[0]}"
     # pip's untar_file is the data filter, after it strips a leading directory that all members share
     for f, name in (("fully_trusted", "fully_trusted"), ("tar", "tar"), ("data", "data, as in pip")):
-        found.append((f"Python tarfile, filter={name}", pyversion, "extract",
+        found.append((f"Python tarfile, filter={name}", pyversion,
                       lambda a, d, f=f: [python, "-I", "-c", TARFILE, a, d, f]))
     build = os.path.join(work, "build")
     os.makedirs(build, exist_ok=True)
-    if want("Go archive/tar", "Go archive/tar, tarinsecurepath=0") and shutil.which("go"):
-        binary = os.path.join(build, "go-runner")
-        code, _, err = run(["go", "build", "-o", binary, "."], cwd=os.path.join(RUNNERS, "go"))
-        if code == 0:
-            version = f"archive/tar of {first_line(['go', 'version']).split()[2]}"
-            found.append(("Go archive/tar", version, "list", lambda a, b=binary: [b, a]))
-            found.append(("Go archive/tar, tarinsecurepath=0", version, "list",
-                          lambda a, b=binary: ["env", "GODEBUG=tarinsecurepath=0", b, a]))
-        else:
-            print("go runner:", err, file=sys.stderr)
     if want("Go containerd archive.Apply") and shutil.which("go"):
         binary = os.path.join(build, "containerd-runner")
         code, _, err = run(["go", "build", "-o", binary, "."], cwd=os.path.join(RUNNERS, "containerd"))
         if code == 0:
-            found.append(("Go containerd archive.Apply", first_line([binary, "--version"]), "extract",
+            found.append(("Go containerd archive.Apply", first_line([binary, "--version"]),
                           lambda a, d, b=binary: [b, a, d]))
         else:
             print("containerd runner:", err, file=sys.stderr)
@@ -197,12 +184,12 @@ def implementations(work, only=None):
                            cwd=os.path.join(RUNNERS, "rust"))
         if code == 0:
             binary = os.path.join(target, "release", "runner")
-            found.append(("Rust tar", "tar 0.4.46, unpack", "extract",
+            found.append(("Rust tar", "tar 0.4.46, unpack",
                           lambda a, d, b=binary: [b, "tar", a, d]))
-            found.append(("Rust astral-tokio-tar", "astral-tokio-tar 0.7.0, unpack", "extract",
+            found.append(("Rust astral-tokio-tar", "astral-tokio-tar 0.7.0, unpack",
                           lambda a, d, b=binary: [b, "astral-tokio-tar", a, d]))
             found.append(("Rust tar-codec, as in uv", "tar-codec 0.0.15, with the policies of uv 0.13",
-                          "extract", lambda a, d, b=binary: [b, "tar-codec-uv", a, d]))
+                          lambda a, d, b=binary: [b, "tar-codec-uv", a, d]))
         else:
             print("rust runner:", err, file=sys.stderr)
     cabal = tool("cabal")
@@ -213,7 +200,7 @@ def implementations(work, only=None):
                              cwd=os.path.join(RUNNERS, "haskell"))
         if code == 0:
             version = first_line([os.path.join(target, "runner"), "--version"])
-            found.append(("Haskell tar", version, "extract",
+            found.append(("Haskell tar", version,
                           lambda a, d, b=os.path.join(target, "runner"): [b, a, d]))
         else:
             print("haskell runner:", (err or out)[-2000:], file=sys.stderr)
@@ -223,7 +210,7 @@ def implementations(work, only=None):
         fetch_jars(os.path.join(RUNNERS, "java", "jars.txt"), jars)
         java_version = first_line([java, "-version"]).split('"')[1]
         found.append(("Java Commons Compress", f"Commons Compress 1.28.0, Expander, on Java {java_version}",
-                      "extract", lambda a, d, j=java, c=os.path.join(jars, "*"):
+                      lambda a, d, j=java, c=os.path.join(jars, "*"):
                       [j, "-cp", c, os.path.join(RUNNERS, "java", "Extract.java"), a, d]))
     dotnet = tool("dotnet")
     if want(".NET System.Formats.Tar") and dotnet:
@@ -234,7 +221,7 @@ def implementations(work, only=None):
                               "--nologo", "-v", "q"], cwd=src)
         if code == 0:
             binary = os.path.join(src, "out", "runner")
-            found.append((".NET System.Formats.Tar", first_line([binary, "--version"]), "extract",
+            found.append((".NET System.Formats.Tar", first_line([binary, "--version"]),
                           lambda a, d, b=binary: [b, a, d]))
         else:
             print("dotnet runner:", (out or err)[-2000:], file=sys.stderr)
@@ -242,26 +229,26 @@ def implementations(work, only=None):
     if ruby:
         code, out, _ = run([ruby, "-e", 'require "rubygems"; print Gem::VERSION, " ", RUBY_VERSION'])
         version = "RubyGems {} of Ruby {}, extract_tar_gz".format(*out.split()) if code == 0 else "?"
-        found.append(("RubyGems", version, "extract", lambda a, d, r=ruby:
+        found.append(("RubyGems", version, lambda a, d, r=ruby:
                       [r, os.path.join(RUNNERS, "ruby", "extract.rb"), a, d]))
     php = tool("php")
     if want("PHP PharData, as in Composer") and php:
         script = os.path.join(RUNNERS, "php", "extract.php")
         php_version = first_line([php, "-r", "echo PHP_VERSION;"])
         found.append(("PHP PharData, as in Composer", f"PharData of PHP {php_version}, as Composer's"
-                      " TarDownloader calls it", "extract", lambda a, d, p=php, s=script:
+                      " TarDownloader calls it", lambda a, d, p=php, s=script:
                       [p, "-d", "display_errors=stderr", s, a, d]))
     rscript = tool("Rscript")
     if want("R untar, internal") and rscript:
         script = os.path.join(RUNNERS, "r", "extract.R")
         version = first_line([rscript, "-e", 'cat(format(getRversion()))'])
         found.append(("R untar, internal", f'utils::untar of R {version}, tar = "internal"',
-                      "extract", lambda a, d, r=rscript, s=script: [r, "--vanilla", s, a, d]))
+                      lambda a, d, r=rscript, s=script: [r, "--vanilla", s, a, d]))
     perl = tool("perl")
     if perl:
         code, out, _ = run([perl, "-MArchive::Tar", "-e", 'print "$Archive::Tar::VERSION $^V"'])
         version = "Archive::Tar {} of Perl {}".format(*out.split()) if code == 0 else "?"
-        found.append(("Perl Archive::Tar", version, "extract", lambda a, d, p=perl:
+        found.append(("Perl Archive::Tar", version, lambda a, d, p=perl:
                       [p, os.path.join(RUNNERS, "perl", "extract.pl"), a, d]))
     julia = tool("julia")
     if julia:
@@ -269,7 +256,7 @@ def implementations(work, only=None):
         code, out, _ = run([julia, "--startup-file=no", "-e",
                             'using Tar; print(VERSION, " ", pkgversion(Tar))'])
         version = "Tar {1} of Julia {0}".format(*out.split()) if code == 0 else "?"
-        found.append(("Julia Tar.jl", version, "extract",
+        found.append(("Julia Tar.jl", version,
                       lambda a, d, j=julia, s=script: [j, "--startup-file=no", s, a, d]))
     if want("node-tar", "node-tar, strict", "tar-fs") and shutil.which("npm"):
         node = os.path.join(build, "node")
@@ -277,11 +264,11 @@ def implementations(work, only=None):
         code, _, err = run(["npm", "ci", "--silent", "--no-audit", "--no-fund"], cwd=node)
         if code == 0:
             script = os.path.join(node, "extract.js")
-            found.append(("node-tar", "tar 7.5.22", "extract",
+            found.append(("node-tar", "tar 7.5.22",
                           lambda a, d, s=script: ["node", s, a, d]))
-            found.append(("node-tar, strict", "tar 7.5.22", "extract",
+            found.append(("node-tar, strict", "tar 7.5.22",
                           lambda a, d, s=script: ["node", s, a, d, "strict"]))
-            found.append(("tar-fs", "tar-fs 3.1.3, on tar-stream 3.2.2", "extract",
+            found.append(("tar-fs", "tar-fs 3.1.3, on tar-stream 3.2.2",
                           lambda a, d, s=os.path.join(node, "tar-fs.js"): ["node", s, a, d]))
         else:
             print("node runner:", err, file=sys.stderr)
@@ -334,41 +321,11 @@ def extract(command, archive, root):
         work = os.path.dirname(os.path.dirname(os.path.dirname(root)))
         for k in range(len(dest), len(work), -1):
             error = error.replace(dest[:k] + "...", "DEST...")
-        error = error.replace(ROOT + os.sep, "")[-300:]
+        error = error.replace(ROOT + os.sep, "")
+        if len(error) > 300:
+            # the message comes first, and what follows is where it was raised
+            error = error[:300].rsplit(None, 1)[0] + " …"
     return code, error, tree, outside
-
-
-def apply(members):
-    """The tree that members make, applied in order to an empty tree: what a program that uses a
-    library without an extractor would extract. Names keep a leading `/` and `..`."""
-    tree, error = {}, None
-    for m in members:
-        if m["type"] == "g":
-            continue  # a global pax header, which the library returns like a member
-        absolute = m["name"].startswith("/")
-        parts = [p for p in m["name"].split("/") if p not in ("", ".")]
-        if not parts:
-            continue
-        path = ("/" if absolute else "") + "/".join(parts)
-        for i in range(1, len(parts)):
-            tree.setdefault(("/" if absolute else "") + "/".join(parts[:i]), {"kind": "directory"})
-        t = m["type"]
-        if t == "5":
-            tree[path] = {"kind": "directory"}
-        elif t == "2":
-            tree[path] = {"kind": "symlink", "target": m.get("linkname", "")}
-        elif t == "1":
-            target = "/".join(p for p in m.get("linkname", "").split("/") if p not in ("", "."))
-            if target in tree and target != path:
-                tree[path] = dict(tree[target])
-            elif target != path:
-                error = error or f"hardlink to {target!r}, which is not there"
-        elif t in ("0", "\0", "7"):
-            tree[path] = {"kind": "file", "size": m["size"], "sha256": m.get("sha256", ""),
-                          "executable": False}
-        else:
-            tree[path] = {"kind": "other"}
-    return error, tree
 
 
 def expected_tree(case):
@@ -408,22 +365,6 @@ def describe(tree):
         else:
             parts.append(f"`{path}` ({e['kind']})")
     return ", ".join(parts) or "nothing"
-
-
-def policies():
-    """Whether the default policy of scanner/strict.py rejects each case, from what tarscan.py
-    reports of it."""
-    sys.path.insert(0, os.path.join(HERE, "..", "scanner"))
-    import strict
-    import tarscan
-
-    out = {}
-    for name in sorted(os.listdir(ARCHIVES)):
-        if name.endswith(".tar"):
-            with open(os.path.join(ARCHIVES, name), "rb") as f:
-                r = tarscan.scan(io.BytesIO(f.read()))
-            out[name[:-4]] = bool(strict.default_rejects(r))
-    return out
 
 
 GROUPS = {
@@ -478,38 +419,23 @@ def main():
     only = set(sys.argv[3:]) if sys.argv[2:3] == ["--only"] else None
     cases = load_cases()
     impls = implementations(work, only)
-    results = {"implementations": [{"name": n, "version": v, "kind": k} for n, v, k, _ in impls],
+    results = {"implementations": [{"name": n, "version": v} for n, v, _ in impls],
                "cases": {}}
     if only:
         # the other columns, and those of names in only that were not found, are kept as they are
         # in matrix.json
         with open(os.path.join(HERE, "matrix.json")) as f:
             previous = json.load(f)
-        ran = {name for name, _, _, _ in impls}
+        ran = {name for name, _, _ in impls}
         results["implementations"] = [i for i in previous["implementations"]
                                       if i["name"] not in ran] + results["implementations"]
-    rejected_by = policies()
     runs = os.path.join(work, "runs")
     shutil.rmtree(runs, ignore_errors=True)
     for case, info in cases.items():
         archive = os.path.join(ARCHIVES, case + ".tar")
         row = dict(previous["cases"].get(case, {})) if only else {}
-        row["strict.py"] = {"error": "rejected" if rejected_by[case] else None, "tree": None,
-                            "outside": {}}
-        for i, (name, version, kind, command) in enumerate(impls):
-            if kind == "extract":
-                code, error, tree, outside = extract(command, archive,
-                                                     os.path.join(runs, str(i), case))
-            else:
-                code, out, err = run(command(archive))
-                try:
-                    listing = json.loads(out)
-                    error, tree = apply(listing["members"])
-                    error = listing.get("error") or error
-                except ValueError:
-                    error = err.strip().replace(ROOT + os.sep, "")
-                    error, tree = (error or f"status {code}")[-300:], {}
-                outside = {}
+        for i, (name, version, command) in enumerate(impls):
+            code, error, tree, outside = extract(command, archive, os.path.join(runs, str(i), case))
             row[name] = {"error": error, "tree": tree, "outside": outside}
             if code is None:
                 # a run that does not finish has not rejected the case, whatever it wrote so far
@@ -548,7 +474,7 @@ LEGEND = [
     "- ⚠️ accepts a case to reject. The letter is the tree it extracts: in one row, the same letter is"
     " the same tree, and different letters are trees that differ; [MATRIX.md](MATRIX.md#trees)"
     " lists them",
-    "- ❌ rejects a case to accept, or extracts another tree than its manifest",
+    "- ❌ rejects a case to accept, or extracts another tree than that of the case",
     f"- ⏳ does not finish within {TIMEOUT} seconds, so it neither rejects nor extracts the case",
     "- 💥 writes outside the destination",
     "- ❔ not run, so not verified: the implementation was not installed where the case was run",
@@ -562,7 +488,7 @@ POPULARITY = [
     "node-tar", "node-tar, strict", "tar-fs",
     "Java Commons Compress", ".NET System.Formats.Tar",
     "PHP PharData, as in Composer",
-    "Go archive/tar", "Go archive/tar, tarinsecurepath=0", "Go containerd archive.Apply",
+    "Go containerd archive.Apply",
     "Rust tar", "Rust astral-tokio-tar", "Rust tar-codec, as in uv",
     "RubyGems", "R untar, internal", "Perl Archive::Tar", "Haskell tar", "Julia Tar.jl",
     "live-bootstrap untar", "live-bootstrap untar, --non-strict",
@@ -576,8 +502,7 @@ def ordered(results):
 
 
 def columns(results):
-    return ["strict.py"] + [
-        i["name"] for i in ordered(results)]
+    return [i["name"] for i in ordered(results)]
 
 
 def case_cells(info, row, names):
@@ -617,7 +542,7 @@ CLASSES = {
     "⚠️": ("warn", ("#ffe08a", "#7d4e00"),
            "accepts a case to reject, which a strict parser rejects", "!"),
     "❌": ("bad", ("#ffc1ba", "#a40e26"),
-           "rejects a case to accept, or extracts another tree than its manifest", "✗"),
+           "rejects a case to accept, or extracts another tree than that of the case", "✗"),
     "⏳": ("slow", ("#b6e3ff", "#0550ae"),
            f"does not finish within {TIMEOUT} seconds, so it neither rejects nor extracts the case",
            "…"),
@@ -631,9 +556,7 @@ FONT = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-se
 
 def group(name):
     """The group of an implementation, which the SVG separates from the next by a gap: the
-    policies, the command-line tools, the libraries of each language, and live-bootstrap."""
-    if name.startswith("strict.py"):
-        return "policy"
+    command-line tools, the libraries of each language, and live-bootstrap."""
     if name in ("GNU tar", "bsdtar", "BusyBox tar", "7-Zip"):
         return "tool"
     if name == "tar-fs":
@@ -666,9 +589,16 @@ def cell_svg(x, y, w, h, symbol):
             f'<text class="cell {cls}-ink" x="{x + w / 2}" y="{y + h / 2 + 4}">{mark}</text>')
 
 
-def legend_svg(x, y):
+def used(results, cases):
+    """The outcomes that some cell has, so that a legend leaves out the others."""
+    names = columns(results)
+    return {outcome(info, results["cases"].get(case, {}).get(n))[0]
+            for case, info in cases.items() for n in names}
+
+
+def legend_svg(x, y, symbols):
     out = []
-    for c in CLASSES.values():
+    for c in (CLASSES[s] for s in CLASSES if s in symbols):
         out.append(f'<rect class="{c[0]}" x="{x}" y="{y - 12}" width="16" height="16" rx="3"/>'
                    f'<text class="cell {c[0]}-ink" x="{x + 8}" y="{y}">{c[3]}</text>'
                    f'<text x="{x + 22}" y="{y}">{esc(c[2])}</text>')
@@ -742,7 +672,7 @@ def svg(results, cases, link=None):
         if link:
             out.append("</a>")
         y += ch + gap
-    legend, y = legend_svg(left, y + 24)
+    legend, y = legend_svg(left, y + 24, used(results, cases))
     out.append(legend)
     # the rotated name of the last column reaches past it, by the cosine of 60°
     width, height = int(max(x + 20 + 7 * len(names[-1]) / 2, end + 10)), y + 4
@@ -786,21 +716,18 @@ def table(results, cases):
         "# What implementations make of the test suite",
         "",
         "Generated by `matrix.py` from `matrix.json`: every case of [suite/archives/](../../suite/archives),",
-        "extracted by every implementation, or for libraries without an extractor listed and",
-        "applied in order. The column `strict.py` is the default policy of `scanner/strict.py`, from",
-        "what `tarscan.py` reports.",
+        "extracted by every implementation.",
         "",
-    ] + LEGEND + [
+    ] + [line for line in LEGEND if line.split()[1] in used(results, cases)] + [
         "",
         "![Every case of the test suite, in rows, and what every implementation makes of it, in columns:"
         " the table below as a picture](matrix.svg)",
         "",
-        "| implementation | version | how |",
-        "|---|---|---|",
+        "| implementation | version |",
+        "|---|---|",
     ]
     for i in ordered(results):
-        how = "extracts" if i["kind"] == "extract" else "lists, applied in order"
-        lines.append(f"| {i['name']} | {i['version']} | {how} |")
+        lines.append(f"| {i['name']} | {i['version']} |")
     lines.append("")
     header = "| case | " + " | ".join(names) + " |"
     lines += [header, "|---|" + "---|" * len(names)]

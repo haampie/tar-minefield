@@ -9,10 +9,10 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="S09 tree-duplicate-file-identical · Tar file extraction test suite">
 <meta property="og:description" content="The same file twice, with the same contents.">
-<link rel="stylesheet" href="style.css?96a01d71">
+<link rel="stylesheet" href="style.css?487f8630">
 <link rel="canonical" href="https://stoppels.ch/tar/S09.html">
 <meta property="og:url" content="https://stoppels.ch/tar/S09.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/134a4e4710d91d4f.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/1401a59ea23b8206.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of S09 tree-duplicate-file-identical">
@@ -25,7 +25,7 @@
 <nav class="wide"><a class="prev" href="S08.html" rel="prev" title="S08 tree-duplicate-file-dir">‹ S08 tree-duplicate-file-dir</a><a href="index.html">tar-minefield</a><a class="next" href="S10.html" rel="next" title="S10 tree-symlink-then-file">S10 tree-symlink-then-file ›</a></nav>
 <h1><code>S09</code> tree-duplicate-file-identical</h1>
 <p>The same file twice, with the same contents.</p>
-<div class="verdict reject wide"><p><span class="badge">Must reject</span> A strict parser must reject this archive.</p></div>
+<div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>order and state</dd>
 <dt>Default policy</dt><dd>rejects it</dd>
@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>Whichever copy an implementation keeps, the tree is the same. But an implementation would have to compare the copies to know that, so the default policy rejects every duplicate file.</p>
+<p>Whichever copy an implementation keeps, the tree is the same. But an extractor that streams the archive cannot know, when it writes the first copy, whether a later one is the same: in some tarballs a file was changed and appended again, as in S07, so that implementations that keep the first copy and those that keep the last extract different trees. In fish 4.7.1, <code>Cargo.toml</code> and <code>Cargo.lock</code> are appended again without their last newline. A strict parser rejects every duplicate file, as one with the same contents and one with other contents look alike until the end.</p>
 <p><strong>Decision point:</strong> which of two members of one path is the file.</p>
 <p><strong>Seen in:</strong> tarballs of <code>cabal sdist</code>, such as string-conversions 0.4.0.1 and multipart 0.2.1.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,8 +51,12 @@
 
 The same file twice, with the same contents.
 
-Whichever copy an implementation keeps, the tree is the same. But an implementation would have to
-compare the copies to know that, so the default policy rejects every duplicate file.
+Whichever copy an implementation keeps, the tree is the same. But an extractor that streams the
+archive cannot know, when it writes the first copy, whether a later one is the same: in some
+tarballs a file was changed and appended again, as in S07, so that implementations that keep the
+first copy and those that keep the last extract different trees. In fish 4.7.1, `Cargo.toml` and
+`Cargo.lock` are appended again without their last newline. A strict parser rejects every duplicate
+file, as one with the same contents and one with other contents look alike until the end.
 
 Decision point: which of two members of one path is the file.
 Seen in: tarballs of `cabal sdist`, such as string-conversions 0.4.0.1 and multipart 0.2.1.
@@ -301,10 +305,9 @@ Seen in: tarballs of `cabal sdist`, such as string-conversions 0.4.0.1 and multi
 </details>
 <h2 id="what-implementations-make-of-it">What implementations make of it<a class="anchor" href="#what-implementations-make-of-it" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="implementations"><colgroup><col style="width: 21%"><col style="width: 21%"><col style="width: 18%"><col style="width: 40%"></colgroup><tr><th>implementation</th><th>version</th><th>outcome</th><th>what it makes of it</th></tr>
-<tr><td>strict.py</td><td></td><td>✅ as the verdict says</td><td>rejects it</td></tr>
 <tr><td>GNU tar</td><td>tar (GNU tar) 1.35</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
 <tr><td>bsdtar</td><td>bsdtar 3.8.10 - libarchive 3.8.10</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
-<tr><td>BusyBox tar</td><td>BusyBox v1.38.0</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
+<tr><td>BusyBox tar</td><td>BusyBox v1.38.0, defconfig</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
 <tr><td>7-Zip</td><td>7-Zip (z) 26.05 (x64)</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
 <tr><td>Python tarfile, filter=data, as in pip</td><td>CPython 3.15.2</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
 <tr><td>Python tarfile, filter=tar</td><td>CPython 3.15.2</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
@@ -315,8 +318,6 @@ Seen in: tarballs of `cabal sdist`, such as string-conversions 0.4.0.1 and multi
 <tr><td>Java Commons Compress</td><td>Commons Compress 1.28.0, Expander, on Java 27.0.1.0.2</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
 <tr><td>.NET System.Formats.Tar</td><td>System.Formats.Tar of .NET 10.0.14, ExtractToDirectory</td><td>✅ as the verdict says</td><td>error: IOException: Cannot create &#x27;DEST/a&#x27; because a file or directory with the same name already exists.</td></tr>
 <tr><td>PHP PharData, as in Composer</td><td>PharData of PHP 8.5.12, as Composer&#x27;s TarDownloader calls it</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
-<tr><td>Go archive/tar</td><td>archive/tar of go1.27.3</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
-<tr><td>Go archive/tar, tarinsecurepath=0</td><td>archive/tar of go1.27.3</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
 <tr><td>Go containerd archive.Apply</td><td>containerd v2.4.2, archive.Apply, of go1.27.3</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
 <tr><td>Rust tar</td><td>tar 0.4.46, unpack</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
 <tr><td>Rust astral-tokio-tar</td><td>astral-tokio-tar 0.7.0, unpack</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
@@ -326,19 +327,20 @@ Seen in: tarballs of `cabal sdist`, such as string-conversions 0.4.0.1 and multi
 <tr><td>Perl Archive::Tar</td><td>Archive::Tar 3.12 of Perl v5.44.0</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
 <tr><td>Haskell tar</td><td>tar 0.7.2.0, extract, of GHC 9.14</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
 <tr><td>Julia Tar.jl</td><td>Tar 1.10.0 of Julia 1.13.3</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
-<tr><td>live-bootstrap untar</td><td>mescc-tools-extra a151c245e512, built with cc</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
-<tr><td>live-bootstrap untar, --non-strict</td><td>mescc-tools-extra a151c245e512, built with cc</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr></table></div>
-<h2 id="prevalence-in-source-tarballs">Prevalence in source tarballs<a class="anchor" href="#prevalence-in-source-tarballs" aria-label="Link to this section">¶</a></h2>
-<p>Release tarballs of Spack, nixpkgs, Guix, live-bootstrap, PyPI, crates.io and RubyGems with <code>tree.duplicate.file-file</code>. The default policy rejects all of them.</p>
+<tr><td>live-bootstrap untar</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr>
+<tr><td>live-bootstrap untar, --non-strict</td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, a6328afc)</td></tr></table></div>
+<h2 id="prevalence-in-release-tarballs">Prevalence in release tarballs<a class="anchor" href="#prevalence-in-release-tarballs" aria-label="Link to this section">¶</a></h2>
+<p>Release tarballs of Spack, nixpkgs, Guix and live-bootstrap, and samples of PyPI, crates.io and RubyGems with <code>tree.duplicate.file-file</code>. The default policy rejects all of them.</p>
 <div class="wide"><table class="data"><colgroup><col style="width: 25%"><col style="width: 25%"><col style="width: 25%"><col style="width: 25%"></colgroup><tr><th>ecosystem</th><th class=n>tarballs</th><th class=n>with it</th><th class=n>share</th></tr>
-<tr><td>Spack</td><td class=n>37,554</td><td class=n>17</td><td class=n>0.05%</td></tr>
+<tr><td>Spack</td><td class=n>37,553</td><td class=n>17</td><td class=n>0.05%</td></tr>
 <tr><td>nixpkgs</td><td class=n>18,990</td><td class=n>59</td><td class=n>0.31%</td></tr>
 <tr><td>Guix</td><td class=n>10,168</td><td class=n>17</td><td class=n>0.17%</td></tr>
 <tr><td>PyPI</td><td class=n>10,000</td><td class=n>3</td><td class=n>0.03%</td></tr>
-<tr><td>crates.io</td><td class=n>5,000</td><td class=n>0</td><td class=n>0.00%</td></tr>
+<tr><td>crates.io</td><td class=n>5,000</td><td class=n>0</td><td class=n>none</td></tr>
 <tr><td>RubyGems</td><td class=n>5,000</td><td class=n>4</td><td class=n>0.08%</td></tr>
-<tr><td>live-bootstrap</td><td class=n>171</td><td class=n>0</td><td class=n>0.00%</td></tr>
-<tr class="total"><td>total (distinct)</td><td class=n>82,587</td><td class=n>87</td><td class=n>0.11%</td></tr></table></div>
+<tr><td>live-bootstrap</td><td class=n>171</td><td class=n>0</td><td class=n>none</td></tr>
+<tr class="total"><td>total (distinct)</td><td class=n>82,586</td><td class=n>87</td><td class=n>0.11%</td></tr></table></div>
+<p class="note"><code>tarscan.py</code> finds the same file twice, and does not compare the contents of the copies: some of these may differ, as in S07.</p>
 <p>See <a href="seen-in.html#S09">the list of these 87 tarballs</a>, with the sha256 of each and an example from it.</p>
 
 <hr class="wide">

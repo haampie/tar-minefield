@@ -1,4 +1,4 @@
-"""A pax `size` that disagrees with the header's size, which hides a header from one implementation.
+"""A pax `size` that disagrees with the header's, so that a reader of the header's misses a member.
 
 The size field in the header of `a` is 512, and its pax extended header has `size=0`. POSIX says
 that the pax size overrides the header's: it is how sizes over 8 GiB, which do not fit in the

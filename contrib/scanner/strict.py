@@ -14,7 +14,9 @@ The default policy, `DEFAULT`, is what METHOD.md decides from these scans: it no
 the criteria and accepts others, and rejects the rest. What each rejects is given of both.
 
 Each results file is the scan of an ecosystem, and rates are given per ecosystem: each is a
-sample of its own population. Tarballs in a compression that tarscan.py does not read are not assessed.
+sample of its own population. Files of which tarscan.py cannot read the first header are not
+assessed, as no implementation extracts anything from them: tarballs in a compression that it does
+not read, such as lzip and zstd, and files that are no tar archive, such as a zip named .tar.gz.
 
 With --readme, the sentence between the markers `<!-- begin strict.py -->` and
 `<!-- end strict.py -->` in that file, which may be inside a paragraph, is generated again, and
@@ -182,6 +184,8 @@ DEFAULT = [
     ("end.data-after", "accept", "junk after the two zero blocks is ignored"),
     ("pax-global.after-members", "accept", "if every global header has only a `comment`"),
     ("magic.posix-version-nuls", "accept", "as some Java archivers write it: `ustar\\0\\0\\0`"),
+    ("name.control-character", "accept",
+     "created as it is: every implementation reads the name alike, and the risk is in its use"),
     ("number.*.leading-space", "accept",
      "octal padded with spaces, not zeros, which implementations read alike"),
     ("pax.size-disagrees", "accept",
@@ -189,10 +193,6 @@ DEFAULT = [
     ("pax.newline-in-value.SCHILY.xattr.*", "accept", "xattrs are not extracted"),
     ("pax.newline-in-value.LIBARCHIVE.xattr.*", "accept", "xattrs are not extracted"),
 ]
-
-# Compressions that tarscan.py does not read: it scans these as uncompressed tar
-UNREAD = (".tar.lz", ".tar.zst", ".tzst", ".tar.lzma", ".tlz", ".tar.Z")
-
 
 def classify(feature):
     """("platform" | "allowed" | "strict" | "unclassified", category, description)"""
@@ -208,10 +208,9 @@ def classify(feature):
 
 
 def assessed(r):
-    if "features" not in r:
-        return False
-    name = r.get("name") or r.get("url", "")
-    return not (r.get("error") and r["compression"]["format"] == "none" and name.endswith(UNREAD))
+    """Whether tarscan.py read the tarball: not if it failed at the first header, as it does on a
+    compression that it does not read, which it takes for an uncompressed tar."""
+    return "features" in r and not (r.get("error") and not r.get("members"))
 
 
 def criterion(feature):
