@@ -76,6 +76,7 @@ SENTENCES = {
                                      "when the archive has multiple members with the same name"),
     "link-data": (PAX_HEADER, "data blocks for files of typeflag 1 (the digit one) (hard link) may be "
                               "included"),
+    "symlink": (USTAR, "The contents of the symbolic link shall be stored in the linkname field"),
     "hardlink": (USTAR, "Represents a file linked to another file, of any type, previously "
                         "archived"),
 }

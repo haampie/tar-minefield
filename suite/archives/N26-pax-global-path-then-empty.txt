@@ -1,0 +1,78 @@
+N26-pax-global-path-then-empty: must reject
+
+A global `path`, then a global header that removes it with an empty value.
+
+The first global header has `path=global-name`, which in POSIX applies to every later member. The
+second has `path=`, which deletes it again, so the file after them keeps the name in its header,
+`a`. This case is ambiguous in practice because a reader may instead take `path=` for an empty name,
+or ignore it and keep `global-name`.
+
+Decision point: whether an empty value in a global header removes an earlier global value.
+Seen in: none of the scanned tarballs.
+See also: N21, a global `path`, and N22, an empty `path` in an extended header.
+
+0x000000  header: pax global header, path=global-name, for every later member
+          name     [  0,100)  "pax_global_header" + 83 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000024" + NUL  20
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "012633\0 "  5531: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "g"  pax global header
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: pax records
+          20 bytes of pax records, then 492 NUL
+          "20 path=global-name\n"
+0x000400  header: pax global header, path=, which removes the global path
+          name     [  0,100)  "pax_global_header" + 83 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000010" + NUL  8
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "012626\0 "  5526: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "g"  pax global header
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data: pax records
+          8 bytes of pax records, then 504 NUL
+          "8 path=\n"
+0x000800  header: regular file
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000014" + NUL  12
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007343\0 "  3811: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000a00  data
+          12 bytes, then 500 NUL to the end of the block
+          "which name?\n"
+0x000c00  2 zero blocks: the end-of-archive marker
+0x001000  end of file

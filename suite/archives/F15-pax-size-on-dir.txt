@@ -7,7 +7,7 @@ whatever its size, so the next block is the header of a file, `dir/smuggled`. Th
 ambiguous in practice because, if the size applies, that block is the directory's data instead, and
 the tree is a directory alone.
 
-Decision point: whether a pax `size` applies to a member that has no data.
+Decision point: whether a pax `size` applies to a member without data.
 Seen in: llama_index_workflows 2.26.0, with a pax size on a directory.
 See also: F33, a size in the ustar header of a directory, and F35, a pax `size` on a hard link,
 which are rejected as well.

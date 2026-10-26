@@ -1,0 +1,59 @@
+F36-pax-record-length-short: must reject
+
+A pax record whose length is one byte short, so that it ends just before its newline.
+
+The extended header contains one record, `16 path=from-pax` followed by a newline, which is 17
+bytes, although its length says 16. In POSIX, the length of a record counts every byte of it, its
+newline included, so the record is malformed. This case is ambiguous in practice because only a
+reader that delimits the record by its length, and checks that it ends in a newline, recognizes it
+as malformed: one that splits records on newlines, or does not check, takes it for a valid record.
+
+Decision point: whether a pax record whose length does not end at its newline is recognized as
+malformed.
+Seen in: none of the scanned tarballs.
+See also: F28, a newline inside a value.
+
+0x000000  header: pax extended header, one record, whose length is one short
+          name     [  0,100)  "PaxHeader" + 91 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000021" + NUL  17
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011072\0 "  4666: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "x"  pax extended header
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: a pax record of 17 bytes that says it has 16
+          17 bytes, then 495 NUL
+          "16 path=from-pax\n"
+0x000400  header: regular file
+          name     [  0,100)  "from-header" + 89 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000014" + NUL  12
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011314\0 "  4812: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          12 bytes, then 500 NUL to the end of the block
+          "which name?\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

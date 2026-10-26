@@ -1,4 +1,4 @@
-"""A negative pax `size`, which no member can have.
+"""A negative pax `size`, which a member cannot have.
 
 The pax header of `a` has `size=-512`, and the size field of its header is 0. In POSIX, a pax size
 is decimal digits, without a sign. Read leniently, this case is ambiguous because the size is either
