@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tar file extraction test suite · tar-minefield</title>
-<meta name="description" content="A test suite of 74 tar archives, what over 20 implementations make of each, and a draft policy that rejects the ambiguous ones and accepts 99.77% of 82,586 real tarballs.">
+<meta name="description" content="A test suite of 74 tar archives, what 20 implementations make of each, and a draft policy that rejects most of the ambiguous ones and accepts 99.77% of 82,586 real tarballs.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="Tar file extraction test suite · tar-minefield">
-<meta property="og:description" content="A test suite of 74 tar archives, what over 20 implementations make of each, and a draft policy that rejects the ambiguous ones and accepts 99.77% of 82,586 real tarballs.">
+<meta property="og:description" content="A test suite of 74 tar archives, what 20 implementations make of each, and a draft policy that rejects most of the ambiguous ones and accepts 99.77% of 82,586 real tarballs.">
 <link rel="stylesheet" href="style.css?487f8630">
 <link rel="canonical" href="https://stoppels.ch/tar/">
 <meta property="og:url" content="https://stoppels.ch/tar/">
@@ -160,8 +160,8 @@ published there.</p>
 <h2 id="examples">Motivating examples<a class="anchor" href="#examples" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="examples"><colgroup><col style="width: 8%"><col style="width: 36%"><col style="width: 56%"></colgroup><tr><th>case</th><th>the archive</th><th>what implementations make of it</th></tr>
 <tr><td><a href="N09.html">N09</a></td><td>two pax headers for one file, with <code>path=first</code> and <code>path=second</code></td><td>GNU tar, BusyBox, 7-Zip, node-tar, tar-fs, Go, R and Julia extract <code>second</code>; Python and Java extract <code>first</code>; PHP, RubyGems, Perl and live-bootstrap extract <code>header-name</code>, the name in the ustar header; bsdtar, Rust, .NET and Haskell reject it</td></tr>
-<tr><td><a href="S10.html">S10</a></td><td>a symlink <code>a</code> to <code>target</code>, then a file <code>a</code></td><td>most replace the link with the file; Python's <code>tarfile</code> writes through the link, to <code>target</code></td></tr>
-<tr><td><a href="K01.html">K01</a></td><td>a regular file named <code>a/</code></td><td>GNU tar, bsdtar, node-tar and Java create a directory <code>a</code>; Python, Go, Rust's <code>tar</code> and PHP's <code>PharData</code> an empty file <code>a</code>; tar-fs and .NET reject it</td></tr>
+<tr><td><a href="S10.html">S10</a></td><td>a symlink <code>a</code> to <code>target</code>, then a file <code>a</code></td><td>most replace the link with the file; Python's <code>tarfile</code> and live-bootstrap write through the link, to <code>target</code>; 7-Zip, .NET and Haskell reject it</td></tr>
+<tr><td><a href="K01.html">K01</a></td><td>a regular file named <code>a/</code></td><td>GNU tar, bsdtar, BusyBox, 7-Zip, node-tar, Java, Perl and live-bootstrap create a directory <code>a</code>; Python, Go, Rust's <code>tar</code> and astral-tokio-tar, PHP's <code>PharData</code>, RubyGems and R an empty file <code>a</code>; tar-fs, .NET, Haskell, Julia and tar-codec reject it</td></tr>
 <tr><td><a href="F12.html">F12</a></td><td>a size field of <code>000000 1000</code>, with a space</td><td>GNU tar, BusyBox, 7-Zip, node-tar, tar-fs, Perl, Haskell, Julia and live-bootstrap read 0, and find a second file <code>smuggled</code> in the data; R reads 512, and extracts it as the data of <code>a</code>; bsdtar, Python, Go, Rust, Java, .NET, PHP and RubyGems reject it</td></tr></table></div>
 <h2 id="contributing">Contributing<a class="anchor" href="#contributing" aria-label="Link to this section">¶</a></h2>
 <p>Issues and pull requests are welcome on <a href="https://github.com/haampie/tar-minefield/issues">GitHub</a>: a new case, an implementation for the comparison, or a tarball that the default policy gets wrong. A case that shows a vulnerability that is not yet disclosed is reported privately first: see <a href="https://github.com/haampie/tar-minefield/blob/main/SECURITY.md">SECURITY.md</a>.</p>

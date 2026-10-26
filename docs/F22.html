@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The pax header of <code>a</code> has <code>size=-512</code>, and the size field of its header is 0. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a>, a pax size is decimal digits, without a sign. Read leniently, this case is ambiguous because the size is either what the header specifies, 0 (and the next block is the header of <code>smuggled</code>), or the pax size read as an unsigned number, almost 2^64 (which runs past the end of the archive).</p>
+<p>The pax header of <code>a</code> has <code>size=-512</code>, and the size field of its header is 0. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a>, a pax size is decimal digits, without a sign. Read leniently, this case is ambiguous because the size is either what the header specifies, 0 (and the next block is the header of <code>smuggled</code>), or the pax size read as an unsigned number, almost 2^64 (which runs past the end of the archive). Python&#x27;s <code>tarfile</code> extracts nothing at all, and reports no error.</p>
 <p><strong>Decision point:</strong> whether a pax size may be negative, and what a negative one means.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -54,7 +54,8 @@ A negative pax `size`, which no member can have.
 The pax header of `a` has `size=-512`, and the size field of its header is 0. In POSIX, a pax size
 is decimal digits, without a sign. Read leniently, this case is ambiguous because the size is either
 what the header specifies, 0 (and the next block is the header of `smuggled`), or the pax size read
-as an unsigned number, almost 2^64 (which runs past the end of the archive).
+as an unsigned number, almost 2^64 (which runs past the end of the archive). Python&#x27;s `tarfile`
+extracts nothing at all, and reports no error.
 
 Decision point: whether a pax size may be negative, and what a negative one means.
 Seen in: none of the scanned tarballs.

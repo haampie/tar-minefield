@@ -155,7 +155,8 @@ JSONTestSuite:
 - **reject**: a strict parser must reject it.
 - **accept**: every implementation must accept it, and extract the tree in its manifest.
 - **tolerate**: ambiguous in principle, but common enough in real archives that rejecting it has
-  a real cost. A strict parser may reject it; if it accepts it, it must extract the tree in its
+  a real cost, or with one reading that implementations share or POSIX requires, so that
+  accepting it is safe. A strict parser may reject it; if it accepts it, it must extract the tree in its
   manifest.
 
 The cases to accept are as important as the cases to reject: without them, an implementation
@@ -164,15 +165,17 @@ parser would trip over:
 
 - the global pax header with only a `comment` that `git archive` writes, and so every GitHub
   release tarball,
-- pax headers for long names and links, GNU long names and links, and the ustar prefix,
+- long names in a pax `path`, in a GNU long name, and split by the ustar prefix, under a parent
+  directory that has no member of its own,
 - names of exactly 100 bytes, without a NUL,
-- numeric fields padded with leading zeros, and terminated by a space, a NUL, or both,
-- base-256 sizes of files over 8 GiB,
-- vendor pax keys that do not affect the tree, such as `LIBARCHIVE.xattr.*` and `SCHILY.*` from
-  macOS and star, also with values that are not UTF-8, and the AppleDouble `._` files next to
-  them,
-- directories after their contents, and parent directories that have no member of their own,
+- vendor pax keys that do not affect the tree: an xattr in `SCHILY.xattr.*`, as libarchive and
+  star write them, with a value that is not UTF-8,
+- directories after their contents,
 - the same directory listed twice, as `tar cf x.tar dir dir/sub` writes.
+
+Real archives also have long link names, base-256 sizes of files over 8 GiB, numeric fields
+terminated by a space, and the AppleDouble `._` files of macOS, which no case to accept covers
+yet.
 
 Each case also records what is known about it:
 
@@ -264,7 +267,9 @@ pinned by checksum.
   can reassemble, which may allow some analysis without downloads.
 - PyPI: the simple index lists the files of about a million projects, with their checksums, and
   `files.pythonhosted.org` serves them. Their sdists are millions, too many to scan, so a sample
-  of projects is scanned, one sdist each: the latest of half, an older one of the other half.
+  of projects is scanned, one file in a tar format each: the latest of half, an older one of the
+  other half. These are sdists, but for a few built distributions with a platform in their name,
+  such as `.linux-x86_64.tar.gz`.
 - crates.io and RubyGems, sampled the same way: crates.io's index has the sha256 of every crate,
   which `cargo package` writes, and RubyGems' compact index that of every gem. A gem is a tar
   whose member `data.tar.gz` contains the files it installs, written by RubyGems itself: that member
@@ -296,7 +301,9 @@ For each rule:
   is practical,
 - the producers and years of the tarballs it rejects.
 
-The first run is on a sample of about 2,000 tarballs, stratified by repository and age.
+The first runs were on samples of about 2,000 tarballs. The scans now cover all of Spack, Guix and
+live-bootstrap, the tarballs that the Hydra jobs of nixpkgs fetch, and samples of PyPI, crates.io and RubyGems: the `RUN.md` of each in
+[contrib/data](contrib/data) says what it scanned.
 
 ### Who pays for ambiguity
 
@@ -321,16 +328,17 @@ People should be able to trust the test suite without trusting its binary files.
   `tarfile` or any other implementation under test: they normalize what they write, and the
   test suite would then test them against themselves. Each script explains its case in a docstring.
 - Generation is deterministic: no clocks, no randomness, no dependency on the machine.
-- The archives are checked into git, and CI regenerates them and fails on any difference. So
+- The archives are checked into git, and `suite/generate.py --check` regenerates them and fails on
+  any difference. So
   every byte can be traced to a script that a reviewer can read.
 - Next to each archive is a generated, annotated dump: every header block with its offset, its
   fields, their raw bytes and their meaning. A change to a case is then a readable diff.
 - Expected trees are plain manifests (path, kind, sha256 of the contents, link target,
   executable), rather than a single hash.
 - The interpretation of every case by every implementation we track (GNU tar, bsdtar, BusyBox,
-  star, Python's `tarfile`, Go's `archive/tar`, Rust's `tar`, node-tar, 7-Zip, Apache Commons
-  Compress, .NET's `System.Formats.Tar`, ...) is produced in CI at pinned versions, and published
-  as data. Claims like "GNU tar does X" can then be checked by running them again.
+  Python's `tarfile`, containerd, Rust's `tar`, node-tar, 7-Zip, Apache Commons Compress, .NET's
+  `System.Formats.Tar`, ...) is produced by `contrib/matrix/matrix.py`, which records their
+  versions, and published as data. Claims like "GNU tar does X" can then be checked by running them again.
 - Cases are written from scratch, in our own words, also where they reproduce a known CVE: no
   archive or test is copied from another project.
 - Payloads are harmless. Cases about traversal write marker files with obvious names, and the
@@ -348,7 +356,7 @@ it a single implementation that has to be taken on trust.
 - **The test suite** is trusted for its bytes, not for its generators. A generator only writes
   bytes, and does not parse anything. Its output is checked into git with an annotated dump, and
   a reviewer can check both by hand against the case's description and the specification it
-  cites. CI checks that the generators still produce exactly those bytes.
+  cites. `suite/generate.py --check` checks that the generators still produce exactly those bytes.
 - **The verdicts** come from the specifications, the reasoning recorded with each case, and the
   interpretation matrix of real implementations, never from our scanner.
 - **The scanner** is a measuring instrument: if it frames an archive differently from the

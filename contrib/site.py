@@ -297,9 +297,10 @@ def readme_section(title):
 
 
 def inline(text):
-    """Text with `code` as HTML."""
+    """Text with `code` and [links](https://...) as HTML."""
     parts = text.split("`")
-    return "".join(f"<code>{html.escape(p)}</code>" if i % 2 else html.escape(p)
+    return "".join(f"<code>{html.escape(p)}</code>" if i % 2 else
+                   re.sub(r"\[(.+?)\]\((https?://[^)\s]+)\)", r'<a href="\2">\1</a>', html.escape(p))
                    for i, p in enumerate(parts))
 
 
@@ -799,10 +800,10 @@ def seen_page(cases, data):
         if not has or any(strict.criterion(f) in strict.default_rejects(r)
                           for r in has for f in features):
             continue
-        # a sample that does not depend on the order of the scans: by sha256, as a random key,
-        # listed by name
+        # a sample of those the default policy accepts, as some are rejected for another case,
+        # that does not depend on the order of the scans: by sha256, as a random key, listed by name
         picks, seen = [], set()
-        for r in sorted(has, key=lambda r: r["sha256"]):
+        for r in sorted((r for r in has if strict.passes_default(r)), key=lambda r: r["sha256"]):
             name = (r["package"], r["version"])
             if name not in seen and len(picks) < EXAMPLES:
                 seen.add(name)
@@ -817,16 +818,17 @@ def seen_page(cases, data):
 <p>Unlike the test archives, which are crafted, these are real release tarballs: of the
 {len(union):,} distinct ones of {ecosystems(names)}, those that cases are seen
 in. Each links to its upstream URL, with the sha256 that its package pins, which is that of the
-file scanned: for some, a copy from the ecosystem's mirror. Some are binaries, such as NVIDIA's
-cuDNN in Spack. Each has an example from it where the scan recorded one.</p>
+file scanned: for some, a copy from the ecosystem's mirror. For RubyGems, it is the sha256 of the
+gem, and the tarball scanned is the <code>data.tar.gz</code> in it. Some are binaries, such as NVIDIA's
+cuDNN in Spack, and the few built distributions in the PyPI sample. Each has an example from it where the scan recorded one.</p>
 <h2 id="rejected">Rejected by the default policy</h2>
 <p>All {len(rejected)} tarballs that the default policy rejects, by why. A tarball with more than
 one reason is listed under each.</p>
 {table("reasons", summary)}
 {chr(10).join(sections)}
 <h2 id="accepted">Accepted, with the feature of a case</h2>
-<p>For the cases whose tarballs the default policy accepts: a sample of up to {EXAMPLES} of them,
-of how many there are, listed by name. The sample is those with the lowest sha256, which is as good
+<p>For the cases whose tarballs the default policy accepts: a sample of up to {EXAMPLES} of the
+tarballs that it accepts, of how many have the case, listed by name. The sample is those with the lowest sha256, which is as good
 as random, and the same on every run.</p>
 {chr(10).join(examples)}
 """
@@ -981,8 +983,9 @@ published there.</p>
 {readme_section("Contributing")}
 """
     rejected = sum(not strict.passes_default(r) for r in union)
-    description = (f"A test suite of {len(cases)} tar archives, what over 20 implementations make of "
-                   "each, and a draft policy that rejects the ambiguous ones "
+    description = (f"A test suite of {len(cases)} tar archives, what "
+                   f"{matrix.implementations(matrix.columns(results))} implementations make of "
+                   "each, and a draft policy that rejects most of the ambiguous ones "
                    f"and accepts {strict.percent(len(union) - rejected, len(union))} of "
                    f"{len(union):,} real tarballs.")
     return page(f"{TITLE} · tar-minefield", description, body)

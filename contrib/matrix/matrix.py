@@ -501,6 +501,12 @@ def ordered(results):
     return sorted(results["implementations"], key=lambda i: rank.get(i["name"], len(rank)))
 
 
+def implementations(names):
+    """How many implementations the columns are: a column is an implementation or one of its
+    configurations, such as a filter of tarfile, named after a comma."""
+    return len({n.split(",")[0] for n in names})
+
+
 def columns(results):
     return [i["name"] for i in ordered(results)]
 
@@ -693,8 +699,7 @@ def readme(path, results, cases):
     names = columns(results)
     total = totals(results, cases, names)
     lines = [
-        # not the number of columns, which counts configurations too, such as the filters of tarfile
-        f"What over 20 implementations make of the {len(cases)} cases: a row per case, by "
+        f"What {implementations(names)} implementations make of the {len(cases)} cases: a row per case, by "
         "category, and a column per implementation, with the outcomes of all cases at the top. "
         f"[The website]({SITE}) has a page per case.",
         "",

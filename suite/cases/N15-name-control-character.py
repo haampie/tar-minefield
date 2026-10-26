@@ -7,7 +7,8 @@ the risk is in what is done with the name afterwards, where a newline makes it l
 carriage return or ESC makes a terminal show another name. A strict parser may reject it; the
 default policy creates it as it is.
 
-Seen in: cdrtools 3.02a09, wgrib2 3.6.0 and apktool 2.6.0.
+Seen in: gocryptfs 2.5.1 and deja-vu 0.4, with newlines, and cdrtools 3.02a09, wgrib2 3.6.0 and
+apktool 2.6.0, with ESC and DEL.
 """
 
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}

@@ -2,8 +2,8 @@
 
 Whichever copy an implementation keeps, the tree is the same. But an extractor that streams the
 archive cannot know, when it writes the first copy, whether a later one is the same: in some
-tarballs a file was changed and appended again, as in S07, so that implementations that keep the
-first copy and those that keep the last extract different trees. In fish 4.7.1, `Cargo.toml` and
+tarballs a file was changed and appended again, as in S07, so that an extractor that keeps the
+first copy and one that keeps the last extract different trees. In fish 4.7.1, `Cargo.toml` and
 `Cargo.lock` are appended again without their last newline. A strict parser rejects every duplicate
 file, as one with the same contents and one with other contents look alike until the end.
 

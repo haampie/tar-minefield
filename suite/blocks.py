@@ -56,9 +56,10 @@ def pax_record(key, value):
     return b"%d" % length + body
 
 
-def show(raw):
-    """Bytes as a string literal, with a run of NULs at the end counted rather than written."""
-    stripped = raw.rstrip(b"\0")
+def show(raw, binary=False):
+    """Bytes as a string literal, with a run of NULs at the end counted rather than written: unless
+    they are binary, such as a base-256 number, where a NUL at the end is a byte of the number."""
+    stripped = raw if binary else raw.rstrip(b"\0")
     nuls = len(raw) - len(stripped)
     text = ""
     for b in stripped:
@@ -80,6 +81,11 @@ def show(raw):
         parts.append(f"{nuls} NUL" if nuls > 1 or not stripped else "NUL")
     return " + ".join(parts) if parts else '""'
 
+
+
+def show_field(field, raw):
+    """A field of a header as show() writes it, a base-256 number as binary."""
+    return show(raw, binary=field in NUMBERS and raw[:1] in (b"\x80", b"\xff"))
 
 
 def clip(line, n):
@@ -140,6 +146,10 @@ class Archive:
             if isinstance(value, int):
                 encoded = octal(value, width)
                 meaning = f"{value:o} (octal)" if field == "mode" else str(value)
+            elif field in NUMBERS and value[:1] == b"\x80":
+                encoded, meaning = value, f"{int.from_bytes(value[1:], 'big')}: base-256"
+            elif field in NUMBERS and value[:1] == b"\xff":
+                encoded, meaning = value, f"{int.from_bytes(value, 'big', signed=True)}: base-256"
             else:
                 encoded, meaning = value, ""
             assert len(encoded) <= width, (field, encoded)
@@ -179,7 +189,8 @@ class Archive:
         if not content:
             return self
         padded = content + bytes(-len(content) % BLOCK)
-        lines = [f"{len(content)} bytes, then {len(padded) - len(content)} NUL to the end of the block"]
+        lines = [f"{len(content)} bytes" + (f", then {len(padded) - len(content)} NUL to the end of the block"
+                                            if len(padded) > len(content) else "")]
         if content:
             lines.append(show(content) if len(content) <= 400 else show(content[:400]) + " ...")
         self._add(padded, "data" + (f": {note}" if note else ""), lines)
@@ -218,7 +229,8 @@ class Archive:
     def raw(self, data, title):
         """Bytes as they are, padded with NULs to a whole block."""
         padded = data + bytes(-len(data) % BLOCK)
-        self._add(padded, title, [f"{len(data)} bytes, then {len(padded) - len(data)} NUL", show(data)])
+        pad = len(padded) - len(data)
+        self._add(padded, title, [f"{len(data)} bytes" + (f", then {pad} NUL" if pad else ""), show(data)])
         return self
 
     def zeros(self, count=1, note=""):
@@ -242,7 +254,7 @@ class Archive:
                     out.append(f"          {d}")
                 else:
                     field, start, width, raw, meaning, _ = d
-                    line = f"          {field:<9}[{start:3},{start + width:3})  {show(raw)}"
+                    line = f"          {field:<9}[{start:3},{start + width:3})  {show_field(field, raw)}"
                     out.append(line + (f"  {meaning}" if meaning else ""))
         out.append(f"{self.size:#08x}  end of file")
         return "\n".join(out) + "\n"
@@ -325,7 +337,7 @@ def block_map(archive, title):
                 texts = []
                 for field, start, w, raw, meaning, explicit in details:
                     x = left + start * scale
-                    hover = f"{field} [{start},{start + w}): {show(raw)}" + (
+                    hover = f"{field} [{start},{start + w}): {show_field(field, raw)}" + (
                         f", {meaning}" if meaning else "")
                     out.append(f'<g><title>{esc(hover)}</title><rect class="field" x="{x:g}" '
                                f'y="{y}" width="{w * scale:g}" height="{h}"/>'
@@ -334,7 +346,7 @@ def block_map(archive, title):
                         out.append(f'<text class="small" x="{x + w * scale / 2:g}" '
                                    f'y="{y + h + 11}">{esc(field)}</text>')
                     if explicit or (field in ("name", "linkname") and raw.strip(b"\0")):
-                        texts.append((x, f"{field} {show(raw)}", "mono accent" if explicit
+                        texts.append((x, f"{field} {show_field(field, raw)}", "mono accent" if explicit
                                       else "mono"))
                 for field, start, w, raw, meaning, explicit in details:
                     if explicit:

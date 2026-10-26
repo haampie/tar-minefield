@@ -9,7 +9,8 @@ bytes, and libarchive and star write them in pax headers: libarchive as both `LI
 do not extract them can skip them without decoding them, so every implementation must extract `a`.
 
 Seen in: 31 release tarballs, such as R 4.5.2, Minion 10.31 and keepassxc 2.7.8, all in
-`SCHILY.xattr.*`. No release tarball has another pax value that is not UTF-8, apart from names.
+`SCHILY.xattr.*`. No tarball scanned for it has another pax value that is not UTF-8, apart from
+names.
 
 0x000000  header: pax extended header, for the next member, an xattr of two bytes that are not UTF-8
           name     [  0,100)  "PaxHeader" + 91 NUL

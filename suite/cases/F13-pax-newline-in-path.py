@@ -1,9 +1,10 @@
 r"""A newline in a pax `path`, which split on lines is another record.
 
 pax records are delimited by their length, so a value can contain a newline, and in POSIX the path
-is `good\n1 path=evil`. Split on lines instead, the extended header has a second record,
-`path=evil`. This case is ambiguous in practice because the path is then `good` or `evil`, or, with
-the records discarded as malformed, the header's name, `plain`.
+is `good\n1 path=evil`, as most implementations extract it. Split on lines instead, the extended
+header has a second record, `path=evil`, and the path is `good` or `evil`. This case is ambiguous in
+practice because node-tar, PharData, Rust's tar, RubyGems and Archive::Tar do not take the pax path,
+and extract the header's name, `plain`.
 
 Decision point: whether a pax record is delimited by its length or by a newline.
 Seen in: none of the scanned tarballs. Newlines in pax values are only in xattrs, such as Minion

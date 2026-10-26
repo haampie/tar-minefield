@@ -16,7 +16,7 @@ Seen in: none of the scanned tarballs.
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
           gid      [116,124)  "0000000" + NUL  0
-          size     [124,136)  "\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xfe" + NUL
+          size     [124,136)  "\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xfe\0"  -512: base-256
           mtime    [136,148)  "00000000000" + NUL  0
           chksum   [148,156)  "013702\0 "  6082: the unsigned sum of the header, this field as spaces
           typeflag [156,157)  "0"  regular file

@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has two members named <code>a</code>, with different contents. This case is ambiguous because either copy can be the file, the first or the last, and the two trees differ in the contents of <code>a</code>.</p>
+<p>The archive has two members named <code>a</code>, with different contents. This case is ambiguous because either copy can be the file, and the two trees differ in the contents of <code>a</code>: every implementation that extracts it keeps the last copy, but an extractor that does not overwrite files, such as GNU tar with <code>--keep-old-files</code>, keeps the first.</p>
 <p><strong>Decision point:</strong> which of two members of one path is the file.</p>
 <p><strong>Seen in:</strong> fish 4.7.1, where <code>Cargo.toml</code> and <code>Cargo.lock</code> are appended again without their last newline, and logstash 8.15.2, where <code>build.rb</code> is first a license header and last the build&#x27;s date and commit. Most tarballs with duplicates, mostly from <code>cabal sdist</code>, have identical copies: the default policy rejects those too, as an implementation would have to compare the copies to tell.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,7 +52,9 @@
 The same file twice, with different contents: the first copy, or the last?
 
 The archive has two members named `a`, with different contents. This case is ambiguous because
-either copy can be the file, the first or the last, and the two trees differ in the contents of `a`.
+either copy can be the file, and the two trees differ in the contents of `a`: every implementation
+that extracts it keeps the last copy, but an extractor that does not overwrite files, such as GNU
+tar with `--keep-old-files`, keeps the first.
 
 Decision point: which of two members of one path is the file.
 Seen in: fish 4.7.1, where `Cargo.toml` and `Cargo.lock` are appended again without their last

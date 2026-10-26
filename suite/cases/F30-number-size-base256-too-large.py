@@ -1,8 +1,10 @@
 """A base-256 size of 2^64 + 512 in the header, which wraps around to 512 in 64 bits.
 
-A base-256 number has 11 bytes, 88 bits, after its first byte, 0x80, but implementations keep sizes
-in 64 bits. The whole number, 2^64 + 512, runs past the end of the archive. Read leniently, this
-case is ambiguous because its low 64 bits are 512, which makes the next block the data of `a`.
+A base-256 number has 11 bytes, 88 bits, after its first byte, 0x80, but many implementations keep
+sizes in 64 bits. The whole number, 2^64 + 512, runs past the end of the archive. Read leniently,
+this case is ambiguous because its low 64 bits are 512, which makes the next block the data of `a`,
+as BusyBox, Rust's tar, astral-tokio-tar and Haskell's tar extract it; GNU tar, node-tar and
+Archive::Tar extract the next block as a file `smuggled` instead, without `a`.
 
 Decision point: what a size too large for the reader means.
 Seen in: none of the scanned tarballs.
