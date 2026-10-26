@@ -664,8 +664,12 @@ says, that can be a choice rather than a bug.</p>
             marks = "".join(mark(s) for s in matrix.ORDER if s in symbols)
             body += (f'<h2 id="{anchor}">{marks}{heading} ({len(rows)})</h2>\n'
                      + table("differences", rows) + "\n")
-    description = (f"What {name} makes of the {len(cases)} cases of the tar-minefield test suite: "
-                   f"as the draft default policy says on {agrees}, and where it does not.")
+    # a name with a comma of its own, such as "Rust tar-codec, as in uv", closes with another
+    closed = name + ("," if "," in name else "")
+    description = (f"The {len(cases) - agrees} of {len(cases)} cases of the tar-minefield test suite "
+                   f"where {closed} does not follow the draft default policy, and what it makes of them."
+                   if agrees < len(cases) else f"{name} follows the draft default policy of the "
+                   f"tar-minefield test suite in all {len(cases)} cases.")
     return page(f"{name} · {TITLE}", description, body)
 
 
