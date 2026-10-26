@@ -492,15 +492,10 @@ def data_section(ident, features, names, short, rated, union):
     policy = ("" if not k else " The default policy rejects some of them, as the last column "
               "says, and accepts the others." if mixed else " The default policy rejects all of "
               "them." if j else " The default policy accepts them.")
-    scanners = unreported_by(features)
-    old = sum(1 for r in union if r.get("scanner") in scanners) if scanners else 0
     note = (f'<p class="note">* Not measured in {u:,} tarballs, which an earlier version of '
             "<code>tarscan.py</code> scanned: it did not report this, and what it did record does "
             "not rule it out. They are counted as not having it, so the share may be higher.</p>\n"
-            if u else
-            f'<p class="note">{old:,} of these tarballs were scanned by an earlier version of '
-            "<code>tarscan.py</code>, which did not report this. What it did record rules it out "
-            "for all of them.</p>\n" if old else "")
+            if u else "")
     caveats = "".join(f'<p class="note">{CAVEATS[f]}</p>\n' for f in features if f in CAVEATS)
     return (
         f"<p>Release tarballs of {ecosystems(names)} with "
@@ -530,6 +525,8 @@ def implementations_section(case, info, results):
             what = "not installed where this case was run"
         elif r["outside"]:
             what = "writes outside: " + inline(matrix.describe(r["outside"]))
+        elif matrix.crashed(r):
+            what = html.escape(error_line(r["error"]))
         elif r["error"] == "rejected":
             what = "rejects it"
         elif r["error"]:
@@ -539,7 +536,8 @@ def implementations_section(case, info, results):
         else:
             what = "the tree of the case" if info["verdict"] != "reject" else ""
         rows.append(f"<tr><td>{html.escape(n)}</td><td>{html.escape(versions.get(n, ''))}</td>"
-                    f"<td>{symbol} {OUTCOMES[symbol]}</td><td>{what}</td></tr>")
+                    f"<td>{symbol} {'crashes' if r and matrix.crashed(r) else OUTCOMES[symbol]}</td>"
+                    f"<td>{what}</td></tr>")
     return table("implementations", rows)
 
 

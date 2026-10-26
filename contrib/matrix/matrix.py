@@ -20,8 +20,10 @@ Each implementation extracts every case, and the outcome is compared with the ca
 - ➖ rejects a tolerated case. A strict parser may do either, so neither ➕ nor ➖ is better than
   the other, and the two look alike
 - ⚠️ accepts a case to reject: the letter says which tree, so that implementations that make
-  different trees of one case have different letters
-- ❌ rejects a case to accept, or extracts another tree than the manifest
+  different trees of one case have different letters. Without a letter, it crashes on the case,
+  which is not a rejection: it is killed by a signal, or stopped by a fault in its own code, which
+  the runtime of its language raises, as CRASHES says
+- ❌ rejects a case to accept, or extracts another tree than the manifest, or crashes on it
 - ⏳ does not finish within 60 seconds, so it neither rejects nor extracts the case
 - 💥 writes outside the destination
 - ❔ not run: matrix.json has no result of the implementation for the case, which is so not verified,
@@ -33,6 +35,7 @@ import json
 import os
 import re
 import shutil
+import signal
 import stat
 import subprocess
 import sys
@@ -330,7 +333,8 @@ def extract(command, archive, root):
             os.remove(ABSOLUTE)
     error = None
     if code != 0:
-        error = (err.strip() or out.strip() or f"status {code}")
+        error = (err.strip() or out.strip()
+                 or (f"killed by {signal.Signals(-code).name}" if code < 0 else f"status {code}"))
         error = error.replace(dest, "DEST").replace(root, "ROOT")
         # Node shortens a long path in its messages to a prefix and "...", which depends on
         # where WORK is
@@ -459,12 +463,38 @@ def main():
             if code is None:
                 # a run that does not finish has not rejected the case, whatever it wrote so far
                 row[name]["timeout"] = True
+            elif code < 0:
+                # nor has a run that is killed by a signal, such as a segfault
+                row[name]["signal"] = -code
         results["cases"][case] = row
         print(case, file=sys.stderr)
     with open(os.path.join(HERE, "matrix.json"), "w") as f:
         json.dump(results, f, indent=1, sort_keys=True)
         f.write("\n")
     write_outputs(results, cases)
+
+
+# Errors that are a crash rather than a rejection: a fault in the implementation's own code, which
+# the runtime of its language raises, such as a null where a string belongs, or an index out of
+# bounds. An error that the implementation raises itself is a rejection, and so is one of the system
+# or the file API of its platform, which refuses an operation or a path (a link to nothing, a NUL in
+# a path), or of a function that parses a number, which refuses one that is not.
+CRASHES = re.compile(
+    r"TypeError \[ERR_INVALID_ARG_TYPE\]: .* Received null"  # Node, given a null for a string
+    r"|TypeError: |IndexError: |AttributeError: |RecursionError: "  # Python
+    r"|BoundsError: |MethodError: "  # Julia
+    r"|argument must be coercible to non-negative integer|the condition has length > 1"
+    r"|embedded nul in string: "  # R, on an NA, -Inf or NUL of its own making
+    r"|NoMethodError: "  # Ruby
+    r"|\S*(NullPointer|ArrayIndexOutOfBounds|StringIndexOutOfBounds)Exception"  # Java
+    r"|(NullReference|IndexOutOfRange)Exception: "  # .NET
+    r"|panic: |thread '.*' panicked at "  # Go, Rust
+    r"|Prelude\.")  # Haskell, such as Prelude.head of an empty list
+
+
+def crashed(r):
+    """Whether a run crashed: killed by a signal, or stopped by a fault in its own code."""
+    return bool(r.get("signal") or r["error"] and CRASHES.match(r["error"]))
 
 
 def outcome(case, r):
@@ -475,6 +505,10 @@ def outcome(case, r):
         return "💥", None
     if r.get("timeout"):
         return "⏳", None
+    if crashed(r):
+        # a crash, without the letter of a tree: what it wrote before it was killed is not a tree
+        # it chose
+        return ("⚠️" if case["verdict"] == "reject" else "❌"), None
     if case["verdict"] == "reject":
         return ("✅", None) if r["error"] else ("⚠️", r["tree"])
     tolerated = case["verdict"] == "tolerate"
@@ -492,8 +526,9 @@ LEGEND = [
     " parser may do either, so neither is better than the other, and the two look alike",
     "- ⚠️ accepts a case to reject. The letter is the tree it extracts: in one row, the same letter is"
     " the same tree, and different letters are trees that differ; [MATRIX.md](MATRIX.md#trees)"
-    " lists them",
-    "- ❌ rejects a case to accept, or extracts another tree than that of the case",
+    " lists them. Without a letter, it crashes on the case, killed by a signal or by a fault in its"
+    " own code: a crash is not a rejection",
+    "- ❌ rejects a case to accept, or extracts another tree than that of the case, or crashes on it",
     f"- ⏳ does not finish within {TIMEOUT} seconds, so it neither rejects nor extracts the case",
     "- 💥 writes outside the destination",
     "- ❔ not run, so not verified: the implementation was not installed where the case was run",
@@ -565,9 +600,10 @@ CLASSES = {
     "➖": ("may-reject", ("#c4ccd4", "#24292f"),
           "rejects a tolerated case, which its verdict allows too", "−"),
     "⚠️": ("warn", ("#ffe08a", "#7d4e00"),
-           "accepts a case to reject, which a strict parser rejects", "!"),
+           "accepts a case to reject, which a strict parser rejects, or crashes on it", "!"),
     "❌": ("bad", ("#ffc1ba", "#a40e26"),
-           "rejects a case to accept, or extracts another tree than that of the case", "✗"),
+           "rejects a case to accept, or extracts another tree than that of the case, or crashes on it",
+           "✗"),
     "⏳": ("slow", ("#b6e3ff", "#0550ae"),
            f"does not finish within {TIMEOUT} seconds, so it neither rejects nor extracts the case",
            "…"),
