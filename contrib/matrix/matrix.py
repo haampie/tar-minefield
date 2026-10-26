@@ -32,6 +32,7 @@ import hashlib
 import io
 import json
 import os
+import re
 import shutil
 import stat
 import subprocess
@@ -149,13 +150,19 @@ def implementations(work, only=None):
                           lambda a, d, b=binary: [b, "--file", a]))
             found.append(("live-bootstrap untar, --non-strict", version, "extract",
                           lambda a, d, b=binary: [b, "--non-strict", "--file", a]))
-    if shutil.which("busybox"):
-        found.append(("BusyBox tar", first_line(["busybox"]).split(" multi-call")[0], "extract",
-                      lambda a, d: ["busybox", "tar", "-xf", a, "-C", d]))
-    if shutil.which("7z"):
-        code, out, _ = run(["7z"])
+    busybox = tool("busybox")
+    if busybox:
+        # without the time of the build, which a build from source has in its banner
+        version = re.sub(r" \(\d{4}-\d\d-\d\d [^)]*\)", "",
+                         first_line([busybox]).split(" multi-call")[0])
+        found.append(("BusyBox tar", version, "extract",
+                      lambda a, d: [busybox, "tar", "-xf", a, "-C", d]))
+    sevenzip = tool("7z")
+    if sevenzip:
+        code, out, _ = run([sevenzip])
         version = next((l for l in out.splitlines() if l.startswith("7-Zip")), "7-Zip").split(" :")[0]
-        found.append(("7-Zip", version, "extract", lambda a, d: ["7z", "x", "-y", "-bd", f"-o{d}", a]))
+        found.append(("7-Zip", version, "extract",
+                      lambda a, d: [sevenzip, "x", "-y", "-bd", f"-o{d}", a]))
     python = sys.executable
     pyversion = f"CPython {sys.version.split()[0]}"
     # pip's untar_file is the data filter, after it strips a leading directory that all members share
