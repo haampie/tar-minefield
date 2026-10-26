@@ -946,10 +946,9 @@ def index_page(cases, results, data):
     body = DRAFT + f"""<h1>{TITLE}</h1>
 {readme_intro()}
 <h2>Comparison of different tar implementations</h2>
-<p>A row per case, grouped by verdict: to accept, tolerated, and to reject by category. A column
-per implementation, at its latest release. ✓ is as the verdict says; ! accepts a case to reject,
-which is lenient rather than a bug; ✗ rejects a case to accept, or extracts another tree; ↑ writes
-outside the destination. The legend below the matrix has the rest. Click a case for its page.</p>
+<p>This table shows how different tar implementations behave on each test case. A green ✅ is the
+strict behavior that the <a href="#policy">default policy</a> asks for; click a row for details
+about the case.</p>
 <div class="wide">{matrix.svg(results, cases, lambda case: cases[case]["id"] + ".html")}</div>
 <p>Each case has a permanent identifier, such as F15, whose letter is its category:</p>
 <ul>
