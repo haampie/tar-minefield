@@ -288,6 +288,15 @@ def readme_intro():
                      for p in text.strip().split("\n\n") if not p.startswith("[!["))
 
 
+def readme_first_sentence():
+    """The first sentence of the README, as plain text: the description of the index, which
+    the page opens with."""
+    text = readme().split("\n## ", 1)[0].split("\n", 1)[1]
+    first = next(p for p in text.strip().split("\n\n") if not p.startswith("[!["))
+    first = re.sub(r"\[(.+?)\]\(.+?\)", r"\1", " ".join(first.split()))
+    return re.sub(r"[*`]", "", first).split(". ", 1)[0].rstrip(".") + "."
+
+
 def readme_examples():
     """The table of the README's motivating examples, as HTML."""
     section = readme().split("\n## Motivating examples\n", 1)[1].split("\n## ", 1)[0]
@@ -948,7 +957,7 @@ def seen_page(cases, data):
         examples.append(f'<h3 id="{ident}"><a href="{ident}.html"><code>{ident}</code></a> '
                         f"{html.escape(name)}: {len(picks)} of {len(has):,}</h3>\n" + table("seen", rows))
     body = f"""<h1>Seen in release tarballs</h1>
-<p>Unlike the test archives, which are crafted, these are real release tarballs: of the
+<p>Unlike the test archives, which are crafted, these are release tarballs as published: of the
 {len(union):,} distinct ones of {ecosystems(names)}, those that cases are seen
 in. Each links to its upstream URL, with the sha256 that its package pins, which is that of the
 file scanned: for some, a copy from the ecosystem's mirror. For RubyGems, it is the sha256 of the
@@ -965,12 +974,11 @@ tarballs that it accepts, of how many have the case, listed by name. The sample 
 as random, and the same on every run.</p>
 {chr(10).join(examples)}
 """
-    return page(f"Seen in release tarballs · {TITLE}", seen_description(len(rejected)), body)
+    return page(f"Seen in release tarballs · {TITLE}", SEEN_DESCRIPTION, body)
 
 
-def seen_description(rejected):
-    return (f"The {rejected} release tarballs that the default policy rejects, and examples of "
-            "those that cases are seen in.")
+SEEN_DESCRIPTION = ("Usage data for the test suite: how often each case occurs in release "
+                    "tarballs, and in which.")
 
 
 # The pictures that a link to a page shows where it is shared, such as in chats: PNGs that
@@ -1103,7 +1111,7 @@ tarballs of {ecosystems(names)}.</p>
 <p>The <em>prevalence</em> column is the share of these tarballs that have a case: a first-order
 approximation of how common it is in general.</p>
 <p class="note" id="stricter"><sup>1</sup> A policy can be stricter and also reject the tolerated
-cases, at the cost of rejecting more real tarballs: some tolerated cases are common, such as
+cases, at the cost of rejecting more published tarballs: some tolerated cases are common, such as
 numbers padded with spaces (F01), and others rare. That suits special-purpose tools,
 such as an extractor for a single ecosystem, where it can be checked against every tarball ever
 published there.</p>
@@ -1115,13 +1123,7 @@ published there.</p>
 <h2 id="contributing">Contributing</h2>
 {readme_section("Contributing")}
 """
-    rejected = sum(not strict.passes_default(r) for r in union)
-    description = (f"A test suite of {len(cases)} tar archives, what "
-                   f"{matrix.count_implementations(matrix.columns(results))} implementations make of "
-                   "each, and a draft policy that rejects most of the ambiguous ones "
-                   f"and accepts {strict.percent(len(union) - rejected, len(union))} of "
-                   f"{len(union):,} real tarballs.")
-    return page(f"{TITLE} · tar-minefield", description, body)
+    return page(f"{TITLE} · tar-minefield", readme_first_sentence(), body)
 
 
 def main():
@@ -1150,7 +1152,7 @@ def main():
     files = {".nojekyll": "", "style.css": STYLE, "index.html": index_page(cases, results, data),
              "seen-in.html": seen_page(cases, data),
              "rejected.html": page(f"Seen in release tarballs · {TITLE}",
-                                   seen_description(sum(not strict.passes_default(r) for r in union)),
+                                   SEEN_DESCRIPTION,
                                    '<p>Now <a href="seen-in.html#rejected">seen-in.html</a>.</p>',
                                    '<meta http-equiv="refresh" content="0; url=seen-in.html#rejected">\n')}
     for case, info in cases.items():
