@@ -19,10 +19,10 @@ cases are produced so that anyone can audit them. It is a working draft.
 | **policy** | The criteria a strict parser rejects: either *every criterion*, or the [default policy](#the-default-policy). |
 | **test suite** | The archives of [suite/](suite), each a case, for implementations to run against. |
 | **identifier** | The permanent name of a case: the letter of its category and a number, such as `F15`. |
-| **case** | An archive of the test suite, named by its identifier (its category and a number) and a few words, such as `F15-pax-size-on-dir`, with a verdict, and a manifest unless it is to reject. |
+| **case** | An archive of the test suite, named by its identifier (its category and a number) and a few words, such as `F15-pax-size-on-dir`, with a verdict, and an expected tree unless it is to reject. |
 | **verdict** | What a case requires: **reject**, a strict parser must reject it; **accept**, every implementation must accept it; **tolerate**, a strict parser may reject it, and the default policy accepts it. See [Verdicts](#verdicts). |
-| **manifest** | The tree an implementation must extract from a case to accept or a tolerated case, if it accepts it. |
-| **outcome** | What an implementation makes of a case: ✅ as its verdict says, ⚠️ accepts a case to reject or crashes on it, ❌ rejects a case to accept, extracts another tree than the manifest or crashes on it, 💥 writes outside its destination; and of a tolerated case, which a strict parser may accept or reject, ➕ accepts it and ➖ rejects it, alike as neither is better. |
+| **expected tree** | The tree an implementation must extract from a case to accept or a tolerated case, if it accepts it. |
+| **outcome** | What an implementation makes of a case: ✅ follows the default policy, ⚠️ accepts a case to reject or crashes on it, ❌ rejects a case to accept, extracts another tree than the expected one or crashes on it, 💥 writes outside its destination; and of a tolerated case, ➕ accepts it and ➖ rejects it, alike as neither is better. |
 | **crash** | An outcome that is not a rejection, although the implementation does not extract the case: it is killed by a signal, or stopped by a fault in its own code that the runtime of its language raises, such as a null where a string belongs or an index out of bounds. An error that the implementation raises itself is a rejection, and so is one of the system or the file API of its platform, which refuses an operation or a path, such as a link to nothing or a NUL in a path. `CRASHES` in [matrix.py](contrib/matrix/matrix.py) lists them. |
 | **tarball** | An archive released by a project and pinned by a package manager, as opposed to a case. |
 
@@ -154,11 +154,11 @@ Every case has one of three verdicts, which are the `n_`, `y_` and `i_` of Nicol
 JSONTestSuite:
 
 - **reject**: a strict parser must reject it.
-- **accept**: every implementation must accept it, and extract the tree in its manifest.
+- **accept**: every implementation must accept it, and extract its expected tree.
 - **tolerate**: ambiguous in principle, but common enough in real archives that rejecting it has
   a real cost, or with one reading that implementations share or POSIX requires, so that
-  accepting it is safe. A strict parser may reject it; if it accepts it, it must extract the tree in its
-  manifest.
+  accepting it is safe. A strict parser may reject it; if it accepts it, it must extract its expected
+  tree.
 
 The cases to accept are as important as the cases to reject: without them, an implementation
 that rejects everything passes. They cover what real archives contain and what a careless strict
@@ -191,7 +191,7 @@ which may change.
 ### The default policy
 
 [The scans](contrib/data) decided it: the default policy rejects every case to reject, and accepts
-the tolerated cases, which extract the tree in their manifest. Its table is `DEFAULT` in
+the tolerated cases, which extract their expected tree. Its table is `DEFAULT` in
 `contrib/scanner/strict.py`, and [contrib/data/STRICT.md](contrib/data/STRICT.md) gives what it
 costs. The tolerated cases are:
 
@@ -334,7 +334,7 @@ People should be able to trust the test suite without trusting its binary files.
   every byte can be traced to a script that a reviewer can read.
 - Next to each archive is a generated, annotated dump: every header block with its offset, its
   fields, their raw bytes and their meaning. A change to a case is then a readable diff.
-- Expected trees are plain manifests (path, kind, sha256 of the contents, link target,
+- Expected trees are plain lists (path, kind, sha256 of the contents, link target,
   executable), rather than a single hash.
 - The interpretation of every case by every implementation we track (GNU tar, bsdtar, BusyBox,
   Python's `tarfile`, containerd, Rust's `tar`, node-tar, 7-Zip, Apache Commons Compress, .NET's
@@ -374,8 +374,8 @@ it a single implementation that has to be taken on trust.
   cannot. It also suits the implementations we hope will run the test suite, many of which are in
   Go and Rust.
 - **The test suite tests the scanner.** Every case to reject and every tolerated case must make the
-  scanner report its feature, and every case to accept must make it report exactly the members in
-  its manifest. That is
+  scanner report its feature, and every case to accept must make it report exactly the members of
+  its expected tree. That is
   not circular, because the cases are defined by reviewed bytes, not by the scanner's output.
   Differential fuzzing covers the rest: archives from a writer must be reported with exactly the
   members that were written.

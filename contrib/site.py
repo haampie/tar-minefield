@@ -40,10 +40,10 @@ with open(os.path.join(os.path.dirname(HERE), "CITATION.cff")) as f:
 CASES = os.path.join(matrix.ROOT, "suite", "cases")
 # The verdict at the top of a case's page: its badge, and what it requires
 VERDICTS = {
-    "accept": ("Accept", "Every implementation must accept this archive, and extract the tree "
-               "below."),
+    "accept": ("Accept", "Every implementation must accept this archive, and extract the "
+               "expected tree below."),
     "tolerate": ("Tolerate", "A strict parser may reject this archive. If it accepts it, it must "
-                 "extract the tree below."),
+                 "extract the expected tree below."),
     "reject": ("Reject", "A strict parser must reject this archive."),
 }
 # That the default policy is a draft, at the top of the pages that have its verdicts
@@ -60,7 +60,7 @@ OUTCOMES = {
     "❌": "another tree, or rejects",
     "⏳": "does not finish",
     "💥": "writes outside the destination",
-    "❔": "not run, so not verified",
+    "❔": "not run",
 }
 # Tables of one kind have the same columns, in the same widths
 COLUMNS = {
@@ -560,7 +560,7 @@ def page_of(name):
 
 def what_it_makes(info, r, tree=None):
     """What one run makes of a case, as HTML, with tree the HTML of the tree it extracts where that
-    is not the tree of the case."""
+    is not the expected tree."""
     if r is None:
         return "not installed where this case was run"
     if r["outside"]:
@@ -573,7 +573,7 @@ def what_it_makes(info, r, tree=None):
         return "error: " + html.escape(error_line(r["error"]))
     if tree:
         return tree
-    return "the tree of the case" if info["verdict"] != "reject" else ""
+    return "the expected tree" if info["verdict"] != "reject" else ""
 
 
 def implementations_section(case, info, results):
@@ -650,8 +650,8 @@ def implementation_summary(name, results, cases):
     sentence = (f'<p>This implementation follows the <a href="index.html#policy">default policy</a> '
                 f"in {agrees} of {len(cases)} cases:</p>\n<ul>\n"
                 f"<li>it rejects {counted(k('reject', '✅'), n('reject'), 'cases to reject')}</li>\n"
-                f"<li>it extracts the tree of {counted(k('accept', '✅'), n('accept'), 'cases to accept')}</li>\n"
-                f"<li>it {either} tolerated cases, which a strict parser may accept or reject</li>\n"
+                f"<li>it extracts the expected tree in {counted(k('accept', '✅'), n('accept'), 'cases to accept')}</li>\n"
+                f"<li>it {either} tolerated cases</li>\n"
                 "</ul>")
     return agrees, sentence, differences, trees
 
@@ -729,7 +729,7 @@ def with_tree(explanation, info):
             contents = f"→ <code>{html.escape(matrix.text(e['target']))}</code>"
         rows.append(f"<tr><td><code>{html.escape(path)}</code></td><td>{kind}</td>"
                     f"<td>{contents}</td></tr>")
-    tree = "<p>The tree to extract:</p>\n" + table("tree", rows) + "\n"
+    tree = "<p>The expected tree:</p>\n" + table("tree", rows) + "\n"
     at = re.search(r"^<p><strong>(Decision point|Seen in):", explanation, re.M)
     i = at.start() if at else len(explanation) + 1
     return explanation[:i] + tree + explanation[i:]

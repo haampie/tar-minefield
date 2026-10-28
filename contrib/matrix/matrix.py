@@ -15,19 +15,19 @@ nothing is run.
 
 Each implementation extracts every case, and the outcome is compared with the case's verdict:
 
-- ✅ as the verdict says: rejects a case to reject; extracts the manifest of a case to accept
-- ➕ accepts a tolerated case, and extracts its manifest
-- ➖ rejects a tolerated case. A strict parser may do either, so neither ➕ nor ➖ is better than
-  the other, and the two look alike
+- ✅ follows the default policy: rejects a case to reject; extracts the expected tree of a case
+  to accept
+- ➕ accepts a tolerated case, and extracts its expected tree
+- ➖ rejects a tolerated case
 - ⚠️ accepts a case to reject: the letter says which tree, so that implementations that make
   different trees of one case have different letters. Without a letter, it crashes on the case,
   which is not a rejection: it is killed by a signal, or stopped by a fault in its own code, which
   the runtime of its language raises, as CRASHES says
-- ❌ rejects a case to accept, or extracts another tree than the manifest, or crashes on it
-- ⏳ does not finish within 60 seconds, so it neither rejects nor extracts the case
+- ❌ rejects a case to accept, or extracts another tree than the expected one, or crashes on it
+- ⏳ does not finish within 60 seconds
 - 💥 writes outside the destination
-- ❔ not run: matrix.json has no result of the implementation for the case, which is so not verified,
-  as when it was not installed where the case was first run
+- ❔ not run: matrix.json has no result of the implementation for the case, as when it was not
+  installed where the case was first run
 """
 
 import hashlib
@@ -283,7 +283,7 @@ def implementations(work, only=None):
 
 
 def entry(path, dest=None):
-    """The entry of one path, as in the manifests of the cases. Link targets in dest start with
+    """The entry of one path, as in the expected trees of the cases. Link targets in dest start with
     `DEST` instead, so that the results do not depend on where they were made."""
     st = os.lstat(path)
     if stat.S_ISLNK(st.st_mode):
@@ -352,11 +352,11 @@ def expected_tree(case):
     return {e["path"]: {k: v for k, v in e.items() if k != "path"} for e in case["tree"]}
 
 
-def same(tree, manifest):
-    """Whether a tree is the manifest's, comparing what the manifest says of each entry."""
-    if set(tree) != set(manifest):
+def same(tree, expected):
+    """Whether a tree is the expected one, comparing what that says of each entry."""
+    if set(tree) != set(expected):
         return False
-    for path, e in manifest.items():
+    for path, e in expected.items():
         got = tree[path]
         if any(got.get(k) != v for k, v in e.items()):
             return False
@@ -521,17 +521,16 @@ def outcome(case, r):
 
 ORDER = ["✅", "➕", "➖", "⚠️", "❌", "⏳", "💥", "❔"]
 LEGEND = [
-    "- ✅ as the verdict says: rejects a case to reject; extracts the manifest of a case to accept",
-    "- ➕ accepts a tolerated case, and extracts its manifest; ➖ rejects a tolerated case. A strict"
-    " parser may do either, so neither is better than the other, and the two look alike",
+    "- ✅ follows the default policy: rejects a case to reject; extracts the expected tree of a"
+    " case to accept",
+    "- ➕ accepts a tolerated case, and extracts its expected tree; ➖ rejects a tolerated case",
     "- ⚠️ accepts a case to reject. The letter is the tree it extracts: in one row, the same letter is"
     " the same tree, and different letters are trees that differ; [MATRIX.md](MATRIX.md#trees)"
-    " lists them. Without a letter, it crashes on the case, killed by a signal or by a fault in its"
-    " own code: a crash is not a rejection",
-    "- ❌ rejects a case to accept, or extracts another tree than that of the case, or crashes on it",
-    f"- ⏳ does not finish within {TIMEOUT} seconds, so it neither rejects nor extracts the case",
+    " lists them. Without a letter, it crashes on the case, which is not a rejection",
+    "- ❌ rejects a case to accept, or extracts another tree than the expected one, or crashes on it",
+    f"- ⏳ does not finish within {TIMEOUT} seconds",
     "- 💥 writes outside the destination",
-    "- ❔ not run, so not verified: the implementation was not installed where the case was run",
+    "- ❔ not run: the implementation was not installed where the case was run",
 ]
 # The order of the columns, roughly by how widely used an implementation is: command-line tools,
 # then libraries by the popularity of their language, and niche tools last. Others go at the end.
@@ -622,23 +621,23 @@ def totals(results, cases, names):
 # accepting is the paler, as most implementations do, so that the few that reject stand out.
 CLASSES = {
     "✅": ("ok", ("#b4f1c3", "#116329"),
-          "as the verdict says: rejects a case to reject, extracts the tree of a case to accept", "✓"),
+          "follows the default policy: rejects a case to reject, extracts the expected tree of a "
+          "case to accept", "✓"),
     "➕": ("may-accept", ("#e6eaef", "#424a53"),
-          "accepts a tolerated case and extracts its tree, which its verdict allows", "+"),
+          "accepts a tolerated case and extracts its expected tree", "+"),
     "➖": ("may-reject", ("#c4ccd4", "#24292f"),
-          "rejects a tolerated case, which its verdict allows too", "−"),
+          "rejects a tolerated case", "−"),
     "⚠️": ("warn", ("#ffe08a", "#7d4e00"),
-           "accepts a case to reject, which a strict parser rejects, or crashes on it", "!"),
+           "accepts a case to reject, or crashes on it", "!"),
     "❌": ("bad", ("#ffc1ba", "#a40e26"),
-           "rejects a case to accept, or extracts another tree than that of the case, or crashes on it",
+           "rejects a case to accept, or extracts another tree than the expected one, or crashes on it",
            "✗"),
     "⏳": ("slow", ("#b6e3ff", "#0550ae"),
-           f"does not finish within {TIMEOUT} seconds, so it neither rejects nor extracts the case",
-           "…"),
+           f"does not finish within {TIMEOUT} seconds", "…"),
     "💥": ("boom", ("#dcc8ff", "#6639ba"),
            "writes outside the destination", "↑"),
     "❔": ("none", ("#ffffff", "#59636e"),
-          "not run, so not verified: the implementation was not installed where the case was run", "?"),
+          "not run: the implementation was not installed where the case was run", "?"),
 }
 FONT = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
 
@@ -839,7 +838,7 @@ def table(results, cases):
     total = totals(results, cases, names)
     lines.append("| **total** | " + " | ".join(total[n] for n in names) + " |")
     lines += ["", "## Trees", "", "What the implementations that accept a case extract, where it is"
-              " not its manifest: files by their size and the start of their sha256.", ""]
+              " not the expected tree: files by their size and the start of their sha256.", ""]
     lines += notes
     return "\n".join(lines) + "\n"
 

@@ -11,8 +11,8 @@ throwaway directory.
 
 ## Using it
 
-Every case is an uncompressed archive, `archives/<case>.tar`, with its manifest
-`archives/<case>.json` next to it:
+Every case is an uncompressed archive, `archives/<case>.tar`, with its expected result,
+`archives/<case>.json`, next to it:
 
 ```json
 {
@@ -30,18 +30,18 @@ Every case is an uncompressed archive, `archives/<case>.tar`, with its manifest
 - `tree`: every path the archive extracts to, directories included, each with its `kind`
   (`file`, `directory` or `symlink`), the `target` of a symlink, and of a file its `size`,
   `sha256` and whether it is `executable`. An extraction passes if it has exactly these paths,
-  and every entry has the values the manifest gives. It is absent from the cases to reject.
+  and every entry has the values that `tree` gives. It is absent from the cases to reject.
 - `id`: the case's identifier, such as `N07`, which stays with it. Its letter is the category: F
   framing, N names, K kinds, S order and state.
 - `features`: what [the scanner](../contrib/scanner) reports of the archive, for reference.
 
-The suite needs nothing but the archives and their manifests: copy `archives/`, or this
+The suite needs nothing but the archives and their expected results: copy `archives/`, or this
 directory, into the tests of an implementation.
 
 ## Layout
 
 - `archives/<case>.tar`: the archive, uncompressed.
-- `archives/<case>.json`: its manifest, as above.
+- `archives/<case>.json`: its expected result, as above.
 - `archives/<case>.txt`: what the case is about, and every block of the archive with its offset
   and, for headers, every field with its raw bytes.
 - `archives/<case>.svg`: a map of its blocks, every one 512 bytes to scale, with the fields of

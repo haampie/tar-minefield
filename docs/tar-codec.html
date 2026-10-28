@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="style.css?80b3069c">
 <link rel="canonical" href="https://stoppels.ch/tar/tar-codec.html">
 <meta property="og:url" content="https://stoppels.ch/tar/tar-codec.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/641ecf0c2cf7c1e2.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/3e53eb588cced954.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of every case of the test suite">
@@ -31,13 +31,13 @@
 <p>This implementation follows the <a href="index.html#policy">default policy</a> in 65 of 78 cases:</p>
 <ul>
 <li>it rejects 47 of the 60 cases to reject</li>
-<li>it extracts the tree of all 8 cases to accept</li>
-<li>it accepts 5 and rejects 5 of the 10 tolerated cases, which a strict parser may accept or reject</li>
+<li>it extracts the expected tree in all 8 cases to accept</li>
+<li>it accepts 5 and rejects 5 of the 10 tolerated cases</li>
 </ul>
 <p class="note">The default policy is a working draft. Where an implementation does not do as it
 says, that can be a choice rather than a bug.</p>
 <p>On the other 13, it does not:</p>
-<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, which a strict parser rejects, or crashes on it" role="img" aria-label="accepts a case to reject, which a strict parser rejects, or crashes on it">!</span>Accepts cases to reject (13)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
+<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (13)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
 <tr><td><a href="F07.html"><code>F07</code></a> end-archive-after</td><td>Another archive after the end-of-archive marker.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F26.html"><code>F26</code></a> pax-size-leading-zero</td><td>A pax <code>size</code> with a leading zero, <code>0777</code>: 777 in decimal, as POSIX says, or 511 in octal.</td><td>extracts <code>a</code> (777 B, b09d2516)</td></tr>
