@@ -54,6 +54,7 @@ extracted by every implementation.
 | **tolerated** | | | | | | | | | | | | | | | | | | | | | | | | |
 | [F01](https://stoppels.ch/tar/F01.html) number-leading-space | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
 | [F02](https://stoppels.ch/tar/F02.html) end-data-after | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ |
+| [F04](https://stoppels.ch/tar/F04.html) end-missing | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➕ | ➖ | ➖ |
 | [F05](https://stoppels.ch/tar/F05.html) magic-version-nuls | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ |
 | [F14](https://stoppels.ch/tar/F14.html) pax-size-disagrees | ➕ | ➕ | ❌A | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ➕ | ➕ | ➕ | ➕ | ❌A | ➕ | ❌A | ❌A | ➕ | ❌B | ❌B |
 | [F18](https://stoppels.ch/tar/F18.html) pax-global-comment-after-members | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ❌A |
@@ -64,7 +65,6 @@ extracted by every implementation.
 | [N15](https://stoppels.ch/tar/N15.html) name-control-character | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
 | **to reject: framing** | | | | | | | | | | | | | | | | | | | | | | | | |
 | [F03](https://stoppels.ch/tar/F03.html) end-lone-zero-block | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A |
-| [F04](https://stoppels.ch/tar/F04.html) end-missing | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ |
 | [F06](https://stoppels.ch/tar/F06.html) checksum-signed | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A |
 | [F07](https://stoppels.ch/tar/F07.html) end-archive-after | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A | ⚠️A |
 | [F08](https://stoppels.ch/tar/F08.html) end-truncated-in-member | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
@@ -127,7 +127,7 @@ extracted by every implementation.
 | [S11](https://stoppels.ch/tar/S11.html) tree-through-symlink | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 💥 | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 💥 | 💥 |
 | [S12](https://stoppels.ch/tar/S12.html) tree-under-file | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️A |
 | [S13](https://stoppels.ch/tar/S13.html) hardlink-empty-target | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️ | ✅ | ✅ | ⚠️ | ✅ | ⚠️B |
-| **total** | ✅29 ➕10 ⚠️42 | ✅31 ➕10 ⚠️40 | ✅18 ➕9 ⚠️53 ❌1 | ✅22 ➕9 ⚠️49 ❌1 | ✅28 ➕9 ➖1 ⚠️43 | ✅27 ➕10 ⚠️44 | ✅25 ➕10 ⚠️43 💥3 | ✅16 ➕9 ⚠️55 ❌1 | ✅27 ➕9 ➖1 ⚠️44 | ✅28 ➕8 ➖2 ⚠️43 | ✅24 ➕9 ⚠️45 ❌3 | ✅48 ➕8 ➖2 ⚠️23 | ✅19 ➕7 ➖1 ⚠️49 ❌5 | ✅29 ➕10 ⚠️42 | ✅25 ➕10 ⚠️46 | ✅34 ➕9 ➖1 ⚠️37 | ✅58 ➕5 ➖5 ⚠️13 | ✅20 ➕7 ➖2 ⚠️47 ❌5 | ✅20 ➕10 ⚠️51 | ✅19 ➕8 ➖1 ⚠️49 ❌4 | ✅32 ➕6 ➖3 ⚠️37 ❌3 | ✅41 ➕10 ⚠️30 | ✅19 ➕8 ⚠️41 ❌10 💥3 | ✅10 ➕8 ⚠️50 ❌10 💥3 |
+| **total** | ✅29 ➕11 ⚠️41 | ✅31 ➕11 ⚠️39 | ✅18 ➕10 ⚠️52 ❌1 | ✅21 ➕9 ➖1 ⚠️49 ❌1 | ✅28 ➕10 ➖1 ⚠️42 | ✅27 ➕11 ⚠️43 | ✅25 ➕11 ⚠️42 💥3 | ✅16 ➕10 ⚠️54 ❌1 | ✅27 ➕10 ➖1 ⚠️43 | ✅28 ➕9 ➖2 ⚠️42 | ✅24 ➕10 ⚠️44 ❌3 | ✅48 ➕9 ➖2 ⚠️22 | ✅19 ➕8 ➖1 ⚠️48 ❌5 | ✅29 ➕11 ⚠️41 | ✅25 ➕11 ⚠️45 | ✅34 ➕10 ➖1 ⚠️36 | ✅57 ➕5 ➖6 ⚠️13 | ✅20 ➕8 ➖2 ⚠️46 ❌5 | ✅20 ➕11 ⚠️50 | ✅19 ➕9 ➖1 ⚠️48 ❌4 | ✅31 ➕6 ➖4 ⚠️37 ❌3 | ✅41 ➕11 ⚠️29 | ✅18 ➕8 ➖1 ⚠️41 ❌10 💥3 | ✅9 ➕8 ➖1 ⚠️50 ❌10 💥3 |
 
 ## Trees
 
@@ -145,7 +145,6 @@ What the implementations that accept a case extract, where it is not the expecte
 - F18 pax-global-comment-after-members: A: `a` (2 B, 87428fc5), `b` (2 B, 02638299), `pax_global_header` (19 B, 89c2f7ac)
 - N07 symlink-absolute: A: `link` → `DEST/tar-minefield-nonexistent`; B: `link` → `tar-minefield-nonexistent`; C: `link` (0 B, e3b0c442)
 - F03 end-lone-zero-block: A: `a` (2 B, 87428fc5)
-- F04 end-missing: A: `a` (2 B, 87428fc5)
 - F06 checksum-signed: A: `a` (2 B, 87428fc5)
 - F07 end-archive-after: A: `a` (2 B, 87428fc5); B: `a` (2 B, 87428fc5), `hidden` (57 B, 150e5c88)
 - F09 end-zero-block-then-member: A: `a` (2 B, 87428fc5); B: `a` (2 B, 87428fc5), `hidden` (44 B, d688c765)

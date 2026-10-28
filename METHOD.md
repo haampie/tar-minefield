@@ -205,6 +205,9 @@ costs. The tolerated cases are:
   one name look like two.
 - data after the end-of-archive marker that is not a header, which is ignored. A header there,
   another archive or members after a zero block, is rejected: some implementations extract them.
+- no end-of-archive marker, when the archive ends after a complete member, as ruby's release
+  tarballs do: the implementations that extract it all extract the same tree, and a compressed
+  archive that is cut short is caught by its decompression.
 - a global pax header with only a `comment` after the first member.
 - the POSIX magic with NULs for its version, `ustar\0\0\0`, which some Java archivers write,
   as in the tarballs of Apache's commons-lang, Solr and Hadoop. Any other version is rejected.
@@ -218,8 +221,8 @@ costs. The tolerated cases are:
   another, but must not take the header's size.
 
 Everything else in the catalogue is rejected. [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros) requires two zero blocks at the end of an
-archive: a tar file that ends with a single zero block, or without any, is rejected, although most
-implementations extract it. Duplicate files are rejected even where their copies are identical, as
+archive: a tar file that ends with a single zero block is rejected, although most implementations
+extract it. Duplicate files are rejected even where their copies are identical, as
 they are in most tarballs that have them: in some, a file was changed and appended again, so that
 implementations that keep the first copy and those that keep the last extract different trees. In
 fish 4.7.1, `Cargo.toml` and `Cargo.lock` are appended again without their last newline; in

@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Go containerd archive.Apply · Tar file extraction test suite</title>
-<meta name="description" content="The 42 of 81 cases of the tar-minefield test suite where Go containerd archive.Apply does not follow the draft default policy, and what it makes of them.">
+<meta name="description" content="The 41 of 81 cases of the tar-minefield test suite where Go containerd archive.Apply does not follow the draft default policy, and what it makes of them.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="Go containerd archive.Apply · Tar file extraction test suite">
-<meta property="og:description" content="The 42 of 81 cases of the tar-minefield test suite where Go containerd archive.Apply does not follow the draft default policy, and what it makes of them.">
+<meta property="og:description" content="The 41 of 81 cases of the tar-minefield test suite where Go containerd archive.Apply does not follow the draft default policy, and what it makes of them.">
 <link rel="stylesheet" href="style.css?80b3069c">
 <link rel="canonical" href="https://stoppels.ch/tar/containerd.html">
 <meta property="og:url" content="https://stoppels.ch/tar/containerd.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/c0760f0d97ba4464.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/f6acdc7ccd199e35.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of every case of the test suite">
@@ -28,19 +28,18 @@
 <dt>Version</dt><dd>containerd v2.4.2, archive.Apply, of go1.27.3</dd>
 
 </dl>
-<p>This implementation follows the <a href="index.html#policy">default policy</a> in 39 of 81 cases:</p>
+<p>This implementation follows the <a href="index.html#policy">default policy</a> in 40 of 81 cases:</p>
 <ul>
-<li>it rejects 19 of the 61 cases to reject</li>
+<li>it rejects 19 of the 60 cases to reject</li>
 <li>it extracts the expected tree in all 10 cases to accept</li>
-<li>it accepts all 10 tolerated cases</li>
+<li>it accepts all 11 tolerated cases</li>
 </ul>
 <p class="note">The default policy is a working draft. Where an implementation does not do as it
 says, that can be a choice rather than a bug.</p>
-<p>On the other 42, it does not:</p>
-<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (42)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
+<p>On the other 41, it does not:</p>
+<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (41)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
 <tr><td><a href="F03.html"><code>F03</code></a> end-lone-zero-block</td><td>An end-of-archive marker of one zero block, not two.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="F04.html"><code>F04</code></a> end-missing</td><td>No end-of-archive marker: the archive ends after a complete member.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F06.html"><code>F06</code></a> checksum-signed</td><td>A checksum that only matches as the signed sum of the header.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F07.html"><code>F07</code></a> end-archive-after</td><td>Another archive after the end-of-archive marker.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F10.html"><code>F10</code></a> extended-pax-size-before-gnu-long</td><td>A pax <code>size</code> followed by a GNU long name: which of them does the size apply to?</td><td>extracts <code>long-name</code> (512 B, 917dba8e)</td></tr>
