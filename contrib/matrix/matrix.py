@@ -1,6 +1,6 @@
 """Run every case of the test suite with every implementation, and tabulate what they make of it.
 
-    python -I contrib/matrix/matrix.py WORK [--only NAME...]
+    python -I contrib/matrix/matrix.py WORK [--only NAME...] [--cases ID...]
     python -I contrib/matrix/matrix.py --readme README.md
 
 Programs are found on PATH, or in an environment variable of their name in capitals, such as
@@ -9,7 +9,8 @@ extracted there in a directory of its own, two levels below a directory that cat
 written outside it, and N12, whose absolute name is in /tmp, is caught there. Some cases do write
 outside the destination in lenient extractors, so WORK should be a throwaway directory. Writes matrix.json, the results, and MATRIX.md, the table made
 from them, next to this script. With --only, only the implementations of those names are run, and
-their results replace or join those in matrix.json, whose other columns are kept. With --readme, the summary between `<!-- begin matrix.py -->` and
+their results replace or join those in matrix.json, whose other columns are kept. With --cases,
+only the cases of those identifiers, such as F37, are run, and the other rows are kept. With --readme, the summary between `<!-- begin matrix.py -->` and
 `<!-- end matrix.py -->` in that file, and MATRIX.md, are generated again from matrix.json, and
 nothing is run.
 
@@ -436,17 +437,28 @@ def main():
         write_outputs(results, cases)
         return
     work = os.path.abspath(sys.argv[1])
-    only = set(sys.argv[3:]) if sys.argv[2:3] == ["--only"] else None
+    options, names = {}, None
+    for arg in sys.argv[2:]:
+        if arg in ("--only", "--cases"):
+            names = options.setdefault(arg, set())
+        elif names is None:
+            sys.exit(f"{arg}: expected --only or --cases")
+        else:
+            names.add(arg)
+    only, ids = options.get("--only"), options.get("--cases")
     if os.path.lexists(ABSOLUTE):
         sys.exit(f"{ABSOLUTE} exists, and would count as written by the first extractor: "
                  "remove it first")
     cases = load_cases()
+    unknown = (ids or set()) - {info["id"] for info in cases.values()}
+    if unknown:
+        sys.exit(f"no such cases: {' '.join(sorted(unknown))}")
     impls = implementations(work, only)
     results = {"implementations": [{"name": n, "version": v} for n, v, _ in impls],
                "cases": {}}
-    if only:
+    if only or ids:
         # the other columns, and those of names in only that were not found, are kept as they are
-        # in matrix.json
+        # in matrix.json, and so are the other rows
         with open(os.path.join(HERE, "matrix.json")) as f:
             previous = json.load(f)
         ran = {name for name, _, _ in impls}
@@ -455,6 +467,9 @@ def main():
     runs = os.path.join(work, "runs")
     shutil.rmtree(runs, ignore_errors=True)
     for case, info in cases.items():
+        if ids and info["id"] not in ids:
+            results["cases"][case] = previous["cases"][case]
+            continue
         archive = os.path.join(ARCHIVES, case + ".tar")
         row = dict(previous["cases"].get(case, {})) if only else {}
         for i, (name, version, command) in enumerate(impls):
