@@ -596,8 +596,8 @@ def implementations_section(case, info, results):
         rows.append(f'<tr><td><a href="{page_of(n)}">{html.escape(n)}</a></td>'
                     f"<td>{html.escape(versions.get(n, ''))}</td>"
                     f"<td>{symbol} {outcome}</td><td>{what}</td></tr>")
-    return ("<p>✅ follows the default policy.</p>\n"
-            + table("implementations", rows))
+    return ("<p>In the outcome column, ✅ means that the implementation follows the default "
+            "policy.</p>\n" + table("implementations", rows))
 
 
 # The outcomes that are as the default policy says: those of a tolerated case are both
