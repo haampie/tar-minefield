@@ -6,7 +6,15 @@
 For each case `<case>.py`, named by its identifier, such as `F15-pax-size-on-dir.py`, archives/ has
 `<case>.tar`, the dump of its blocks `<case>.txt`, a map of them `<case>.svg`, and `<case>.json`:
 its identifier, its verdict, the features of tarscan.py that it is about, and for the cases to accept
-and the tolerated ones the tree an implementation must extract.
+and the tolerated ones the tree an implementation must extract. Generation is deterministic.
+
+A case is a script in cases/, named by its identifier, the next free number of its letter, and a
+few words. It defines `ID`; `VERDICT`, one of "reject", "accept" and "tolerate"; `FEATURES`;
+`TREE`, unless it is to reject; `POSIX`, the key in contrib/citations.py of the sentence its
+explanation relies on, if any, or a dict from words of the explanation to keys, where it relies on
+several; and `build(archive)`, which writes the archive with blocks.py. Its docstring explains the
+case: the decision point where implementations differ, where the scans saw it, and what
+implementations do with it.
 
 It needs nothing outside suite/ but the Python standard library.
 """
