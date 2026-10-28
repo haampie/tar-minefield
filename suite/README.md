@@ -3,7 +3,7 @@
 Each case is a tar archive with a verdict: to reject, to accept, or tolerated. Unless the verdict
 is to reject, the case also gives the tree that an implementation must extract from the archive.
 [METHOD.md](../METHOD.md#verdicts) explains the verdicts, and [the site](https://stoppels.ch/tar/)
-has a page per case, with its blocks and what implementations make of it.
+explains each case in detail.
 
 **Some archives escape the directory they are extracted to in lenient implementations.** Their
 files are harmless, and say in their names and contents what happened, but extract them in a
@@ -19,6 +19,9 @@ $ python -I suite/check.py -- tar -xf '{archive}' -C '{dest}'
 
 It extracts every case in a temporary directory of its own, and says which cases fail, and what
 the extractor wrote outside the directory.
+
+If your project does not expose a command line utility, it is best to write your own tests. It is
+allowed to copy the test cases over.
 
 Every case is an archive, `archives/<case>.tar`, such as `archives/N07-symlink-absolute.tar`, with
 its expected result in `archives/<case>.json`:
@@ -43,6 +46,3 @@ its expected result in `archives/<case>.json`:
 - `id`: the identifier, which stays with the case. Its letter is the category: F framing, N
   names, K kinds, S order and state.
 - `features`: labels of what the case is about, such as `symlink.absolute`, for reference.
-
-To use the suite in the tests of an implementation, copy `archives/`, or this directory, which has
-`check.py` too.
