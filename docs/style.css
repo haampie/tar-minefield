@@ -27,16 +27,24 @@ dt { font-weight: 600; }
    margins of a list in the text */
 dd ul { margin: 0; padding-left: 1.25rem; }
 .note { color: #59636e; font-size: 0.875em; }
-/* The footer, muted, of three items with a dot between them */
+/* The footer, muted: when the page last changed, and the badges of the repository and the DOI */
 footer { color: #59636e; font-size: 0.875em; }
 footer a { color: inherit; }
 footer .sep { margin: 0 0.5rem; }
 /* The DOI, as a badge like Zenodo's, of text rather than an image of another site: inline, so
    that its text is on the line of the text around it */
-a.doi { font-size: 0.75em; text-decoration: none; white-space: nowrap; }
-a.doi span { padding: 0.125em 0.375rem; color: #ffffff; }
-a.doi span:first-child { background: #555555; border-radius: 3px 0 0 3px; }
-a.doi span + span { background: #0969da; border-radius: 0 3px 3px 0; }
+a.doi, a.repo { font-size: 0.75em; text-decoration: none; white-space: nowrap; }
+a.doi span, a.repo span { padding: 0.125em 0.375rem; color: #ffffff; }
+a.doi span:first-child, a.repo span:first-child { background: #555555; border-radius: 3px 0 0 3px; }
+a.doi span + span, a.repo span + span { background: #0969da; border-radius: 0 3px 3px 0; }
+/* The badges of the repository and the DOI, under the title of the index */
+p.badges { margin-top: -0.5rem; }
+/* A link to GitHub, with GitHub's mark after it, in the colour of the link; and before the name in
+   the badge of the repository */
+a.gh::after, a.repo span:first-child::before {
+  content: ""; display: inline-block; width: 0.875em; height: 0.875em; margin-left: 0.25em;
+  vertical-align: -0.0625em; background: currentColor; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.73.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z'/%3E%3C/svg%3E") center / contain no-repeat; }
+a.repo span:first-child::before { margin: 0 0.25em 0 0; }
 /* Previous, the index and next in columns that do not move: names that do not fit end in ….
    Muted, above a rule, as the footer is below one, so that they read as the frame of the page */
 nav { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 1rem;

@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="Tar file extraction test suite · tar-minefield">
 <meta property="og:description" content="This project provides an extensive test suite and documentation for tar file extraction, with the goal of ensuring that implementations extract tar archives the same way.">
-<link rel="stylesheet" href="style.css?5715e010">
+<link rel="stylesheet" href="style.css?80b3069c">
 <link rel="canonical" href="https://stoppels.ch/tar/">
 <meta property="og:url" content="https://stoppels.ch/tar/">
 <meta property="og:image" content="https://stoppels.ch/tar/img/641ecf0c2cf7c1e2.png">
@@ -24,7 +24,8 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><span class="prev"></span><a href="index.html">tar-minefield</a><a class="next" href="F17.html" rel="next" title="F17 pax-global-comment">F17 pax-global-comment ›</a></nav>
 <h1>Tar file extraction test suite</h1>
-<p>This project provides an extensive <strong><a href="https://github.com/haampie/tar-minefield/blob/main/suite/">test suite</a></strong> and <strong>documentation</strong> for tar file extraction, with the goal of ensuring that implementations extract tar archives the same way.</p>
+<p class="badges"><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></p>
+<p>This project provides an extensive <strong><a href="https://github.com/haampie/tar-minefield/blob/main/suite/" class="gh">test suite</a></strong> and <strong>documentation</strong> for tar file extraction, with the goal of ensuring that implementations extract tar archives the same way.</p>
 <p>There are many implementations of tar, from command line tools to libraries for programming languages. Because the tar file format leaves room for interpretation, different implementations can extract <a href="#examples">certain crafted tar files</a> in different ways.</p>
 <p>This is a security concern for file exchange: for example, when a security scanner and the extractor use different tar implementations, the scanner could inspect other files than the ones that end up on disk.</p>
 <p>By assigning <a href="#policy">identifiers</a> to these ambiguities, and providing test cases and usage data, this project aims for tar implementations to converge on strict parsing and identical behavior.</p>
@@ -168,8 +169,8 @@ published there.</p>
 <tr><td><a href="K01.html">K01</a></td><td>a regular file named <code>a/</code></td><td>GNU tar, bsdtar, BusyBox, 7-Zip, node-tar, Java, Perl and live-bootstrap create a directory <code>a</code>; Python, Go, Rust's <code>tar</code> and astral-tokio-tar, PHP's <code>PharData</code>, RubyGems and R an empty file <code>a</code>; tar-fs, .NET, Haskell, Julia and tar-codec reject it</td></tr>
 <tr><td><a href="F12.html">F12</a></td><td>a size field of <code>000000 1000</code>, with a space</td><td>GNU tar, BusyBox, 7-Zip, node-tar, tar-fs, Perl, Haskell, Julia and live-bootstrap read 0, and find a second file <code>smuggled</code> in the data; R reads 512, and extracts it as the data of <code>a</code>; bsdtar, Python, Go, Rust, Java, .NET, PHP and RubyGems reject it</td></tr></table></div>
 <h2 id="contributing">Contributing<a class="anchor" href="#contributing" aria-label="Link to this section">¶</a></h2>
-<p>This project is looking for contributions from people who work on package managers, registries and tar implementations, in the form of discussions in <a href="https://github.com/haampie/tar-minefield/issues">issues or pull requests on GitHub</a> or by email to harmen at stoppels dot ch, so that the working draft of the default policy can become a reference.</p>
-<p>You can also contribute by testing other implementations, or by crafting a tarball that is particularly hard to parse. A case that shows a vulnerability that is not yet disclosed is reported privately first: see <a href="https://github.com/haampie/tar-minefield/blob/main/SECURITY.md">SECURITY.md</a>.</p>
+<p>This project is looking for contributions from people who work on package managers, registries and tar implementations, in the form of discussions in <a href="https://github.com/haampie/tar-minefield/issues" class="gh">issues or pull requests on GitHub</a> or by email to harmen at stoppels dot ch, so that the working draft of the default policy can become a reference.</p>
+<p>You can also contribute by testing other implementations, or by crafting a tarball that is particularly hard to parse. A case that shows a vulnerability that is not yet disclosed is reported privately first: see <a href="https://github.com/haampie/tar-minefield/blob/main/SECURITY.md" class="gh">SECURITY.md</a>.</p>
 <p>Contributors:</p>
 <ul>
 <li><a href="https://github.com/haampie">Harmen Stoppels</a></li>
@@ -177,6 +178,6 @@ published there.</p>
 </ul>
 
 <hr class="wide">
-<footer class="wide"><a href="https://github.com/haampie/tar-minefield">haampie/tar-minefield on GitHub</a><span class="sep">·</span>Last updated <time datetime="2026-10-27">2026-10-27</time><span class="sep">·</span><a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time></footer>
 </body>
 </html>
