@@ -37,12 +37,14 @@ import os
 import re
 import shutil
 import signal
-import stat
 import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
+sys.path.insert(0, os.path.join(ROOT, "suite"))
+from check import ABSOLUTE, expected_tree, same  # noqa: E402
+import check  # noqa: E402
 ARCHIVES = os.path.join(ROOT, "suite", "archives")
 RUNNERS = os.path.join(HERE, "runners")
 TIMEOUT = 60
@@ -283,55 +285,11 @@ def implementations(work, only=None):
     return [i for i in found if want(i[0])]
 
 
-def entry(path, dest=None):
-    """The entry of one path, as in the expected trees of the cases. Link targets in dest start with
-    `DEST` instead, so that the results do not depend on where they were made."""
-    st = os.lstat(path)
-    if stat.S_ISLNK(st.st_mode):
-        target = os.readlink(path)
-        if dest and (target == dest or target.startswith(dest + os.sep)):
-            target = "DEST" + target[len(dest):]
-        return {"kind": "symlink", "target": target}
-    if stat.S_ISDIR(st.st_mode):
-        return {"kind": "directory"}
-    if stat.S_ISREG(st.st_mode):
-        with open(path, "rb") as f:
-            data = f.read()
-        return {"kind": "file", "size": len(data), "sha256": hashlib.sha256(data).hexdigest(),
-                "executable": bool(st.st_mode & stat.S_IXUSR)}
-    return {"kind": "other"}
-
-
-def walk(top, dest=None):
-    """The tree under top: {path: entry}."""
-    tree = {}
-    for dirpath, dirnames, filenames in os.walk(top):
-        for name in dirnames + filenames:
-            path = os.path.join(dirpath, name)
-            tree[os.path.relpath(path, top).replace(os.sep, "/")] = entry(path, dest)
-        dirnames[:] = [d for d in dirnames if not os.path.islink(os.path.join(dirpath, d))]
-    return tree
-
-
-# The absolute name of N12: in /tmp, which an extractor that follows it can write without root
-ABSOLUTE = "/tmp/tar-minefield-absolute"
-
-
 def extract(command, archive, root):
     """Extract into root/x/y/dest; return (status, error, tree, outside), where outside is what
     was written in root but not under dest."""
     dest = os.path.join(root, "x", "y", "dest")
-    os.makedirs(dest)
-    code, out, err = run(command(archive, dest), cwd=dest)
-    tree = walk(dest, dest)
-    outside = {p: e for p, e in walk(root, dest).items()
-               if p not in ("x", "x/y", "x/y/dest") and not p.startswith("x/y/dest/")}
-    if os.path.lexists(ABSOLUTE):
-        outside[ABSOLUTE] = entry(ABSOLUTE)
-        if os.path.isdir(ABSOLUTE) and not os.path.islink(ABSOLUTE):
-            shutil.rmtree(ABSOLUTE)
-        else:
-            os.remove(ABSOLUTE)
+    code, out, err, tree, outside = check.extract(command, archive, root, TIMEOUT)
     error = None
     if code != 0:
         error = (err.strip() or out.strip()
@@ -347,21 +305,6 @@ def extract(command, archive, root):
             # the message comes first, and what follows is where it was raised
             error = error[:300].rsplit(None, 1)[0] + " …"
     return code, error, tree, outside
-
-
-def expected_tree(case):
-    return {e["path"]: {k: v for k, v in e.items() if k != "path"} for e in case["tree"]}
-
-
-def same(tree, expected):
-    """Whether a tree is the expected one, comparing what that says of each entry."""
-    if set(tree) != set(expected):
-        return False
-    for path, e in expected.items():
-        got = tree[path]
-        if any(got.get(k) != v for k, v in e.items()):
-            return False
-    return True
 
 
 def text(name):
