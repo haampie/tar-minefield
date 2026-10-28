@@ -267,31 +267,32 @@ Seen in: over a thousand tarballs.
 </pre>
 </details>
 <h2 id="what-implementations-make-of-it">What implementations make of it<a class="anchor" href="#what-implementations-make-of-it" aria-label="Link to this section">¶</a></h2>
+<p>✅ follows the default policy.</p>
 <div class="wide"><table class="implementations"><colgroup><col style="width: 21%"><col style="width: 21%"><col style="width: 18%"><col style="width: 40%"></colgroup><tr><th>implementation</th><th>version</th><th>outcome</th><th>what it makes of it</th></tr>
-<tr><td><a href="gnu-tar.html">GNU tar</a></td><td>tar (GNU tar) 1.35</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="bsdtar.html">bsdtar</a></td><td>bsdtar 3.8.10 - libarchive 3.8.10</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="busybox.html">BusyBox tar</a></td><td>BusyBox v1.38.0, defconfig</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="7zip.html">7-Zip</a></td><td>7-Zip (z) 26.05 (x64)</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="tarfile-data.html">Python tarfile, filter=data, as in pip</a></td><td>CPython 3.15.2</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="tarfile-tar.html">Python tarfile, filter=tar</a></td><td>CPython 3.15.2</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="tarfile-trusted.html">Python tarfile, filter=fully_trusted</a></td><td>CPython 3.15.2</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="node-tar.html">node-tar</a></td><td>tar 7.5.22</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="node-tar-strict.html">node-tar, strict</a></td><td>tar 7.5.22</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="tar-fs.html">tar-fs</a></td><td>tar-fs 3.1.3, on tar-stream 3.2.2</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="commons-compress.html">Java Commons Compress</a></td><td>Commons Compress 1.28.0, Expander, on Java 27.0.1.0.2</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="dotnet.html">.NET System.Formats.Tar</a></td><td>System.Formats.Tar of .NET 10.0.14, ExtractToDirectory</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="phardata.html">PHP PharData, as in Composer</a></td><td>PharData of PHP 8.5.12, as Composer&#x27;s TarDownloader calls it</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="containerd.html">Go containerd archive.Apply</a></td><td>containerd v2.4.2, archive.Apply, of go1.27.3</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="rust-tar.html">Rust tar</a></td><td>tar 0.4.46, unpack</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="astral-tokio-tar.html">Rust astral-tokio-tar</a></td><td>astral-tokio-tar 0.7.0, unpack</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="tar-codec.html">Rust tar-codec, as in uv</a></td><td>tar-codec 0.0.15, with the policies of uv 0.13</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="rubygems.html">RubyGems</a></td><td>RubyGems 4.0.20 of Ruby 4.0.9, extract_tar_gz</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="r-untar.html">R untar, internal</a></td><td>utils::untar of R 4.6.1, tar = &quot;internal&quot;</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="archive-tar.html">Perl Archive::Tar</a></td><td>Archive::Tar 3.12 of Perl v5.44.0</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="haskell-tar.html">Haskell tar</a></td><td>tar 0.7.2.0, extract, of GHC 9.14</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="julia-tar.html">Julia Tar.jl</a></td><td>Tar 1.10.0 of Julia 1.13.3</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="live-bootstrap.html">live-bootstrap untar</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr>
-<tr><td><a href="live-bootstrap-nonstrict.html">live-bootstrap untar, --non-strict</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>✅ as the verdict says</td><td>the tree of the case</td></tr></table></div>
+<tr><td><a href="gnu-tar.html">GNU tar</a></td><td>tar (GNU tar) 1.35</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="bsdtar.html">bsdtar</a></td><td>bsdtar 3.8.10 - libarchive 3.8.10</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="busybox.html">BusyBox tar</a></td><td>BusyBox v1.38.0, defconfig</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="7zip.html">7-Zip</a></td><td>7-Zip (z) 26.05 (x64)</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="tarfile-data.html">Python tarfile, filter=data, as in pip</a></td><td>CPython 3.15.2</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="tarfile-tar.html">Python tarfile, filter=tar</a></td><td>CPython 3.15.2</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="tarfile-trusted.html">Python tarfile, filter=fully_trusted</a></td><td>CPython 3.15.2</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="node-tar.html">node-tar</a></td><td>tar 7.5.22</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="node-tar-strict.html">node-tar, strict</a></td><td>tar 7.5.22</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="tar-fs.html">tar-fs</a></td><td>tar-fs 3.1.3, on tar-stream 3.2.2</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="commons-compress.html">Java Commons Compress</a></td><td>Commons Compress 1.28.0, Expander, on Java 27.0.1.0.2</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="dotnet.html">.NET System.Formats.Tar</a></td><td>System.Formats.Tar of .NET 10.0.14, ExtractToDirectory</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="phardata.html">PHP PharData, as in Composer</a></td><td>PharData of PHP 8.5.12, as Composer&#x27;s TarDownloader calls it</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="containerd.html">Go containerd archive.Apply</a></td><td>containerd v2.4.2, archive.Apply, of go1.27.3</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="rust-tar.html">Rust tar</a></td><td>tar 0.4.46, unpack</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="astral-tokio-tar.html">Rust astral-tokio-tar</a></td><td>astral-tokio-tar 0.7.0, unpack</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="tar-codec.html">Rust tar-codec, as in uv</a></td><td>tar-codec 0.0.15, with the policies of uv 0.13</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="rubygems.html">RubyGems</a></td><td>RubyGems 4.0.20 of Ruby 4.0.9, extract_tar_gz</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="r-untar.html">R untar, internal</a></td><td>utils::untar of R 4.6.1, tar = &quot;internal&quot;</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="archive-tar.html">Perl Archive::Tar</a></td><td>Archive::Tar 3.12 of Perl v5.44.0</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="haskell-tar.html">Haskell tar</a></td><td>tar 0.7.2.0, extract, of GHC 9.14</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="julia-tar.html">Julia Tar.jl</a></td><td>Tar 1.10.0 of Julia 1.13.3</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="live-bootstrap.html">live-bootstrap untar</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>✅ accepts</td><td>the tree of the case</td></tr>
+<tr><td><a href="live-bootstrap-nonstrict.html">live-bootstrap untar, --non-strict</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>✅ accepts</td><td>the tree of the case</td></tr></table></div>
 <h2 id="prevalence-in-release-tarballs">Prevalence in release tarballs<a class="anchor" href="#prevalence-in-release-tarballs" aria-label="Link to this section">¶</a></h2>
 <p>Release tarballs of Spack, nixpkgs, Guix and live-bootstrap, and samples of PyPI, crates.io and RubyGems with <code>tree.dir-after-contents</code>. The default policy accepts them.</p>
 <div class="wide"><table class="data"><colgroup><col style="width: 25%"><col style="width: 25%"><col style="width: 25%"><col style="width: 25%"></colgroup><tr><th>ecosystem</th><th class=n>tarballs</th><th class=n>with it</th><th class=n>share</th></tr>

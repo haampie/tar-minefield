@@ -52,8 +52,8 @@ DRAFT = '<a class="draft" href="index.html#policy">Working draft</a>\n'
 ANCHORS = {"#motivating-examples": "#examples", "#contributing": "#contributing"}
 # Identifiers that a case no longer has, and the one it has now: the pages of the old ones redirect
 MOVED = {"G01": "F17", "G02": "F18", "G03": "F19", "G04": "N21"}
+# What an implementation does with a case, by its mark: that of ✅ depends on the verdict
 OUTCOMES = {
-    "✅": "as the verdict says",
     "➕": "accepts",
     "➖": "rejects",
     "⚠️": "accepts",
@@ -587,11 +587,17 @@ def implementations_section(case, info, results):
         symbol = next(s for s in matrix.ORDER if cells[n].startswith(s))
         letter = cells[n][len(symbol):].lstrip("️")
         what = what_it_makes(info, r, f"tree {letter}: " + inline(trees[letter]) if letter else None)
+        if r and matrix.crashed(r):
+            outcome = "crashes"
+        elif symbol == "✅":
+            outcome = "rejects" if info["verdict"] == "reject" else "accepts"
+        else:
+            outcome = OUTCOMES[symbol]
         rows.append(f'<tr><td><a href="{page_of(n)}">{html.escape(n)}</a></td>'
                     f"<td>{html.escape(versions.get(n, ''))}</td>"
-                    f"<td>{symbol} {'crashes' if r and matrix.crashed(r) else OUTCOMES[symbol]}</td>"
-                    f"<td>{what}</td></tr>")
-    return table("implementations", rows)
+                    f"<td>{symbol} {outcome}</td><td>{what}</td></tr>")
+    return ("<p>✅ follows the default policy.</p>\n"
+            + table("implementations", rows))
 
 
 # The outcomes that are as the default policy says: those of a tolerated case are both
