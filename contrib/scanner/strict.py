@@ -182,6 +182,7 @@ DEFAULT = [
     ("name.double-slash", "normalize", "`a//b` is `a/b`"),
     ("symlink.absolute", "accept", "created as it is: writing through a symlink is rejected"),
     ("end.data-after", "accept", "junk after the two zero blocks is ignored"),
+    ("end.missing", "accept", "implementations that extract it extract the same tree"),
     ("pax-global.after-members", "accept", "if every global header has only a `comment`"),
     ("magic.posix-version-nuls", "accept", "as some Java archivers write it: `ustar\\0\\0\\0`"),
     ("name.control-character", "accept",

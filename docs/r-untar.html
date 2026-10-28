@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>R untar, internal · Tar file extraction test suite</title>
-<meta name="description" content="The 51 of 81 cases of the tar-minefield test suite where R untar, internal, does not follow the draft default policy, and what it makes of them.">
+<meta name="description" content="The 50 of 81 cases of the tar-minefield test suite where R untar, internal, does not follow the draft default policy, and what it makes of them.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="R untar, internal · Tar file extraction test suite">
-<meta property="og:description" content="The 51 of 81 cases of the tar-minefield test suite where R untar, internal, does not follow the draft default policy, and what it makes of them.">
+<meta property="og:description" content="The 50 of 81 cases of the tar-minefield test suite where R untar, internal, does not follow the draft default policy, and what it makes of them.">
 <link rel="stylesheet" href="style.css?80b3069c">
 <link rel="canonical" href="https://stoppels.ch/tar/r-untar.html">
 <meta property="og:url" content="https://stoppels.ch/tar/r-untar.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/c0760f0d97ba4464.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/f6acdc7ccd199e35.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of every case of the test suite">
@@ -28,15 +28,15 @@
 <dt>Version</dt><dd>utils::untar of R 4.6.1, tar = &quot;internal&quot;</dd>
 
 </dl>
-<p>This implementation follows the <a href="index.html#policy">default policy</a> in 30 of 81 cases:</p>
+<p>This implementation follows the <a href="index.html#policy">default policy</a> in 31 of 81 cases:</p>
 <ul>
-<li>it rejects 10 of the 61 cases to reject</li>
+<li>it rejects 10 of the 60 cases to reject</li>
 <li>it extracts the expected tree in all 10 cases to accept</li>
-<li>it accepts all 10 tolerated cases</li>
+<li>it accepts all 11 tolerated cases</li>
 </ul>
 <p class="note">The default policy is a working draft. Where an implementation does not do as it
 says, that can be a choice rather than a bug.</p>
-<p>On the other 51, it does not:</p>
+<p>On the other 50, it does not:</p>
 <h2 id="crashes"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Crashes (11)<a class="anchor" href="#crashes" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
 <tr><td><a href="F13.html"><code>F13</code></a> pax-newline-in-path</td><td>A newline in a pax <code>path</code>, which split on lines is another record.</td><td>the condition has length &gt; 1</td></tr>
@@ -50,10 +50,9 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="N20.html"><code>N20</code></a> pax-repeated-key</td><td>One pax key twice in one extended header.</td><td>the condition has length &gt; 1</td></tr>
 <tr><td><a href="N25.html"><code>N25</code></a> symlink-empty-target</td><td>A symlink with an empty target.</td><td>argument must be coercible to non-negative integer Warning message: In max(which(block[158:257] &gt; 0)) : no non-missing arguments to max; returning -Inf</td></tr>
 <tr><td><a href="S13.html"><code>S13</code></a> hardlink-empty-target</td><td>A hardlink with an empty target.</td><td>argument must be coercible to non-negative integer Warning message: In max(which(block[158:257] &gt; 0)) : no non-missing arguments to max; returning -Inf</td></tr></table></div>
-<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (40)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
+<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (39)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
 <tr><td><a href="F03.html"><code>F03</code></a> end-lone-zero-block</td><td>An end-of-archive marker of one zero block, not two.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="F04.html"><code>F04</code></a> end-missing</td><td>No end-of-archive marker: the archive ends after a complete member.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F06.html"><code>F06</code></a> checksum-signed</td><td>A checksum that only matches as the signed sum of the header.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F07.html"><code>F07</code></a> end-archive-after</td><td>Another archive after the end-of-archive marker.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F09.html"><code>F09</code></a> end-zero-block-then-member</td><td>A zero block, then another member: the end of the archive, or not?</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
