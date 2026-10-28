@@ -1,7 +1,7 @@
 """Numeric fields padded with spaces rather than zeros, as old tars wrote them.
 
 The mode, uid, gid, size and mtime fields are padded with spaces, such as `          7 ` for the
-size of `a`. In POSIX, numeric fields are leading zero-filled octal numbers.
+size of `a`. In POSIX, numeric fields are octal numbers filled with leading zeros.
 
 Seen in: hundreds of tarballs, many from CPAN: the same as F32, whose checksum is padded too.
 """
