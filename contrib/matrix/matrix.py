@@ -37,32 +37,21 @@ import os
 import re
 import shutil
 import signal
-import subprocess
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(ROOT, "suite"))
-from check import ABSOLUTE, expected_tree, same  # noqa: E402
 import check  # noqa: E402
-ARCHIVES = os.path.join(ROOT, "suite", "archives")
+ARCHIVES = check.ARCHIVES
 RUNNERS = os.path.join(HERE, "runners")
-TIMEOUT = 60
+TIMEOUT = check.TIMEOUT
 # The site, docs/ as contrib/site.py writes it, served as files: a page per case, named by its identifier
 SITE = "https://stoppels.ch/tar/"
 
 
-def run(cmd, **kw):
-    """(status, stdout, stderr) of cmd, with status None if it does not finish within TIMEOUT."""
-    try:
-        p = subprocess.run(cmd, capture_output=True, timeout=TIMEOUT, **kw)
-        return p.returncode, p.stdout.decode(errors="replace"), p.stderr.decode(errors="replace")
-    except subprocess.TimeoutExpired:
-        return None, "", "timeout"
-
-
 def first_line(cmd):
-    code, out, err = run(cmd)
+    code, out, err = check.run(cmd)
     return (out or err).strip().splitlines()[0] if (out or err).strip() else "?"
 
 
@@ -115,12 +104,12 @@ def build_mescc_untar(build):
         shutil.rmtree(path, ignore_errors=True)
         for cmd in (["git", "clone", "-q", "--filter=blob:none", "--no-checkout", url, path],
                     ["git", "-C", path, "checkout", "-q", commit]):
-            code, _, err = run(cmd)
+            code, _, err = check.run(cmd)
             if code != 0:
                 print("mescc-tools-extra:", err, file=sys.stderr)
                 return None
     # C99: M2libc names a variable bool, which C23 makes a keyword
-    code, _, err = run([tool("cc"), "-std=gnu99", "-Wno-implicit-function-declaration", "untar.c",
+    code, _, err = check.run([tool("cc"), "-std=gnu99", "-Wno-implicit-function-declaration", "untar.c",
                         "M2libc/bootstrappable.c", "-o", binary], cwd=src)
     if code != 0:
         print("mescc-tools-extra:", err, file=sys.stderr)
@@ -152,12 +141,12 @@ def implementations(work, only=None):
                 "mescc-tools-extra https://github.com/oriansj/mescc-tools-extra ")[1][:12]
             version = f"mescc-tools-extra {commit}, as live-bootstrap pins it, built with cc"
             # untar exits 0 when it "produced errors", such as a checksum failure: as an error
-            check = ('out=$("$@" 2>&1); code=$?; printf "%s\\n" "$out" >&2; '
+            script = ('out=$("$@" 2>&1); code=$?; printf "%s\\n" "$out" >&2; '
                      'case $out in *"produced errors"*) exit 1;; esac; exit $code')
             found.append(("live-bootstrap untar", version,
-                          lambda a, d, b=binary: ["sh", "-c", check, "sh", b, "--file", a]))
+                          lambda a, d, b=binary: ["sh", "-c", script, "sh", b, "--file", a]))
             found.append(("live-bootstrap untar, --non-strict", version,
-                          lambda a, d, b=binary: ["sh", "-c", check, "sh", b, "--non-strict",
+                          lambda a, d, b=binary: ["sh", "-c", script, "sh", b, "--non-strict",
                                                   "--file", a]))
     busybox = tool("busybox")
     if busybox:
@@ -168,7 +157,7 @@ def implementations(work, only=None):
                       lambda a, d: [busybox, "tar", "-xf", a, "-C", d]))
     sevenzip = tool("7z")
     if sevenzip:
-        code, out, _ = run([sevenzip])
+        code, out, _ = check.run([sevenzip])
         version = next((l for l in out.splitlines() if l.startswith("7-Zip")), "7-Zip").split(" :")[0]
         found.append(("7-Zip", version,
                       lambda a, d: [sevenzip, "x", "-y", "-bd", f"-o{d}", a]))
@@ -182,7 +171,7 @@ def implementations(work, only=None):
     os.makedirs(build, exist_ok=True)
     if want("Go containerd archive.Apply") and shutil.which("go"):
         binary = os.path.join(build, "containerd-runner")
-        code, _, err = run(["go", "build", "-o", binary, "."], cwd=os.path.join(RUNNERS, "containerd"))
+        code, _, err = check.run(["go", "build", "-o", binary, "."], cwd=os.path.join(RUNNERS, "containerd"))
         if code == 0:
             found.append(("Go containerd archive.Apply", first_line([binary, "--version"]),
                           lambda a, d, b=binary: [b, a, d]))
@@ -190,7 +179,7 @@ def implementations(work, only=None):
             print("containerd runner:", err, file=sys.stderr)
     if want("Rust tar", "Rust astral-tokio-tar", "Rust tar-codec, as in uv") and shutil.which("cargo"):
         target = os.path.join(build, "rust")
-        code, _, err = run(["cargo", "build", "--release", "--quiet", "--target-dir", target],
+        code, _, err = check.run(["cargo", "build", "--release", "--quiet", "--target-dir", target],
                            cwd=os.path.join(RUNNERS, "rust"))
         if code == 0:
             binary = os.path.join(target, "release", "runner")
@@ -205,7 +194,7 @@ def implementations(work, only=None):
     cabal = tool("cabal")
     if want("Haskell tar") and cabal:
         target = os.path.join(build, "haskell")
-        code, out, err = run([cabal, "install", "--installdir", target, "--overwrite-policy=always",
+        code, out, err = check.run([cabal, "install", "--installdir", target, "--overwrite-policy=always",
                               "--install-method=copy", f"--builddir={target}/dist"],
                              cwd=os.path.join(RUNNERS, "haskell"))
         if code == 0:
@@ -227,7 +216,7 @@ def implementations(work, only=None):
         # built in a copy, as dotnet writes obj/ next to the project
         src = os.path.join(build, "dotnet")
         shutil.copytree(os.path.join(RUNNERS, "dotnet"), src, dirs_exist_ok=True)
-        code, out, err = run([dotnet, "build", "-c", "Release", "-o", os.path.join(src, "out"),
+        code, out, err = check.run([dotnet, "build", "-c", "Release", "-o", os.path.join(src, "out"),
                               "--nologo", "-v", "q"], cwd=src)
         if code == 0:
             binary = os.path.join(src, "out", "runner")
@@ -237,7 +226,7 @@ def implementations(work, only=None):
             print("dotnet runner:", (out or err)[-2000:], file=sys.stderr)
     ruby = tool("ruby")
     if ruby:
-        code, out, _ = run([ruby, "-e", 'require "rubygems"; print Gem::VERSION, " ", RUBY_VERSION'])
+        code, out, _ = check.run([ruby, "-e", 'require "rubygems"; print Gem::VERSION, " ", RUBY_VERSION'])
         version = "RubyGems {} of Ruby {}, extract_tar_gz".format(*out.split()) if code == 0 else "?"
         found.append(("RubyGems", version, lambda a, d, r=ruby:
                       [r, os.path.join(RUNNERS, "ruby", "extract.rb"), a, d]))
@@ -256,14 +245,14 @@ def implementations(work, only=None):
                       lambda a, d, r=rscript, s=script: [r, "--vanilla", s, a, d]))
     perl = tool("perl")
     if perl:
-        code, out, _ = run([perl, "-MArchive::Tar", "-e", 'print "$Archive::Tar::VERSION $^V"'])
+        code, out, _ = check.run([perl, "-MArchive::Tar", "-e", 'print "$Archive::Tar::VERSION $^V"'])
         version = "Archive::Tar {} of Perl {}".format(*out.split()) if code == 0 else "?"
         found.append(("Perl Archive::Tar", version, lambda a, d, p=perl:
                       [p, os.path.join(RUNNERS, "perl", "extract.pl"), a, d]))
     julia = tool("julia")
     if julia:
         script = os.path.join(RUNNERS, "julia", "extract.jl")
-        code, out, _ = run([julia, "--startup-file=no", "-e",
+        code, out, _ = check.run([julia, "--startup-file=no", "-e",
                             'using Tar; print(VERSION, " ", pkgversion(Tar))'])
         version = "Tar {1} of Julia {0}".format(*out.split()) if code == 0 else "?"
         found.append(("Julia Tar.jl", version,
@@ -271,7 +260,7 @@ def implementations(work, only=None):
     if want("node-tar", "node-tar, strict", "tar-fs") and shutil.which("npm"):
         node = os.path.join(build, "node")
         shutil.copytree(os.path.join(RUNNERS, "node"), node, dirs_exist_ok=True)
-        code, _, err = run(["npm", "ci", "--silent", "--no-audit", "--no-fund"], cwd=node)
+        code, _, err = check.run(["npm", "ci", "--silent", "--no-audit", "--no-fund"], cwd=node)
         if code == 0:
             script = os.path.join(node, "extract.js")
             found.append(("node-tar", "tar 7.5.22",
@@ -289,21 +278,17 @@ def extract(command, archive, root):
     """Extract into root/x/y/dest; return (status, error, tree, outside), where outside is what
     was written in root but not under dest."""
     dest = os.path.join(root, "x", "y", "dest")
-    code, out, err, tree, outside = check.extract(command, archive, root, TIMEOUT)
+    code, out, err, tree, outside = check.extract(command, archive, root)
     error = None
     if code != 0:
         error = (err.strip() or out.strip()
                  or (f"killed by {signal.Signals(-code).name}" if code < 0 else f"status {code}"))
-        error = error.replace(dest, "DEST").replace(root, "ROOT")
         # Node shortens a long path in its messages to a prefix and "...", which depends on
         # where WORK is
         work = os.path.dirname(os.path.dirname(os.path.dirname(root)))
         for k in range(len(dest), len(work), -1):
             error = error.replace(dest[:k] + "...", "DEST...")
-        error = error.replace(ROOT + os.sep, "")
-        if len(error) > 300:
-            # the message comes first, and what follows is where it was raised
-            error = error[:300].rsplit(None, 1)[0] + " …"
+        error = check.shorten(error.replace(ROOT + os.sep, ""))
     return code, error, tree, outside
 
 
@@ -362,13 +347,9 @@ def label(case, info):
 
 def load_cases():
     """The cases, in the order of GROUPS, and by identifier in each group."""
-    cases = {}
-    for name in sorted(os.listdir(ARCHIVES)):
-        if name.endswith(".json"):
-            with open(os.path.join(ARCHIVES, name)) as f:
-                cases[name[:-5]] = json.load(f)
     order = list(GROUPS)
-    return dict(sorted(cases.items(), key=lambda kv: (order.index(category(kv[1])), kv[1]["id"])))
+    return dict(sorted(check.load_cases().items(),
+                       key=lambda kv: (order.index(category(kv[1])), kv[1]["id"])))
 
 
 def main():
@@ -389,8 +370,8 @@ def main():
         else:
             names.add(arg)
     only, ids = options.get("--only"), options.get("--cases")
-    if os.path.lexists(ABSOLUTE):
-        sys.exit(f"{ABSOLUTE} exists, and would count as written by the first extractor: "
+    if os.path.lexists(check.ABSOLUTE):
+        sys.exit(f"{check.ABSOLUTE} exists, and would count as written by the first extractor: "
                  "remove it first")
     cases = load_cases()
     unknown = (ids or set()) - {info["id"] for info in cases.values()}
@@ -459,22 +440,22 @@ def outcome(case, r):
     """(symbol, tree or None) of one run, or of None where there was no run."""
     if r is None:
         return "❔", None
-    if r["outside"]:
+    status = None if r.get("timeout") else -r["signal"] if r.get("signal") else 1 if r["error"] else 0
+    kind = check.classify(case, status, r["tree"], r["outside"], crashed(r))
+    reject, tolerated = case["verdict"] == "reject", case["verdict"] == "tolerate"
+    if kind == "outside":
         return "💥", None
-    if r.get("timeout"):
+    if kind == "timeout":
         return "⏳", None
-    if crashed(r):
+    if kind == "crash":
         # a crash, without the letter of a tree: what it wrote before it was killed is not a tree
         # it chose
-        return ("⚠️" if case["verdict"] == "reject" else "❌"), None
-    if case["verdict"] == "reject":
-        return ("✅", None) if r["error"] else ("⚠️", r["tree"])
-    tolerated = case["verdict"] == "tolerate"
-    if r["error"]:
-        return ("➖" if tolerated else "❌"), None
-    if r["tree"] is None or same(r["tree"], expected_tree(case)):
+        return ("⚠️" if reject else "❌"), None
+    if kind == "rejected":
+        return ("✅" if reject else "➖" if tolerated else "❌"), None
+    if kind == "expected":
         return ("➕" if tolerated else "✅"), None
-    return "❌", r["tree"]
+    return ("⚠️" if reject else "❌"), r["tree"]
 
 
 ORDER = ["✅", "➕", "➖", "⚠️", "❌", "⏳", "💥", "❔"]

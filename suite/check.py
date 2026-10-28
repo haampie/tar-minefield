@@ -20,7 +20,8 @@ outside dest, is not killed by a signal, and finishes within TIMEOUT seconds. Ea
 with what the extractor did, and the exit status is 1 if a case fails.
 
 Tests of a library in Python can import this module: extract into a directory, and call
-problems(case, rejected, walk(dest)), which is empty if the case passes.
+problems(case, status, walk(dest)), with status 0 if the library extracted the archive and 1 if it
+rejected it, which is empty if the case passes.
 
 It needs nothing outside suite/ but the Python standard library.
 """
@@ -29,16 +30,27 @@ import hashlib
 import json
 import os
 import shutil
+import signal
 import stat
 import subprocess
 import sys
 import tempfile
+import textwrap
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ARCHIVES = os.path.join(HERE, "archives")
 TIMEOUT = 60
 # The absolute name of N12: in /tmp, which an extractor that follows it can write without root
 ABSOLUTE = "/tmp/tar-minefield-absolute"
+
+
+def run(cmd, timeout=TIMEOUT, **kw):
+    """(status, stdout, stderr) of cmd, with status None if it does not finish within timeout."""
+    try:
+        p = subprocess.run(cmd, capture_output=True, timeout=timeout, **kw)
+        return p.returncode, p.stdout.decode(errors="replace"), p.stderr.decode(errors="replace")
+    except subprocess.TimeoutExpired:
+        return None, "", "timeout"
 
 
 def entry(path, dest=None):
@@ -86,19 +98,16 @@ def same(tree, expected):
     return True
 
 
-def extract(command, archive, root, timeout=TIMEOUT):
-    """Run command(archive, dest), which extracts archive into dest, root/x/y/dest. Return (status,
-    stdout, stderr, tree, outside), where status is None if it does not finish within timeout, and
-    outside is what was written in root but not under dest, or at ABSOLUTE, which is removed."""
+def extract(command, archive, root):
+    """Run command(archive, dest), which extracts archive into dest, root/x/y/dest, with the
+    archive as its standard input. Return (status, stdout, stderr, tree, outside), where status is
+    None if it does not finish within TIMEOUT, dest is DEST and root is ROOT in stdout and stderr,
+    and outside is what was written in root but not under dest, or at ABSOLUTE, which is removed."""
     dest = os.path.join(root, "x", "y", "dest")
     os.makedirs(dest)
     with open(archive, "rb") as stdin:
-        try:
-            p = subprocess.run(command(archive, dest), cwd=dest, stdin=stdin, capture_output=True,
-                               timeout=timeout)
-            code, out, err = p.returncode, p.stdout.decode(errors="replace"), p.stderr.decode(errors="replace")
-        except subprocess.TimeoutExpired:
-            code, out, err = None, "", "timeout"
+        status, out, err = run(command(archive, dest), cwd=dest, stdin=stdin)
+    out, err = (s.replace(dest, "DEST").replace(root, "ROOT") for s in (out, err))
     tree = walk(dest, dest)
     outside = {p: e for p, e in walk(root, dest).items()
                if p not in ("x", "x/y", "x/y/dest") and not p.startswith("x/y/dest/")}
@@ -108,21 +117,45 @@ def extract(command, archive, root, timeout=TIMEOUT):
             shutil.rmtree(ABSOLUTE)
         else:
             os.remove(ABSOLUTE)
-    return code, out, err, tree, outside
+    return status, out, err, tree, outside
 
 
-def problems(case, rejected, tree, outside=None):
-    """Why an extraction fails the case, or [] if it passes. The tree is what was extracted, as walk
-    gives it, and outside what was written outside the destination."""
+def classify(case, status, tree, outside, crashed=False):
+    """What a run did with a case: "outside", it wrote outside the destination; "timeout", it did not
+    finish; "crash", a signal killed it, or it crashed, as the caller judges; "rejected", it exited
+    with another status than 0; "expected", it extracted the expected tree; or "other", it extracted
+    another tree, or any tree of a case to reject."""
     if outside:
+        return "outside"
+    if status is None:
+        return "timeout"
+    if crashed or status < 0:
+        return "crash"
+    if status:
+        return "rejected"
+    if case["verdict"] != "reject" and same(tree, expected_tree(case)):
+        return "expected"
+    return "other"
+
+
+def problems(case, status, tree, outside=None):
+    """Why a run fails the case, or [] if it passes. The status is 0 if the run extracted the archive,
+    positive if it rejected it, negative if a signal killed it, and None if it did not finish; tree
+    is what it extracted, as walk gives it, and outside what it wrote outside the destination."""
+    kind = classify(case, status, tree, outside)
+    if kind == "outside":
         return [f"writes outside the destination: {path}" for path in sorted(outside)]
-    if case["verdict"] == "reject":
-        return [] if rejected else ["accepts a case to reject"]
-    if rejected:
-        return [] if case["verdict"] == "tolerate" else ["rejects a case to accept"]
-    expected = expected_tree(case)
-    if same(tree, expected):
+    if kind == "timeout":
+        return [f"does not finish within {TIMEOUT} seconds"]
+    if kind == "crash":
+        return [f"killed by {signal.Signals(-status).name}"]
+    if kind == "rejected":
+        return ["rejects a case to accept"] if case["verdict"] == "accept" else []
+    if kind == "expected":
         return []
+    if case["verdict"] == "reject":
+        return ["accepts a case to reject"]
+    expected = expected_tree(case)
     out = []
     for path in sorted(set(tree) | set(expected)):
         if path not in tree:
@@ -133,6 +166,12 @@ def problems(case, rejected, tree, outside=None):
             out.append(f"{path!r} is {json.dumps(tree[path], sort_keys=True)}, "
                        f"not {json.dumps(expected[path], sort_keys=True)}")
     return out
+
+
+def shorten(message, limit=300):
+    """A message cut after about limit characters: it comes first, and what follows is where it was
+    raised."""
+    return message if len(message) <= limit else message[:limit].rsplit(None, 1)[0] + " …"
 
 
 def load_cases():
@@ -147,9 +186,10 @@ def load_cases():
 
 def main():
     args = sys.argv[1:]
-    if "--" not in args or args.index("--") == len(args) - 1:
+    i = args.index("--") if "--" in args else len(args)
+    options, argv = args[:i], args[i + 1:]
+    if not argv:
         sys.exit(__doc__.split("\n\n")[1])
-    options, argv = args[:args.index("--")], args[args.index("--") + 1:]
     ids = set()
     while options:
         if options[0] != "--case" or len(options) < 2:
@@ -162,33 +202,26 @@ def main():
     unknown = ids - {case["id"] for case in cases.values()}
     if unknown:
         sys.exit(f"no such cases: {' '.join(sorted(unknown))}")
+    if ids:
+        cases = {name: case for name, case in cases.items() if case["id"] in ids}
 
     def command(archive, dest):
         return [a.replace("{archive}", archive).replace("{dest}", dest) for a in argv]
 
     failed = 0
     for name, case in cases.items():
-        if ids and case["id"] not in ids:
-            continue
         with tempfile.TemporaryDirectory() as root:
-            code, out, err, tree, outside = extract(command, os.path.join(ARCHIVES, name + ".tar"), root)
-        if code is None:
-            found = [f"does not finish within {TIMEOUT} seconds"]
-        elif code < 0:
-            found = [f"killed by signal {-code}"]
-        else:
-            found = problems(case, code != 0, tree, outside)
-        did = "rejects it" if code else "extracts the expected tree"
+            status, out, err, tree, outside = extract(command, os.path.join(ARCHIVES, name + ".tar"), root)
+        found = problems(case, status, tree, outside)
         failed += bool(found)
-        print(f"{name:<45} {case['verdict']:<9} {'FAIL' if found else 'ok':<4} {'' if found else did}".rstrip())
+        did = "" if found else "rejects it" if status else "extracts the expected tree"
+        print(f"{name:<45} {case['verdict']:<9} {'FAIL' if found else 'ok':<4} {did}".rstrip())
         for line in found:
             print("    " + line)
-        if code:
-            lines = (err.strip() or out.strip() or f"status {code}").splitlines()
-            # the error of a Python traceback is its last line
-            message = lines[-1] if lines[0].startswith("Traceback") else lines[0]
-            print("    " + message.replace(root, "ROOT"))
-    print(f"{failed} of {len(ids) or len(cases)} cases fail")
+        message = err.strip() or out.strip()
+        if status and message:
+            print(textwrap.indent(shorten(message), "    "))
+    print(f"{failed} of {len(cases)} cases fail")
     sys.exit(1 if failed else 0)
 
 
