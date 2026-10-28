@@ -11293,6 +11293,220 @@
     }
    }
   },
+  "F37-number-size-not-octal": {
+   ".NET System.Formats.Tar": {
+    "error": "InvalidDataException: Unable to parse number.",
+    "outside": {},
+    "tree": {}
+   },
+   "7-Zip": {
+    "error": "ERROR: suite/archives/F37-number-size-not-octal.tar\nsuite/archives/F37-number-size-not-octal.tar\nOpen ERROR: Cannot open the file as [tar] archive\n\n\nERRORS:\nIs not archive",
+    "outside": {},
+    "tree": {}
+   },
+   "BusyBox tar": {
+    "error": "tar: corrupted octal value in tar header",
+    "outside": {},
+    "tree": {}
+   },
+   "GNU tar": {
+    "error": "tar: Archive contains \u201800000000090\u2019 where numeric off_t value expected\ntar: This does not look like a tar archive\ntar: Skipping to next header\ntar: Exiting with failure status due to previous errors",
+    "outside": {},
+    "tree": {
+     "smuggled": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "Go containerd archive.Apply": {
+    "error": "archive/tar: invalid tar header",
+    "outside": {},
+    "tree": {}
+   },
+   "Haskell tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "1dd766f3598a21ca0505608d33f8efcfe6d1a3b534c70e2f0183fa7eb1b45fe3",
+      "size": 72
+     }
+    }
+   },
+   "Java Commons Compress": {
+    "error": "java.io.IOException: Corrupted TAR archive.",
+    "outside": {},
+    "tree": {}
+   },
+   "Julia Tar.jl": {
+    "error": "malformed size field: \"00000000090\"\n[header block data]:\n  name     = \"a\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\\0\"\n  mode     = \"0000644\\0\" \u2026",
+    "outside": {},
+    "tree": {}
+   },
+   "PHP PharData, as in Composer": {
+    "error": "UnexpectedValueException: phar error: \"suite/archives/F37-number-size-not-octal.tar\" is a corrupted tar file (invalid entry size)",
+    "outside": {},
+    "tree": {}
+   },
+   "Perl Archive::Tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     },
+     "smuggled": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "Python tarfile, filter=data, as in pip": {
+    "error": "ReadError: file could not be opened successfully:\n- method gz: ReadError('not a gzip file')\n- method bz2: ReadError('not a bzip2 file')\n- method xz: ReadError('not an lzma file')\n- method zst: ReadError('not a zstd file')\n- method tar: ReadError('invalid header')",
+    "outside": {},
+    "tree": {}
+   },
+   "Python tarfile, filter=fully_trusted": {
+    "error": "ReadError: file could not be opened successfully:\n- method gz: ReadError('not a gzip file')\n- method bz2: ReadError('not a bzip2 file')\n- method xz: ReadError('not an lzma file')\n- method zst: ReadError('not a zstd file')\n- method tar: ReadError('invalid header')",
+    "outside": {},
+    "tree": {}
+   },
+   "Python tarfile, filter=tar": {
+    "error": "ReadError: file could not be opened successfully:\n- method gz: ReadError('not a gzip file')\n- method bz2: ReadError('not a bzip2 file')\n- method xz: ReadError('not an lzma file')\n- method zst: ReadError('not a zstd file')\n- method tar: ReadError('invalid header')",
+    "outside": {},
+    "tree": {}
+   },
+   "R untar, internal": {
+    "error": "invalid octal digit",
+    "outside": {},
+    "tree": {}
+   },
+   "RubyGems": {
+    "error": "Gem::Package::TarInvalidError: \"00000000090\" is not an octal string",
+    "outside": {},
+    "tree": {}
+   },
+   "Rust astral-tokio-tar": {
+    "error": "failed to iterate over archive",
+    "outside": {},
+    "tree": {}
+   },
+   "Rust tar": {
+    "error": "failed to iterate over archive",
+    "outside": {},
+    "tree": {}
+   },
+   "Rust tar-codec, as in uv": {
+    "error": "at byte 0: invalid tar size field: found [48, 48, 48, 48, 48, 48, 48, 48, 48, 57, 48, 0]",
+    "outside": {},
+    "tree": {}
+   },
+   "bsdtar": {
+    "error": "bsdtar: Error opening archive: Unrecognized archive format",
+    "outside": {},
+    "tree": {}
+   },
+   "live-bootstrap untar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     },
+     "smuggled": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "live-bootstrap untar, --non-strict": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     },
+     "smuggled": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "node-tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     },
+     "smuggled": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "node-tar, strict": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     },
+     "smuggled": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     },
+     "smuggled": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   }
+  },
   "K01-kind-trailing-slash-file": {
    ".NET System.Formats.Tar": {
     "error": "IOException: Cannot create 'DEST/a/' because a file or directory with the same name already exists.",
@@ -19148,6 +19362,836 @@
     }
    }
   },
+  "N27-pax-long-symlink": {
+   ".NET System.Formats.Tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "7-Zip": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "BusyBox tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "GNU tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Go containerd archive.Apply": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Haskell tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Java Commons Compress": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Julia Tar.jl": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "PHP PharData, as in Composer": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Perl Archive::Tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Python tarfile, filter=data, as in pip": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Python tarfile, filter=fully_trusted": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Python tarfile, filter=tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "R untar, internal": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "RubyGems": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Rust astral-tokio-tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Rust tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Rust tar-codec, as in uv": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "bsdtar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "live-bootstrap untar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "PaxHeader": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "37db8c176439bcc61e651dbb979329d7b41672ea447fdf229def01496332aec6",
+      "size": 264
+     },
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll0000644": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt0000644": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "live-bootstrap untar, --non-strict": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "PaxHeader": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "37db8c176439bcc61e651dbb979329d7b41672ea447fdf229def01496332aec6",
+      "size": 264
+     },
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll0000644": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt0000644": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "node-tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "node-tar, strict": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   }
+  },
+  "N28-pax-long-hardlink": {
+   ".NET System.Formats.Tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "7-Zip": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "BusyBox tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "GNU tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Go containerd archive.Apply": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Haskell tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Java Commons Compress": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Julia Tar.jl": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "PHP PharData, as in Composer": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Perl Archive::Tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Python tarfile, filter=data, as in pip": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Python tarfile, filter=fully_trusted": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Python tarfile, filter=tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "R untar, internal": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "RubyGems": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Rust astral-tokio-tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Rust tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "Rust tar-codec, as in uv": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "bsdtar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "live-bootstrap untar": {
+    "error": "unable to create hardlinks",
+    "outside": {},
+    "tree": {
+     "PaxHeader": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "799d3c804d13910d04b8581d4f4d393493f57f4ad5e97ad80b92979b858fac02",
+      "size": 264
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt0000644": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "live-bootstrap untar, --non-strict": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "PaxHeader": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "799d3c804d13910d04b8581d4f4d393493f57f4ad5e97ad80b92979b858fac02",
+      "size": 264
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt0000644": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "node-tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "node-tar, strict": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   }
+  },
   "S01-tree-dir-after-contents": {
    ".NET System.Formats.Tar": {
     "error": null,
@@ -22994,6 +24038,10 @@
    "version": "mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc"
   },
   {
+   "name": "BusyBox tar",
+   "version": "BusyBox v1.38.0, defconfig"
+  },
+  {
    "name": "7-Zip",
    "version": "7-Zip (z) 26.05 (x64)"
   },
@@ -23068,10 +24116,6 @@
   {
    "name": "tar-fs",
    "version": "tar-fs 3.1.3, on tar-stream 3.2.2"
-  },
-  {
-   "name": "BusyBox tar",
-   "version": "BusyBox v1.38.0, defconfig"
   }
  ]
 }

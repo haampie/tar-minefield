@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>node-tar · Tar file extraction test suite</title>
-<meta name="description" content="The 55 of 78 cases of the tar-minefield test suite where node-tar does not follow the draft default policy, and what it makes of them.">
+<meta name="description" content="The 56 of 81 cases of the tar-minefield test suite where node-tar does not follow the draft default policy, and what it makes of them.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="node-tar · Tar file extraction test suite">
-<meta property="og:description" content="The 55 of 78 cases of the tar-minefield test suite where node-tar does not follow the draft default policy, and what it makes of them.">
+<meta property="og:description" content="The 56 of 81 cases of the tar-minefield test suite where node-tar does not follow the draft default policy, and what it makes of them.">
 <link rel="stylesheet" href="style.css?80b3069c">
 <link rel="canonical" href="https://stoppels.ch/tar/node-tar.html">
 <meta property="og:url" content="https://stoppels.ch/tar/node-tar.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/3e53eb588cced954.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/c0760f0d97ba4464.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of every case of the test suite">
@@ -28,16 +28,16 @@
 <dt>Version</dt><dd>tar 7.5.22</dd>
 <dt>Other configurations</dt><dd><ul><li><a href="node-tar-strict.html">node-tar, strict</a></li></ul></dd>
 </dl>
-<p>This implementation follows the <a href="index.html#policy">default policy</a> in 23 of 78 cases:</p>
+<p>This implementation follows the <a href="index.html#policy">default policy</a> in 25 of 81 cases:</p>
 <ul>
-<li>it rejects 6 of the 60 cases to reject</li>
-<li>it extracts the expected tree in all 8 cases to accept</li>
+<li>it rejects 6 of the 61 cases to reject</li>
+<li>it extracts the expected tree in all 10 cases to accept</li>
 <li>it accepts 9 of the 10 tolerated cases</li>
 </ul>
 <p class="note">The default policy is a working draft. Where an implementation does not do as it
 says, that can be a choice rather than a bug.</p>
-<p>On the other 55, it does not:</p>
-<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (54)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
+<p>On the other 56, it does not:</p>
+<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (55)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
 <tr><td><a href="F03.html"><code>F03</code></a> end-lone-zero-block</td><td>An end-of-archive marker of one zero block, not two.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F04.html"><code>F04</code></a> end-missing</td><td>No end-of-archive marker: the archive ends after a complete member.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
@@ -64,6 +64,7 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="F34.html"><code>F34</code></a> size-on-hardlink</td><td>A size in the header of a hard link, in a pax archive, which takes the next header for its data.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>h</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F35.html"><code>F35</code></a> pax-size-on-hardlink</td><td>A pax <code>size</code> on a hard link, which takes the next header for its data.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>h</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F36.html"><code>F36</code></a> pax-record-length-short</td><td>A pax record whose length is one byte short, so that it ends just before its newline.</td><td>extracts <code>from-header</code> (12 B, a578eb49)</td></tr>
+<tr><td><a href="F37.html"><code>F37</code></a> number-size-not-octal</td><td>A size with the digit 9, which is not octal.</td><td>extracts <code>a</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="N08.html"><code>N08</code></a> extended-pax-path-and-gnu-long-name</td><td>A pax <code>path</code> and a GNU long name for one member, and a third name in its header.</td><td>extracts <code>from-pax</code> (12 B, a578eb49)</td></tr>
 <tr><td><a href="N09.html"><code>N09</code></a> extended-two-pax-headers</td><td>Two pax extended headers for one member, with different paths.</td><td>extracts <code>second</code> (12 B, a578eb49)</td></tr>
 <tr><td><a href="N10.html"><code>N10</code></a> format-star</td><td>A ustar prefix whose end reads as star&#x27;s times, with star&#x27;s <code>tar\0</code> at offset 508.</td><td>extracts <code>ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /</code>, <code>ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a</code> (2 B, 87428fc5)</td></tr>

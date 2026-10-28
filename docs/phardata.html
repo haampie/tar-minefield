@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PHP PharData, as in Composer · Tar file extraction test suite</title>
-<meta name="description" content="The 52 of 78 cases of the tar-minefield test suite where PHP PharData, as in Composer, does not follow the draft default policy, and what it makes of them.">
+<meta name="description" content="The 54 of 81 cases of the tar-minefield test suite where PHP PharData, as in Composer, does not follow the draft default policy, and what it makes of them.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="PHP PharData, as in Composer · Tar file extraction test suite">
-<meta property="og:description" content="The 52 of 78 cases of the tar-minefield test suite where PHP PharData, as in Composer, does not follow the draft default policy, and what it makes of them.">
+<meta property="og:description" content="The 54 of 81 cases of the tar-minefield test suite where PHP PharData, as in Composer, does not follow the draft default policy, and what it makes of them.">
 <link rel="stylesheet" href="style.css?80b3069c">
 <link rel="canonical" href="https://stoppels.ch/tar/phardata.html">
 <meta property="og:url" content="https://stoppels.ch/tar/phardata.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/3e53eb588cced954.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/c0760f0d97ba4464.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of every case of the test suite">
@@ -28,15 +28,15 @@
 <dt>Version</dt><dd>PharData of PHP 8.5.12, as Composer&#x27;s TarDownloader calls it</dd>
 
 </dl>
-<p>This implementation follows the <a href="index.html#policy">default policy</a> in 26 of 78 cases:</p>
+<p>This implementation follows the <a href="index.html#policy">default policy</a> in 27 of 81 cases:</p>
 <ul>
-<li>it rejects 11 of the 60 cases to reject</li>
-<li>it extracts the expected tree in 7 of the 8 cases to accept</li>
+<li>it rejects 12 of the 61 cases to reject</li>
+<li>it extracts the expected tree in 7 of the 10 cases to accept</li>
 <li>it accepts 7 and rejects 1 of the 10 tolerated cases</li>
 </ul>
 <p class="note">The default policy is a working draft. Where an implementation does not do as it
 says, that can be a choice rather than a bug.</p>
-<p>On the other 52, it does not:</p>
+<p>On the other 54, it does not:</p>
 <h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (49)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
 <tr><td><a href="F03.html"><code>F03</code></a> end-lone-zero-block</td><td>An end-of-archive marker of one zero block, not two.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
@@ -88,9 +88,11 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="S08.html"><code>S08</code></a> tree-duplicate-file-dir</td><td>A file, then a directory of the same name.</td><td>extracts nothing</td></tr>
 <tr><td><a href="S09.html"><code>S09</code></a> tree-duplicate-file-identical</td><td>The same file twice, with the same contents.</td><td>extracts <code>a</code> (5 B, a6328afc)</td></tr>
 <tr><td><a href="S10.html"><code>S10</code></a> tree-symlink-then-file</td><td>A symlink, then a file of the same name: replace the link, or write through it?</td><td>extracts <code>a</code> (28 B, d5a04bbb)</td></tr></table></div>
-<h2 id="rejects"><span class="mark bad" title="rejects a case to accept, or extracts another tree than the expected one, or crashes on it" role="img" aria-label="rejects a case to accept, or extracts another tree than the expected one, or crashes on it">✗</span>Rejects cases to accept, or extracts another tree (3)<a class="anchor" href="#rejects" aria-label="Link to this section">¶</a></h2>
+<h2 id="rejects"><span class="mark bad" title="rejects a case to accept, or extracts another tree than the expected one, or crashes on it" role="img" aria-label="rejects a case to accept, or extracts another tree than the expected one, or crashes on it">✗</span>Rejects cases to accept, or extracts another tree (5)<a class="anchor" href="#rejects" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
 <tr><td><a href="N03.html"><code>N03</code></a> pax-long-name</td><td>A name over 100 bytes, in a pax <code>path</code>.</td><td>extracts <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/</code>, <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/fffffffffffffffffffffffffffffffffffffff</code> (5 B, bbdbb75b)</td></tr>
+<tr><td><a href="N27.html"><code>N27</code></a> pax-long-symlink</td><td>A symlink with a long name and a long target, in a pax <code>path</code> and <code>linkpath</code> respectively.</td><td>extracts <code>llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll</code> (0 B, e3b0c442), <code>tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt</code> (7 B, c97ecfda)</td></tr>
+<tr><td><a href="N28.html"><code>N28</code></a> pax-long-hardlink</td><td>A hard link with a long name and a long target, in a pax <code>path</code> and <code>linkpath</code> respectively.</td><td>extracts <code>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</code> (0 B, e3b0c442), <code>tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt</code> (7 B, c97ecfda)</td></tr>
 <tr><td><a href="F14.html"><code>F14</code></a> pax-size-disagrees</td><td>A pax <code>size</code> that disagrees with the header&#x27;s, so that a reader of the header&#x27;s misses a member.</td><td>extracts <code>a</code> (512 B, 917dba8e)</td></tr>
 <tr><td><a href="N07.html"><code>N07</code></a> symlink-absolute</td><td>A symlink to an absolute path, created as it is.</td><td>extracts <code>link</code> (0 B, e3b0c442)</td></tr></table></div>
 

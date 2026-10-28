@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The mode, uid, gid, size and mtime fields are padded with spaces, such as <code>          7 </code> for the size of <code>a</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are leading zero-filled octal numbers.</p>
+<p>The mode, uid, gid, size and mtime fields are padded with spaces, such as <code>          7 </code> for the size of <code>a</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal numbers filled with leading zeros.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>7 bytes, sha256 <code title="e47fbedb2823cf1ae4d4cdb8273635be2024cb870588e259c9b23d76ae49d484">e47fbedb</code></td></tr></table></div>
@@ -54,7 +54,7 @@
 Numeric fields padded with spaces rather than zeros, as old tars wrote them.
 
 The mode, uid, gid, size and mtime fields are padded with spaces, such as `          7 ` for the
-size of `a`. In POSIX, numeric fields are leading zero-filled octal numbers.
+size of `a`. In POSIX, numeric fields are octal numbers filled with leading zeros.
 
 Seen in: hundreds of tarballs, many from CPAN: the same as F32, whose checksum is padded too.
 

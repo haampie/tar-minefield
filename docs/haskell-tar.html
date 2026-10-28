@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Haskell tar · Tar file extraction test suite</title>
-<meta name="description" content="The 37 of 78 cases of the tar-minefield test suite where Haskell tar does not follow the draft default policy, and what it makes of them.">
+<meta name="description" content="The 40 of 81 cases of the tar-minefield test suite where Haskell tar does not follow the draft default policy, and what it makes of them.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="Haskell tar · Tar file extraction test suite">
-<meta property="og:description" content="The 37 of 78 cases of the tar-minefield test suite where Haskell tar does not follow the draft default policy, and what it makes of them.">
+<meta property="og:description" content="The 40 of 81 cases of the tar-minefield test suite where Haskell tar does not follow the draft default policy, and what it makes of them.">
 <link rel="stylesheet" href="style.css?80b3069c">
 <link rel="canonical" href="https://stoppels.ch/tar/haskell-tar.html">
 <meta property="og:url" content="https://stoppels.ch/tar/haskell-tar.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/3e53eb588cced954.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/c0760f0d97ba4464.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of every case of the test suite">
@@ -28,16 +28,16 @@
 <dt>Version</dt><dd>tar 0.7.2.0, extract, of GHC 9.14</dd>
 
 </dl>
-<p>This implementation follows the <a href="index.html#policy">default policy</a> in 41 of 78 cases:</p>
+<p>This implementation follows the <a href="index.html#policy">default policy</a> in 41 of 81 cases:</p>
 <ul>
-<li>it rejects 24 of the 60 cases to reject</li>
-<li>it extracts the expected tree in all 8 cases to accept</li>
+<li>it rejects 24 of the 61 cases to reject</li>
+<li>it extracts the expected tree in 8 of the 10 cases to accept</li>
 <li>it accepts 6 and rejects 3 of the 10 tolerated cases</li>
 </ul>
 <p class="note">The default policy is a working draft. Where an implementation does not do as it
 says, that can be a choice rather than a bug.</p>
-<p>On the other 37, it does not:</p>
-<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (36)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
+<p>On the other 40, it does not:</p>
+<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (37)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
 <tr><td><a href="F10.html"><code>F10</code></a> extended-pax-size-before-gnu-long</td><td>A pax <code>size</code> followed by a GNU long name: which of them does the size apply to?</td><td>extracts <code>long-name</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="F12.html"><code>F12</code></a> number-size-gap</td><td>A size with a space among its digits, which reads as two sizes.</td><td>extracts <code>a</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
@@ -60,6 +60,7 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="F34.html"><code>F34</code></a> size-on-hardlink</td><td>A size in the header of a hard link, in a pax archive, which takes the next header for its data.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>h</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F35.html"><code>F35</code></a> pax-size-on-hardlink</td><td>A pax <code>size</code> on a hard link, which takes the next header for its data.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>h</code> (2 B, 87428fc5), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="F36.html"><code>F36</code></a> pax-record-length-short</td><td>A pax record whose length is one byte short, so that it ends just before its newline.</td><td>extracts <code>from-header</code> (12 B, a578eb49)</td></tr>
+<tr><td><a href="F37.html"><code>F37</code></a> number-size-not-octal</td><td>A size with the digit 9, which is not octal.</td><td>extracts <code>a</code> (72 B, 1dd766f3)</td></tr>
 <tr><td><a href="N10.html"><code>N10</code></a> format-star</td><td>A ustar prefix whose end reads as star&#x27;s times, with star&#x27;s <code>tar\0</code> at offset 508.</td><td>extracts <code>ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /</code>, <code>ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="N11.html"><code>N11</code></a> gnu-prefix-field</td><td>The prefix field of a header with GNU magic, which GNU tar uses for times in incremental archives.</td><td>extracts <code>15000000000/</code>, <code>15000000000/a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="N13.html"><code>N13</code></a> name-backslash</td><td>A backslash in a name: a character on Unix, a separator on Windows.</td><td>extracts <code>a\b</code> (21 B, 15acfc39)</td></tr>
@@ -75,8 +76,10 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="S05.html"><code>S05</code></a> hardlink-to-later-member</td><td>A hardlink to a member that comes later.</td><td>extracts <code>f</code> (2 B, 092fcfbb), <code>h</code> (2 B, 092fcfbb)</td></tr>
 <tr><td><a href="S07.html"><code>S07</code></a> tree-duplicate-file-differs</td><td>The same file twice, with different contents: the first copy, or the last?</td><td>extracts <code>a</code> (5 B, 761d1fb1)</td></tr>
 <tr><td><a href="S09.html"><code>S09</code></a> tree-duplicate-file-identical</td><td>The same file twice, with the same contents.</td><td>extracts <code>a</code> (5 B, a6328afc)</td></tr></table></div>
-<h2 id="rejects"><span class="mark bad" title="rejects a case to accept, or extracts another tree than the expected one, or crashes on it" role="img" aria-label="rejects a case to accept, or extracts another tree than the expected one, or crashes on it">✗</span>Rejects cases to accept, or extracts another tree (1)<a class="anchor" href="#rejects" aria-label="Link to this section">¶</a></h2>
+<h2 id="rejects"><span class="mark bad" title="rejects a case to accept, or extracts another tree than the expected one, or crashes on it" role="img" aria-label="rejects a case to accept, or extracts another tree than the expected one, or crashes on it">✗</span>Rejects cases to accept, or extracts another tree (3)<a class="anchor" href="#rejects" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
+<tr><td><a href="N27.html"><code>N27</code></a> pax-long-symlink</td><td>A symlink with a long name and a long target, in a pax <code>path</code> and <code>linkpath</code> respectively.</td><td>extracts <code>llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll</code> → <code>tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt</code>, <code>tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt</code> (7 B, c97ecfda)</td></tr>
+<tr><td><a href="N28.html"><code>N28</code></a> pax-long-hardlink</td><td>A hard link with a long name and a long target, in a pax <code>path</code> and <code>linkpath</code> respectively.</td><td>extracts <code>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</code> (7 B, c97ecfda), <code>tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt</code> (7 B, c97ecfda)</td></tr>
 <tr><td><a href="F14.html"><code>F14</code></a> pax-size-disagrees</td><td>A pax <code>size</code> that disagrees with the header&#x27;s, so that a reader of the header&#x27;s misses a member.</td><td>extracts <code>a</code> (512 B, 917dba8e)</td></tr></table></div>
 
 <hr class="wide">
