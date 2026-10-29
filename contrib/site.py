@@ -222,9 +222,9 @@ def prevalence(k, n):
 
 
 # The footnote of the index for a prevalence marked with *
-UNMEASURED = ('<p class="note" id="unmeasured">* Not measured in some tarballs, which an earlier '
-              "version of <code>tarscan.py</code> scanned: it did not report this, and what it did "
-              "record does not rule it out. The case's page says how many.</p>")
+UNMEASURED = ('<p class="note" id="unmeasured">* Not measured in some tarballs, which were scanned '
+              "before the scan reported this, and what it did record does not rule it out. The "
+              "case's page says how many.</p>")
 
 
 def unmeasured(features, rows):
@@ -469,15 +469,15 @@ def error_line(error):
 
 # Cases that tarscan.py does not report as a feature of their own, and why: one it does not tell
 # apart from another, and one it stops at with an error
-UNTOLD = {"S07": "<code>tarscan.py</code> finds the same file twice, but does not compare the "
-                 "contents of the copies, so it does not tell this case from S09",
-          "F08": "<code>tarscan.py</code> stops at an archive cut short with an error, which none of "
-                 "the scanned tarballs has"}
+UNTOLD = {"S07": "the scan finds the same file twice, but does not compare the contents of the "
+                 "copies, so it does not tell this case from S09",
+          "F08": "the scan stops at an archive cut short with an error, which none of the scanned "
+                 "tarballs has"}
 # What a feature does not say, below the table of the tarballs that have it
-CAVEATS = {"tree.duplicate.file-file": "<code>tarscan.py</code> finds the same file twice, and does "
-           "not compare the contents of the copies: some of these may differ, as in S07.",
-           "end.zero-block-before-member": "<code>tarscan.py</code> counts a zero block followed "
-           "by any block that is not zero. In all of these, the scan then stops at a block that is "
+CAVEATS = {"tree.duplicate.file-file": "The scan finds the same file twice, and does not compare "
+           "the contents of the copies: some of these may differ, as in S07.",
+           "end.zero-block-before-member": "The scan counts a zero block followed by any block "
+           "that is not zero. In all of these, the scan then stops at a block that is "
            "not a valid header: no member follows the zero block, unlike in F09."}
 
 
@@ -511,7 +511,7 @@ def data_section(ident, features, names, short, rated, union):
     with them: a sentence where it rejects all or none of them for the features, and a column
     where it rejects some. seen-in.html lists them: all that it rejects, or else examples."""
     if not features:
-        why = UNTOLD.get(ident, "<code>tarscan.py</code> reports no feature of it on its own")
+        why = UNTOLD.get(ident, "the scan reports no feature of it on its own")
         return f"<p>This case is not measured in release tarballs: {why}.</p>"
 
     def has(r):
@@ -537,9 +537,9 @@ def data_section(ident, features, names, short, rated, union):
     policy = ("" if not k else " The default policy rejects some of them, as the last column "
               "says, and accepts the others." if mixed else " The default policy rejects all of "
               "them." if j else " The default policy accepts them.")
-    note = (f'<p class="note">* Not measured in {u:,} tarballs, which an earlier version of '
-            "<code>tarscan.py</code> scanned: it did not report this, and what it did record does "
-            "not rule it out. They are counted as not having it, so the share may be higher.</p>\n"
+    note = (f'<p class="note">* Not measured in {u:,} tarballs, which were scanned before the scan '
+            "reported this, and what it did record does not rule it out. They are counted as not "
+            "having it, so the share may be higher.</p>\n"
             if u else "")
     caveats = "".join(f'<p class="note">{CAVEATS[f]}</p>\n' for f in features if f in CAVEATS)
     return (

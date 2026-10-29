@@ -13,7 +13,7 @@ its first 131 bytes, as readers that recognize `tar\0` take it: `a` is then unde
 name ends in those numbers, or of the 131 `p`s alone.
 
 Decision point: whether `tar\0` at offset 508 makes the prefix field shorter.
-Seen in: berkeley-db 18.1.40 and ncurses 5.9, which are in star's format; `tarscan.py` does not
+Seen in: berkeley-db 18.1.40 and ncurses 5.9, which are in star's format; the scan does not
 record whether a prefix runs past 130 bytes.
 """
 
