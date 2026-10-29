@@ -1,7 +1,7 @@
 """An unknown typeflag with a size: data, or no data?
 
-The archive has a member `unknown` of typeflag `Z`, which no format defines, with the size 512. The
-512 bytes after its header also form a valid header, of an empty file `smuggled`.
+The archive has a member `unknown` of typeflag `Z`, which is not defined anywhere, with the size
+512. The 512 bytes after its header also form a valid header, of an empty file `smuggled`.
 
 [POSIX][unknown-type] says an unknown typeflag is read as a regular file, so those 512 bytes are the
 data of `unknown`. This case is ambiguous in practice because a reader that skips the member, rather
