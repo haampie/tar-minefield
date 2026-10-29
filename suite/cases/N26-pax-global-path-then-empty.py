@@ -7,7 +7,7 @@ In [POSIX][global], the first applies to every later member, and the second [del
 it again, so the file after them keeps the name in its header, `a`. POSIX deletes the global value
 by name; whether the deletion also reaches the name in the header, as for an empty `path` in an
 extended header, it leaves open, so the file may also be left without a name. This case is ambiguous
-in practice because a reader may instead take `path=` for an empty name, or ignore it and keep
+in practice because `path=` is also taken for an empty name, or ignored, so that the file is
 `global-name`.
 
 Decision point: whether an empty value in a global header removes an earlier global value.

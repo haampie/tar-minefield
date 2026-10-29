@@ -3,8 +3,8 @@
 The archive has a file `a`, then a hardlink `a` to `a`.
 
 In [POSIX][same-entry], extracting a hardlink to the same directory entry is an error. Read
-leniently, this case is ambiguous because the link replaces `a`, which then has nothing to link to,
-empties it, or leaves it as it is.
+leniently, this case is ambiguous because the link either replaces `a`, which then has nothing to
+link to, or leaves it as it is.
 
 Decision point: what a link to itself does to the file.
 Seen in: 27 tarballs, among them 18 of NVIDIA's cuDNN binaries in Spack, and xscreensaver 6.12

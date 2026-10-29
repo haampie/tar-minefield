@@ -4,7 +4,7 @@ The archive has a hardlink `h` to `f`, then the file `f`.
 
 In [POSIX][hardlink], the target of a hardlink is a file previously archived. Read leniently, this
 case is ambiguous because `h` either has nothing to link to yet, or is linked to `f` once the whole
-archive is read; a reader may also make it an empty file.
+archive is read.
 
 Decision point: whether the target of a hardlink can be a later member.
 Seen in: none of the scanned tarballs.
