@@ -113,6 +113,11 @@ SENTENCES = {
     "link-follows": (LINK, None, "If path1 names a symbolic link, it is implementation-defined"),
     "symlink-string": (SYMLINK, None, "shall be treated only as a string and shall not be "
                                       "validated as a pathname"),
+    "trailing-slash": (PATHNAMES, "tag_04_16", "ends with one or more trailing <slash> characters "
+                                               "shall not be resolved successfully unless"),
+    "symlink-slash": (SYMLINK, None, "The path2 argument contains at least one non-<slash> "
+                                     "character and ends with one or more trailing <slash> "
+                                     "characters"),
 }
 
 

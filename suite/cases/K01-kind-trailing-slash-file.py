@@ -3,12 +3,13 @@
 The archive has one member, whose header has typeflag `0`, a regular file, and size 0, but the name
 `a/`.
 
-In [POSIX][file-type], a member is extracted as a file of its own type, but a file cannot be created
-under a name that ends in a slash, so this is an error, or, as for an [invalid
-filename][invalid-name], it is up to the implementation whether to create the file `a`. A name that
-ends in a slash was the old way to archive a directory, as the [rationale][slash-convention] of
-POSIX recalls, but POSIX does not specify it. This case is ambiguous in practice because the member
-is either a directory `a`, by its trailing slash, or an empty file `a`, by its typeflag.
+In [POSIX][file-type], a member is extracted as a file of its own type, but a name that ends in a
+slash [resolves only to a directory][trailing-slash], so this is an [error][cannot-create], or, as
+for an [invalid filename][invalid-name], it is up to the implementation whether to create the file
+`a`. A name that ends in a slash was the old way to archive a directory, as the
+[rationale][slash-convention] of POSIX recalls, but POSIX does not specify it. This case is
+ambiguous in practice because the member is either a directory `a`, by its trailing slash, or an
+empty file `a`, by its typeflag.
 
 Decision point: whether the typeflag or the trailing slash decides the kind.
 Seen in: archives in the old v7 format, such as sendmail 8.18.2, tcp_wrappers 7.6 and
