@@ -4,8 +4,9 @@ The archive has two `x` headers, with `path=first` and `path=second`, then the m
 has the name `header-name`.
 
 [POSIX][last-wins] settles conflicting records within one extended header, where the last one wins,
-but not two extended headers for one file. This case is ambiguous because the name is `first`,
-`second`, or the header's own.
+but two extended headers for one file break the [sequence][sequence] that POSIX describes, and it
+does not say how to read them. This case is ambiguous because the name is `first`, `second`, or the
+header's own.
 
 Decision point: which of two extended headers of one kind applies.
 Seen in: none of the scanned tarballs. libmygpo-qt 1.2.0 repeats xattr keys within one header.

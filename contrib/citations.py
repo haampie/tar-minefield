@@ -35,6 +35,7 @@ PAX_EXTENDED = "tag_20_94_13_03"  # pax Extended Header
 PRECEDENCE = "tag_20_94_13_04"  # pax Extended Header Keyword Precedence
 USTAR = "tag_20_94_13_06"  # ustar Interchange Format
 RATIONALE_USTAR = "tag_20_94_18_03"  # RATIONALE: ustar Interchange Format
+FUTURE_DIRECTIONS = "tag_20_94_19"
 SENTENCES = {
     "end": (END, "there shall be two 512-byte blocks filled with binary zeros"),
     "version": (USTAR, 'The version field is two octets containing the characters "00"'),
@@ -107,6 +108,17 @@ SENTENCES = {
     "intermediate": (DESCRIPTION, "if intermediate directories are necessary to extract an archive "
                                   "member"),
     "cannot-create": (ERRORS, "If pax cannot create a file or a link when reading an archive"),
+    "x-assigned": (PRECEDENCE, "If there is a typeflag x extended header record, the affected "
+                               "attribute shall be assigned the <value>"),
+    "header-fallback": (PRECEDENCE, "Otherwise, the attribute shall be determined from the ustar "
+                                    "header block"),
+    "link-error": (DESCRIPTION, "it shall be an error if these files cannot be linked when the "
+                                "archive is extracted"),
+    "restore": (DESCRIPTION, "either the data shall be restored from the original file"),
+    "resolution": (DESCRIPTION, "The extracted files shall be created performing pathname "
+                                "resolution"),
+    "newline-error": (FUTURE_DIRECTIONS, "directed to create a new directory entry that contains any "
+                                         "bytes that have the encoded value of a <newline> character"),
     "slash-convention": (RATIONALE_USTAR, "the convention of using a filename ending with <slash> "
                                           "was adopted to specify a directory on the archive"),
     # Sentences of other pages, as (page, section or None, sentence)

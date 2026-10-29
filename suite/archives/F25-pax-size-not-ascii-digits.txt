@@ -8,9 +8,8 @@ The archive has a file `a`, whose pax header has the size `٥١٢`, which is 512
 In POSIX, a pax size is ASCII decimal digits. Python's `int` and Java's
 `Long.parseLong` take any decimal digit of Unicode, and so read it as 512. Read leniently, this case
 is ambiguous because the size is either 512, as read that way (and the next block is the data of
-`a`), or 0, as the header specifies (and the next block is the header of `smuggled`). Neither is a
-reading of POSIX: `٥١٢` is not a pax size, and the header's size is to be ignored
-once a `size` record is there.
+`a`), or 0, as the header specifies (and the next block is the header of `smuggled`). Neither
+follows from POSIX, which does not say what a `size` record that is not a decimal number means.
 
 Decision point: which digits a pax number may have.
 Seen in: none of the scanned tarballs.
