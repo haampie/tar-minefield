@@ -1,7 +1,8 @@
 """A symlink with an empty target.
 
-The member `link` is a symlink whose linkname field is empty, and there is no pax `linkpath`. A
-symlink to the empty string cannot be created on most systems. [POSIX][symlink] allows it: the
+The archive has one symlink, `link`, whose linkname field is empty, and no pax `linkpath`.
+
+A symlink to the empty string cannot be created on most systems. [POSIX][symlink] allows it: the
 contents of a symlink are stored in its linkname field, and `symlink()` [takes them as a
 string][symlink-string], not as a pathname; where the system refuses to create it, pax
 [reports][cannot-create] that it cannot create the link. This case is ambiguous in practice because

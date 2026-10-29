@@ -1,5 +1,7 @@
 """No end-of-archive marker: the archive ends after a complete member.
 
+The archive has a file `a`, and ends right after its data, without zero blocks.
+
 [POSIX][end] requires two zero blocks at the end of an archive. Without them, an archive cannot be
 told apart from one cut short after a member, but the implementations that extract it all extract
 the same tree, and ruby's release tarballs are written this way. The default policy extracts it: a

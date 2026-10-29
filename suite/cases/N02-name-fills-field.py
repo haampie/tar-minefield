@@ -1,7 +1,9 @@
 """A name of exactly 100 bytes, which fills the name field without a NUL.
 
-The name field is 100 `n`s, without a NUL. In [POSIX][name-full], the name field ends with a NUL
-except when all of its bytes are non-NUL, so the name is all 100 bytes.
+The archive has one file whose name is 100 `n`s, which fill the name field without a NUL.
+
+In [POSIX][name-full], the name field ends with a NUL except when all of its bytes are non-NUL, so
+the name is all 100 bytes.
 
 Seen in: thousands of tarballs.
 """

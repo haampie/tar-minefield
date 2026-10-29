@@ -1,5 +1,7 @@
 """An end-of-archive marker of one zero block, not two.
 
+The archive has a file `a`, then one zero block, and ends there.
+
 [POSIX][end] requires two zero blocks at the end of an archive; most implementations stop at the
 first, so they extract it all the same.
 

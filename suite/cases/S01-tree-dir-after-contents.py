@@ -1,6 +1,8 @@
 """A directory after its contents.
 
-The file `d/a` comes before the directory `d/`, so `d` already exists when `d/` is extracted.
+The archive has the file `d/a`, then the directory `d/`, so `d` already exists when `d/` is
+extracted.
+
 [POSIX][dir-exists] says that extracting a directory that already exists is not an error.
 
 Seen in: over a thousand tarballs.

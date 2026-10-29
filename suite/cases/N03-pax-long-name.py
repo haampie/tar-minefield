@@ -1,6 +1,7 @@
 """A name over 100 bytes, in a pax `path`.
 
-The pax path is the name; the header has a truncated one, as writers put there.
+The archive has one file whose pax `path` is its name, 60 `d`s, a slash and 60 `f`s, and whose
+header has that name cut to 100 bytes, as writers put there.
 
 Seen in: tarballs with long names from Python's `tarfile` and GNU tar in pax format.
 """

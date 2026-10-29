@@ -1,5 +1,7 @@
 """A negative base-256 size in the header, -512, which a member cannot have.
 
+The archive has a file `a`, whose size field is -512 in base 256, then an empty file `smuggled`.
+
 GNU tar writes numbers too large for octal in base 256: the first byte of the field is 0x80 for a
 positive number, and 0xff for a negative one, in two's complement. A negative size is meaningless,
 but the encoding allows it. Read leniently, this case is ambiguous because the size is 0, 512

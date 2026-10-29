@@ -1,5 +1,8 @@
 """An empty pax `path`, which in POSIX deletes a path: the pax one, or the header's name too?
 
+The archive has one file, whose pax header has an empty `path=`, and whose header has the name
+`from-header`.
+
 [POSIX][empty-value] says that a record with an empty value deletes any header block field of the
 same name, and that pax ignores a field of the header that a keyword deletes, its
 [corresponding][corresponding] field. No field of the header is named `path`, which

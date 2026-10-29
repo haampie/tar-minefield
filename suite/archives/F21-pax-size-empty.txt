@@ -2,6 +2,9 @@ F21-pax-size-empty: must reject
 
 An empty pax `size`, which in POSIX removes the size rather than giving one.
 
+The archive has a file `a`, whose header has the size 512 and whose pax header has an empty
+`size=`, then an empty file `smuggled`.
+
 POSIX says that a record with an empty value deletes the field of that name, in the
 header too, so `size=` leaves `a` with no size at all, not even the 512 of its header. It does not
 say what a member without a size is. Nor does the header's size stand in, as a header field that a

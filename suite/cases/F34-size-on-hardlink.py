@@ -1,13 +1,14 @@
 """A size in the header of a hard link, in a pax archive, which takes the next header for its data.
 
-The first member is a file `a`, the second a hard link `h` to `a`, with a pax extended header and
-the size 512 in its ustar header. In a pax archive, which this is, [POSIX][link-data] permits data
-on a hard link, so the block after the header of `h` is its data, and what looks like the header of
-`smuggled` is that data. POSIX does not say what the data of a hard link does: whether it replaces
-the contents of `a`, or is ignored. A reader that applies the [rule of ustar][no-data], that no data
-is stored for a hard link, reads `smuggled` as a member. This case is ambiguous because the tree has
-`a` as it is, `a` with that block as its contents, or `a` and `smuggled`. A reader may also make `h`
-a file of the block.
+The archive has a file `a`, then a hard link `h` to `a`, with a pax header and the size 512 in its
+header, then an empty file `smuggled`.
+
+In a pax archive, which this is, [POSIX][link-data] permits data on a hard link, so the block after
+the header of `h` is its data, and what looks like the header of `smuggled` is that data. POSIX does
+not say what the data of a hard link does: whether it replaces the contents of `a`, or is ignored. A
+reader that applies the [rule of ustar][no-data], that no data is stored for a hard link, reads
+`smuggled` as a member. This case is ambiguous because the tree has `a` as it is, `a` with that
+block as its contents, or `a` and `smuggled`. A reader may also make `h` a file of the block.
 
 Decision point: whether a size in the header of a hard link applies, in an archive with pax headers.
 Seen in: none of the scanned tarballs.

@@ -1,5 +1,8 @@
 r"""A newline in a pax `path`, which split on lines is another record.
 
+The archive has one file, `plain`, whose pax header has one record: a `path` with a newline in it,
+`good\n1 path=evil`.
+
 pax records are delimited by their length, so a value can contain a newline, and in
 [POSIX][record-length] the path is `good\n1 path=evil`. Split on lines instead, the extended header
 has a second record, `path=evil`, and the path is `good` or `evil`. This case is ambiguous in

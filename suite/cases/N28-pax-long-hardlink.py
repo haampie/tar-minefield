@@ -1,9 +1,11 @@
 """A hard link with a long name and a long target, in a pax `path` and `linkpath` respectively.
 
-The pax header has a `path` of 120 `h`s and a `linkpath` of 120 `t`s, and the hard link's header has
-truncated ones, as writers put there. In [POSIX][corresponding], a pax record overrides the
-corresponding field of the header, so the hard link is the 120 `h`s, and links to the file of 120
-`t`s before it.
+The archive has a file whose pax `path` is 120 `t`s, then a hard link to it, whose pax header has a
+`path` of 120 `h`s and a `linkpath` of 120 `t`s. Their headers have the names cut to 100 bytes, as
+writers put there.
+
+In [POSIX][corresponding], a pax record overrides the corresponding field of the header, so the hard
+link is the 120 `h`s, and links to the file of 120 `t`s before it.
 
 Seen in: pyDACP 1.0.1.
 """

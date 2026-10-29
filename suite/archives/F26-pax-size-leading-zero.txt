@@ -2,6 +2,9 @@ F26-pax-size-leading-zero: must reject
 
 A pax `size` with a leading zero, `0777`: 777 in decimal, as POSIX says, or 511 in octal.
 
+The archive has a file `a`, whose pax header has `size=0777` and whose header has the size 0, then
+two empty files, `smuggled-1` and `smuggled-2`.
+
 A pax size is decimal, and POSIX does not forbid leading zeros, so the size is 777.
 But a reader that converts with C's `strtoul(s, NULL, 0)`, or that knows the header's octal numbers,
 reads `0777` as octal, 511. This case is ambiguous in practice because the size is 777, in decimal,

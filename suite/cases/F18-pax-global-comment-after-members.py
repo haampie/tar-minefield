@@ -1,7 +1,9 @@
 """A global pax header with only a `comment`, after the first member.
 
-Between the members `a` and `b` is a global header, typeflag `g`, with the one record `comment=after
-a`. In [POSIX][comment], the value of a comment is ignored, so the header changes nothing for `b`.
+The archive has the files `a` and `b`, and between them a global header, typeflag `g`, with the one
+record `comment=after a`.
+
+In [POSIX][comment], the value of a comment is ignored, so the header changes nothing for `b`.
 
 Seen in: rpm 4.20.1 and x42-plugins 20230701.
 """

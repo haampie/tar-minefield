@@ -2,7 +2,9 @@ S01-tree-dir-after-contents: must accept, and extract its tree
 
 A directory after its contents.
 
-The file `d/a` comes before the directory `d/`, so `d` already exists when `d/` is extracted.
+The archive has the file `d/a`, then the directory `d/`, so `d` already exists when `d/` is
+extracted.
+
 POSIX says that extracting a directory that already exists is not an error.
 
 Seen in: over a thousand tarballs.

@@ -1,9 +1,11 @@
 """Two pax extended headers for one member, with different paths.
 
-Two `x` headers come before one member, with the paths `first` and `second`. [POSIX][last-wins]
-settles conflicting records within one extended header, where the last one wins, but not two
-extended headers for one file. This case is ambiguous because the name is `first`, `second`, or the
-header's own.
+The archive has two `x` headers, with `path=first` and `path=second`, then the member, whose header
+has the name `header-name`.
+
+[POSIX][last-wins] settles conflicting records within one extended header, where the last one wins,
+but not two extended headers for one file. This case is ambiguous because the name is `first`,
+`second`, or the header's own.
 
 Decision point: which of two extended headers of one kind applies.
 Seen in: none of the scanned tarballs. libmygpo-qt 1.2.0 repeats xattr keys within one header,

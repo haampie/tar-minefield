@@ -2,6 +2,9 @@ F24-pax-size-leading-space: must reject
 
 A pax `size` with a leading space, ` 512`, which conversions of strings to numbers skip.
 
+The archive has a file `a`, whose pax header has the size ` 512`, with a space before it, and whose
+header has the size 0, then an empty file `smuggled`.
+
 A pax record is `<length> <key>=<value>\n`, and its value starts right after the `=`: here, with a
 space. In POSIX, a pax size is decimal digits only, but Python's `int` and C's
 `strtoull` skip leading whitespace, and read 512. Read leniently, this case is ambiguous because the

@@ -2,10 +2,12 @@ N27-pax-long-symlink: must accept, and extract its tree
 
 A symlink with a long name and a long target, in a pax `path` and `linkpath` respectively.
 
-The pax header has a `path` of 120 `l`s and a `linkpath` of 120 `t`s, and the symlink's header has
-truncated ones, as writers put there. In POSIX, a pax record overrides the
-corresponding field of the header, so the symlink is the 120 `l`s, and points to the file of 120
-`t`s before it.
+The archive has a file whose pax `path` is 120 `t`s, then a symlink to it, whose pax header has a
+`path` of 120 `l`s and a `linkpath` of 120 `t`s. Their headers have the names cut to 100 bytes, as
+writers put there.
+
+In POSIX, a pax record overrides the corresponding field of the header, so the
+symlink is the 120 `l`s, and points to the file of 120 `t`s before it.
 
 Seen in: gnome-software 49.3.
 

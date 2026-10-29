@@ -1,10 +1,11 @@
 """A member under a file.
 
-The first member is a file `a`, the second a file `a/b` in it. In [POSIX][intermediate], the
-directory `a` that `a/b` needs is made as with `mkdir()`, which fails as `a` exists, so `a` is kept,
-`a/b` is not created, and pax [reports][cannot-create] it. This case is ambiguous in practice
-because a reader may also replace the file `a` with a directory, which is what the archives below
-mean.
+The archive has a file `a`, then a file `a/b` in it.
+
+In [POSIX][intermediate], the directory `a` that `a/b` needs is made as with `mkdir()`, which fails
+as `a` exists, so `a` is kept, `a/b` is not created, and pax [reports][cannot-create] it. This case
+is ambiguous in practice because a reader may also replace the file `a` with a directory, which is
+what the archives below mean.
 
 Decision point: whether a member under a file replaces it.
 Seen in: sendmail 8.18.2 and unclutter 8, where the file is a v7 directory named `a/`.

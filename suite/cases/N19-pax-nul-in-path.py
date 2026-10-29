@@ -1,9 +1,11 @@
 r"""A NUL inside a pax `path`.
 
-The pax path is `a\0b`. In [POSIX][value-data], a NUL in a pax value is data, so the path is
-invalid, and pax by default [bypasses][bypass] a file whose name has an [embedded
-NUL][embedded-nul]. This case is ambiguous in practice because the path is `a`, cut at the NUL,
-`a_b` or the like, with the NUL replaced, or discarded for the header's name, `header-name`.
+The archive has one file, whose pax `path` is `a\0b` and whose header has the name `header-name`.
+
+In [POSIX][value-data], a NUL in a pax value is data, so the path is invalid, and pax by default
+[bypasses][bypass] a file whose name has an [embedded NUL][embedded-nul]. This case is ambiguous in
+practice because the path is `a`, cut at the NUL, `a_b` or the like, with the NUL replaced, or
+discarded for the header's name, `header-name`.
 
 Decision point: where a pax path ends.
 Seen in: none of the scanned tarballs.

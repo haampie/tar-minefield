@@ -1,6 +1,8 @@
 """A pax `size` that disagrees with the header's, so that a reader of the header's misses a member.
 
-The size field in the header of `a` is 512, and its pax extended header has `size=0`.
+The archive has a file `a`, whose header has the size 512 and whose pax header has `size=0`, then
+an empty file `smuggled`.
+
 [POSIX][size-override] says that the pax size overrides the header's: it is how sizes over 8 GiB,
 which do not fit in the header's size field, are written, and archivers write various sizes in the
 header then. An implementation that takes the pax size, as it must, reads the next block as the

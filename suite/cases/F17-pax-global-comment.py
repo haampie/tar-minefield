@@ -1,8 +1,11 @@
 """The global pax header with only a `comment`, as `git archive` writes it.
 
-A tarball created with `git archive` from a commit or a tag starts with a global header whose only
-record is the commit, as a `comment`, which does not affect extraction. GitHub's release tarballs
-are made this way, so a strict parser that rejects global headers rejects most of them.
+The archive starts with a global header whose only record is a `comment` with a commit, then has a
+directory `project/` with a file `README`.
+
+A tarball created with `git archive` from a commit or a tag starts with such a global header, and
+its comment does not affect extraction. GitHub's release tarballs are made this way, so a strict
+parser that rejects global headers rejects most of them.
 
 Seen in: tarballs created with `git archive`, such as GitHub's release tarballs.
 """

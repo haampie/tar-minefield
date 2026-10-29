@@ -2,6 +2,9 @@ F27-pax-size-too-large: must reject
 
 A pax `size` of 2^64 + 512, which wraps around to 512 in 64 bits.
 
+The archive has a file `a`, whose pax header has the size 2^64 + 512 and whose header has the size
+0, then an empty file `smuggled`.
+
 pax numbers can be of any length, but many implementations keep sizes in 64 bits. In
 POSIX, the size is 2^64 + 512, which runs past the end of the archive. Read
 leniently, this case is ambiguous because the size is also the header's, 0, with the pax size
