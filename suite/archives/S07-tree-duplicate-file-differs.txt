@@ -5,8 +5,8 @@ The same file twice, with different contents: the first copy, or the last?
 The archive has two files named `a`: the first contains `first`, the last `last`.
 
 This case is ambiguous because either copy can be the file, and the two trees differ in the contents
-of `a`: every implementation that extracts it keeps the last copy, but an extractor that does not
-overwrite files, such as GNU tar with `--keep-old-files`, keeps the first.
+of `a`: an extractor that overwrites files keeps the last copy, and one that does not, such as GNU
+tar with `--keep-old-files`, keeps the first.
 
 Decision point: which of two members of one path is the file.
 Seen in: fish 4.7.1, where `Cargo.toml` and `Cargo.lock` are appended again without their last

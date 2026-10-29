@@ -2,10 +2,7 @@
 
 The archive has the directory `d/`, then `d/sub/` twice, then the file `d/sub/f`.
 
-[POSIX][dir-exists] says that extracting a directory that already exists is not an error. The file
-is there so that no directory is empty, which some implementations leave out. `tar cf x.tar d d/sub`
-also writes the files in `d/sub` twice: bsdtar and BusyBox as two copies, which S09 rejects, and GNU
-tar the second as a hard link to itself, which S04 rejects.
+[POSIX][dir-exists] says that extracting a directory that already exists is not an error.
 
 Seen in: over a hundred tarballs.
 """

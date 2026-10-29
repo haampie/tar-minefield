@@ -444,7 +444,8 @@ Work on archives specifically:
 - Is a single verdict per case enough, or do some cases need a verdict per use (software
   distribution versus backups, where owners and modes matter)?
 - Which normalizations of names are interpretation (`./a` is `a`) and which are a reason to
-  reject? The default policy normalizes `./a`, `.`, `a/./b` and `a//b`, and rejects the rest.
+  reject? The default policy tolerates `./a`, `.`, `a/./b` and `a//b`, as the paths they name, and
+  rejects the rest.
 - How should a rule that only old tarballs break be handled: tolerated, or rejected with an
   allowlist? The default policy rejects them, as the tarballs they reject are few: a package that
   needs one can allow it by the tarball's sha256.

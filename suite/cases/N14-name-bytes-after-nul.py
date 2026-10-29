@@ -6,9 +6,8 @@ In [POSIX][name-nul], a name ends at its first NUL, so the name is `a`. Copied a
 is `a` as a C string, which ends at the first NUL, but `a\0b` in languages whose strings can contain
 a NUL, and creating the file then fails.
 
-Implementations that extract it make `a`, or fail on `a\0b`. The bytes after the NUL have no meaning
-and no writer puts them there (none of the scanned tarballs has them), so a strict parser rejects
-them rather than guess what they are for.
+The bytes after the NUL have no meaning and no writer puts them there (none of the scanned tarballs
+has them), so a strict parser rejects them rather than guess what they are for.
 
 Decision point: where a name ends.
 Seen in: none of the scanned tarballs.

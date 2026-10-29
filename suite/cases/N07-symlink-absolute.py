@@ -3,7 +3,8 @@
 The archive has one symlink, `link`, to `/tar-minefield-nonexistent`, an absolute path that does not
 exist.
 
-The default policy creates the link, and rejects writing through any symlink.
+The default policy tolerates it, and rejects an archive that writes through a symlink, as S10 and
+S11 do.
 
 Seen in: tachyon 0.99.5, notmuch 0.40 and others.
 """

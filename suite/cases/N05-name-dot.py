@@ -2,8 +2,7 @@
 
 The archive has the directory `./`, then the file `a`.
 
-The directory `./` is the one the archive is extracted into, and the default policy normalizes it to
-the root of the tree.
+The directory `./` is the one the archive is extracted into, the root of the tree.
 
 Seen in: Guix's bootstrap guile-2.0.9.tar.xz and others.
 """

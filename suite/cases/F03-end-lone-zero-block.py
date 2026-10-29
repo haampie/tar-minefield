@@ -2,8 +2,8 @@
 
 The archive has a file `a`, then one zero block, and ends there.
 
-[POSIX][end] requires two zero blocks at the end of an archive; most implementations stop at the
-first, so they extract it all the same.
+[POSIX][end] requires two zero blocks at the end of an archive. A reader that stops at the one zero
+block and one that reads to the end of the file extract the same tree.
 
 Decision point: whether one zero block is an end-of-archive marker.
 Seen in: eng-rus, srecord 1.64 and cdi2iso 0.1.
