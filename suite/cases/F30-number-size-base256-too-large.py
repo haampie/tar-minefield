@@ -3,7 +3,7 @@
 The archive has a file `a`, whose size field is 2^64 + 512 in base 256, then an empty file
 `smuggled`.
 
-A base-256 number has 11 bytes, 88 bits, after its first byte, 0x80, but many implementations keep
+A base-256 number has 11 bytes, 88 bits, after its first byte, `0x80`, but many implementations keep
 sizes in 64 bits. The whole number runs past the end of the archive. Read leniently, this case is
 ambiguous because its low 64 bits are 512, which makes the next block the data of `a`; a reader that
 skips the header instead extracts the next block as a file `smuggled`, without `a`.

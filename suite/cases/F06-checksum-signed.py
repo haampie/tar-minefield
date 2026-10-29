@@ -1,7 +1,7 @@
 """A checksum that only matches as the signed sum of the header.
 
-The archive has one file, `a`, with the byte 0xe9 in its `uname`, and a checksum that is the sum of
-the bytes of its header taken as signed numbers.
+The archive has one file, `a`, with the byte `0xe9` in its `uname`, and a checksum that is the sum
+of the bytes of its header taken as signed numbers.
 
 In [POSIX][checksum], the checksum is the sum of the bytes of a header taken as unsigned numbers.
 Some old tars added them as signed. With a byte over 127 in the header, the two totals differ, and

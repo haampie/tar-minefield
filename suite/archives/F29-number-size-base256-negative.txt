@@ -4,8 +4,8 @@ A negative base-256 size in the header, -512, which a member cannot have.
 
 The archive has a file `a`, whose size field is -512 in base 256, then an empty file `smuggled`.
 
-GNU tar writes numbers too large for octal in base 256: the first byte of the field is 0x80 for a
-positive number, and 0xff for a negative one, in two's complement. A negative size is meaningless,
+GNU tar writes numbers too large for octal in base 256: the first byte of the field is `0x80` for a
+positive number, and `0xff` for a negative one, in two's complement. A negative size is meaningless,
 but the encoding allows it. Read leniently, this case is ambiguous because the size is 0, 512
 without its sign, or the field read as an unsigned number. With 0 the next block is the header of
 `smuggled`, with 512 the data of `a`, and the unsigned number runs past the end of the archive.
