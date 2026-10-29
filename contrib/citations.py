@@ -84,23 +84,23 @@ SENTENCES = {
     "hardlink": (USTAR, "Represents a file linked to another file, of any type, previously "
                         "archived"),
     "sequence": (END, "Each file archived shall be represented by the following sequence"),
-    "global-files": (PAX_HEADER, "Represents global extended header records for the following files "
-                                 "in the archive"),
+    "global-files": (PAX_HEADER, "Represents global extended header records for the following "
+                                 "files in the archive"),
     "path": (PAX_EXTENDED, "This record shall override the name and prefix fields in the following "
                            "header block(s)"),
-    "ascii-header": (USTAR, "All characters in the header logical record shall be represented in the "
-                            "coded character set"),
+    "ascii-header": (USTAR, "All characters in the header logical record shall be represented in "
+                            "the coded character set"),
     "embedded-nul": (OPTIONS, "the name may contain embedded NULs"),
     "bypass": (OPTIONS, "pax shall act as if -oinvalid=bypass were specified"),
     "untranslatable": (STDERR, "cannot be translated between the codeset in use for that extended "
                                "header record and the character set of the current locale"),
-    "overwritten": (OUTPUT_FILES, "existing files in the destination hierarchy shall be overwritten "
-                                  "only when all permission"),
+    "overwritten": (OUTPUT_FILES, "existing files in the destination hierarchy shall be "
+                                  "overwritten only when all permission"),
     "intermediate": (DESCRIPTION, "if intermediate directories are necessary to extract an archive "
                                   "member"),
     "cannot-create": (ERRORS, "If pax cannot create a file or a link when reading an archive"),
-    "slash-convention": (RATIONALE_USTAR, "the convention of using a filename ending with <slash> was "
-                                          "adopted to specify a directory on the archive"),
+    "slash-convention": (RATIONALE_USTAR, "the convention of using a filename ending with <slash> "
+                                          "was adopted to specify a directory on the archive"),
 }
 
 
