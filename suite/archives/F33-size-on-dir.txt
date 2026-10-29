@@ -8,7 +8,7 @@ In POSIX, no data is stored for a directory, whatever its size, so the next bloc
 header of a file, `dir/smuggled`. This case is ambiguous in practice because, if the size applies,
 that block is the directory's data instead, and the tree is a directory alone.
 
-Decision point: whether a size in the header applies to a member without data.
+Decision point: whether the size in the header of a directory applies.
 Seen in: none of the scanned tarballs.
 See also: F15, a pax `size` on a directory, and F34, a size in the header of a hard link, which
 are rejected as well.
