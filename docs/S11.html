@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a symlink <code>d</code> to <code>..</code>, then a file <code>d/tar-minefield-through-symlink</code>.</p>
-<p>The case is rejected because the file, written through the link, lands in the parent of the destination, not because it is ambiguous. The file is harmless.</p>
+<p>The case is rejected because the file, written through the link, lands in the parent of the destination, not because it is ambiguous. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a>, files are created by pathname resolution, which follows the link. The file is harmless.</p>
 <p><strong>Decision point:</strong> whether a member may be written through a symlink.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,7 +55,8 @@ A member written through a symlink, which points out of the destination.
 The archive has a symlink `d` to `..`, then a file `d/tar-minefield-through-symlink`.
 
 The case is rejected because the file, written through the link, lands in the parent of the
-destination, not because it is ambiguous. The file is harmless.
+destination, not because it is ambiguous. In POSIX, files are created by pathname
+resolution, which follows the link. The file is harmless.
 
 Decision point: whether a member may be written through a symlink.
 Seen in: none of the scanned tarballs.

@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one member, whose header has typeflag <code>0</code>, a regular file, and size 0, but the name <code>a/</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">POSIX</a>, a member is extracted as a file of its own type, but a name that ends in a slash <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=ends%20with%20one%20or%20more%20trailing%20%3Cslash%3E%20characters%20shall%20not%20be%20resolved%20successfully%20unless">resolves only to a directory</a>, so this is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">error</a>, or, as for an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=invalid%20filename%2C%20it%20is%20implementation%2Ddefined%20whether%20the%20data%20from%20the%20file%20is%20stored%20on%20the%20file%20hierarchy">invalid filename</a>, it is up to the implementation whether to create the file <code>a</code>. A name that ends in a slash was the old way to archive a directory, as the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_18_03:~:text=the%20convention%20of%20using%20a%20filename%20ending%20with%20%3Cslash%3E%20was%20adopted%20to%20specify%20a%20directory%20on%20the%20archive">rationale</a> of POSIX recalls, but POSIX does not specify it. This case is ambiguous in practice because the member is either a directory <code>a</code>, by its trailing slash, or an empty file <code>a</code>, by its typeflag.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">POSIX</a>, a member is extracted as a file of its own type, but a name that ends in a slash <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=ends%20with%20one%20or%20more%20trailing%20%3Cslash%3E%20characters%20shall%20not%20be%20resolved%20successfully%20unless">resolves only to a directory</a>, so this is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">error</a>. A name that ends in a slash was the old way to archive a directory, as the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_18_03:~:text=the%20convention%20of%20using%20a%20filename%20ending%20with%20%3Cslash%3E%20was%20adopted%20to%20specify%20a%20directory%20on%20the%20archive">rationale</a> of POSIX recalls, but POSIX does not specify it. This case is ambiguous in practice because the member is either a directory <code>a</code>, by its trailing slash, or an empty file <code>a</code>, by its typeflag.</p>
 <p><strong>Decision point:</strong> whether the typeflag or the trailing slash decides the kind.</p>
 <p><strong>Seen in:</strong> archives in the old v7 format, such as sendmail 8.18.2, tcp_wrappers 7.6 and unclutter 8.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -56,12 +56,10 @@ The archive has one member, whose header has typeflag `0`, a regular file, and s
 `a/`.
 
 In POSIX, a member is extracted as a file of its own type, but a name that ends in a
-slash resolves only to a directory, so this is an error, or, as
-for an invalid filename, it is up to the implementation whether to create the file
-`a`. A name that ends in a slash was the old way to archive a directory, as the
-rationale of POSIX recalls, but POSIX does not specify it. This case is
-ambiguous in practice because the member is either a directory `a`, by its trailing slash, or an
-empty file `a`, by its typeflag.
+slash resolves only to a directory, so this is an error. A name
+that ends in a slash was the old way to archive a directory, as the rationale of
+POSIX recalls, but POSIX does not specify it. This case is ambiguous in practice because the member
+is either a directory `a`, by its trailing slash, or an empty file `a`, by its typeflag.
 
 Decision point: whether the typeflag or the trailing slash decides the kind.
 Seen in: archives in the old v7 format, such as sendmail 8.18.2, tcp_wrappers 7.6 and

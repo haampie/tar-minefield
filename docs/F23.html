@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, whose pax header has <code>size=+512</code> and whose header has the size 0, then an empty file <code>smuggled</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a>, a pax size is decimal digits, without a sign. But the conversions of strings to numbers that implementations use, such as Python&#x27;s <code>int</code>, Go&#x27;s <code>strconv.ParseInt</code> and Rust&#x27;s <code>u64::from_str</code>, read <code>+512</code> as 512. Read leniently, this case is ambiguous because the size is either 512, as read that way (and the next block is the data of <code>a</code>), or 0, as the header specifies (and the next block is the header of <code>smuggled</code>). Neither is a reading of POSIX: <code>+512</code> is not a pax size, and the header&#x27;s size is to be <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">ignored</a> once a <code>size</code> record is there.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a>, a pax size is decimal digits, without a sign. But the conversions of strings to numbers that implementations use, such as Python&#x27;s <code>int</code>, Go&#x27;s <code>strconv.ParseInt</code> and Rust&#x27;s <code>u64::from_str</code>, read <code>+512</code> as 512. Read leniently, this case is ambiguous because the size is either 512, as read that way (and the next block is the data of <code>a</code>), or 0, as the header specifies (and the next block is the header of <code>smuggled</code>). Neither follows from POSIX, which does not say what a <code>size</code> record that is not a decimal number means.</p>
 <p><strong>Decision point:</strong> whether a pax size may have a sign.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -59,9 +59,8 @@ In POSIX, a pax size is decimal digits, without a sign. But the conversions of
 strings to numbers that implementations use, such as Python&#x27;s `int`, Go&#x27;s `strconv.ParseInt` and
 Rust&#x27;s `u64::from_str`, read `+512` as 512. Read leniently, this case is ambiguous because the size
 is either 512, as read that way (and the next block is the data of `a`), or 0, as the header
-specifies (and the next block is the header of `smuggled`). Neither is a reading of POSIX: `+512` is
-not a pax size, and the header&#x27;s size is to be ignored once a `size` record is
-there.
+specifies (and the next block is the header of `smuggled`). Neither follows from POSIX, which does
+not say what a `size` record that is not a decimal number means.
 
 Decision point: whether a pax size may have a sign.
 Seen in: none of the scanned tarballs.

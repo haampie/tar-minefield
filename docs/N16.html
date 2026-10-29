@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one file, <code>tar-minefield/../../tar-minefield-escaped</code>, whose name resolves to a path outside the destination.</p>
-<p>The case is rejected because the name, taken as it is, leads out of the destination, not because it is ambiguous. The file is harmless: its name and contents say what happened.</p>
+<p>The case is rejected because the name, taken as it is, leads out of the destination, not because it is ambiguous. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a>, files are created by pathname resolution, which follows the name out of the destination. The file is harmless: its name and contents say what happened.</p>
 <p><strong>Decision point:</strong> whether a name with <code>..</code> is rejected, rewritten, skipped, or followed.</p>
 <p><strong>Seen in:</strong> 4 PyPI sdists, such as spdk 26.9 (<code>spdk-26.9/../scripts/rpc.py</code>) and bt-test-interfaces 0.0.5, whose <code>bt-test-interfaces-0.0.5/../.git/config</code> lands next to the top directory.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -56,7 +56,8 @@ The archive has one file, `tar-minefield/../../tar-minefield-escaped`, whose nam
 outside the destination.
 
 The case is rejected because the name, taken as it is, leads out of the destination, not because it
-is ambiguous. The file is harmless: its name and contents say what happened.
+is ambiguous. In POSIX, files are created by pathname resolution, which follows the
+name out of the destination. The file is harmless: its name and contents say what happened.
 
 Decision point: whether a name with `..` is rejected, rewritten, skipped, or followed.
 Seen in: 4 PyPI sdists, such as spdk 26.9 (`spdk-26.9/../scripts/rpc.py`) and bt-test-interfaces

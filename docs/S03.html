@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one member, <code>h</code>, a hardlink to <code>missing</code>, which is not in the archive.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file previously archived, which <code>missing</code> is not. Read leniently, this case is ambiguous because the link is skipped, or made to a file of that name that already exists where the archive is extracted.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file previously archived, which <code>missing</code> is not, and a link that cannot be made is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=it%20shall%20be%20an%20error%20if%20these%20files%20cannot%20be%20linked%20when%20the%20archive%20is%20extracted">error</a>. This case is ambiguous because the link is either an error, or, as data may also be <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=either%20the%20data%20shall%20be%20restored%20from%20the%20original%20file">restored from the original file</a>, made to a file of that name that already exists where the archive is extracted.</p>
 <p><strong>Decision point:</strong> what a hardlink to nothing does.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,8 +55,9 @@ A hardlink to a member that is not in the archive.
 The archive has one member, `h`, a hardlink to `missing`, which is not in the archive.
 
 In POSIX, the target of a hardlink is a file previously archived, which `missing` is
-not. Read leniently, this case is ambiguous because the link is skipped, or made to a file of that
-name that already exists where the archive is extracted.
+not, and a link that cannot be made is an error. This case is ambiguous because the
+link is either an error, or, as data may also be restored from the original file, made to
+a file of that name that already exists where the archive is extracted.
 
 Decision point: what a hardlink to nothing does.
 Seen in: none of the scanned tarballs.

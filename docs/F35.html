@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, then a hard link <code>h</code> to <code>a</code>, whose pax header has <code>size=512</code>, then an empty file <code>smuggled</code>.</p>
-<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=data%20blocks%20for%20files%20of%20typeflag%201%20%28the%20digit%20one%29%20%28hard%20link%29%20may%20be%20included">POSIX</a> permits data on a hard link in pax, which this is, so the next block is the data of <code>h</code>, but does not say what that data does: whether it replaces the contents of <code>a</code>, or is ignored. A reader that applies the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=No%20data%20logical%20records%20are%20stored%20for%20types%201%2C%202%2C%20or%205">rule of ustar</a>, that no data is stored for a hard link, reads the block as the header of a file, <code>smuggled</code>. This case is ambiguous because the tree has <code>a</code> as it is, <code>a</code> with that block as its contents, or <code>a</code> and <code>smuggled</code>.</p>
+<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=data%20blocks%20for%20files%20of%20typeflag%201%20%28the%20digit%20one%29%20%28hard%20link%29%20may%20be%20included">POSIX</a> permits data on a hard link in pax, which its <code>x</code> header suggests, so the next block is the data of <code>h</code>, but does not say what that data does: whether it replaces the contents of <code>a</code>, or is ignored. A reader that reads it as ustar, in which <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=No%20data%20logical%20records%20are%20stored%20for%20types%201%2C%202%2C%20or%205">no data</a> is stored for a hard link, reads the block as the header of a file, <code>smuggled</code>; the bytes do not say which it is. This case is ambiguous because the tree has <code>a</code> as it is, <code>a</code> with that block as its contents, or <code>a</code> and <code>smuggled</code>.</p>
 <p><strong>Decision point:</strong> whether a pax size applies to a hard link.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,11 +55,12 @@ A pax `size` on a hard link, which takes the next header for its data.
 The archive has a file `a`, then a hard link `h` to `a`, whose pax header has `size=512`, then an
 empty file `smuggled`.
 
-POSIX permits data on a hard link in pax, which this is, so the next block is the data
-of `h`, but does not say what that data does: whether it replaces the contents of `a`, or is
-ignored. A reader that applies the rule of ustar, that no data is stored for a hard link,
-reads the block as the header of a file, `smuggled`. This case is ambiguous because the tree has `a`
-as it is, `a` with that block as its contents, or `a` and `smuggled`.
+POSIX permits data on a hard link in pax, which its `x` header suggests, so the next
+block is the data of `h`, but does not say what that data does: whether it replaces the contents of
+`a`, or is ignored. A reader that reads it as ustar, in which no data is stored for a
+hard link, reads the block as the header of a file, `smuggled`; the bytes do not say which it is.
+This case is ambiguous because the tree has `a` as it is, `a` with that block as its contents, or
+`a` and `smuggled`.
 
 Decision point: whether a pax size applies to a hard link.
 Seen in: none of the scanned tarballs.

@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one file, <code>a\nb</code>, with a newline in its name.</p>
-<p>The name is valid on Unix, as is any name with a control character, <code>[\x01-\x1f\x7f]</code>. A tar reader has no other way to read it: the risk is in what is done with the name afterwards, where a newline makes it look like two names, <code>a</code> and <code>b</code>, in the output of <code>ls</code> piped to another command, in manifests and in scripts, and a carriage return or ESC makes a terminal show another name. A strict parser may reject it; the default policy tolerates it.</p>
+<p>The name is valid on Unix, as is any name with a control character, <code>[\x01-\x1f\x7f]</code>. POSIX <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_19:~:text=directed%20to%20create%20a%20new%20directory%20entry%20that%20contains%20any%20bytes%20that%20have%20the%20encoded%20value%20of%20a%20%3Cnewline%3E%20character">encourages</a> treating it as an error, but a reader that creates it has no other way to read it: the risk is in what is done with the name afterwards, where a newline makes it look like two names, <code>a</code> and <code>b</code>, in the output of <code>ls</code> piped to another command, in manifests and in scripts, and a carriage return or ESC makes a terminal show another name. A strict parser may reject it; the default policy tolerates it.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a\x0ab</code></td><td>file</td><td>21 bytes, sha256 <code title="93d2f8418e760b244545798b892899921327396ea6913af7482bd1c845b9d2bb">93d2f841</code></td></tr></table></div>
@@ -56,11 +56,12 @@ A control character in a name, here a newline, created as it is.
 
 The archive has one file, `a\nb`, with a newline in its name.
 
-The name is valid on Unix, as is any name with a control character, `[\x01-\x1f\x7f]`. A tar reader
-has no other way to read it: the risk is in what is done with the name afterwards, where a newline
-makes it look like two names, `a` and `b`, in the output of `ls` piped to another command, in
-manifests and in scripts, and a carriage return or ESC makes a terminal show another name. A strict
-parser may reject it; the default policy tolerates it.
+The name is valid on Unix, as is any name with a control character, `[\x01-\x1f\x7f]`. POSIX
+encourages treating it as an error, but a reader that creates it has no other way
+to read it: the risk is in what is done with the name afterwards, where a newline makes it look like
+two names, `a` and `b`, in the output of `ls` piped to another command, in manifests and in scripts,
+and a carriage return or ESC makes a terminal show another name. A strict parser may reject it; the
+default policy tolerates it.
 
 Seen in: gocryptfs 2.5.1 and deja-vu 0.4, with newlines, and cdrtools 3.02a09, wgrib2 3.6.0 and
 apktool 2.6.0, with ESC and DEL.

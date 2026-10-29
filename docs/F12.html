@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, whose size field is <code>000000 1000</code>, with a space among its digits, then an empty file <code>smuggled</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20numeric%20field%20is%20terminated%20by%20one%20or%20more%20%3Cspace%3E%20or%20NUL%20characters">POSIX</a>, a numeric field is octal digits terminated by spaces or NULs, and nothing follows them. Read leniently, this case is ambiguous because the size is either 0, if the number ends at the first blank (and the next block is the header of <code>smuggled</code>), or 1000 octal, which is 512, if the blank is skipped (and the next block is the data of <code>a</code>).</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20numeric%20field%20is%20terminated%20by%20one%20or%20more%20%3Cspace%3E%20or%20NUL%20characters">POSIX</a>, a numeric field is octal digits terminated by spaces or NULs; it does not say what may follow the terminator. Read leniently, this case is ambiguous because the size is either 0, if the number ends at the first blank (and the next block is the header of <code>smuggled</code>), or 1000 octal, which is 512, if the blank is skipped (and the next block is the data of <code>a</code>).</p>
 <p><strong>Decision point:</strong> how a numeric field with a space among its digits is read.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,10 +55,10 @@ A size with a space among its digits, which reads as two sizes.
 The archive has a file `a`, whose size field is `000000 1000`, with a space among its digits, then
 an empty file `smuggled`.
 
-In POSIX, a numeric field is octal digits terminated by spaces or NULs, and nothing
-follows them. Read leniently, this case is ambiguous because the size is either 0, if the number
-ends at the first blank (and the next block is the header of `smuggled`), or 1000 octal, which is
-512, if the blank is skipped (and the next block is the data of `a`).
+In POSIX, a numeric field is octal digits terminated by spaces or NULs; it does not say
+what may follow the terminator. Read leniently, this case is ambiguous because the size is either 0,
+if the number ends at the first blank (and the next block is the header of `smuggled`), or 1000
+octal, which is 512, if the blank is skipped (and the next block is the data of `a`).
 
 Decision point: how a numeric field with a space among its digits is read.
 Seen in: none of the scanned tarballs.

@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a symlink <code>a</code> to <code>target</code>, then a file <code>a</code>.</p>
-<p>This case is ambiguous because the file either replaces the link, or is written through it, to <code>target</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a>, files are created by pathname resolution, which follows a symlink, but a member is also extracted as a file of its <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">own type</a>. This case is ambiguous because the file either replaces the link, or is written through it, to <code>target</code>.</p>
 <p><strong>Decision point:</strong> whether writing a member follows a symlink in its place.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -54,8 +54,9 @@ A symlink, then a file of the same name: replace the link, or write through it?
 
 The archive has a symlink `a` to `target`, then a file `a`.
 
-This case is ambiguous because the file either replaces the link, or is written through it, to
-`target`.
+In POSIX, files are created by pathname resolution, which follows a symlink, but a
+member is also extracted as a file of its own type. This case is ambiguous because the
+file either replaces the link, or is written through it, to `target`.
 
 Decision point: whether writing a member follows a symlink in its place.
 Seen in: none of the scanned tarballs.

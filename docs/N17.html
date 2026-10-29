@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one file whose name field is all NULs.</p>
-<p>The name is an empty pathname, which <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=A%20null%20pathname%20shall%20not%20be%20successfully%20resolved">does not resolve</a>, so it would create an invalid filename. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=invalid%20filename%2C%20it%20is%20implementation%2Ddefined%20whether%20the%20data%20from%20the%20file%20is%20stored%20on%20the%20file%20hierarchy">POSIX</a>, it is then implementation-defined whether the member is stored, and under what name, and pax may <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=file%20hierarchy%20and%20under%20what%20name%20it%20is%20stored.%20The%20pax%20utility%20may%20choose%20to%20ignore%20these%20files%20as%20long%20as%20it%20produces%20an%20error">ignore it</a> &quot;as long as it produces an error&quot;. This case is ambiguous because the member is then skipped with an error, or stored under a name that the implementation chooses.</p>
+<p>The name is an empty pathname, which <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=A%20null%20pathname%20shall%20not%20be%20successfully%20resolved">does not resolve</a>, so it would create an invalid filename. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=invalid%20filename%2C%20it%20is%20implementation%2Ddefined%20whether%20the%20data%20from%20the%20file%20is%20stored%20on%20the%20file%20hierarchy">POSIX</a>, it is then implementation-defined whether the member is stored, and under what name, and pax may <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=file%20hierarchy%20and%20under%20what%20name%20it%20is%20stored.%20The%20pax%20utility%20may%20choose%20to%20ignore%20these%20files%20as%20long%20as%20it%20produces%20an%20error">ignore it</a> &quot;as long as it produces an error&quot;. This case is ambiguous because POSIX leaves it to the implementation whether the member is skipped with an error, or stored under a name it chooses.</p>
 <p><strong>Decision point:</strong> what an empty name refers to.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -57,8 +57,8 @@ The archive has one file whose name field is all NULs.
 The name is an empty pathname, which does not resolve, so it would create an
 invalid filename. In POSIX, it is then implementation-defined whether the member is
 stored, and under what name, and pax may ignore it &quot;as long as it produces an
-error&quot;. This case is ambiguous because the member is then skipped with an error, or stored under a
-name that the implementation chooses.
+error&quot;. This case is ambiguous because POSIX leaves it to the implementation whether the member is
+skipped with an error, or stored under a name it chooses.
 
 Decision point: what an empty name refers to.
 Seen in: none of the scanned tarballs.

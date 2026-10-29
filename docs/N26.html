@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a global header with <code>path=global-name</code>, then a second global header with an empty <code>path=</code>, then a file whose header has the name <code>a</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">POSIX</a>, the first applies to every later member, and the second <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">deletes</a> it again, so the file after them keeps the name in its header, <code>a</code>. In POSIX, the global value is deleted by name; whether the deletion also reaches the name in the header, as for an empty <code>path</code> in an extended header, is left open, so the file may also be left without a name. This case is ambiguous in practice because <code>path=</code> is also taken for an empty name, or ignored, so that the file is <code>global-name</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">POSIX</a>, the first applies to every later member, and the second <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">deletes</a> it again, so the file after them keeps the name in its header, <code>a</code>. In POSIX, the global value is deleted by name; whether the deletion also reaches the name in the header, as for an empty <code>path</code> in an extended header, is left open.</p>
 <p><strong>Decision point:</strong> whether an empty value in a global header removes an earlier global value.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -58,9 +58,7 @@ The archive has a global header with `path=global-name`, then a second global he
 In POSIX, the first applies to every later member, and the second deletes
 it again, so the file after them keeps the name in its header, `a`. In POSIX, the global value is
 deleted by name; whether the deletion also reaches the name in the header, as for an empty `path` in
-an extended header, is left open, so the file may also be left without a name. This case is
-ambiguous in practice because `path=` is also taken for an empty name, or ignored, so that the file
-is `global-name`.
+an extended header, is left open.
 
 Decision point: whether an empty value in a global header removes an earlier global value.
 Seen in: none of the scanned tarballs.

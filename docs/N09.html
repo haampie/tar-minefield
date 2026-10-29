@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has two <code>x</code> headers, with <code>path=first</code> and <code>path=second</code>, then the member, whose header has the name <code>header-name</code>.</p>
-<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=When%20extended%20header%20records%20conflict%2C%20the%20last%20one%20given%20in%20the%20header%20shall%20take%20precedence">POSIX</a> settles conflicting records within one extended header, where the last one wins, but not two extended headers for one file. This case is ambiguous because the name is <code>first</code>, <code>second</code>, or the header&#x27;s own.</p>
+<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=When%20extended%20header%20records%20conflict%2C%20the%20last%20one%20given%20in%20the%20header%20shall%20take%20precedence">POSIX</a> settles conflicting records within one extended header, where the last one wins, but two extended headers for one file break the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=Each%20file%20archived%20shall%20be%20represented%20by%20the%20following%20sequence">sequence</a> that POSIX describes, and it does not say how to read them. This case is ambiguous because the name is <code>first</code>, <code>second</code>, or the header&#x27;s own.</p>
 <p><strong>Decision point:</strong> which of two extended headers of one kind applies.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs. libmygpo-qt 1.2.0 repeats xattr keys within one header.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -56,8 +56,9 @@ The archive has two `x` headers, with `path=first` and `path=second`, then the m
 has the name `header-name`.
 
 POSIX settles conflicting records within one extended header, where the last one wins,
-but not two extended headers for one file. This case is ambiguous because the name is `first`,
-`second`, or the header&#x27;s own.
+but two extended headers for one file break the sequence that POSIX describes, and it
+does not say how to read them. This case is ambiguous because the name is `first`, `second`, or the
+header&#x27;s own.
 
 Decision point: which of two extended headers of one kind applies.
 Seen in: none of the scanned tarballs. libmygpo-qt 1.2.0 repeats xattr keys within one header.

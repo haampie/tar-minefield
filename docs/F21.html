@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, whose header has the size 512 and whose pax header has an empty <code>size=</code>, then an empty file <code>smuggled</code>.</p>
-<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">POSIX</a> says that a record with an empty value deletes the field of that name, in the header too, so <code>size=</code> technically leaves <code>a</code> without a size field, not even the one in its header, which says 512. It does not say what a member without a size is. Nor does the header&#x27;s size stand in, as a header field that a keyword deletes is to be <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">ignored</a>. This case is ambiguous because the size is then either 0, and the next block is the header of <code>smuggled</code>, or none, and the member is invalid. Readers also fall back to what the header specifies, against POSIX, and the next block is the data of <code>a</code>.</p>
+<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">POSIX</a> says that a record with an empty value deletes the field of that name, in the header too, so <code>size=</code> technically leaves <code>a</code> without a size field, and the header&#x27;s is to be <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">ignored</a>. But its order of precedence <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=If%20there%20is%20a%20typeflag%20x%20extended%20header%20record%2C%20the%20affected%20attribute%20shall%20be%20assigned%20the%20%3Cvalue%3E">assigns</a> the empty value, or, <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=Otherwise%2C%20the%20attribute%20shall%20be%20determined%20from%20the%20ustar%20header%20block">failing that</a>, the header&#x27;s size, 512. This case is ambiguous because the size is either none (and the member is invalid), 0 (and <code>smuggled</code> is a member), or 512 (and the next block is the data of <code>a</code>).</p>
 <p><strong>Decision point:</strong> what an empty pax size means: no size, a size of 0, or the header&#x27;s size.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -56,12 +56,11 @@ The archive has a file `a`, whose header has the size 512 and whose pax header h
 `size=`, then an empty file `smuggled`.
 
 POSIX says that a record with an empty value deletes the field of that name, in the
-header too, so `size=` technically leaves `a` without a size field, not even the one in its header,
-which says 512. It does not say what a member without a size is. Nor does the header&#x27;s size stand
-in, as a header field that a keyword deletes is to be ignored. This case is
-ambiguous because the size is then either 0, and the next block is the header of `smuggled`, or
-none, and the member is invalid. Readers also fall back to what the header specifies, against POSIX,
-and the next block is the data of `a`.
+header too, so `size=` technically leaves `a` without a size field, and the header&#x27;s is to be
+ignored. But its order of precedence assigns the empty value, or,
+failing that, the header&#x27;s size, 512. This case is ambiguous because the size is
+either none (and the member is invalid), 0 (and `smuggled` is a member), or 512 (and the next block
+is the data of `a`).
 
 Decision point: what an empty pax size means: no size, a size of 0, or the header&#x27;s size.
 Seen in: none of the scanned tarballs.

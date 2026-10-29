@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one file, <code>/tmp/tar-minefield-absolute</code>, whose name is a path from the root.</p>
-<p>The case is rejected because the name, taken as it is, leads out of the destination, not because it is ambiguous. The file is harmless, and in <code>/tmp</code>, so that an extractor that follows the name writes it without running as root.</p>
+<p>The case is rejected because the name, taken as it is, leads out of the destination, not because it is ambiguous. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a>, files are created by pathname resolution, which follows the name out of the destination. The file is harmless, and in <code>/tmp</code>, so that an extractor that follows the name writes it without running as root.</p>
 <p><strong>Decision point:</strong> whether an absolute name is rejected, made relative, or followed.</p>
 <p><strong>Seen in:</strong> dtv-scan-tables (<code>/usr/share/dvb/</code>) and masurca 3.3.1.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,8 +55,9 @@ An absolute name, which points outside the directory the archive is extracted to
 The archive has one file, `/tmp/tar-minefield-absolute`, whose name is a path from the root.
 
 The case is rejected because the name, taken as it is, leads out of the destination, not because it
-is ambiguous. The file is harmless, and in `/tmp`, so that an extractor that follows the name writes
-it without running as root.
+is ambiguous. In POSIX, files are created by pathname resolution, which follows the
+name out of the destination. The file is harmless, and in `/tmp`, so that an extractor that follows
+the name writes it without running as root.
 
 Decision point: whether an absolute name is rejected, made relative, or followed.
 Seen in: dtv-scan-tables (`/usr/share/dvb/`) and masurca 3.3.1.
