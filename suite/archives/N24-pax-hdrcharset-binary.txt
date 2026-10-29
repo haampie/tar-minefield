@@ -1,19 +1,17 @@
 N24-pax-hdrcharset-binary: must reject
 
-`hdrcharset=BINARY`, which declares a pax path that is not UTF-8 as bytes.
+A pax path that is not UTF-8, declared as bytes with `hdrcharset=BINARY`.
 
-The archive has one file, whose pax header has `hdrcharset=BINARY` and the path `caf\xe9`, in
-Latin-1, and whose header has the name `cafe`.
+The archive has one file. Its pax header has `hdrcharset=BINARY` and the path `caf\xe9`, which is
+`café` in Latin-1 and not UTF-8; its ustar header has the name `cafe`.
 
-POSIX lets a pax header declare with `hdrcharset=BINARY` that its names are bytes in
-no particular encoding, rather than UTF-8, but also that a name that cannot be translated to the
-character set of the locale is reported, and by default bypassed. This case is
-ambiguous because the name on disk is those bytes, or, in a UTF-8 locale, there is none, as the file
-is bypassed. In practice, the path is also decoded as Latin-1, `café`, or with the byte replaced by
-U+FFFD, or discarded for the header's name, `cafe`. A strict parser rejects names that are not
-UTF-8.
+With `hdrcharset=BINARY`, the pax path is unencoded binary data, here the bytes
+`caf\xe9`. But POSIX also has pax report a name that it cannot translate to the
+character set of the locale, and by default bypass the file. This case is ambiguous
+because the file is either created under those bytes, or bypassed, in a UTF-8 locale, to which
+they cannot be translated.
 
-Decision point: how a name that is not UTF-8 becomes a path.
+Decision point: whether a pax path declared as bytes is created as it is.
 Seen in: none of the scanned tarballs.
 
 0x000000  header: pax extended header, a path in Latin-1
