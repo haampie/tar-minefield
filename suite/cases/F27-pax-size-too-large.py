@@ -7,8 +7,8 @@ pax numbers can be of any length, but many implementations keep sizes in 64 bits
 [POSIX][size-decimal], the size is 2^64 + 512, which runs past the end of the archive. Read
 leniently, this case is ambiguous because the size is also the header's size of 0, with the pax size
 discarded, which makes the next block the header of `smuggled`, or 512, wrapped around in 64 bits,
-which makes it the data of `a`. Neither is a reading of POSIX, which takes the size as it is, and
-the header's size is to be [ignored][corresponding] once a `size` record is there.
+which makes it the data of `a`. Neither is a reading of POSIX, in which the size is what the record
+says, and the header's size is to be [ignored][corresponding] once a `size` record is there.
 
 Decision point: what a pax number too large for the reader means.
 Seen in: none of the scanned tarballs.
