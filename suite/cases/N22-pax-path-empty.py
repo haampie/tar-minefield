@@ -13,11 +13,12 @@ one, which POSIX does not define, as an empty pathname [does not resolve][null-p
 may also skip the member, or name the file after the archive.
 
 An empty `linkpath` asks the same of a link: whether a symlink keeps the target in its header, has
-an empty target (see N25), or is skipped. Implementations need not answer both alike: one that falls
-back to the header's name for an empty `path` may still apply an empty `linkpath`.
+an empty target, or is skipped. Implementations need not answer both alike: one that falls back to
+the header's name for an empty `path` may still apply an empty `linkpath`.
 
 Decision point: what an empty pax path means: no name, an empty name, or the header's name.
 Seen in: none of the scanned tarballs.
+See also: N25, a symlink with an empty target.
 """
 
 VERDICT = "reject"

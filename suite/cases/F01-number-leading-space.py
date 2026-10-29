@@ -5,7 +5,8 @@ rather than zeros, such as ` 7 ` for its size.
 
 In [POSIX][zero-filled], numeric fields are octal numbers filled with leading zeros.
 
-Seen in: hundreds of tarballs, many from CPAN: the same as F32, whose checksum is padded too.
+Seen in: hundreds of tarballs, many from CPAN, which pad the checksum with spaces too.
+See also: F32, a checksum padded with spaces, as those tarballs have it.
 """
 
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}

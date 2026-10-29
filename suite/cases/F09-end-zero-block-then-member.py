@@ -10,7 +10,7 @@ either ends the archive, or is skipped, and only in the second reading is `hidde
 Decision point: whether one zero block ends the archive.
 Seen in: 7 tarballs that `tarscan.py` counts, such as jakarta-oro 2.0.8 and commons-cli 1.2-src,
 but in none of them is the zero block followed by a member: what follows is not a valid header,
-and in those two, it is stale data, as after F03.
+and in those two, it is stale data.
 See also: F03, one zero block with nothing after it, which is rejected as well.
 """
 

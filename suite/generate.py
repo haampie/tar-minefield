@@ -14,7 +14,8 @@ unless it is to reject; and `build(archive)`, which writes the archive with bloc
 explains the case: first what is in the archive, in a paragraph that cites nothing, then the
 decision point where implementations differ, where the scans saw it, and what implementations do
 with it. Where it relies on a sentence of POSIX, it links words to it as `[words][key]`, by its key
-in contrib/citations.py, which the site makes a link; in archives/, they are the words alone.
+in contrib/citations.py, which the site makes a link; in archives/, they are the words alone. It
+stands on its own: other cases are named only in its `See also:` lines.
 
 It needs nothing outside suite/ but the Python standard library.
 """
@@ -77,6 +78,9 @@ def generate():
         assert module.ID not in ids, f"{case}: the identifier of {ids.get(module.ID)}"
         assert not re.search(r"\]\[[a-z0-9-]+\]", module.__doc__.strip().split("\n\n")[1]), \
             f"{case}: the first paragraph says what is in the archive, and cites nothing"
+        others = set(re.findall(r"\b[FNKS]\d\d\b", "\n".join(
+            line for line in module.__doc__.split("\n") if not line.startswith("See also:"))))
+        assert others <= {module.ID}, f"{case}: names {sorted(others - {module.ID})} outside See also"
         ids[module.ID] = case
         archive = Archive()
         module.build(archive)

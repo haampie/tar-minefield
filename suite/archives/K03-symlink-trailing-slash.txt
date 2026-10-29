@@ -8,11 +8,12 @@ refers to what the link points to.
 In POSIX, a symlink cannot be created under a name that ends in a slash, so this
 gives an error, or, as for an invalid filename, leaves it to the implementation whether to create
 the symlink `link`. This case is ambiguous in practice because the member is either a symlink
-`link`, by its typeflag, or a directory `link`, by its trailing slash, as in K01. A reader that
-takes it for neither makes an empty file `link`.
+`link`, by its typeflag, or a directory `link`, by its trailing slash. A reader that takes it for
+neither makes an empty file `link`.
 
 Decision point: what a trailing slash on a link means.
 Seen in: none of the scanned tarballs.
+See also: K01, a regular file whose name ends in a slash.
 
 0x000000  header: directory
           name     [  0,100)  "target/" + 93 NUL

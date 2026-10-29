@@ -8,8 +8,8 @@ but not two extended headers for one file. This case is ambiguous because the na
 `second`, or the header's own.
 
 Decision point: which of two extended headers of one kind applies.
-Seen in: none of the scanned tarballs. libmygpo-qt 1.2.0 repeats xattr keys within one header,
-which is N20, pax-repeated-key.
+Seen in: none of the scanned tarballs. libmygpo-qt 1.2.0 repeats xattr keys within one header.
+See also: N20, one pax key twice in one extended header.
 """
 
 VERDICT = "reject"

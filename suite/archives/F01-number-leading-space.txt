@@ -7,7 +7,8 @@ rather than zeros, such as ` 7 ` for its size.
 
 In POSIX, numeric fields are octal numbers filled with leading zeros.
 
-Seen in: hundreds of tarballs, many from CPAN: the same as F32, whose checksum is padded too.
+Seen in: hundreds of tarballs, many from CPAN, which pad the checksum with spaces too.
+See also: F32, a checksum padded with spaces, as those tarballs have it.
 
 0x000000  header: regular file
           name     [  0,100)  "a" + 99 NUL
