@@ -6,7 +6,9 @@ U+0661 U+0662, in UTF-8), and whose header has the size 0, then an empty file `s
 In [POSIX][size-decimal], a pax size is ASCII decimal digits. Python's `int` and Java's
 `Long.parseLong` take any decimal digit of Unicode, and so read it as 512. Read leniently, this case
 is ambiguous because the size is either that number, 512 (and the next block is the data of `a`), or
-what the header specifies, 0 (and the next block is the header of `smuggled`).
+what the header specifies, 0 (and the next block is the header of `smuggled`). Neither is a reading
+of POSIX: `٥١٢` is not a pax size, and the header's size is to be [ignored][corresponding] once a
+`size` record is there.
 
 Decision point: which digits a pax number may have.
 Seen in: none of the scanned tarballs.
