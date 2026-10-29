@@ -2,11 +2,13 @@
 
 The archive has one file whose name field is all NULs.
 
-In [POSIX][invalid-name], it is implementation-defined whether a member with an invalid name is
-stored, and under what name. This case is ambiguous because implementations read an empty name in
-different ways: a reader skips the member, names the file after the archive, takes the name for the
-destination directory itself, and fails to write a file there, or takes the header for the end of
-the archive.
+The name is an empty pathname, which [does not resolve][null-pathname], so it would create an
+invalid filename. In [POSIX][invalid-name], it is then implementation-defined whether the member is
+stored, and under what name, and pax may [ignore it][ignore-invalid] if it reports an error. This
+case is ambiguous because the member is then skipped with an error, stored under another name, such
+as that of the archive, or taken for the destination directory itself, which fails. A reader that
+takes the header for the end of the archive reads it against POSIX: the header is not a zero block,
+and only [two zero blocks][end] end an archive.
 
 Decision point: what an empty name refers to.
 Seen in: none of the scanned tarballs.

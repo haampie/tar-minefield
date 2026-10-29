@@ -65,6 +65,9 @@ SENTENCES = {
     "name-nul": (USTAR, "name is terminated at the first NUL character"),
     "invalid-name": (USTAR, "invalid filename, it is implementation-defined whether the data from "
                             "the file is stored on the file hierarchy"),
+    # the same sentence follows in the cpio section, where files are stored on the local file system
+    "ignore-invalid": (USTAR, "file hierarchy and under what name it is stored. The pax utility may "
+                              "choose to ignore these files as long as it produces an error"),
     "name-full": (USTAR, "except when all characters in the array contain non-NUL characters "
                          "including the last character"),
     "prefix": (USTAR, "by concatenating prefix (up to the first NUL character), a <slash> character, "
