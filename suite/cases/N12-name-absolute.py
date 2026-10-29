@@ -3,9 +3,9 @@
 The archive has one file, `/tmp/tar-minefield-absolute`, whose name is a path from the root.
 
 The case is rejected because the name, taken as it is, leads out of the destination, not because it
-is ambiguous: POSIX, which creates files by [pathname resolution][resolution], requires following
-the name. The file is harmless, and in `/tmp`, so that an extractor that follows the name writes it
-without running as root.
+is ambiguous. In [POSIX][resolution], files are created by pathname resolution, which follows the
+name out of the destination. The file is harmless, and in `/tmp`, so that an extractor that follows
+the name writes it without running as root.
 
 Decision point: whether an absolute name is rejected, made relative, or followed.
 Seen in: dtv-scan-tables (`/usr/share/dvb/`) and masurca 3.3.1.
