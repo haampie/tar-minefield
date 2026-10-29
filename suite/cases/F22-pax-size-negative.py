@@ -6,8 +6,8 @@ an empty file `smuggled`.
 In [POSIX][size-decimal], a pax size is decimal digits, without a sign. Read leniently, this case is
 ambiguous because the size is either 0, as the header specifies (and the next block is the header of
 `smuggled`), or the pax size read as an unsigned number, almost 2^64 (which runs past the end of the
-archive). Neither is a reading of POSIX: `-512` is not a pax size, and the header's size is to be
-[ignored][corresponding] once a `size` record is there.
+archive). Neither follows from POSIX, which does not say what a `size` record that is not a decimal
+number means.
 
 Decision point: whether a pax size may be negative, and what a negative one means.
 Seen in: none of the scanned tarballs.

@@ -8,8 +8,8 @@ POSIX's ustar header ends at byte 500, with a prefix field of 155 bytes, which a
 without a NUL][name-full]. star's own format, xstar, puts `tar\0` at offset 508, in bytes that POSIX
 leaves undefined, and splits the prefix field: 131 bytes for the prefix, then the access and change
 times, in octal. star itself ends its prefixes with a NUL at byte 130, so that ustar readers read
-them alike. This case is ambiguous because the prefix is either the whole field, which in
-[POSIX][prefix] is joined to the name, or its first 131 bytes, as readers that recognize `tar\0`
+them alike. This case is ambiguous in practice because the prefix is either the whole field, which
+in [POSIX][prefix] is joined to the name, or its first 131 bytes, as readers that recognize `tar\0`
 take it: `a` is then under a directory whose name ends in those numbers, or of the 131 `p`s alone.
 
 Decision point: whether `tar\0` at offset 508 makes the prefix field shorter.

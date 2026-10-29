@@ -3,7 +3,8 @@
 The archive has a symlink `d` to `..`, then a file `d/tar-minefield-through-symlink`.
 
 The case is rejected because the file, written through the link, lands in the parent of the
-destination, not because it is ambiguous. The file is harmless.
+destination, not because it is ambiguous. In [POSIX][resolution], files are created by pathname
+resolution, which follows the link. The file is harmless.
 
 Decision point: whether a member may be written through a symlink.
 Seen in: none of the scanned tarballs.

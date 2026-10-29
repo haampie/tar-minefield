@@ -3,11 +3,12 @@
 The archive has a file `a`, then a hard link `h` to `a`, whose pax header has `size=512`, then an
 empty file `smuggled`.
 
-[POSIX][link-data] permits data on a hard link in pax, which this is, so the next block is the data
-of `h`, but does not say what that data does: whether it replaces the contents of `a`, or is
-ignored. A reader that applies the [rule of ustar][no-data], that no data is stored for a hard link,
-reads the block as the header of a file, `smuggled`. This case is ambiguous because the tree has `a`
-as it is, `a` with that block as its contents, or `a` and `smuggled`.
+[POSIX][link-data] permits data on a hard link in pax, which its `x` header suggests, so the next
+block is the data of `h`, but does not say what that data does: whether it replaces the contents of
+`a`, or is ignored. A reader that reads it as ustar, in which [no data][no-data] is stored for a
+hard link, reads the block as the header of a file, `smuggled`; the bytes do not say which it is.
+This case is ambiguous because the tree has `a` as it is, `a` with that block as its contents, or
+`a` and `smuggled`.
 
 Decision point: whether a pax size applies to a hard link.
 Seen in: none of the scanned tarballs.

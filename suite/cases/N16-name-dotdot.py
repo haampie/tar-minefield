@@ -4,7 +4,8 @@ The archive has one file, `tar-minefield/../../tar-minefield-escaped`, whose nam
 outside the destination.
 
 The case is rejected because the name, taken as it is, leads out of the destination, not because it
-is ambiguous. The file is harmless: its name and contents say what happened.
+is ambiguous. In [POSIX][resolution], files are created by pathname resolution, which follows the
+name out of the destination. The file is harmless: its name and contents say what happened.
 
 Decision point: whether a name with `..` is rejected, rewritten, skipped, or followed.
 Seen in: 4 PyPI sdists, such as spdk 26.9 (`spdk-26.9/../scripts/rpc.py`) and bt-test-interfaces

@@ -6,9 +6,7 @@ The archive has a global header with `path=global-name`, then a second global he
 In [POSIX][global], the first applies to every later member, and the second [deletes][empty-value]
 it again, so the file after them keeps the name in its header, `a`. In POSIX, the global value is
 deleted by name; whether the deletion also reaches the name in the header, as for an empty `path` in
-an extended header, is left open, so the file may also be left without a name. This case is
-ambiguous in practice because `path=` is also taken for an empty name, or ignored, so that the file
-is `global-name`.
+an extended header, is left open.
 
 Decision point: whether an empty value in a global header removes an earlier global value.
 Seen in: none of the scanned tarballs.
