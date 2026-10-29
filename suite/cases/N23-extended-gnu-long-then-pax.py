@@ -3,9 +3,10 @@
 The archive has a GNU long name `from-gnu`, then a pax header with only an `mtime`, then the member,
 whose header has the name `from-header`.
 
-GNU long names and pax headers are two ways of extending the next header, and neither format defines
-the other. This case is ambiguous because the long name applies either to the next header, the pax
-header, and is lost, or to the next member, which is then `from-gnu` rather than `from-header`.
+GNU long names and pax headers are two ways of extending the next header, and neither format
+specifies how the two interact. This case is ambiguous because the long name applies either to the
+next header, the pax header, and is lost, or to the next member, which is then `from-gnu` rather
+than `from-header`.
 
 Decision point: whether a GNU long name applies to the next header or to the next member.
 Seen in: none of the scanned tarballs.
