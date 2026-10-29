@@ -20,13 +20,17 @@ import urllib.request
 PAGE = "https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html"
 # The sections, by their ids on the page
 DESCRIPTION = "tag_20_94_03"
+OPTIONS = "tag_20_94_04"
+STDERR = "tag_20_94_11"
 OUTPUT_FILES = "tag_20_94_12"
+ERRORS = "tag_20_94_15"  # CONSEQUENCES OF ERRORS
 APPLICATION_USAGE = "tag_20_94_16"
 END = "tag_20_94_13_01"  # pax Interchange Format
 PAX_HEADER = "tag_20_94_13_02"  # pax Header Block
 PAX_EXTENDED = "tag_20_94_13_03"  # pax Extended Header
 PRECEDENCE = "tag_20_94_13_04"  # pax Extended Header Keyword Precedence
 USTAR = "tag_20_94_13_06"  # ustar Interchange Format
+RATIONALE_USTAR = "tag_20_94_18_03"  # RATIONALE: ustar Interchange Format
 SENTENCES = {
     "end": (END, "there shall be two 512-byte blocks filled with binary zeros"),
     "version": (USTAR, 'The version field is two octets containing the characters "00"'),
@@ -79,6 +83,24 @@ SENTENCES = {
     "symlink": (USTAR, "The contents of the symbolic link shall be stored in the linkname field"),
     "hardlink": (USTAR, "Represents a file linked to another file, of any type, previously "
                         "archived"),
+    "sequence": (END, "Each file archived shall be represented by the following sequence"),
+    "global-files": (PAX_HEADER, "Represents global extended header records for the following files "
+                                 "in the archive"),
+    "path": (PAX_EXTENDED, "This record shall override the name and prefix fields in the following "
+                           "header block(s)"),
+    "ascii-header": (USTAR, "All characters in the header logical record shall be represented in the "
+                            "coded character set"),
+    "embedded-nul": (OPTIONS, "the name may contain embedded NULs"),
+    "bypass": (OPTIONS, "pax shall act as if -oinvalid=bypass were specified"),
+    "untranslatable": (STDERR, "cannot be translated between the codeset in use for that extended "
+                               "header record and the character set of the current locale"),
+    "overwritten": (OUTPUT_FILES, "existing files in the destination hierarchy shall be overwritten "
+                                  "only when all permission"),
+    "intermediate": (DESCRIPTION, "if intermediate directories are necessary to extract an archive "
+                                  "member"),
+    "cannot-create": (ERRORS, "If pax cannot create a file or a link when reading an archive"),
+    "slash-convention": (RATIONALE_USTAR, "the convention of using a filename ending with <slash> was "
+                                          "adopted to specify a directory on the archive"),
 }
 
 

@@ -6,8 +6,10 @@ header's size field, are written, and archivers write various sizes in the heade
 implementation that takes the pax size, as it must, reads the next block as the header of another
 file, `smuggled`; an implementation that takes the header's size, or does not know pax, reads that
 block as the data of `a`. An implementation that takes the header's size is the bug of
-CVE-2025-62518 (astral-tokio-tar before 0.5.6, and tokio-tar). A strict parser may reject a header
-whose size field has room for the size but gives another, but must not extract `a` with 512 bytes.
+CVE-2025-62518 (astral-tokio-tar before 0.5.6, and tokio-tar). POSIX gives no reason to reject the
+archive, as the header's size is then to be ignored. A strict parser may reject it anyway, since a
+header with room for the size has no reason to give another, but must not extract `a` with 512
+bytes.
 
 Decision point: which of two sizes frames the member.
 Seen in: none of the scanned tarballs.
@@ -16,7 +18,7 @@ Seen in: none of the scanned tarballs.
 VERDICT = "tolerate"
 ID = "F14"
 FEATURES = ["pax.size-disagrees"]
-POSIX = "size-override"
+POSIX = {"POSIX": "size-override", "ignored": "corresponding"}
 TREE = [
     {"path": "a", "kind": "file", "contents": b"", "executable": False},
     {"path": "smuggled", "kind": "file", "contents": b"", "executable": False},

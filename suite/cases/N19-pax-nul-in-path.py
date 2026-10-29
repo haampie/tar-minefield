@@ -1,8 +1,9 @@
 r"""A NUL inside a pax `path`.
 
-The pax path is `a\0b`. In POSIX, a NUL in a pax value is data, so the path is invalid. This case
-is ambiguous because the path is `a`, cut at the NUL, `a_b` or the like, with the NUL replaced, or
-discarded for the header's name, `header-name`.
+The pax path is `a\0b`. In POSIX, a NUL in a pax value is data, so the path is invalid, and pax by
+default bypasses a file whose name has an embedded NUL. This case is ambiguous in practice because
+the path is `a`, cut at the NUL, `a_b` or the like, with the NUL replaced, or discarded for the
+header's name, `header-name`.
 
 Decision point: where a pax path ends.
 Seen in: none of the scanned tarballs.
@@ -11,7 +12,7 @@ Seen in: none of the scanned tarballs.
 VERDICT = "reject"
 ID = "N19"
 FEATURES = ['pax.nul-in-value.path']
-POSIX = "value-data"
+POSIX = {"POSIX": "value-data", "embedded NUL": "embedded-nul", "bypasses": "bypass"}
 
 
 def build(a):
