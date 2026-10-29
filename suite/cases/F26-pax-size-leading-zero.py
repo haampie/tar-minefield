@@ -5,11 +5,11 @@ two empty files, `smuggled-1` and `smuggled-2`.
 
 A pax size is decimal, and [POSIX][size-decimal] does not forbid leading zeros, so the size is 777.
 But a reader that converts with C's `strtoul(s, NULL, 0)`, or that knows the header's octal numbers,
-reads `0777` as octal, 511. This case is ambiguous in practice because the size is 777, in decimal,
-511, in octal, or the header's, 0, with the pax size discarded. The data of `a` then takes two
-blocks, one, after which `smuggled-2` is a member, or none, and both `smuggled-1` and `smuggled-2`
-are. Only 777 is a reading of POSIX: the header's size is to be [ignored][corresponding] once a
-`size` record is there.
+reads `0777` as the octal number 511. This case is ambiguous in practice because the size is 777 in
+decimal, or 511 in octal, or the header's size of 0, with the pax size discarded. The data of `a`
+then takes two blocks, one, after which `smuggled-2` is a member, or none, and both `smuggled-1` and
+`smuggled-2` are. Only 777 is a reading of POSIX: the header's size is to be
+[ignored][corresponding] once a `size` record is there.
 
 Decision point: whether a pax number with a leading zero is decimal or octal.
 Seen in: none of the scanned tarballs.

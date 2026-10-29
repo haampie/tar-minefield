@@ -7,8 +7,8 @@ leniently, this case is ambiguous because the link replaces `a`, which then has 
 empties it, or leaves it as it is.
 
 Decision point: what a link to itself does to the file.
-Seen in: 27 tarballs, 18 of them NVIDIA's cuDNN binaries in Spack, and xscreensaver 6.12 and
-atari++ 1.85.
+Seen in: 27 tarballs, among them 18 of NVIDIA's cuDNN binaries in Spack, and xscreensaver 6.12
+and atari++ 1.85.
 """
 
 VERDICT = "reject"

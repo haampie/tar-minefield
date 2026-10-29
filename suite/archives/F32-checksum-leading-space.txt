@@ -10,8 +10,8 @@ The sum is the same as that of a header padded with zeros, so an implementation 
 archive must extract `a`, also one that checks the checksum before the other fields.
 
 Decision point: whether the checksum field may start with a space.
-Seen in: 819 release tarballs, 674 of them from CPAN, such as Starman 0.4015, and PyPDF2 1.26.0,
-which Spack fetches from PyPI: every tarball whose numeric fields are padded with spaces.
+Seen in: 819 release tarballs, among them 674 from CPAN, such as Starman 0.4015, and PyPDF2
+1.26.0, which Spack fetches from PyPI: every tarball whose numeric fields are padded with spaces.
 See also: F01, numeric fields padded with spaces, with a checksum as usual.
 
 0x000000  header: regular file, the size and the checksum padded with spaces

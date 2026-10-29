@@ -6,9 +6,10 @@ an empty file `smuggled`.
 In [POSIX][size-decimal], a pax size is decimal digits, without a sign. But the conversions of
 strings to numbers that implementations use, such as Python's `int`, Go's `strconv.ParseInt` and
 Rust's `u64::from_str`, read `+512` as 512. Read leniently, this case is ambiguous because the size
-is either that number, 512 (and the next block is the data of `a`), or what the header specifies, 0
-(and the next block is the header of `smuggled`). Neither is a reading of POSIX: `+512` is not a pax
-size, and the header's size is to be [ignored][corresponding] once a `size` record is there.
+is either 512, as read that way (and the next block is the data of `a`), or 0, as the header
+specifies (and the next block is the header of `smuggled`). Neither is a reading of POSIX: `+512` is
+not a pax size, and the header's size is to be [ignored][corresponding] once a `size` record is
+there.
 
 Decision point: whether a pax size may have a sign.
 Seen in: none of the scanned tarballs.

@@ -5,8 +5,8 @@ an empty file `smuggled`.
 
 In [POSIX][numeric], a numeric field is octal digits terminated by spaces or NULs, and nothing
 follows them. Read leniently, this case is ambiguous because the size is either 0, if the number
-ends at the first blank (and the next block is the header of `smuggled`), or 1000 octal, 512, if the
-blank is skipped (and the next block is the data of `a`).
+ends at the first blank (and the next block is the header of `smuggled`), or 1000 octal, which is
+512, if the blank is skipped (and the next block is the data of `a`).
 
 Decision point: how a numeric field with a space among its digits is read.
 Seen in: none of the scanned tarballs.

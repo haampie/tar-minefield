@@ -2,8 +2,8 @@ N01-gnu-long-name: must accept, and extract its tree
 
 A name over 100 bytes, in a GNU long name.
 
-The archive has a GNU long name header, typeflag `L`, whose data is the name of the next member, 60
-`d`s, a slash and 60 `f`s; then the member, whose header has GNU's magic and that name cut to 100
+The archive has a GNU long name header, typeflag `L`, whose data is the name of the next member, of
+60 `d`s, a slash and 60 `f`s; then the member, whose header has GNU's magic and that name cut to 100
 bytes. This is GNU tar's own format for long names.
 
 Seen in: tarballs produced by GNU tar.
