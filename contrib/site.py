@@ -88,8 +88,8 @@ code, pre { font: 0.875em ui-monospace, SFMono-Regular, Menlo, Consolas, monospa
 pre { background: #f6f8fa; padding: 0.75rem; overflow-x: auto; }
 code { background: #e8ebef; padding: 0.1em 0.3em; border-radius: 4px; }
 /* Code in text as it is written: spaces in it, such as those of a padded field, are not
-   collapsed */
-p code { white-space: pre-wrap; }
+   collapsed, nor is it broken across lines */
+p code { white-space: pre; }
 pre code { background: none; padding: 0; }
 table { border-collapse: collapse; margin: 1rem 0; width: 100%; table-layout: fixed; }
 th, td { border: 1px solid #d0d7de; padding: 0.25rem 0.5rem; text-align: left;
@@ -222,9 +222,9 @@ def prevalence(k, n):
 
 
 # The footnote of the index for a prevalence marked with *
-UNMEASURED = ('<p class="note" id="unmeasured">* Not measured in some tarballs, which an earlier '
-              "version of <code>tarscan.py</code> scanned: it did not report this, and what it did "
-              "record does not rule it out. The case's page says how many.</p>")
+UNMEASURED = ('<p class="note" id="unmeasured">* Not measured in some tarballs, which were scanned '
+              "before the scan reported this, and what it did record does not rule it out. The "
+              "case's page says how many.</p>")
 
 
 def unmeasured(features, rows):
@@ -332,11 +332,22 @@ def readme_section(title):
 
 
 def inline(text):
-    """Text with `code` and [links](https://...) as HTML."""
+    """Text with `code`, [links](https://...) and [links][key] to sentences of POSIX, by their keys
+    in citations.py, as HTML."""
     parts = text.split("`")
     return "".join(f"<code>{html.escape(p)}</code>" if i % 2 else
-                   re.sub(r"\[(.+?)\]\((https?://[^)\s]+)\)", r'<a href="\2">\1</a>', html.escape(p))
+                   cite(re.sub(r"\[(.+?)\]\((https?://[^)\s]+)\)", r'<a href="\2">\1</a>',
+                               html.escape(p)))
                    for i, p in enumerate(parts))
+
+
+def cite(text):
+    """Text with its [links][key] to sentences of POSIX as HTML."""
+    def link(m):
+        if m.group(2) not in citations.SENTENCES:
+            sys.exit(f"[{m.group(1)}][{m.group(2)}]: no such sentence in citations.py")
+        return f'<a href="{html.escape(citations.url(m.group(2)))}">{m.group(1)}</a>'
+    return re.sub(r"\[([^\[\]]+)\]\[([a-z0-9-]+)\]", link, text)
 
 
 def doc_paragraphs(text):
@@ -345,21 +356,15 @@ def doc_paragraphs(text):
     return [" ".join(p.strip().split("\n")) for p in text.split("\n\n")]
 
 
-def paragraphs(text, cited=None):
-    """The explanation of a case as HTML, with its first "POSIX" a link to the sentence it cites: or,
-    where it cites several, the first of each word that it links to its sentence."""
+def paragraphs(text):
+    """The explanation of a case as HTML."""
     out = []
     for p in doc_paragraphs(text):
         if p.startswith("See also:"):
             continue
         out.append("<p>" + re.sub(r"^(Decision point|Seen in):", r"<strong>\1:</strong>", inline(p))
                    + "</p>")
-    out = "\n".join(out)
-    for word, key in ({"POSIX": cited} if isinstance(cited, str) else cited or {}).items():
-        if word not in out:
-            sys.exit(f"cites {key}, but its explanation does not say {word}")
-        out = out.replace(word, f'<a href="{html.escape(citations.url(key))}">{word}</a>', 1)
-    return out
+    return "\n".join(out)
 
 
 def see_also(text):
@@ -464,15 +469,15 @@ def error_line(error):
 
 # Cases that tarscan.py does not report as a feature of their own, and why: one it does not tell
 # apart from another, and one it stops at with an error
-UNTOLD = {"S07": "<code>tarscan.py</code> finds the same file twice, but does not compare the "
-                 "contents of the copies, so it does not tell this case from S09",
-          "F08": "<code>tarscan.py</code> stops at an archive cut short with an error, which none of "
-                 "the scanned tarballs has"}
+UNTOLD = {"S07": "the scan finds the same file twice, but does not compare the contents of the "
+                 "copies, so it does not tell this case from S09",
+          "F08": "the scan stops at an archive cut short with an error, which none of the scanned "
+                 "tarballs has"}
 # What a feature does not say, below the table of the tarballs that have it
-CAVEATS = {"tree.duplicate.file-file": "<code>tarscan.py</code> finds the same file twice, and does "
-           "not compare the contents of the copies: some of these may differ, as in S07.",
-           "end.zero-block-before-member": "<code>tarscan.py</code> counts a zero block followed "
-           "by any block that is not zero. In all of these, the scan then stops at a block that is "
+CAVEATS = {"tree.duplicate.file-file": "The scan finds the same file twice, and does not compare "
+           "the contents of the copies: some of these may differ, as in S07.",
+           "end.zero-block-before-member": "The scan counts a zero block followed by any block "
+           "that is not zero. In all of these, the scan then stops at a block that is "
            "not a valid header: no member follows the zero block, unlike in F09."}
 
 
@@ -506,7 +511,7 @@ def data_section(ident, features, names, short, rated, union):
     with them: a sentence where it rejects all or none of them for the features, and a column
     where it rejects some. seen-in.html lists them: all that it rejects, or else examples."""
     if not features:
-        why = UNTOLD.get(ident, "<code>tarscan.py</code> reports no feature of it on its own")
+        why = UNTOLD.get(ident, "the scan reports no feature of it on its own")
         return f"<p>This case is not measured in release tarballs: {why}.</p>"
 
     def has(r):
@@ -532,9 +537,9 @@ def data_section(ident, features, names, short, rated, union):
     policy = ("" if not k else " The default policy rejects some of them, as the last column "
               "says, and accepts the others." if mixed else " The default policy rejects all of "
               "them." if j else " The default policy accepts them.")
-    note = (f'<p class="note">* Not measured in {u:,} tarballs, which an earlier version of '
-            "<code>tarscan.py</code> scanned: it did not report this, and what it did record does "
-            "not rule it out. They are counted as not having it, so the share may be higher.</p>\n"
+    note = (f'<p class="note">* Not measured in {u:,} tarballs, which were scanned before the scan '
+            "reported this, and what it did record does not rule it out. They are counted as not "
+            "having it, so the share may be higher.</p>\n"
             if u else "")
     caveats = "".join(f'<p class="note">{CAVEATS[f]}</p>\n' for f in features if f in CAVEATS)
     return (
@@ -742,17 +747,6 @@ def docstring(case):
         return ast.get_docstring(ast.parse(f.read()), clean=False)
 
 
-def cited(case):
-    """The sentence of POSIX that the script of a case cites, by its key in citations.py, or the
-    sentences, by the words of its explanation that link to them."""
-    with open(os.path.join(CASES, case + ".py")) as f:
-        for node in ast.parse(f.read()).body:
-            if isinstance(node, ast.Assign) and any(getattr(t, "id", None) == "POSIX"
-                                                    for t in node.targets):
-                return ast.literal_eval(node.value)
-    return None
-
-
 def case_page(case, info, results, data):
     ident, name = matrix.label(case, info).split(" ", 1)
     doc = docstring(case)
@@ -781,7 +775,7 @@ def case_page(case, info, results, data):
 </table></dd>
 </dl>
 <h2>The case</h2>
-{with_tree(paragraphs(doc.strip().split(chr(10), 1)[1], cited(case)), info)}
+{with_tree(paragraphs(doc.strip().split(chr(10), 1)[1]), info)}
 <h2>The archive</h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
 <div class="wide">{block_map}</div>

@@ -1,9 +1,12 @@
 """Numeric fields padded with spaces rather than zeros, as old tars wrote them.
 
-The mode, uid, gid, size and mtime fields are padded with spaces, such as `          7 ` for the
-size of `a`. In POSIX, numeric fields are octal numbers filled with leading zeros.
+The archive has one file, `a`, whose mode, uid, gid, size and mtime fields are padded with spaces
+rather than zeros, such as ` 7 ` for its size.
 
-Seen in: hundreds of tarballs, many from CPAN: the same as F32, whose checksum is padded too.
+In [POSIX][zero-filled], numeric fields are octal numbers filled with leading zeros.
+
+Seen in: hundreds of tarballs, many from CPAN, which pad the checksum with spaces too.
+See also: F32, a checksum padded with spaces, as those tarballs have it.
 """
 
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}
@@ -11,7 +14,6 @@ F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, 
 VERDICT = "tolerate"
 ID = "F01"
 FEATURES = ["number.mode.leading-space", "number.size.leading-space"]
-POSIX = "zero-filled"
 TREE = [F('a', b'spaces\n')]
 
 

@@ -1,8 +1,11 @@
 """A pax `path` and a GNU long name for one member, and a third name in its header.
 
-The member has the name `from-header`, a GNU long name `from-gnu`, and a pax path `from-pax`.
-Neither POSIX nor GNU's format defines the two extensions together. This case is ambiguous because
-nothing says which of the three names wins: the member is `from-pax`, `from-gnu` or `from-header`.
+The archive has a GNU long name `from-gnu`, then a pax header with `path=from-pax`, then the member,
+whose header has the name `from-header`.
+
+Neither POSIX nor GNU's format specifies how the two extensions interact. This case is ambiguous
+because nothing says which of the three names wins: the member is `from-pax`, `from-gnu` or
+`from-header`.
 
 Decision point: which of several sources gives a member its name.
 Seen in: none of the scanned tarballs.

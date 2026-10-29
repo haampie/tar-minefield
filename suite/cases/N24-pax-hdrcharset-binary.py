@@ -1,19 +1,21 @@
-r"""`hdrcharset=BINARY`, which declares a pax path that is not UTF-8 as bytes.
+r"""A pax path that is not UTF-8, declared as bytes with `hdrcharset=BINARY`.
 
-POSIX lets a pax header declare with `hdrcharset=BINARY` that its names are bytes in no particular
-encoding, rather than UTF-8, and then no translation is performed. Here the path is `caf\xe9`, in
-Latin-1, so the name on disk is those bytes. This case is ambiguous in practice because the path is
-also decoded as Latin-1, `café`, or with the byte replaced by U+FFFD, or discarded for the
-header's name, `cafe`. A strict parser rejects names that are not UTF-8.
+The archive has one file. Its pax header has `hdrcharset=BINARY` and the path `caf\xe9`, which is
+`café` in Latin-1 and not UTF-8; its ustar header has the name `cafe`.
 
-Decision point: how a name that is not UTF-8 becomes a path.
+With `hdrcharset=BINARY`, the pax path is [unencoded binary data][hdrcharset], here the bytes
+`caf\xe9`. But [POSIX][untranslatable] also has pax write a "diagnostic message" for a name that it
+cannot translate to the character set of the locale, and by default [bypass][bypass] the file. This
+case is ambiguous because the file is either created under those bytes, or bypassed, in a UTF-8
+locale, to which they cannot be translated.
+
+Decision point: whether a pax path declared as bytes is created as it is.
 Seen in: none of the scanned tarballs.
 """
 
 VERDICT = "reject"
 ID = "N24"
 FEATURES = ["pax.hdrcharset", "pax.path-not-utf8"]
-POSIX = "hdrcharset"
 
 
 def build(a):

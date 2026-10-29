@@ -1,8 +1,9 @@
 """Data after the end-of-archive marker that is not a header, which is ignored.
 
-After the two zero blocks comes a block that starts with `junk after the end of the archive`. In
-POSIX, the two zero blocks are the end of the archive, so the junk is not part of it, and the
-default policy ignores it.
+The archive has a file `a` and the two zero blocks that end it, and after them a block that starts
+with `junk after the end of the archive`, which is not a header.
+
+In [POSIX][end], the two zero blocks are the end of the archive, so the junk is not part of it.
 
 Seen in: tcp_wrappers 7.6, commons-lang 2.6 and xml-commons-resolver 1.2.
 See also: F07, two concatenated archives, as `cat one.tar two.tar` makes them, which are rejected
@@ -14,7 +15,6 @@ F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, 
 VERDICT = "tolerate"
 ID = "F02"
 FEATURES = ['end.data-after']
-POSIX = "end"
 TREE = [F('a', b'a\n')]
 
 

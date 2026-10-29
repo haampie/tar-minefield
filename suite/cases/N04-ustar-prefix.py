@@ -1,7 +1,9 @@
 """A long name split between the ustar prefix and name fields.
 
-The prefix field is 120 `p`s and the name field is `file`. In POSIX, the pathname is the prefix,
-followed by `/`, followed by the name, so `file` is in a directory whose name is the 120 `p`s.
+The archive has one file whose prefix field is 120 `p`s and whose name field is `file`.
+
+In [POSIX][prefix], the pathname is the prefix, followed by `/`, followed by the name, so `file` is
+in a directory whose name is the 120 `p`s.
 
 Seen in: thousands of tarballs.
 """
@@ -12,7 +14,6 @@ D = lambda path: {"path": path, "kind": "directory"}
 VERDICT = "accept"
 ID = "N04"
 FEATURES = []
-POSIX = "prefix"
 TREE = [D('pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp'), F('pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/file', b'prefixed\n')]
 
 

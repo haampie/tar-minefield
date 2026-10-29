@@ -1,8 +1,11 @@
 """A regular file with a link target.
 
-The header has typeflag `0` and the linkname `target`. POSIX gives a linkname meaning only for
-links. This case is ambiguous because the member is either a file, by its typeflag, or a link to
-`target`, by its linkname.
+The archive has one member, `a`, whose header has typeflag `0`, a regular file, and the linkname
+`target`.
+
+[POSIX][linkname] gives a linkname meaning only for links, and a member is extracted as a file of
+its [own type][file-type], so the member is a file. This case is ambiguous only to a reader that
+goes by the linkname, and makes a link to `target`.
 
 Decision point: whether a linkname makes a member a link.
 Seen in: bgen 1.1.7.
@@ -11,7 +14,6 @@ Seen in: bgen 1.1.7.
 VERDICT = "reject"
 ID = "K02"
 FEATURES = ['linkname.on-file']
-POSIX = "linkname"
 
 
 def build(a):

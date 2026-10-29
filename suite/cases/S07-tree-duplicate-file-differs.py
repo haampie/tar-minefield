@@ -1,9 +1,13 @@
 """The same file twice, with different contents: the first copy, or the last?
 
-The archive has two members named `a`, with different contents. This case is ambiguous because
-either copy can be the file, and the two trees differ in the contents of `a`: every implementation
-that extracts it keeps the last copy, but an extractor that does not overwrite files, such as GNU
-tar with `--keep-old-files`, keeps the first.
+The archive has two files named `a`: the first contains `first`, the last `last`.
+
+In POSIX, `-k` [prevents the overwriting][keep-old] of existing files, so without it the last copy
+is the file, and with it the first. But POSIX only says that existing files are
+[overwritten][overwritten] when its options allow it, not that they must be, and its [application
+usage][overwrite] calls overwriting permitted. This case is ambiguous because either copy can be the
+file: an extractor that overwrites files keeps the last copy, and one that does not, such as GNU tar
+with `--keep-old-files`, keeps the first.
 
 Decision point: which of two members of one path is the file.
 Seen in: fish 4.7.1, where `Cargo.toml` and `Cargo.lock` are appended again without their last

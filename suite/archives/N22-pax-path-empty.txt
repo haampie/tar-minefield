@@ -1,16 +1,17 @@
 N22-pax-path-empty: must reject
 
-An empty pax `path`, which in POSIX removes the path rather than giving one.
+An empty pax `path`, which in POSIX deletes a path: the pax one, or the header's name too?
 
-POSIX says that a record with an empty value deletes the corresponding field, in the header too, so
-`path=` leaves the member with no name at all, not even that of its header, `from-header`. It does
-not say what a member without a name is. This case is ambiguous because the name is either what the
-header specifies, `from-header`, or empty (which refers to the destination itself). A reader may
-also skip the member, or name the file after the archive.
+The archive has one file, whose pax header has an empty `path=`, and whose header has the name
+`from-header`.
 
-An empty `linkpath` asks the same of a link: whether a symlink keeps the target in its header, has
-an empty target (see N25), or is skipped. Implementations need not answer both alike: one that falls
-back to the header's name for an empty `path` may still apply an empty `linkpath`.
+POSIX says that a record with an empty value deletes any header block field of the
+same name, and that pax ignores a field of the header that a keyword deletes, its
+corresponding field. No field of the header is named `path`, which
+overrides `name` and `prefix`. This case is ambiguous because, if deletion goes by the name
+of the keyword, `path=` deletes nothing in the header, and the member is `from-header`; if it goes
+by the header field that the keyword overrides, it deletes the name too, and leaves a member without
+one, which POSIX does not define, as an empty pathname does not resolve.
 
 Decision point: what an empty pax path means: no name, an empty name, or the header's name.
 Seen in: none of the scanned tarballs.

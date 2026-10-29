@@ -2,14 +2,18 @@ F14-pax-size-disagrees: tolerated: a strict parser may reject it; if it accepts 
 
 A pax `size` that disagrees with the header's, so that a reader of the header's misses a member.
 
-The size field in the header of `a` is 512, and its pax extended header has `size=0`. POSIX says
-that the pax size overrides the header's: it is how sizes over 8 GiB, which do not fit in the
-header's size field, are written, and archivers write various sizes in the header then. An
-implementation that takes the pax size, as it must, reads the next block as the header of another
-file, `smuggled`; an implementation that takes the header's size, or does not know pax, reads that
-block as the data of `a`. An implementation that takes the header's size is the bug of
-CVE-2025-62518 (astral-tokio-tar before 0.5.6, and tokio-tar). A strict parser may reject a header
-whose size field has room for the size but gives another, but must not extract `a` with 512 bytes.
+The archive has a file `a`, whose header has the size 512 and whose pax header has `size=0`, then
+an empty file `smuggled`.
+
+POSIX says that the pax size overrides the header's: it is how sizes over 8 GiB,
+which do not fit in the header's size field, are written, and archivers write various sizes in the
+header then. An implementation that takes the pax size, as it must, reads the next block as the
+header of another file, `smuggled`; an implementation that takes the header's size, or does not know
+pax, reads that block as the data of `a`. An implementation that takes the header's size is the bug
+of CVE-2025-62518 (astral-tokio-tar before 0.5.6, and tokio-tar). POSIX gives no reason to reject
+the archive, as the header's size is then to be ignored. A strict parser may reject
+it anyway, since a header with room for the size has no reason to give another, but must not extract
+`a` with 512 bytes.
 
 Decision point: which of two sizes frames the member.
 Seen in: none of the scanned tarballs.

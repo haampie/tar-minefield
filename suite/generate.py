@@ -8,13 +8,14 @@ For each case `<case>.py`, named by its identifier, such as `F15-pax-size-on-dir
 its identifier, its verdict, the features of tarscan.py that it is about, and for the cases to accept
 and the tolerated ones the tree an implementation must extract. Generation is deterministic.
 
-A case is a script in cases/, named by its identifier, the next free number of its letter, and a
-few words. It defines `ID`; `VERDICT`, one of "reject", "accept" and "tolerate"; `FEATURES`;
-`TREE`, unless it is to reject; `POSIX`, the key in contrib/citations.py of the sentence its
-explanation relies on, if any, or a dict from words of the explanation to keys, where it relies on
-several; and `build(archive)`, which writes the archive with blocks.py. Its docstring explains the
-case: the decision point where implementations differ, where the scans saw it, and what
-implementations do with it.
+A case is a script in cases/, named by its identifier, the next free number of its letter, and a few
+words. It defines `ID`; `VERDICT`, one of "reject", "accept" and "tolerate"; `FEATURES`; `TREE`,
+unless it is to reject; and `build(archive)`, which writes the archive with blocks.py. Its docstring
+explains the case: first what is in the archive, in a paragraph that cites nothing, then the
+decision point where implementations differ, where the scans saw it, and what implementations do
+with it. Where it relies on a sentence of POSIX, it links words to it as `[words][key]`, by its key
+in contrib/citations.py, which the site makes a link; in archives/, they are the words alone. It
+stands on its own: other cases are named only in its `See also:` lines.
 
 It needs nothing outside suite/ but the Python standard library.
 """
@@ -58,6 +59,11 @@ def tree(entries):
     return out
 
 
+def plain(text):
+    """Text with its links to sentences of POSIX, `[words][key]`, as the words."""
+    return re.sub(r"\[([^\[\]]+)\]\[[a-z0-9-]+\]", r"\1", text)
+
+
 def generate():
     """{file name: bytes} of every case."""
     files, ids = {}, {}
@@ -70,18 +76,23 @@ def generate():
         assert case.startswith(module.ID + "-"), f"{case}: the name starts with its identifier"
         assert module.VERDICT in VERDICTS, f"{case}: a verdict of {sorted(VERDICTS)}"
         assert module.ID not in ids, f"{case}: the identifier of {ids.get(module.ID)}"
+        assert not re.search(r"\]\[[a-z0-9-]+\]", module.__doc__.strip().split("\n\n")[1]), \
+            f"{case}: the first paragraph says what is in the archive, and cites nothing"
+        others = set(re.findall(r"\b[FNKS]\d\d\b", "\n".join(
+            line for line in module.__doc__.split("\n") if not line.startswith("See also:"))))
+        assert others <= {module.ID}, f"{case}: names {sorted(others - {module.ID})} outside See also"
         ids[module.ID] = case
         archive = Archive()
         module.build(archive)
         expected = {
             "id": module.ID,
             "verdict": module.VERDICT,
-            "description": module.__doc__.strip().split("\n")[0],
+            "description": plain(module.__doc__.strip().split("\n")[0]),
             "features": getattr(module, "FEATURES", []),
         }
         if module.VERDICT != "reject":
             expected["tree"] = tree(module.TREE)
-        header = f"{case}: {VERDICTS[module.VERDICT]}\n\n{module.__doc__.strip()}\n\n"
+        header = f"{case}: {VERDICTS[module.VERDICT]}\n\n{plain(module.__doc__.strip())}\n\n"
         files[f"{case}.tar"] = archive.bytes()
         files[f"{case}.txt"] = (header + archive.dump()).encode()
         files[f"{case}.svg"] = block_map(

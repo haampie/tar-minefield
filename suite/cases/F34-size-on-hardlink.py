@@ -1,12 +1,14 @@
 """A size in the header of a hard link, in a pax archive, which takes the next header for its data.
 
-The first member is a file `a`, the second a hard link `h` to `a`, with a pax extended header and
-the size 512 in its ustar header. POSIX says that no data is stored for a hard link in ustar, so the
-next block is the header of a file, `smuggled`. It permits data on a hard link in pax, so that
-a reader may take the block, once an archive has a pax header, for the data of `h`, which replaces
-the contents of `a`. This case is ambiguous because the tree has either `a` as it is and
-`smuggled`, or `a` with that block as its contents. A reader may also skip the block, or make `h`
-a file of it.
+The archive has a file `a`, then a hard link `h` to `a`, with a pax header and the size 512 in its
+header, then an empty file `smuggled`.
+
+In a pax archive, which this is, [POSIX][link-data] permits data on a hard link, so the block after
+the header of `h` is its data, and what looks like the header of `smuggled` is that data. POSIX does
+not say what the data of a hard link does: whether it replaces the contents of `a`, or is ignored. A
+reader that applies the [rule of ustar][no-data], that no data is stored for a hard link, reads
+`smuggled` as a member. This case is ambiguous because the tree has `a` as it is, `a` with that
+block as its contents, or `a` and `smuggled`.
 
 Decision point: whether a size in the header of a hard link applies, in an archive with pax headers.
 Seen in: none of the scanned tarballs.
@@ -16,7 +18,6 @@ See also: F33, a size in the header of a directory, and F35, a pax size on a har
 VERDICT = "reject"
 ID = "F34"
 FEATURES = ["size.on-hardlink"]
-POSIX = {"POSIX": "no-data", "permits": "link-data"}
 
 
 def build(a):

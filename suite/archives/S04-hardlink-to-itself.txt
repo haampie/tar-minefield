@@ -2,13 +2,15 @@ S04-hardlink-to-itself: must reject
 
 A hardlink to itself.
 
-The first member is a file `a`, the second a hardlink `a` to `a`. In POSIX, extracting a hardlink
-to the same directory entry is an error. Read leniently, this case is ambiguous because the link
-replaces `a`, which then has nothing to link to, empties it, or leaves it as it is.
+The archive has a file `a`, then a hardlink `a` to `a`.
+
+In POSIX, extracting a hardlink to the same directory entry is an error. Read
+leniently, this case is ambiguous because the link either replaces `a`, which then has nothing to
+link to, or leaves it as it is.
 
 Decision point: what a link to itself does to the file.
-Seen in: 27 tarballs, 18 of them NVIDIA's cuDNN binaries in Spack, and xscreensaver 6.12 and
-atari++ 1.85.
+Seen in: 27 tarballs, among them 18 of NVIDIA's cuDNN binaries in Spack, and xscreensaver 6.12
+and atari++ 1.85.
 
 0x000000  header: regular file
           name     [  0,100)  "a" + 99 NUL

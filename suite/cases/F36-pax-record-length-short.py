@@ -1,10 +1,12 @@
 """A pax record whose length is one byte short, so that it ends just before its newline.
 
-The extended header contains one record, `16 path=from-pax` followed by a newline, which is 17
-bytes, although its length says 16. In POSIX, the length of a record counts every byte of it, its
-newline included, so the record is malformed. This case is ambiguous in practice because only a
-reader that delimits the record by its length, and checks that it ends in a newline, recognizes it
-as malformed: one that splits records on newlines, or does not check, takes it for a valid record.
+The archive has a pax header with one record, `16 path=from-pax` followed by a newline, which is 17
+bytes, although its length says 16; then the member, whose header has the name `from-header`.
+
+In [POSIX][record-length], the length of a record counts every byte of it, its newline included, so
+the record is malformed. This case is ambiguous in practice because only a reader that delimits the
+record by its length, and checks that it ends in a newline, recognizes it as malformed: one that
+splits records on newlines, or does not check, takes it for a valid record.
 
 Decision point: whether a pax record whose length does not end at its newline is recognized as
 malformed.
@@ -15,7 +17,6 @@ See also: F28, a newline inside a value.
 VERDICT = "reject"
 ID = "F36"
 FEATURES = ["pax.invalid-length", "pax.no-newline"]
-POSIX = "record-length"
 
 RECORD = b"16 path=from-pax\n"
 
