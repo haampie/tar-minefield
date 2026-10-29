@@ -3,8 +3,8 @@ F07-end-archive-after: must reject
 Another archive after the end-of-archive marker.
 
 The archive ends with two zero blocks, as it should, and is followed by a second archive with a file
-`hidden`. In POSIX, the archive ends at the marker, and `hidden` is not part of it. This case is
-ambiguous in practice because a reader that reads on past the marker, by default or with an
+`hidden`. In POSIX, the archive ends at the marker, and `hidden` is not part of it. This case
+is ambiguous in practice because a reader that reads on past the marker, by default or with an
 option, extracts `hidden` as well.
 
 Decision point: whether an implementation stops at the end-of-archive marker.

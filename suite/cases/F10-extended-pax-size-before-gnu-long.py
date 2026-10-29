@@ -1,13 +1,13 @@
 """A pax `size` followed by a GNU long name: which of them does the size apply to?
 
 The pax header has `size=512` and is followed by a GNU long name header, then by the member. GNU's
-format does not say how the two combine, and POSIX does not know GNU long names: to POSIX, the long
-name header is a file of an unknown type, so the pax size applies to it. This case is ambiguous
-because the size applies either to the long name header, and `smuggled` is a member of its own, or
-to the member, whose data then takes in the header of `smuggled`, or to both, so that the member has
-that data and `smuggled` is a member as well. A reader that does not know GNU long names extracts
-the member as `short-name`. This is the bug class of GHSA-3pv8-6f4r-ffg2 (tar-rs) and CVE-2026-53655
-(node-tar).
+format does not say how the two combine, and [POSIX][unknown-type] does not know GNU long names: to
+POSIX, the long name header is a file of an unknown type, so the pax size applies to it. This case
+is ambiguous because the size applies either to the long name header, and `smuggled` is a member of
+its own, or to the member, whose data then takes in the header of `smuggled`, or to both, so that
+the member has that data and `smuggled` is a member as well. A reader that does not know GNU long
+names extracts the member as `short-name`. This is the bug class of GHSA-3pv8-6f4r-ffg2 (tar-rs) and
+CVE-2026-53655 (node-tar).
 
 Decision point: which header a pax size applies to, when another extended header follows.
 Seen in: none of the scanned tarballs.
@@ -16,7 +16,6 @@ Seen in: none of the scanned tarballs.
 VERDICT = "reject"
 ID = "F10"
 FEATURES = ['extended.pax-size-before-gnu-long']
-POSIX = "unknown-type"
 
 
 def build(a):

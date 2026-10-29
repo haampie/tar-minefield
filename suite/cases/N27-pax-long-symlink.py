@@ -1,8 +1,9 @@
 """A symlink with a long name and a long target, in a pax `path` and `linkpath` respectively.
 
 The pax header has a `path` of 120 `l`s and a `linkpath` of 120 `t`s, and the symlink's header has
-truncated ones, as writers put there. In POSIX, a pax record overrides the corresponding field of
-the header, so the symlink is the 120 `l`s, and points to the file of 120 `t`s before it.
+truncated ones, as writers put there. In [POSIX][corresponding], a pax record overrides the
+corresponding field of the header, so the symlink is the 120 `l`s, and points to the file of 120
+`t`s before it.
 
 Seen in: gnome-software 49.3.
 """
@@ -13,7 +14,6 @@ L = lambda path, target: {"path": path, "kind": "symlink", "target": target}
 VERDICT = "accept"
 ID = "N27"
 FEATURES = []
-POSIX = "corresponding"
 TREE = [F("t" * 120, b"target\n"), L("l" * 120, "t" * 120)]
 
 

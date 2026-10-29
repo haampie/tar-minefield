@@ -332,11 +332,22 @@ def readme_section(title):
 
 
 def inline(text):
-    """Text with `code` and [links](https://...) as HTML."""
+    """Text with `code`, [links](https://...) and [links][key] to sentences of POSIX, by their keys
+    in citations.py, as HTML."""
     parts = text.split("`")
     return "".join(f"<code>{html.escape(p)}</code>" if i % 2 else
-                   re.sub(r"\[(.+?)\]\((https?://[^)\s]+)\)", r'<a href="\2">\1</a>', html.escape(p))
+                   cite(re.sub(r"\[(.+?)\]\((https?://[^)\s]+)\)", r'<a href="\2">\1</a>',
+                               html.escape(p)))
                    for i, p in enumerate(parts))
+
+
+def cite(text):
+    """Text with its [links][key] to sentences of POSIX as HTML."""
+    def link(m):
+        if m.group(2) not in citations.SENTENCES:
+            sys.exit(f"[{m.group(1)}][{m.group(2)}]: no such sentence in citations.py")
+        return f'<a href="{html.escape(citations.url(m.group(2)))}">{m.group(1)}</a>'
+    return re.sub(r"\[([^\[\]]+)\]\[([a-z0-9-]+)\]", link, text)
 
 
 def doc_paragraphs(text):
@@ -345,21 +356,15 @@ def doc_paragraphs(text):
     return [" ".join(p.strip().split("\n")) for p in text.split("\n\n")]
 
 
-def paragraphs(text, cited=None):
-    """The explanation of a case as HTML, with its first "POSIX" a link to the sentence it cites: or,
-    where it cites several, the first of each word that it links to its sentence."""
+def paragraphs(text):
+    """The explanation of a case as HTML."""
     out = []
     for p in doc_paragraphs(text):
         if p.startswith("See also:"):
             continue
         out.append("<p>" + re.sub(r"^(Decision point|Seen in):", r"<strong>\1:</strong>", inline(p))
                    + "</p>")
-    out = "\n".join(out)
-    for word, key in ({"POSIX": cited} if isinstance(cited, str) else cited or {}).items():
-        if word not in out:
-            sys.exit(f"cites {key}, but its explanation does not say {word}")
-        out = out.replace(word, f'<a href="{html.escape(citations.url(key))}">{word}</a>', 1)
-    return out
+    return "\n".join(out)
 
 
 def see_also(text):
@@ -742,17 +747,6 @@ def docstring(case):
         return ast.get_docstring(ast.parse(f.read()), clean=False)
 
 
-def cited(case):
-    """The sentence of POSIX that the script of a case cites, by its key in citations.py, or the
-    sentences, by the words of its explanation that link to them."""
-    with open(os.path.join(CASES, case + ".py")) as f:
-        for node in ast.parse(f.read()).body:
-            if isinstance(node, ast.Assign) and any(getattr(t, "id", None) == "POSIX"
-                                                    for t in node.targets):
-                return ast.literal_eval(node.value)
-    return None
-
-
 def case_page(case, info, results, data):
     ident, name = matrix.label(case, info).split(" ", 1)
     doc = docstring(case)
@@ -781,7 +775,7 @@ def case_page(case, info, results, data):
 </table></dd>
 </dl>
 <h2>The case</h2>
-{with_tree(paragraphs(doc.strip().split(chr(10), 1)[1], cited(case)), info)}
+{with_tree(paragraphs(doc.strip().split(chr(10), 1)[1]), info)}
 <h2>The archive</h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
 <div class="wide">{block_map}</div>

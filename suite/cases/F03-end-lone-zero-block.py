@@ -1,7 +1,7 @@
 """An end-of-archive marker of one zero block, not two.
 
-POSIX requires two zero blocks at the end of an archive; most implementations stop at the first, so
-they extract it all the same.
+[POSIX][end] requires two zero blocks at the end of an archive; most implementations stop at the
+first, so they extract it all the same.
 
 Decision point: whether one zero block is an end-of-archive marker.
 Seen in: eng-rus, srecord 1.64 and cdi2iso 0.1.
@@ -11,7 +11,6 @@ See also: F09, one zero block followed by another member, which is rejected as w
 VERDICT = "reject"
 ID = "F03"
 FEATURES = ['end.lone-zero-block']
-POSIX = "end"
 
 
 def build(a):

@@ -1,10 +1,10 @@
 """An unknown typeflag with a size: data, or no data?
 
-POSIX says an unknown typeflag is read as a regular file, so the 512 bytes after the header are the
-data of `unknown`. Those bytes also form a valid header, of an empty file `smuggled`. This case is
-ambiguous in practice because a reader that skips the member, rather than extract it as a file, has
-to decide whether it has data. If it does, the 512 bytes are skipped with it; if not, they are the
-header of the next member, and `smuggled` is extracted.
+[POSIX][unknown-type] says an unknown typeflag is read as a regular file, so the 512 bytes after the
+header are the data of `unknown`. Those bytes also form a valid header, of an empty file `smuggled`.
+This case is ambiguous in practice because a reader that skips the member, rather than extract it as
+a file, has to decide whether it has data. If it does, the 512 bytes are skipped with it; if not,
+they are the header of the next member, and `smuggled` is extracted.
 
 Decision point: whether an unknown typeflag has data.
 Seen in: none of the scanned tarballs.
@@ -13,7 +13,6 @@ Seen in: none of the scanned tarballs.
 VERDICT = "reject"
 ID = "F16"
 FEATURES = ['type.unknown-Z']
-POSIX = "unknown-type"
 
 
 def build(a):

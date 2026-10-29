@@ -1,11 +1,11 @@
 """The sentences of POSIX that the cases rely on, and links to them: to their section of the pax
-utility in POSIX.1-2024, with a text fragment that highlights the sentence, so that a browser
-without text fragments still shows the section.
+utility in POSIX.1-2024, or of another page of it, with a text fragment that highlights the
+sentence, so that a browser without text fragments still shows the section.
 
-A case names its sentence as `POSIX = "<key>"`, next to its FEATURES, and the site links the first
-"POSIX" of its explanation to it; a case that cites several names them by the word of its
-explanation that links to each, as `POSIX = {"POSIX": "<key>", "permits": "<key>"}`. Checked against the page as it is published, that every sentence
-is in its section, once, and so are the ones that METHOD.md links to:
+The explanation of a case links words to a sentence by its key, as a reference link of Markdown:
+`[POSIX][size-override] says`, which the site makes a link and generate.py makes plain text.
+Checked against the pages as they are published, that every sentence is in its section, once, and
+so are the ones that METHOD.md links to:
 
     python -I contrib/citations.py
 """
@@ -17,7 +17,11 @@ import sys
 import urllib.parse
 import urllib.request
 
-PAGE = "https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html"
+BASE = "https://pubs.opengroup.org/onlinepubs/9799919799"
+PAGE = f"{BASE}/utilities/pax.html"
+PATHNAMES = f"{BASE}/basedefs/V1_chap04.html"  # General Concepts, with Pathname Resolution
+LINK = f"{BASE}/functions/link.html"
+SYMLINK = f"{BASE}/functions/symlink.html"
 # The sections, by their ids on the page
 DESCRIPTION = "tag_20_94_03"
 OPTIONS = "tag_20_94_04"
@@ -101,17 +105,29 @@ SENTENCES = {
     "cannot-create": (ERRORS, "If pax cannot create a file or a link when reading an archive"),
     "slash-convention": (RATIONALE_USTAR, "the convention of using a filename ending with <slash> "
                                           "was adopted to specify a directory on the archive"),
+    # Sentences of other pages, as (page, section or None, sentence)
+    "null-pathname": (PATHNAMES, "tag_04_16", "A null pathname shall not be successfully resolved"),
+    "link-follows": (LINK, None, "If path1 names a symbolic link, it is implementation-defined"),
+    "symlink-string": (SYMLINK, None, "shall be treated only as a string and shall not be "
+                                      "validated as a pathname"),
 }
 
 
-def link(section, sentence):
+def link(section, sentence, page=PAGE):
     # a dash, comma or ampersand is syntax in a text directive, so they are escaped too
     text = urllib.parse.quote(sentence, safe="").replace("-", "%2D")
-    return f"{PAGE}#{section}:~:text={text}"
+    return f"{page}#{section or ''}:~:text={text}"
+
+
+def where(key):
+    """(page, section or None, sentence) of a key."""
+    cited = SENTENCES[key]
+    return cited if len(cited) == 3 else (PAGE, *cited)
 
 
 def url(key):
-    return link(*SENTENCES[key])
+    page, section, sentence = where(key)
+    return link(section, sentence, page)
 
 
 # The tags after which a browser starts a new line: a text fragment matches across the others
@@ -124,25 +140,33 @@ def text(page):
     return " ".join(html.unescape(re.sub(r"<[^>]+>", "", page)).split())
 
 
-def main():
-    with urllib.request.urlopen(PAGE) as f:
-        page = f.read().decode("latin-1")
-    starts = [(len(text(page[:m.start()])), m.group(1))
-              for m in re.finditer(r'<a\b[^>]*\bid="(tag_[0-9_]+)"', page)]
-    whole = text(page)
+def check(pages):
+    """The problems with the cited sentences, given {URL: the HTML of that page}."""
     with open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                            "METHOD.md")) as f:
         method = f.read()
-    cited = list(SENTENCES.items())
+    cited = [(key, where(key)) for key in SENTENCES]
     for section, fragment in re.findall(re.escape(PAGE) + r"#(\w+):~:text=([^)\s]+)", method):
-        cited.append(("METHOD.md", (section, urllib.parse.unquote(fragment))))
+        cited.append(("METHOD.md", (PAGE, section, urllib.parse.unquote(fragment))))
     problems = []
-    for key, (section, sentence) in cited:
-        at = [m.start() for m in re.finditer(re.escape(sentence), whole, re.I)]
+    for key, (url_, section, sentence) in cited:
+        page = pages[url_]
+        starts = [(len(text(page[:m.start()])), m.group(1))
+                  for m in re.finditer(r'<a\b[^>]*\bid="(tag_[0-9_]+)"', page)]
+        at = [m.start() for m in re.finditer(re.escape(sentence), text(page), re.I)]
         if len(at) != 1:
             problems.append(f"{key}: {len(at)} times on the page: {sentence}")
-        elif max(s for s in starts if s[0] <= at[0])[1] != section:
+        elif section and max(s for s in starts if s[0] <= at[0])[1] != section:
             problems.append(f"{key}: not in {section}: {sentence}")
+    return problems
+
+
+def main():
+    pages = {}
+    for url_ in sorted({where(key)[0] for key in SENTENCES} | {PAGE}):
+        with urllib.request.urlopen(url_) as f:
+            pages[url_] = f.read().decode("latin-1")
+    problems = check(pages)
     if problems:
         sys.exit("\n".join(problems))
 

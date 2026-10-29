@@ -1,8 +1,8 @@
 """Another archive after the end-of-archive marker.
 
 The archive ends with two zero blocks, as it should, and is followed by a second archive with a file
-`hidden`. In POSIX, the archive ends at the marker, and `hidden` is not part of it. This case is
-ambiguous in practice because a reader that reads on past the marker, by default or with an
+`hidden`. In [POSIX][end], the archive ends at the marker, and `hidden` is not part of it. This case
+is ambiguous in practice because a reader that reads on past the marker, by default or with an
 option, extracts `hidden` as well.
 
 Decision point: whether an implementation stops at the end-of-archive marker.
@@ -15,7 +15,6 @@ See also: F02, junk after the two zero blocks, which is tolerated.
 VERDICT = "reject"
 ID = "F07"
 FEATURES = ['end.archive-after']
-POSIX = "end"
 
 
 def build(a):
