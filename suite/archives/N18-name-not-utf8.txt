@@ -2,7 +2,8 @@ N18-name-not-utf8: must reject
 
 A name that is not UTF-8.
 
-The name `caf\xe9` is Latin-1, and POSIX leaves how a name in the header is encoded to the
+The name `caf\xe9` is Latin-1. POSIX requires the header to be in ISO/IEC 646, that is ASCII, so the
+archive does not conform, and leaves the encoding of other characters in names to the
 implementation. This case is ambiguous because the name on disk is those bytes, or the name with the
 byte replaced, by U+FFFD or by `?`.
 
