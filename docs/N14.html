@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N14 name-bytes-after-nul · Tar file extraction test suite">
 <meta property="og:description" content="Bytes after the NUL that ends a name.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N14.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N14.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/9292a0d04e48eef4.png">
@@ -39,8 +39,9 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The name field contains <code>a</code>, followed by a NUL, followed by <code>b</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=name%20is%20terminated%20at%20the%20first%20NUL%20character">POSIX</a>, a name ends at its first NUL, so the name is <code>a</code>. Copied as a whole, the field is <code>a</code> as a C string, which ends at the first NUL, but <code>a\0b</code> in languages whose strings can contain a NUL, and creating the file then fails.</p>
-<p>Implementations that extract it make <code>a</code>, or fail on <code>a\0b</code>. The bytes after the NUL have no meaning and no writer puts them there (none of the scanned tarballs has them), so a strict parser rejects them rather than guess what they are for.</p>
+<p>The archive has one file whose name field contains <code>a</code>, followed by a NUL, followed by <code>b</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=name%20is%20terminated%20at%20the%20first%20NUL%20character">POSIX</a>, a name ends at its first NUL, so the name is <code>a</code>. Copied as a whole, the field is <code>a</code> as a C string, which ends at the first NUL, but <code>a\0b</code> in languages whose strings can contain a NUL, and creating the file then fails.</p>
+<p>The bytes after the NUL have no meaning and no writer puts them there (none of the scanned tarballs has them), so a strict parser rejects them rather than guess what they are for.</p>
 <p><strong>Decision point:</strong> where a name ends.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,13 +53,14 @@
 
 Bytes after the NUL that ends a name.
 
-The name field contains `a`, followed by a NUL, followed by `b`. In POSIX, a name ends at its first
-NUL, so the name is `a`. Copied as a whole, the field is `a` as a C string, which ends at the first
-NUL, but `a\0b` in languages whose strings can contain a NUL, and creating the file then fails.
+The archive has one file whose name field contains `a`, followed by a NUL, followed by `b`.
 
-Implementations that extract it make `a`, or fail on `a\0b`. The bytes after
-the NUL have no meaning and no writer puts them there (none of the scanned tarballs has them), so a
-strict parser rejects them rather than guess what they are for.
+In POSIX, a name ends at its first NUL, so the name is `a`. Copied as a whole, the field
+is `a` as a C string, which ends at the first NUL, but `a\0b` in languages whose strings can contain
+a NUL, and creating the file then fails.
+
+The bytes after the NUL have no meaning and no writer puts them there (none of the scanned tarballs
+has them), so a strict parser rejects them rather than guess what they are for.
 
 Decision point: where a name ends.
 Seen in: none of the scanned tarballs.
@@ -261,6 +263,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

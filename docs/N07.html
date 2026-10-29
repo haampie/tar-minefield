@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N07 symlink-absolute · Tar file extraction test suite">
 <meta property="og:description" content="A symlink to an absolute path, created as it is.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N07.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N07.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/930f4ac6c5653d89.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The default policy creates the link, and rejects writing through any symlink. The target does not exist.</p>
+<p>The archive has one symlink, <code>link</code>, to <code>/tar-minefield-nonexistent</code>, an absolute path that does not exist.</p>
+<p>The default policy tolerates it, and rejects an archive that writes through a symlink.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>link</code></td><td>symlink</td><td>→ <code>/tar-minefield-nonexistent</code></td></tr></table></div>
@@ -53,10 +54,13 @@
 
 A symlink to an absolute path, created as it is.
 
-The default policy creates the link, and rejects writing through any symlink. The target does
-not exist.
+The archive has one symlink, `link`, to `/tar-minefield-nonexistent`, an absolute path that does not
+exist.
+
+The default policy tolerates it, and rejects an archive that writes through a symlink.
 
 Seen in: tachyon 0.99.5, notmuch 0.40 and others.
+See also: S10 and S11, archives that write through a symlink.
 
 0x000000  header: symlink
           name     [  0,100)  &quot;link&quot; + 96 NUL
@@ -219,8 +223,12 @@ Seen in: tachyon 0.99.5, notmuch 0.40 and others.
 <tr><td>live-bootstrap</td><td class=n>171</td><td class=n>0</td><td class=n>none</td></tr>
 <tr class="total"><td>total (distinct)</td><td class=n>82,586</td><td class=n>89</td><td class=n>0.11%</td></tr></table></div>
 <p>See <a href="seen-in.html#N07">a sample of these 89 tarballs</a>, with the sha256 of each and an example from it.</p>
+<h2 id="see-also">See also<a class="anchor" href="#see-also" aria-label="Link to this section">¶</a></h2>
+<ul>
+<li><a href="S10.html"><code>S10</code></a> and <a href="S11.html"><code>S11</code></a>, archives that write through a symlink.</li>
+</ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

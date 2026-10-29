@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="Rust astral-tokio-tar · Tar file extraction test suite">
 <meta property="og:description" content="The 36 of 81 cases of the tar-minefield test suite where Rust astral-tokio-tar does not follow the draft default policy, and what it makes of them.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/astral-tokio-tar.html">
 <meta property="og:url" content="https://stoppels.ch/tar/astral-tokio-tar.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/f6acdc7ccd199e35.png">
@@ -66,7 +66,7 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="N20.html"><code>N20</code></a> pax-repeated-key</td><td>One pax key twice in one extended header.</td><td>extracts <code>second</code> (12 B, a578eb49)</td></tr>
 <tr><td><a href="N21.html"><code>N21</code></a> pax-global-path</td><td>A global pax header with a <code>path</code>.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>b</code> (2 B, 02638299)</td></tr>
 <tr><td><a href="N23.html"><code>N23</code></a> extended-gnu-long-then-pax</td><td>A GNU long name, then a pax header, then the member: which of them does the long name apply to?</td><td>extracts <code>from-gnu</code> (12 B, a578eb49)</td></tr>
-<tr><td><a href="N24.html"><code>N24</code></a> pax-hdrcharset-binary</td><td><code>hdrcharset=BINARY</code>, which declares a pax path that is not UTF-8 as bytes.</td><td>extracts <code>caf\xe9</code> (12 B, a578eb49)</td></tr>
+<tr><td><a href="N24.html"><code>N24</code></a> pax-hdrcharset-binary</td><td>A pax path that is not UTF-8, declared as bytes with <code>hdrcharset=BINARY</code>.</td><td>extracts <code>caf\xe9</code> (12 B, a578eb49)</td></tr>
 <tr><td><a href="N26.html"><code>N26</code></a> pax-global-path-then-empty</td><td>A global <code>path</code>, then a global header that removes it with an empty value.</td><td>extracts <code>a</code> (12 B, a578eb49)</td></tr>
 <tr><td><a href="K01.html"><code>K01</code></a> kind-trailing-slash-file</td><td>A regular file whose name ends in a slash: a file, or a directory?</td><td>extracts <code>a</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="K02.html"><code>K02</code></a> linkname-on-file</td><td>A regular file with a link target.</td><td>extracts <code>a</code> (19 B, bc345849)</td></tr>
@@ -77,6 +77,6 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="S10.html"><code>S10</code></a> tree-symlink-then-file</td><td>A symlink, then a file of the same name: replace the link, or write through it?</td><td>extracts <code>a</code> (28 B, d5a04bbb)</td></tr></table></div>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

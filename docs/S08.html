@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="S08 tree-duplicate-file-dir · Tar file extraction test suite">
 <meta property="og:description" content="A file, then a directory of the same name.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/S08.html">
 <meta property="og:url" content="https://stoppels.ch/tar/S08.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/ae8626033c16a14e.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The first member is a file <code>a</code>, the second a directory <code>a/</code>. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">POSIX</a> says that a member is extracted as a file of its own type, and <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_16:~:text=In%20read%20mode%2C%20implementations%20are%20permitted%20to%20overwrite%20files%20when%20the%20archive%20has%20multiple%20members%20with%20the%20same%20name">permits</a> a later member to overwrite an earlier one of the same name, but does not require it. This case is ambiguous because the tree has either the directory, which replaces the file, or the file, or neither.</p>
+<p>The archive has a file <code>a</code>, then a directory <code>a/</code>.</p>
+<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">POSIX</a> says that a member is extracted as a file of its own type, and that existing files are <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">overwritten</a> only when its options allow it, but not whether overwriting a file includes replacing it with a directory. This case is ambiguous because the tree has either the directory, which replaces the file, or the file, with an error for the directory.</p>
 <p><strong>Decision point:</strong> whether a later member replaces an earlier one of another kind.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,10 +52,12 @@
 
 A file, then a directory of the same name.
 
-The first member is a file `a`, the second a directory `a/`. POSIX says that a member is extracted
-as a file of its own type, and permits a later member to overwrite an earlier one of the same name,
-but does not require it. This case is ambiguous because the tree has either the directory, which
-replaces the file, or the file, or neither.
+The archive has a file `a`, then a directory `a/`.
+
+POSIX says that a member is extracted as a file of its own type, and that existing
+files are overwritten only when its options allow it, but not whether overwriting a
+file includes replacing it with a directory. This case is ambiguous because the tree has either the
+directory, which replaces the file, or the file, with an error for the directory.
 
 Decision point: whether a later member replaces an earlier one of another kind.
 Seen in: none of the scanned tarballs.
@@ -307,6 +310,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

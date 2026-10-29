@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F13 pax-newline-in-path · Tar file extraction test suite">
 <meta property="og:description" content="A newline in a pax path, which split on lines is another record.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F13.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F13.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/bbfd079daed0ec0b.png">
@@ -39,6 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
+<p>The archive has one file, <code>plain</code>, whose pax header has one record: a <code>path</code> with a newline in it, <code>good\n1 path=evil</code>.</p>
 <p>pax records are delimited by their length, so a value can contain a newline, and in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">POSIX</a> the path is <code>good\n1 path=evil</code>. Split on lines instead, the extended header has a second record, <code>path=evil</code>, and the path is <code>good</code> or <code>evil</code>. This case is ambiguous in practice because a reader that discards the records as malformed extracts the header&#x27;s name, <code>plain</code>.</p>
 <p><strong>Decision point:</strong> whether a pax record is delimited by its length or by a newline.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs. Newlines in pax values are only in xattrs, such as Minion 10.31, which the default policy accepts as xattrs are not extracted.</p>
@@ -51,10 +52,14 @@
 
 A newline in a pax `path`, which split on lines is another record.
 
-pax records are delimited by their length, so a value can contain a newline, and in POSIX the path
-is `good\n1 path=evil`. Split on lines instead, the extended header has a second record,
-`path=evil`, and the path is `good` or `evil`. This case is ambiguous in practice because a reader
-that discards the records as malformed extracts the header&#x27;s name, `plain`.
+The archive has one file, `plain`, whose pax header has one record: a `path` with a newline in it,
+`good\n1 path=evil`.
+
+pax records are delimited by their length, so a value can contain a newline, and in
+POSIX the path is `good\n1 path=evil`. Split on lines instead, the extended header
+has a second record, `path=evil`, and the path is `good` or `evil`. This case is ambiguous in
+practice because a reader that discards the records as malformed extracts the header&#x27;s name,
+`plain`.
 
 Decision point: whether a pax record is delimited by its length or by a newline.
 Seen in: none of the scanned tarballs. Newlines in pax values are only in xattrs, such as Minion
@@ -343,6 +348,6 @@ Seen in: none of the scanned tarballs. Newlines in pax values are only in xattrs
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

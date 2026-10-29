@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F18 pax-global-comment-after-members · Tar file extraction test suite">
 <meta property="og:description" content="A global pax header with only a comment, after the first member.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F18.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F18.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/4548361c8b7fa950.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>Between the members <code>a</code> and <code>b</code> is a global header, typeflag <code>g</code>, with the one record <code>comment=after a</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=All%20characters%20in%20the%20%3Cvalue%3E%20field%20shall%20be%20ignored%20by%20pax">POSIX</a>, the value of a comment is ignored, so the header changes nothing for <code>b</code>.</p>
+<p>The archive has the files <code>a</code> and <code>b</code>, and between them a global header, typeflag <code>g</code>, with the one record <code>comment=after a</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=All%20characters%20in%20the%20%3Cvalue%3E%20field%20shall%20be%20ignored%20by%20pax">POSIX</a>, the value of a comment is ignored, so the header changes nothing for <code>b</code>.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>2 bytes, sha256 <code title="87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7">87428fc5</code></td></tr>
@@ -54,9 +55,10 @@
 
 A global pax header with only a `comment`, after the first member.
 
-Between the members `a` and `b` is a global header, typeflag `g`, with the one record
-`comment=after a`. In POSIX, the value of a comment is ignored, so the header changes nothing for
-`b`.
+The archive has the files `a` and `b`, and between them a global header, typeflag `g`, with the one
+record `comment=after a`.
+
+In POSIX, the value of a comment is ignored, so the header changes nothing for `b`.
 
 Seen in: rpm 4.20.1 and x42-plugins 20230701.
 
@@ -428,6 +430,6 @@ Seen in: rpm 4.20.1 and x42-plugins 20230701.
 <p>See <a href="seen-in.html#F18">a sample of these 82 tarballs</a>, with the sha256 of each and an example from it.</p>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F19 pax-global-between-extended-and-member · Tar file extraction test suite">
 <meta property="og:description" content="A global pax header between an extended header and its member.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F19.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F19.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/0b5e8ee1bee70fc8.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>An <code>x</code> header, then a <code>g</code> header, then the member. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Represents%20extended%20header%20records%20for%20the%20following%20file%20in%20the%20archive">POSIX</a>, an extended header applies to the following file, but whether a global header counts as one is left open. This case is ambiguous because the extended header applies either to the global header, and the member keeps its name, <code>header-name</code>, or to the member, as <code>from-pax</code>.</p>
+<p>The archive has an <code>x</code> header with <code>path=from-pax</code>, then a <code>g</code> header with only a <code>comment</code>, then a file whose header has the name <code>header-name</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Represents%20extended%20header%20records%20for%20the%20following%20file%20in%20the%20archive">POSIX</a>, an extended header applies to the following file, and a global header is not a file but <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Represents%20global%20extended%20header%20records%20for%20the%20following%20files%20in%20the%20archive">records for the files</a> after it. But POSIX <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=Each%20file%20archived%20shall%20be%20represented%20by%20the%20following%20sequence">describes</a> each file as at most one extended or global header, then its own header, so this sequence is not covered, and it does not say how to read it. This case is ambiguous because the extended header applies either to the global header, and the member keeps its name, <code>header-name</code>, or to the member, as <code>from-pax</code>.</p>
 <p><strong>Decision point:</strong> which header an extended header applies to.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,10 +52,14 @@
 
 A global pax header between an extended header and its member.
 
-An `x` header, then a `g` header, then the member. In POSIX, an extended header applies to the
-following file, but whether a global header counts as one is left open. This case is ambiguous
-because the extended header applies either to the global header, and the member keeps its name,
-`header-name`, or to the member, as `from-pax`.
+The archive has an `x` header with `path=from-pax`, then a `g` header with only a `comment`, then a
+file whose header has the name `header-name`.
+
+In POSIX, an extended header applies to the following file, and a global header is not a
+file but records for the files after it. But POSIX describes each file
+as at most one extended or global header, then its own header, so this sequence is not covered, and
+it does not say how to read it. This case is ambiguous because the extended header applies either to
+the global header, and the member keeps its name, `header-name`, or to the member, as `from-pax`.
 
 Decision point: which header an extended header applies to.
 Seen in: none of the scanned tarballs.
@@ -427,6 +432,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

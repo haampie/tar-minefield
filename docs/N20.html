@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N20 pax-repeated-key · Tar file extraction test suite">
 <meta property="og:description" content="One pax key twice in one extended header.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N20.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N20.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/4b985752d90f7c8f.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The extended header has the records <code>path=first</code> and <code>path=second</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=When%20extended%20header%20records%20conflict%2C%20the%20last%20one%20given%20in%20the%20header%20shall%20take%20precedence">POSIX</a>, the last of conflicting records in one header takes precedence, so the name is <code>second</code>. This case is ambiguous in practice because the name is also read as <code>first</code>, or as the header&#x27;s own, with the records discarded.</p>
+<p>The archive has one file, whose pax header has the records <code>path=first</code> and <code>path=second</code>, and whose header has the name <code>header-name</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=When%20extended%20header%20records%20conflict%2C%20the%20last%20one%20given%20in%20the%20header%20shall%20take%20precedence">POSIX</a>, the last of conflicting records in one header takes precedence, so the name is <code>second</code>. This case is ambiguous in practice because the name is also read as <code>first</code>, or as the header&#x27;s own, with the records discarded.</p>
 <p><strong>Decision point:</strong> which of two values of one key applies.</p>
 <p><strong>Seen in:</strong> libmygpo-qt 1.2.0, with xattr keys.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,10 +52,12 @@
 
 One pax key twice in one extended header.
 
-The extended header has the records `path=first` and `path=second`. In POSIX, the last of
-conflicting records in one header takes precedence, so the name is `second`. This case is ambiguous
-in practice because the name is also read as `first`, or as the header&#x27;s own, with the records
-discarded.
+The archive has one file, whose pax header has the records `path=first` and `path=second`, and whose
+header has the name `header-name`.
+
+In POSIX, the last of conflicting records in one header takes precedence, so the name
+is `second`. This case is ambiguous in practice because the name is also read as `first`, or as the
+header&#x27;s own, with the records discarded.
 
 Decision point: which of two values of one key applies.
 Seen in: libmygpo-qt 1.2.0, with xattr keys.
@@ -343,6 +346,6 @@ Seen in: libmygpo-qt 1.2.0, with xattr keys.
 <p>See <a href="seen-in.html#N20">the tarball</a>, with its sha256 and an example.</p>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

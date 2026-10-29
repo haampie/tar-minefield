@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>N24 pax-hdrcharset-binary · Tar file extraction test suite</title>
-<meta name="description" content="hdrcharset=BINARY, which declares a pax path that is not UTF-8 as bytes.">
+<meta name="description" content="A pax path that is not UTF-8, declared as bytes with hdrcharset=BINARY.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N24 pax-hdrcharset-binary · Tar file extraction test suite">
-<meta property="og:description" content="hdrcharset=BINARY, which declares a pax path that is not UTF-8 as bytes.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<meta property="og:description" content="A pax path that is not UTF-8, declared as bytes with hdrcharset=BINARY.">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N24.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N24.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/c521c206d11ca344.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/5ca96c7e381750eb.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of N24 pax-hdrcharset-binary">
@@ -24,7 +24,7 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="N23.html" rel="prev" title="N23 extended-gnu-long-then-pax">‹ N23 extended-gnu-long-then-pax</a><a href="index.html">tar-minefield</a><a class="next" href="N25.html" rel="next" title="N25 symlink-empty-target">N25 symlink-empty-target ›</a></nav>
 <h1><code>N24</code> pax-hdrcharset-binary</h1>
-<p><code>hdrcharset=BINARY</code>, which declares a pax path that is not UTF-8 as bytes.</p>
+<p>A pax path that is not UTF-8, declared as bytes with <code>hdrcharset=BINARY</code>.</p>
 <div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>name</dd>
@@ -39,8 +39,9 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=values%20recorded%20in%20extended%20headers%20for%20affected%20files%20are%20unencoded%20binary%20data">POSIX</a> lets a pax header declare with <code>hdrcharset=BINARY</code> that its names are bytes in no particular encoding, rather than UTF-8, and then no translation is performed. Here the path is <code>caf\xe9</code>, in Latin-1, so the name on disk is those bytes. This case is ambiguous in practice because the path is also decoded as Latin-1, <code>café</code>, or with the byte replaced by U+FFFD, or discarded for the header&#x27;s name, <code>cafe</code>. A strict parser rejects names that are not UTF-8.</p>
-<p><strong>Decision point:</strong> how a name that is not UTF-8 becomes a path.</p>
+<p>The archive has one file. Its pax header has <code>hdrcharset=BINARY</code> and the path <code>caf\xe9</code>, which is <code>café</code> in Latin-1 and not UTF-8; its ustar header has the name <code>cafe</code>.</p>
+<p>With <code>hdrcharset=BINARY</code>, the pax path is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=values%20recorded%20in%20extended%20headers%20for%20affected%20files%20are%20unencoded%20binary%20data">unencoded binary data</a>, here the bytes <code>caf\xe9</code>. But <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_11:~:text=cannot%20be%20translated%20between%20the%20codeset%20in%20use%20for%20that%20extended%20header%20record%20and%20the%20character%20set%20of%20the%20current%20locale">POSIX</a> also has pax write a &quot;diagnostic message&quot; for a name that it cannot translate to the character set of the locale, and by default <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_04:~:text=pax%20shall%20act%20as%20if%20%2Doinvalid%3Dbypass%20were%20specified">bypass</a> the file. This case is ambiguous because the file is either created under those bytes, or bypassed, in a UTF-8 locale, to which they cannot be translated.</p>
+<p><strong>Decision point:</strong> whether a pax path declared as bytes is created as it is.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -49,15 +50,18 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>N24-pax-hdrcharset-binary: must reject
 
-`hdrcharset=BINARY`, which declares a pax path that is not UTF-8 as bytes.
+A pax path that is not UTF-8, declared as bytes with `hdrcharset=BINARY`.
 
-POSIX lets a pax header declare with `hdrcharset=BINARY` that its names are bytes in no particular
-encoding, rather than UTF-8, and then no translation is performed. Here the path is `caf\xe9`, in
-Latin-1, so the name on disk is those bytes. This case is ambiguous in practice because the path is
-also decoded as Latin-1, `café`, or with the byte replaced by U+FFFD, or discarded for the
-header&#x27;s name, `cafe`. A strict parser rejects names that are not UTF-8.
+The archive has one file. Its pax header has `hdrcharset=BINARY` and the path `caf\xe9`, which is
+`café` in Latin-1 and not UTF-8; its ustar header has the name `cafe`.
 
-Decision point: how a name that is not UTF-8 becomes a path.
+With `hdrcharset=BINARY`, the pax path is unencoded binary data, here the bytes
+`caf\xe9`. But POSIX also has pax write a &quot;diagnostic message&quot; for a name that it
+cannot translate to the character set of the locale, and by default bypass the file. This
+case is ambiguous because the file is either created under those bytes, or bypassed, in a UTF-8
+locale, to which they cannot be translated.
+
+Decision point: whether a pax path declared as bytes is created as it is.
 Seen in: none of the scanned tarballs.
 
 0x000000  header: pax extended header, a path in Latin-1
@@ -344,6 +348,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

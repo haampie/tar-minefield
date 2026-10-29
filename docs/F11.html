@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F11 magic-odd-version · Tar file extraction test suite">
 <meta property="og:description" content="The POSIX magic with a version that is neither 00 nor NULs.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F11.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F11.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/fab508eb5341de40.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The magic <code>ustar\0</code> is followed by the version <code>01</code>, where <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20version%20field%20is%20two%20octets%20containing%20the%20characters%20%2200%22">POSIX</a> requires <code>00</code>. The default policy accepts only that version, and NULs as some Java archivers write. This case is ambiguous because a reader takes the header in one of three ways: as ustar, ignoring the version; as not in a format that POSIX defines, and stops; or as a v7 header, without the fields that ustar added, which here are empty, so that it gives the same tree.</p>
+<p>The archive has one file, <code>a</code>, whose magic <code>ustar\0</code> is followed by the version <code>01</code>.</p>
+<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20version%20field%20is%20two%20octets%20containing%20the%20characters%20%2200%22">POSIX</a> requires <code>00</code>. The default policy tolerates NULs instead, as some Java archivers write them, but no other version. This case is ambiguous because a reader takes the header in one of three ways: as ustar, ignoring the version; as not in a format that POSIX defines, and stops; or as a v7 header, without the fields that ustar added.</p>
 <p><strong>Decision point:</strong> which format the header is in.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,14 +52,16 @@
 
 The POSIX magic with a version that is neither `00` nor NULs.
 
-The magic `ustar\0` is followed by the version `01`, where POSIX requires `00`. The default policy
-accepts only that version, and NULs as some Java archivers write. This case is ambiguous because a
-reader takes the header in one of three ways: as ustar, ignoring the version; as not in a format
-that POSIX defines, and stops; or as a v7 header, without the fields that ustar added, which here
-are empty, so that it gives the same tree.
+The archive has one file, `a`, whose magic `ustar\0` is followed by the version `01`.
+
+POSIX requires `00`. The default policy tolerates NULs instead, as some Java archivers
+write them, but no other version. This case is ambiguous because a reader takes the header in one of
+three ways: as ustar, ignoring the version; as not in a format that POSIX defines, and stops; or as
+a v7 header, without the fields that ustar added.
 
 Decision point: which format the header is in.
 Seen in: none of the scanned tarballs.
+See also: F05, the POSIX magic with NULs for its version, which is tolerated.
 
 0x000000  header: regular file
           name     [  0,100)  &quot;a&quot; + 99 NUL
@@ -256,8 +259,12 @@ Seen in: none of the scanned tarballs.
 <tr><td>live-bootstrap</td><td class=n>171</td><td class=n>0</td><td class=n>none</td></tr>
 <tr class="total"><td>total (distinct)</td><td class=n>82,586</td><td class=n>0</td><td class=n>none</td></tr></table></div>
 
+<h2 id="see-also">See also<a class="anchor" href="#see-also" aria-label="Link to this section">¶</a></h2>
+<ul>
+<li><a href="F05.html"><code>F05</code></a>: the POSIX magic with NULs for its version, which is tolerated.</li>
+</ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F06 checksum-signed · Tar file extraction test suite">
 <meta property="og:description" content="A checksum that only matches as the signed sum of the header.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F06.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F06.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/bba1f4a428cdd243.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20octet%20in%20the%20header%20shall%20be%20treated%20as%20an%20unsigned%20value">POSIX</a>, the checksum is the sum of the bytes of a header taken as unsigned numbers. Some old tars added them as signed, and many implementations still accept either. With a byte over 127 in the header, here in <code>uname</code>, the two totals differ, and the checksum matches only the signed one. This case is ambiguous because a reader takes the header in one of three ways: as valid, by the signed sum, and extracts <code>a</code>; as invalid, and stops; or as invalid, and skips ahead to the next header.</p>
+<p>The archive has one file, <code>a</code>, with the byte <code>0xe9</code> in its <code>uname</code>, and a checksum that is the sum of the bytes of its header taken as signed numbers.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20octet%20in%20the%20header%20shall%20be%20treated%20as%20an%20unsigned%20value">POSIX</a>, the checksum is the sum of the bytes of a header taken as unsigned numbers. Some old tars added them as signed. With a byte over 127 in the header, the two totals differ, and the checksum matches only the signed one. This case is ambiguous because a reader takes the header in one of three ways: as valid, by the signed sum, and extracts <code>a</code>; as invalid, and stops; or as invalid, and skips ahead to the next header.</p>
 <p><strong>Decision point:</strong> whether a signed checksum makes a header valid.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,11 +52,14 @@
 
 A checksum that only matches as the signed sum of the header.
 
-In POSIX, the checksum is the sum of the bytes of a header taken as unsigned numbers. Some old tars
-added them as signed, and many implementations still accept either. With a byte over 127 in the
-header, here in `uname`, the two totals differ, and the checksum matches only the signed one. This
-case is ambiguous because a reader takes the header in one of three ways: as valid, by the signed
-sum, and extracts `a`; as invalid, and stops; or as invalid, and skips ahead to the next header.
+The archive has one file, `a`, with the byte `0xe9` in its `uname`, and a checksum that is the sum
+of the bytes of its header taken as signed numbers.
+
+In POSIX, the checksum is the sum of the bytes of a header taken as unsigned numbers.
+Some old tars added them as signed. With a byte over 127 in the header, the two totals differ, and
+the checksum matches only the signed one. This case is ambiguous because a reader takes the header
+in one of three ways: as valid, by the signed sum, and extracts `a`; as invalid, and stops; or as
+invalid, and skips ahead to the next header.
 
 Decision point: whether a signed checksum makes a header valid.
 Seen in: none of the scanned tarballs.
@@ -258,6 +262,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

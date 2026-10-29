@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N23 extended-gnu-long-then-pax · Tar file extraction test suite">
 <meta property="og:description" content="A GNU long name, then a pax header, then the member: which of them does the long name apply to?">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N23.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N23.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/8bc712f0e834270f.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>GNU long names and pax headers are two ways of extending the next header, and neither format defines the other. Here a GNU long name <code>from-gnu</code> is followed by a pax header with only an <code>mtime</code>, and then by the member <code>from-header</code>. This case is ambiguous because the long name applies either to the next header, the pax header, and is lost, or to the next member, which is then <code>from-gnu</code> rather than <code>from-header</code>.</p>
+<p>The archive has a GNU long name <code>from-gnu</code>, then a pax header with only an <code>mtime</code>, then the member, whose header has the name <code>from-header</code>.</p>
+<p>GNU long names and pax headers are two ways of extending the next header, and neither format specifies how the two interact. This case is ambiguous because the long name applies either to the next header, the pax header, and is lost, or to the next member, which is then <code>from-gnu</code> rather than <code>from-header</code>.</p>
 <p><strong>Decision point:</strong> whether a GNU long name applies to the next header or to the next member.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,9 +52,11 @@
 
 A GNU long name, then a pax header, then the member: which of them does the long name apply to?
 
-GNU long names and pax headers are two ways of extending the next header, and neither format defines
-the other. Here a GNU long name `from-gnu` is followed by a pax header with only an `mtime`, and
-then by the member `from-header`. This case is ambiguous because the long name applies either to the
+The archive has a GNU long name `from-gnu`, then a pax header with only an `mtime`, then the member,
+whose header has the name `from-header`.
+
+GNU long names and pax headers are two ways of extending the next header, and neither format
+specifies how the two interact. This case is ambiguous because the long name applies either to the
 next header, the pax header, and is lost, or to the next member, which is then `from-gnu` rather
 than `from-header`.
 
@@ -428,6 +431,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

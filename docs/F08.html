@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F08 end-truncated-in-member · Tar file extraction test suite">
 <meta property="og:description" content="An archive that ends inside the data of a member.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F08.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F08.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/abbe31812e60c7f1.png">
@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The size field in the header of <code>a</code> is 1024, but the archive ends after 512 bytes of its data.</p>
+<p>The archive has one file, <code>a</code>, whose size field is 1024, but the archive ends after 512 bytes of its data.</p>
 <p><strong>Decision point:</strong> whether a member that is cut short is extracted.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,7 +51,8 @@
 
 An archive that ends inside the data of a member.
 
-The size field in the header of `a` is 1024, but the archive ends after 512 bytes of its data.
+The archive has one file, `a`, whose size field is 1024, but the archive ends after 512 bytes of its
+data.
 
 Decision point: whether a member that is cut short is extracted.
 Seen in: none of the scanned tarballs.
@@ -178,13 +179,13 @@ marker, which is tolerated.
 <tr><td><a href="live-bootstrap.html">live-bootstrap untar</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>✅ rejects</td><td>error: Short read on suite/archives/F08-end-truncated-in-member.tar: Expected 512, got The extraction of suite/archives/F08-end-truncated-in-member.tar produced errors 0</td></tr>
 <tr><td><a href="live-bootstrap-nonstrict.html">live-bootstrap untar, --non-strict</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>✅ rejects</td><td>error: non-strict mode enabled, preparing for chaos Short read on suite/archives/F08-end-truncated-in-member.tar: Expected 512, got The extraction of suite/archives/F08-end-truncated-in-member.tar produced …</td></tr></table></div>
 <h2 id="prevalence-in-release-tarballs">Prevalence in release tarballs<a class="anchor" href="#prevalence-in-release-tarballs" aria-label="Link to this section">¶</a></h2>
-<p>This case is not measured in release tarballs: <code>tarscan.py</code> stops at an archive cut short with an error, which none of the scanned tarballs has.</p>
+<p>This case is not measured in release tarballs: the scan stops at an archive cut short with an error, which none of the scanned tarballs has.</p>
 <h2 id="see-also">See also<a class="anchor" href="#see-also" aria-label="Link to this section">¶</a></h2>
 <ul>
 <li><a href="F04.html"><code>F04</code></a>: an archive cut short after a complete member, or one without an end-of-archive marker, which is tolerated.</li>
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

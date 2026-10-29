@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N18 name-not-utf8 · Tar file extraction test suite">
 <meta property="og:description" content="A name that is not UTF-8.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N18.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N18.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/54994972426c6cbf.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The name <code>caf\xe9</code> is Latin-1, and <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=characters%20outside%20of%20%3Cslash%3E%20and%20the%20portable%20filename%20character%20set">POSIX</a> leaves how a name in the header is encoded to the implementation. This case is ambiguous because the name on disk is those bytes, or the name with the byte replaced, by U+FFFD or by <code>?</code>.</p>
+<p>The archive has one file, <code>caf\xe9</code>, whose name is Latin-1.</p>
+<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20characters%20in%20the%20header%20logical%20record%20shall%20be%20represented%20in%20the%20coded%20character%20set">POSIX</a> requires the header to be in ISO/IEC 646, that is ASCII, so the archive does not conform, and leaves the encoding of other characters in names to the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=characters%20outside%20of%20%3Cslash%3E%20and%20the%20portable%20filename%20character%20set">implementation</a>. This case is ambiguous because the name on disk is those bytes, or the name with the byte replaced, by U+FFFD or by <code>?</code>.</p>
 <p><strong>Decision point:</strong> how a name that is not UTF-8 is decoded.</p>
 <p><strong>Seen in:</strong> aspell-is 0.51.1-0 and aspell-nb 0.50.1-0.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,9 +52,12 @@
 
 A name that is not UTF-8.
 
-The name `caf\xe9` is Latin-1, and POSIX leaves how a name in the header is encoded to the
-implementation. This case is ambiguous because the name on disk is those bytes, or the name with the
-byte replaced, by U+FFFD or by `?`.
+The archive has one file, `caf\xe9`, whose name is Latin-1.
+
+POSIX requires the header to be in ISO/IEC 646, that is ASCII, so the archive does
+not conform, and leaves the encoding of other characters in names to the
+implementation. This case is ambiguous because the name on disk is those bytes, or
+the name with the byte replaced, by U+FFFD or by `?`.
 
 Decision point: how a name that is not UTF-8 is decoded.
 Seen in: aspell-is 0.51.1-0 and aspell-nb 0.50.1-0.
@@ -256,6 +260,6 @@ Seen in: aspell-is 0.51.1-0 and aspell-nb 0.50.1-0.
 <p>See <a href="seen-in.html#N18">the list of these 2 tarballs</a>, with the sha256 of each and an example from it.</p>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

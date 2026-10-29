@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F37 number-size-not-octal · Tar file extraction test suite">
 <meta property="og:description" content="A size with the digit 9, which is not octal.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F37.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F37.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/b46c9505bebcfb9d.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The size field is <code>00000000090</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal numbers filled with leading zeros, and 9 is not an octal digit. Read leniently, this case is ambiguous because the size is either 0, if the number ends before the 9 (and the next block is the header of <code>smuggled</code>), or 72, 9 × 8, if the 9 is taken as a digit (and the next block is the data of <code>a</code>).</p>
+<p>The archive has a file <code>a</code>, whose size field is <code>00000000090</code>, then an empty file <code>smuggled</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal numbers filled with leading zeros, and 9 is not an octal digit. Read leniently, this case is ambiguous because the size is either 0, if the number ends before the 9 (and the next block is the header of <code>smuggled</code>), or 72, which is 9 × 8, if the 9 is taken as a digit (and the next block is the data of <code>a</code>).</p>
 <p><strong>Decision point:</strong> how a numeric field with a digit that is not octal is read.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,10 +52,12 @@
 
 A size with the digit 9, which is not octal.
 
-The size field is `00000000090`. In POSIX, numeric fields are octal numbers filled with leading
-zeros, and 9 is not an octal digit. Read leniently, this case is ambiguous because the size is
-either 0, if the number ends before the 9 (and the next block is the header of `smuggled`), or 72,
-9 × 8, if the 9 is taken as a digit (and the next block is the data of `a`).
+The archive has a file `a`, whose size field is `00000000090`, then an empty file `smuggled`.
+
+In POSIX, numeric fields are octal numbers filled with leading zeros, and 9 is not an
+octal digit. Read leniently, this case is ambiguous because the size is either 0, if the number ends
+before the 9 (and the next block is the header of `smuggled`), or 72, which is 9 × 8, if the 9 is
+taken as a digit (and the next block is the data of `a`).
 
 Decision point: how a numeric field with a digit that is not octal is read.
 Seen in: none of the scanned tarballs.
@@ -272,6 +275,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F28 pax-newline-in-comment · Tar file extraction test suite">
 <meta property="og:description" content="A newline in a pax comment, which split on lines leaves a size record.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F28.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F28.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/db336c2845adc0a7.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>pax records are delimited by their length, so a value can contain a newline. Here the only record is a <code>comment</code>, <code>x\n12 size=512</code>, and in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=All%20characters%20in%20the%20%3Cvalue%3E%20field%20shall%20be%20ignored%20by%20pax">POSIX</a> every comment is ignored, so <code>a</code> has the size of its header, 0, and the next block is the header of <code>smuggled</code>. Split on lines, the extended header has a second record, <code>size=512</code>. This case is ambiguous in practice because, read that way, the block is the data of <code>a</code>.</p>
+<p>The archive has a file <code>a</code>, whose header has the size 0 and whose pax header has one record, a <code>comment</code> with a newline in it, <code>x\n12 size=512</code>, then an empty file <code>smuggled</code>.</p>
+<p>pax records are delimited by their length, so a value can contain a newline, and in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=All%20characters%20in%20the%20%3Cvalue%3E%20field%20shall%20be%20ignored%20by%20pax">POSIX</a> every comment is ignored, so <code>a</code> has the size in its header, which is 0, and the next block is the header of <code>smuggled</code>. Split on lines, the extended header has a second record, <code>size=512</code>. This case is ambiguous in practice because, read that way, the block is the data of <code>a</code>.</p>
 <p><strong>Decision point:</strong> whether a pax record is delimited by its length or by a newline.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs. Newlines in pax values are only in xattrs, such as Minion 10.31, which the default policy accepts as xattrs are not extracted.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,11 +52,13 @@
 
 A newline in a pax `comment`, which split on lines leaves a `size` record.
 
-pax records are delimited by their length, so a value can contain a newline. Here the only record is
-a `comment`, `x\n12 size=512`, and in POSIX every comment is ignored, so `a` has the size of its
-header, 0, and the next block is the header of `smuggled`. Split on lines, the extended header has a
-second record, `size=512`. This case is ambiguous in practice because, read that way, the block is
-the data of `a`.
+The archive has a file `a`, whose header has the size 0 and whose pax header has one record, a
+`comment` with a newline in it, `x\n12 size=512`, then an empty file `smuggled`.
+
+pax records are delimited by their length, so a value can contain a newline, and in POSIX
+every comment is ignored, so `a` has the size in its header, which is 0, and the next block is the
+header of `smuggled`. Split on lines, the extended header has a second record, `size=512`. This case
+is ambiguous in practice because, read that way, the block is the data of `a`.
 
 Decision point: whether a pax record is delimited by its length or by a newline.
 Seen in: none of the scanned tarballs. Newlines in pax values are only in xattrs, such as Minion
@@ -359,6 +362,6 @@ Seen in: none of the scanned tarballs. Newlines in pax values are only in xattrs
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

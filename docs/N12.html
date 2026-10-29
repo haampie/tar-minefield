@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N12 name-absolute · Tar file extraction test suite">
 <meta property="og:description" content="An absolute name, which points outside the directory the archive is extracted to.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N12.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N12.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/6c615f089a4cccf5.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The name <code>/tmp/tar-minefield-absolute</code> is a path from the root. The case is rejected because the name, taken as it is, leads out of the destination, not because it is ambiguous. The file is harmless, and in <code>/tmp</code>, so that an extractor that follows the name writes it without running as root.</p>
+<p>The archive has one file, <code>/tmp/tar-minefield-absolute</code>, whose name is a path from the root.</p>
+<p>The case is rejected because the name, taken as it is, leads out of the destination, not because it is ambiguous. The file is harmless, and in <code>/tmp</code>, so that an extractor that follows the name writes it without running as root.</p>
 <p><strong>Decision point:</strong> whether an absolute name is rejected, made relative, or followed.</p>
 <p><strong>Seen in:</strong> dtv-scan-tables (<code>/usr/share/dvb/</code>) and masurca 3.3.1.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,10 +52,11 @@
 
 An absolute name, which points outside the directory the archive is extracted to.
 
-The name `/tmp/tar-minefield-absolute` is a path from the root. The case is rejected because the
-name, taken as it is, leads out of the destination, not because it is ambiguous. The file is
-harmless, and in `/tmp`, so that an extractor that follows the name writes it without running as
-root.
+The archive has one file, `/tmp/tar-minefield-absolute`, whose name is a path from the root.
+
+The case is rejected because the name, taken as it is, leads out of the destination, not because it
+is ambiguous. The file is harmless, and in `/tmp`, so that an extractor that follows the name writes
+it without running as root.
 
 Decision point: whether an absolute name is rejected, made relative, or followed.
 Seen in: dtv-scan-tables (`/usr/share/dvb/`) and masurca 3.3.1.
@@ -257,6 +259,6 @@ Seen in: dtv-scan-tables (`/usr/share/dvb/`) and masurca 3.3.1.
 <p>See <a href="seen-in.html#N12">the list of these 3 tarballs</a>, with the sha256 of each and an example from it.</p>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

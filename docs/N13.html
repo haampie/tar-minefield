@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N13 name-backslash · Tar file extraction test suite">
 <meta property="og:description" content="A backslash in a name: a character on Unix, a separator on Windows.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N13.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N13.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/095ebe9c0eb95556.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The name <code>a\b</code> is one file named with a backslash on Unix, and the file <code>b</code> in the directory <code>a</code> on Windows. With <code>..\</code> the same rule lets a name climb out of the destination there.</p>
+<p>The archive has one file, <code>a\b</code>, with a backslash in its name.</p>
+<p>The name is one file named with a backslash on Unix, and the file <code>b</code> in the directory <code>a</code> on Windows. With <code>..\</code> the same rule lets a name climb out of the destination there.</p>
 <p><strong>Decision point:</strong> whether a backslash separates components.</p>
 <p><strong>Seen in:</strong> texi2html 5.0 and gstreamer-docs 1.28.1.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,7 +52,9 @@
 
 A backslash in a name: a character on Unix, a separator on Windows.
 
-The name `a\b` is one file named with a backslash on Unix, and the file `b` in the directory `a` on
+The archive has one file, `a\b`, with a backslash in its name.
+
+The name is one file named with a backslash on Unix, and the file `b` in the directory `a` on
 Windows. With `..\` the same rule lets a name climb out of the destination there.
 
 Decision point: whether a backslash separates components.
@@ -255,6 +258,6 @@ Seen in: texi2html 5.0 and gstreamer-docs 1.28.1.
 <p>See <a href="seen-in.html#N13">the list of these 7 tarballs</a>, with the sha256 of each and an example from it.</p>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N04 ustar-prefix · Tar file extraction test suite">
 <meta property="og:description" content="A long name split between the ustar prefix and name fields.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N04.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N04.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/c58dd2a41bde60f4.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The prefix field is 120 <code>p</code>s and the name field is <code>file</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=by%20concatenating%20prefix%20%28up%20to%20the%20first%20NUL%20character%29%2C%20a%20%3Cslash%3E%20character%2C%20and%20name">POSIX</a>, the pathname is the prefix, followed by <code>/</code>, followed by the name, so <code>file</code> is in a directory whose name is the 120 <code>p</code>s.</p>
+<p>The archive has one file whose prefix field is 120 <code>p</code>s and whose name field is <code>file</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=by%20concatenating%20prefix%20%28up%20to%20the%20first%20NUL%20character%29%2C%20a%20%3Cslash%3E%20character%2C%20and%20name">POSIX</a>, the pathname is the prefix, followed by <code>/</code>, followed by the name, so <code>file</code> is in a directory whose name is the 120 <code>p</code>s.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/</code></td><td>directory</td><td></td></tr>
@@ -54,8 +55,10 @@
 
 A long name split between the ustar prefix and name fields.
 
-The prefix field is 120 `p`s and the name field is `file`. In POSIX, the pathname is the prefix,
-followed by `/`, followed by the name, so `file` is in a directory whose name is the 120 `p`s.
+The archive has one file whose prefix field is 120 `p`s and whose name field is `file`.
+
+In POSIX, the pathname is the prefix, followed by `/`, followed by the name, so `file` is
+in a directory whose name is the 120 `p`s.
 
 Seen in: thousands of tarballs.
 
@@ -257,6 +260,6 @@ Seen in: thousands of tarballs.
 <p>See <a href="seen-in.html#N04">a sample of these 6,317 tarballs</a>, with the sha256 of each and an example from it.</p>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

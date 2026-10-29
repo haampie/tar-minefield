@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F04 end-missing · Tar file extraction test suite">
 <meta property="og:description" content="No end-of-archive marker: the archive ends after a complete member.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F04.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F04.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/ef8a4e45d138d32c.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros">POSIX</a> requires two zero blocks at the end of an archive. Without them, an archive cannot be told apart from one cut short after a member, but the implementations that extract it all extract the same tree, and ruby&#x27;s release tarballs are written this way. The default policy extracts it: a compressed archive that is cut short is caught by its decompression.</p>
+<p>The archive has a file <code>a</code>, and ends right after its data, without zero blocks.</p>
+<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros">POSIX</a> requires two zero blocks at the end of an archive. Without them, an archive cannot be told apart from one cut short after a member. The default policy tolerates it, as it is rarely a problem in practice: whether an archive is complete is known by other means, such as a published checksum, or the decompression of a compressed archive.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>2 bytes, sha256 <code title="87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7">87428fc5</code></td></tr></table></div>
@@ -54,10 +55,12 @@
 
 No end-of-archive marker: the archive ends after a complete member.
 
-POSIX requires two zero blocks at the end of an archive. Without them, an archive cannot be told
-apart from one cut short after a member, but the implementations that extract it all extract the
-same tree, and ruby&#x27;s release tarballs are written this way. The default policy extracts it: a compressed
-archive that is cut short is caught by its decompression.
+The archive has a file `a`, and ends right after its data, without zero blocks.
+
+POSIX requires two zero blocks at the end of an archive. Without them, an archive cannot be
+told apart from one cut short after a member. The default policy tolerates it, as it is rarely a
+problem in practice: whether an archive is complete is known by other means, such as a published
+checksum, or the decompression of a compressed archive.
 
 Decision point: whether an archive without an end-of-archive marker is complete.
 Seen in: SDL2_image 2.8.8, ruby 4.0.5 and fastcap 2.0-18Sep92.
@@ -200,6 +203,6 @@ See also: F08, an archive cut short inside the data of a member, which is reject
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F14 pax-size-disagrees · Tar file extraction test suite">
 <meta property="og:description" content="A pax size that disagrees with the header&#x27;s, so that a reader of the header&#x27;s misses a member.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F14.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F14.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/d7b6bf06791dcdac.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The size field in the header of <code>a</code> is 512, and its pax extended header has <code>size=0</code>. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20size%20field%20in%20the%20following%20header%20block%28s%29">POSIX</a> says that the pax size overrides the header&#x27;s: it is how sizes over 8 GiB, which do not fit in the header&#x27;s size field, are written, and archivers write various sizes in the header then. An implementation that takes the pax size, as it must, reads the next block as the header of another file, <code>smuggled</code>; an implementation that takes the header&#x27;s size, or does not know pax, reads that block as the data of <code>a</code>. An implementation that takes the header&#x27;s size is the bug of CVE-2025-62518 (astral-tokio-tar before 0.5.6, and tokio-tar). A strict parser may reject a header whose size field has room for the size but gives another, but must not extract <code>a</code> with 512 bytes.</p>
+<p>The archive has a file <code>a</code>, whose header has the size 512 and whose pax header has <code>size=0</code>, then an empty file <code>smuggled</code>.</p>
+<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20size%20field%20in%20the%20following%20header%20block%28s%29">POSIX</a> says that the pax size overrides the header&#x27;s: it is how sizes over 8 GiB, which do not fit in the header&#x27;s size field, are written, and archivers write various sizes in the header then. An implementation that takes the pax size, as it must, reads the next block as the header of another file, <code>smuggled</code>; an implementation that takes the header&#x27;s size, or does not know pax, reads that block as the data of <code>a</code>. An implementation that takes the header&#x27;s size is the bug of CVE-2025-62518 (astral-tokio-tar before 0.5.6, and tokio-tar). POSIX gives no reason to reject the archive, as the header&#x27;s size is then to be <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">ignored</a>. A strict parser may reject it anyway, since a header with room for the size has no reason to give another, but must not extract <code>a</code> with 512 bytes.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>0 bytes, sha256 <code title="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855">e3b0c442</code></td></tr>
@@ -55,14 +56,18 @@
 
 A pax `size` that disagrees with the header&#x27;s, so that a reader of the header&#x27;s misses a member.
 
-The size field in the header of `a` is 512, and its pax extended header has `size=0`. POSIX says
-that the pax size overrides the header&#x27;s: it is how sizes over 8 GiB, which do not fit in the
-header&#x27;s size field, are written, and archivers write various sizes in the header then. An
-implementation that takes the pax size, as it must, reads the next block as the header of another
-file, `smuggled`; an implementation that takes the header&#x27;s size, or does not know pax, reads that
-block as the data of `a`. An implementation that takes the header&#x27;s size is the bug of
-CVE-2025-62518 (astral-tokio-tar before 0.5.6, and tokio-tar). A strict parser may reject a header
-whose size field has room for the size but gives another, but must not extract `a` with 512 bytes.
+The archive has a file `a`, whose header has the size 512 and whose pax header has `size=0`, then
+an empty file `smuggled`.
+
+POSIX says that the pax size overrides the header&#x27;s: it is how sizes over 8 GiB,
+which do not fit in the header&#x27;s size field, are written, and archivers write various sizes in the
+header then. An implementation that takes the pax size, as it must, reads the next block as the
+header of another file, `smuggled`; an implementation that takes the header&#x27;s size, or does not know
+pax, reads that block as the data of `a`. An implementation that takes the header&#x27;s size is the bug
+of CVE-2025-62518 (astral-tokio-tar before 0.5.6, and tokio-tar). POSIX gives no reason to reject
+the archive, as the header&#x27;s size is then to be ignored. A strict parser may reject
+it anyway, since a header with room for the size has no reason to give another, but must not extract
+`a` with 512 bytes.
 
 Decision point: which of two sizes frames the member.
 Seen in: none of the scanned tarballs.
@@ -365,6 +370,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

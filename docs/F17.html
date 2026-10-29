@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F17 pax-global-comment · Tar file extraction test suite">
 <meta property="og:description" content="The global pax header with only a comment, as git archive writes it.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F17.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F17.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/e295bbfc54f569b1.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>A tarball created with <code>git archive</code> from a commit or a tag starts with a global header whose only record is the commit, as a <code>comment</code>, which does not affect extraction. GitHub&#x27;s release tarballs are made this way, so a strict parser that rejects global headers rejects most of them.</p>
+<p>The archive starts with a global header whose only record is a <code>comment</code> with a commit, then has a directory <code>project/</code> with a file <code>README</code>.</p>
+<p>A tarball created with <code>git archive</code> from a commit or a tag starts with such a global header, and its comment does not affect extraction. GitHub&#x27;s release tarballs are made this way, so a strict parser that rejects global headers rejects most of them.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>project/</code></td><td>directory</td><td></td></tr>
@@ -54,9 +55,12 @@
 
 The global pax header with only a `comment`, as `git archive` writes it.
 
-A tarball created with `git archive` from a commit or a tag starts with a global header whose only
-record is the commit, as a `comment`, which does not affect extraction. GitHub&#x27;s release tarballs
-are made this way, so a strict parser that rejects global headers rejects most of them.
+The archive starts with a global header whose only record is a `comment` with a commit, then has a
+directory `project/` with a file `README`.
+
+A tarball created with `git archive` from a commit or a tag starts with such a global header, and
+its comment does not affect extraction. GitHub&#x27;s release tarballs are made this way, so a strict
+parser that rejects global headers rejects most of them.
 
 Seen in: tarballs created with `git archive`, such as GitHub&#x27;s release tarballs.
 
@@ -380,9 +384,9 @@ Seen in: tarballs created with `git archive`, such as GitHub&#x27;s release tarb
 <tr><td><a href="live-bootstrap.html">live-bootstrap untar</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>❌ another tree, or rejects</td><td>tree A: <code>pax_global_header</code> (52 B, e00a4a95), <code>project/</code>, <code>project/README</code> (6 B, 5891b5b5)</td></tr>
 <tr><td><a href="live-bootstrap-nonstrict.html">live-bootstrap untar, --non-strict</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>❌ another tree, or rejects</td><td>tree A: <code>pax_global_header</code> (52 B, e00a4a95), <code>project/</code>, <code>project/README</code> (6 B, 5891b5b5)</td></tr></table></div>
 <h2 id="prevalence-in-release-tarballs">Prevalence in release tarballs<a class="anchor" href="#prevalence-in-release-tarballs" aria-label="Link to this section">¶</a></h2>
-<p>This case is not measured in release tarballs: <code>tarscan.py</code> reports no feature of it on its own.</p>
+<p>This case is not measured in release tarballs: the scan reports no feature of it on its own.</p>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

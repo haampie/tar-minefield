@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F26 pax-size-leading-zero · Tar file extraction test suite">
 <meta property="og:description" content="A pax size with a leading zero, 0777: 777 in decimal, as POSIX says, or 511 in octal.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F26.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F26.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/a2a21a636bfa1491.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>A pax size is decimal, and <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a> does not forbid leading zeros, so the size is 777. But a reader that converts with C&#x27;s <code>strtoul(s, NULL, 0)</code>, or that knows the header&#x27;s octal numbers, reads <code>0777</code> as octal, 511. This case is ambiguous in practice because the size is 777, in decimal, 511, in octal, or the header&#x27;s, 0, with the pax size discarded. The data of <code>a</code> then takes two blocks, one, after which <code>smuggled-2</code> is a member, or none, and both <code>smuggled-1</code> and <code>smuggled-2</code> are.</p>
+<p>The archive has a file <code>a</code>, whose pax header has <code>size=0777</code> and whose header has the size 0, then two empty files, <code>smuggled-1</code> and <code>smuggled-2</code>.</p>
+<p>A pax size is decimal, and <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a> does not forbid leading zeros, so the size is 777. But a reader that converts with C&#x27;s <code>strtoul(s, NULL, 0)</code>, or that knows the header&#x27;s octal numbers, reads <code>0777</code> as the octal number 511. This case is ambiguous in practice because the size is 777 in decimal, or 511 in octal, or the header&#x27;s size of 0, with the pax size discarded. The data of <code>a</code> then takes two blocks, one, after which <code>smuggled-2</code> is a member, or none, and both <code>smuggled-1</code> and <code>smuggled-2</code> are. Only 777 is a reading of POSIX: the header&#x27;s size is to be <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">ignored</a> once a <code>size</code> record is there.</p>
 <p><strong>Decision point:</strong> whether a pax number with a leading zero is decimal or octal.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,11 +52,16 @@
 
 A pax `size` with a leading zero, `0777`: 777 in decimal, as POSIX says, or 511 in octal.
 
-A pax size is decimal, and POSIX does not forbid leading zeros, so the size is 777. But a reader
-that converts with C&#x27;s `strtoul(s, NULL, 0)`, or that knows the header&#x27;s octal numbers, reads `0777`
-as octal, 511. This case is ambiguous in practice because the size is 777, in decimal, 511, in
-octal, or the header&#x27;s, 0, with the pax size discarded. The data of `a` then takes two blocks, one,
-after which `smuggled-2` is a member, or none, and both `smuggled-1` and `smuggled-2` are.
+The archive has a file `a`, whose pax header has `size=0777` and whose header has the size 0, then
+two empty files, `smuggled-1` and `smuggled-2`.
+
+A pax size is decimal, and POSIX does not forbid leading zeros, so the size is 777.
+But a reader that converts with C&#x27;s `strtoul(s, NULL, 0)`, or that knows the header&#x27;s octal numbers,
+reads `0777` as the octal number 511. This case is ambiguous in practice because the size is 777 in
+decimal, or 511 in octal, or the header&#x27;s size of 0, with the pax size discarded. The data of `a`
+then takes two blocks, one, after which `smuggled-2` is a member, or none, and both `smuggled-1` and
+`smuggled-2` are. Only 777 is a reading of POSIX: the header&#x27;s size is to be
+ignored once a `size` record is there.
 
 Decision point: whether a pax number with a leading zero is decimal or octal.
 Seen in: none of the scanned tarballs.
@@ -408,6 +414,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

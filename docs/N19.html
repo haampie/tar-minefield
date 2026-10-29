@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N19 pax-nul-in-path · Tar file extraction test suite">
 <meta property="og:description" content="A NUL inside a pax path.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N19.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N19.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/4496604a72ef4df5.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The pax path is <code>a\0b</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=all%20characters%20within%20the%20%3Cvalue%3E%20field%20shall%20be%20considered%20data%20for%20the%20field">POSIX</a>, a NUL in a pax value is data, so the path is invalid. This case is ambiguous because the path is <code>a</code>, cut at the NUL, <code>a_b</code> or the like, with the NUL replaced, or discarded for the header&#x27;s name, <code>header-name</code>.</p>
+<p>The archive has one file, whose pax <code>path</code> is <code>a\0b</code> and whose header has the name <code>header-name</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=all%20characters%20within%20the%20%3Cvalue%3E%20field%20shall%20be%20considered%20data%20for%20the%20field">POSIX</a>, a NUL in a pax value is data, so the path is invalid, and pax by default <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_04:~:text=pax%20shall%20act%20as%20if%20%2Doinvalid%3Dbypass%20were%20specified">bypasses</a> a file whose name has an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_04:~:text=the%20name%20may%20contain%20embedded%20NULs">embedded NUL</a>. This case is ambiguous in practice because the path is <code>a</code>, cut at the NUL, <code>a_b</code> or the like, with the NUL replaced, or discarded for the header&#x27;s name, <code>header-name</code>.</p>
 <p><strong>Decision point:</strong> where a pax path ends.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,8 +52,11 @@
 
 A NUL inside a pax `path`.
 
-The pax path is `a\0b`. In POSIX, a NUL in a pax value is data, so the path is invalid. This case
-is ambiguous because the path is `a`, cut at the NUL, `a_b` or the like, with the NUL replaced, or
+The archive has one file, whose pax `path` is `a\0b` and whose header has the name `header-name`.
+
+In POSIX, a NUL in a pax value is data, so the path is invalid, and pax by default
+bypasses a file whose name has an embedded NUL. This case is ambiguous in
+practice because the path is `a`, cut at the NUL, `a_b` or the like, with the NUL replaced, or
 discarded for the header&#x27;s name, `header-name`.
 
 Decision point: where a pax path ends.
@@ -341,6 +345,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

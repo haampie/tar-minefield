@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="S03 hardlink-missing-target · Tar file extraction test suite">
 <meta property="og:description" content="A hardlink to a member that is not in the archive.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/S03.html">
 <meta property="og:url" content="https://stoppels.ch/tar/S03.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/018d04245c117fb0.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The member <code>h</code> is a hardlink to <code>missing</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file previously archived, which <code>missing</code> is not. Read leniently, this case is ambiguous because the link is skipped, made to a file of that name that already exists where the archive is extracted, or made an empty file.</p>
+<p>The archive has one member, <code>h</code>, a hardlink to <code>missing</code>, which is not in the archive.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file previously archived, which <code>missing</code> is not. Read leniently, this case is ambiguous because the link is skipped, or made to a file of that name that already exists where the archive is extracted.</p>
 <p><strong>Decision point:</strong> what a hardlink to nothing does.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,10 +52,11 @@
 
 A hardlink to a member that is not in the archive.
 
-The member `h` is a hardlink to `missing`. In POSIX, the target of a hardlink is a file previously
-archived, which `missing` is not. Read leniently, this case is ambiguous because the link is
-skipped, made to a file of that name that already exists where the archive is extracted, or made
-an empty file.
+The archive has one member, `h`, a hardlink to `missing`, which is not in the archive.
+
+In POSIX, the target of a hardlink is a file previously archived, which `missing` is
+not. Read leniently, this case is ambiguous because the link is skipped, or made to a file of that
+name that already exists where the archive is extracted.
 
 Decision point: what a hardlink to nothing does.
 Seen in: none of the scanned tarballs.
@@ -222,6 +224,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

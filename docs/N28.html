@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N28 pax-long-hardlink · Tar file extraction test suite">
 <meta property="og:description" content="A hard link with a long name and a long target, in a pax path and linkpath respectively.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N28.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N28.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/9679c88c2bc2a0ff.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The pax header has a <code>path</code> of 120 <code>h</code>s and a <code>linkpath</code> of 120 <code>t</code>s, and the hard link&#x27;s header has truncated ones, as writers put there. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">POSIX</a>, a pax record overrides the corresponding field of the header, so the hard link is the 120 <code>h</code>s, and links to the file of 120 <code>t</code>s before it.</p>
+<p>The archive has a file whose pax <code>path</code> is 120 <code>t</code>s, then a hard link to it, whose pax header has a <code>path</code> of 120 <code>h</code>s and a <code>linkpath</code> of 120 <code>t</code>s. Their headers have the names cut to 100 bytes, as writers put there.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">POSIX</a>, a pax record overrides the corresponding field of the header, so the hard link is the 120 <code>h</code>s, and links to the file of 120 <code>t</code>s before it.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt</code></td><td>file</td><td>7 bytes, sha256 <code title="c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738">c97ecfda</code></td></tr>
@@ -54,9 +55,12 @@
 
 A hard link with a long name and a long target, in a pax `path` and `linkpath` respectively.
 
-The pax header has a `path` of 120 `h`s and a `linkpath` of 120 `t`s, and the hard link&#x27;s header
-has truncated ones, as writers put there. In POSIX, a pax record overrides the corresponding field
-of the header, so the hard link is the 120 `h`s, and links to the file of 120 `t`s before it.
+The archive has a file whose pax `path` is 120 `t`s, then a hard link to it, whose pax header has a
+`path` of 120 `h`s and a `linkpath` of 120 `t`s. Their headers have the names cut to 100 bytes, as
+writers put there.
+
+In POSIX, a pax record overrides the corresponding field of the header, so the hard
+link is the 120 `h`s, and links to the file of 120 `t`s before it.
 
 Seen in: pyDACP 1.0.1.
 
@@ -479,6 +483,6 @@ Seen in: pyDACP 1.0.1.
 <p>See <a href="seen-in.html#N28">a sample of these 35 tarballs</a>, with the sha256 of each and an example from it.</p>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

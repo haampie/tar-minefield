@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F10 extended-pax-size-before-gnu-long · Tar file extraction test suite">
 <meta property="og:description" content="A pax size followed by a GNU long name: which of them does the size apply to?">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F10.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F10.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/47349a9bfb8b622a.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The pax header has <code>size=512</code> and is followed by a GNU long name header, then by the member. Neither POSIX nor GNU&#x27;s format defines the two together. This case is ambiguous because the size applies either to the long name header, and <code>smuggled</code> is a member of its own, or to the member, whose data then takes in the header of <code>smuggled</code>, or to both, so that the member has that data and <code>smuggled</code> is a member as well. A reader that does not know GNU long names extracts the member as <code>short-name</code>. This is the bug class of GHSA-3pv8-6f4r-ffg2 (tar-rs) and CVE-2026-53655 (node-tar).</p>
+<p>The archive has a pax header with <code>size=512</code>, then a GNU long name header with the name <code>long-name</code>, then the member, whose header has the name <code>short-name</code> and the size 0, then an empty file <code>smuggled</code>.</p>
+<p>GNU&#x27;s format does not say how the two extensions combine, and <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file">POSIX</a> does not define GNU long names: in POSIX, the long name header is a file of an unknown type, so the pax size applies to it. This case is ambiguous because the size applies either to the long name header, and <code>smuggled</code> is a member of its own, or to the member, whose data then takes in the header of <code>smuggled</code>, or to both, so that the member has that data and <code>smuggled</code> is a member as well. A reader that does not know GNU long names extracts the member as <code>short-name</code>. This is the bug class of GHSA-3pv8-6f4r-ffg2 (tar-rs) and CVE-2026-53655 (node-tar).</p>
 <p><strong>Decision point:</strong> which header a pax size applies to, when another extended header follows.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,13 +52,17 @@
 
 A pax `size` followed by a GNU long name: which of them does the size apply to?
 
-The pax header has `size=512` and is followed by a GNU long name header, then by the member.
-Neither POSIX nor GNU&#x27;s format defines the two together. This case is ambiguous because the size
-applies either to the long name header, and `smuggled` is a member of its own, or to the member,
-whose data then takes in the header of `smuggled`, or to both, so that the member has that data
-and `smuggled` is a member as well. A reader that does not know GNU long names extracts the member
-as `short-name`. This is the bug class of GHSA-3pv8-6f4r-ffg2 (tar-rs) and CVE-2026-53655
-(node-tar).
+The archive has a pax header with `size=512`, then a GNU long name header with the name
+`long-name`, then the member, whose header has the name `short-name` and the size 0, then an empty
+file `smuggled`.
+
+GNU&#x27;s format does not say how the two extensions combine, and POSIX does not define
+GNU long names: in POSIX, the long name header is a file of an unknown type, so the pax size applies
+to it. This case is ambiguous because the size applies either to the long name header, and
+`smuggled` is a member of its own, or to the member, whose data then takes in the header of
+`smuggled`, or to both, so that the member has that data and `smuggled` is a member as well. A
+reader that does not know GNU long names extracts the member as `short-name`. This is the bug class
+of GHSA-3pv8-6f4r-ffg2 (tar-rs) and CVE-2026-53655 (node-tar).
 
 Decision point: which header a pax size applies to, when another extended header follows.
 Seen in: none of the scanned tarballs.
@@ -445,6 +450,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

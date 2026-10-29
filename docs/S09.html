@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="S09 tree-duplicate-file-identical · Tar file extraction test suite">
 <meta property="og:description" content="The same file twice, with the same contents.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/S09.html">
 <meta property="og:url" content="https://stoppels.ch/tar/S09.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/1401a59ea23b8206.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>Whichever copy an implementation keeps, the tree is the same. But an extractor that streams the archive cannot know, when it writes the first copy, whether a later one is the same: in some tarballs a file was changed and appended again, as in S07, so that an extractor that keeps the first copy and one that keeps the last extract different trees. In fish 4.7.1, <code>Cargo.toml</code> and <code>Cargo.lock</code> are appended again without their last newline. A strict parser rejects every duplicate file, as one with the same contents and one with other contents look alike until the end.</p>
+<p>The archive has two files named <code>a</code>, with the same contents.</p>
+<p>Whichever copy is kept, the tree is the same. But an extractor that streams the archive cannot know, when it writes the first copy, whether a later one is the same: a duplicate with the same contents and one with other contents look alike until the end.</p>
 <p><strong>Decision point:</strong> which of two members of one path is the file.</p>
 <p><strong>Seen in:</strong> tarballs of <code>cabal sdist</code>, such as string-conversions 0.4.0.1 and multipart 0.2.1.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,15 +52,15 @@
 
 The same file twice, with the same contents.
 
-Whichever copy an implementation keeps, the tree is the same. But an extractor that streams the
-archive cannot know, when it writes the first copy, whether a later one is the same: in some
-tarballs a file was changed and appended again, as in S07, so that an extractor that keeps the
-first copy and one that keeps the last extract different trees. In fish 4.7.1, `Cargo.toml` and
-`Cargo.lock` are appended again without their last newline. A strict parser rejects every duplicate
-file, as one with the same contents and one with other contents look alike until the end.
+The archive has two files named `a`, with the same contents.
+
+Whichever copy is kept, the tree is the same. But an extractor that streams the archive cannot know,
+when it writes the first copy, whether a later one is the same: a duplicate with the same contents
+and one with other contents look alike until the end.
 
 Decision point: which of two members of one path is the file.
 Seen in: tarballs of `cabal sdist`, such as string-conversions 0.4.0.1 and multipart 0.2.1.
+See also: S07, the same file twice, with different contents.
 
 0x000000  header: regular file
           name     [  0,100)  &quot;a&quot; + 99 NUL
@@ -341,10 +342,14 @@ Seen in: tarballs of `cabal sdist`, such as string-conversions 0.4.0.1 and multi
 <tr><td>RubyGems</td><td class=n>5,000</td><td class=n>4</td><td class=n>0.08%</td></tr>
 <tr><td>live-bootstrap</td><td class=n>171</td><td class=n>0</td><td class=n>none</td></tr>
 <tr class="total"><td>total (distinct)</td><td class=n>82,586</td><td class=n>87</td><td class=n>0.11%</td></tr></table></div>
-<p class="note"><code>tarscan.py</code> finds the same file twice, and does not compare the contents of the copies: some of these may differ, as in S07.</p>
+<p class="note">The scan finds the same file twice, and does not compare the contents of the copies: some of these may differ, as in S07.</p>
 <p>See <a href="seen-in.html#S09">the list of these 87 tarballs</a>, with the sha256 of each and an example from it.</p>
+<h2 id="see-also">See also<a class="anchor" href="#see-also" aria-label="Link to this section">¶</a></h2>
+<ul>
+<li><a href="S07.html"><code>S07</code></a>: the same file twice, with different contents.</li>
+</ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F36 pax-record-length-short · Tar file extraction test suite">
 <meta property="og:description" content="A pax record whose length is one byte short, so that it ends just before its newline.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F36.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F36.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/b2bfa8ff04bb1adf.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The extended header contains one record, <code>16 path=from-pax</code> followed by a newline, which is 17 bytes, although its length says 16. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">POSIX</a>, the length of a record counts every byte of it, its newline included, so the record is malformed. This case is ambiguous in practice because only a reader that delimits the record by its length, and checks that it ends in a newline, recognizes it as malformed: one that splits records on newlines, or does not check, takes it for a valid record.</p>
+<p>The archive has a pax header with one record, <code>16 path=from-pax</code> followed by a newline, which is 17 bytes, although its length says 16; then the member, whose header has the name <code>from-header</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">POSIX</a>, the length of a record counts every byte of it, its newline included, so the record is malformed. This case is ambiguous in practice because only a reader that delimits the record by its length, and checks that it ends in a newline, recognizes it as malformed: one that splits records on newlines, or does not check, takes it for a valid record.</p>
 <p><strong>Decision point:</strong> whether a pax record whose length does not end at its newline is recognized as malformed.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,11 +52,13 @@
 
 A pax record whose length is one byte short, so that it ends just before its newline.
 
-The extended header contains one record, `16 path=from-pax` followed by a newline, which is 17
-bytes, although its length says 16. In POSIX, the length of a record counts every byte of it, its
-newline included, so the record is malformed. This case is ambiguous in practice because only a
-reader that delimits the record by its length, and checks that it ends in a newline, recognizes it
-as malformed: one that splits records on newlines, or does not check, takes it for a valid record.
+The archive has a pax header with one record, `16 path=from-pax` followed by a newline, which is 17
+bytes, although its length says 16; then the member, whose header has the name `from-header`.
+
+In POSIX, the length of a record counts every byte of it, its newline included, so
+the record is malformed. This case is ambiguous in practice because only a reader that delimits the
+record by its length, and checks that it ends in a newline, recognizes it as malformed: one that
+splits records on newlines, or does not check, takes it for a valid record.
 
 Decision point: whether a pax record whose length does not end at its newline is recognized as
 malformed.
@@ -349,6 +352,6 @@ See also: F28, a newline inside a value.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

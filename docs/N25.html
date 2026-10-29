@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N25 symlink-empty-target · Tar file extraction test suite">
 <meta property="og:description" content="A symlink with an empty target.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N25.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N25.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/4150390b6aa03fe5.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The member <code>link</code> is a symlink whose linkname field is empty, and there is no pax <code>linkpath</code>. A symlink to the empty string cannot be created on most systems. This case is ambiguous because <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20contents%20of%20the%20symbolic%20link%20shall%20be%20stored%20in%20the%20linkname%20field">POSIX</a> says only that the contents of a symlink are stored in its linkname field, which leaves room for interpretation of what an empty name means.</p>
+<p>The archive has one symlink, <code>link</code>, whose linkname field is empty.</p>
+<p>A symlink to the empty string cannot be created on most systems. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20contents%20of%20the%20symbolic%20link%20shall%20be%20stored%20in%20the%20linkname%20field">POSIX</a> allows it: the contents of a symlink are stored in its linkname field, and <code>symlink()</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/symlink.html#:~:text=shall%20be%20treated%20only%20as%20a%20string%20and%20shall%20not%20be%20validated%20as%20a%20pathname">takes them as a string</a>, not as a pathname; where the system refuses to create it, pax writes a <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">&quot;diagnostic message&quot;</a>. This case is ambiguous because the tree depends on the system: a symlink <code>link</code> with an empty target, or none.</p>
 <p><strong>Decision point:</strong> whether a link with an empty target is a link.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,10 +52,13 @@
 
 A symlink with an empty target.
 
-The member `link` is a symlink whose linkname field is empty, and there is no pax `linkpath`. A
-symlink to the empty string cannot be created on most systems. This case is ambiguous because POSIX
-says only that the contents of a symlink are stored in its linkname field, which leaves room for
-interpretation of what an empty name means.
+The archive has one symlink, `link`, whose linkname field is empty.
+
+A symlink to the empty string cannot be created on most systems. POSIX allows it: the
+contents of a symlink are stored in its linkname field, and `symlink()` takes them as a
+string, not as a pathname; where the system refuses to create it, pax writes a
+&quot;diagnostic message&quot;. This case is ambiguous because the tree depends on the
+system: a symlink `link` with an empty target, or none.
 
 Decision point: whether a link with an empty target is a link.
 Seen in: none of the scanned tarballs.
@@ -222,6 +226,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

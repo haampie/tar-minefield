@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N11 gnu-prefix-field · Tar file extraction test suite">
 <meta property="og:description" content="The prefix field of a header with GNU magic, which GNU tar uses for times in incremental archives.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N11.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N11.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/021608bc63d4fafa.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>GNU&#x27;s format does not have a prefix field: in incremental archives, GNU tar writes the access and change times where ustar has its prefix. This case is ambiguous in practice because the field, taken for ustar&#x27;s prefix, puts <code>a</code> under a directory <code>15000000000</code>.</p>
+<p>The archive has one file, <code>a</code>, with GNU&#x27;s magic, and two times, <code>15000000000</code> and <code>15000000000</code>, where ustar has its prefix field.</p>
+<p>GNU&#x27;s format does not have a prefix field: in incremental archives, GNU tar writes the access and change times there. This case is ambiguous in practice because the field, taken for ustar&#x27;s prefix, puts <code>a</code> under a directory <code>15000000000</code>.</p>
 <p><strong>Decision point:</strong> whether a header with GNU magic has a prefix.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs with times there.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,9 +52,12 @@
 
 The prefix field of a header with GNU magic, which GNU tar uses for times in incremental archives.
 
+The archive has one file, `a`, with GNU&#x27;s magic, and two times, `15000000000` and `15000000000`,
+where ustar has its prefix field.
+
 GNU&#x27;s format does not have a prefix field: in incremental archives, GNU tar writes the access and
-change times where ustar has its prefix. This case is ambiguous in practice because the field, taken
-for ustar&#x27;s prefix, puts `a` under a directory `15000000000`.
+change times there. This case is ambiguous in practice because the field, taken for ustar&#x27;s prefix,
+puts `a` under a directory `15000000000`.
 
 Decision point: whether a header with GNU magic has a prefix.
 Seen in: none of the scanned tarballs with times there.
@@ -256,6 +260,6 @@ Seen in: none of the scanned tarballs with times there.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

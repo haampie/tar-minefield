@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F34 size-on-hardlink · Tar file extraction test suite">
 <meta property="og:description" content="A size in the header of a hard link, in a pax archive, which takes the next header for its data.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F34.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F34.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/5d07314464178307.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The first member is a file <code>a</code>, the second a hard link <code>h</code> to <code>a</code>, with a pax extended header and the size 512 in its ustar header. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=No%20data%20logical%20records%20are%20stored%20for%20types%201%2C%202%2C%20or%205">POSIX</a> says that no data is stored for a hard link in ustar, so the next block is the header of a file, <code>smuggled</code>. It <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=data%20blocks%20for%20files%20of%20typeflag%201%20%28the%20digit%20one%29%20%28hard%20link%29%20may%20be%20included">permits</a> data on a hard link in pax, so that a reader may take the block, once an archive has a pax header, for the data of <code>h</code>, which replaces the contents of <code>a</code>. This case is ambiguous because the tree has either <code>a</code> as it is and <code>smuggled</code>, or <code>a</code> with that block as its contents. A reader may also skip the block, or make <code>h</code> a file of it.</p>
+<p>The archive has a file <code>a</code>, then a hard link <code>h</code> to <code>a</code>, with a pax header and the size 512 in its header, then an empty file <code>smuggled</code>.</p>
+<p>In a pax archive, which this is, <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=data%20blocks%20for%20files%20of%20typeflag%201%20%28the%20digit%20one%29%20%28hard%20link%29%20may%20be%20included">POSIX</a> permits data on a hard link, so the block after the header of <code>h</code> is its data, and what looks like the header of <code>smuggled</code> is that data. POSIX does not say what the data of a hard link does: whether it replaces the contents of <code>a</code>, or is ignored. A reader that applies the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=No%20data%20logical%20records%20are%20stored%20for%20types%201%2C%202%2C%20or%205">rule of ustar</a>, that no data is stored for a hard link, reads <code>smuggled</code> as a member. This case is ambiguous because the tree has <code>a</code> as it is, <code>a</code> with that block as its contents, or <code>a</code> and <code>smuggled</code>.</p>
 <p><strong>Decision point:</strong> whether a size in the header of a hard link applies, in an archive with pax headers.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,13 +52,15 @@
 
 A size in the header of a hard link, in a pax archive, which takes the next header for its data.
 
-The first member is a file `a`, the second a hard link `h` to `a`, with a pax extended header and
-the size 512 in its ustar header. POSIX says that no data is stored for a hard link in ustar, so the
-next block is the header of a file, `smuggled`. It permits data on a hard link in pax, so that
-a reader may take the block, once an archive has a pax header, for the data of `h`, which replaces
-the contents of `a`. This case is ambiguous because the tree has either `a` as it is and
-`smuggled`, or `a` with that block as its contents. A reader may also skip the block, or make `h`
-a file of it.
+The archive has a file `a`, then a hard link `h` to `a`, with a pax header and the size 512 in its
+header, then an empty file `smuggled`.
+
+In a pax archive, which this is, POSIX permits data on a hard link, so the block after
+the header of `h` is its data, and what looks like the header of `smuggled` is that data. POSIX does
+not say what the data of a hard link does: whether it replaces the contents of `a`, or is ignored. A
+reader that applies the rule of ustar, that no data is stored for a hard link, reads
+`smuggled` as a member. This case is ambiguous because the tree has `a` as it is, `a` with that
+block as its contents, or `a` and `smuggled`.
 
 Decision point: whether a size in the header of a hard link applies, in an archive with pax headers.
 Seen in: none of the scanned tarballs.
@@ -450,6 +453,6 @@ See also: F33, a size in the header of a directory, and F35, a pax size on a har
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

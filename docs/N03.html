@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N03 pax-long-name · Tar file extraction test suite">
 <meta property="og:description" content="A name over 100 bytes, in a pax path.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N03.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N03.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/3a8258e6fca546dd.png">
@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The pax path is the name; the header has a truncated one, as writers put there.</p>
+<p>The archive has one file whose pax <code>path</code> is its name, of 60 <code>d</code>s, a slash and 60 <code>f</code>s, and whose header has that name cut to 100 bytes, as writers put there.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/</code></td><td>directory</td><td></td></tr>
@@ -54,7 +54,8 @@
 
 A name over 100 bytes, in a pax `path`.
 
-The pax path is the name; the header has a truncated one, as writers put there.
+The archive has one file whose pax `path` is its name, of 60 `d`s, a slash and 60 `f`s, and whose
+header has that name cut to 100 bytes, as writers put there.
 
 Seen in: tarballs with long names from Python&#x27;s `tarfile` and GNU tar in pax format.
 
@@ -328,9 +329,9 @@ Seen in: tarballs with long names from Python&#x27;s `tarfile` and GNU tar in pa
 <tr><td><a href="live-bootstrap.html">live-bootstrap untar</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>❌ another tree, or rejects</td><td>tree B: <code>PaxHeader</code> (131 B, 8cc43c67), <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/</code>, <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/fffffffffffffffffffffffffffffffffffffff0000644</code> (5 B, bbdbb75b)</td></tr>
 <tr><td><a href="live-bootstrap-nonstrict.html">live-bootstrap untar, --non-strict</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>❌ another tree, or rejects</td><td>tree B: <code>PaxHeader</code> (131 B, 8cc43c67), <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/</code>, <code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/fffffffffffffffffffffffffffffffffffffff0000644</code> (5 B, bbdbb75b)</td></tr></table></div>
 <h2 id="prevalence-in-release-tarballs">Prevalence in release tarballs<a class="anchor" href="#prevalence-in-release-tarballs" aria-label="Link to this section">¶</a></h2>
-<p>This case is not measured in release tarballs: <code>tarscan.py</code> reports no feature of it on its own.</p>
+<p>This case is not measured in release tarballs: the scan reports no feature of it on its own.</p>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

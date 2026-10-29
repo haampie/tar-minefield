@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="S02 tree-duplicate-dir · Tar file extraction test suite">
 <meta property="og:description" content="The same directory twice, as tar cf x.tar d d/sub writes.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/S02.html">
 <meta property="og:url" content="https://stoppels.ch/tar/S02.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/7e15102f8fb25bc3.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has the directory <code>d/</code>, then <code>d/sub/</code> twice, then the file <code>d/sub/f</code>. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=If%20an%20attempt%20is%20made%20to%20extract%20a%20directory%20when%20the%20directory%20already%20exists%2C%20this%20shall%20not%20be%20considered%20an%20error">POSIX</a> says that extracting a directory that already exists is not an error. The file is there so that no directory is empty, which some implementations leave out. <code>tar cf x.tar d d/sub</code> also writes the files in <code>d/sub</code> twice: bsdtar and BusyBox as two copies, which S09 rejects, and GNU tar the second as a hard link to itself, which S04 rejects.</p>
+<p>The archive has the directory <code>d/</code>, then <code>d/sub/</code> twice, then the file <code>d/sub/f</code>.</p>
+<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=If%20an%20attempt%20is%20made%20to%20extract%20a%20directory%20when%20the%20directory%20already%20exists%2C%20this%20shall%20not%20be%20considered%20an%20error">POSIX</a> says that extracting a directory that already exists is not an error.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>d/</code></td><td>directory</td><td></td></tr>
@@ -55,11 +56,9 @@
 
 The same directory twice, as `tar cf x.tar d d/sub` writes.
 
-The archive has the directory `d/`, then `d/sub/` twice, then the file `d/sub/f`. POSIX says that
-extracting a directory that already exists is not an error. The file is there so that no directory
-is empty, which some implementations leave out. `tar cf x.tar d d/sub` also writes the files in
-`d/sub` twice: bsdtar and BusyBox as two copies, which S09 rejects, and GNU tar the second as a
-hard link to itself, which S04 rejects.
+The archive has the directory `d/`, then `d/sub/` twice, then the file `d/sub/f`.
+
+POSIX says that extracting a directory that already exists is not an error.
 
 Seen in: over a hundred tarballs.
 
@@ -411,6 +410,6 @@ Seen in: over a hundred tarballs.
 <p>See <a href="seen-in.html#S02">a sample of these 157 tarballs</a>, with the sha256 of each and an example from it.</p>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

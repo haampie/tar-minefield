@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F21 pax-size-empty · Tar file extraction test suite">
 <meta property="og:description" content="An empty pax size, which in POSIX removes the size rather than giving one.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F21.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F21.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/47b3c67f06af355a.png">
@@ -39,8 +39,9 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">POSIX</a> says that a record with an empty value deletes the field of that name, in the header too, so <code>size=</code> leaves <code>a</code> with no size at all, not even the 512 of its header. It does not say what a member without a size is. This case is ambiguous because the size is then either 0 (and the next block is the header of <code>smuggled</code>) or what the header specifies (and the next block is the data of <code>a</code>).</p>
-<p><strong>Decision point:</strong> what an empty pax size means: no size, 0, or the header&#x27;s size.</p>
+<p>The archive has a file <code>a</code>, whose header has the size 512 and whose pax header has an empty <code>size=</code>, then an empty file <code>smuggled</code>.</p>
+<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">POSIX</a> says that a record with an empty value deletes the field of that name, in the header too, so <code>size=</code> technically leaves <code>a</code> without a size field, not even the one in its header, which says 512. It does not say what a member without a size is. Nor does the header&#x27;s size stand in, as a header field that a keyword deletes is to be <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">ignored</a>. This case is ambiguous because the size is then either 0, and the next block is the header of <code>smuggled</code>, or none, and the member is invalid. Readers also fall back to what the header specifies, against POSIX, and the next block is the data of <code>a</code>.</p>
+<p><strong>Decision point:</strong> what an empty pax size means: no size, a size of 0, or the header&#x27;s size.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -51,13 +52,18 @@
 
 An empty pax `size`, which in POSIX removes the size rather than giving one.
 
-POSIX says that a record with an empty value deletes the field of that name, in the header too, so
-`size=` leaves `a` with no size at all, not even the 512 of its header. It does not say what a
-member without a size is. This case is ambiguous because the size is then either 0 (and the next
-block is the header of `smuggled`) or what the header specifies (and the next block is the data of
-`a`).
+The archive has a file `a`, whose header has the size 512 and whose pax header has an empty
+`size=`, then an empty file `smuggled`.
 
-Decision point: what an empty pax size means: no size, 0, or the header&#x27;s size.
+POSIX says that a record with an empty value deletes the field of that name, in the
+header too, so `size=` technically leaves `a` without a size field, not even the one in its header,
+which says 512. It does not say what a member without a size is. Nor does the header&#x27;s size stand
+in, as a header field that a keyword deletes is to be ignored. This case is
+ambiguous because the size is then either 0, and the next block is the header of `smuggled`, or
+none, and the member is invalid. Readers also fall back to what the header specifies, against POSIX,
+and the next block is the data of `a`.
+
+Decision point: what an empty pax size means: no size, a size of 0, or the header&#x27;s size.
 Seen in: none of the scanned tarballs.
 
 0x000000  header: pax extended header, size=, which removes the size
@@ -358,6 +364,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

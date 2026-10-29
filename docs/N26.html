@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N26 pax-global-path-then-empty · Tar file extraction test suite">
 <meta property="og:description" content="A global path, then a global header that removes it with an empty value.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N26.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N26.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/64a4a8e382db925b.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The first global header has <code>path=global-name</code>, which in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">POSIX</a> applies to every later member. The second has <code>path=</code>, which <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">deletes</a> it again, so the file after them keeps the name in its header, <code>a</code>. This case is ambiguous in practice because a reader may instead take <code>path=</code> for an empty name, or ignore it and keep <code>global-name</code>.</p>
+<p>The archive has a global header with <code>path=global-name</code>, then a second global header with an empty <code>path=</code>, then a file whose header has the name <code>a</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">POSIX</a>, the first applies to every later member, and the second <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">deletes</a> it again, so the file after them keeps the name in its header, <code>a</code>. In POSIX, the global value is deleted by name; whether the deletion also reaches the name in the header, as for an empty <code>path</code> in an extended header, is left open, so the file may also be left without a name. This case is ambiguous in practice because <code>path=</code> is also taken for an empty name, or ignored, so that the file is <code>global-name</code>.</p>
 <p><strong>Decision point:</strong> whether an empty value in a global header removes an earlier global value.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,10 +52,15 @@
 
 A global `path`, then a global header that removes it with an empty value.
 
-The first global header has `path=global-name`, which in POSIX applies to every later member. The
-second has `path=`, which deletes it again, so the file after them keeps the name in its header,
-`a`. This case is ambiguous in practice because a reader may instead take `path=` for an empty name,
-or ignore it and keep `global-name`.
+The archive has a global header with `path=global-name`, then a second global header with an empty
+`path=`, then a file whose header has the name `a`.
+
+In POSIX, the first applies to every later member, and the second deletes
+it again, so the file after them keeps the name in its header, `a`. In POSIX, the global value is
+deleted by name; whether the deletion also reaches the name in the header, as for an empty `path` in
+an extended header, is left open, so the file may also be left without a name. This case is
+ambiguous in practice because `path=` is also taken for an empty name, or ignored, so that the file
+is `global-name`.
 
 Decision point: whether an empty value in a global header removes an earlier global value.
 Seen in: none of the scanned tarballs.
@@ -432,6 +438,6 @@ See also: N21, a global `path`, and N22, an empty `path` in an extended header.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

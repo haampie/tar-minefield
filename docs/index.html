@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="Tar file extraction test suite · tar-minefield">
 <meta property="og:description" content="This project provides an extensive test suite and documentation for tar file extraction, with the goal of ensuring that implementations extract tar archives the same way.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/">
 <meta property="og:url" content="https://stoppels.ch/tar/">
 <meta property="og:image" content="https://stoppels.ch/tar/img/f6acdc7ccd199e35.png">
@@ -78,7 +78,7 @@ published there.</p>
 <tr><td><a href="F05.html"><code>F05</code></a></td><td>magic-version-nuls</td><td>The POSIX magic with NULs for its version, <code>ustar\0\0\0</code>, as some Java archivers write.</td><td class=n>0.07%</td></tr>
 <tr><td><a href="F14.html"><code>F14</code></a></td><td>pax-size-disagrees</td><td>A pax <code>size</code> that disagrees with the header&#x27;s, so that a reader of the header&#x27;s misses a member.</td><td class=n>none</td></tr>
 <tr><td><a href="F18.html"><code>F18</code></a></td><td>pax-global-comment-after-members</td><td>A global pax header with only a <code>comment</code>, after the first member.</td><td class=n>0.10%</td></tr>
-<tr><td><a href="F32.html"><code>F32</code></a></td><td>checksum-leading-space</td><td>A checksum padded with spaces rather than zeros, as Perl&#x27;s <code>Archive::Tar</code> writes it.</td><td class=n>0.99%</td></tr>
+<tr><td><a href="F32.html"><code>F32</code></a></td><td>checksum-leading-space</td><td>A checksum padded with spaces rather than zeros.</td><td class=n>0.99%</td></tr>
 <tr><td><a href="N05.html"><code>N05</code></a></td><td>name-dot</td><td>A member named <code>./</code>, the root of the tree, as <code>tar cf x.tar .</code> writes first.</td><td class=n>0.08%</td></tr>
 <tr><td><a href="N06.html"><code>N06</code></a></td><td>name-leading-dot-slash</td><td>The name <code>./a</code>, which is the path <code>a</code>.</td><td class=n>0.30%</td></tr>
 <tr><td><a href="N07.html"><code>N07</code></a></td><td>symlink-absolute</td><td>A symlink to an absolute path, created as it is.</td><td class=n>0.11%</td></tr>
@@ -128,9 +128,9 @@ published there.</p>
 <tr><td><a href="N19.html"><code>N19</code></a></td><td>pax-nul-in-path</td><td>A NUL inside a pax <code>path</code>.</td><td class=n>none</td></tr>
 <tr><td><a href="N20.html"><code>N20</code></a></td><td>pax-repeated-key</td><td>One pax key twice in one extended header.</td><td class=n>&lt;0.01%</td></tr>
 <tr><td><a href="N21.html"><code>N21</code></a></td><td>pax-global-path</td><td>A global pax header with a <code>path</code>.</td><td class=n>none</td></tr>
-<tr><td><a href="N22.html"><code>N22</code></a></td><td>pax-path-empty</td><td>An empty pax <code>path</code>, which in POSIX removes the path rather than giving one.</td><td class=n>none</td></tr>
+<tr><td><a href="N22.html"><code>N22</code></a></td><td>pax-path-empty</td><td>An empty pax <code>path</code>, which in POSIX deletes a path: the pax one, or the header&#x27;s name too?</td><td class=n>none</td></tr>
 <tr><td><a href="N23.html"><code>N23</code></a></td><td>extended-gnu-long-then-pax</td><td>A GNU long name, then a pax header, then the member: which of them does the long name apply to?</td><td class=n>none</td></tr>
-<tr><td><a href="N24.html"><code>N24</code></a></td><td>pax-hdrcharset-binary</td><td><code>hdrcharset=BINARY</code>, which declares a pax path that is not UTF-8 as bytes.</td><td class=n>none</td></tr>
+<tr><td><a href="N24.html"><code>N24</code></a></td><td>pax-hdrcharset-binary</td><td>A pax path that is not UTF-8, declared as bytes with <code>hdrcharset=BINARY</code>.</td><td class=n>none</td></tr>
 <tr><td><a href="N25.html"><code>N25</code></a></td><td>symlink-empty-target</td><td>A symlink with an empty target.</td><td class=n>none</td></tr>
 <tr><td><a href="N26.html"><code>N26</code></a></td><td>pax-global-path-then-empty</td><td>A global <code>path</code>, then a global header that removes it with an empty value.</td><td class=n>none</td></tr></table></div>
 <h3 id="to-reject-kinds">To reject: kinds<a class="anchor" href="#to-reject-kinds" aria-label="Link to this section">¶</a></h3>
@@ -181,6 +181,6 @@ published there.</p>
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time></footer>
 </body>
 </html>

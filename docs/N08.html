@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N08 extended-pax-path-and-gnu-long-name · Tar file extraction test suite">
 <meta property="og:description" content="A pax path and a GNU long name for one member, and a third name in its header.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N08.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N08.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/d6edde1cc9ad9500.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The member has the name <code>from-header</code>, a GNU long name <code>from-gnu</code>, and a pax path <code>from-pax</code>. Neither POSIX nor GNU&#x27;s format defines the two extensions together. This case is ambiguous because nothing says which of the three names wins: the member is <code>from-pax</code>, <code>from-gnu</code> or <code>from-header</code>.</p>
+<p>The archive has a GNU long name <code>from-gnu</code>, then a pax header with <code>path=from-pax</code>, then the member, whose header has the name <code>from-header</code>.</p>
+<p>Neither POSIX nor GNU&#x27;s format specifies how the two extensions interact. This case is ambiguous because nothing says which of the three names wins: the member is <code>from-pax</code>, <code>from-gnu</code> or <code>from-header</code>.</p>
 <p><strong>Decision point:</strong> which of several sources gives a member its name.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,9 +52,12 @@
 
 A pax `path` and a GNU long name for one member, and a third name in its header.
 
-The member has the name `from-header`, a GNU long name `from-gnu`, and a pax path `from-pax`.
-Neither POSIX nor GNU&#x27;s format defines the two extensions together. This case is ambiguous because
-nothing says which of the three names wins: the member is `from-pax`, `from-gnu` or `from-header`.
+The archive has a GNU long name `from-gnu`, then a pax header with `path=from-pax`, then the member,
+whose header has the name `from-header`.
+
+Neither POSIX nor GNU&#x27;s format specifies how the two extensions interact. This case is ambiguous
+because nothing says which of the three names wins: the member is `from-pax`, `from-gnu` or
+`from-header`.
 
 Decision point: which of several sources gives a member its name.
 Seen in: none of the scanned tarballs.
@@ -426,6 +430,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

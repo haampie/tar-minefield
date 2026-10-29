@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N05 name-dot · Tar file extraction test suite">
 <meta property="og:description" content="A member named ./, the root of the tree, as tar cf x.tar . writes first.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N05.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N05.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/ae78ff3fb5ecd5dc.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The first member is the directory <code>./</code>, then the file <code>a</code>. The directory <code>./</code> is the one the archive is extracted into, and the default policy normalizes it to the root of the tree.</p>
+<p>The archive has the directory <code>./</code>, then the file <code>a</code>.</p>
+<p>The directory <code>./</code> is the one the archive is extracted into, the root of the tree.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>2 bytes, sha256 <code title="87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7">87428fc5</code></td></tr></table></div>
@@ -53,8 +54,9 @@
 
 A member named `./`, the root of the tree, as `tar cf x.tar .` writes first.
 
-The first member is the directory `./`, then the file `a`. The directory `./` is the one the
-archive is extracted into, and the default policy normalizes it to the root of the tree.
+The archive has the directory `./`, then the file `a`.
+
+The directory `./` is the one the archive is extracted into, the root of the tree.
 
 Seen in: Guix&#x27;s bootstrap guile-2.0.9.tar.xz and others.
 
@@ -306,6 +308,6 @@ Seen in: Guix&#x27;s bootstrap guile-2.0.9.tar.xz and others.
 <p>See <a href="seen-in.html#N05">a sample of these 64 tarballs</a>, with the sha256 of each and an example from it.</p>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

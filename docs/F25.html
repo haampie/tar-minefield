@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F25 pax-size-not-ascii-digits · Tar file extraction test suite">
 <meta property="og:description" content="A pax size in Arabic-Indic digits, ٥١٢, which some conversions of strings read as 512.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F25.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F25.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/85cd29bfb9d6edee.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a>, a pax size is ASCII decimal digits. Python&#x27;s <code>int</code> and Java&#x27;s <code>Long.parseLong</code> take any decimal digit of Unicode, and so read <code>٥١٢</code> (U+0665 U+0661 U+0662, in UTF-8) as 512. Read leniently, this case is ambiguous because the size is either that number, 512 (and the next block is the data of <code>a</code>), or what the header specifies, 0 (and the next block is the header of <code>smuggled</code>).</p>
+<p>The archive has a file <code>a</code>, whose pax header has the size <code>٥١٢</code>, which is 512 in Arabic-Indic digits (U+0665 U+0661 U+0662, in UTF-8), and whose header has the size 0, then an empty file <code>smuggled</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a>, a pax size is ASCII decimal digits. Python&#x27;s <code>int</code> and Java&#x27;s <code>Long.parseLong</code> take any decimal digit of Unicode, and so read it as 512. Read leniently, this case is ambiguous because the size is either 512, as read that way (and the next block is the data of <code>a</code>), or 0, as the header specifies (and the next block is the header of <code>smuggled</code>). Neither is a reading of POSIX: <code>٥١٢</code> is not a pax size, and the header&#x27;s size is to be <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">ignored</a> once a <code>size</code> record is there.</p>
 <p><strong>Decision point:</strong> which digits a pax number may have.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,11 +52,15 @@
 
 A pax `size` in Arabic-Indic digits, `٥١٢`, which some conversions of strings read as 512.
 
-In POSIX, a pax size is ASCII decimal digits. Python&#x27;s `int` and Java&#x27;s `Long.parseLong` take any
-decimal digit of Unicode, and so read `٥١٢` (U+0665 U+0661 U+0662, in UTF-8) as 512. Read
-leniently, this case is ambiguous because the size is either that number, 512 (and the next block
-is the data of `a`), or what the header specifies, 0 (and the next block is the header of
-`smuggled`).
+The archive has a file `a`, whose pax header has the size `٥١٢`, which is 512 in Arabic-Indic digits
+(U+0665 U+0661 U+0662, in UTF-8), and whose header has the size 0, then an empty file `smuggled`.
+
+In POSIX, a pax size is ASCII decimal digits. Python&#x27;s `int` and Java&#x27;s
+`Long.parseLong` take any decimal digit of Unicode, and so read it as 512. Read leniently, this case
+is ambiguous because the size is either 512, as read that way (and the next block is the data of
+`a`), or 0, as the header specifies (and the next block is the header of `smuggled`). Neither is a
+reading of POSIX: `٥١٢` is not a pax size, and the header&#x27;s size is to be ignored
+once a `size` record is there.
 
 Decision point: which digits a pax number may have.
 Seen in: none of the scanned tarballs.
@@ -358,6 +363,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

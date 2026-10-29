@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="S07 tree-duplicate-file-differs · Tar file extraction test suite">
 <meta property="og:description" content="The same file twice, with different contents: the first copy, or the last?">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/S07.html">
 <meta property="og:url" content="https://stoppels.ch/tar/S07.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/24560225593bb4e1.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has two members named <code>a</code>, with different contents. This case is ambiguous because either copy can be the file, and the two trees differ in the contents of <code>a</code>: every implementation that extracts it keeps the last copy, but an extractor that does not overwrite files, such as GNU tar with <code>--keep-old-files</code>, keeps the first.</p>
+<p>The archive has two files named <code>a</code>: the first contains <code>first</code>, the last <code>last</code>.</p>
+<p>In POSIX, <code>-k</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_04:~:text=Prevent%20the%20overwriting%20of%20existing%20files">prevents the overwriting</a> of existing files, so without it the last copy is the file, and with it the first. But POSIX only says that existing files are <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">overwritten</a> when its options allow it, not that they must be, and its <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_16:~:text=In%20read%20mode%2C%20implementations%20are%20permitted%20to%20overwrite%20files%20when%20the%20archive%20has%20multiple%20members%20with%20the%20same%20name">application usage</a> calls overwriting permitted. This case is ambiguous because either copy can be the file: an extractor that overwrites files keeps the last copy, and one that does not, such as GNU tar with <code>--keep-old-files</code>, keeps the first.</p>
 <p><strong>Decision point:</strong> which of two members of one path is the file.</p>
 <p><strong>Seen in:</strong> fish 4.7.1, where <code>Cargo.toml</code> and <code>Cargo.lock</code> are appended again without their last newline, and logstash 8.15.2, where <code>build.rb</code> is first a license header and last the build&#x27;s date and commit. Most tarballs with duplicates, mostly from <code>cabal sdist</code>, have identical copies: the default policy rejects those too, as an implementation would have to compare the copies to tell.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,10 +52,14 @@
 
 The same file twice, with different contents: the first copy, or the last?
 
-The archive has two members named `a`, with different contents. This case is ambiguous because
-either copy can be the file, and the two trees differ in the contents of `a`: every implementation
-that extracts it keeps the last copy, but an extractor that does not overwrite files, such as GNU
-tar with `--keep-old-files`, keeps the first.
+The archive has two files named `a`: the first contains `first`, the last `last`.
+
+In POSIX, `-k` prevents the overwriting of existing files, so without it the last copy
+is the file, and with it the first. But POSIX only says that existing files are
+overwritten when its options allow it, not that they must be, and its application
+usage calls overwriting permitted. This case is ambiguous because either copy can be the
+file: an extractor that overwrites files keeps the last copy, and one that does not, such as GNU tar
+with `--keep-old-files`, keeps the first.
 
 Decision point: which of two members of one path is the file.
 Seen in: fish 4.7.1, where `Cargo.toml` and `Cargo.lock` are appended again without their last
@@ -332,9 +337,9 @@ the default policy rejects those too, as an implementation would have to compare
 <tr><td><a href="live-bootstrap.html">live-bootstrap untar</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr>
 <tr><td><a href="live-bootstrap-nonstrict.html">live-bootstrap untar, --non-strict</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr></table></div>
 <h2 id="prevalence-in-release-tarballs">Prevalence in release tarballs<a class="anchor" href="#prevalence-in-release-tarballs" aria-label="Link to this section">¶</a></h2>
-<p>This case is not measured in release tarballs: <code>tarscan.py</code> finds the same file twice, but does not compare the contents of the copies, so it does not tell this case from S09.</p>
+<p>This case is not measured in release tarballs: the scan finds the same file twice, but does not compare the contents of the copies, so it does not tell this case from S09.</p>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

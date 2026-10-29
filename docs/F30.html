@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F30 number-size-base256-too-large · Tar file extraction test suite">
 <meta property="og:description" content="A base-256 size of 2^64 + 512 in the header, which wraps around to 512 in 64 bits.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F30.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F30.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/ebd8ceb6016f1f03.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>A base-256 number has 11 bytes, 88 bits, after its first byte, 0x80, but many implementations keep sizes in 64 bits. The whole number, 2^64 + 512, runs past the end of the archive. Read leniently, this case is ambiguous because its low 64 bits are 512, which makes the next block the data of <code>a</code>; a reader that skips the header instead extracts the next block as a file <code>smuggled</code>, without <code>a</code>.</p>
+<p>The archive has a file <code>a</code>, whose size field is 2^64 + 512 in base 256, then an empty file <code>smuggled</code>.</p>
+<p>A base-256 number has 11 bytes, or 88 bits, after its first byte, <code>0x80</code>, but many implementations keep sizes in 64 bits. The whole number runs past the end of the archive. Read leniently, this case is ambiguous because its low 64 bits are 512, which makes the next block the data of <code>a</code>; a reader that skips the header instead extracts the next block as a file <code>smuggled</code>, without <code>a</code>.</p>
 <p><strong>Decision point:</strong> what a size too large for the reader means.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,10 +52,13 @@
 
 A base-256 size of 2^64 + 512 in the header, which wraps around to 512 in 64 bits.
 
-A base-256 number has 11 bytes, 88 bits, after its first byte, 0x80, but many implementations keep
-sizes in 64 bits. The whole number, 2^64 + 512, runs past the end of the archive. Read leniently,
-this case is ambiguous because its low 64 bits are 512, which makes the next block the data of `a`;
-a reader that skips the header instead extracts the next block as a file `smuggled`, without `a`.
+The archive has a file `a`, whose size field is 2^64 + 512 in base 256, then an empty file
+`smuggled`.
+
+A base-256 number has 11 bytes, or 88 bits, after its first byte, `0x80`, but many implementations
+keep sizes in 64 bits. The whole number runs past the end of the archive. Read leniently, this case
+is ambiguous because its low 64 bits are 512, which makes the next block the data of `a`; a reader
+that skips the header instead extracts the next block as a file `smuggled`, without `a`.
 
 Decision point: what a size too large for the reader means.
 Seen in: none of the scanned tarballs.
@@ -272,6 +276,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

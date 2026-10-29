@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="S13 hardlink-empty-target · Tar file extraction test suite">
 <meta property="og:description" content="A hardlink with an empty target.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/S13.html">
 <meta property="og:url" content="https://stoppels.ch/tar/S13.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/f49d27244b77973b.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The first member is a file <code>a</code>, the second a hardlink <code>link</code> whose linkname field is empty. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file previously archived, and the archive contains no member with the empty name, so as in S03 the link has nothing to link to. This case is ambiguous because the link is skipped, or made to the destination directory itself, which fails, or made an empty regular file <code>link</code>. It is a case of its own because implementations that refuse a hardlink to a missing name may still take an empty one for no link at all.</p>
+<p>The archive has a file <code>a</code>, then a hardlink <code>link</code> whose linkname field is empty.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file previously archived, which the archive does not have, so the link has nothing to link to. Read leniently, the link is skipped instead.</p>
 <p><strong>Decision point:</strong> what a hardlink to the empty name does.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,12 +52,10 @@
 
 A hardlink with an empty target.
 
-The first member is a file `a`, the second a hardlink `link` whose linkname field is empty. In
-POSIX, the target of a hardlink is a file previously archived, and the archive contains no member
-with the empty name, so as in S03 the link has nothing to link to. This case is ambiguous because
-the link is skipped, or made to the destination directory itself, which fails, or made an empty
-regular file `link`. It is a case of its own because implementations that refuse a hardlink to a
-missing name may still take an empty one for no link at all.
+The archive has a file `a`, then a hardlink `link` whose linkname field is empty.
+
+In POSIX, the target of a hardlink is a file previously archived, which the archive does
+not have, so the link has nothing to link to. Read leniently, the link is skipped instead.
 
 Decision point: what a hardlink to the empty name does.
 Seen in: none of the scanned tarballs.
@@ -314,6 +313,6 @@ See also: S03, a hardlink to a name that is not in the archive.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

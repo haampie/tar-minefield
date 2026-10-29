@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F07 end-archive-after · Tar file extraction test suite">
 <meta property="og:description" content="Another archive after the end-of-archive marker.">
-<link rel="stylesheet" href="style.css?80b3069c">
+<link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F07.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F07.html">
 <meta property="og:image" content="https://stoppels.ch/tar/img/b563ea4110110f50.png">
@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive ends with two zero blocks, as it should, and is followed by a second archive with a file <code>hidden</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros">POSIX</a>, the archive ends at the marker, and <code>hidden</code> is not part of it. This case is ambiguous in practice because a reader that reads on past the marker, by default or with an option, extracts <code>hidden</code> as well.</p>
+<p>The archive has a file <code>a</code>, and ends with two zero blocks, as it should. After them comes a second archive, with a file <code>hidden</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros">POSIX</a>, the archive ends at the marker, and <code>hidden</code> is not part of it. This case is ambiguous in practice because a reader that reads on past the marker, by default or with an option, extracts <code>hidden</code> as well.</p>
 <p><strong>Decision point:</strong> whether an implementation stops at the end-of-archive marker.</p>
 <p><strong>Seen in:</strong> glibmm 2.16.0, whose second archive, in GNU&#x27;s format, has the files of the first and 6 more with long names, jmol 14.8.0, and commons-jexl 2.1.1, whose record after the marker holds stale copies of headers before it.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -51,10 +52,12 @@
 
 Another archive after the end-of-archive marker.
 
-The archive ends with two zero blocks, as it should, and is followed by a second archive with a file
-`hidden`. In POSIX, the archive ends at the marker, and `hidden` is not part of it. This case is
-ambiguous in practice because a reader that reads on past the marker, by default or with an
-option, extracts `hidden` as well.
+The archive has a file `a`, and ends with two zero blocks, as it should. After them comes a second
+archive, with a file `hidden`.
+
+In POSIX, the archive ends at the marker, and `hidden` is not part of it. This case is
+ambiguous in practice because a reader that reads on past the marker, by default or with an option,
+extracts `hidden` as well.
 
 Decision point: whether an implementation stops at the end-of-archive marker.
 Seen in: glibmm 2.16.0, whose second archive, in GNU&#x27;s format, has the files of the first and 6
@@ -414,6 +417,6 @@ See also: F02, junk after the two zero blocks, which is tolerated.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-28">2026-10-28</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>
