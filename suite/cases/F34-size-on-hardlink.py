@@ -8,7 +8,7 @@ the header of `h` is its data, and what looks like the header of `smuggled` is t
 not say what the data of a hard link does: whether it replaces the contents of `a`, or is ignored. A
 reader that applies the [rule of ustar][no-data], that no data is stored for a hard link, reads
 `smuggled` as a member. This case is ambiguous because the tree has `a` as it is, `a` with that
-block as its contents, or `a` and `smuggled`. A reader may also make `h` a file of the block.
+block as its contents, or `a` and `smuggled`.
 
 Decision point: whether a size in the header of a hard link applies, in an archive with pax headers.
 Seen in: none of the scanned tarballs.

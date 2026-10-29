@@ -9,8 +9,7 @@ POSIX permits data on a hard link in pax, which this is, so the next block is th
 of `h`, but does not say what that data does: whether it replaces the contents of `a`, or is
 ignored. A reader that applies the rule of ustar, that no data is stored for a hard link,
 reads the block as the header of a file, `smuggled`. This case is ambiguous because the tree has `a`
-as it is, `a` with that block as its contents, or `a` and `smuggled`. A reader may also make `h` a
-file of the block, or give `smuggled` the size of `h`.
+as it is, `a` with that block as its contents, or `a` and `smuggled`.
 
 Decision point: whether a pax size applies to a hard link.
 Seen in: none of the scanned tarballs.
