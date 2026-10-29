@@ -89,7 +89,7 @@ pre { background: #f6f8fa; padding: 0.75rem; overflow-x: auto; }
 code { background: #e8ebef; padding: 0.1em 0.3em; border-radius: 4px; }
 /* Code in text as it is written: spaces in it, such as those of a padded field, are not
    collapsed */
-p code { white-space: pre-wrap; }
+p code { white-space: pre; }  /* a literal: its spaces as they are, and on one line */
 pre code { background: none; padding: 0; }
 table { border-collapse: collapse; margin: 1rem 0; width: 100%; table-layout: fixed; }
 th, td { border: 1px solid #d0d7de; padding: 0.25rem 0.5rem; text-align: left;
