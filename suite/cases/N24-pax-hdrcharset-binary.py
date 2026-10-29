@@ -4,10 +4,10 @@ The archive has one file. Its pax header has `hdrcharset=BINARY` and the path `c
 `café` in Latin-1 and not UTF-8; its ustar header has the name `cafe`.
 
 With `hdrcharset=BINARY`, the pax path is [unencoded binary data][hdrcharset], here the bytes
-`caf\xe9`. But [POSIX][untranslatable] also has pax report a name that it cannot translate to the
-character set of the locale, and by default [bypass][bypass] the file. This case is ambiguous
-because the file is either created under those bytes, or bypassed, in a UTF-8 locale, to which
-they cannot be translated.
+`caf\xe9`. But [POSIX][untranslatable] also has pax write a "diagnostic message" for a name that it
+cannot translate to the character set of the locale, and by default [bypass][bypass] the file. This
+case is ambiguous because the file is either created under those bytes, or bypassed, in a UTF-8
+locale, to which they cannot be translated.
 
 Decision point: whether a pax path declared as bytes is created as it is.
 Seen in: none of the scanned tarballs.

@@ -4,9 +4,10 @@ The archive has one file whose name field is all NULs.
 
 The name is an empty pathname, which [does not resolve][null-pathname], so it would create an
 invalid filename. In [POSIX][invalid-name], it is then implementation-defined whether the member is
-stored, and under what name, and pax may [ignore it][ignore-invalid] if it reports an error. This
-case is ambiguous because the member is then skipped with an error, stored under another name, such
-as that of the archive, or taken for the destination directory itself, which fails.
+stored, and under what name, and pax may [ignore it][ignore-invalid] "as long as it produces an
+error". This case is ambiguous because the member is then skipped with an error, stored under
+another name, such as that of the archive, or taken for the destination directory itself, which
+fails.
 
 Decision point: what an empty name refers to.
 Seen in: none of the scanned tarballs.
