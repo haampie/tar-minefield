@@ -101,6 +101,7 @@ SENTENCES = {
     "bypass": (OPTIONS, "pax shall act as if -oinvalid=bypass were specified"),
     "untranslatable": (STDERR, "cannot be translated between the codeset in use for that extended "
                                "header record and the character set of the current locale"),
+    "keep-old": (OPTIONS, "Prevent the overwriting of existing files"),
     "overwritten": (OUTPUT_FILES, "existing files in the destination hierarchy shall be "
                                   "overwritten only when all permission"),
     "intermediate": (DESCRIPTION, "if intermediate directories are necessary to extract an archive "
