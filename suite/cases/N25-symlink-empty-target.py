@@ -1,6 +1,6 @@
 """A symlink with an empty target.
 
-The archive has one symlink, `link`, whose linkname field is empty, and no pax `linkpath`.
+The archive has one symlink, `link`, whose linkname field is empty.
 
 A symlink to the empty string cannot be created on most systems. [POSIX][symlink] allows it: the
 contents of a symlink are stored in its linkname field, and `symlink()` [takes them as a
