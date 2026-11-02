@@ -48,6 +48,10 @@ SENTENCES = {
                                     "header block(s)"),
     "no-data": (USTAR, "No data logical records are stored for types 1, 2, or 5"),
     "unknown-type": (USTAR, "the file shall be extracted as if it were a regular file"),
+    "custom-type": (USTAR, "are reserved for custom implementations"),
+    "detected": (DESCRIPTION, "The archive formats described in the EXTENDED DESCRIPTION section "
+                              "shall be automatically detected on input"),
+    "same-layout": (END, "The physical layout of the archive shall be identical to the ustar format"),
     "extended": (PAX_HEADER, "Represents extended header records for the following file in the "
                              "archive"),
     "global": (PAX_HEADER, "Each value shall affect all subsequent files that do not override that "
