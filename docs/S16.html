@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, then a hard link <code>h</code> whose target is <code>./a</code>.</p>
-<p>In POSIX, a hard link represents a file linked to another file <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">previously archived</a>, and its target is in the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20linked%2Dto%20name%20is%20specified%20in%20the%20linkname%20field">linkname</a> field, but POSIX does not say whether the target must be spelled as that file&#x27;s name. This case is ambiguous because <code>./a</code> names the file <code>a</code>, as a path, or no member, as a name, so that <code>h</code> is a link to <code>a</code>, or an error.</p>
+<p>In POSIX, a hard link represents a file linked to another file <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">previously archived</a>, and its target is in the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20linked%2Dto%20name%20is%20specified%20in%20the%20linkname%20field">linkname</a> field. POSIX does not say whether the target should be literally the file name of an earlier member, or whether it can also be an equivalent path. This case is ambiguous because <code>./a</code> names the file <code>a</code>, as a path, or no member, as a name, so that <code>h</code> is a link to <code>a</code>, or an error.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>2 bytes, sha256 <code title="87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7">87428fc5</code></td></tr>
@@ -58,10 +58,11 @@ A hard link to `./a`, where the member is named `a`.
 
 The archive has a file `a`, then a hard link `h` whose target is `./a`.
 
-In POSIX, a hard link represents a file linked to another file previously archived,
-and its target is in the linkname field, but POSIX does not say whether the target
-must be spelled as that file&#x27;s name. This case is ambiguous because `./a` names the file `a`, as a
-path, or no member, as a name, so that `h` is a link to `a`, or an error.
+In POSIX, a hard link represents a file linked to another file previously archived, and
+its target is in the linkname field. POSIX does not say whether the target should be
+literally the file name of an earlier member, or whether it can also be an equivalent path. This
+case is ambiguous because `./a` names the file `a`, as a path, or no member, as a name, so that `h`
+is a link to `a`, or an error.
 
 Decision point: whether the target of a hard link is a path or the name of a member.
 Seen in: none of the scanned tarballs.
