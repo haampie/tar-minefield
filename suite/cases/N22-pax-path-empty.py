@@ -4,12 +4,12 @@ The archive has one file, whose pax header has an empty `path=`, and whose heade
 `from-header`.
 
 [POSIX][empty-value] says that a record with an empty value deletes any header block field of the
-same name, and that pax ignores a field of the header that a keyword deletes, its
-[corresponding][corresponding] field. No field of the header is named `path`, which
-[overrides][path] `name` and `prefix`. This case is ambiguous because, if deletion goes by the name
-of the keyword, `path=` deletes nothing in the header, and the member is `from-header`; if it goes
-by the header field that the keyword overrides, it deletes the name too, and leaves a member without
-one, which POSIX does not define, as an empty pathname [does not resolve][null-pathname].
+same name, and that pax ignores any field of the header that a keyword [deletes][corresponding]. No
+field of the header is named `path`, which [overrides][path] `name` and `prefix`. This case is
+ambiguous because, if deletion goes by the name of the keyword, `path=` deletes nothing in the
+header, and the member is `from-header`; if it goes by the header field that the keyword overrides,
+it deletes the name too, and leaves a member without one, which POSIX does not define, as an empty
+pathname [does not resolve][null-pathname].
 
 Decision point: what an empty pax path means: no name, an empty name, or the header's name.
 Seen in: none of the scanned tarballs.
