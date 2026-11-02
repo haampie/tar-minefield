@@ -4,10 +4,11 @@ A hard link to `./a`, where the member is named `a`.
 
 The archive has a file `a`, then a hard link `h` whose target is `./a`.
 
-In POSIX, a hard link represents a file linked to another file previously archived,
-and its target is in the linkname field, but POSIX does not say whether the target
-must be spelled as that file's name. This case is ambiguous because `./a` names the file `a`, as a
-path, or no member, as a name, so that `h` is a link to `a`, or an error.
+In POSIX, a hard link represents a file linked to another file previously archived, and
+its target is in the linkname field. POSIX does not say whether the target should be
+literally the file name of an earlier member, or whether it can also be an equivalent path. This
+case is ambiguous because `./a` names the file `a`, as a path, or no member, as a name, so that `h`
+is a link to `a`, or an error.
 
 Decision point: whether the target of a hard link is a path or the name of a member.
 Seen in: none of the scanned tarballs.
