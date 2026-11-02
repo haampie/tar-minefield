@@ -5,12 +5,12 @@ empty file `smuggled`. It does not have a pax header.
 
 POSIX says two incompatible things about the size of a hard link. In ustar, it [shall be
 zero][link-size-zero], and the archive [does not store data][no-data] for a hard link, so the block
-after the header of `h` is the header of `smuggled`. In pax, [data][link-data] follows a hard link
-whose size is not zero, so that block is the data of `h`. A reader [detects][detected] the format,
-but every ustar archive is also a valid pax archive: the [layout][same-layout] of pax is that of
-ustar, both have the same magic, and a pax archive [need not have][extended-optional] a pax header.
-This case is ambiguous because POSIX contradicts itself: read as ustar, the tree has `a`, its link
-`h` and `smuggled`; read as pax, it has `a` and `h` alone, which hold `a\n` or that block.
+after the header of `h` is the header of `smuggled`. In pax, a hard link can have [data][link-data]
+and a nonzero size, so the following block is the data of `h`. A reader [should detect][detected]
+the format, but every ustar archive is also a valid pax archive: the [layout][same-layout] of pax
+is that of ustar, both have the same magic, and a pax archive [need not have][extended-optional] a
+pax header. This case is ambiguous because POSIX contradicts itself: read as ustar, the tree has
+`a`, its link `h` and `smuggled`; read as pax, it has `a` and `h` alone.
 
 Decision point: whether a size in the header of a hard link applies, in an archive without pax
 headers.

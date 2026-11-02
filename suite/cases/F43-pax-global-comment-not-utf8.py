@@ -5,9 +5,9 @@ The archive has a global header, typeflag `g`, with one record, a `comment` of t
 
 POSIX says that the value of every keyword it [specifies][utf-8-keyword], `comment` among them, is
 UTF-8, and that every [comment][comment] is ignored. So the archive is invalid, but a reader that
-skips a comment never decodes it, and a reader that decodes every record before it looks at its
-keyword finds the invalid one. This case is ambiguous because the archive is rejected, or has the
-file `a`.
+skips comments might not validate the value, and a reader that decodes every record before it looks
+at its keyword might realize it is invalid. This case is ambiguous because the archive is rejected,
+or has the file `a`.
 
 Decision point: whether a comment is decoded before it is ignored.
 Seen in: none of the scanned tarballs.

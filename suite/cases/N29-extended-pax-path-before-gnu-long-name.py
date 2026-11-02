@@ -7,9 +7,9 @@ In POSIX, an [extended header][extended] applies to the file that follows it, wh
 long name: a typeflag `L`, which POSIX does not define, and so extracts [as a regular
 file][unknown-type], with an error. Read by POSIX alone, the archive has a file `from-pax`, which
 holds the long name, and the member `from-header`. Most readers that know GNU long names give the
-member one of the two long names instead; RubyGems keeps `from-header`. This case is ambiguous
-because the member is `from-pax` or `from-gnu`, to a reader that knows GNU long names, or
-`from-header`, alone or after a file `from-pax` that holds the long name.
+member one of the two long names instead. This case is ambiguous for multiple reasons, because the
+member is either `from-pax` or `from-gnu` for readers that support GNU long names; or a file
+`from-pax` with the long name as contents followed by the file `from-header`.
 
 Decision point: which of several sources gives a member its name, and whether a pax header applies
 to a GNU long name.

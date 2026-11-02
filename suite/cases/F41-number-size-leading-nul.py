@@ -6,8 +6,7 @@ by a NUL, then an empty file `smuggled`.
 In [POSIX][zero-filled], numeric fields are octal numbers filled with leading zeros, and each is
 [terminated][numeric] by a space or a NUL. A reader that skips the NUL in front reads 512, octal
 1000, and takes the block after the header of `a` for its data; a reader that stops at the first NUL
-reads an empty field, as 0 or as an error. This case is ambiguous because the tree has `a` with that
-block as its contents, or an empty `a` and `smuggled`.
+reads an empty field, as 0 or as an error.
 
 Decision point: whether a NUL before the digits of a size ends it.
 Seen in: none of the scanned tarballs.
