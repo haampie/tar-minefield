@@ -1,7 +1,7 @@
 {
  "id": "F34",
  "verdict": "reject",
- "description": "A size in the header of a hard link, in a pax archive, which takes the next header for its data.",
+ "description": "A size in the header of a hardlink, in a pax archive, which takes the next header for its data.",
  "features": [
   "size.on-hardlink"
  ]

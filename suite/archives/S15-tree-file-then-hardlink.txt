@@ -1,18 +1,18 @@
 S15-tree-file-then-hardlink: must reject
 
-A file, then a hard link of the same name to another file.
+A file, then a hardlink of the same name to another file.
 
-The archive has the files `a` and `b`, then a hard link `a` to `b`.
+The archive has the files `a` and `b`, then a hardlink `a` to `b`.
 
-The hard link `a` either replaces the file `a`, as existing files can be overwritten,
+The hardlink `a` either replaces the file `a`, as existing files can be overwritten,
 so that `a` becomes a link to `b`, or results in a failure, as a link cannot be
 created where a file already is, which is an error, and `a` keeps its
 own contents.
 
-Decision point: whether a hard link replaces an existing file of its name.
-Seen in: 27 tarballs have a file, then a hard link of the same name, such as xscreensaver 6.12 and
+Decision point: whether a hardlink replaces an existing file of its name.
+Seen in: 27 tarballs have a file, then a hardlink of the same name, such as xscreensaver 6.12 and
 atari++ 1.85, but each links to itself; none links to another file.
-See also: S04, a hard link to itself, and S07, the same file twice.
+See also: S04, a hardlink to itself, and S07, the same file twice.
 
 0x000000  header: regular file
           name     [  0,100)  "a" + 99 NUL
@@ -56,7 +56,7 @@ See also: S04, a hard link to itself, and S07, the same file twice.
 0x000600  data
           2 bytes, then 510 NUL to the end of the block
           "b\n"
-0x000800  header: hardlink, a hard link onto the file a
+0x000800  header: hardlink, a hardlink onto the file a
           name     [  0,100)  "a" + 99 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

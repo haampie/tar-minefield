@@ -189,7 +189,7 @@ DEFAULT = [
     ("name.dot", "normalize", "`.` is the root of the tree"),
     ("name.dot-component", "normalize", "`a/./b` is `a/b`"),
     ("name.double-slash", "normalize", "`a//b` is `a/b`"),
-    ("hardlink.target-spelled-differently", "normalize", "a hard link to `./a` is one to `a`"),
+    ("hardlink.target-spelled-differently", "normalize", "a hardlink to `./a` is one to `a`"),
     ("symlink.absolute", "accept", "created as it is: writing through a symlink is rejected"),
     ("end.data-after", "accept", "junk after the two zero blocks is ignored"),
     ("end.missing", "accept", "implementations that extract it extract the same tree"),

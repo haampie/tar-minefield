@@ -1,12 +1,12 @@
-"""A hard link to a member that comes later.
+"""A hardlink to a member that comes later.
 
-The archive has a hard link `h` to `f`, then the file `f`.
+The archive has a hardlink `h` to `f`, then the file `f`.
 
-In [POSIX][hardlink], the target of a hard link is a file previously archived. Read leniently, this
+In [POSIX][hardlink], the target of a hardlink is a file previously archived. Read leniently, this
 case is ambiguous because `h` either has nothing to link to yet, or is linked to `f` once the whole
 archive is read.
 
-Decision point: whether the target of a hard link can be a later member.
+Decision point: whether the target of a hardlink can be a later member.
 Seen in: none of the scanned tarballs.
 """
 

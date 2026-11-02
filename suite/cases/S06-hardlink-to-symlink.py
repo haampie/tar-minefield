@@ -1,14 +1,14 @@
-"""A hard link to a symlink: a link to the symlink, or to its target?
+"""A hardlink to a symlink: a link to the symlink, or to its target?
 
-The archive has a file `f`, a symlink `s` to `f`, and a hard link `h` to `s`.
+The archive has a file `f`, a symlink `s` to `f`, and a hardlink `h` to `s`.
 
-In [POSIX][hardlink], the target of a hard link is a file of any type, so `h` is a second name for
+In [POSIX][hardlink], the target of a hardlink is a file of any type, so `h` is a second name for
 the symlink `s` itself. But whether `link()` follows a symlink is
 [implementation-defined][link-follows]; `linkat()` takes a flag for it. This case is ambiguous in
-practice because `h` is either a hard link to the symlink `s`, and so itself a symlink to `f`, or,
-with the symlink followed, a hard link to the file `f`.
+practice because `h` is either a hardlink to the symlink `s`, and so itself a symlink to `f`, or,
+with the symlink followed, a hardlink to the file `f`.
 
-Decision point: whether a hard link follows a symlink.
+Decision point: whether a hardlink follows a symlink.
 Seen in: octa 8.4.
 """
 

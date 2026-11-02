@@ -1,7 +1,7 @@
 {
  "id": "S15",
  "verdict": "reject",
- "description": "A file, then a hard link of the same name to another file.",
+ "description": "A file, then a hardlink of the same name to another file.",
  "features": [
   "tree.duplicate.file-hardlink"
  ]

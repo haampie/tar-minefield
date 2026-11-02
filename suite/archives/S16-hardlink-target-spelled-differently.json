@@ -1,7 +1,7 @@
 {
  "id": "S16",
  "verdict": "tolerate",
- "description": "A hard link to `./a`, where the member is named `a`.",
+ "description": "A hardlink to `./a`, where the member is named `a`.",
  "features": [
   "hardlink.target-spelled-differently"
  ],

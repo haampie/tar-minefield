@@ -1,16 +1,16 @@
-"""A hard link to `./a`, where the member is named `a`.
+"""A hardlink to `./a`, where the member is named `a`.
 
-The archive has a file `a`, then a hard link `h` whose target is `./a`.
+The archive has a file `a`, then a hardlink `h` whose target is `./a`.
 
-In POSIX, a hard link represents a file linked to another file [previously archived][hardlink], and
+In POSIX, a hardlink represents a file linked to another file [previously archived][hardlink], and
 its target is in the [linkname][linkname] field. POSIX does not say whether the target should be
 literally the name of an earlier member, or whether it can also be an equivalent path. This case is
 ambiguous because `./a` names the file `a`, as a path, or no member, as a name, so that `h` is a
 link to `a`, or an error.
 
-Decision point: whether the target of a hard link is a path or the name of a member.
+Decision point: whether the target of a hardlink is a path or the name of a member.
 Seen in: none of the scanned tarballs.
-See also: S03, a hard link to a member that is not in the archive, and N06, the name `./a`.
+See also: S03, a hardlink to a member that is not in the archive, and N06, the name `./a`.
 """
 
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}

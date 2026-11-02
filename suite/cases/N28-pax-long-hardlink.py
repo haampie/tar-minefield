@@ -1,6 +1,6 @@
-"""A hard link with a long name and a long target, in a pax `path` and `linkpath` respectively.
+"""A hardlink with a long name and a long target, in a pax `path` and `linkpath` respectively.
 
-The archive has a file whose pax `path` is 120 `t`s, then a hard link to it, whose pax header has a
+The archive has a file whose pax `path` is 120 `t`s, then a hardlink to it, whose pax header has a
 `path` of 120 `h`s and a `linkpath` of 120 `t`s. Their headers have the names cut to 100 bytes, as
 writers put there.
 

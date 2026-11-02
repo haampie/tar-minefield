@@ -1,20 +1,20 @@
 F35-pax-size-on-hardlink: must reject
 
-A pax `size` on a hard link, which takes the next header for its data.
+A pax `size` on a hardlink, which takes the next header for its data.
 
-The archive has a file `a`, then a hard link `h` to `a`, whose pax header has `size=512`, then an
+The archive has a file `a`, then a hardlink `h` to `a`, whose pax header has `size=512`, then an
 empty file `smuggled`.
 
-POSIX permits data on a hard link in pax, which its `x` header suggests, so the next
-block is the data of `h`, but does not say what that data does: whether it replaces the contents of
-`a`, or is ignored. A reader that reads it as ustar, in which no data is stored for a
-hard link, reads the block as the header of a file, `smuggled`; the bytes do not say which it is.
-This case is ambiguous because the tree has `a` as it is, `a` with that block as its contents, or
-`a` and `smuggled`.
+In pax, which its `x` header suggests, data on a hardlink is permitted, so the next
+block is the data of `h`, but POSIX does not say what that data does: whether it replaces the
+contents of `a`, or is ignored. A reader that reads it as ustar, in which no data is
+stored for a hardlink, reads the block as the header of a file, `smuggled`; the bytes do not say
+which it is. This case is ambiguous because the tree has `a` as it is, `a` with that block as its
+contents, or `a` and `smuggled`.
 
-Decision point: whether a pax size applies to a hard link.
+Decision point: whether a pax size applies to a hardlink.
 Seen in: none of the scanned tarballs.
-See also: F15, a pax size on a directory, and F34, a size in the header of a hard link.
+See also: F15, a pax size on a directory, and F34, a size in the header of a hardlink.
 
 0x000000  header: regular file
           name     [  0,100)  "a" + 99 NUL
@@ -58,7 +58,7 @@ See also: F15, a pax size on a directory, and F34, a size in the header of a har
 0x000600  data: pax records
           12 bytes of pax records, then 500 NUL
           "12 size=512\n"
-0x000800  header: hardlink, a hard link to a, but the pax size is 512
+0x000800  header: hardlink, a hardlink to a, but the pax size is 512
           name     [  0,100)  "h" + 99 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

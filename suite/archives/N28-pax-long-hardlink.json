@@ -1,7 +1,7 @@
 {
  "id": "N28",
  "verdict": "accept",
- "description": "A hard link with a long name and a long target, in a pax `path` and `linkpath` respectively.",
+ "description": "A hardlink with a long name and a long target, in a pax `path` and `linkpath` respectively.",
  "features": [],
  "tree": [
   {
