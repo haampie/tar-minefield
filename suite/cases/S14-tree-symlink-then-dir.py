@@ -2,11 +2,11 @@
 
 The archive has a directory `target/`, then a symlink `a` to `target`, then a directory `a/`.
 
-In POSIX, extracting a directory that [already exists][dir-exists] is not an error, and `a/`, whose
-[trailing slash][trailing-slash] resolves it through the symlink, is the directory `target`. But
-readers drop the slash of a directory's name, and then `a` is a symlink, not a directory of its [own
-type][file-type]. This case is ambiguous because the directory `a/` replaces the symlink, is taken
-to exist already, through it, or is an error.
+The name `a/` can be seen as a file path that [resolves][trailing-slash] through the symlink, as its
+trailing slash suggests, to the directory `target`, which [already exists][dir-exists], so
+extracting it changes nothing. It can also be seen as the name of a directory `a`, of the member's
+[own type][file-type], which either replaces the symlink, or results in a failure, as it cannot be
+created where the symlink is.
 
 Decision point: whether a directory member follows a symlink in its place.
 Seen in: none of the scanned tarballs.
