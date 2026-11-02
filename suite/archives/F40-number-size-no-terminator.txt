@@ -6,9 +6,8 @@ The archive has one file, `a`, whose size field is the 12 octal digits `00000000
 NUL or a space after them, and whose data is the 10 bytes `0123456789`.
 
 In POSIX, every numeric field is terminated by a space or a NUL, so a size of 12 digits
-has no room for its terminator. A reader that takes the whole field reads 10, octal 12; a reader
-that takes at most the 11 digits that ustar allows reads 1. This case is ambiguous because `a` is
-`0123456789` or `0`; both fit in the one block of data, so the rest of the archive is read alike.
+is invalid and does not leave room for a terminator. A lenient reader can either read 10 (octal 12)
+or 1 if it takes the 11 digits that ustar allows, assuming the last byte is a terminator.
 
 Decision point: whether a numeric field without a terminator is read to its end.
 Seen in: none of the scanned tarballs.

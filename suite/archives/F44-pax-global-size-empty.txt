@@ -8,11 +8,7 @@ size 512 in its header, then an empty file `smuggled`.
 POSIX says that a record with an empty value deletes any header block field of the
 same name, and a value in a global header applies to every file after it. So `size=`
 deletes the size of `a`, and the size in its header is to be ignored, which leaves
-`a` without a size, which POSIX does not define. But its order of precedence assigns
-the empty value, which is not a number, or 0 to a lenient reader, or, failing
-that, the size in the header of `a`, 512, which takes the next block for its
-data. This case is ambiguous because the tree has `a` with that block as its contents, an empty `a`
-and `smuggled`, or no tree.
+`a` without a size, which POSIX does not define.
 
 Decision point: what an empty size in a global header deletes.
 Seen in: none of the scanned tarballs.
