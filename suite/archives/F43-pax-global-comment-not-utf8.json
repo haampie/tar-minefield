@@ -1,0 +1,8 @@
+{
+ "id": "F43",
+ "verdict": "reject",
+ "description": "A global pax `comment` that is not UTF-8.",
+ "features": [
+  "pax-global.value-not-utf8.comment"
+ ]
+}

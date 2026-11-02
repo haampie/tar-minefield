@@ -1,0 +1,41 @@
+F45-type-gnu-sparse: must reject
+
+An old GNU sparse file, typeflag `S`: the data as stored, or the file it expands to?
+
+The archive has one member, `a`, of typeflag `S` in the GNU format, whose header has a sparse map of
+one region, 2 bytes at offset 1024, and the real size 1026. Its data is those 2 bytes, `ab`.
+
+POSIX reserves the typeflags `A` to `Z` for custom implementations, and a reader that
+does not recognize one extracts the member as a regular file: `a`, of 2 bytes. GNU's
+format makes `a` a file of 1026 bytes, zeros but for the last two. The sparse map is where a ustar
+header has the end of its prefix, so a reader that takes the header for ustar also finds a name
+other than `a`. This case is ambiguous because `a` is the data as stored, or the file it expands
+to.
+
+Decision point: whether a sparse member is expanded.
+Seen in: none of the scanned tarballs.
+See also: N37, a sparse file in GNU's pax format.
+
+0x000000  header: unknown type, a GNU sparse file: 2 bytes at offset 1024 of 1026
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "012433\0 "  5403: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "S"  unknown typeflag
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar "
+          version  [263,265)  " " + NUL
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\000000002000\000000000002\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\000000002002" + 6 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: the one region of data
+          2 bytes, then 510 NUL to the end of the block
+          "ab"
+0x000400  2 zero blocks: the end-of-archive marker
+0x000800  end of file

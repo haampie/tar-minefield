@@ -1,0 +1,8 @@
+{
+ "id": "F44",
+ "verdict": "reject",
+ "description": "An empty `size` in a global pax header, which in POSIX deletes the size of every later member.",
+ "features": [
+  "pax-global.empty-value.size"
+ ]
+}

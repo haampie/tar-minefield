@@ -1,0 +1,8 @@
+{
+ "id": "F42",
+ "verdict": "reject",
+ "description": "A pax `comment` that is not UTF-8.",
+ "features": [
+  "pax.value-not-utf8.comment"
+ ]
+}
