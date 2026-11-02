@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one symlink, <code>link</code>, whose linkname field is empty.</p>
-<p>A symlink to the empty string cannot be created on most systems. <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20contents%20of%20the%20symbolic%20link%20shall%20be%20stored%20in%20the%20linkname%20field">POSIX</a> allows it: the contents of a symlink are stored in its linkname field, and <code>symlink()</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/symlink.html#:~:text=shall%20be%20treated%20only%20as%20a%20string%20and%20shall%20not%20be%20validated%20as%20a%20pathname">takes them as a string</a>, not as a pathname; where the system refuses to create it, pax writes a <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">&quot;diagnostic message&quot;</a>. This case is rejected because the tree depends on the system: a symlink <code>link</code> with an empty target, or none.</p>
+<p>A symlink to the empty string cannot be created on most systems. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20contents%20of%20the%20symbolic%20link%20shall%20be%20stored%20in%20the%20linkname%20field">POSIX</a>, it is allowed: the contents of a symlink are stored in its linkname field, and <code>symlink()</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/symlink.html#:~:text=shall%20be%20treated%20only%20as%20a%20string%20and%20shall%20not%20be%20validated%20as%20a%20pathname">takes them as a string</a>, not as a pathname; where the system refuses to create it, a <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">&quot;diagnostic message&quot;</a> is written. This case is rejected because the tree depends on the system: a symlink <code>link</code> with an empty target, or none.</p>
 <p><strong>Decision point:</strong> whether a link with an empty target is a link.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -54,11 +54,11 @@ A symlink with an empty target.
 
 The archive has one symlink, `link`, whose linkname field is empty.
 
-A symlink to the empty string cannot be created on most systems. POSIX allows it: the
-contents of a symlink are stored in its linkname field, and `symlink()` takes them as a
-string, not as a pathname; where the system refuses to create it, pax writes a
-&quot;diagnostic message&quot;. This case is rejected because the tree depends on the system:
-a symlink `link` with an empty target, or none.
+A symlink to the empty string cannot be created on most systems. In POSIX, it is allowed:
+the contents of a symlink are stored in its linkname field, and `symlink()` takes them as a
+string, not as a pathname; where the system refuses to create it, a &quot;diagnostic
+message&quot; is written. This case is rejected because the tree depends on the system: a
+symlink `link` with an empty target, or none.
 
 Decision point: whether a link with an empty target is a link.
 Seen in: none of the scanned tarballs.
@@ -191,14 +191,14 @@ Seen in: none of the scanned tarballs.
 <tr><td><a href="gnu-tar.html">GNU tar</a></td><td>tar (GNU tar) 1.35</td><td>✅ rejects</td><td>error: tar: link: Cannot create symlink to ‘’: No such file or directory tar: Exiting with failure status due to previous errors</td></tr>
 <tr><td><a href="bsdtar.html">bsdtar</a></td><td>bsdtar 3.8.10 - libarchive 3.8.10</td><td>✅ rejects</td><td>error: link: Can&#x27;t create &#x27;link&#x27;: No such file or directory bsdtar: Error exit delayed from previous errors</td></tr>
 <tr><td><a href="busybox.html">BusyBox tar</a></td><td>BusyBox v1.38.0, defconfig</td><td>⚠️ crashes</td><td>killed by SIGSEGV</td></tr>
-<tr><td><a href="7zip.html">7-Zip</a></td><td>7-Zip (z) 26.05 (x64)</td><td>⚠️ accepts</td><td>tree A: <code>link</code> (0 B, e3b0c442)</td></tr>
+<tr><td><a href="7zip.html">7-Zip</a></td><td>7-Zip (z) 26.05 (arm64)</td><td>⚠️ accepts</td><td>tree A: <code>link</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="tarfile-data.html">Python tarfile, filter=data, as in pip</a></td><td>CPython 3.15.2</td><td>⚠️ accepts</td><td>tree B: <code>link</code> → <code>.</code></td></tr>
 <tr><td><a href="tarfile-tar.html">Python tarfile, filter=tar</a></td><td>CPython 3.15.2</td><td>⚠️ accepts</td><td>tree C: nothing</td></tr>
 <tr><td><a href="tarfile-trusted.html">Python tarfile, filter=fully_trusted</a></td><td>CPython 3.15.2</td><td>⚠️ accepts</td><td>tree C: nothing</td></tr>
 <tr><td><a href="node-tar.html">node-tar</a></td><td>tar 7.5.22</td><td>✅ rejects</td><td>error: Error: TAR_BAD_ARCHIVE: Unrecognized archive format</td></tr>
 <tr><td><a href="node-tar-strict.html">node-tar, strict</a></td><td>tar 7.5.22</td><td>✅ rejects</td><td>error: Error: TAR_ENTRY_INVALID: linkpath required</td></tr>
 <tr><td><a href="tar-fs.html">tar-fs</a></td><td>tar-fs 3.1.3, on tar-stream 3.2.2</td><td>⚠️ crashes</td><td>TypeError [ERR_INVALID_ARG_TYPE]: The &quot;paths[1]&quot; argument must be of type string. Received null</td></tr>
-<tr><td><a href="commons-compress.html">Java Commons Compress</a></td><td>Commons Compress 1.28.0, Expander, on Java 27.0.1.0.2</td><td>⚠️ accepts</td><td>tree A: <code>link</code> (0 B, e3b0c442)</td></tr>
+<tr><td><a href="commons-compress.html">Java Commons Compress</a></td><td>Commons Compress 1.28.0, Expander, on Java 25.0.2</td><td>⚠️ accepts</td><td>tree A: <code>link</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="dotnet.html">.NET System.Formats.Tar</a></td><td>System.Formats.Tar of .NET 10.0.14, ExtractToDirectory</td><td>✅ rejects</td><td>error: ArgumentException: The value cannot be an empty string. (Parameter &#x27;pathToTarget&#x27;)</td></tr>
 <tr><td><a href="phardata.html">PHP PharData, as in Composer</a></td><td>PharData of PHP 8.5.12, as Composer&#x27;s TarDownloader calls it</td><td>⚠️ accepts</td><td>tree A: <code>link</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="containerd.html">Go containerd archive.Apply</a></td><td>containerd v2.4.2, archive.Apply, of go1.27.3</td><td>✅ rejects</td><td>error: symlink DEST/link: no such file or directory</td></tr>

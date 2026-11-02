@@ -22,7 +22,7 @@
 </head>
 <body>
 <a class="draft" href="index.html#policy">Working draft</a>
-<nav class="wide"><a class="prev" href="S12.html" rel="prev" title="S12 tree-under-file">‹ S12 tree-under-file</a><a href="index.html">tar-minefield</a><a class="next" href="gnu-tar.html" rel="next" title="GNU tar">GNU tar ›</a></nav>
+<nav class="wide"><a class="prev" href="S12.html" rel="prev" title="S12 tree-under-file">‹ S12 tree-under-file</a><a href="index.html">tar-minefield</a><a class="next" href="S14.html" rel="next" title="S14 tree-symlink-then-dir">S14 tree-symlink-then-dir ›</a></nav>
 <h1><code>S13</code> hardlink-empty-target</h1>
 <p>A hardlink with an empty target.</p>
 <div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
@@ -274,14 +274,14 @@ See also: S03, a hardlink to a name that is not in the archive.
 <tr><td><a href="gnu-tar.html">GNU tar</a></td><td>tar (GNU tar) 1.35</td><td>✅ rejects</td><td>error: tar: Substituting `.&#x27; for empty hard link target tar: link: Cannot hard link to ‘.’: Operation not permitted tar: Exiting with failure status due to previous errors</td></tr>
 <tr><td><a href="bsdtar.html">bsdtar</a></td><td>bsdtar 3.8.10 - libarchive 3.8.10</td><td>✅ rejects</td><td>error: bsdtar: Skipping link: hardlink target becomes empty after removing leading &#x27;/&#x27; bsdtar: Error exit delayed from previous errors</td></tr>
 <tr><td><a href="busybox.html">BusyBox tar</a></td><td>BusyBox v1.38.0, defconfig</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (2 B, 87428fc5), <code>link</code> (0 B, e3b0c442)</td></tr>
-<tr><td><a href="7zip.html">7-Zip</a></td><td>7-Zip (z) 26.05 (x64)</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (2 B, 87428fc5), <code>link</code> (0 B, e3b0c442)</td></tr>
+<tr><td><a href="7zip.html">7-Zip</a></td><td>7-Zip (z) 26.05 (arm64)</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (2 B, 87428fc5), <code>link</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="tarfile-data.html">Python tarfile, filter=data, as in pip</a></td><td>CPython 3.15.2</td><td>⚠️ accepts</td><td>tree B: <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="tarfile-tar.html">Python tarfile, filter=tar</a></td><td>CPython 3.15.2</td><td>⚠️ accepts</td><td>tree B: <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="tarfile-trusted.html">Python tarfile, filter=fully_trusted</a></td><td>CPython 3.15.2</td><td>⚠️ accepts</td><td>tree B: <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="node-tar.html">node-tar</a></td><td>tar 7.5.22</td><td>⚠️ accepts</td><td>tree B: <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="node-tar-strict.html">node-tar, strict</a></td><td>tar 7.5.22</td><td>✅ rejects</td><td>error: Error: TAR_ENTRY_INVALID: linkpath required</td></tr>
 <tr><td><a href="tar-fs.html">tar-fs</a></td><td>tar-fs 3.1.3, on tar-stream 3.2.2</td><td>⚠️ crashes</td><td>TypeError [ERR_INVALID_ARG_TYPE]: The &quot;path&quot; argument must be of type string. Received null</td></tr>
-<tr><td><a href="commons-compress.html">Java Commons Compress</a></td><td>Commons Compress 1.28.0, Expander, on Java 27.0.1.0.2</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (2 B, 87428fc5), <code>link</code> (0 B, e3b0c442)</td></tr>
+<tr><td><a href="commons-compress.html">Java Commons Compress</a></td><td>Commons Compress 1.28.0, Expander, on Java 25.0.2</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (2 B, 87428fc5), <code>link</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="dotnet.html">.NET System.Formats.Tar</a></td><td>System.Formats.Tar of .NET 10.0.14, ExtractToDirectory</td><td>✅ rejects</td><td>error: UnauthorizedAccessException: Access to the path &#x27;DEST/link&#x27; is denied.</td></tr>
 <tr><td><a href="phardata.html">PHP PharData, as in Composer</a></td><td>PharData of PHP 8.5.12, as Composer&#x27;s TarDownloader calls it</td><td>✅ rejects</td><td>error: UnexpectedValueException: phar error: &quot;suite/archives/S13-hardlink-empty-target.tar&quot; is a corrupted tar file - hard link to non-existent file &quot;&quot;</td></tr>
 <tr><td><a href="containerd.html">Go containerd archive.Apply</a></td><td>containerd v2.4.2, archive.Apply, of go1.27.3</td><td>✅ rejects</td><td>error: link DEST DEST/link: operation not permitted</td></tr>

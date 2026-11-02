@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has two files named <code>a</code>: the first contains <code>first</code>, the last <code>last</code>.</p>
-<p>In POSIX, <code>-k</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_04:~:text=Prevent%20the%20overwriting%20of%20existing%20files">prevents the overwriting</a> of existing files, so without it the last copy is the file, and with it the first. But POSIX only says that existing files are <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">overwritten</a> when its options allow it, not that they must be, and its <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_16:~:text=In%20read%20mode%2C%20implementations%20are%20permitted%20to%20overwrite%20files%20when%20the%20archive%20has%20multiple%20members%20with%20the%20same%20name">application usage</a> calls overwriting permitted. This case is ambiguous because either copy can be the file: an extractor that overwrites files keeps the last copy, and one that does not, such as GNU tar with <code>--keep-old-files</code>, keeps the first.</p>
+<p>In POSIX, existing files <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">can be overwritten</a>, but need not be, and overwriting is called permitted in its <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_16:~:text=In%20read%20mode%2C%20implementations%20are%20permitted%20to%20overwrite%20files%20when%20the%20archive%20has%20multiple%20members%20with%20the%20same%20name">application usage</a>. This case is ambiguous because either copy can be the file: an extractor that overwrites files keeps the last copy, and one that does not, such as GNU tar with <code>--keep-old-files</code>, keeps the first.</p>
 <p><strong>Decision point:</strong> which of two members of one path is the file.</p>
 <p><strong>Seen in:</strong> fish 4.7.1, where <code>Cargo.toml</code> and <code>Cargo.lock</code> are appended again without their last newline, and logstash 8.15.2, where <code>build.rb</code> is first a license header and last the build&#x27;s date and commit. Most tarballs with duplicates, mostly from <code>cabal sdist</code>, have identical copies: the default policy rejects those too, as an implementation would have to compare the copies to tell.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -54,12 +54,10 @@ The same file twice, with different contents: the first copy, or the last?
 
 The archive has two files named `a`: the first contains `first`, the last `last`.
 
-In POSIX, `-k` prevents the overwriting of existing files, so without it the last copy
-is the file, and with it the first. But POSIX only says that existing files are
-overwritten when its options allow it, not that they must be, and its application
-usage calls overwriting permitted. This case is ambiguous because either copy can be the
-file: an extractor that overwrites files keeps the last copy, and one that does not, such as GNU tar
-with `--keep-old-files`, keeps the first.
+In POSIX, existing files can be overwritten, but need not be, and overwriting is
+called permitted in its application usage. This case is ambiguous because either copy
+can be the file: an extractor that overwrites files keeps the last copy, and one that does not, such
+as GNU tar with `--keep-old-files`, keeps the first.
 
 Decision point: which of two members of one path is the file.
 Seen in: fish 4.7.1, where `Cargo.toml` and `Cargo.lock` are appended again without their last
@@ -315,14 +313,14 @@ the default policy rejects those too, as an implementation would have to compare
 <tr><td><a href="gnu-tar.html">GNU tar</a></td><td>tar (GNU tar) 1.35</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr>
 <tr><td><a href="bsdtar.html">bsdtar</a></td><td>bsdtar 3.8.10 - libarchive 3.8.10</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr>
 <tr><td><a href="busybox.html">BusyBox tar</a></td><td>BusyBox v1.38.0, defconfig</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr>
-<tr><td><a href="7zip.html">7-Zip</a></td><td>7-Zip (z) 26.05 (x64)</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr>
+<tr><td><a href="7zip.html">7-Zip</a></td><td>7-Zip (z) 26.05 (arm64)</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr>
 <tr><td><a href="tarfile-data.html">Python tarfile, filter=data, as in pip</a></td><td>CPython 3.15.2</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr>
 <tr><td><a href="tarfile-tar.html">Python tarfile, filter=tar</a></td><td>CPython 3.15.2</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr>
 <tr><td><a href="tarfile-trusted.html">Python tarfile, filter=fully_trusted</a></td><td>CPython 3.15.2</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr>
 <tr><td><a href="node-tar.html">node-tar</a></td><td>tar 7.5.22</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr>
 <tr><td><a href="node-tar-strict.html">node-tar, strict</a></td><td>tar 7.5.22</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr>
 <tr><td><a href="tar-fs.html">tar-fs</a></td><td>tar-fs 3.1.3, on tar-stream 3.2.2</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr>
-<tr><td><a href="commons-compress.html">Java Commons Compress</a></td><td>Commons Compress 1.28.0, Expander, on Java 27.0.1.0.2</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr>
+<tr><td><a href="commons-compress.html">Java Commons Compress</a></td><td>Commons Compress 1.28.0, Expander, on Java 25.0.2</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr>
 <tr><td><a href="dotnet.html">.NET System.Formats.Tar</a></td><td>System.Formats.Tar of .NET 10.0.14, ExtractToDirectory</td><td>✅ rejects</td><td>error: IOException: Cannot create &#x27;DEST/a&#x27; because a file or directory with the same name already exists.</td></tr>
 <tr><td><a href="phardata.html">PHP PharData, as in Composer</a></td><td>PharData of PHP 8.5.12, as Composer&#x27;s TarDownloader calls it</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr>
 <tr><td><a href="containerd.html">Go containerd archive.Apply</a></td><td>containerd v2.4.2, archive.Apply, of go1.27.3</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (5 B, 761d1fb1)</td></tr>
