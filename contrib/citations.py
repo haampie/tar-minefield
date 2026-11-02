@@ -52,6 +52,7 @@ SENTENCES = {
     "detected": (DESCRIPTION, "The archive formats described in the EXTENDED DESCRIPTION section "
                               "shall be automatically detected on input"),
     "same-layout": (END, "The physical layout of the archive shall be identical to the ustar format"),
+    "extended-optional": (END, "An optional header block with extended header records"),
     "pre-pax-reader": (PAX_HEADER, "the header block fields are used to create a regular file that "
                                    "contains the extended header records as data"),
     "link-size-zero": (USTAR, "the size field shall be specified as zero"),
