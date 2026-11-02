@@ -7,7 +7,7 @@ Solaris tar writes extended headers with typeflag `X`, where POSIX has `x`. POSI
 typeflags `A` to `Z` for [custom implementations][custom-type], and a reader that does not recognize
 one extracts the member [as a regular file][unknown-type]. This case is ambiguous because the member
 is `from-x`, to a reader that takes `X` for `x`, or `from-header`, after a file `PaxHeader` that
-holds the record, or alone, to a reader that skips a type it does not know.
+contains the record, or alone, to a reader that skips a type it does not know.
 
 Decision point: whether typeflag `X` is an extended header.
 Seen in: none of the scanned tarballs.
