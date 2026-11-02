@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one file, whose pax header has an empty <code>path=</code>, and whose header has the name <code>from-header</code>.</p>
-<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">POSIX</a> says that a record with an empty value deletes any header block field of the same name, and that pax ignores any field of the header that a keyword <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">deletes</a>. No field of the header is named <code>path</code>, which <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20name%20and%20prefix%20fields%20in%20the%20following%20header%20block%28s%29">overrides</a> <code>name</code> and <code>prefix</code>. This case is ambiguous because, if deletion goes by the name of the keyword, <code>path=</code> deletes nothing in the header, and the member is <code>from-header</code>; if it goes by the header field that the keyword overrides, it deletes the name too, and leaves a member without one, which POSIX does not define, as an empty pathname <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=A%20null%20pathname%20shall%20not%20be%20successfully%20resolved">does not resolve</a>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">POSIX</a>, a record with an empty value deletes any header block field of the same name, and a field of the header that a keyword deletes <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">is ignored</a>. The header does not have a field named <code>path</code>, which <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20name%20and%20prefix%20fields%20in%20the%20following%20header%20block%28s%29">overrides</a> <code>name</code> and <code>prefix</code>. This case is ambiguous because, if deletion goes by the name of the keyword, <code>path=</code> deletes nothing in the header, and the member is <code>from-header</code>; if it goes by the header field that the keyword overrides, it deletes the name too, and leaves a member without a name, which POSIX does not define, as an empty pathname <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=A%20null%20pathname%20shall%20not%20be%20successfully%20resolved">does not resolve</a>.</p>
 <p><strong>Decision point:</strong> what an empty pax path means: no name, an empty name, or the header&#x27;s name.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,13 +55,13 @@ An empty pax `path`, which in POSIX deletes a path: the pax one, or the header&#
 The archive has one file, whose pax header has an empty `path=`, and whose header has the name
 `from-header`.
 
-POSIX says that a record with an empty value deletes any header block field of the
-same name, and that pax ignores any field of the header that a keyword deletes. No
-field of the header is named `path`, which overrides `name` and `prefix`. This case is
-ambiguous because, if deletion goes by the name of the keyword, `path=` deletes nothing in the
-header, and the member is `from-header`; if it goes by the header field that the keyword overrides,
-it deletes the name too, and leaves a member without one, which POSIX does not define, as an empty
-pathname does not resolve.
+In POSIX, a record with an empty value deletes any header block field of the same
+name, and a field of the header that a keyword deletes is ignored. The header does
+not have a field named `path`, which overrides `name` and `prefix`. This case is ambiguous
+because, if deletion goes by the name of the keyword, `path=` deletes nothing in the header, and the
+member is `from-header`; if it goes by the header field that the keyword overrides, it deletes the
+name too, and leaves a member without a name, which POSIX does not define, as an empty pathname
+does not resolve.
 
 Decision point: what an empty pax path means: no name, an empty name, or the header&#x27;s name.
 Seen in: none of the scanned tarballs.

@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a symlink <code>link</code>, whose pax header has an empty <code>linkpath=</code>, and whose header has the target <code>from-header</code>.</p>
-<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">POSIX</a> says that a record with an empty value deletes any header block field of the same name, and that pax ignores any field of the header that a keyword <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">overrides or deletes</a>. No field of the header is named <code>linkpath</code>, which overrides <code>linkname</code>. This case is ambiguous because, if deletion goes by the name of the keyword, <code>linkpath=</code> deletes nothing in the header, and the target is <code>from-header</code>; if it goes by the field that the keyword overrides, it deletes the target too, and leaves a symlink without one; and if the empty value is the target, as POSIX <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=If%20there%20is%20a%20typeflag%20x%20extended%20header%20record%2C%20the%20affected%20attribute%20shall%20be%20assigned%20the%20%3Cvalue%3E">assigns</a> the value of a record, the symlink points to an empty path.</p>
+<p>In POSIX, a <code>linkpath</code> record <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20linkname%20field">overrides</a> the <code>linkname</code> field of the header, a record with an empty value <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">deletes</a> any field of the header of the same name, and a field of the header that a keyword overrides or deletes <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">is ignored</a>. The header does not have a field named <code>linkpath</code>. So, if the empty value deletes by name, it deletes only the record, and the target <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=Otherwise%2C%20the%20attribute%20shall%20be%20determined%20from%20the%20ustar%20header%20block">comes from the header</a>: <code>from-header</code>. If it deletes the field that the record overrides, <code>linkname</code> goes too, and the symlink is left without a target. If the record is applied like any other, its empty value <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=If%20there%20is%20a%20typeflag%20x%20extended%20header%20record%2C%20the%20affected%20attribute%20shall%20be%20assigned%20the%20%3Cvalue%3E">becomes the target</a>. This case is ambiguous because the target is <code>from-header</code>, missing, or empty.</p>
 <p><strong>Decision point:</strong> what an empty pax link path means: no target, an empty target, or the header&#x27;s.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,14 +55,14 @@ An empty pax `linkpath`, which in POSIX deletes a target: the pax one, or the he
 The archive has a symlink `link`, whose pax header has an empty `linkpath=`, and whose header has
 the target `from-header`.
 
-POSIX says that a record with an empty value deletes any header block field of the
-same name, and that pax ignores any field of the header that a keyword overrides or
-deletes. No field of the header is named `linkpath`, which overrides `linkname`.
-This case is ambiguous because, if deletion goes by the name of the keyword, `linkpath=` deletes
-nothing in the header, and the target is `from-header`; if it goes by the field that the keyword
-overrides, it deletes the target too, and leaves a symlink without one; and if the empty value is
-the target, as POSIX assigns the value of a record, the symlink points to an empty
-path.
+In POSIX, a `linkpath` record overrides the `linkname` field of the header, a record
+with an empty value deletes any field of the header of the same name, and a field of
+the header that a keyword overrides or deletes is ignored. The header does not have
+a field named `linkpath`. So, if the empty value deletes by name, it deletes only the record, and
+the target comes from the header: `from-header`. If it deletes the field that the
+record overrides, `linkname` goes too, and the symlink is left without a target. If the record is
+applied like any other, its empty value becomes the target. This case is ambiguous
+because the target is `from-header`, missing, or empty.
 
 Decision point: what an empty pax link path means: no target, an empty target, or the header&#x27;s.
 Seen in: none of the scanned tarballs.
