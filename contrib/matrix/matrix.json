@@ -24030,14 +24030,6 @@
    "version": "bsdtar 3.8.10 - libarchive 3.8.10"
   },
   {
-   "name": "live-bootstrap untar",
-   "version": "mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc"
-  },
-  {
-   "name": "live-bootstrap untar, --non-strict",
-   "version": "mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc"
-  },
-  {
    "name": "BusyBox tar",
    "version": "BusyBox v1.38.0, defconfig"
   },
@@ -24116,6 +24108,14 @@
   {
    "name": "tar-fs",
    "version": "tar-fs 3.1.3, on tar-stream 3.2.2"
+  },
+  {
+   "name": "live-bootstrap untar",
+   "version": "mescc-tools-extra a151c245e512, as live-bootstrap pins it"
+  },
+  {
+   "name": "live-bootstrap untar, --non-strict",
+   "version": "mescc-tools-extra a151c245e512, as live-bootstrap pins it"
   }
  ]
 }

@@ -35,8 +35,8 @@ extracted by every implementation.
 | Perl Archive::Tar | Archive::Tar 3.12 of Perl v5.44.0 |
 | Haskell tar | tar 0.7.2.0, extract, of GHC 9.14 |
 | Julia Tar.jl | Tar 1.10.0 of Julia 1.13.3 |
-| live-bootstrap untar | mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc |
-| live-bootstrap untar, --non-strict | mescc-tools-extra a151c245e512, as live-bootstrap pins it, built with cc |
+| live-bootstrap untar | mescc-tools-extra a151c245e512, as live-bootstrap pins it |
+| live-bootstrap untar, --non-strict | mescc-tools-extra a151c245e512, as live-bootstrap pins it |
 
 | case | GNU tar | bsdtar | BusyBox tar | 7-Zip | Python tarfile, filter=data, as in pip | Python tarfile, filter=tar | Python tarfile, filter=fully_trusted | node-tar | node-tar, strict | tar-fs | Java Commons Compress | .NET System.Formats.Tar | PHP PharData, as in Composer | Go containerd archive.Apply | Rust tar | Rust astral-tokio-tar | Rust tar-codec, as in uv | RubyGems | R untar, internal | Perl Archive::Tar | Haskell tar | Julia Tar.jl | live-bootstrap untar | live-bootstrap untar, --non-strict |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|

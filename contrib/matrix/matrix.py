@@ -108,9 +108,12 @@ def build_mescc_untar(build):
             if code != 0:
                 print("mescc-tools-extra:", err, file=sys.stderr)
                 return None
-    # C99: M2libc names a variable bool, which C23 makes a keyword
-    code, _, err = check.run([tool("cc"), "-std=gnu99", "-Wno-implicit-function-declaration", "untar.c",
-                        "M2libc/bootstrappable.c", "-o", binary], cwd=src)
+    # C99: M2libc names a variable bool, which C23 makes a keyword. A signed char, as M2-Planet's
+    # on every architecture: the checksum of untar.c adds chars, so which sum it accepts depends on
+    # it, and cc's char is unsigned on arm64
+    code, _, err = check.run([tool("cc"), "-std=gnu99", "-fsigned-char",
+                              "-Wno-implicit-function-declaration", "untar.c",
+                              "M2libc/bootstrappable.c", "-o", binary], cwd=src)
     if code != 0:
         print("mescc-tools-extra:", err, file=sys.stderr)
         return None
@@ -139,7 +142,7 @@ def implementations(work, only=None):
         if binary:
             commit = open(os.path.join(RUNNERS, "mescc-tools-extra", "source.txt")).read().split(
                 "mescc-tools-extra https://github.com/oriansj/mescc-tools-extra ")[1][:12]
-            version = f"mescc-tools-extra {commit}, as live-bootstrap pins it, built with cc"
+            version = f"mescc-tools-extra {commit}, as live-bootstrap pins it"
             # untar exits 0 when it "produced errors", such as a checksum failure: as an error
             script = ('out=$("$@" 2>&1); code=$?; printf "%s\\n" "$out" >&2; '
                      'case $out in *"produced errors"*) exit 1;; esac; exit $code')
