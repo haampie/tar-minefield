@@ -144,10 +144,10 @@ def implementations(work, only=None):
             script = ('out=$("$@" 2>&1); code=$?; printf "%s\\n" "$out" >&2; '
                      'case $out in *"produced errors"*) exit 1;; esac; exit $code')
             found.append(("live-bootstrap untar", version,
-                          lambda a, d, b=binary: ["sh", "-c", script, "sh", b, "--file", a]))
+                          lambda a, d, b=binary, s=script: ["sh", "-c", s, "sh", b, "--file", a]))
             found.append(("live-bootstrap untar, --non-strict", version,
-                          lambda a, d, b=binary: ["sh", "-c", script, "sh", b, "--non-strict",
-                                                  "--file", a]))
+                          lambda a, d, b=binary, s=script: ["sh", "-c", s, "sh", b, "--non-strict",
+                                                            "--file", a]))
     busybox = tool("busybox")
     if busybox:
         # without the time of the build, which a build from source has in its banner
