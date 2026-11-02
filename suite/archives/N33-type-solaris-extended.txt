@@ -1,0 +1,61 @@
+N33-type-solaris-extended: must reject
+
+A Solaris extended header, typeflag `X`: a pax header, or a file?
+
+The archive has a header of typeflag `X`, named `PaxHeader`, whose data is the pax record
+`path=from-x`, then a file whose header has the name `from-header`.
+
+Solaris tar writes extended headers with typeflag `X`, instead of the `x` of POSIX. In POSIX, the
+typeflags `A` to `Z` are reserved for custom implementations, and a reader that does
+not recognize one extracts the member as a regular file. This case is ambiguous
+because the member is `from-x`, to a reader that takes `X` for `x`, or `from-header`, after a file
+`PaxHeader` that contains the record, or alone, to a reader that skips a type it does not know.
+
+Decision point: whether typeflag `X` is an extended header.
+Seen in: none of the scanned tarballs.
+See also: F16, an unknown typeflag with a size.
+
+0x000000  header: unknown type, typeflag X, as Solaris tar writes it
+          name     [  0,100)  "PaxHeader" + 91 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000017" + NUL  15
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011037\0 "  4639: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "X"  unknown typeflag
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: pax records
+          15 bytes of pax records, then 497 NUL
+          "15 path=from-x\n"
+0x000400  header: regular file
+          name     [  0,100)  "from-header" + 89 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000014" + NUL  12
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011314\0 "  4812: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          12 bytes, then 500 NUL to the end of the block
+          "which name?\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

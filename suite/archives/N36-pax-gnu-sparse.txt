@@ -1,0 +1,68 @@
+N36-pax-gnu-sparse: must reject
+
+A sparse file in GNU's pax format 1.0: the data as stored, or the file it expands to?
+
+The archive has one member, whose pax header has `GNU.sparse.major=1`, `GNU.sparse.minor=0`,
+`GNU.sparse.name=a`, `GNU.sparse.realsize=1026` and `path=GNUSparseFile.0/a`. Its data is a sparse
+map of one region, 2 bytes at offset 1024, as the lines `1`, `1024` and `2` padded with NULs to a
+block, followed by those 2 bytes, `ab`.
+
+In POSIX, keywords such as GNU's are implementation extensions, which are not
+defined, so a reader that ignores them applies the pax `path`, and extracts
+`GNUSparseFile.0/a`, which contains the map and the data. As a GNU sparse file, the member is
+extracted as a file `a` that contains 1024 zero bytes, followed by `ab`. This case is ambiguous
+because the member is the data as stored, under its pax `path`, or the file it expands to, under
+`GNU.sparse.name`, or even the expanded file under the pax `path`.
+
+Decision point: whether a sparse member is expanded, and which of its names it gets.
+Seen in: none of the scanned tarballs.
+See also: F45, an old GNU sparse file.
+
+0x000000  header: pax extended header, a sparse file in GNU's format 1.0
+          name     [  0,100)  "PaxHeader" + 91 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000167" + NUL  119
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011105\0 "  4677: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "x"  pax extended header
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: pax records
+          119 bytes of pax records, then 393 NUL
+          "22 GNU.sparse.major=1\n"
+          "22 GNU.sparse.minor=0\n"
+          "21 GNU.sparse.name=a\n"
+          "28 GNU.sparse.realsize=1026\n"
+          "26 path=GNUSparseFile.0/a\n"
+0x000400  header: regular file, the sparse map, then the one region of data
+          name     [  0,100)  "GNUSparseFile.0/a" + 83 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000001002" + NUL  514
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "012106\0 "  5190: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          514 bytes, then 510 NUL to the end of the block
+          "1\n1024\n2\n" + 391 NUL ...
+0x000a00  2 zero blocks: the end-of-archive marker
+0x000e00  end of file

@@ -1,0 +1,8 @@
+{
+ "id": "N35",
+ "verdict": "reject",
+ "description": "A relative symlink whose target leads out of the destination.",
+ "features": [
+  "symlink.escapes"
+ ]
+}

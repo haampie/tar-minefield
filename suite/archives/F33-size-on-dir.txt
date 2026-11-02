@@ -10,8 +10,8 @@ that block is the directory's data instead, and the tree is a directory alone.
 
 Decision point: whether the size in the header of a directory applies.
 Seen in: none of the scanned tarballs.
-See also: F15, a pax `size` on a directory, and F34, a size in the header of a hard link, which
-are rejected as well.
+See also: F15, a pax `size` on a directory, and F34, a size in the header of a hardlink, which are
+rejected as well.
 
 0x000000  header: directory, no data, but its size field is 512
           name     [  0,100)  "dir/" + 96 NUL

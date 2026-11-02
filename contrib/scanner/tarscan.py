@@ -417,6 +417,7 @@ class Scanner:
         self.nfc = {}
         self.folded = {}
         self.unresolved = []  # hardlinks whose target is not an earlier member
+        self.first_format = None  # of the first header, by which some readers decide the format
         self.error = None
 
     def run(self):
@@ -506,8 +507,12 @@ class Scanner:
         if fmt == "posix" and block[508:512] == b"tar\0":
             fmt = "star"
         self.fingerprint["magic"][fmt] += 1
+        if self.first_format is None:
+            self.first_format = fmt
 
         type = block[156:157]
+        if type in (b"x", b"g", b"X") and self.first_format == "v7":
+            features.add("format.pax-after-v7")
         size, size_shape = number(block[124:136], "size", features)
         self.fingerprint["size"][size_shape] += 1
         for field, start, end in (
@@ -694,6 +699,11 @@ class Scanner:
                 pax[b"path"].decode("utf-8")
             except UnicodeDecodeError:
                 features.add("pax.path-not-utf8")
+        if b"linkpath" not in pax and linkname and kind in ("hardlink", "symlink"):
+            try:
+                linkname.decode("utf-8")
+            except UnicodeDecodeError:
+                features.add("linkname.not-utf8")
         if (b"linkpath" in pax or long_links) and kind not in ("hardlink", "symlink"):
             features.add(f"extended.linkpath-on-{kind}")
         if linkname and kind not in ("hardlink", "symlink"):

@@ -1,0 +1,30 @@
+r"""A size in the header of a hardlink, in an archive without pax headers: ustar or pax?
+
+The archive has a file `a`, then a hardlink `h` to `a`, with the size 512 in its header, then an
+empty file `smuggled`. It does not have a pax header.
+
+The size of a hardlink follows different rules in ustar and in pax. In ustar, it [shall be
+zero][link-size-zero], and the archive [does not store data][no-data] for a hardlink, so the block
+after the header of `h` is the header of `smuggled`. In pax, a hardlink can have [data][link-data]
+and a nonzero size, so the following block is the data of `h`. In POSIX, the format of an archive is
+[detected][detected] on input, but this archive can be either: the [layout][same-layout] of pax is
+that of ustar, both have the same magic, and a pax archive [need not have][extended-optional] a pax
+header. This case is ambiguous because the archive can be read as either format: read as ustar, the
+tree has `a`, its link `h` and `smuggled`; read as pax, it has `a` and `h` alone.
+
+Decision point: whether a size in the header of a hardlink applies, in an archive without pax
+headers.
+Seen in: none of the scanned tarballs.
+See also: F34, the same in an archive with a pax header, which marks it as pax.
+"""
+
+VERDICT = "reject"
+ID = "F38"
+FEATURES = ["size.on-hardlink"]
+
+
+def build(a):
+    a.file(b"a", b"a\n")
+    a.header(b"h", b"1", 512, note="a hardlink to a, with a size of 512", linkname=b"a")
+    a.file(b"smuggled", b"", note="the block that the size covers")
+    a.end()

@@ -1,0 +1,78 @@
+F44-pax-global-size-empty: must reject
+
+An empty `size` in a global pax header: does it delete the size of every later member, or set it?
+
+The archive has a global header, typeflag `g`, with the one record `size=`, then a file `a` with the
+size 512 in its header, then an empty file `smuggled`.
+
+In POSIX, a record with an empty value deletes any header block field of the same
+name, and a value in a global header applies to every file after it. So `size=` can be
+seen as deleting the size of `a`, whose size in the header is then ignored, so that
+`a` does not have a size. It can also be seen as an empty size, assigned to `a`, or as
+a record that deletes only earlier global values, so that the size in the header stands. This case
+is ambiguous because `a` has no size (and is invalid), the size 0 (and `smuggled` is a member), or
+the size 512 (and the next block is its data).
+
+Decision point: what an empty size in a global header deletes.
+Seen in: none of the scanned tarballs.
+See also: F20, a size in a global header, and F21, an empty size in an extended header.
+
+0x000000  header: pax global header, size=, which deletes the size of every later member
+          name     [  0,100)  "pax_global_header" + 83 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000010" + NUL  8
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "012626\0 "  5526: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "g"  pax global header
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: pax records
+          8 bytes of pax records, then 504 NUL
+          "8 size=\n"
+0x000400  header: regular file, size 512
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000001000" + NUL  512
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007337\0 "  3807: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  header: regular file, the data of a, to a reader that keeps its size
+          name     [  0,100)  "smuggled" + 92 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000000" + NUL  0
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "010725\0 "  4565: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

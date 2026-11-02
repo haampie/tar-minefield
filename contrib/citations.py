@@ -48,6 +48,18 @@ SENTENCES = {
                                     "header block(s)"),
     "no-data": (USTAR, "No data logical records are stored for types 1, 2, or 5"),
     "unknown-type": (USTAR, "the file shall be extracted as if it were a regular file"),
+    "custom-type": (USTAR, "are reserved for custom implementations"),
+    "keyword-extension": (PAX_EXTENDED, "or a keyword provided as an implementation extension"),
+    "detected": (DESCRIPTION, "The archive formats described in the EXTENDED DESCRIPTION section "
+                              "shall be automatically detected on input"),
+    "same-layout": (END, "The physical layout of the archive shall be identical to the ustar format"),
+    "extended-optional": (END, "An optional header block with extended header records"),
+    "pre-pax-reader": (PAX_HEADER, "the header block fields are used to create a regular file that "
+                                   "contains the extended header records as data"),
+    "link-size-zero": (USTAR, "the size field shall be specified as zero"),
+    "prefix-nul": (USTAR, "If prefix begins with a NUL character, it shall be ignored"),
+    "utf-8-keyword": (PAX_EXTENDED, "The value field for all other keywords specified by "
+                                    "POSIX.1-2024 shall be encoded using UTF-8"),
     "extended": (PAX_HEADER, "Represents extended header records for the following file in the "
                              "archive"),
     "global": (PAX_HEADER, "Each value shall affect all subsequent files that do not override that "
@@ -94,6 +106,7 @@ SENTENCES = {
     "sequence": (END, "Each file archived shall be represented by the following sequence"),
     "global-files": (PAX_HEADER, "Represents global extended header records for the following "
                                  "files in the archive"),
+    "linkpath": (PAX_EXTENDED, "This record shall override the linkname field"),
     "path": (PAX_EXTENDED, "This record shall override the name and prefix fields in the following "
                            "header block(s)"),
     "ascii-header": (USTAR, "All characters in the header logical record shall be represented in "
@@ -102,7 +115,6 @@ SENTENCES = {
     "bypass": (OPTIONS, "pax shall act as if -oinvalid=bypass were specified"),
     "untranslatable": (STDERR, "cannot be translated between the codeset in use for that extended "
                                "header record and the character set of the current locale"),
-    "keep-old": (OPTIONS, "Prevent the overwriting of existing files"),
     "overwritten": (OUTPUT_FILES, "existing files in the destination hierarchy shall be "
                                   "overwritten only when all permission"),
     "intermediate": (DESCRIPTION, "if intermediate directories are necessary to extract an archive "
@@ -110,6 +122,8 @@ SENTENCES = {
     "cannot-create": (ERRORS, "If pax cannot create a file or a link when reading an archive"),
     "x-assigned": (PRECEDENCE, "If there is a typeflag x extended header record, the affected "
                                "attribute shall be assigned the <value>"),
+    "g-assigned": (PRECEDENCE, "If there is a typeflag g global extended header record, the "
+                               "affected attribute shall be assigned the <value>"),
     "header-fallback": (PRECEDENCE, "Otherwise, the attribute shall be determined from the ustar "
                                     "header block"),
     "link-error": (DESCRIPTION, "it shall be an error if these files cannot be linked when the "
@@ -128,6 +142,9 @@ SENTENCES = {
                                       "validated as a pathname"),
     "trailing-slash": (PATHNAMES, "tag_04_16", "ends with one or more trailing <slash> characters "
                                                "shall not be resolved successfully unless"),
+    "symlink-followed": (PATHNAMES, "tag_04_16", "In all other cases, the system shall prefix the "
+                                                 "remaining pathname"),
+    "link-exists": (LINK, None, "The path2 argument resolves to an existing directory entry"),
     "symlink-slash": (SYMLINK, None, "The path2 argument contains at least one non-<slash> "
                                      "character and ends with one or more trailing <slash> "
                                      "characters"),

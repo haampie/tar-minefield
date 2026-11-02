@@ -79,6 +79,12 @@ STRICT = [
     ("pax.no-equals", "framing", "a pax record without `=`"),
     ("pax.empty-key", "framing", "a pax record with an empty key"),
     ("pax.empty-value.size", "framing", "an empty pax size, which in POSIX removes it"),
+    ("pax-global.empty-value.size", "framing",
+     "an empty size in a global header, which in POSIX removes the size of every later member"),
+    ("pax*.value-not-utf8.comment", "framing", "a comment that is not UTF-8"),
+    ("format.pax-after-v7", "framing",
+     "pax headers after a v7 header, which a reader that takes the format of the first header "
+     "extracts as files"),
     ("end.missing", "framing", "no end-of-archive marker"),
     ("end.lone-zero-block", "framing", "an end-of-archive marker of one zero block, not two"),
     ("end.data-after", "framing", "data other than zeros after the end-of-archive marker"),
@@ -99,6 +105,7 @@ STRICT = [
     ("name.drive-letter", "name", "a drive letter"),
     ("name.control-character", "name", "a control character in a name"),
     ("name.not-utf8", "name", "a name that is not UTF-8"),
+    ("linkname.not-utf8", "name", "a link target that is not UTF-8"),
     ("name.bytes-after-nul", "name", "bytes after the NUL that ends a name"),
     ("name.*", "name", "a name that implementations may normalize differently"),
     ("extended.gnu-long-and-pax", "name",
@@ -169,6 +176,8 @@ ALLOWED = [
     ("pax.value-not-utf8.[acm]time", "outside the tree"),
     ("pax.value-not-utf8.[ug]id", "outside the tree"),
     ("pax.value-not-utf8.[ug]name", "outside the tree"),
+    ("pax.newline-in-value.comment",
+     "a comment with newlines: pax records are delimited by their length"),
 ]
 
 # The default policy: the strict criteria that it lets through, and how; it rejects the others.
@@ -180,6 +189,7 @@ DEFAULT = [
     ("name.dot", "normalize", "`.` is the root of the tree"),
     ("name.dot-component", "normalize", "`a/./b` is `a/b`"),
     ("name.double-slash", "normalize", "`a//b` is `a/b`"),
+    ("hardlink.target-spelled-differently", "normalize", "a hardlink to `./a` is one to `a`"),
     ("symlink.absolute", "accept", "created as it is: writing through a symlink is rejected"),
     ("end.data-after", "accept", "junk after the two zero blocks is ignored"),
     ("end.missing", "accept", "implementations that extract it extract the same tree"),
@@ -191,6 +201,8 @@ DEFAULT = [
      "octal padded with spaces, not zeros, which implementations read alike"),
     ("pax.size-disagrees", "accept",
      "the pax size frames the member, as POSIX says: it is how sizes over 8 GiB are written"),
+    ("pax*.value-not-utf8.comment", "accept",
+     "a comment is ignored, so a reader need not decode it to check its encoding"),
     ("pax.newline-in-value.SCHILY.xattr.*", "accept", "xattrs are not extracted"),
     ("pax.newline-in-value.LIBARCHIVE.xattr.*", "accept", "xattrs are not extracted"),
 ]
@@ -268,19 +280,36 @@ def may_have_25bfa32e6e71(r):
         may |= {"pax.size-leading-zero", "pax.size-too-large"}
     if any("x" in s and ("L" in s or "K" in s) for s in fingerprint.get("extended_sequence", {})):
         may.add("extended.gnu-long-and-pax")
+    return may | may_have_7078a34ab512(r)
+
+
+def may_have_7078a34ab512(r):
+    """The features of UNREPORTED that a tarball that version 7078a34ab512, or an earlier one,
+    scanned may have: pax headers after a v7 header if it has both, and a link target that is not
+    UTF-8 if it has links, as no version recorded the bytes of link targets."""
+    fingerprint, kinds = r.get("fingerprint", {}), r.get("kinds", {})
+    may = set()
+    pax = any(t in s for s in fingerprint.get("extended_sequence", {}) for t in "xX")
+    if fingerprint.get("magic", {}).get("v7") and (pax or fingerprint.get("pax_global_keys")):
+        may.add("format.pax-after-v7")
+    if kinds.get("symlink") or kinds.get("hardlink"):
+        may.add("linkname.not-utf8")
     return may
 
 
 # Versions of tarscan.py that did not report some features: (those features, and a function of a
 # tarball that version scanned to the ones it may have). A tarball that may have none of them is
 # measured for them all the same; the others are not, until they are scanned again.
+LATER = ["format.pax-after-v7", "linkname.not-utf8"]
 UNREPORTED = {
     "25bfa32e6e71": (
         ["pax.empty-value.*", "pax-global.empty-value.*", "pax.value-not-utf8.*",
          "pax-global.value-not-utf8.*", "pax.size-leading-zero", "pax.size-too-large",
-         "extended.gnu-long-and-pax", "number.*.base256-too-large"],
+         "extended.gnu-long-and-pax", "number.*.base256-too-large"] + LATER,
         may_have_25bfa32e6e71,
     ),
+    "5b9b83abac66": (LATER, may_have_7078a34ab512),
+    "7078a34ab512": (LATER, may_have_7078a34ab512),
 }
 
 
