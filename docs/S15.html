@@ -22,7 +22,7 @@
 </head>
 <body>
 <a class="draft" href="index.html#policy">Working draft</a>
-<nav class="wide"><a class="prev" href="S14.html" rel="prev" title="S14 tree-symlink-then-dir">‹ S14 tree-symlink-then-dir</a><a href="index.html">tar-minefield</a><a class="next" href="S16.html" rel="next" title="S16 hardlink-target-spelled-differently">S16 hardlink-target-spelled-differently ›</a></nav>
+<nav class="wide"><a class="prev" href="S14.html" rel="prev" title="S14 tree-symlink-then-dir">‹ S14 tree-symlink-then-dir</a><a href="index.html">tar-minefield</a><a class="next" href="gnu-tar.html" rel="next" title="GNU tar">GNU tar ›</a></nav>
 <h1><code>S15</code> tree-file-then-hardlink</h1>
 <p>A file, then a hard link of the same name to another file.</p>
 <div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has the files <code>a</code> and <code>b</code>, then a hard link <code>a</code> to <code>b</code>.</p>
-<p>In POSIX, a hard link that cannot be created is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=it%20shall%20be%20an%20error%20if%20these%20files%20cannot%20be%20linked%20when%20the%20archive%20is%20extracted">an error</a>, and existing files are <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">overwritten</a> unless the options forbid it, but POSIX does not say whether a link replaces a file of its name. This case is ambiguous because <code>a</code> is replaced by a link to <code>b</code>, or keeps its own contents, with an error for the link.</p>
+<p>The hard link <code>a</code> either replaces the file <code>a</code>, as existing files are <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">overwritten</a> by default, so that <code>a</code> becomes a link to <code>b</code>, or results in a failure, as a link <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=it%20shall%20be%20an%20error%20if%20these%20files%20cannot%20be%20linked%20when%20the%20archive%20is%20extracted">cannot be created</a> where a file already is, and <code>a</code> keeps its own contents.</p>
 <p><strong>Decision point:</strong> whether a hard link replaces an existing file of its name.</p>
 <p><strong>Seen in:</strong> 27 tarballs have a file, then a hard link of the same name, such as xscreensaver 6.12 and atari++ 1.85, but each links to itself; none links to another file.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -54,10 +54,9 @@ A file, then a hard link of the same name to another file.
 
 The archive has the files `a` and `b`, then a hard link `a` to `b`.
 
-In POSIX, a hard link that cannot be created is an error, and existing files are
-overwritten unless the options forbid it, but POSIX does not say whether a link
-replaces a file of its name. This case is ambiguous because `a` is replaced by a link to `b`, or
-keeps its own contents, with an error for the link.
+The hard link `a` either replaces the file `a`, as existing files are overwritten by
+default, so that `a` becomes a link to `b`, or results in a failure, as a link cannot be
+created where a file already is, and `a` keeps its own contents.
 
 Decision point: whether a hard link replaces an existing file of its name.
 Seen in: 27 tarballs have a file, then a hard link of the same name, such as xscreensaver 6.12 and

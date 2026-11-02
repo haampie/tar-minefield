@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GNU tar · Tar file extraction test suite</title>
-<meta name="description" content="The 57 of 101 cases of the tar-minefield test suite where GNU tar does not follow the draft default policy, and what it makes of them.">
+<meta name="description" content="The 56 of 101 cases of the tar-minefield test suite where GNU tar does not follow the draft default policy, and what it makes of them.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="GNU tar · Tar file extraction test suite">
-<meta property="og:description" content="The 57 of 101 cases of the tar-minefield test suite where GNU tar does not follow the draft default policy, and what it makes of them.">
+<meta property="og:description" content="The 56 of 101 cases of the tar-minefield test suite where GNU tar does not follow the draft default policy, and what it makes of them.">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/gnu-tar.html">
 <meta property="og:url" content="https://stoppels.ch/tar/gnu-tar.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/42a56d8edabb069e.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/be1a5b1f9c7b07b9.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of every case of the test suite">
@@ -22,22 +22,22 @@
 </head>
 <body>
 <a class="draft" href="index.html#policy">Working draft</a>
-<nav class="wide"><a class="prev" href="S16.html" rel="prev" title="S16 hardlink-target-spelled-differently">‹ S16 hardlink-target-spelled-differently</a><a href="index.html">tar-minefield</a><a class="next" href="bsdtar.html" rel="next" title="bsdtar">bsdtar ›</a></nav>
+<nav class="wide"><a class="prev" href="S15.html" rel="prev" title="S15 tree-file-then-hardlink">‹ S15 tree-file-then-hardlink</a><a href="index.html">tar-minefield</a><a class="next" href="bsdtar.html" rel="next" title="bsdtar">bsdtar ›</a></nav>
 <h1>GNU tar</h1>
 <dl class="wide">
 <dt>Version</dt><dd>tar (GNU tar) 1.35</dd>
 
 </dl>
-<p>This implementation follows the <a href="index.html#policy">default policy</a> in 44 of 101 cases:</p>
+<p>This implementation follows the <a href="index.html#policy">default policy</a> in 45 of 101 cases:</p>
 <ul>
-<li>it rejects 21 of the 78 cases to reject</li>
+<li>it rejects 21 of the 77 cases to reject</li>
 <li>it extracts the expected tree in all 11 cases to accept</li>
-<li>it accepts all 12 tolerated cases</li>
+<li>it accepts all 13 tolerated cases</li>
 </ul>
 <p class="note">The default policy is a working draft. Where an implementation does not do as it
 says, that can be a choice rather than a bug.</p>
-<p>On the other 57, it does not:</p>
-<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (57)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
+<p>On the other 56, it does not:</p>
+<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (56)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
 <tr><td><a href="F03.html"><code>F03</code></a> end-lone-zero-block</td><td>An end-of-archive marker of one zero block, not two.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F06.html"><code>F06</code></a> checksum-signed</td><td>A checksum that only matches as the signed sum of the header.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
@@ -94,8 +94,7 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="S09.html"><code>S09</code></a> tree-duplicate-file-identical</td><td>The same file twice, with the same contents.</td><td>extracts <code>a</code> (5 B, a6328afc)</td></tr>
 <tr><td><a href="S10.html"><code>S10</code></a> tree-symlink-then-file</td><td>A symlink, then a file of the same name: replace the link, or write through it?</td><td>extracts <code>a</code> (28 B, d5a04bbb)</td></tr>
 <tr><td><a href="S14.html"><code>S14</code></a> tree-symlink-then-dir</td><td>A symlink to a directory, then a directory of the same name.</td><td>extracts <code>a/</code>, <code>target/</code></td></tr>
-<tr><td><a href="S15.html"><code>S15</code></a> tree-file-then-hardlink</td><td>A file, then a hard link of the same name to another file.</td><td>extracts <code>a</code> (2 B, 02638299), <code>b</code> (2 B, 02638299)</td></tr>
-<tr><td><a href="S16.html"><code>S16</code></a> hardlink-target-spelled-differently</td><td>A hard link to <code>./a</code>, where the member is named <code>a</code>.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>h</code> (2 B, 87428fc5)</td></tr></table></div>
+<tr><td><a href="S15.html"><code>S15</code></a> tree-file-then-hardlink</td><td>A file, then a hard link of the same name to another file.</td><td>extracts <code>a</code> (2 B, 02638299), <code>b</code> (2 B, 02638299)</td></tr></table></div>
 
 <hr class="wide">
 <footer class="wide">Last updated <time datetime="2026-11-02">2026-11-02</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>

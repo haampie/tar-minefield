@@ -65,6 +65,7 @@ extracted by every implementation.
 | [N06](https://stoppels.ch/tar/N06.html) name-leading-dot-slash | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
 | [N07](https://stoppels.ch/tar/N07.html) symlink-absolute | ➕ | ➕ | ➕ | ❌A | ➖ | ➕ | ➕ | ❌B | ➖ | ➖ | ❌C | ➖ | ❌C | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➖ | ➖ | ➕ | ➕ | ➕ |
 | [N15](https://stoppels.ch/tar/N15.html) name-control-character | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
+| [S16](https://stoppels.ch/tar/S16.html) hardlink-target-spelled-differently | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ❌B | ➕ | ➕ | ➕ | ➕ | ➖ | ❌B |
 | **to reject: framing** | | | | | | | | | | | | | | | | | | | | | | | | |
 | [F03](https://stoppels.ch/tar/F03.html) end-lone-zero-block | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A |
 | [F06](https://stoppels.ch/tar/F06.html) checksum-signed | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A |
@@ -146,8 +147,7 @@ extracted by every implementation.
 | [S13](https://stoppels.ch/tar/S13.html) hardlink-empty-target | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️ | ✅ | ✅ | ⚠️ | ✅ | ⚠️B |
 | [S14](https://stoppels.ch/tar/S14.html) tree-symlink-then-dir | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️C | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️B |
 | [S15](https://stoppels.ch/tar/S15.html) tree-file-then-hardlink | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️C |
-| [S16](https://stoppels.ch/tar/S16.html) hardlink-target-spelled-differently | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️C |
-| **total** | ✅32 ➕12 ⚠️57 | ✅34 ➕12 ⚠️55 | ✅22 ➕11 ⚠️67 ❌1 | ✅24 ➕10 ➖1 ⚠️65 ❌1 | ✅30 ➕11 ➖1 ⚠️59 | ✅28 ➕12 ⚠️61 | ✅26 ➕12 ⚠️60 💥3 | ✅16 ➕11 ⚠️72 ❌2 | ✅30 ➕11 ➖1 ⚠️58 ❌1 | ✅34 ➕10 ➖2 ⚠️55 | ✅26 ➕11 ⚠️61 ❌3 | ✅55 ➕10 ➖2 ⚠️33 ❌1 | ✅22 ➕9 ➖1 ⚠️64 ❌5 | ✅32 ➕12 ⚠️57 | ✅30 ➕12 ⚠️59 | ✅40 ➕11 ➖1 ⚠️49 | ✅73 ➕5 ➖7 ⚠️16 | ✅24 ➕9 ➖2 ⚠️61 ❌5 | ✅23 ➕12 ⚠️65 ❌1 | ✅23 ➕10 ➖1 ⚠️63 ❌4 | ✅36 ➕7 ➖4 ⚠️51 ❌3 | ✅49 ➕12 ⚠️40 | ✅23 ➕8 ➖1 ⚠️54 ❌12 💥3 | ✅11 ➕8 ➖1 ⚠️66 ❌12 💥3 |
+| **total** | ✅32 ➕13 ⚠️56 | ✅34 ➕13 ⚠️54 | ✅22 ➕12 ⚠️66 ❌1 | ✅24 ➕11 ➖1 ⚠️64 ❌1 | ✅30 ➕12 ➖1 ⚠️58 | ✅28 ➕13 ⚠️60 | ✅26 ➕13 ⚠️59 💥3 | ✅16 ➕12 ⚠️71 ❌2 | ✅30 ➕12 ➖1 ⚠️57 ❌1 | ✅34 ➕11 ➖2 ⚠️54 | ✅26 ➕11 ⚠️60 ❌4 | ✅55 ➕11 ➖2 ⚠️32 ❌1 | ✅21 ➕9 ➖2 ⚠️64 ❌5 | ✅32 ➕13 ⚠️56 | ✅30 ➕13 ⚠️58 | ✅40 ➕12 ➖1 ⚠️48 | ✅73 ➕6 ➖7 ⚠️15 | ✅24 ➕9 ➖2 ⚠️60 ❌6 | ✅23 ➕13 ⚠️64 ❌1 | ✅23 ➕11 ➖1 ⚠️62 ❌4 | ✅36 ➕8 ➖4 ⚠️50 ❌3 | ✅49 ➕13 ⚠️39 | ✅22 ➕8 ➖2 ⚠️54 ❌12 💥3 | ✅11 ➕8 ➖1 ⚠️65 ❌13 💥3 |
 
 ## Trees
 
@@ -166,6 +166,7 @@ What the implementations that accept a case extract, where it is not the expecte
 - F18 pax-global-comment-after-members: A: `a` (2 B, 87428fc5), `b` (2 B, 02638299), `pax_global_header` (19 B, 89c2f7ac)
 - F42 pax-comment-not-utf8: A: `PaxHeader` (14 B, eeb3db03), `a` (2 B, 87428fc5)
 - N07 symlink-absolute: A: `link` → `DEST/tar-minefield-nonexistent`; B: `link` → `tar-minefield-nonexistent`; C: `link` (0 B, e3b0c442)
+- S16 hardlink-target-spelled-differently: A: `a` (2 B, 87428fc5), `h` (0 B, e3b0c442); B: `a` (2 B, 87428fc5)
 - F03 end-lone-zero-block: A: `a` (2 B, 87428fc5)
 - F06 checksum-signed: A: `a` (2 B, 87428fc5)
 - F07 end-archive-after: A: `a` (2 B, 87428fc5); B: `a` (2 B, 87428fc5), `hidden` (57 B, 150e5c88)
@@ -242,4 +243,3 @@ What the implementations that accept a case extract, where it is not the expecte
 - S13 hardlink-empty-target: A: `a` (2 B, 87428fc5), `link` (0 B, e3b0c442); B: `a` (2 B, 87428fc5)
 - S14 tree-symlink-then-dir: A: `a/`, `target/`; B: `a` → `target`, `target/`; C: nothing
 - S15 tree-file-then-hardlink: A: `a` (2 B, 02638299), `b` (2 B, 02638299); B: `a` (0 B, e3b0c442), `b` (2 B, 02638299); C: `a` (2 B, 87428fc5), `b` (2 B, 02638299)
-- S16 hardlink-target-spelled-differently: A: `a` (2 B, 87428fc5), `h` (2 B, 87428fc5); B: `a` (2 B, 87428fc5), `h` (0 B, e3b0c442); C: `a` (2 B, 87428fc5)
