@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/seen-in.html">
 <meta property="og:url" content="https://stoppels.ch/tar/seen-in.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/f6acdc7ccd199e35.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/782d2f5e188c6a66.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of every case of the test suite">
@@ -35,11 +35,11 @@ one reason is listed under each.</p>
 <div class="wide"><table class="reasons"><colgroup><col style="width: 80%"><col style="width: 20%"></colgroup><tr><th>why</th><th class=n>tarballs</th></tr>
 <tr><td><a href="#why-tree-duplicate-file-file">the same file twice</a> (<a href="S07.html">S07</a>, <a href="S09.html">S09</a>)</td><td class=n>87</td></tr>
 <tr><td><a href="#why-hardlink-to-itself">a hardlink to itself</a> (<a href="S04.html">S04</a>)</td><td class=n>27</td></tr>
-<tr><td><a href="#why-tree-duplicate-file-hardlink">one path as two members</a></td><td class=n>27</td></tr>
+<tr><td><a href="#why-tree-duplicate-file-hardlink">one path as two members</a> (<a href="S15.html">S15</a>)</td><td class=n>27</td></tr>
 <tr><td><a href="#why-pax-size-on-dir">a pax size on a member without data</a> (<a href="F15.html">F15</a>)</td><td class=n>9</td></tr>
 <tr><td><a href="#why-end-zero-block-before-member">a zero block, then more members</a> (<a href="F09.html">F09</a>)</td><td class=n>7</td></tr>
 <tr><td><a href="#why-scan-error">an archive that could not be read past a header</a></td><td class=n>7</td></tr>
-<tr><td><a href="#why-name-trailing-slash-on-file">a regular file named like a directory, <code>a/</code></a> (<a href="K01.html">K01</a>)</td><td class=n>7</td></tr>
+<tr><td><a href="#why-name-trailing-slash-on-file">a regular file named like a directory, <code>a/</code></a> (<a href="K01.html">K01</a>, <a href="K04.html">K04</a>)</td><td class=n>7</td></tr>
 <tr><td><a href="#why-name-backslash">a backslash, <code>\</code>, which is a separator on Windows</a> (<a href="N13.html">N13</a>)</td><td class=n>7</td></tr>
 <tr><td><a href="#why-tree-under-file">a member under a file</a> (<a href="S12.html">S12</a>)</td><td class=n>5</td></tr>
 <tr><td><a href="#why-end-lone-zero-block">an end-of-archive marker of one zero block, not two</a> (<a href="F03.html">F03</a>)</td><td class=n>5</td></tr>
@@ -47,8 +47,8 @@ one reason is listed under each.</p>
 <tr><td><a href="#why-name-dotdot">a name with <code>..</code></a> (<a href="N16.html">N16</a>)</td><td class=n>4</td></tr>
 <tr><td><a href="#why-name-absolute">an absolute name</a> (<a href="N12.html">N12</a>)</td><td class=n>3</td></tr>
 <tr><td><a href="#why-name-not-utf8">a name that is not UTF-8</a> (<a href="N18.html">N18</a>)</td><td class=n>2</td></tr>
-<tr><td><a href="#why-format-star">star&#x27;s prefix field</a> (<a href="N10.html">N10</a>)</td><td class=n>2</td></tr>
-<tr><td><a href="#why-symlink-escapes">a symlink that points out of the archive</a></td><td class=n>2</td></tr>
+<tr><td><a href="#why-format-star">star&#x27;s prefix field</a> (<a href="N10.html">N10</a>, <a href="N34.html">N34</a>)</td><td class=n>2</td></tr>
+<tr><td><a href="#why-symlink-escapes">a symlink that points out of the archive</a> (<a href="N36.html">N36</a>)</td><td class=n>2</td></tr>
 <tr><td><a href="#why-linkname-on-dir">a link target on a member that is not a link</a> (<a href="K02.html">K02</a>)</td><td class=n>1</td></tr>
 <tr><td><a href="#why-pax-key-in-two-headers-libarchive-xattr">a pax key in two extended headers of one member</a></td><td class=n>1</td></tr>
 <tr><td><a href="#why-pax-repeated-key">a pax key twice in one extended header</a> (<a href="N20.html">N20</a>)</td><td class=n>1</td></tr>
@@ -171,7 +171,7 @@ one reason is listed under each.</p>
 <tr><td><a href="https://developer.download.nvidia.com/compute/redist/cudnn/v8.1.0/cudnn-11.2-linux-x64-v8.1.0.77.tgz" rel="nofollow">cudnn 8.1.0.77-11.2</a><span class="hash">sha256 <code>dbe82faf071d91ba9bcf00480146ad33f462482dfee56caf4479c1b8dabe3ecb</code></span></td><td>Spack</td><td><code>cuda/lib64/libcudnn_static.a</code><br>also: <a href="#why-tree-duplicate-file-hardlink">one path as two members</a></td></tr>
 <tr><td><a href="https://www.haskell.org/ghc/dist/7.8.4/ghc-7.8.4-x86_64-unknown-linux-deb7.tar.xz" rel="nofollow">ghc 7.8.4-x86_64-unknown-linux-deb7</a><span class="hash">sha256 <code>f62e00e93a5ac16ebfe97cd7cb8cde6c6f3156073d4918620542be3e0ad55f8d</code></span></td><td>Guix</td><td><code>ghc-7.8.4/utils/haddock/dist/build/tmp/haddock</code><br>also: <a href="#why-tree-duplicate-file-hardlink">one path as two members</a></td></tr>
 <tr><td><a href="https://www.jwz.org/xscreensaver/xscreensaver-6.12.tar.gz" rel="nofollow">xscreensaver 6.12</a><span class="hash">sha256 <code>4ff6798217e3bbbc3c7336beeda7e83eafbf03301ac29b2236da66a0f1317643</code></span></td><td>Guix</td><td><code>xscreensaver-6.12/driver/wayland-dpy.c</code><br>also: <a href="#why-tree-duplicate-file-hardlink">one path as two members</a></td></tr></table></div>
-<h3 id="why-tree-duplicate-file-hardlink">One path as two members: 27<a class="anchor" href="#why-tree-duplicate-file-hardlink" aria-label="Link to this section">¶</a></h3>
+<h3 id="why-tree-duplicate-file-hardlink"><span id="S15"></span>One path as two members (<a href="S15.html">S15</a>): 27<a class="anchor" href="#why-tree-duplicate-file-hardlink" aria-label="Link to this section">¶</a></h3>
 <div class="wide"><table class="seen"><colgroup><col style="width: 55%"><col style="width: 12%"><col style="width: 33%"></colgroup><tr><th>tarball</th><th>packaged by</th><th>example from the tarball</th></tr>
 <tr><td><a href="https://downloads.sourceforge.net/project/antimony/Antimony%20source/2.2/antimony_src_v2.2.tar.gz" rel="nofollow">antimony 2.2</a><span class="hash">sha256 <code>795c777dd90c28fd8c3f4f8896702744b7389cff2fcf40e797b4bfafbb6f7251</code></span></td><td>Spack</td><td><code>antimony/src/testantimony.cpp</code><br>also: <a href="#why-hardlink-to-itself">a hardlink to itself</a></td></tr>
 <tr><td><a href="https://downloads.sourceforge.net/project/antimony/Antimony%20source/2.4/antimony_src_v2.4.tar.gz" rel="nofollow">antimony 2.4</a><span class="hash">sha256 <code>1597efa823f9a48f5a40373cbd40386207764807fbc0b79cf20d0f8570a7e54b</code></span></td><td>Spack</td><td><code>antimony/src/testantimony.cpp</code><br>also: <a href="#why-hardlink-to-itself">a hardlink to itself</a></td></tr>
@@ -229,7 +229,7 @@ one reason is listed under each.</p>
 <tr><td><a href="https://archive.apache.org/dist/commons/logging/binaries/commons-logging-1.1.1-bin.tar.gz" rel="nofollow">commons-logging 1.1.1</a><span class="hash">sha256 <code>88c721d66f570a87f710a2449f0e3bffea86489d9dd2fa70b805104c4f8d69e6</code></span></td><td>Spack</td><td><br>also: <a href="#why-end-zero-block-before-member">a zero block, then more members</a></td></tr>
 <tr><td><a href="https://dlcdn.apache.org/jakarta/oro/jakarta-oro-2.0.8.tar.gz" rel="nofollow">jakarta-oro 2.0.8</a><span class="hash">sha256 <code>4c4f3c7c479994c3ce09f542d4fbdc03eed58a2d7f320d32f2baf238b5b6f566</code></span></td><td>Guix</td><td><br>also: <a href="#why-end-zero-block-before-member">a zero block, then more members</a></td></tr>
 <tr><td><a href="https://ftp.fau.de/gentoo/distfiles/PullParser2.1.10.tgz" rel="nofollow">PullParser 2.1.10</a><span class="hash">sha256 <code>ad82569b809e29c19b8223feaa12923f97bb4bbc942ff985857f9d853db489cf</code></span></td><td>Guix</td><td><br>also: <a href="#why-end-zero-block-before-member">a zero block, then more members</a></td></tr></table></div>
-<h3 id="why-name-trailing-slash-on-file"><span id="K01"></span>A regular file named like a directory, <code>a/</code> (<a href="K01.html">K01</a>): 7<a class="anchor" href="#why-name-trailing-slash-on-file" aria-label="Link to this section">¶</a></h3>
+<h3 id="why-name-trailing-slash-on-file"><span id="K01"></span><span id="K04"></span>A regular file named like a directory, <code>a/</code> (<a href="K01.html">K01</a>, <a href="K04.html">K04</a>): 7<a class="anchor" href="#why-name-trailing-slash-on-file" aria-label="Link to this section">¶</a></h3>
 <div class="wide"><table class="seen"><colgroup><col style="width: 55%"><col style="width: 12%"><col style="width: 33%"></colgroup><tr><th>tarball</th><th>packaged by</th><th>example from the tarball</th></tr>
 <tr><td><a href="https://www.cs.mcgill.ca/~fukuda/download/cdd/cdd-061a.tar.gz" rel="nofollow">cdd 0.61a</a><span class="hash">sha256 <code>637a1909bbd8aa4d32667da08f9e9ac687bf7d3ef1b8af5bd227e91a3cd4019b</code></span></td><td>Spack</td><td><code>cdd-061/</code><br>also: <a href="#why-tree-under-file">a member under a file</a></td></tr>
 <tr><td><a href="https://rubygems.org/gems/JEG2-rrdb-0.0.2.gem" rel="nofollow">JEG2-rrdb 0.0.2</a><span class="hash">sha256 <code>3274c49410c604d880caa67f34a7ae81e60db2f9c8084c68469bf3418c0f1f51</code></span></td><td>RubyGems</td><td><code>lib/</code></td></tr>
@@ -283,11 +283,11 @@ one reason is listed under each.</p>
 <div class="wide"><table class="seen"><colgroup><col style="width: 55%"><col style="width: 12%"><col style="width: 33%"></colgroup><tr><th>tarball</th><th>packaged by</th><th>example from the tarball</th></tr>
 <tr><td><a href="https://ftpmirror.gnu.org/aspell/dict/is/aspell-is-0.51.1-0.tar.bz2" rel="nofollow">aspell-is 0.51.1-0</a><span class="hash">sha256 <code>3035bd29dad929ce66e6acdc7c29670df458e0d13fe178241b212f481111e3d6</code></span></td><td>nixpkgs</td><td><code>aspell-is-0.51.1-0/\xedslenska.alias</code></td></tr>
 <tr><td><a href="https://ftpmirror.gnu.org/aspell/dict/nb/aspell-nb-0.50.1-0.tar.bz2" rel="nofollow">aspell-nb 0.50.1-0</a><span class="hash">sha256 <code>e7746e8b617b2df576c1172399544818084524504202b16c747f52db5e5d228a</code></span></td><td>nixpkgs</td><td><code>aspell-nb-0.50.1-0/bokm\xe5l.alias</code></td></tr></table></div>
-<h3 id="why-format-star"><span id="N10"></span>Star&#x27;s prefix field (<a href="N10.html">N10</a>): 2<a class="anchor" href="#why-format-star" aria-label="Link to this section">¶</a></h3>
+<h3 id="why-format-star"><span id="N10"></span><span id="N34"></span>Star&#x27;s prefix field (<a href="N10.html">N10</a>, <a href="N34.html">N34</a>): 2<a class="anchor" href="#why-format-star" aria-label="Link to this section">¶</a></h3>
 <div class="wide"><table class="seen"><colgroup><col style="width: 55%"><col style="width: 12%"><col style="width: 33%"></colgroup><tr><th>tarball</th><th>packaged by</th><th>example from the tarball</th></tr>
 <tr><td><a href="https://download.oracle.com/berkeley-db/db-18.1.40.tar.gz" rel="nofollow">berkeley-db 18.1.40</a><span class="hash">sha256 <code>0cecb2ef0c67b166de93732769abdeba0555086d51de1090df325e18ee8da9c8</code></span></td><td>Spack</td><td><code>db-18.1.40/</code></td></tr>
 <tr><td><a href="https://ftpmirror.gnu.org/ncurses/ncurses-5.9.tar.gz" rel="nofollow">ncurses 5.9</a><span class="hash">sha256 <code>9046298fb440324c9d4135ecea7879ffed8546dd1b58e59430ea07a4633f563b</code></span></td><td>Spack</td><td><code>ncurses-5.9/</code></td></tr></table></div>
-<h3 id="why-symlink-escapes">A symlink that points out of the archive: 2<a class="anchor" href="#why-symlink-escapes" aria-label="Link to this section">¶</a></h3>
+<h3 id="why-symlink-escapes"><span id="N36"></span>A symlink that points out of the archive (<a href="N36.html">N36</a>): 2<a class="anchor" href="#why-symlink-escapes" aria-label="Link to this section">¶</a></h3>
 <div class="wide"><table class="seen"><colgroup><col style="width: 55%"><col style="width: 12%"><col style="width: 33%"></colgroup><tr><th>tarball</th><th>packaged by</th><th>example from the tarball</th></tr>
 <tr><td><a href="https://files.pythonhosted.org/packages/81/39/b77545058ab699b9d88667842a2cfaf8b783dee84d495e5447e27aefb259/proteomics_runtime-0.3.8.tar.gz" rel="nofollow">proteomics-runtime 0.3.8</a><span class="hash">sha256 <code>6a479524573ec88d966e051155768624abc3190de3a40855db9e5001ca984c8a</code></span></td><td>PyPI</td><td><code>proteomics_runtime-0.3.8/LICENSE</code></td></tr>
 <tr><td><a href="https://files.pythonhosted.org/packages/27/ac/afd099bc8f2ac127b84146a4669cc7c634f4867829a3bf7b02b3202f7a42/snowpark_checkpoints-0.1.0rc1.tar.gz" rel="nofollow">snowpark-checkpoints 0.1.0rc1</a><span class="hash">sha256 <code>bec39e4e021ae8ff8fec6340f3801cb0a7b95a615bfd8742f51b8c7e4cbdfb59</code></span></td><td>PyPI</td><td><code>snowpark_checkpoints-0.1.0rc1/snowflake/snowpark_checkpoints_collector/utils/telemetry.py</code></td></tr></table></div>
@@ -479,6 +479,6 @@ as random, and the same on every run.</p>
 <tr><td><a href="https://github.com/NOAA-EMC/wgrib2/archive/refs/tags/v3.8.0.tar.gz" rel="nofollow">wgrib2 3.8.0</a><span class="hash">sha256 <code>39faebada36da5457c75f0980bb68fa299b221b3e6b335bb7d29006a35830c54</code></span></td><td>Spack</td><td><code>wgrib2-3.8.0/docs/web_docs/jj\x7f\x7f\x7f</code></td></tr></table></div>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-10-29">2026-10-29</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-02">2026-11-02</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>
