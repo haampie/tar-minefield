@@ -1,7 +1,7 @@
 {
  "id": "S13",
  "verdict": "reject",
- "description": "A hardlink with an empty target.",
+ "description": "A hard link with an empty target.",
  "features": [
   "hardlink.missing-target"
  ]

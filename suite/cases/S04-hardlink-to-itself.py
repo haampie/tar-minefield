@@ -1,8 +1,8 @@
-"""A hardlink to itself.
+"""A hard link to itself.
 
-The archive has a file `a`, then a hardlink `a` to `a`.
+The archive has a file `a`, then a hard link `a` to `a`.
 
-In [POSIX][same-entry], extracting a hardlink to the same directory entry is an error. Read
+In [POSIX][same-entry], extracting a hard link to the same directory entry is an error. Read
 leniently, this case is ambiguous because the link either replaces `a`, which then has nothing to
 link to, or leaves it as it is.
 

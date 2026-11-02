@@ -1,7 +1,7 @@
 {
  "id": "S04",
  "verdict": "reject",
- "description": "A hardlink to itself.",
+ "description": "A hard link to itself.",
  "features": [
   "hardlink.to-itself"
  ]
