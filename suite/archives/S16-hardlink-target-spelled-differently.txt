@@ -1,4 +1,4 @@
-S16-hardlink-target-spelled-differently: must reject
+S16-hardlink-target-spelled-differently: tolerated: a strict parser may reject it; if it accepts it, it must extract its tree, and the default policy accepts it
 
 A hard link to `./a`, where the member is named `a`.
 

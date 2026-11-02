@@ -12,9 +12,12 @@ Seen in: none of the scanned tarballs.
 See also: S03, a hard link to a member that is not in the archive.
 """
 
-VERDICT = "reject"
+F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}
+
+VERDICT = "tolerate"
 ID = "S16"
 FEATURES = ["hardlink.target-spelled-differently"]
+TREE = [F("a", b"a\n"), F("h", b"a\n")]
 
 
 def build(a):
