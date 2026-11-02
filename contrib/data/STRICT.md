@@ -80,6 +80,7 @@ The strict criteria that the default policy lets through, and how; it rejects al
 | `name.control-character` | accept | created as it is: every implementation reads the name alike, and the risk is in its use | 11 |
 | `number.*.leading-space` | accept | octal padded with spaces, not zeros, which implementations read alike | 819 |
 | `pax.size-disagrees` | accept | the pax size frames the member, as POSIX says: it is how sizes over 8 GiB are written | 0 |
+| `pax.value-not-utf8.comment` | accept | a comment is ignored, so a reader need not decode it to check its encoding | 0 |
 | `pax.newline-in-value.SCHILY.xattr.*` | accept | xattrs are not extracted | 12 |
 | `pax.newline-in-value.LIBARCHIVE.xattr.*` | accept | xattrs are not extracted | 0 |
 

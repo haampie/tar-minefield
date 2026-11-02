@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Python tarfile, filter=data, as in pip · Tar file extraction test suite</title>
-<meta name="description" content="The 61 of 102 cases of the tar-minefield test suite where Python tarfile, filter=data, as in pip, does not follow the draft default policy, and what it makes of them.">
+<meta name="description" content="The 60 of 102 cases of the tar-minefield test suite where Python tarfile, filter=data, as in pip, does not follow the draft default policy, and what it makes of them.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="Python tarfile, filter=data, as in pip · Tar file extraction test suite">
-<meta property="og:description" content="The 61 of 102 cases of the tar-minefield test suite where Python tarfile, filter=data, as in pip, does not follow the draft default policy, and what it makes of them.">
+<meta property="og:description" content="The 60 of 102 cases of the tar-minefield test suite where Python tarfile, filter=data, as in pip, does not follow the draft default policy, and what it makes of them.">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/tarfile-data.html">
 <meta property="og:url" content="https://stoppels.ch/tar/tarfile-data.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/782d2f5e188c6a66.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/d3adbcbe10a5f749.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of every case of the test suite">
@@ -28,16 +28,16 @@
 <dt>Version</dt><dd>CPython 3.15.2</dd>
 <dt>Other configurations</dt><dd><ul><li><a href="tarfile-tar.html">Python tarfile, filter=tar</a></li><li><a href="tarfile-trusted.html">Python tarfile, filter=fully_trusted</a></li></ul></dd>
 </dl>
-<p>This implementation follows the <a href="index.html#policy">default policy</a> in 41 of 102 cases:</p>
+<p>This implementation follows the <a href="index.html#policy">default policy</a> in 42 of 102 cases:</p>
 <ul>
-<li>it rejects 19 of the 80 cases to reject</li>
+<li>it rejects 19 of the 79 cases to reject</li>
 <li>it extracts the expected tree in all 11 cases to accept</li>
-<li>it accepts 10 and rejects 1 of the 11 tolerated cases</li>
+<li>it accepts 11 and rejects 1 of the 12 tolerated cases</li>
 </ul>
 <p class="note">The default policy is a working draft. Where an implementation does not do as it
 says, that can be a choice rather than a bug.</p>
-<p>On the other 61, it does not:</p>
-<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (61)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
+<p>On the other 60, it does not:</p>
+<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (60)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
 <tr><td><a href="F03.html"><code>F03</code></a> end-lone-zero-block</td><td>An end-of-archive marker of one zero block, not two.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F06.html"><code>F06</code></a> checksum-signed</td><td>A checksum that only matches as the signed sum of the header.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
@@ -62,7 +62,6 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="F39.html"><code>F39</code></a> format-pax-after-v7</td><td>A v7 header first, then a member with a pax header: is the <code>x</code> header a header, or a file?</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>from-pax</code> (12 B, a578eb49)</td></tr>
 <tr><td><a href="F40.html"><code>F40</code></a> number-size-no-terminator</td><td>A size of 12 octal digits, without a terminator.</td><td>extracts <code>a</code> (10 B, 84d89877)</td></tr>
 <tr><td><a href="F41.html"><code>F41</code></a> number-size-leading-nul</td><td>A size with a NUL before its digits, which takes the next header for its data.</td><td>extracts <code>a</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
-<tr><td><a href="F42.html"><code>F42</code></a> pax-comment-not-utf8</td><td>A pax <code>comment</code> that is not UTF-8.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F43.html"><code>F43</code></a> pax-global-comment-not-utf8</td><td>A global pax <code>comment</code> that is not UTF-8.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F44.html"><code>F44</code></a> pax-global-size-empty</td><td>An empty <code>size</code> in a global pax header: does it delete the size of every later member, or set it?</td><td>extracts <code>a</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="F45.html"><code>F45</code></a> type-gnu-sparse</td><td>An old GNU sparse file, typeflag <code>S</code>: the data as stored, or the file it expands to?</td><td>extracts <code>a</code> (1026 B, f93a4465)</td></tr>

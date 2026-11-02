@@ -22,7 +22,7 @@
 </head>
 <body>
 <a class="draft" href="index.html#policy">Working draft</a>
-<nav class="wide"><a class="prev" href="F40.html" rel="prev" title="F40 number-size-no-terminator">‹ F40 number-size-no-terminator</a><a href="index.html">tar-minefield</a><a class="next" href="F42.html" rel="next" title="F42 pax-comment-not-utf8">F42 pax-comment-not-utf8 ›</a></nav>
+<nav class="wide"><a class="prev" href="F40.html" rel="prev" title="F40 number-size-no-terminator">‹ F40 number-size-no-terminator</a><a href="index.html">tar-minefield</a><a class="next" href="F43.html" rel="next" title="F43 pax-global-comment-not-utf8">F43 pax-global-comment-not-utf8 ›</a></nav>
 <h1><code>F41</code> number-size-leading-nul</h1>
 <p>A size with a NUL before its digits, which takes the next header for its data.</p>
 <div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, whose size field is a NUL, followed by the digits <code>0000001000</code>, followed by a NUL, then an empty file <code>smuggled</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal numbers filled with leading zeros, and each is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20numeric%20field%20is%20terminated%20by%20one%20or%20more%20%3Cspace%3E%20or%20NUL%20characters">terminated</a> by a space or a NUL. A reader that skips the NUL in front reads 512, octal 1000, and takes the block after the header of <code>a</code> for its data; a reader that stops at the first NUL reads an empty field, as 0 or as an error. This case is ambiguous because the tree has <code>a</code> with that block as its contents, or an empty <code>a</code> and <code>smuggled</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal numbers filled with leading zeros, and each is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20numeric%20field%20is%20terminated%20by%20one%20or%20more%20%3Cspace%3E%20or%20NUL%20characters">terminated</a> by a space or a NUL. A reader that skips the NUL in front reads 512, octal 1000, and takes the block after the header of <code>a</code> for its data; a reader that stops at the first NUL reads an empty field, as 0 or as an error.</p>
 <p><strong>Decision point:</strong> whether a NUL before the digits of a size ends it.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -58,8 +58,7 @@ by a NUL, then an empty file `smuggled`.
 In POSIX, numeric fields are octal numbers filled with leading zeros, and each is
 terminated by a space or a NUL. A reader that skips the NUL in front reads 512, octal
 1000, and takes the block after the header of `a` for its data; a reader that stops at the first NUL
-reads an empty field, as 0 or as an error. This case is ambiguous because the tree has `a` with that
-block as its contents, or an empty `a` and `smuggled`.
+reads an empty field, as 0 or as an error.
 
 Decision point: whether a NUL before the digits of a size ends it.
 Seen in: none of the scanned tarballs.
