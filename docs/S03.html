@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>S03 hardlink-missing-target · Tar file extraction test suite</title>
-<meta name="description" content="A hard link to a member that is not in the archive.">
+<meta name="description" content="A hardlink to a member that is not in the archive.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="S03 hardlink-missing-target · Tar file extraction test suite">
-<meta property="og:description" content="A hard link to a member that is not in the archive.">
+<meta property="og:description" content="A hardlink to a member that is not in the archive.">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/S03.html">
 <meta property="og:url" content="https://stoppels.ch/tar/S03.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/f3dd8d640cc1b39c.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/018d04245c117fb0.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of S03 hardlink-missing-target">
@@ -24,7 +24,7 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="K04.html" rel="prev" title="K04 name-empty-with-prefix">‹ K04 name-empty-with-prefix</a><a href="index.html">tar-minefield</a><a class="next" href="S04.html" rel="next" title="S04 hardlink-to-itself">S04 hardlink-to-itself ›</a></nav>
 <h1><code>S03</code> hardlink-missing-target</h1>
-<p>A hard link to a member that is not in the archive.</p>
+<p>A hardlink to a member that is not in the archive.</p>
 <div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>order and state</dd>
@@ -39,9 +39,9 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has one member, <code>h</code>, a hard link to <code>missing</code>, which is not in the archive.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hard link is a file previously archived, which <code>missing</code> is not, and a link that cannot be made is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=it%20shall%20be%20an%20error%20if%20these%20files%20cannot%20be%20linked%20when%20the%20archive%20is%20extracted">error</a>. This case is ambiguous because the link is either an error, or, as data may also be <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=either%20the%20data%20shall%20be%20restored%20from%20the%20original%20file">restored from the original file</a>, made to a file of that name that already exists where the archive is extracted.</p>
-<p><strong>Decision point:</strong> what a hard link to nothing does.</p>
+<p>The archive has one member, <code>h</code>, a hardlink to <code>missing</code>, which is not in the archive.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file previously archived, which <code>missing</code> is not, and a link that cannot be made is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=it%20shall%20be%20an%20error%20if%20these%20files%20cannot%20be%20linked%20when%20the%20archive%20is%20extracted">error</a>. This case is ambiguous because the link is either an error, or, as data may also be <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=either%20the%20data%20shall%20be%20restored%20from%20the%20original%20file">restored from the original file</a>, made to a file of that name that already exists where the archive is extracted.</p>
+<p><strong>Decision point:</strong> what a hardlink to nothing does.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -50,16 +50,16 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>S03-hardlink-missing-target: must reject
 
-A hard link to a member that is not in the archive.
+A hardlink to a member that is not in the archive.
 
-The archive has one member, `h`, a hard link to `missing`, which is not in the archive.
+The archive has one member, `h`, a hardlink to `missing`, which is not in the archive.
 
-In POSIX, the target of a hard link is a file previously archived, which `missing` is
+In POSIX, the target of a hardlink is a file previously archived, which `missing` is
 not, and a link that cannot be made is an error. This case is ambiguous because the
 link is either an error, or, as data may also be restored from the original file, made to
 a file of that name that already exists where the archive is extracted.
 
-Decision point: what a hard link to nothing does.
+Decision point: what a hardlink to nothing does.
 Seen in: none of the scanned tarballs.
 
 0x000000  header: hardlink

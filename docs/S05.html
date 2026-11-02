@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>S05 hardlink-to-later-member · Tar file extraction test suite</title>
-<meta name="description" content="A hard link to a member that comes later.">
+<meta name="description" content="A hardlink to a member that comes later.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="S05 hardlink-to-later-member · Tar file extraction test suite">
-<meta property="og:description" content="A hard link to a member that comes later.">
+<meta property="og:description" content="A hardlink to a member that comes later.">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/S05.html">
 <meta property="og:url" content="https://stoppels.ch/tar/S05.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/860a8f38cb123aba.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/77252283eb323324.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of S05 hardlink-to-later-member">
@@ -24,7 +24,7 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="S04.html" rel="prev" title="S04 hardlink-to-itself">‹ S04 hardlink-to-itself</a><a href="index.html">tar-minefield</a><a class="next" href="S06.html" rel="next" title="S06 hardlink-to-symlink">S06 hardlink-to-symlink ›</a></nav>
 <h1><code>S05</code> hardlink-to-later-member</h1>
-<p>A hard link to a member that comes later.</p>
+<p>A hardlink to a member that comes later.</p>
 <div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>order and state</dd>
@@ -39,9 +39,9 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a hard link <code>h</code> to <code>f</code>, then the file <code>f</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hard link is a file previously archived. Read leniently, this case is ambiguous because <code>h</code> either has nothing to link to yet, or is linked to <code>f</code> once the whole archive is read.</p>
-<p><strong>Decision point:</strong> whether the target of a hard link can be a later member.</p>
+<p>The archive has a hardlink <code>h</code> to <code>f</code>, then the file <code>f</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file previously archived. Read leniently, this case is ambiguous because <code>h</code> either has nothing to link to yet, or is linked to <code>f</code> once the whole archive is read.</p>
+<p><strong>Decision point:</strong> whether the target of a hardlink can be a later member.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -50,15 +50,15 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>S05-hardlink-to-later-member: must reject
 
-A hard link to a member that comes later.
+A hardlink to a member that comes later.
 
-The archive has a hard link `h` to `f`, then the file `f`.
+The archive has a hardlink `h` to `f`, then the file `f`.
 
-In POSIX, the target of a hard link is a file previously archived. Read leniently, this
+In POSIX, the target of a hardlink is a file previously archived. Read leniently, this
 case is ambiguous because `h` either has nothing to link to yet, or is linked to `f` once the whole
 archive is read.
 
-Decision point: whether the target of a hard link can be a later member.
+Decision point: whether the target of a hardlink can be a later member.
 Seen in: none of the scanned tarballs.
 
 0x000000  header: hardlink

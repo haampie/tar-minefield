@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>S16 hardlink-target-spelled-differently · Tar file extraction test suite</title>
-<meta name="description" content="A hard link to ./a, where the member is named a.">
+<meta name="description" content="A hardlink to ./a, where the member is named a.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="S16 hardlink-target-spelled-differently · Tar file extraction test suite">
-<meta property="og:description" content="A hard link to ./a, where the member is named a.">
+<meta property="og:description" content="A hardlink to ./a, where the member is named a.">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/S16.html">
 <meta property="og:url" content="https://stoppels.ch/tar/S16.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/50e4fb0bd20aeda2.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/f631bd3fba9f91b2.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of S16 hardlink-target-spelled-differently">
@@ -24,11 +24,11 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="N15.html" rel="prev" title="N15 name-control-character">‹ N15 name-control-character</a><a href="index.html">tar-minefield</a><a class="next" href="F03.html" rel="next" title="F03 end-lone-zero-block">F03 end-lone-zero-block ›</a></nav>
 <h1><code>S16</code> hardlink-target-spelled-differently</h1>
-<p>A hard link to <code>./a</code>, where the member is named <code>a</code>.</p>
+<p>A hardlink to <code>./a</code>, where the member is named <code>a</code>.</p>
 <div class="verdict tolerate wide"><p><span class="badge">Tolerate</span><span class="badge-draft">(draft)</span> A strict parser may reject this archive. If it accepts it, it must extract the expected tree below.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>order and state</dd>
-<dt>Default policy</dt><dd>normalizes <code>hardlink.target-spelled-differently</code>: a hard link to <code>./a</code> is one to <code>a</code></dd>
+<dt>Default policy</dt><dd>normalizes <code>hardlink.target-spelled-differently</code>: a hardlink to <code>./a</code> is one to <code>a</code></dd>
 <dt>Files</dt><dd><table class="files">
 <tr><td><a href="https://github.com/haampie/tar-minefield/raw/main/suite/archives/S16-hardlink-target-spelled-differently.tar"><code>S16-hardlink-target-spelled-differently.tar</code></a></td>
 <td>test archive, 2,560 bytes
@@ -39,13 +39,13 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a file <code>a</code>, then a hard link <code>h</code> whose target is <code>./a</code>.</p>
-<p>In POSIX, a hard link represents a file linked to another file <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">previously archived</a>, and its target is in the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20linked%2Dto%20name%20is%20specified%20in%20the%20linkname%20field">linkname</a> field. POSIX does not say whether the target should be literally the name of an earlier member, or whether it can also be an equivalent path. This case is ambiguous because <code>./a</code> names the file <code>a</code>, as a path, or no member, as a name, so that <code>h</code> is a link to <code>a</code>, or an error.</p>
+<p>The archive has a file <code>a</code>, then a hardlink <code>h</code> whose target is <code>./a</code>.</p>
+<p>In POSIX, a hardlink represents a file linked to another file <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">previously archived</a>, and its target is in the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20linked%2Dto%20name%20is%20specified%20in%20the%20linkname%20field">linkname</a> field. POSIX does not say whether the target should be literally the name of an earlier member, or whether it can also be an equivalent path. This case is ambiguous because <code>./a</code> names the file <code>a</code>, as a path, or no member, as a name, so that <code>h</code> is a link to <code>a</code>, or an error.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>2 bytes, sha256 <code title="87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7">87428fc5</code></td></tr>
 <tr><td><code>h</code></td><td>file</td><td>2 bytes, sha256 <code title="87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7">87428fc5</code></td></tr></table></div>
-<p><strong>Decision point:</strong> whether the target of a hard link is a path or the name of a member.</p>
+<p><strong>Decision point:</strong> whether the target of a hardlink is a path or the name of a member.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -54,19 +54,19 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>S16-hardlink-target-spelled-differently: tolerated: a strict parser may reject it; if it accepts it, it must extract its tree, and the default policy accepts it
 
-A hard link to `./a`, where the member is named `a`.
+A hardlink to `./a`, where the member is named `a`.
 
-The archive has a file `a`, then a hard link `h` whose target is `./a`.
+The archive has a file `a`, then a hardlink `h` whose target is `./a`.
 
-In POSIX, a hard link represents a file linked to another file previously archived, and
+In POSIX, a hardlink represents a file linked to another file previously archived, and
 its target is in the linkname field. POSIX does not say whether the target should be
 literally the name of an earlier member, or whether it can also be an equivalent path. This case is
 ambiguous because `./a` names the file `a`, as a path, or no member, as a name, so that `h` is a
 link to `a`, or an error.
 
-Decision point: whether the target of a hard link is a path or the name of a member.
+Decision point: whether the target of a hardlink is a path or the name of a member.
 Seen in: none of the scanned tarballs.
-See also: S03, a hard link to a member that is not in the archive, and N06, the name `./a`.
+See also: S03, a hardlink to a member that is not in the archive, and N06, the name `./a`.
 
 0x000000  header: regular file
           name     [  0,100)  &quot;a&quot; + 99 NUL
@@ -316,7 +316,7 @@ See also: S03, a hard link to a member that is not in the archive, and N06, the 
 
 <h2 id="see-also">See also<a class="anchor" href="#see-also" aria-label="Link to this section">¶</a></h2>
 <ul>
-<li><a href="S03.html"><code>S03</code></a>: a hard link to a member that is not in the archive, and <a href="N06.html"><code>N06</code></a>, the name <code>./a</code>.</li>
+<li><a href="S03.html"><code>S03</code></a>: a hardlink to a member that is not in the archive, and <a href="N06.html"><code>N06</code></a>, the name <code>./a</code>.</li>
 </ul>
 
 <hr class="wide">

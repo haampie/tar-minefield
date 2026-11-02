@@ -72,7 +72,7 @@ The strict criteria that the default policy lets through, and how; it rejects al
 | `name.dot` | normalize | `.` is the root of the tree | 64 |
 | `name.dot-component` | normalize | `a/./b` is `a/b` | 10 |
 | `name.double-slash` | normalize | `a//b` is `a/b` | 2 |
-| `hardlink.target-spelled-differently` | normalize | a hard link to `./a` is one to `a` | 0 |
+| `hardlink.target-spelled-differently` | normalize | a hardlink to `./a` is one to `a` | 0 |
 | `symlink.absolute` | accept | created as it is: writing through a symlink is rejected | 89 |
 | `end.data-after` | accept | junk after the two zero blocks is ignored | 25 |
 | `end.missing` | accept | implementations that extract it extract the same tree | 22 |
