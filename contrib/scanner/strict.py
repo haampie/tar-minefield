@@ -79,6 +79,9 @@ STRICT = [
     ("pax.no-equals", "framing", "a pax record without `=`"),
     ("pax.empty-key", "framing", "a pax record with an empty key"),
     ("pax.empty-value.size", "framing", "an empty pax size, which in POSIX removes it"),
+    ("pax-global.empty-value.size", "framing",
+     "an empty size in a global header, which in POSIX removes the size of every later member"),
+    ("pax*.value-not-utf8.comment", "framing", "a comment that is not UTF-8"),
     ("format.pax-after-v7", "framing",
      "pax headers after a v7 header, which a reader that takes the format of the first header "
      "extracts as files"),
