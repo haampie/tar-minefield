@@ -128,9 +128,15 @@ Other criteria reject no tarball here. That is no proof that they cost nothing: 
 
 ## Not measured
 
-Of the 82,586 tarballs, 62,536 were scanned by `25bfa32e6e71`, a version of `tarscan.py` that did not report `pax.empty-value.*`, `pax-global.empty-value.*`, `pax.value-not-utf8.*`, `pax-global.value-not-utf8.*`, `pax.size-leading-zero`, `pax.size-too-large`, `extended.gnu-long-and-pax`, `number.*.base256-too-large`; the other 20,050 were scanned by a later version. What the earlier versions did record rules out most of these features: a tarball without a pax `size` has no pax size with a leading zero. `UNREPORTED` in `contrib/scanner/strict.py` says how, for each version.
+Of the 82,586 tarballs, 62,536 were scanned by `25bfa32e6e71`, a version of `tarscan.py` that did not report `pax.empty-value.*`, `pax-global.empty-value.*`, `pax.value-not-utf8.*`, `pax-global.value-not-utf8.*`, `pax.size-leading-zero`, `pax.size-too-large`, `extended.gnu-long-and-pax`, `number.*.base256-too-large`, `format.pax-after-v7`, `linkname.not-utf8`; 19,972 were scanned by `7078a34ab512`, a version of `tarscan.py` that did not report `format.pax-after-v7`, `linkname.not-utf8`; 78 were scanned by `5b9b83abac66`, a version of `tarscan.py` that did not report `format.pax-after-v7`, `linkname.not-utf8`; the other 0 were scanned by a later version. What the earlier versions did record rules out most of these features: a tarball without a pax `size` has no pax size with a leading zero. `UNREPORTED` in `contrib/scanner/strict.py` says how, for each version.
 
-It rules out every strict criterion for every one of them, so the tables above measure every tarball. It does not rule out these allowed features, in fields outside the tree, which the table below counts only where they were reported: `pax.value-not-utf8.mtime` in 10,787, `pax.value-not-utf8.atime` in 703, `pax.value-not-utf8.ctime` in 687, `number.uid.base256-too-large` in 143, `number.gid.base256-too-large` in 136, `pax.value-not-utf8.uid` in 100, `pax.value-not-utf8.gid` in 67.
+It does not rule out all strict criteria. These are not measured in some tarballs, which they may reject, more than the tables above say:
+
+| criterion | tarballs not measured |
+|---|---:|
+| `linkname.not-utf8` | 5,051 |
+
+It does not rule out these allowed features, in fields outside the tree, which the table below counts only where they were reported: `pax.value-not-utf8.mtime` in 10,787, `pax.value-not-utf8.atime` in 703, `pax.value-not-utf8.ctime` in 687, `number.uid.base256-too-large` in 143, `number.gid.base256-too-large` in 136, `pax.value-not-utf8.uid` in 100, `pax.value-not-utf8.gid` in 67.
 
 ## Allowed features
 
