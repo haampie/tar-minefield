@@ -1,0 +1,8 @@
+{
+ "id": "N34",
+ "verdict": "reject",
+ "description": "star's format with a short prefix, ended by a NUL and followed by star's times.",
+ "features": [
+  "format.star"
+ ]
+}
