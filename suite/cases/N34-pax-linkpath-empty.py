@@ -4,13 +4,13 @@ The archive has a symlink `link`, whose pax header has an empty `linkpath=`, and
 the target `from-header`.
 
 In POSIX, a `linkpath` record [overrides][linkpath] the `linkname` field of the header, a record
-with an empty value [deletes][empty-value] any field of the header of the same name, and pax
-[ignores][corresponding] any field of the header that a keyword overrides or deletes. The header
-does not have a field named `linkpath`. So, if the empty value deletes by name, it deletes only the
-record, and the target [comes from the header][header-fallback]: `from-header`. If it deletes the
-field that the record overrides, `linkname` goes too, and the symlink is left without a target. If
-the record is applied like any other, its empty value [becomes the target][x-assigned]. This case is
-ambiguous because the target is `from-header`, missing, or empty, and each follows from the text.
+with an empty value [deletes][empty-value] any field of the header of the same name, and a field of
+the header that a keyword overrides or deletes [is ignored][corresponding]. The header does not have
+a field named `linkpath`. So, if the empty value deletes by name, it deletes only the record, and
+the target [comes from the header][header-fallback]: `from-header`. If it deletes the field that the
+record overrides, `linkname` goes too, and the symlink is left without a target. If the record is
+applied like any other, its empty value [becomes the target][x-assigned]. This case is ambiguous
+because the target is `from-header`, missing, or empty, and each follows from the text.
 
 Decision point: what an empty pax link path means: no target, an empty target, or the header's.
 Seen in: none of the scanned tarballs.
