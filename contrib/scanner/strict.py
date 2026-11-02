@@ -191,6 +191,7 @@ DEFAULT = [
     ("name.double-slash", "normalize", "`a//b` is `a/b`"),
     ("hardlink.target-spelled-differently", "normalize", "a hardlink to `./a` is one to `a`"),
     ("symlink.absolute", "accept", "created as it is: writing through a symlink is rejected"),
+    ("symlink.escapes", "accept", "created as it is: writing through a symlink is rejected"),
     ("end.data-after", "accept", "junk after the two zero blocks is ignored"),
     ("end.missing", "accept", "implementations that extract it extract the same tree"),
     ("pax-global.after-members", "accept", "if every global header has only a `comment`"),

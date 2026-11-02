@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one file, <code>a</code>, whose magic <code>ustar\0</code> is followed by the version <code>01</code>.</p>
-<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20version%20field%20is%20two%20octets%20containing%20the%20characters%20%2200%22">POSIX</a> requires <code>00</code>. The default policy tolerates NULs instead, as some Java archivers write them, but no other version. This case is ambiguous because a reader takes the header in one of three ways: as ustar, ignoring the version; as not in a format that POSIX defines, and stops; or as a v7 header, without the fields that ustar added.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20version%20field%20is%20two%20octets%20containing%20the%20characters%20%2200%22">POSIX</a>, the version is <code>00</code>. The default policy tolerates NULs instead, as some Java archivers write them, but no other version. This case is ambiguous because a reader takes the header in one of three ways: as ustar, ignoring the version; as in a format not defined in POSIX, and stops; or as a v7 header, without the fields that ustar added.</p>
 <p><strong>Decision point:</strong> which format the header is in.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -54,10 +54,10 @@ The POSIX magic with a version that is neither `00` nor NULs.
 
 The archive has one file, `a`, whose magic `ustar\0` is followed by the version `01`.
 
-POSIX requires `00`. The default policy tolerates NULs instead, as some Java archivers
-write them, but no other version. This case is ambiguous because a reader takes the header in one of
-three ways: as ustar, ignoring the version; as not in a format that POSIX defines, and stops; or as
-a v7 header, without the fields that ustar added.
+In POSIX, the version is `00`. The default policy tolerates NULs instead, as some Java
+archivers write them, but no other version. This case is ambiguous because a reader takes the header
+in one of three ways: as ustar, ignoring the version; as in a format not defined in POSIX, and
+stops; or as a v7 header, without the fields that ustar added.
 
 Decision point: which format the header is in.
 Seen in: none of the scanned tarballs.
