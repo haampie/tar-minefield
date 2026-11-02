@@ -40,7 +40,6 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one member, a symlink <code>link</code> to <code>../escaped</code>, and does not write through it.</p>
-<p>The target of a symlink is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/symlink.html#:~:text=shall%20be%20treated%20only%20as%20a%20string%20and%20shall%20not%20be%20validated%20as%20a%20pathname">only a string</a> until it is used, so the archive has one reading: a symlink <code>link</code> that points out of the destination.</p>
 <p><strong>Decision point:</strong> whether a symlink that points out of the destination is created.</p>
 <p><strong>Seen in:</strong> proteomics-runtime 0.3.8 and snowpark-checkpoints 0.1.0rc1.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -53,9 +52,6 @@
 A relative symlink whose target leads out of the destination.
 
 The archive has one member, a symlink `link` to `../escaped`, and does not write through it.
-
-The target of a symlink is only a string until it is used, so the archive has one
-reading: a symlink `link` that points out of the destination.
 
 Decision point: whether a symlink that points out of the destination is created.
 Seen in: proteomics-runtime 0.3.8 and snowpark-checkpoints 0.1.0rc1.
