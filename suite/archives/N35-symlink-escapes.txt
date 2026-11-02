@@ -1,4 +1,4 @@
-N36-symlink-escapes: must reject
+N35-symlink-escapes: must reject
 
 A relative symlink whose target leads out of the destination.
 

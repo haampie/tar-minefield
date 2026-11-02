@@ -18,7 +18,7 @@ See also: F45, an old GNU sparse file.
 """
 
 VERDICT = "reject"
-ID = "N37"
+ID = "N36"
 FEATURES = ["pax.gnu-sparse"]
 
 

@@ -15,7 +15,7 @@ See also: N07, a symlink to an absolute path, and S11, a member written through 
 """
 
 VERDICT = "reject"
-ID = "N36"
+ID = "N35"
 FEATURES = ["symlink.escapes"]
 
 

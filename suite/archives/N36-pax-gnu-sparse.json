@@ -1,5 +1,5 @@
 {
- "id": "N37",
+ "id": "N36",
  "verdict": "reject",
  "description": "A sparse file in GNU's pax format 1.0: the data as stored, or the file it expands to?",
  "features": [

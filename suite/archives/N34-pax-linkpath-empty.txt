@@ -1,4 +1,4 @@
-N35-pax-linkpath-empty: must reject
+N34-pax-linkpath-empty: must reject
 
 An empty pax `linkpath`, which in POSIX deletes a target: the pax one, or the header's too?
 

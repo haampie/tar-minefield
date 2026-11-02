@@ -9,7 +9,7 @@ GNU's format makes `a` a file of 1026 bytes, with 1024 leading zero bytes.
 
 Decision point: whether a sparse member is expanded.
 Seen in: none of the scanned tarballs.
-See also: N37, a sparse file in GNU's pax format.
+See also: N36, a sparse file in GNU's pax format.
 """
 
 from blocks import octal

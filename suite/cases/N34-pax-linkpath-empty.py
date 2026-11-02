@@ -18,7 +18,7 @@ See also: N22, an empty pax `path`, and N25, a symlink with an empty target.
 """
 
 VERDICT = "reject"
-ID = "N35"
+ID = "N34"
 FEATURES = ["pax.empty-value.linkpath"]
 
 
