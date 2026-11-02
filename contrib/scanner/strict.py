@@ -201,7 +201,7 @@ DEFAULT = [
      "octal padded with spaces, not zeros, which implementations read alike"),
     ("pax.size-disagrees", "accept",
      "the pax size frames the member, as POSIX says: it is how sizes over 8 GiB are written"),
-    ("pax.value-not-utf8.comment", "accept",
+    ("pax*.value-not-utf8.comment", "accept",
      "a comment is ignored, so a reader need not decode it to check its encoding"),
     ("pax.newline-in-value.SCHILY.xattr.*", "accept", "xattrs are not extracted"),
     ("pax.newline-in-value.LIBARCHIVE.xattr.*", "accept", "xattrs are not extracted"),
