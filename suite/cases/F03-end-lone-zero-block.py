@@ -2,7 +2,7 @@
 
 The archive has a file `a`, then one zero block, and ends there.
 
-[POSIX][end] requires two zero blocks at the end of an archive.
+In [POSIX][end], an archive ends with two zero blocks.
 
 Decision point: whether one zero block is an end-of-archive marker.
 Seen in: eng-rus, srecord 1.64 and cdi2iso 0.1.

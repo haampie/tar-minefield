@@ -156,7 +156,7 @@ JSONTestSuite:
 - **reject**: a strict parser must reject it.
 - **accept**: every implementation must accept it, and extract its expected tree.
 - **tolerate**: ambiguous in principle, but common enough in real archives that rejecting it has
-  a real cost, or with one reading that implementations share or POSIX requires, so that
+  a real cost, or with one reading that implementations share or that POSIX makes the only one, so that
   accepting it is safe. A strict parser may reject it; if it accepts it, it must extract its expected
   tree.
 
