@@ -12,7 +12,7 @@ a field named `linkpath`. So, if the empty value deletes by name, it deletes onl
 the target comes from the header: `from-header`. If it deletes the field that the
 record overrides, `linkname` goes too, and the symlink is left without a target. If the record is
 applied like any other, its empty value becomes the target. This case is ambiguous
-because the target is `from-header`, missing, or empty, and each follows from the text.
+because the target is `from-header`, missing, or empty.
 
 Decision point: what an empty pax link path means: no target, an empty target, or the header's.
 Seen in: none of the scanned tarballs.
