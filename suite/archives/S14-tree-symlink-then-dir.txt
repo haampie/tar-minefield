@@ -4,9 +4,9 @@ A symlink to a directory, then a directory of the same name.
 
 The archive has a directory `target/`, then a symlink `a` to `target`, then a directory `a/`.
 
-When a directory to extract already exists, POSIX keeps it, and `a/`, whose trailing
-slash resolves it through the symlink, is the directory `target`. But readers drop
-the slash of a directory's name, and then `a` is a symlink, not a directory of its own
+In POSIX, extracting a directory that already exists is not an error, and `a/`, whose
+trailing slash resolves it through the symlink, is the directory `target`. But
+readers drop the slash of a directory's name, and then `a` is a symlink, not a directory of its own
 type. This case is ambiguous because the directory `a/` replaces the symlink, is taken
 to exist already, through it, or is an error.
 

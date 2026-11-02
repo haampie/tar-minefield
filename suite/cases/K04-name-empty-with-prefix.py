@@ -7,11 +7,11 @@ In [POSIX][prefix], the pathname is the prefix, followed by `/`, followed by the
 empty, so the pathname is `dir/`. A member is extracted as a file of its [own type][file-type], here
 a regular file, but a name that ends in a slash [resolves only to a directory][trailing-slash], so
 this is an [error][cannot-create]. A name that ends in a slash was the old way to archive a
-directory, before the typeflag of a directory existed, as the [rationale][slash-convention] of POSIX
-recalls, but it is not part of POSIX. This case is ambiguous in practice because a reader that
-follows that convention extracts a directory `dir`, a reader that goes by the typeflag extracts an
-empty file `dir`, and a reader that takes the empty name field for a member without a name, before
-it applies the prefix, extracts nothing.
+directory, before the typeflag of a directory existed; it is in the [rationale][slash-convention] of
+POSIX, but not in its rules. This case is ambiguous in practice because a reader that follows that
+convention extracts a directory `dir`, a reader that goes by the typeflag extracts an empty file
+`dir`, and a reader that takes the empty name field for a member without a name, before it applies
+the prefix, extracts nothing.
 
 Decision point: whether a prefix makes a name of an empty name field, and whether the typeflag or
 the trailing slash decides the kind.

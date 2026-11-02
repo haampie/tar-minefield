@@ -6,7 +6,7 @@ size 512 in its header, then an empty file `smuggled`.
 [POSIX][empty-value] says that a record with an empty value deletes any header block field of the
 same name, and a value in a global header [applies][global] to every file after it. So `size=`
 deletes the size of `a`, and the size in its header is to be [ignored][corresponding], which leaves
-`a` without a size, which POSIX does not define.
+`a` without a size, which is undefined.
 
 Decision point: what an empty size in a global header deletes.
 Seen in: none of the scanned tarballs.

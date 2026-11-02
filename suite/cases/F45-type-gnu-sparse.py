@@ -3,9 +3,9 @@
 The archive has one member, `a`, of typeflag `S` in the GNU format, whose header has a sparse map of
 one region, 2 bytes at offset 1024, and the real size 1026. Its data is those 2 bytes, `ab`.
 
-POSIX reserves the typeflags `A` to `Z` for [custom implementations][custom-type], and a reader that
-does not support it should extract the member [as a regular file][unknown-type] `a` of 2 bytes. As a
-GNU sparse file, `a` is extracted as 1024 zero bytes, followed by `ab`.
+In POSIX, the typeflags `A` to `Z` are reserved for [custom implementations][custom-type], and a
+reader that does not support it should extract the member [as a regular file][unknown-type] `a` of 2
+bytes. As a GNU sparse file, `a` is extracted as 1024 zero bytes, followed by `ab`.
 
 Decision point: whether a sparse member is expanded.
 Seen in: none of the scanned tarballs.

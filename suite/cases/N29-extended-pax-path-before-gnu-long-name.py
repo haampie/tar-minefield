@@ -4,7 +4,7 @@ The archive has a pax header with `path=from-pax`, then a GNU long name `from-gn
 whose header has the name `from-header`.
 
 In POSIX, an [extended header][extended] applies to the file that follows it, which here is the GNU
-long name: a typeflag `L`, which POSIX does not define, and so extracts [as a regular
+long name: a typeflag `L`, which is not defined in POSIX, and so is extracted [as a regular
 file][unknown-type], with an error. Read by POSIX alone, the archive has a file `from-pax`, which
 contains the long name, and the member `from-header`. Most readers that know GNU long names give the
 member one of the two long names instead. This case is ambiguous for multiple reasons, because the

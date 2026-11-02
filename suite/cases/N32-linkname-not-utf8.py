@@ -4,11 +4,10 @@ The archive has a symlink `link`, whose header has the target `caf\xe9`, `café`
 which has no pax header.
 
 The fields of a ustar header are bytes, and in [POSIX][ascii-header] the characters of a header are
-those of ISO/IEC 646, of which `\xe9` is not one, so the archive does not conform, and POSIX leaves
-the encoding of other characters in names to the [implementation][name-encoding]. A reader decodes
-the target as UTF-8, as another encoding, or not at all. This case is ambiguous because the target
-is the bytes as they are, `caf\xe9`, or a decoding of them, such as `café` or `caf` followed by
-U+FFFD.
+those of ISO/IEC 646, of which `\xe9` is not one, so the archive does not conform, and the encoding
+of other characters in names is [implementation-defined][name-encoding]. A reader decodes the target
+as UTF-8, as another encoding, or not at all. This case is ambiguous because the target is the bytes
+as they are, `caf\xe9`, or a decoding of them, such as `café` or `caf` followed by U+FFFD.
 
 Decision point: how a link target that is not UTF-8 is decoded.
 Seen in: none of the scanned tarballs.

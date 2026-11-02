@@ -5,9 +5,10 @@ The archive has one member, whose header has typeflag `0`, a regular file, and s
 
 In [POSIX][file-type], a member is extracted as a file of its own type, but a name that ends in a
 slash [resolves only to a directory][trailing-slash], so this is an [error][cannot-create]. A name
-that ends in a slash was the old way to archive a directory, as the [rationale][slash-convention] of
-POSIX recalls, but POSIX does not specify it. This case is ambiguous in practice because the member
-is either a directory `a`, by its trailing slash, or an empty file `a`, by its typeflag.
+that ends in a slash was the old way to archive a directory; it is in the
+[rationale][slash-convention] of POSIX, but not in its rules. This case is ambiguous in practice
+because the member is either a directory `a`, by its trailing slash, or an empty file `a`, by its
+typeflag.
 
 Decision point: whether the typeflag or the trailing slash decides the kind.
 Seen in: archives in the old v7 format, such as sendmail 8.18.2, tcp_wrappers 7.6 and

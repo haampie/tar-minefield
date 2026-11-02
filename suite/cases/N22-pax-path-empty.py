@@ -8,8 +8,8 @@ name, and a field of the header that a keyword deletes [is ignored][correspondin
 not have a field named `path`, which [overrides][path] `name` and `prefix`. This case is ambiguous
 because, if deletion goes by the name of the keyword, `path=` deletes nothing in the header, and the
 member is `from-header`; if it goes by the header field that the keyword overrides, it deletes the
-name too, and leaves a member without a name, which POSIX does not define, as an empty pathname
-[does not resolve][null-pathname].
+name too, and leaves a member without a name, which is undefined, as an empty pathname [does not
+resolve][null-pathname].
 
 Decision point: what an empty pax path means: no name, an empty name, or the header's name.
 Seen in: none of the scanned tarballs.

@@ -5,7 +5,7 @@ A size in the header of a hard link, in a pax archive, which takes the next head
 The archive has a file `a`, then a hard link `h` to `a`, with a pax header and the size 512 in its
 header, then an empty file `smuggled`.
 
-Read as pax, which its `x` header suggests, POSIX permits data on a hard link, so the
+Read as pax, which its `x` header suggests, data on a hard link is permitted, so the
 block after the header of `h` is its data, and what looks like the header of `smuggled` is that
 data. POSIX does not say what the data of a hard link does: whether it replaces the contents of `a`,
 or is ignored. A reader that reads it as ustar, in which no data is stored for a hard

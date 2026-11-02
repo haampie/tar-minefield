@@ -3,11 +3,11 @@
 The archive has a header of typeflag `X`, named `PaxHeader`, whose data is the pax record
 `path=from-x`, then a file whose header has the name `from-header`.
 
-Solaris tar writes extended headers with typeflag `X`, where POSIX has `x`. POSIX reserves the
-typeflags `A` to `Z` for [custom implementations][custom-type], and a reader that does not recognize
-one extracts the member [as a regular file][unknown-type]. This case is ambiguous because the member
-is `from-x`, to a reader that takes `X` for `x`, or `from-header`, after a file `PaxHeader` that
-contains the record, or alone, to a reader that skips a type it does not know.
+Solaris tar writes extended headers with typeflag `X`, instead of the `x` of POSIX. In POSIX, the
+typeflags `A` to `Z` are reserved for [custom implementations][custom-type], and a reader that does
+not recognize one extracts the member [as a regular file][unknown-type]. This case is ambiguous
+because the member is `from-x`, to a reader that takes `X` for `x`, or `from-header`, after a file
+`PaxHeader` that contains the record, or alone, to a reader that skips a type it does not know.
 
 Decision point: whether typeflag `X` is an extended header.
 Seen in: none of the scanned tarballs.
