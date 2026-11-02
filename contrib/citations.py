@@ -105,6 +105,7 @@ SENTENCES = {
     "sequence": (END, "Each file archived shall be represented by the following sequence"),
     "global-files": (PAX_HEADER, "Represents global extended header records for the following "
                                  "files in the archive"),
+    "linkpath": (PAX_EXTENDED, "This record shall override the linkname field"),
     "path": (PAX_EXTENDED, "This record shall override the name and prefix fields in the following "
                            "header block(s)"),
     "ascii-header": (USTAR, "All characters in the header logical record shall be represented in "
