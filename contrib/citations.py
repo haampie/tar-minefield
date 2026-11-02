@@ -52,6 +52,12 @@ SENTENCES = {
     "detected": (DESCRIPTION, "The archive formats described in the EXTENDED DESCRIPTION section "
                               "shall be automatically detected on input"),
     "same-layout": (END, "The physical layout of the archive shall be identical to the ustar format"),
+    "pre-pax-reader": (PAX_HEADER, "the header block fields are used to create a regular file that "
+                                   "contains the extended header records as data"),
+    "link-size-zero": (USTAR, "the size field shall be specified as zero"),
+    "prefix-nul": (USTAR, "If prefix begins with a NUL character, it shall be ignored"),
+    "utf-8-keyword": (PAX_EXTENDED, "The value field for all other keywords specified by "
+                                    "POSIX.1-2024 shall be encoded using UTF-8"),
     "extended": (PAX_HEADER, "Represents extended header records for the following file in the "
                              "archive"),
     "global": (PAX_HEADER, "Each value shall affect all subsequent files that do not override that "
@@ -114,6 +120,8 @@ SENTENCES = {
     "cannot-create": (ERRORS, "If pax cannot create a file or a link when reading an archive"),
     "x-assigned": (PRECEDENCE, "If there is a typeflag x extended header record, the affected "
                                "attribute shall be assigned the <value>"),
+    "g-assigned": (PRECEDENCE, "If there is a typeflag g global extended header record, the "
+                               "affected attribute shall be assigned the <value>"),
     "header-fallback": (PRECEDENCE, "Otherwise, the attribute shall be determined from the ustar "
                                     "header block"),
     "link-error": (DESCRIPTION, "it shall be an error if these files cannot be linked when the "
