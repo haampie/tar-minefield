@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one member, whose pax header has <code>GNU.sparse.major=1</code>, <code>GNU.sparse.minor=0</code>, <code>GNU.sparse.name=a</code>, <code>GNU.sparse.realsize=1026</code> and <code>path=GNUSparseFile.0/a</code>. Its data is a sparse map of one region, 2 bytes at offset 1024, as the lines <code>1</code>, <code>1024</code> and <code>2</code> padded with NULs to a block, followed by those 2 bytes, <code>ab</code>.</p>
-<p>POSIX allows keys such as GNU&#x27;s as extensions, but does not define them, so a reader that ignores them applies the pax <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20name%20and%20prefix%20fields%20in%20the%20following%20header%20block%28s%29"><code>path</code></a>, and extracts <code>GNUSparseFile.0/a</code>, which holds the map and the data. As a GNU sparse file, the member is extracted as <code>a</code>, 1024 zero bytes, followed by <code>ab</code>. This case is ambiguous because the member is the data as stored, under its pax <code>path</code>, or the file it expands to, under <code>GNU.sparse.name</code>, or even the expanded file under the pax <code>path</code>.</p>
+<p>POSIX allows keys such as GNU&#x27;s as extensions, but does not define them, so a reader that ignores them applies the pax <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20name%20and%20prefix%20fields%20in%20the%20following%20header%20block%28s%29"><code>path</code></a>, and extracts <code>GNUSparseFile.0/a</code>, which holds the map and the data. As a GNU sparse file, the member is extracted as a file <code>a</code> that holds 1024 zero bytes, followed by <code>ab</code>. This case is ambiguous because the member is the data as stored, under its pax <code>path</code>, or the file it expands to, under <code>GNU.sparse.name</code>, or even the expanded file under the pax <code>path</code>.</p>
 <p><strong>Decision point:</strong> whether a sparse member is expanded, and which of its names it gets.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -59,9 +59,10 @@ block, followed by those 2 bytes, `ab`.
 
 POSIX allows keys such as GNU&#x27;s as extensions, but does not define them, so a reader that ignores
 them applies the pax `path`, and extracts `GNUSparseFile.0/a`, which holds the map and the
-data. As a GNU sparse file, the member is extracted as `a`, 1024 zero bytes, followed by `ab`. This
-case is ambiguous because the member is the data as stored, under its pax `path`, or the file it
-expands to, under `GNU.sparse.name`, or even the expanded file under the pax `path`.
+data. As a GNU sparse file, the member is extracted as a file `a` that holds 1024 zero bytes,
+followed by `ab`. This case is ambiguous because the member is the data as stored, under its pax
+`path`, or the file it expands to, under `GNU.sparse.name`, or even the expanded file under the pax
+`path`.
 
 Decision point: whether a sparse member is expanded, and which of its names it gets.
 Seen in: none of the scanned tarballs.
