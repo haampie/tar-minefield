@@ -333,21 +333,26 @@ def readme_section(title):
 
 def inline(text):
     """Text with `code`, [links](https://...) and [links][key] to sentences of POSIX, by their keys
-    in citations.py, as HTML."""
-    parts = text.split("`")
-    return "".join(f"<code>{html.escape(p)}</code>" if i % 2 else
-                   cite(re.sub(r"\[(.+?)\]\((https?://[^)\s]+)\)", r'<a href="\2">\1</a>',
-                               html.escape(p)))
-                   for i, p in enumerate(parts))
+    in citations.py, as HTML. The words of a link to a sentence can have code in them, as in
+    [the pax `path`][path], so those links are taken out first, and put back."""
+    links = []
 
-
-def cite(text):
-    """Text with its [links][key] to sentences of POSIX as HTML."""
-    def link(m):
+    def stash(m):
         if m.group(2) not in citations.SENTENCES:
             sys.exit(f"[{m.group(1)}][{m.group(2)}]: no such sentence in citations.py")
-        return f'<a href="{html.escape(citations.url(m.group(2)))}">{m.group(1)}</a>'
-    return re.sub(r"\[([^\[\]]+)\]\[([a-z0-9-]+)\]", link, text)
+        links.append(f'<a href="{html.escape(citations.url(m.group(2)))}">{code(m.group(1))}</a>')
+        return f"\0{len(links) - 1}\0"
+
+    text = re.sub(r"\[([^\[\]]+)\]\[([a-z0-9-]+)\]", stash, text)
+    return re.sub(r"\0(\d+)\0", lambda m: links[int(m.group(1))], code(text))
+
+
+def code(text):
+    """Text with `code` and [links](https://...) as HTML."""
+    parts = text.split("`")
+    return "".join(f"<code>{html.escape(p)}</code>" if i % 2 else
+                   re.sub(r"\[(.+?)\]\((https?://[^)\s]+)\)", r'<a href="\2">\1</a>', html.escape(p))
+                   for i, p in enumerate(parts))
 
 
 def doc_paragraphs(text):
