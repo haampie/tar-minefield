@@ -14,9 +14,12 @@ Seen in: none of the scanned tarballs.
 See also: F43, the same comment in a global header.
 """
 
-VERDICT = "reject"
+F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}
+
+VERDICT = "tolerate"
 ID = "F42"
 FEATURES = ["pax.value-not-utf8.comment"]
+TREE = [F("a", b"a\n")]
 
 
 def build(a):
