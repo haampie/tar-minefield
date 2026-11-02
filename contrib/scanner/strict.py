@@ -176,6 +176,8 @@ ALLOWED = [
     ("pax.value-not-utf8.[acm]time", "outside the tree"),
     ("pax.value-not-utf8.[ug]id", "outside the tree"),
     ("pax.value-not-utf8.[ug]name", "outside the tree"),
+    ("pax.newline-in-value.comment",
+     "a comment with newlines: pax records are delimited by their length"),
 ]
 
 # The default policy: the strict criteria that it lets through, and how; it rejects the others.
