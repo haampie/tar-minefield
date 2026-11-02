@@ -22,7 +22,7 @@
 </head>
 <body>
 <a class="draft" href="index.html#policy">Working draft</a>
-<nav class="wide"><a class="prev" href="F40.html" rel="prev" title="F40 number-size-no-terminator">‹ F40 number-size-no-terminator</a><a href="index.html">tar-minefield</a><a class="next" href="F43.html" rel="next" title="F43 pax-global-comment-not-utf8">F43 pax-global-comment-not-utf8 ›</a></nav>
+<nav class="wide"><a class="prev" href="F40.html" rel="prev" title="F40 number-size-no-terminator">‹ F40 number-size-no-terminator</a><a href="index.html">tar-minefield</a><a class="next" href="F44.html" rel="next" title="F44 pax-global-size-empty">F44 pax-global-size-empty ›</a></nav>
 <h1><code>F41</code> number-size-leading-nul</h1>
 <p>A size with a NUL before its digits, which takes the next header for its data.</p>
 <div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
@@ -40,8 +40,8 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, whose size field is a NUL, followed by the digits <code>0000001000</code>, followed by a NUL, then an empty file <code>smuggled</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal numbers filled with leading zeros, and each is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20numeric%20field%20is%20terminated%20by%20one%20or%20more%20%3Cspace%3E%20or%20NUL%20characters">terminated</a> by a space or a NUL. A reader that skips the NUL in front reads 512, octal 1000, and takes the block after the header of <code>a</code> for its data; a reader that stops at the first NUL reads an empty field, as 0 or as an error.</p>
-<p><strong>Decision point:</strong> whether a NUL before the digits of a size ends it.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal numbers filled with leading zeros, and each is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20numeric%20field%20is%20terminated%20by%20one%20or%20more%20%3Cspace%3E%20or%20NUL%20characters">terminated</a> by a space or a NUL. Read leniently, this case is ambiguous because the size is either 512, octal 1000, if the NUL in front is skipped (and the next block is the data of <code>a</code>), or 0, if the field ends at its first NUL (and the next block is the header of <code>smuggled</code>).</p>
+<p><strong>Decision point:</strong> how a numeric field with a NUL before its digits is read.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -56,11 +56,11 @@ The archive has a file `a`, whose size field is a NUL, followed by the digits `0
 by a NUL, then an empty file `smuggled`.
 
 In POSIX, numeric fields are octal numbers filled with leading zeros, and each is
-terminated by a space or a NUL. A reader that skips the NUL in front reads 512, octal
-1000, and takes the block after the header of `a` for its data; a reader that stops at the first NUL
-reads an empty field, as 0 or as an error.
+terminated by a space or a NUL. Read leniently, this case is ambiguous because the size
+is either 512, octal 1000, if the NUL in front is skipped (and the next block is the data of `a`),
+or 0, if the field ends at its first NUL (and the next block is the header of `smuggled`).
 
-Decision point: whether a NUL before the digits of a size ends it.
+Decision point: how a numeric field with a NUL before its digits is read.
 Seen in: none of the scanned tarballs.
 
 0x000000  header: regular file, a NUL, then 512 in octal

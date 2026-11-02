@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one file, <code>a</code>, whose size field is the 12 octal digits <code>000000000012</code>, without a NUL or a space after them, and whose data is the 10 bytes <code>0123456789</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20numeric%20field%20is%20terminated%20by%20one%20or%20more%20%3Cspace%3E%20or%20NUL%20characters">POSIX</a>, every numeric field is terminated by a space or a NUL, so a size of 12 digits is invalid and does not leave room for a terminator. A lenient reader can either read 10 (octal 12) or 1 if it takes the 11 digits that ustar allows, assuming the last byte is a terminator.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20numeric%20field%20is%20terminated%20by%20one%20or%20more%20%3Cspace%3E%20or%20NUL%20characters">POSIX</a>, every numeric field is terminated by a space or a NUL, so a size of 12 digits is invalid, as it does not leave room for a terminator. Read leniently, this case is ambiguous because the size is either 10, octal 12, if the field is read to its end (and <code>a</code> contains <code>0123456789</code>), or 1, if its last byte is taken for a terminator (and <code>a</code> contains <code>0</code>).</p>
 <p><strong>Decision point:</strong> whether a numeric field without a terminator is read to its end.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -56,8 +56,9 @@ The archive has one file, `a`, whose size field is the 12 octal digits `00000000
 NUL or a space after them, and whose data is the 10 bytes `0123456789`.
 
 In POSIX, every numeric field is terminated by a space or a NUL, so a size of 12 digits
-is invalid and does not leave room for a terminator. A lenient reader can either read 10 (octal 12)
-or 1 if it takes the 11 digits that ustar allows, assuming the last byte is a terminator.
+is invalid, as it does not leave room for a terminator. Read leniently, this case is ambiguous
+because the size is either 10, octal 12, if the field is read to its end (and `a` contains
+`0123456789`), or 1, if its last byte is taken for a terminator (and `a` contains `0`).
 
 Decision point: whether a numeric field without a terminator is read to its end.
 Seen in: none of the scanned tarballs.

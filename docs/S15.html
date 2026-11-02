@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has the files <code>a</code> and <code>b</code>, then a hard link <code>a</code> to <code>b</code>.</p>
-<p>The hard link <code>a</code> either replaces the file <code>a</code>, as existing files are <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">overwritten</a> by default, so that <code>a</code> becomes a link to <code>b</code>, or results in a failure, as a link <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=it%20shall%20be%20an%20error%20if%20these%20files%20cannot%20be%20linked%20when%20the%20archive%20is%20extracted">cannot be created</a> where a file already is, and <code>a</code> keeps its own contents.</p>
+<p>The hard link <code>a</code> either replaces the file <code>a</code>, as existing files <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">can be overwritten</a>, so that <code>a</code> becomes a link to <code>b</code>, or results in a failure, as a link <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/link.html#:~:text=The%20path2%20argument%20resolves%20to%20an%20existing%20directory%20entry">cannot be created</a> where a file already is, which is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=it%20shall%20be%20an%20error%20if%20these%20files%20cannot%20be%20linked%20when%20the%20archive%20is%20extracted">error</a>, and <code>a</code> keeps its own contents.</p>
 <p><strong>Decision point:</strong> whether a hard link replaces an existing file of its name.</p>
 <p><strong>Seen in:</strong> 27 tarballs have a file, then a hard link of the same name, such as xscreensaver 6.12 and atari++ 1.85, but each links to itself; none links to another file.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -54,9 +54,10 @@ A file, then a hard link of the same name to another file.
 
 The archive has the files `a` and `b`, then a hard link `a` to `b`.
 
-The hard link `a` either replaces the file `a`, as existing files are overwritten by
-default, so that `a` becomes a link to `b`, or results in a failure, as a link cannot be
-created where a file already is, and `a` keeps its own contents.
+The hard link `a` either replaces the file `a`, as existing files can be overwritten,
+so that `a` becomes a link to `b`, or results in a failure, as a link cannot be
+created where a file already is, which is an error, and `a` keeps its
+own contents.
 
 Decision point: whether a hard link replaces an existing file of its name.
 Seen in: 27 tarballs have a file, then a hard link of the same name, such as xscreensaver 6.12 and

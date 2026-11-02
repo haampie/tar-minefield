@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>S13 hardlink-empty-target · Tar file extraction test suite</title>
-<meta name="description" content="A hardlink with an empty target.">
+<meta name="description" content="A hard link with an empty target.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="S13 hardlink-empty-target · Tar file extraction test suite">
-<meta property="og:description" content="A hardlink with an empty target.">
+<meta property="og:description" content="A hard link with an empty target.">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/S13.html">
 <meta property="og:url" content="https://stoppels.ch/tar/S13.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/f49d27244b77973b.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/991946f1b6e9fecd.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of S13 hardlink-empty-target">
@@ -24,7 +24,7 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="S12.html" rel="prev" title="S12 tree-under-file">‹ S12 tree-under-file</a><a href="index.html">tar-minefield</a><a class="next" href="S14.html" rel="next" title="S14 tree-symlink-then-dir">S14 tree-symlink-then-dir ›</a></nav>
 <h1><code>S13</code> hardlink-empty-target</h1>
-<p>A hardlink with an empty target.</p>
+<p>A hard link with an empty target.</p>
 <div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>order and state</dd>
@@ -39,9 +39,9 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a file <code>a</code>, then a hardlink <code>link</code> whose linkname field is empty.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file previously archived, which the archive does not have, so the link has nothing to link to. Read leniently, the link is skipped instead.</p>
-<p><strong>Decision point:</strong> what a hardlink to the empty name does.</p>
+<p>The archive has a file <code>a</code>, then a hard link <code>link</code> whose linkname field is empty.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hard link is a file previously archived, which the archive does not have, so the link has nothing to link to. Read leniently, the link is skipped instead.</p>
+<p><strong>Decision point:</strong> what a hard link to the empty name does.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -50,16 +50,16 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>S13-hardlink-empty-target: must reject
 
-A hardlink with an empty target.
+A hard link with an empty target.
 
-The archive has a file `a`, then a hardlink `link` whose linkname field is empty.
+The archive has a file `a`, then a hard link `link` whose linkname field is empty.
 
-In POSIX, the target of a hardlink is a file previously archived, which the archive does
-not have, so the link has nothing to link to. Read leniently, the link is skipped instead.
+In POSIX, the target of a hard link is a file previously archived, which the archive
+does not have, so the link has nothing to link to. Read leniently, the link is skipped instead.
 
-Decision point: what a hardlink to the empty name does.
+Decision point: what a hard link to the empty name does.
 Seen in: none of the scanned tarballs.
-See also: S03, a hardlink to a name that is not in the archive.
+See also: S03, a hard link to a name that is not in the archive.
 
 0x000000  header: regular file
           name     [  0,100)  &quot;a&quot; + 99 NUL
@@ -309,7 +309,7 @@ See also: S03, a hardlink to a name that is not in the archive.
 
 <h2 id="see-also">See also<a class="anchor" href="#see-also" aria-label="Link to this section">¶</a></h2>
 <ul>
-<li><a href="S03.html"><code>S03</code></a>: a hardlink to a name that is not in the archive.</li>
+<li><a href="S03.html"><code>S03</code></a>: a hard link to a name that is not in the archive.</li>
 </ul>
 
 <hr class="wide">

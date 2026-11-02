@@ -22,7 +22,7 @@
 </head>
 <body>
 <a class="draft" href="index.html#policy">Working draft</a>
-<nav class="wide"><a class="prev" href="F32.html" rel="prev" title="F32 checksum-leading-space">‹ F32 checksum-leading-space</a><a href="index.html">tar-minefield</a><a class="next" href="N05.html" rel="next" title="N05 name-dot">N05 name-dot ›</a></nav>
+<nav class="wide"><a class="prev" href="F32.html" rel="prev" title="F32 checksum-leading-space">‹ F32 checksum-leading-space</a><a href="index.html">tar-minefield</a><a class="next" href="F43.html" rel="next" title="F43 pax-global-comment-not-utf8">F43 pax-global-comment-not-utf8 ›</a></nav>
 <h1><code>F42</code> pax-comment-not-utf8</h1>
 <p>A pax <code>comment</code> that is not UTF-8.</p>
 <div class="verdict tolerate wide"><p><span class="badge">Tolerate</span><span class="badge-draft">(draft)</span> A strict parser may reject this archive. If it accepts it, it must extract the expected tree below.</p></div>
@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one file, <code>a</code>, whose pax header has one record, a <code>comment</code> of the two bytes <code>\xff\xfe</code>, which are not UTF-8.</p>
-<p>POSIX says that the value of every keyword it <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20value%20field%20for%20all%20other%20keywords%20specified%20by%20POSIX.1%2D2024%20shall%20be%20encoded%20using%20UTF%2D8">specifies</a>, <code>comment</code> among them, is UTF-8, and that every <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=All%20characters%20in%20the%20%3Cvalue%3E%20field%20shall%20be%20ignored%20by%20pax">comment</a> is ignored. So the archive is invalid, but a reader that skips comments might not validate the value, and a reader that decodes every record before it looks at its keyword might realize it is invalid. This case is ambiguous because the archive is rejected, or has the file <code>a</code>.</p>
+<p>In POSIX, the value of every specified keyword, <code>comment</code> among them, is in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20value%20field%20for%20all%20other%20keywords%20specified%20by%20POSIX.1%2D2024%20shall%20be%20encoded%20using%20UTF%2D8">UTF-8</a>, and every <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=All%20characters%20in%20the%20%3Cvalue%3E%20field%20shall%20be%20ignored%20by%20pax">comment</a> is ignored. The value can be seen as bound by the rule for UTF-8, which makes the archive invalid, or as never read, as the comment is ignored. This case is ambiguous because the archive is invalid, or has the file <code>a</code>.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>2 bytes, sha256 <code title="87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7">87428fc5</code></td></tr></table></div>
@@ -58,11 +58,10 @@ A pax `comment` that is not UTF-8.
 The archive has one file, `a`, whose pax header has one record, a `comment` of the two bytes
 `\xff\xfe`, which are not UTF-8.
 
-POSIX says that the value of every keyword it specifies, `comment` among them, is
-UTF-8, and that every comment is ignored. So the archive is invalid, but a reader that
-skips comments might not validate the value, and a reader that decodes every record before it looks
-at its keyword might realize it is invalid. This case is ambiguous because the archive is rejected,
-or has the file `a`.
+In POSIX, the value of every specified keyword, `comment` among them, is in UTF-8,
+and every comment is ignored. The value can be seen as bound by the rule for UTF-8, which
+makes the archive invalid, or as never read, as the comment is ignored. This case is ambiguous
+because the archive is invalid, or has the file `a`.
 
 Decision point: whether a comment is decoded before it is ignored.
 Seen in: none of the scanned tarballs.

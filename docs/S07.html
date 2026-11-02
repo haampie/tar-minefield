@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has two files named <code>a</code>: the first contains <code>first</code>, the last <code>last</code>.</p>
-<p>In POSIX, <code>-k</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_04:~:text=Prevent%20the%20overwriting%20of%20existing%20files">prevents the overwriting</a> of existing files, so without it the last copy is the file, and with it the first. But POSIX only says that existing files are <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">overwritten</a> when its options allow it, not that they must be, and its <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_16:~:text=In%20read%20mode%2C%20implementations%20are%20permitted%20to%20overwrite%20files%20when%20the%20archive%20has%20multiple%20members%20with%20the%20same%20name">application usage</a> calls overwriting permitted. This case is ambiguous because either copy can be the file: an extractor that overwrites files keeps the last copy, and one that does not, such as GNU tar with <code>--keep-old-files</code>, keeps the first.</p>
+<p>In POSIX, existing files <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">can be overwritten</a>, but need not be, and overwriting is called permitted in its <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_16:~:text=In%20read%20mode%2C%20implementations%20are%20permitted%20to%20overwrite%20files%20when%20the%20archive%20has%20multiple%20members%20with%20the%20same%20name">application usage</a>. This case is ambiguous because either copy can be the file: an extractor that overwrites files keeps the last copy, and one that does not, such as GNU tar with <code>--keep-old-files</code>, keeps the first.</p>
 <p><strong>Decision point:</strong> which of two members of one path is the file.</p>
 <p><strong>Seen in:</strong> fish 4.7.1, where <code>Cargo.toml</code> and <code>Cargo.lock</code> are appended again without their last newline, and logstash 8.15.2, where <code>build.rb</code> is first a license header and last the build&#x27;s date and commit. Most tarballs with duplicates, mostly from <code>cabal sdist</code>, have identical copies: the default policy rejects those too, as an implementation would have to compare the copies to tell.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -54,12 +54,10 @@ The same file twice, with different contents: the first copy, or the last?
 
 The archive has two files named `a`: the first contains `first`, the last `last`.
 
-In POSIX, `-k` prevents the overwriting of existing files, so without it the last copy
-is the file, and with it the first. But POSIX only says that existing files are
-overwritten when its options allow it, not that they must be, and its application
-usage calls overwriting permitted. This case is ambiguous because either copy can be the
-file: an extractor that overwrites files keeps the last copy, and one that does not, such as GNU tar
-with `--keep-old-files`, keeps the first.
+In POSIX, existing files can be overwritten, but need not be, and overwriting is
+called permitted in its application usage. This case is ambiguous because either copy
+can be the file: an extractor that overwrites files keeps the last copy, and one that does not, such
+as GNU tar with `--keep-old-files`, keeps the first.
 
 Decision point: which of two members of one path is the file.
 Seen in: fish 4.7.1, where `Cargo.toml` and `Cargo.lock` are appended again without their last

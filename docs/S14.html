@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a directory <code>target/</code>, then a symlink <code>a</code> to <code>target</code>, then a directory <code>a/</code>.</p>
-<p>The name <code>a/</code> can be seen as a file path that <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=ends%20with%20one%20or%20more%20trailing%20%3Cslash%3E%20characters%20shall%20not%20be%20resolved%20successfully%20unless">resolves</a> through the symlink, as its trailing slash suggests, to the directory <code>target</code>, which <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=If%20an%20attempt%20is%20made%20to%20extract%20a%20directory%20when%20the%20directory%20already%20exists%2C%20this%20shall%20not%20be%20considered%20an%20error">already exists</a>, so extracting it changes nothing. It can also be seen as the name of a directory <code>a</code>, of the member&#x27;s <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">own type</a>, which either replaces the symlink, or results in a failure, as it cannot be created where the symlink is.</p>
+<p>The name <code>a/</code> can be seen as a pathname that <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=In%20all%20other%20cases%2C%20the%20system%20shall%20prefix%20the%20remaining%20pathname">resolves</a> through the symlink, as the name ends in a slash, to the directory <code>target</code>, which <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=If%20an%20attempt%20is%20made%20to%20extract%20a%20directory%20when%20the%20directory%20already%20exists%2C%20this%20shall%20not%20be%20considered%20an%20error">already exists</a>, so extracting it changes nothing. It can also be seen as the name of a directory <code>a</code>, of the member&#x27;s <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">own type</a>, which either replaces the symlink, or results in a failure, as it cannot be created where the symlink is.</p>
 <p><strong>Decision point:</strong> whether a directory member follows a symlink in its place.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -54,8 +54,8 @@ A symlink to a directory, then a directory of the same name.
 
 The archive has a directory `target/`, then a symlink `a` to `target`, then a directory `a/`.
 
-The name `a/` can be seen as a file path that resolves through the symlink, as its
-trailing slash suggests, to the directory `target`, which already exists, so
+The name `a/` can be seen as a pathname that resolves through the symlink, as
+the name ends in a slash, to the directory `target`, which already exists, so
 extracting it changes nothing. It can also be seen as the name of a directory `a`, of the member&#x27;s
 own type, which either replaces the symlink, or results in a failure, as it cannot be
 created where the symlink is.

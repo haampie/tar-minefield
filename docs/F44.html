@@ -22,7 +22,7 @@
 </head>
 <body>
 <a class="draft" href="index.html#policy">Working draft</a>
-<nav class="wide"><a class="prev" href="F43.html" rel="prev" title="F43 pax-global-comment-not-utf8">‹ F43 pax-global-comment-not-utf8</a><a href="index.html">tar-minefield</a><a class="next" href="F45.html" rel="next" title="F45 type-gnu-sparse">F45 type-gnu-sparse ›</a></nav>
+<nav class="wide"><a class="prev" href="F41.html" rel="prev" title="F41 number-size-leading-nul">‹ F41 number-size-leading-nul</a><a href="index.html">tar-minefield</a><a class="next" href="F45.html" rel="next" title="F45 type-gnu-sparse">F45 type-gnu-sparse ›</a></nav>
 <h1><code>F44</code> pax-global-size-empty</h1>
 <p>An empty <code>size</code> in a global pax header: does it delete the size of every later member, or set it?</p>
 <div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a global header, typeflag <code>g</code>, with the one record <code>size=</code>, then a file <code>a</code> with the size 512 in its header, then an empty file <code>smuggled</code>.</p>
-<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">POSIX</a> says that a record with an empty value deletes any header block field of the same name, and a value in a global header <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">applies</a> to every file after it. So <code>size=</code> deletes the size of <code>a</code>, and the size in its header is to be <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">ignored</a>, which leaves <code>a</code> without a size, which is undefined.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">POSIX</a>, a record with an empty value deletes any header block field of the same name, and a value in a global header <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">applies</a> to every file after it. So <code>size=</code> can be seen as deleting the size of <code>a</code>, whose size in the header is then <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">ignored</a>, so that <code>a</code> does not have a size. It can also be seen as an empty size, <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=If%20there%20is%20a%20typeflag%20g%20global%20extended%20header%20record%2C%20the%20affected%20attribute%20shall%20be%20assigned%20the%20%3Cvalue%3E">assigned</a> to <code>a</code>, or as a record that deletes only earlier global values, so that the size in the header stands. This case is ambiguous because <code>a</code> has no size (and is invalid), the size 0 (and <code>smuggled</code> is a member), or the size 512 (and the next block is its data).</p>
 <p><strong>Decision point:</strong> what an empty size in a global header deletes.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,10 +55,13 @@ An empty `size` in a global pax header: does it delete the size of every later m
 The archive has a global header, typeflag `g`, with the one record `size=`, then a file `a` with the
 size 512 in its header, then an empty file `smuggled`.
 
-POSIX says that a record with an empty value deletes any header block field of the
-same name, and a value in a global header applies to every file after it. So `size=`
-deletes the size of `a`, and the size in its header is to be ignored, which leaves
-`a` without a size, which is undefined.
+In POSIX, a record with an empty value deletes any header block field of the same
+name, and a value in a global header applies to every file after it. So `size=` can be
+seen as deleting the size of `a`, whose size in the header is then ignored, so that
+`a` does not have a size. It can also be seen as an empty size, assigned to `a`, or as
+a record that deletes only earlier global values, so that the size in the header stands. This case
+is ambiguous because `a` has no size (and is invalid), the size 0 (and `smuggled` is a member), or
+the size 512 (and the next block is its data).
 
 Decision point: what an empty size in a global header deletes.
 Seen in: none of the scanned tarballs.
