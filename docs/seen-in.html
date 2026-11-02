@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/seen-in.html">
 <meta property="og:url" content="https://stoppels.ch/tar/seen-in.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/7aa6bc8588ef0dae.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/b51f1f1880d3e491.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of every case of the test suite">
@@ -30,7 +30,7 @@ file scanned: for some, a copy from the ecosystem's mirror. For RubyGems, it is 
 gem, and the tarball scanned is the <code>data.tar.gz</code> in it. Some are binaries, such as NVIDIA's
 cuDNN in Spack, and the few built distributions in the PyPI sample. Each has an example from it where the scan recorded one.</p>
 <h2 id="rejected">Rejected by the default policy<a class="anchor" href="#rejected" aria-label="Link to this section">¶</a></h2>
-<p>All 170 tarballs that the default policy rejects, by why. A tarball with more than
+<p>All 168 tarballs that the default policy rejects, by why. A tarball with more than
 one reason is listed under each.</p>
 <div class="wide"><table class="reasons"><colgroup><col style="width: 80%"><col style="width: 20%"></colgroup><tr><th>why</th><th class=n>tarballs</th></tr>
 <tr><td><a href="#why-tree-duplicate-file-file">the same file twice</a> (<a href="S07.html">S07</a>, <a href="S09.html">S09</a>)</td><td class=n>87</td></tr>
@@ -48,7 +48,6 @@ one reason is listed under each.</p>
 <tr><td><a href="#why-name-absolute">an absolute name</a> (<a href="N12.html">N12</a>)</td><td class=n>3</td></tr>
 <tr><td><a href="#why-name-not-utf8">a name that is not UTF-8</a> (<a href="N18.html">N18</a>)</td><td class=n>2</td></tr>
 <tr><td><a href="#why-format-star">star&#x27;s prefix field</a> (<a href="N10.html">N10</a>)</td><td class=n>2</td></tr>
-<tr><td><a href="#why-symlink-escapes">a symlink that points out of the archive</a> (<a href="N35.html">N35</a>)</td><td class=n>2</td></tr>
 <tr><td><a href="#why-linkname-on-dir">a link target on a member that is not a link</a> (<a href="K02.html">K02</a>)</td><td class=n>1</td></tr>
 <tr><td><a href="#why-pax-key-in-two-headers-libarchive-xattr">a pax key in two extended headers of one member</a></td><td class=n>1</td></tr>
 <tr><td><a href="#why-pax-repeated-key">a pax key twice in one extended header</a> (<a href="N20.html">N20</a>)</td><td class=n>1</td></tr>
@@ -287,10 +286,6 @@ one reason is listed under each.</p>
 <div class="wide"><table class="seen"><colgroup><col style="width: 55%"><col style="width: 12%"><col style="width: 33%"></colgroup><tr><th>tarball</th><th>packaged by</th><th>example from the tarball</th></tr>
 <tr><td><a href="https://download.oracle.com/berkeley-db/db-18.1.40.tar.gz" rel="nofollow">berkeley-db 18.1.40</a><span class="hash">sha256 <code>0cecb2ef0c67b166de93732769abdeba0555086d51de1090df325e18ee8da9c8</code></span></td><td>Spack</td><td><code>db-18.1.40/</code></td></tr>
 <tr><td><a href="https://ftpmirror.gnu.org/ncurses/ncurses-5.9.tar.gz" rel="nofollow">ncurses 5.9</a><span class="hash">sha256 <code>9046298fb440324c9d4135ecea7879ffed8546dd1b58e59430ea07a4633f563b</code></span></td><td>Spack</td><td><code>ncurses-5.9/</code></td></tr></table></div>
-<h3 id="why-symlink-escapes"><span id="N35"></span>A symlink that points out of the archive (<a href="N35.html">N35</a>): 2<a class="anchor" href="#why-symlink-escapes" aria-label="Link to this section">¶</a></h3>
-<div class="wide"><table class="seen"><colgroup><col style="width: 55%"><col style="width: 12%"><col style="width: 33%"></colgroup><tr><th>tarball</th><th>packaged by</th><th>example from the tarball</th></tr>
-<tr><td><a href="https://files.pythonhosted.org/packages/81/39/b77545058ab699b9d88667842a2cfaf8b783dee84d495e5447e27aefb259/proteomics_runtime-0.3.8.tar.gz" rel="nofollow">proteomics-runtime 0.3.8</a><span class="hash">sha256 <code>6a479524573ec88d966e051155768624abc3190de3a40855db9e5001ca984c8a</code></span></td><td>PyPI</td><td><code>proteomics_runtime-0.3.8/LICENSE</code></td></tr>
-<tr><td><a href="https://files.pythonhosted.org/packages/27/ac/afd099bc8f2ac127b84146a4669cc7c634f4867829a3bf7b02b3202f7a42/snowpark_checkpoints-0.1.0rc1.tar.gz" rel="nofollow">snowpark-checkpoints 0.1.0rc1</a><span class="hash">sha256 <code>bec39e4e021ae8ff8fec6340f3801cb0a7b95a615bfd8742f51b8c7e4cbdfb59</code></span></td><td>PyPI</td><td><code>snowpark_checkpoints-0.1.0rc1/snowflake/snowpark_checkpoints_collector/utils/telemetry.py</code></td></tr></table></div>
 <h3 id="why-linkname-on-dir"><span id="K02"></span>A link target on a member that is not a link (<a href="K02.html">K02</a>): 1<a class="anchor" href="#why-linkname-on-dir" aria-label="Link to this section">¶</a></h3>
 <div class="wide"><table class="seen"><colgroup><col style="width: 55%"><col style="width: 12%"><col style="width: 33%"></colgroup><tr><th>tarball</th><th>packaged by</th><th>example from the tarball</th></tr>
 <tr><td><a href="https://enkre.net/cgi-bin/code/bgen/tarball/6ac2d582f9/BGEN-6ac2d582f9.tar.gz" rel="nofollow">bgen 1.1.7</a><span class="hash">sha256 <code>121f5956f04ad174bc410fa7deed59e2ebff0ec818a3c66cf5d667357dddfb62</code></span></td><td>Spack</td><td><code>BGEN-6ac2d582f9/doc/wiki</code></td></tr></table></div>
@@ -477,6 +472,10 @@ as random, and the same on every run.</p>
 <tr><td><a href="https://rubygems.org/gems/fenton_shell-0.1.0.gem" rel="nofollow">fenton_shell 0.1.0</a><span class="hash">sha256 <code>2c29be5df622765cc6539910281748cd55ed9610ee43da8a46c3fbb57a54cb0a</code></span></td><td>RubyGems</td><td><code>lib/Icon\x0d</code></td></tr>
 <tr><td><a href="https://github.com/NOAA-EMC/wgrib2/archive/refs/tags/v3.6.0.tar.gz" rel="nofollow">wgrib2 3.6.0</a><span class="hash">sha256 <code>55913cb58f2b329759de17f5a84dd97ad1844d7a93956d245ec94f4264d802be</code></span></td><td>Spack</td><td><code>wgrib2-3.6.0/docs/web_docs/jj\x7f\x7f\x7f</code></td></tr>
 <tr><td><a href="https://github.com/NOAA-EMC/wgrib2/archive/refs/tags/v3.8.0.tar.gz" rel="nofollow">wgrib2 3.8.0</a><span class="hash">sha256 <code>39faebada36da5457c75f0980bb68fa299b221b3e6b335bb7d29006a35830c54</code></span></td><td>Spack</td><td><code>wgrib2-3.8.0/docs/web_docs/jj\x7f\x7f\x7f</code></td></tr></table></div>
+<h3 id="N35"><a href="N35.html"><code>N35</code></a> symlink-escapes: 2 of 2<a class="anchor" href="#N35" aria-label="Link to this section">¶</a></h3>
+<div class="wide"><table class="seen"><colgroup><col style="width: 55%"><col style="width: 12%"><col style="width: 33%"></colgroup><tr><th>tarball</th><th>packaged by</th><th>example from the tarball</th></tr>
+<tr><td><a href="https://files.pythonhosted.org/packages/81/39/b77545058ab699b9d88667842a2cfaf8b783dee84d495e5447e27aefb259/proteomics_runtime-0.3.8.tar.gz" rel="nofollow">proteomics-runtime 0.3.8</a><span class="hash">sha256 <code>6a479524573ec88d966e051155768624abc3190de3a40855db9e5001ca984c8a</code></span></td><td>PyPI</td><td><code>proteomics_runtime-0.3.8/LICENSE</code></td></tr>
+<tr><td><a href="https://files.pythonhosted.org/packages/27/ac/afd099bc8f2ac127b84146a4669cc7c634f4867829a3bf7b02b3202f7a42/snowpark_checkpoints-0.1.0rc1.tar.gz" rel="nofollow">snowpark-checkpoints 0.1.0rc1</a><span class="hash">sha256 <code>bec39e4e021ae8ff8fec6340f3801cb0a7b95a615bfd8742f51b8c7e4cbdfb59</code></span></td><td>PyPI</td><td><code>snowpark_checkpoints-0.1.0rc1/snowflake/snowpark_checkpoints_collector/utils/telemetry.py</code></td></tr></table></div>
 
 <hr class="wide">
 <footer class="wide">Last updated <time datetime="2026-11-02">2026-11-02</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>

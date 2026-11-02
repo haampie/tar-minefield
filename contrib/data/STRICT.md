@@ -49,7 +49,7 @@ Fixed: the median mtime is one that a producer writes in place of the real one, 
 
 ## What each policy rejects
 
-**The default policy rejects 170 of 82,586 release tarballs (0.21%); rejecting every criterion would reject 1431 (1.73%).** The criterion that rejects the most tarballs on its own is `tree.duplicate.file-file` of the default policy, and `number.*.leading-space` of every criterion.
+**The default policy rejects 168 of 82,586 release tarballs (0.20%); rejecting every criterion would reject 1431 (1.73%).** The criterion that rejects the most tarballs on its own is `tree.duplicate.file-file` of the default policy, and `number.*.leading-space` of every criterion.
 
 | ecosystem | tarballs | GB | rejected: every criterion | rejected: default policy |
 |---|---:|---:|---:|---:|
@@ -57,10 +57,10 @@ Fixed: the median mtime is one that a producer writes in place of the real one, 
 | guix | 10,168 | 76.5 | 354 (3.48%) | 28 (0.28%) |
 | live-bootstrap | 171 | 1.1 | 8 (4.68%) | 0 (0.00%) |
 | nix | 18,990 | 77.7 | 682 (3.59%) | 74 (0.39%) |
-| pypi | 10,000 | 7.9 | 44 (0.44%) | 19 (0.19%) |
+| pypi | 10,000 | 7.9 | 44 (0.44%) | 17 (0.17%) |
 | rubygems | 5,000 | 1.0 | 22 (0.44%) | 6 (0.12%) |
 | spack | 37,553 | 1,080.9 | 551 (1.47%) | 58 (0.15%) |
-| **all, distinct** | 82,586 | 1,225.4 | 1,431 (1.73%) | 170 (0.21%) |
+| **all, distinct** | 82,586 | 1,225.4 | 1,431 (1.73%) | 168 (0.20%) |
 
 ## The default policy
 
@@ -74,6 +74,7 @@ The strict criteria that the default policy lets through, and how; it rejects al
 | `name.double-slash` | normalize | `a//b` is `a/b` | 2 |
 | `hardlink.target-spelled-differently` | normalize | a hardlink to `./a` is one to `a` | 0 |
 | `symlink.absolute` | accept | created as it is: writing through a symlink is rejected | 89 |
+| `symlink.escapes` | accept | created as it is: writing through a symlink is rejected | 2 |
 | `end.data-after` | accept | junk after the two zero blocks is ignored | 25 |
 | `end.missing` | accept | implementations that extract it extract the same tree | 22 |
 | `pax-global.after-members` | accept | if every global header has only a `comment` | 82 |
@@ -113,7 +114,7 @@ Tarballs that each criterion rejects, per ecosystem. Default: what the default p
 | name | `format.star`: star's prefix field | reject | 0 | 0 | 0 | 0 | 0 | 0 | 2 (0.01%) | 2 | berkeley-db@18.1.40, ncurses@5.9 |
 | name | `name.double-slash`: a name like `a//b` | normalize | 0 | 0 | 0 | 1 (0.01%) | 0 | 0 | 1 (0.00%) | 1 | ghc@9.0.2-x86_64-deb10-linux, shapemapper@2.1.5 |
 | name | `name.not-utf8`: a name that is not UTF-8 | reject | 0 | 0 | 0 | 2 (0.01%) | 0 | 0 | 0 | 2 | aspell-is@0.51.1-0, aspell-nb@0.50.1-0 |
-| name | `symlink.escapes`: a symlink that points out of the archive | reject | 0 | 0 | 0 | 0 | 2 (0.02%) | 0 | 0 | 2 | proteomics-runtime@0.3.8, snowpark-checkpoints@0.1.0rc1 |
+| name | `symlink.escapes`: a symlink that points out of the archive | accept | 0 | 0 | 0 | 0 | 2 (0.02%) | 0 | 0 | 2 | proteomics-runtime@0.3.8, snowpark-checkpoints@0.1.0rc1 |
 | name | `pax.key-in-two-headers.LIBARCHIVE.xattr.*`: a pax key in two extended headers of one member | reject | 0 | 1 (0.01%) | 0 | 0 | 0 | 0 | 0 | 0 | libmygpo-qt.1.2.0 |
 | name | `pax.key-in-two-headers.SCHILY.xattr.*`: a pax key in two extended headers of one member | reject | 0 | 1 (0.01%) | 0 | 0 | 0 | 0 | 0 | 0 | libmygpo-qt.1.2.0 |
 | name | `pax.repeated-key`: a pax key twice in one extended header | reject | 0 | 1 (0.01%) | 0 | 0 | 0 | 0 | 0 | 0 | libmygpo-qt.1.2.0 |

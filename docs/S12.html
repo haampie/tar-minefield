@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, then a file <code>a/b</code>, whose name refers to <code>a</code> as a directory.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=if%20intermediate%20directories%20are%20necessary%20to%20extract%20an%20archive%20member">POSIX</a>, the directory <code>a</code> that <code>a/b</code> needs is made as with <code>mkdir()</code>, which fails as <code>a</code> exists, so <code>a</code> is kept, <code>a/b</code> is not created, and pax writes a <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">&quot;diagnostic message&quot;</a>. This case is ambiguous in practice because a reader that replaces the file <code>a</code> with a directory extracts <code>a/b</code> as well.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=if%20intermediate%20directories%20are%20necessary%20to%20extract%20an%20archive%20member">POSIX</a>, the directory <code>a</code> that <code>a/b</code> needs is made as with <code>mkdir()</code>, which fails as <code>a</code> exists, so <code>a</code> is kept, <code>a/b</code> is not created, and a <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">&quot;diagnostic message&quot;</a> is written. This case is ambiguous in practice because a reader that replaces the file <code>a</code> with a directory extracts <code>a/b</code> as well.</p>
 <p><strong>Decision point:</strong> whether a member under a file replaces it.</p>
 <p><strong>Seen in:</strong> sendmail 8.18.2 and unclutter 8, where the file is a v7 directory named <code>a/</code>.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,9 +55,9 @@ A member under a file.
 The archive has a file `a`, then a file `a/b`, whose name refers to `a` as a directory.
 
 In POSIX, the directory `a` that `a/b` needs is made as with `mkdir()`, which fails
-as `a` exists, so `a` is kept, `a/b` is not created, and pax writes a &quot;diagnostic
-message&quot;. This case is ambiguous in practice because a reader that replaces the file
-`a` with a directory extracts `a/b` as well.
+as `a` exists, so `a` is kept, `a/b` is not created, and a &quot;diagnostic message&quot; is
+written. This case is ambiguous in practice because a reader that replaces the file `a` with a
+directory extracts `a/b` as well.
 
 Decision point: whether a member under a file replaces it.
 Seen in: sendmail 8.18.2 and unclutter 8, where the file is a v7 directory named `a/`.

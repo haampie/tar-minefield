@@ -66,6 +66,7 @@ extracted by every implementation.
 | [N06](https://stoppels.ch/tar/N06.html) name-leading-dot-slash | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
 | [N07](https://stoppels.ch/tar/N07.html) symlink-absolute | ➕ | ➕ | ➕ | ❌A | ➖ | ➕ | ➕ | ❌B | ➖ | ➖ | ❌C | ➖ | ❌C | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➖ | ➖ | ➕ | ➕ | ➕ |
 | [N15](https://stoppels.ch/tar/N15.html) name-control-character | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
+| [N35](https://stoppels.ch/tar/N35.html) symlink-escapes | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➕ | ❌A | ➖ | ➖ | ❌B | ➖ | ❌B | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➖ | ➖ | ➕ | ➕ | ➕ |
 | [S16](https://stoppels.ch/tar/S16.html) hardlink-target-spelled-differently | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ❌B | ➕ | ➕ | ➕ | ➕ | ➖ | ❌B |
 | **to reject: framing** | | | | | | | | | | | | | | | | | | | | | | | | |
 | [F03](https://stoppels.ch/tar/F03.html) end-lone-zero-block | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A |
@@ -126,7 +127,6 @@ extracted by every implementation.
 | [N32](https://stoppels.ch/tar/N32.html) linkname-not-utf8 | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️C | ⚠️B | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️D | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ |
 | [N33](https://stoppels.ch/tar/N33.html) type-solaris-extended | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️B | ⚠️A | ✅ | ⚠️C | ✅ | ⚠️B | ⚠️C | ✅ | ⚠️B | ⚠️B |
 | [N34](https://stoppels.ch/tar/N34.html) pax-linkpath-empty | ✅ | ⚠️A | ✅ | ⚠️B | ⚠️C | ⚠️D | ⚠️D | ⚠️D | ✅ | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ✅ | ⚠️D | ✅ | ⚠️A | ✅ | ✅ | ⚠️E | ⚠️E |
-| [N35](https://stoppels.ch/tar/N35.html) symlink-escapes | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️C | ✅ | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A |
 | [N36](https://stoppels.ch/tar/N36.html) pax-gnu-sparse | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️C | ⚠️C | ⚠️C | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️D | ⚠️D |
 | **to reject: kinds** | | | | | | | | | | | | | | | | | | | | | | | | |
 | [K01](https://stoppels.ch/tar/K01.html) kind-trailing-slash-file | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A |
@@ -147,7 +147,7 @@ extracted by every implementation.
 | [S13](https://stoppels.ch/tar/S13.html) hardlink-empty-target | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️ | ✅ | ✅ | ⚠️ | ✅ | ⚠️B |
 | [S14](https://stoppels.ch/tar/S14.html) tree-symlink-then-dir | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️C | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️B |
 | [S15](https://stoppels.ch/tar/S15.html) tree-file-then-hardlink | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️C |
-| **total** | ✅32 ➕14 ⚠️55 | ✅34 ➕14 ⚠️53 | ✅22 ➕13 ⚠️65 ❌1 | ✅24 ➕12 ➖1 ⚠️63 ❌1 | ✅30 ➕13 ➖1 ⚠️57 | ✅28 ➕14 ⚠️59 | ✅26 ➕14 ⚠️58 💥3 | ✅16 ➕13 ⚠️70 ❌2 | ✅30 ➕13 ➖1 ⚠️56 ❌1 | ✅34 ➕12 ➖2 ⚠️53 | ✅26 ➕12 ⚠️59 ❌4 | ✅55 ➕12 ➖2 ⚠️31 ❌1 | ✅21 ➕10 ➖2 ⚠️63 ❌5 | ✅32 ➕14 ⚠️55 | ✅30 ➕14 ⚠️57 | ✅40 ➕13 ➖1 ⚠️47 | ✅72 ➕6 ➖8 ⚠️15 | ✅24 ➕10 ➖2 ⚠️59 ❌6 | ✅23 ➕14 ⚠️63 ❌1 | ✅23 ➕12 ➖1 ⚠️61 ❌4 | ✅36 ➕9 ➖4 ⚠️49 ❌3 | ✅49 ➕14 ⚠️38 | ✅22 ➕8 ➖2 ⚠️53 ❌13 💥3 | ✅11 ➕8 ➖1 ⚠️64 ❌14 💥3 |
+| **total** | ✅32 ➕15 ⚠️54 | ✅34 ➕15 ⚠️52 | ✅22 ➕14 ⚠️64 ❌1 | ✅23 ➕12 ➖2 ⚠️63 ❌1 | ✅29 ➕13 ➖2 ⚠️57 | ✅28 ➕15 ⚠️58 | ✅26 ➕15 ⚠️57 💥3 | ✅16 ➕13 ⚠️69 ❌3 | ✅29 ➕13 ➖2 ⚠️56 ❌1 | ✅33 ➕12 ➖3 ⚠️53 | ✅26 ➕12 ⚠️58 ❌5 | ✅54 ➕12 ➖3 ⚠️31 ❌1 | ✅21 ➕10 ➖2 ⚠️62 ❌6 | ✅32 ➕15 ⚠️54 | ✅30 ➕15 ⚠️56 | ✅40 ➕14 ➖1 ⚠️46 | ✅71 ➕6 ➖9 ⚠️15 | ✅23 ➕10 ➖3 ⚠️59 ❌6 | ✅23 ➕15 ⚠️62 ❌1 | ✅22 ➕12 ➖2 ⚠️61 ❌4 | ✅35 ➕9 ➖5 ⚠️49 ❌3 | ✅49 ➕15 ⚠️37 | ✅22 ➕9 ➖2 ⚠️52 ❌13 💥3 | ✅11 ➕9 ➖1 ⚠️63 ❌14 💥3 |
 
 ## Trees
 
@@ -167,6 +167,7 @@ What the implementations that accept a case extract, where it is not the expecte
 - F42 pax-comment-not-utf8: A: `PaxHeader` (14 B, eeb3db03), `a` (2 B, 87428fc5)
 - F43 pax-global-comment-not-utf8: A: `a` (2 B, 87428fc5), `pax_global_header` (14 B, eeb3db03)
 - N07 symlink-absolute: A: `link` → `DEST/tar-minefield-nonexistent`; B: `link` → `tar-minefield-nonexistent`; C: `link` (0 B, e3b0c442)
+- N35 symlink-escapes: A: nothing; B: `link` (0 B, e3b0c442)
 - S16 hardlink-target-spelled-differently: A: `a` (2 B, 87428fc5), `h` (0 B, e3b0c442); B: `a` (2 B, 87428fc5)
 - F03 end-lone-zero-block: A: `a` (2 B, 87428fc5)
 - F06 checksum-signed: A: `a` (2 B, 87428fc5)
@@ -224,7 +225,6 @@ What the implementations that accept a case extract, where it is not the expecte
 - N32 linkname-not-utf8: A: `link` → `caf\xe9`; B: `link` → `caf�`; C: `link` (0 B, e3b0c442); D: nothing
 - N33 type-solaris-extended: A: `from-x` (12 B, a578eb49); B: `PaxHeader` (15 B, 06d30be0), `from-header` (12 B, a578eb49); C: `from-header` (12 B, a578eb49)
 - N34 pax-linkpath-empty: A: `link` → `from-header`; B: `link` (0 B, e3b0c442); C: `link` → `.`; D: nothing; E: `PaxHeader` (13 B, 1d57417c), `link` → `from-header`
-- N35 symlink-escapes: A: `link` → `../escaped`; B: nothing; C: `link` (0 B, e3b0c442)
 - N36 pax-gnu-sparse: A: `a` (1026 B, f93a4465); B: `GNUSparseFile.0/`, `GNUSparseFile.0/a` (514 B, efc6219f); C: `GNUSparseFile.0/`, `GNUSparseFile.0/a` (1026 B, f93a4465); D: `GNUSparseFile.0/`, `GNUSparseFile.0/a` (514 B, efc6219f), `PaxHeader` (119 B, 4b963cc0)
 - K01 kind-trailing-slash-file: A: `a/`; B: `a` (0 B, e3b0c442)
 - K02 linkname-on-file: A: `a` (19 B, bc345849)
