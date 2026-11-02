@@ -1,0 +1,8 @@
+{
+ "id": "S16",
+ "verdict": "reject",
+ "description": "A hard link to `./a`, where the member is named `a`.",
+ "features": [
+  "hardlink.target-spelled-differently"
+ ]
+}
