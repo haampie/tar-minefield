@@ -1,4 +1,4 @@
-"""A size in the header of a hard link, in a pax archive, which takes the next header for its data.
+r"""A size in the header of a hard link, in a pax archive, which takes the next header for its data.
 
 The archive has a file `a`, then a hard link `h` to `a`, with a pax header and the size 512 in its
 header, then an empty file `smuggled`.
@@ -8,7 +8,7 @@ block after the header of `h` is its data, and what looks like the header of `sm
 data. POSIX does not say what the data of a hard link does: whether it replaces the contents of `a`,
 or is ignored. A reader that reads it as ustar, in which [no data][no-data] is stored for a hard
 link, reads `smuggled` as a member; the bytes do not say which it is. This case is ambiguous because
-the tree has `a` as it is, `a` with that block as its contents, or `a` and `smuggled`.
+the tree has `a` and its link `h`, which hold `a\n` or that block, or `a`, `h` and `smuggled`.
 
 Decision point: whether a size in the header of a hard link applies, in an archive with pax headers.
 Seen in: none of the scanned tarballs.

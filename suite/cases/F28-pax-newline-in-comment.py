@@ -5,9 +5,9 @@ The archive has a file `a`, whose header has the size 0 and whose pax header has
 
 pax records are delimited by their length, so a comment can contain newlines, and in
 [POSIX][comment] every comment is ignored: `a` has the size in its header, which is 0, and the next
-block is the header of `smuggled`. This case is not ambiguous. A reader that splits records on lines
-finds a second record, `size=512`, and takes the block for the data of `a`, but POSIX has no such
-reading.
+block is the header of `smuggled`. This case is not ambiguous. A reader that splits records on
+lines, and ignores their lengths, finds a second record, `size=512`, and takes the block for the
+data of `a`, but POSIX has no such reading.
 
 Seen in: none of the scanned tarballs. Newlines in pax values are only in xattrs, such as Minion
 10.31, which the default policy accepts as xattrs are not extracted.

@@ -5,9 +5,8 @@ NUL or a space after them, and whose data is the 10 bytes `0123456789`.
 
 In [POSIX][numeric], every numeric field is terminated by a space or a NUL, so a size of 12 digits
 has no room for its terminator. A reader that takes the whole field reads 10, octal 12; a reader
-that stops where the terminator should be reads the first 11 digits, 1. This case is ambiguous
-because `a` is `0123456789` or `0`; both fit in the one block of data, so the rest of the archive is
-read alike.
+that takes at most the 11 digits that ustar allows reads 1. This case is ambiguous because `a` is
+`0123456789` or `0`; both fit in the one block of data, so the rest of the archive is read alike.
 
 Decision point: whether a numeric field without a terminator is read to its end.
 Seen in: none of the scanned tarballs.

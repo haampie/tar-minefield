@@ -6,11 +6,13 @@ The archive has one member, `a`, of typeflag `S` in the GNU format, whose header
 one region, 2 bytes at offset 1024, and the real size 1026. Its data is those 2 bytes, `ab`.
 
 POSIX reserves the typeflags `A` to `Z` for custom implementations, and a reader that
-does not recognize one extracts the member as a regular file: `a`, of 2 bytes. GNU's
-format makes `a` a file of 1026 bytes, zeros but for the last two. The sparse map is where a ustar
-header has the end of its prefix, so a reader that takes the header for ustar also finds a name
-other than `a`. This case is ambiguous because `a` is the data as stored, or the file it expands
-to.
+does not recognize one extracts the member as a regular file, and reports an error:
+`a`, of 2 bytes. GNU's format makes `a` a file of 1026 bytes, zeros but for the last two. Its magic
+is GNU's, `ustar` followed by a space, so a reader of ustar does not take the header for one of its
+own; one that does finds the sparse map in the prefix field, which starts with a NUL and so is
+ignored, and the name is still `a`. This case is ambiguous because `a` is the data as
+stored, or the file it expands to, or there is no file, to a reader that rejects or skips a type it
+does not know.
 
 Decision point: whether a sparse member is expanded.
 Seen in: none of the scanned tarballs.

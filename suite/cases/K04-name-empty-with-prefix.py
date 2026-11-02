@@ -5,9 +5,10 @@ field, and the prefix `dir`.
 
 In [POSIX][prefix], the pathname is the prefix, followed by `/`, followed by the name, which here
 is `dir/`, a name that [resolves only to a directory][trailing-slash]. But the member is a regular
-file, and a reader that finds the name field empty can take the member for one without a name
-before it looks at the prefix. This case is ambiguous because the member is a directory `dir`, by
-its slash, an empty file `dir`, by its typeflag, or a member without a name.
+file, which cannot be created at a name that ends in a slash. This case is ambiguous because the
+member is a directory `dir`, by its slash, an empty file `dir`, by its typeflag, or, as POSIX has
+it, an [error][cannot-create]; a reader that stops at the empty name field, against POSIX's rule
+for the prefix, sees no member at all.
 
 Decision point: whether a prefix makes a name of an empty name field, and whether the typeflag or
 the trailing slash decides the kind.

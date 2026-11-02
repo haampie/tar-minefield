@@ -4,16 +4,16 @@ The archive has one file, `a`, whose prefix field has the prefix `dir`, followed
 131, followed by `15000000000 15000000000 `, which reads as two times; and whose header has `tar\0`
 at offset 508, as star's own format puts it there.
 
-star's own format splits the [prefix][prefix] field: 131 bytes for the prefix, then the access and
-change times, in octal. star ends a prefix with a NUL, as here, so a reader that takes the prefix up
-to its first NUL, as POSIX does, reads the name `dir/a`, the same as a reader of star's format. This
-case is ambiguous because the times are bytes of the prefix field after its NUL: a reader that does
-not stop at the NUL reads them as part of the prefix, as some readers do with the bytes after the NUL
-of a name.
+star's own format splits the prefix field: 131 bytes for the prefix, then the access and change
+times, in octal. star ends a prefix with a NUL, as here, so a reader that takes the prefix up to its
+first NUL, [as POSIX does][prefix], reads the name `dir/a`, the same as a reader of star's format.
 
-Decision point: whether `tar\0` at offset 508 makes the prefix field shorter, and whether the bytes
-after its NUL count.
-Seen in: berkeley-db 18.1.40 and ncurses 5.9, which are in star's format.
+The bytes after that NUL are star's times, which a reader of the whole field takes into the name,
+and then fails to create, so a strict parser rejects them rather than guess what they are for.
+
+Decision point: whether the bytes after the NUL of a prefix count.
+Seen in: berkeley-db 18.1.40 and ncurses 5.9, which are in star's format; the scan does not record
+whether a member has a non-empty prefix.
 See also: N10, a prefix that runs into star's times, and N14, bytes after the NUL of a name.
 """
 

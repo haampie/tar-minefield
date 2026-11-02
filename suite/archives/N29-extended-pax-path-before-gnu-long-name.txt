@@ -2,15 +2,16 @@ N29-extended-pax-path-before-gnu-long-name: must reject
 
 A pax `path`, then a GNU long name, then the member: which name does it get?
 
-The archive has a pax header with `path=from-pax`, then a GNU long name `from-gnu`, then a file whose
-header has the name `from-header`.
+The archive has a pax header with `path=from-pax`, then a GNU long name `from-gnu`, then a file
+whose header has the name `from-header`.
 
 In POSIX, an extended header applies to the file that follows it, which here is the GNU
 long name: a typeflag `L`, which POSIX does not define, and so extracts as a regular
-file. Read by POSIX alone, the archive has a file `from-pax`, which holds the long
-name, and the member `from-header`. A reader that knows GNU long names gives the member one of the
-two long names instead. This case is ambiguous because the member is `from-pax`, `from-gnu` or
-`from-header`, with or without a file `from-pax` beside it.
+file, with an error. Read by POSIX alone, the archive has a file `from-pax`, which
+holds the long name, and the member `from-header`. Most readers that know GNU long names give the
+member one of the two long names instead; RubyGems keeps `from-header`. This case is ambiguous
+because the member is `from-pax` or `from-gnu`, to a reader that knows GNU long names, or
+`from-header`, alone or after a file `from-pax` that holds the long name.
 
 Decision point: which of several sources gives a member its name, and whether a pax header applies
 to a GNU long name.

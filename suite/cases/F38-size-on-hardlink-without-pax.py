@@ -1,19 +1,21 @@
-"""A size in the header of a hard link, in an archive without pax headers: ustar or pax?
+r"""A size in the header of a hard link, in an archive without pax headers: ustar or pax?
 
 The archive has a file `a`, then a hard link `h` to `a`, with the size 512 in its header, then an
 empty file `smuggled`. No header of the archive is a pax header.
 
-The bytes are the same whether the archive is read as ustar or as pax, as the [physical
-layout][same-layout] of pax is that of ustar, and a reader [detects][detected] the format. In ustar,
-[no data][no-data] is stored for a hard link, so the block after the header of `h` is the header of
-`smuggled`; in pax, [data][link-data] follows a hard link whose size is not zero, so that block is
-the data of `h`. This case is ambiguous because nothing in the archive says which format it is: the
-tree has `a` and `smuggled`, or `a` alone, as it is or with that block as its contents.
+The [physical layout][same-layout] of pax is that of ustar, so the archive reads as either, and a
+reader [detects][detected] the format. In ustar, the size of a hard link [shall be
+zero][link-size-zero], and [no data][no-data] is stored for it, so the block after the header of
+`h` is the header of `smuggled`; in pax, [data][link-data] follows a hard link whose size is not
+zero, so that block is the data of `h`. The size is valid only in pax, but ustar and pax have the
+same magic, and nothing else in the archive says which format it is. This case is ambiguous
+because the tree has `a`, its link `h` and `smuggled`, or `a` and `h` alone, which hold `a\n` or
+that block.
 
 Decision point: whether a size in the header of a hard link applies, in an archive without pax
 headers.
 Seen in: none of the scanned tarballs.
-See also: F34, the same in an archive with a pax header, which settles the format.
+See also: F34, the same in an archive with a pax header, which marks it as pax.
 """
 
 VERDICT = "reject"
