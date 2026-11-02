@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a symlink <code>link</code>, whose header has the target <code>caf\xe9</code>, <code>café</code> in Latin-1, and which has no pax header.</p>
-<p>The fields of a ustar header are bytes, and in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20characters%20in%20the%20header%20logical%20record%20shall%20be%20represented%20in%20the%20coded%20character%20set">POSIX</a> the characters of a header are those of ISO/IEC 646, of which <code>\xe9</code> is not one, so the archive does not conform, and POSIX leaves the encoding of other characters in names to the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=characters%20outside%20of%20%3Cslash%3E%20and%20the%20portable%20filename%20character%20set">implementation</a>. A reader decodes the target as UTF-8, as another encoding, or not at all. This case is ambiguous because the target is the bytes as they are, <code>caf\xe9</code>, or a decoding of them, such as <code>café</code> or <code>caf</code> followed by U+FFFD.</p>
+<p>The fields of a ustar header are bytes, and in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20characters%20in%20the%20header%20logical%20record%20shall%20be%20represented%20in%20the%20coded%20character%20set">POSIX</a> the characters of a header are those of ISO/IEC 646, of which <code>\xe9</code> is not one, so the archive does not conform, and the encoding of other characters in names is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=characters%20outside%20of%20%3Cslash%3E%20and%20the%20portable%20filename%20character%20set">implementation-defined</a>. A reader decodes the target as UTF-8, as another encoding, or not at all. This case is ambiguous because the target is the bytes as they are, <code>caf\xe9</code>, or a decoding of them, such as <code>café</code> or <code>caf</code> followed by U+FFFD.</p>
 <p><strong>Decision point:</strong> how a link target that is not UTF-8 is decoded.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -56,11 +56,10 @@ The archive has a symlink `link`, whose header has the target `caf\xe9`, `café`
 which has no pax header.
 
 The fields of a ustar header are bytes, and in POSIX the characters of a header are
-those of ISO/IEC 646, of which `\xe9` is not one, so the archive does not conform, and POSIX leaves
-the encoding of other characters in names to the implementation. A reader decodes
-the target as UTF-8, as another encoding, or not at all. This case is ambiguous because the target
-is the bytes as they are, `caf\xe9`, or a decoding of them, such as `café` or `caf` followed by
-U+FFFD.
+those of ISO/IEC 646, of which `\xe9` is not one, so the archive does not conform, and the encoding
+of other characters in names is implementation-defined. A reader decodes the target
+as UTF-8, as another encoding, or not at all. This case is ambiguous because the target is the bytes
+as they are, `caf\xe9`, or a decoding of them, such as `café` or `caf` followed by U+FFFD.
 
 Decision point: how a link target that is not UTF-8 is decoded.
 Seen in: none of the scanned tarballs.

@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one member, <code>a</code>, of typeflag <code>S</code> in the GNU format, whose header has a sparse map of one region, 2 bytes at offset 1024, and the real size 1026. Its data is those 2 bytes, <code>ab</code>.</p>
-<p>POSIX reserves the typeflags <code>A</code> to <code>Z</code> for <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=are%20reserved%20for%20custom%20implementations">custom implementations</a>, and a reader that does not support it should extract the member <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file">as a regular file</a> <code>a</code> of 2 bytes. As a GNU sparse file, <code>a</code> is extracted as 1024 zero bytes, followed by <code>ab</code>.</p>
+<p>In POSIX, the typeflags <code>A</code> to <code>Z</code> are reserved for <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=are%20reserved%20for%20custom%20implementations">custom implementations</a>, and a reader that does not support it should extract the member <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file">as a regular file</a> <code>a</code> of 2 bytes. As a GNU sparse file, <code>a</code> is extracted as 1024 zero bytes, followed by <code>ab</code>.</p>
 <p><strong>Decision point:</strong> whether a sparse member is expanded.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,9 +55,9 @@ An old GNU sparse file, typeflag `S`: the data as stored, or the file it expands
 The archive has one member, `a`, of typeflag `S` in the GNU format, whose header has a sparse map of
 one region, 2 bytes at offset 1024, and the real size 1026. Its data is those 2 bytes, `ab`.
 
-POSIX reserves the typeflags `A` to `Z` for custom implementations, and a reader that
-does not support it should extract the member as a regular file `a` of 2 bytes. As a
-GNU sparse file, `a` is extracted as 1024 zero bytes, followed by `ab`.
+In POSIX, the typeflags `A` to `Z` are reserved for custom implementations, and a
+reader that does not support it should extract the member as a regular file `a` of 2
+bytes. As a GNU sparse file, `a` is extracted as 1024 zero bytes, followed by `ab`.
 
 Decision point: whether a sparse member is expanded.
 Seen in: none of the scanned tarballs.
