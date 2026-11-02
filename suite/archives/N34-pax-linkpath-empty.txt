@@ -8,17 +8,17 @@ the target `from-header`.
 In POSIX, a `linkpath` record overrides the `linkname` field of the header, a record
 with an empty value deletes any field of the header of the same name, and a field of
 the header that a keyword overrides or deletes is ignored. The header does not have
-a field named `linkpath`. So, if the empty value deletes by name, it deletes only the record, and
-the target comes from the header: `from-header`. If it deletes the field that the
-record overrides, `linkname` goes too, and the symlink is left without a target. If the record is
-applied like any other, its empty value becomes the target. This case is ambiguous
-because the target is `from-header`, missing, or empty.
+a field named `linkpath`. So, if deletion goes by the name of the keyword, `linkpath=` deletes
+nothing in the header, and the target comes from the header: `from-header`. If it
+goes by the header field that the keyword overrides, `linkname` goes too, and the symlink is left
+without a target. If the record is applied like any other, its empty value becomes the
+target. This case is ambiguous because the target is `from-header`, missing, or empty.
 
 Decision point: what an empty pax link path means: no target, an empty target, or the header's.
 Seen in: none of the scanned tarballs.
 See also: N22, an empty pax `path`, and N25, a symlink with an empty target.
 
-0x000000  header: pax extended header, linkpath=, which removes the target
+0x000000  header: pax extended header, linkpath=, an empty target
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

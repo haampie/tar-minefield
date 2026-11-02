@@ -5,12 +5,12 @@ The archive has one member, whose pax header has `GNU.sparse.major=1`, `GNU.spar
 map of one region, 2 bytes at offset 1024, as the lines `1`, `1024` and `2` padded with NULs to a
 block, followed by those 2 bytes, `ab`.
 
-In POSIX, keys such as GNU's are allowed as extensions, but not defined, so a reader that ignores
-them applies the pax [`path`][path], and extracts `GNUSparseFile.0/a`, which contains the map and
-the data. As a GNU sparse file, the member is extracted as a file `a` that contains 1024 zero bytes,
-followed by `ab`. This case is ambiguous because the member is the data as stored, under its pax
-`path`, or the file it expands to, under `GNU.sparse.name`, or even the expanded file under the pax
-`path`.
+In POSIX, keywords such as GNU's are [implementation extensions][keyword-extension], which are not
+defined, so a reader that ignores them applies the pax [`path`][path], and extracts
+`GNUSparseFile.0/a`, which contains the map and the data. As a GNU sparse file, the member is
+extracted as a file `a` that contains 1024 zero bytes, followed by `ab`. This case is ambiguous
+because the member is the data as stored, under its pax `path`, or the file it expands to, under
+`GNU.sparse.name`, or even the expanded file under the pax `path`.
 
 Decision point: whether a sparse member is expanded, and which of its names it gets.
 Seen in: none of the scanned tarballs.

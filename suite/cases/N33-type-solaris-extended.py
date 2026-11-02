@@ -20,6 +20,6 @@ FEATURES = ["type.solaris-extended"]
 
 
 def build(a):
-    a.pax([(b"path", b"from-x")], typeflag=b"X", note="typeflag X, as Solaris tar wrote it")
+    a.pax([(b"path", b"from-x")], typeflag=b"X", note="typeflag X, as Solaris tar writes it")
     a.file(b"from-header", b"which name?\n")
     a.end()

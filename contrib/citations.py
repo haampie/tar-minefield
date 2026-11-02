@@ -49,6 +49,7 @@ SENTENCES = {
     "no-data": (USTAR, "No data logical records are stored for types 1, 2, or 5"),
     "unknown-type": (USTAR, "the file shall be extracted as if it were a regular file"),
     "custom-type": (USTAR, "are reserved for custom implementations"),
+    "keyword-extension": (PAX_EXTENDED, "or a keyword provided as an implementation extension"),
     "detected": (DESCRIPTION, "The archive formats described in the EXTENDED DESCRIPTION section "
                               "shall be automatically detected on input"),
     "same-layout": (END, "The physical layout of the archive shall be identical to the ustar format"),
@@ -114,7 +115,6 @@ SENTENCES = {
     "bypass": (OPTIONS, "pax shall act as if -oinvalid=bypass were specified"),
     "untranslatable": (STDERR, "cannot be translated between the codeset in use for that extended "
                                "header record and the character set of the current locale"),
-    "keep-old": (OPTIONS, "Prevent the overwriting of existing files"),
     "overwritten": (OUTPUT_FILES, "existing files in the destination hierarchy shall be "
                                   "overwritten only when all permission"),
     "intermediate": (DESCRIPTION, "if intermediate directories are necessary to extract an archive "
@@ -142,6 +142,9 @@ SENTENCES = {
                                       "validated as a pathname"),
     "trailing-slash": (PATHNAMES, "tag_04_16", "ends with one or more trailing <slash> characters "
                                                "shall not be resolved successfully unless"),
+    "symlink-followed": (PATHNAMES, "tag_04_16", "In all other cases, the system shall prefix the "
+                                                 "remaining pathname"),
+    "link-exists": (LINK, None, "The path2 argument resolves to an existing directory entry"),
     "symlink-slash": (SYMLINK, None, "The path2 argument contains at least one non-<slash> "
                                      "character and ends with one or more trailing <slash> "
                                      "characters"),

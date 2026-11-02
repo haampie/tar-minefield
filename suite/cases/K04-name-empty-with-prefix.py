@@ -8,10 +8,9 @@ empty, so the pathname is `dir/`. A member is extracted as a file of its [own ty
 a regular file, but a name that ends in a slash [resolves only to a directory][trailing-slash], so
 this is an [error][cannot-create]. A name that ends in a slash was the old way to archive a
 directory, before the typeflag of a directory existed; it is in the [rationale][slash-convention] of
-POSIX, but not in its rules. This case is ambiguous in practice because a reader that follows that
-convention extracts a directory `dir`, a reader that goes by the typeflag extracts an empty file
-`dir`, and a reader that takes the empty name field for a member without a name, before it applies
-the prefix, extracts nothing.
+POSIX, but not in its rules. This case is ambiguous in practice because the member is either a
+directory `dir`, by its trailing slash, an empty file `dir`, by its typeflag, or no file at all, if
+the empty name field is taken for a missing name before the prefix is applied.
 
 Decision point: whether a prefix makes a name of an empty name field, and whether the typeflag or
 the trailing slash decides the kind.

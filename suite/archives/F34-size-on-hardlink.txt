@@ -14,7 +14,8 @@ the tree has `a` and its link `h`, which contain `a\n` or that block, or `a`, `h
 
 Decision point: whether a size in the header of a hard link applies, in an archive with pax headers.
 Seen in: none of the scanned tarballs.
-See also: F33, a size in the header of a directory, and F35, a pax size on a hard link.
+See also: F33, a size in the header of a directory, F35, a pax size on a hard link, and F38, the
+same in an archive without pax headers.
 
 0x000000  header: regular file
           name     [  0,100)  "a" + 99 NUL

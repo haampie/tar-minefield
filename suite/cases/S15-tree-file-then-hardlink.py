@@ -2,9 +2,10 @@
 
 The archive has the files `a` and `b`, then a hard link `a` to `b`.
 
-The hard link `a` either replaces the file `a`, as existing files are [overwritten][overwritten] by
-default, so that `a` becomes a link to `b`, or results in a failure, as a link [cannot be
-created][link-error] where a file already is, and `a` keeps its own contents.
+The hard link `a` either replaces the file `a`, as existing files [can be overwritten][overwritten],
+so that `a` becomes a link to `b`, or results in a failure, as a link [cannot be
+created][link-exists] where a file already is, which is an [error][link-error], and `a` keeps its
+own contents.
 
 Decision point: whether a hard link replaces an existing file of its name.
 Seen in: 27 tarballs have a file, then a hard link of the same name, such as xscreensaver 6.12 and

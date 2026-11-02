@@ -2,8 +2,8 @@
 
 The archive has a directory `target/`, then a symlink `a` to `target`, then a directory `a/`.
 
-The name `a/` can be seen as a file path that [resolves][trailing-slash] through the symlink, as its
-trailing slash suggests, to the directory `target`, which [already exists][dir-exists], so
+The name `a/` can be seen as a pathname that [resolves][symlink-followed] through the symlink, as
+the name ends in a slash, to the directory `target`, which [already exists][dir-exists], so
 extracting it changes nothing. It can also be seen as the name of a directory `a`, of the member's
 [own type][file-type], which either replaces the symlink, or results in a failure, as it cannot be
 created where the symlink is.

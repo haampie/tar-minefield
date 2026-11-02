@@ -15,7 +15,7 @@ Decision point: whether typeflag `X` is an extended header.
 Seen in: none of the scanned tarballs.
 See also: F16, an unknown typeflag with a size.
 
-0x000000  header: unknown type, typeflag X, as Solaris tar wrote it
+0x000000  header: unknown type, typeflag X, as Solaris tar writes it
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
