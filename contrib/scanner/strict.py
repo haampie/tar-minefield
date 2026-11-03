@@ -208,6 +208,7 @@ DEFAULT = [
     ("pax.newline-in-value.LIBARCHIVE.xattr.*", "accept", "xattrs are not extracted"),
 ]
 
+@functools.cache
 def classify(feature):
     """("platform" | "allowed" | "strict" | "unclassified", category, description)"""
     if feature.startswith("platform."):

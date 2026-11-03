@@ -227,14 +227,44 @@ UNMEASURED = ('<p class="note" id="unmeasured">* Not measured in some tarballs, 
               "case's page says how many.</p>")
 
 
+# The indexes of the lists of tarballs, which every case looks up its features in: made once per
+# list, as the lists do not change. {id(rows): (rows, by feature, by scanner and unmeasured)}
+INDEXES = {}
+
+
+def index(rows):
+    """The positions in rows of the tarballs with each feature; and of those that the version of
+    tarscan.py that scanned them may not have reported some features of, by that version and those
+    features, of which few tarballs have a set of their own."""
+    if id(rows) not in INDEXES:
+        by_feature, by_unmeasured = collections.defaultdict(list), collections.defaultdict(list)
+        for i, r in enumerate(rows):
+            for f in set(r["features"]):
+                by_feature[f].append(i)
+            if r.get("scanner") in strict.UNREPORTED:
+                by_unmeasured[r["scanner"], frozenset(strict.unmeasured(r))].append(i)
+        # with rows, so that its id is not that of another list while the index is in use
+        INDEXES[id(rows)] = rows, by_feature, by_unmeasured
+    return INDEXES[id(rows)]
+
+
+def having(features, rows):
+    """The tarballs of rows that have one of features, in their order."""
+    _, by_feature, _ = index(rows)
+    return [rows[i] for i in sorted({i for f in features for i in by_feature.get(f, ())})]
+
+
 def unmeasured(features, rows):
     """The tarballs of rows that may have one of features, which the version of tarscan.py that
     scanned them did not report, and what else it recorded does not rule out."""
     scanners = unreported_by(features)
     if not scanners:
         return []
-    return [r for r in rows if r.get("scanner") in scanners
-            and any(strict.overlap(f, u) for f in features for u in strict.unmeasured(r))]
+    _, _, by_unmeasured = index(rows)
+    return [rows[i] for i in sorted(i for (scanner, may), positions in by_unmeasured.items()
+                                    if scanner in scanners
+                                    and any(strict.overlap(f, u) for f in features for u in may)
+                                    for i in positions)]
 
 
 def unreported_by(features):
@@ -519,15 +549,12 @@ def data_section(ident, features, names, short, rated, union):
         why = UNTOLD.get(ident, "the scan reports no feature of it on its own")
         return f"<p>This case is not measured in release tarballs: {why}.</p>"
 
-    def has(r):
-        return any(f in r["features"] for f in features)
-
     def rejected(r):
         return any(strict.criterion(f) in strict.default_rejects(r) for f in features)
 
     counts = []
     for n, rs in [(short[n], rated[n]) for n in names] + [("total (distinct)", union)]:
-        with_it = [r for r in rs if has(r)]
+        with_it = having(features, rs)
         counts.append((n, len(rs), len(with_it), sum(rejected(r) for r in with_it),
                        len(unmeasured(features, rs))))
     _, _, k, j, u = counts[-1]
@@ -808,7 +835,7 @@ def seen_in_problems(cases, union):
         features = features_of(case, info)
         if not seen or not features:
             continue
-        k = sum(1 for r in union if any(f in r["features"] for f in features))
+        k = len(having(features, union))
         none = seen.group(1).startswith("none of the scanned tarballs")
         if none and k or not none and not k:
             problems.append(f"{case}: Seen in: {seen.group(1)!r}, but {k} tarballs have "
@@ -959,7 +986,7 @@ def seen_page(cases, data):
     examples = []
     for case, info in cases.items():
         features = features_of(case, info)
-        has = [r for r in union if any(f in r["features"] for f in features)]
+        has = having(features, union)
         if not has or any(strict.criterion(f) in strict.default_rejects(r)
                           for r in has for f in features):
             continue
@@ -1097,7 +1124,7 @@ def index_page(cases, results, data):
         for case, info in members:
             ident, name = matrix.label(case, info).split(" ", 1)
             features = features_of(case, info)
-            k = sum(1 for r in union if any(f in r["features"] for f in features))
+            k = len(having(features, union))
             share = prevalence(k, len(union)) if features else "not measured"
             if features and unmeasured(features, union):
                 share += '<a href="#unmeasured">*</a>'
