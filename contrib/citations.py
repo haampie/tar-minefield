@@ -133,6 +133,15 @@ SENTENCES = {
                                 "resolution"),
     "newline-error": (FUTURE_DIRECTIONS, "directed to create a new directory entry that contains any "
                                          "bytes that have the encoded value of a <newline> character"),
+    "pax-header-block": (PAX_HEADER, "The pax header block shall be identical to the ustar header "
+                                     "block"),
+    "records": (PAX_EXTENDED, "An extended header shall consist of one or more records"),
+    "magic": (USTAR, "The magic field is the specification that this archive was output in this "
+                     "archive format"),
+    "records-follow": (USTAR, "the number of logical records written following the header shall be "
+                              "(size+511)/512"),
+    "contiguous": (USTAR, "Implementations without such extensions should treat this file as a "
+                          "regular file (type 0)"),
     "slash-convention": (RATIONALE_USTAR, "the convention of using a filename ending with <slash> "
                                           "was adopted to specify a directory on the archive"),
     # Sentences of other pages, as (page, section or None, sentence)
@@ -144,6 +153,12 @@ SENTENCES = {
                                                "shall not be resolved successfully unless"),
     "symlink-followed": (PATHNAMES, "tag_04_16", "In all other cases, the system shall prefix the "
                                                  "remaining pathname"),
+    "absolute": (PATHNAMES, "tag_04_16", "If the pathname begins with a <slash>, the predecessor of "
+                                         "the first filename in the pathname shall be taken to be "
+                                         "the root directory of the process"),
+    "dot": (PATHNAMES, "tag_04_16", "The special filename dot shall refer to the directory "
+                                    "specified by its predecessor"),
+    "symlink-exists": (SYMLINK, None, "The path2 argument names an existing file"),
     "link-exists": (LINK, None, "The path2 argument resolves to an existing directory entry"),
     "symlink-slash": (SYMLINK, None, "The path2 argument contains at least one non-<slash> "
                                      "character and ends with one or more trailing <slash> "
