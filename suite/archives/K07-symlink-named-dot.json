@@ -1,7 +1,7 @@
 {
  "id": "K07",
  "verdict": "reject",
- "description": "A symlink named `.`: the root of the tree replaced by a link, or dropped?",
+ "description": "A symlink `.`: the root of the tree replaced by a link, or dropped?",
  "features": [
   "name.dot-on-symlink"
  ]

@@ -1,7 +1,7 @@
 """A header of typeflag `N`, which some readers take for a long name: a name, or a file?
 
-The archive has a header of typeflag `N`, in the GNU format, named `././@LongLink`, whose data is
-`long-name` and a NUL, then a file whose header has GNU's magic and the name `header-name`.
+The archive has a header of typeflag `N`, in the GNU format, with the name `././@LongLink`, whose
+data is `long-name` and a NUL, then a file whose header has GNU's magic and the name `header-name`.
 
 Some readers take typeflag `N` for a GNU long name, as `L`. In POSIX, the typeflags `A` to `Z` are
 reserved for [custom implementations][custom-type], and a reader that does not recognize one

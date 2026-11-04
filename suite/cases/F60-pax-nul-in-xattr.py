@@ -6,7 +6,7 @@ NUL and `y`, then the record `path=renamed`, and whose header has the name `head
 pax records are delimited by their [length][record-length], and [all characters][value-data] of a
 value are data, so the NUL is part of the value of the xattr, and the file is `renamed`. This case
 is not ambiguous. A reader that ends the data of a pax header at its first NUL loses the `path`
-record after it, and extracts `header-name`, but POSIX has no such reading.
+record after it, and extracts `header-name`, which is not a reading of POSIX.
 
 Seen in: 32 of the scanned tarballs have a NUL in the value of an xattr, such as those of qd,
 sundials and pacparser in Spack.

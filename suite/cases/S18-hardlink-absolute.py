@@ -3,11 +3,10 @@
 The archive has a directory `etc`, a file `etc/passwd`, then a hardlink `l` to `/etc/passwd`.
 
 A [hardlink][hardlink] is a link to a file archived before it, and here its target is an [absolute
-pathname][absolute], which resolves from the root directory of the process, and so names no
-member. This
-case is ambiguous because `l` is a link to the member `etc/passwd`, if the leading slash is dropped
-as it is from names, or to the file `/etc/passwd` outside the destination, linked or copied, or is
-not created.
+pathname][absolute], which is resolved from the root directory of the process and is the name of no
+member. This case is ambiguous because `l` is a link to the member `etc/passwd`, if the leading
+slash is dropped as it is from names, or to the file `/etc/passwd` outside the destination, linked
+or copied, or is not created.
 
 Decision point: whether the target of a hardlink is looked up in the archive or in the file system.
 Seen in: not measured, as earlier versions of the scanner dropped the leading slash of the targets

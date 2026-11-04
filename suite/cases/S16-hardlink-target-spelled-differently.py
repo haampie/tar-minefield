@@ -5,7 +5,7 @@ The archive has a file `a`, then a hardlink `h` whose target is `./a`.
 In POSIX, a hardlink represents a file linked to another file [previously archived][hardlink], and
 its target is in the [linkname][linkname] field. POSIX does not say whether the target should be
 literally the name of an earlier member, or whether it can also be an equivalent path. This case is
-ambiguous because `./a` names the file `a`, as a path, or no member, as a name, so that `h` is a
+ambiguous because `./a` is a path to the file `a`, or the name of no member, so that `h` is a
 link to `a`, or an error.
 
 Decision point: whether the target of a hardlink is a path or the name of a member.

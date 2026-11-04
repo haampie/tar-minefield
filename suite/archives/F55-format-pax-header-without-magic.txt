@@ -6,13 +6,12 @@ The archive has a pax header, typeflag `x`, without magic or version, whose data
 `path=renamed`, then a file whose header has the POSIX magic and the name `header-name`.
 
 In POSIX, the format of an archive is detected on input, but it is not specified from
-which headers, and the magic field specifies the format that the archive was written in: a
-header without it is not one of ustar, or of pax, whose header block is that of
+which headers, and the magic field is the specification of the format that the archive was
+written in: a header without it is not one of ustar, or of pax, whose header block is that of
 ustar. To a reader of ustar before pax, an extended header is a
-regular file. This case is ambiguous
-because the member is `renamed`, to a reader that takes the header for an extended header by its
-typeflag, or `header-name`, after a file `PaxHeader` that contains the record, or alone, to a reader
-that skips it.
+regular file. This case is ambiguous because the member is `renamed`, to a reader that takes the
+header for an extended header by its typeflag, or `header-name`, after a file `PaxHeader` that
+contains the record, or alone, to a reader that skips it.
 
 Decision point: whether a header without magic may be an extended header.
 Seen in: none of the scanned tarballs.

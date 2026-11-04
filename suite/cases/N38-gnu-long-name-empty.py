@@ -7,7 +7,7 @@ A GNU long name replaces the name of the next member, and GNU's format does not 
 one means. If it applies, the pathname of the member is empty, and in POSIX an [empty
 pathname][null-pathname] does not resolve. This case is ambiguous because the member is
 `header-name`, if the empty long name is ignored; has an empty name, which is skipped, rejected or
-taken for `.`; or is named after the long name header, `././@LongLink`. To a reader that does not
+taken for `.`; or has the name of the long name header, `././@LongLink`. To a reader that does not
 know typeflag `L`, the member is `header-name`, after an empty file `././@LongLink`.
 
 Decision point: whether an empty GNU long name replaces the name in the header.

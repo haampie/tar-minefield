@@ -1,19 +1,19 @@
 K07-symlink-named-dot: must reject
 
-A symlink named `.`: the root of the tree replaced by a link, or dropped?
+A symlink `.`: the root of the tree replaced by a link, or dropped?
 
 The archive has a directory `d`, then a symlink `.` to `d`, then a file `f`.
 
 The special filename dot refers to the directory that it is in, so in POSIX a
-member named `.` is the directory that the archive is extracted to. Creating a symlink there fails,
-as the name exists, which is an error. This case is ambiguous in
+member `.` is the directory that the archive is extracted to. Creating a symlink there fails, as
+the name exists, which is an error. This case is ambiguous in
 practice because the symlink is dropped, as a name that normalizes to the root, and the tree is `d`
 and `f`, or is created under another name, such as `_`, or the member is an error.
 
-Decision point: whether a link may be named `.`.
-Seen in: not measured: 64 of the scanned tarballs have a member named `.` or `./`, and the scans
+Decision point: whether a link may have the name `.`.
+Seen in: not measured: 64 of the scanned tarballs have a member `.` or `./`, and the scans
 did not record its kind.
-See also: N05, a directory named `./`.
+See also: N05, a directory `./`.
 
 0x000000  header: directory
           name     [  0,100)  "d" + 99 NUL
