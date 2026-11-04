@@ -1,0 +1,61 @@
+F54-type-gnu-old-long-name: must reject
+
+A header of typeflag `N`, which some readers take for a long name: a name, or a file?
+
+The archive has a header of typeflag `N`, in the GNU format, named `././@LongLink`, whose data is
+`long-name` and a NUL, then a file whose header has GNU's magic and the name `header-name`.
+
+Some readers take typeflag `N` for a GNU long name, as `L`. In POSIX, the typeflags `A` to `Z` are
+reserved for custom implementations, and a reader that does not recognize one
+extracts the member as a regular file. This case is ambiguous because the member is
+`long-name`, to a reader that takes `N` for a long name, or `header-name`, after a file
+`././@LongLink` that contains the name, or alone, to a reader that skips a type it does not know.
+
+Decision point: whether typeflag `N` is a long name.
+Seen in: none of the scanned tarballs.
+See also: F16, an unknown typeflag with a size, and N33, a Solaris extended header.
+
+0x000000  header: unknown type, typeflag N
+          name     [  0,100)  "././@LongLink" + 87 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000012" + NUL  10
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011226\0 "  4758: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "N"  unknown typeflag
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar "
+          version  [263,265)  " " + NUL
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: a name and a NUL
+          10 bytes, then 502 NUL
+          "long-name" + NUL
+0x000400  header: regular file
+          name     [  0,100)  "header-name" + 89 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000014" + NUL  12
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011231\0 "  4761: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar "
+          version  [263,265)  " " + NUL
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          12 bytes, then 500 NUL to the end of the block
+          "which name?\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

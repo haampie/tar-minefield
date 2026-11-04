@@ -1,0 +1,26 @@
+"""A size of 512 in base-256.
+
+The archive has a file `a` of 512 bytes, whose size field is in base-256: the byte 0x80, then 512
+as a binary number.
+
+Sizes of 8 GiB and over do not fit in the 11 octal digits of the size field. In pax, they are
+written in a `size` record; GNU's format writes them in base-256, which marks itself by its first
+byte. In [POSIX][zero-filled], numeric fields are octal, so base-256 is an extension, but it has one
+reading, here 512, and a reader that does not support it cannot take it for octal. This case is to
+accept as a small instance of the base-256 sizes of large files, which no case can contain.
+
+Seen in: none of the scanned tarballs.
+See also: F29 and F30, a negative size and a size past 64 bits, in base-256.
+"""
+F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}
+
+VERDICT = "accept"
+ID = "F57"
+FEATURES = ["number.size.base256"]
+TREE = [F("a", b"a\n" * 256)]
+
+
+def build(a):
+    a.header(b"a", b"0", b"\x80" + (512).to_bytes(11, "big"), note="size 512, in base-256")
+    a.data(b"a\n" * 256)
+    a.end()

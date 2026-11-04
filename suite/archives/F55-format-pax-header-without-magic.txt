@@ -1,0 +1,64 @@
+F55-format-pax-header-without-magic: must reject
+
+A pax extended header without magic: a header, or a file?
+
+The archive has a pax header, typeflag `x`, without magic or version, whose data is the record
+`path=renamed`, then a file whose header has the POSIX magic and the name `header-name`.
+
+In POSIX, the format of an archive is detected on input, but it is not specified from
+which headers, and the magic field specifies the format that the archive was written in: a
+header without it is not one of ustar, or of pax, whose header block is that of
+ustar. To a reader of ustar before pax, an extended header is a
+regular file. This case is ambiguous
+because the member is `renamed`, to a reader that takes the header for an extended header by its
+typeflag, or `header-name`, after a file `PaxHeader` that contains the record, or alone, to a reader
+that skips it.
+
+Decision point: whether a header without magic may be an extended header.
+Seen in: none of the scanned tarballs.
+See also: F39, a pax header after a v7 header.
+
+0x000000  header: pax extended header, no magic and no version
+          name     [  0,100)  "PaxHeader" + 91 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000020" + NUL  16
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007652\0 "  4010: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "x"  pax extended header
+          linkname [157,257)  100 NUL
+          magic    [257,263)  6 NUL
+          version  [263,265)  2 NUL
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: pax records
+          16 bytes, then 496 NUL
+          "16 path=renamed\n"
+0x000400  header: regular file
+          name     [  0,100)  "header-name" + 89 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000014" + NUL  12
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011271\0 "  4793: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          12 bytes, then 500 NUL to the end of the block
+          "which name?\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

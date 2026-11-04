@@ -1,0 +1,55 @@
+F52-number-size-plus: must reject
+
+A size with a plus sign, `+0000001000`.
+
+The archive has a file `a`, whose size field is `+0000001000`, then an empty file `smuggled`.
+
+In POSIX, numeric fields are octal numbers filled with leading zeros, without a
+sign. Read leniently, this case is ambiguous because the size is 512, which is octal 1000, if the
+sign is skipped (and the next block is the data of `a`); 0, if the number ends at the sign (and the
+next block is the header of `smuggled`); or a size far past the end of the archive, to a reader
+that takes a sign for the start of a base-64 number, as some early test versions of GNU tar wrote
+them (and the rest of the archive is the data of `a`).
+
+Decision point: whether a numeric field may have a sign.
+Seen in: none of the scanned tarballs.
+See also: F23, a pax size with a plus sign, and F37, a size with the digit 9.
+
+0x000000  header: regular file, size 512, or 0
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "+0000001000" + NUL
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007332\0 "  3802: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  header: regular file, the data of a, to an implementation that skips the sign
+          name     [  0,100)  "smuggled" + 92 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000000" + NUL  0
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "010725\0 "  4565: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000400  2 zero blocks: the end-of-archive marker
+0x000800  end of file

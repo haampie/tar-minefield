@@ -1,0 +1,8 @@
+{
+ "id": "S18",
+ "verdict": "reject",
+ "description": "A hardlink to an absolute path, which a member has as its name without the slash.",
+ "features": [
+  "hardlink.absolute"
+ ]
+}
