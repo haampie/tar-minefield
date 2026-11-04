@@ -12,8 +12,7 @@ is ambiguous because `b` contains `first`, if `a` is replaced, or `second`, if i
 place, and `a` contains `second` either way.
 
 Decision point: whether a file is overwritten in place or replaced.
-Seen in: none of the scanned tarballs: 100 have the same file twice, and none of them has a
-hardlink.
+Seen in: 87 of the scanned tarballs have the same file twice, but none of them has a hardlink.
 See also: S07, the same file twice with different contents, and S15, a file, then a hardlink of
 the same name.
 """

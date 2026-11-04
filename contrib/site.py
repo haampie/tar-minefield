@@ -828,7 +828,8 @@ def case_page(case, info, results, data):
 
 def seen_in_problems(cases, union):
     """Cases whose `Seen in:`, which is written by hand, contradicts the scans: no tarball where
-    the scans have some, or tarballs where they have none."""
+    the scans have some, or tarballs where they have none; not those that say the scans do not
+    measure it."""
     problems = []
     for case, info in cases.items():
         seen = re.search(r"^Seen in: *(.*)", docstring(case), re.M)
@@ -836,6 +837,8 @@ def seen_in_problems(cases, union):
         if not seen or not features:
             continue
         k = len(having(features, union))
+        if seen.group(1).startswith("not measured"):
+            continue
         none = seen.group(1).startswith("none of the scanned tarballs")
         if none and k or not none and not k:
             problems.append(f"{case}: Seen in: {seen.group(1)!r}, but {k} tarballs have "

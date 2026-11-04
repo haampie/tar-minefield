@@ -14,7 +14,7 @@ either skips its 512 bytes, and extracts a directory `a` and `b`, or reads no da
 extracts `smuggled` as well.
 
 Decision point: whether a regular file whose name ends in a slash has data.
-Seen in: not measured: 8 of the scanned tarballs have a regular file whose name ends in a slash,
+Seen in: not measured: 7 of the scanned tarballs have a regular file whose name ends in a slash,
 such as sendmail 8.18.2, and the scans do not record its size.
 See also: K01, the same with the size 0.
 """
