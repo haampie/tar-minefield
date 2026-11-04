@@ -137,6 +137,7 @@ Kind:
 - A regular file whose name ends in a slash: the historical convention for directories. GNU tar
   1.35, `tarfile` and Ubuntu's patched GNU tar 1.35 make three different trees of one archive.
 - A trailing slash on the name of a link.
+- A file or link named `.`, which is the root of the tree.
 - A link target in the linkname field of a member that is not a link.
 
 Order and state:
@@ -145,8 +146,8 @@ Order and state:
   directory, symlink and file (replace the symlink, or write through it).
 - Writing through a symlink: a member `a/b` after a symlink `a`.
 - Hardlinks to a later member, to a member that does not exist, to a directory, to a symlink (link
-  the symlink or its target), to themselves, or to a target spelled differently from the member
-  it names (`./a` and `a`).
+  the symlink or its target), to themselves, to an absolute path, or to a target spelled
+  differently from the member it names (`./a` and `a`).
 
 ## Verdicts
 
@@ -174,9 +175,8 @@ parser would trip over:
 - directories after their contents,
 - the same directory listed twice, as `tar cf x.tar dir dir/sub` writes.
 
-Real archives also have long link names, base-256 sizes of files over 8 GiB, numeric fields
-terminated by a space, and the AppleDouble `._` files of macOS, which no case to accept covers
-yet.
+Real archives also have numeric fields terminated by a space, and the AppleDouble `._` files of
+macOS, which no case to accept covers yet.
 
 Each case also records what is known about it:
 
@@ -212,6 +212,8 @@ costs. The tolerated cases are:
 - a global pax header with only a `comment` after the first member.
 - the POSIX magic with NULs for its version, `ustar\0\0\0`, which some Java archivers write,
   as in the tarballs of Apache's commons-lang, Solr and Hadoop. Any other version is rejected.
+- contiguous files, typeflag `7`, as regular files: in POSIX, implementations without contiguous
+  files should treat them so.
 - numeric fields padded with spaces rather than zeros, the checksum too, as `Archive::Tar` and old
   GNU tar write them, in many CPAN tarballs: [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers) has leading zeros,
   and [the scans](contrib/data) find no tarball where implementations read such a field

@@ -94,6 +94,8 @@ STRICT = [
     ("archive.empty", "framing", "no members at all"),
     ("name.leading-dot-slash", "name", "a name like `./a`, which some implementations make `a`"),
     ("name.dot", "name", "a member named `.` or `./`"),
+    ("name.dot-on-*", "kind",
+     "a member named `.` that is not a directory: the root of the tree as a file or link, or dropped"),
     ("name.dot-component", "name", "a name like `a/./b`"),
     ("name.double-slash", "name", "a name like `a//b`"),
     ("name.trailing-slash-on-file", "kind", "a regular file named like a directory, `a/`"),
@@ -107,6 +109,10 @@ STRICT = [
     ("name.not-utf8", "name", "a name that is not UTF-8"),
     ("linkname.not-utf8", "name", "a link target that is not UTF-8"),
     ("name.bytes-after-nul", "name", "bytes after the NUL that ends a name"),
+    ("gnu-long.empty", "name", "an empty GNU long name or link: the field in the header, or none"),
+    ("gnu-long.no-nul", "name",
+     "a GNU long name or link whose size leaves out its NUL: it ends at the size, or at a NUL after"),
+    ("gnu-long.nul-inside", "name", "bytes after the NUL that ends a GNU long name or link"),
     ("name.*", "name", "a name that implementations may normalize differently"),
     ("extended.gnu-long-and-pax", "name",
      "a GNU long name or link and a pax header for one member, which may apply to the other"),
@@ -142,6 +148,9 @@ STRICT = [
     ("tree.through-symlink", "order and state", "a member written through a symlink"),
     ("tree.*", "order and state", "members that interact"),
     ("hardlink.to-itself", "order and state", "a hardlink to itself"),
+    ("hardlink.absolute", "order and state",
+     "a hardlink to an absolute path: the member of that name without the slash, or the file "
+     "outside the destination"),
     ("hardlink.to-symlink", "order and state", "a hardlink to a symlink"),
     ("hardlink.*", "order and state", "a hardlink to a later member, no member, or a misspelling"),
     ("pax-global.*", "framing",
@@ -200,6 +209,8 @@ DEFAULT = [
      "created as it is: every implementation reads the name alike, and the risk is in its use"),
     ("number.*.leading-space", "accept",
      "octal padded with spaces, not zeros, which implementations read alike"),
+    ("type.contiguous", "accept",
+     "a regular file, which in POSIX implementations without contiguous files should make of them"),
     ("pax.size-disagrees", "accept",
      "the pax size frames the member, as POSIX says: it is how sizes over 8 GiB are written"),
     ("pax*.value-not-utf8.comment", "accept",
@@ -287,10 +298,21 @@ def may_have_25bfa32e6e71(r):
 
 def may_have_7078a34ab512(r):
     """The features of UNREPORTED that a tarball that version 7078a34ab512, or an earlier one,
-    scanned may have: pax headers after a v7 header if it has both, and a link target that is not
-    UTF-8 if it has links, as no version recorded the bytes of link targets."""
-    fingerprint, kinds = r.get("fingerprint", {}), r.get("kinds", {})
+    scanned may have: pax headers after a v7 header if it has both, a link target that is not
+    UTF-8 if it has links, as no version recorded the bytes of link targets, a member that is not a
+    directory with a name that is the root, such as `.` or `./.`, if it has one of the names that
+    those give and members that are not directories, and a hardlink to an absolute path if it has
+    hardlinks and a hardlink feature or an absolute name, as their targets were normalized."""
+    fingerprint, kinds, features = r.get("fingerprint", {}), r.get("kinds", {}), r["features"]
     may = set()
+    root = "name.dot" in features or "name.absolute" in features or (
+        "name.leading-dot-slash" in features and ("name.dot-component" in features or any(
+            f.startswith("name.trailing-slash-on-") for f in features)))
+    if root and any(k != "dir" for k in kinds):
+        may.add("name.dot-on-*")
+    if kinds.get("hardlink") and ("name.absolute" in features or any(
+            f.startswith("hardlink.") for f in features)):
+        may.add("hardlink.absolute")
     pax = any(t in s for s in fingerprint.get("extended_sequence", {}) for t in "xX")
     if fingerprint.get("magic", {}).get("v7") and (pax or fingerprint.get("pax_global_keys")):
         may.add("format.pax-after-v7")
@@ -302,7 +324,7 @@ def may_have_7078a34ab512(r):
 # Versions of tarscan.py that did not report some features: (those features, and a function of a
 # tarball that version scanned to the ones it may have). A tarball that may have none of them is
 # measured for them all the same; the others are not, until they are scanned again.
-LATER = ["format.pax-after-v7", "linkname.not-utf8"]
+LATER = ["format.pax-after-v7", "linkname.not-utf8", "name.dot-on-*", "hardlink.absolute"]
 UNREPORTED = {
     "25bfa32e6e71": (
         ["pax.empty-value.*", "pax-global.empty-value.*", "pax.value-not-utf8.*",
