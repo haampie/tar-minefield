@@ -10,7 +10,7 @@ pax records are delimited by their length, so the comment is one record, which i
 ignored, and the pax size overrides the size field: `a` contains the
 512 bytes. This case is not ambiguous. A reader that splits records on lines finds a record
 `size=0` before `size=512`, and one that takes the first, rather than the last,
-extracts an empty `a`, then `smuggled`, which is not a reading of POSIX.
+extracts an empty `a`, then `smuggled`.
 
 Seen in: none of the scanned tarballs.
 See also: F28, a `size` record in a comment on a file without a pax size.

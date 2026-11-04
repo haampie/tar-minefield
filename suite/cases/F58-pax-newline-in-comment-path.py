@@ -6,7 +6,7 @@ The archive has a file `a`, whose pax header has one record, a `comment` with a 
 pax records are delimited by their [length][record-length], so a comment can contain newlines, and
 in [POSIX][comment] every comment is ignored: the file is `a`. This case is not ambiguous. A reader
 that splits records on lines, and ignores their lengths, finds a second record, `path=smuggled`,
-and extracts the file as `smuggled`, which is not a reading of POSIX.
+and extracts the file as `smuggled`.
 
 Seen in: none of the scanned tarballs.
 See also: F28, the same with a `size` record.
