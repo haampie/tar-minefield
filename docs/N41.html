@@ -22,7 +22,7 @@
 </head>
 <body>
 <a class="draft" href="index.html#policy">Working draft</a>
-<nav class="wide"><a class="prev" href="N40.html" rel="prev" title="N40 pax-global-linkpath">‹ N40 pax-global-linkpath</a><a href="index.html">tar-minefield</a><a class="next" href="K01.html" rel="next" title="K01 kind-trailing-slash-file">K01 kind-trailing-slash-file ›</a></nav>
+<nav class="wide"><a class="prev" href="N40.html" rel="prev" title="N40 pax-global-linkpath">‹ N40 pax-global-linkpath</a><a href="index.html">tar-minefield</a><a class="next" href="F60.html" rel="next" title="F60 trailing-slash-file-with-size">F60 trailing-slash-file-with-size ›</a></nav>
 <h1><code>N41</code> pax-gnu-sparse-name</h1>
 <p>A pax <code>GNU.sparse.name</code> on a file that is not sparse, after a <code>path</code>.</p>
 <div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file whose pax header has <code>path=path-name</code>, then <code>GNU.sparse.name=sparse-name</code>, and whose header has the name <code>header-name</code>. The pax header does not have other keys of GNU&#x27;s sparse format.</p>
-<p>In GNU&#x27;s pax format of sparse files, the name of a sparse file is in <code>GNU.sparse.name</code>. In POSIX, keywords such as GNU&#x27;s are <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=or%20a%20keyword%20provided%20as%20an%20implementation%20extension">implementation extensions</a>, which are not defined. This case is ambiguous because the name is either <code>sparse-name</code>, to a reader that applies <code>GNU.sparse.name</code> to any file, as the last of two records with a name, or <code>path-name</code>, to one that applies it only to a sparse file.</p>
+<p>In GNU&#x27;s pax format of sparse files, the name of a sparse file is in <code>GNU.sparse.name</code>. In POSIX, keywords such as GNU&#x27;s are <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=or%20a%20keyword%20provided%20as%20an%20implementation%20extension">implementation extensions</a>, which are not defined. This case is ambiguous because the name is either <code>sparse-name</code> or <code>path-name</code>. A reader that applies <code>GNU.sparse.name</code> to any file extracts <code>sparse-name</code>, either because it gives that record precedence over <code>path</code>, or because it is the later of the two. A reader that applies it only to a sparse file extracts <code>path-name</code>, and one that ignores both records extracts <code>header-name</code>.</p>
 <p><strong>Decision point:</strong> whether <code>GNU.sparse.name</code> applies to a file that is not sparse.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -58,9 +58,10 @@ format.
 
 In GNU&#x27;s pax format of sparse files, the name of a sparse file is in `GNU.sparse.name`. In POSIX,
 keywords such as GNU&#x27;s are implementation extensions, which are not defined.
-This case is ambiguous because the name is either `sparse-name`, to a reader that applies
-`GNU.sparse.name` to any file, as the last of two records with a name, or `path-name`, to one that
-applies it only to a sparse file.
+This case is ambiguous because the name is either `sparse-name` or `path-name`. A reader that
+applies `GNU.sparse.name` to any file extracts `sparse-name`, either because it gives that record
+precedence over `path`, or because it is the later of the two. A reader that applies it only to a
+sparse file extracts `path-name`, and one that ignores both records extracts `header-name`.
 
 Decision point: whether `GNU.sparse.name` applies to a file that is not sparse.
 Seen in: none of the scanned tarballs.

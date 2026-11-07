@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has two GNU long name headers, with <code>first</code> and <code>second</code>, then the member, whose header has GNU&#x27;s magic and the name <code>header-name</code>.</p>
-<p>GNU&#x27;s format does not say what two long names for one member mean. In POSIX, the typeflags <code>A</code> to <code>Z</code> are reserved for <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=are%20reserved%20for%20custom%20implementations">custom implementations</a>, and a reader that does not recognize one extracts the member <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file">as a regular file</a>. This case is ambiguous because the member is <code>first</code> or <code>second</code>, to a reader that knows GNU long names, or <code>header-name</code>, to one that does not, after two files <code>././@LongLink</code> that contain the names.</p>
+<p>GNU&#x27;s format does not say what two long names for one member mean. In POSIX, the typeflags <code>A</code> to <code>Z</code> are reserved for <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=are%20reserved%20for%20custom%20implementations">custom implementations</a>, and a reader that does not recognize one extracts that header <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file">as a regular file</a>. This case is ambiguous because a reader that knows GNU long names extracts the member either as <code>first</code> or as <code>second</code>. A reader that discards both long names extracts <code>header-name</code>, and one that applies each long name to the next header extracts a file <code>first</code> that contains <code>second</code>, then <code>header-name</code>.</p>
 <p><strong>Decision point:</strong> which of two GNU long names applies.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -57,9 +57,10 @@ has GNU&#x27;s magic and the name `header-name`.
 
 GNU&#x27;s format does not say what two long names for one member mean. In POSIX, the typeflags `A` to
 `Z` are reserved for custom implementations, and a reader that does not recognize one
-extracts the member as a regular file. This case is ambiguous because the member is
-`first` or `second`, to a reader that knows GNU long names, or `header-name`, to one that does not,
-after two files `././@LongLink` that contain the names.
+extracts that header as a regular file. This case is ambiguous because a reader that
+knows GNU long names extracts the member either as `first` or as `second`. A reader that discards
+both long names extracts `header-name`, and one that applies each long name to the next header
+extracts a file `first` that contains `second`, then `header-name`.
 
 Decision point: which of two GNU long names applies.
 Seen in: none of the scanned tarballs.

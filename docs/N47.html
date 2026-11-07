@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a GNU long link name header, typeflag <code>K</code>, whose data is a target of 120 <code>t</code>s, then a symlink <code>l</code>, whose header has GNU&#x27;s magic and, in its linkname field, the first 100 <code>t</code>s.</p>
+<p>The archive has a GNU long link name header, typeflag <code>K</code>, whose data is 120 <code>t</code>s, followed by a NUL, then a symlink <code>l</code>, whose header has GNU&#x27;s magic and, in its linkname field, the first 100 <code>t</code>s.</p>
 <p>The long link name replaces the linkname field, so <code>l</code> points to the 120 <code>t</code>s. This is GNU tar&#x27;s own format for long link targets.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
@@ -54,8 +54,9 @@
 
 A symlink with a long target, in a GNU long link name.
 
-The archive has a GNU long link name header, typeflag `K`, whose data is a target of 120 `t`s, then
-a symlink `l`, whose header has GNU&#x27;s magic and, in its linkname field, the first 100 `t`s.
+The archive has a GNU long link name header, typeflag `K`, whose data is 120 `t`s, followed by a
+NUL, then a symlink `l`, whose header has GNU&#x27;s magic and, in its linkname field, the first 100
+`t`s.
 
 The long link name replaces the linkname field, so `l` points to the 120 `t`s. This is GNU tar&#x27;s
 own format for long link targets.

@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a GNU long name header of size 0, then a file whose header has GNU&#x27;s magic and the name <code>header-name</code>.</p>
-<p>A GNU long name replaces the name of the next member, and GNU&#x27;s format does not say what an empty one means. If it applies, the pathname of the member is empty, and in POSIX an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=A%20null%20pathname%20shall%20not%20be%20successfully%20resolved">empty pathname</a> does not resolve. This case is ambiguous because the member is <code>header-name</code>, if the empty long name is ignored; has an empty name, which is skipped, rejected or taken for <code>.</code>; or has the name of the long name header, <code>././@LongLink</code>. To a reader that does not know typeflag <code>L</code>, the member is <code>header-name</code>, after an empty file <code>././@LongLink</code>.</p>
+<p>A GNU long name replaces the name of the next member, and GNU&#x27;s format does not say what an empty one means. If it applies, the pathname of the member is empty, and in POSIX an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=A%20null%20pathname%20shall%20not%20be%20successfully%20resolved">empty pathname</a> does not resolve. This case is ambiguous because the member is <code>header-name</code>, if the empty long name is ignored; has an empty name, which is skipped, rejected or taken for <code>.</code>; or has the name of the long name header, <code>././@LongLink</code>. To a reader that does not know typeflag <code>L</code>, the member is <code>header-name</code>, after an empty file <code>@LongLink</code>.</p>
 <p><strong>Decision point:</strong> whether an empty GNU long name replaces the name in the header.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -60,7 +60,7 @@ one means. If it applies, the pathname of the member is empty, and in POSIX an e
 pathname does not resolve. This case is ambiguous because the member is
 `header-name`, if the empty long name is ignored; has an empty name, which is skipped, rejected or
 taken for `.`; or has the name of the long name header, `././@LongLink`. To a reader that does not
-know typeflag `L`, the member is `header-name`, after an empty file `././@LongLink`.
+know typeflag `L`, the member is `header-name`, after an empty file `@LongLink`.
 
 Decision point: whether an empty GNU long name replaces the name in the header.
 Seen in: none of the scanned tarballs.

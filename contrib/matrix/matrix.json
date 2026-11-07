@@ -14520,295 +14520,7 @@
     }
    }
   },
-  "F47-magic-gnu-version-00": {
-   ".NET System.Formats.Tar": {
-    "error": "InvalidDataException: Unable to parse number.",
-    "outside": {},
-    "tree": {}
-   },
-   "7-Zip": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "p": {
-      "kind": "directory"
-     },
-     "p/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "BusyBox tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "p": {
-      "kind": "directory"
-     },
-     "p/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Go containerd archive.Apply": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Haskell tar": {
-    "error": "UnrecognisedTarFormat",
-    "outside": {},
-    "tree": {}
-   },
-   "Java Commons Compress": {
-    "error": "java.io.IOException: Corrupted TAR archive.",
-    "outside": {},
-    "tree": {}
-   },
-   "Julia Tar.jl": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "p": {
-      "kind": "directory"
-     },
-     "p/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "PHP PharData, as in Composer": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "p": {
-      "kind": "directory"
-     },
-     "p/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Perl Archive::Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "p": {
-      "kind": "directory"
-     },
-     "p/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Python tarfile, filter=data, as in pip": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "p": {
-      "kind": "directory"
-     },
-     "p/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Python tarfile, filter=fully_trusted": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "p": {
-      "kind": "directory"
-     },
-     "p/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Python tarfile, filter=tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "p": {
-      "kind": "directory"
-     },
-     "p/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "R untar, internal": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "p": {
-      "kind": "directory"
-     },
-     "p/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "RubyGems": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "p": {
-      "kind": "directory"
-     },
-     "p/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Rust astral-tokio-tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Rust tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "Rust tar-codec, as in uv": {
-    "error": "at byte 0: invalid tar identity: found [117, 115, 116, 97, 114, 32, 48, 48]",
-    "outside": {},
-    "tree": {}
-   },
-   "bsdtar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "p": {
-      "kind": "directory"
-     },
-     "p/a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "live-bootstrap untar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "live-bootstrap untar, --non-strict": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "node-tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "node-tar, strict": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
-      "size": 2
-     }
-    }
-   },
-   "tar-fs": {
-    "error": "Error: Invalid tar header: unknown format.",
-    "outside": {},
-    "tree": {}
-   }
-  },
-  "F48-checksum-wrong-after-first-member": {
+  "F47-checksum-wrong-after-first-member": {
    ".NET System.Formats.Tar": {
     "error": null,
     "outside": {},
@@ -14923,7 +14635,7 @@
     "tree": {}
    },
    "PHP PharData, as in Composer": {
-    "error": "UnexpectedValueException: phar error: \"suite/archives/F48-checksum-wrong-after-first-member.tar\" is a corrupted tar file (checksum mismatch of file \"b\")",
+    "error": "UnexpectedValueException: phar error: \"suite/archives/F47-checksum-wrong-after-first-member.tar\" is a corrupted tar file (checksum mismatch of file \"b\")",
     "outside": {},
     "tree": {}
    },
@@ -15096,7 +14808,7 @@
     }
    },
    "live-bootstrap untar": {
-    "error": "Checksum failure\nThe extraction of suite/archives/F48-checksum-wrong-after-first-member.tar produced errors",
+    "error": "Checksum failure\nThe extraction of suite/archives/F47-checksum-wrong-after-first-member.tar produced errors",
     "outside": {},
     "tree": {
      "a": {
@@ -15108,7 +14820,7 @@
     }
    },
    "live-bootstrap untar, --non-strict": {
-    "error": "non-strict mode enabled, preparing for chaos\nChecksum failure\nThe extraction of suite/archives/F48-checksum-wrong-after-first-member.tar produced errors",
+    "error": "non-strict mode enabled, preparing for chaos\nChecksum failure\nThe extraction of suite/archives/F47-checksum-wrong-after-first-member.tar produced errors",
     "outside": {},
     "tree": {
      "a": {
@@ -15168,7 +14880,7 @@
     }
    }
   },
-  "F49-pax-record-length-plus": {
+  "F48-pax-record-length-plus": {
    ".NET System.Formats.Tar": {
     "error": "InvalidDataException: The extended header contains invalid records.",
     "outside": {},
@@ -15421,7 +15133,7 @@
     }
    }
   },
-  "F50-pax-record-empty-line": {
+  "F49-pax-record-empty-line": {
    ".NET System.Formats.Tar": {
     "error": "InvalidDataException: The extended header contains invalid records.",
     "outside": {},
@@ -15667,7 +15379,7 @@
     }
    }
   },
-  "F51-pax-size-underscore": {
+  "F50-pax-size-underscore": {
    ".NET System.Formats.Tar": {
     "error": "FormatException: The input string '5_12' was not in a correct format.",
     "outside": {},
@@ -15999,14 +15711,14 @@
     }
    }
   },
-  "F52-number-size-plus": {
+  "F51-number-size-plus": {
    ".NET System.Formats.Tar": {
     "error": "InvalidDataException: Unable to parse number.",
     "outside": {},
     "tree": {}
    },
    "7-Zip": {
-    "error": "ERROR: suite/archives/F52-number-size-plus.tar\nsuite/archives/F52-number-size-plus.tar\nOpen ERROR: Cannot open the file as [tar] archive\n\n\nERRORS:\nIs not archive",
+    "error": "ERROR: suite/archives/F51-number-size-plus.tar\nsuite/archives/F51-number-size-plus.tar\nOpen ERROR: Cannot open the file as [tar] archive\n\n\nERRORS:\nIs not archive",
     "outside": {},
     "tree": {}
    },
@@ -16055,7 +15767,7 @@
     "tree": {}
    },
    "PHP PharData, as in Composer": {
-    "error": "UnexpectedValueException: phar error: \"suite/archives/F52-number-size-plus.tar\" is a corrupted tar file (invalid entry size)",
+    "error": "UnexpectedValueException: phar error: \"suite/archives/F51-number-size-plus.tar\" is a corrupted tar file (invalid entry size)",
     "outside": {},
     "tree": {}
    },
@@ -16218,7 +15930,7 @@
     }
    }
   },
-  "F53-type-gnu-volume-label": {
+  "F52-type-gnu-volume-label": {
    ".NET System.Formats.Tar": {
     "error": "InvalidOperationException: Entry type 'TapeVolume' not supported for extraction.",
     "outside": {},
@@ -16513,7 +16225,7 @@
     "tree": {}
    }
   },
-  "F54-type-gnu-old-long-name": {
+  "F53-type-gnu-old-long-name": {
    ".NET System.Formats.Tar": {
     "error": "InvalidOperationException: Entry type 'RenamedOrSymlinked' not supported for extraction.",
     "outside": {},
@@ -16800,7 +16512,7 @@
     }
    }
   },
-  "F55-format-pax-header-without-magic": {
+  "F54-format-pax-header-without-magic": {
    ".NET System.Formats.Tar": {
     "error": null,
     "outside": {},
@@ -17081,7 +16793,7 @@
     "tree": {}
    }
   },
-  "F56-type-contiguous": {
+  "F55-type-contiguous": {
    ".NET System.Formats.Tar": {
     "error": null,
     "outside": {},
@@ -17329,7 +17041,7 @@
     "tree": {}
    }
   },
-  "F57-number-size-base256": {
+  "F56-number-size-base256": {
    ".NET System.Formats.Tar": {
     "error": null,
     "outside": {},
@@ -17427,7 +17139,7 @@
     }
    },
    "PHP PharData, as in Composer": {
-    "error": "UnexpectedValueException: phar error: \"suite/archives/F57-number-size-base256.tar\" is a corrupted tar file (invalid entry size)",
+    "error": "UnexpectedValueException: phar error: \"suite/archives/F56-number-size-base256.tar\" is a corrupted tar file (invalid entry size)",
     "outside": {},
     "tree": {}
    },
@@ -17531,12 +17243,12 @@
     }
    },
    "live-bootstrap untar": {
-    "error": "Checksum failure\nThe extraction of suite/archives/F57-number-size-base256.tar produced errors",
+    "error": "Checksum failure\nThe extraction of suite/archives/F56-number-size-base256.tar produced errors",
     "outside": {},
     "tree": {}
    },
    "live-bootstrap untar, --non-strict": {
-    "error": "non-strict mode enabled, preparing for chaos\nChecksum failure\nThe extraction of suite/archives/F57-number-size-base256.tar produced errors",
+    "error": "non-strict mode enabled, preparing for chaos\nChecksum failure\nThe extraction of suite/archives/F56-number-size-base256.tar produced errors",
     "outside": {},
     "tree": {}
    },
@@ -17577,7 +17289,7 @@
     }
    }
   },
-  "F58-pax-newline-in-comment-path": {
+  "F57-pax-newline-in-comment-path": {
    ".NET System.Formats.Tar": {
     "error": "InvalidDataException: The extended header contains invalid records.",
     "outside": {},
@@ -17872,7 +17584,7 @@
     }
    }
   },
-  "F59-pax-newline-in-comment-then-size": {
+  "F58-pax-newline-in-comment-then-size": {
    ".NET System.Formats.Tar": {
     "error": "InvalidDataException: The extended header contains invalid records.",
     "outside": {},
@@ -18173,7 +17885,7 @@
     }
    }
   },
-  "F60-pax-nul-in-xattr": {
+  "F59-pax-nul-in-xattr": {
    ".NET System.Formats.Tar": {
     "error": null,
     "outside": {},
@@ -18466,6 +18178,389 @@
       "size": 12
      }
     }
+   }
+  },
+  "F60-trailing-slash-file-with-size": {
+   ".NET System.Formats.Tar": {
+    "error": "IOException: Cannot create 'DEST/a/' because a file or directory with the same name already exists.",
+    "outside": {},
+    "tree": {
+     "a": {
+      "kind": "directory"
+     }
+    }
+   },
+   "7-Zip": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "kind": "directory"
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     }
+    }
+   },
+   "BusyBox tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "kind": "directory"
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     },
+     "smuggled": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "GNU tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "kind": "directory"
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     },
+     "smuggled": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "Go containerd archive.Apply": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
+      "size": 512
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     }
+    }
+   },
+   "Haskell tar": {
+    "error": "DEST/a/: withFile: inappropriate type (Is a directory)",
+    "outside": {},
+    "tree": {
+     "a": {
+      "kind": "directory"
+     }
+    }
+   },
+   "Java Commons Compress": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "kind": "directory"
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     }
+    }
+   },
+   "Julia Tar.jl": {
+    "error": "non-directory path ending with '/'\nTar.Header(\"a/\", :file, 0o644, 512, \"\")",
+    "outside": {},
+    "tree": {}
+   },
+   "PHP PharData, as in Composer": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
+      "size": 512
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     }
+    }
+   },
+   "Perl Archive::Tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "kind": "directory"
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     },
+     "smuggled": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "Python tarfile, filter=data, as in pip": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
+      "size": 512
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     }
+    }
+   },
+   "Python tarfile, filter=fully_trusted": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
+      "size": 512
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     }
+    }
+   },
+   "Python tarfile, filter=tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
+      "size": 512
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     }
+    }
+   },
+   "R untar, internal": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
+      "size": 512
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     }
+    }
+   },
+   "RubyGems": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
+      "size": 512
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     }
+    }
+   },
+   "Rust astral-tokio-tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
+      "size": 512
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     }
+    }
+   },
+   "Rust tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
+      "size": 512
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     }
+    }
+   },
+   "Rust tar-codec, as in uv": {
+    "error": "at byte 0: unsafe member path \"a/\": only a directory may have a directory-required path suffix",
+    "outside": {},
+    "tree": {}
+   },
+   "bsdtar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "kind": "directory"
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     },
+     "smuggled": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "live-bootstrap untar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "kind": "directory"
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     }
+    }
+   },
+   "live-bootstrap untar, --non-strict": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "kind": "directory"
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     }
+    }
+   },
+   "node-tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "kind": "directory"
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     },
+     "smuggled": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "node-tar, strict": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "kind": "directory"
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     },
+     "smuggled": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
+   },
+   "tar-fs": {
+    "error": "Error: EISDIR: illegal operation on a directory, open 'DEST/a/'",
+    "outside": {},
+    "tree": {}
    }
   },
   "K01-kind-trailing-slash-file": {
@@ -19475,390 +19570,7 @@
     "tree": {}
    }
   },
-  "K05-trailing-slash-file-with-size": {
-   ".NET System.Formats.Tar": {
-    "error": "IOException: Cannot create 'DEST/a/' because a file or directory with the same name already exists.",
-    "outside": {},
-    "tree": {
-     "a": {
-      "kind": "directory"
-     }
-    }
-   },
-   "7-Zip": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "kind": "directory"
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "BusyBox tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "kind": "directory"
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "GNU tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "kind": "directory"
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "Go containerd archive.Apply": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "Haskell tar": {
-    "error": "DEST/a/: withFile: inappropriate type (Is a directory)",
-    "outside": {},
-    "tree": {
-     "a": {
-      "kind": "directory"
-     }
-    }
-   },
-   "Java Commons Compress": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "kind": "directory"
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "Julia Tar.jl": {
-    "error": "non-directory path ending with '/'\nTar.Header(\"a/\", :file, 0o644, 512, \"\")",
-    "outside": {},
-    "tree": {}
-   },
-   "PHP PharData, as in Composer": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "Perl Archive::Tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "kind": "directory"
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "Python tarfile, filter=data, as in pip": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "Python tarfile, filter=fully_trusted": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "Python tarfile, filter=tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "R untar, internal": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "RubyGems": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "Rust astral-tokio-tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "Rust tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
-      "size": 512
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "Rust tar-codec, as in uv": {
-    "error": "at byte 0: unsafe member path \"a/\": only a directory may have a directory-required path suffix",
-    "outside": {},
-    "tree": {}
-   },
-   "bsdtar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "kind": "directory"
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "live-bootstrap untar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "kind": "directory"
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "live-bootstrap untar, --non-strict": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "kind": "directory"
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     }
-    }
-   },
-   "node-tar": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "kind": "directory"
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "node-tar, strict": {
-    "error": null,
-    "outside": {},
-    "tree": {
-     "a": {
-      "kind": "directory"
-     },
-     "b": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
-      "size": 2
-     },
-     "smuggled": {
-      "executable": false,
-      "kind": "file",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "size": 0
-     }
-    }
-   },
-   "tar-fs": {
-    "error": "Error: EISDIR: illegal operation on a directory, open 'DEST/a/'",
-    "outside": {},
-    "tree": {}
-   }
-  },
-  "K06-hardlink-trailing-slash": {
+  "K05-hardlink-trailing-slash": {
    ".NET System.Formats.Tar": {
     "error": "IOException: Cannot create 'DEST/b/' because a file or directory with the same name already exists.",
     "outside": {},
@@ -20234,7 +19946,7 @@
     }
    }
   },
-  "K07-symlink-named-dot": {
+  "K06-symlink-named-dot": {
    ".NET System.Formats.Tar": {
     "error": "IOException: Extracting the Tar entry '.' would have resulted in a file outside the specified destination directory: 'DEST/'",
     "outside": {},
@@ -20332,7 +20044,7 @@
     "tree": {}
    },
    "PHP PharData, as in Composer": {
-    "error": "PharException: Extraction from phar \"suite/archives/K07-symlink-named-dot.tar\" failed: Cannot extract \".\", internal error",
+    "error": "PharException: Extraction from phar \"suite/archives/K06-symlink-named-dot.tar\" failed: Cannot extract \".\", internal error",
     "outside": {},
     "tree": {}
    },
@@ -20514,7 +20226,7 @@
     }
    }
   },
-  "K08-dir-name-empty-with-prefix": {
+  "K07-dir-name-empty-with-prefix": {
    ".NET System.Formats.Tar": {
     "error": null,
     "outside": {},
@@ -33758,6 +33470,294 @@
       "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
      }
     }
+   }
+  },
+  "N48-magic-gnu-version-00": {
+   ".NET System.Formats.Tar": {
+    "error": "InvalidDataException: Unable to parse number.",
+    "outside": {},
+    "tree": {}
+   },
+   "7-Zip": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "p": {
+      "kind": "directory"
+     },
+     "p/a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "BusyBox tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "p": {
+      "kind": "directory"
+     },
+     "p/a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "GNU tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Go containerd archive.Apply": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Haskell tar": {
+    "error": "UnrecognisedTarFormat",
+    "outside": {},
+    "tree": {}
+   },
+   "Java Commons Compress": {
+    "error": "java.io.IOException: Corrupted TAR archive.",
+    "outside": {},
+    "tree": {}
+   },
+   "Julia Tar.jl": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "p": {
+      "kind": "directory"
+     },
+     "p/a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "PHP PharData, as in Composer": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "p": {
+      "kind": "directory"
+     },
+     "p/a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Perl Archive::Tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "p": {
+      "kind": "directory"
+     },
+     "p/a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Python tarfile, filter=data, as in pip": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "p": {
+      "kind": "directory"
+     },
+     "p/a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Python tarfile, filter=fully_trusted": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "p": {
+      "kind": "directory"
+     },
+     "p/a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Python tarfile, filter=tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "p": {
+      "kind": "directory"
+     },
+     "p/a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "R untar, internal": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "p": {
+      "kind": "directory"
+     },
+     "p/a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "RubyGems": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "p": {
+      "kind": "directory"
+     },
+     "p/a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Rust astral-tokio-tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Rust tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "Rust tar-codec, as in uv": {
+    "error": "at byte 0: invalid tar identity: found [117, 115, 116, 97, 114, 32, 48, 48]",
+    "outside": {},
+    "tree": {}
+   },
+   "bsdtar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "p": {
+      "kind": "directory"
+     },
+     "p/a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "live-bootstrap untar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "live-bootstrap untar, --non-strict": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "node-tar": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "node-tar, strict": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "tar-fs": {
+    "error": "Error: Invalid tar header: unknown format.",
+    "outside": {},
+    "tree": {}
    }
   },
   "S01-tree-dir-after-contents": {

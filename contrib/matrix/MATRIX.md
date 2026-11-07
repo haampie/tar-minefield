@@ -44,10 +44,10 @@ extracted by every implementation.
 | [F17](https://stoppels.ch/tar/F17.html) pax-global-comment | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
 | [F28](https://stoppels.ch/tar/F28.html) pax-newline-in-comment | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ❌B | ❌B |
 | [F31](https://stoppels.ch/tar/F31.html) pax-xattr-not-utf8 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
-| [F58](https://stoppels.ch/tar/F58.html) pax-newline-in-comment-path | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A | ✅ | ✅ | ❌ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ❌B | ❌B |
-| [F59](https://stoppels.ch/tar/F59.html) pax-newline-in-comment-then-size | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ❌B | ❌B |
-| [F60](https://stoppels.ch/tar/F60.html) pax-nul-in-xattr | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌A | ❌ | ❌A | ✅ | ✅ | ❌B | ❌B |
-| [K08](https://stoppels.ch/tar/K08.html) dir-name-empty-with-prefix | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ❌A | ❌A |
+| [F57](https://stoppels.ch/tar/F57.html) pax-newline-in-comment-path | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A | ✅ | ✅ | ❌ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ❌B | ❌B |
+| [F58](https://stoppels.ch/tar/F58.html) pax-newline-in-comment-then-size | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ❌B | ❌B |
+| [F59](https://stoppels.ch/tar/F59.html) pax-nul-in-xattr | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌A | ❌ | ❌A | ✅ | ✅ | ❌B | ❌B |
+| [K07](https://stoppels.ch/tar/K07.html) dir-name-empty-with-prefix | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ❌A | ❌A |
 | [N01](https://stoppels.ch/tar/N01.html) gnu-long-name | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
 | [N02](https://stoppels.ch/tar/N02.html) name-fills-field | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
 | [N03](https://stoppels.ch/tar/N03.html) pax-long-name | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌A | ✅ | ✅ | ❌B | ❌B |
@@ -72,8 +72,8 @@ extracted by every implementation.
 | [F32](https://stoppels.ch/tar/F32.html) checksum-leading-space | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
 | [F42](https://stoppels.ch/tar/F42.html) pax-comment-not-utf8 | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ❌A |
 | [F43](https://stoppels.ch/tar/F43.html) pax-global-comment-not-utf8 | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ❌A |
-| [F56](https://stoppels.ch/tar/F56.html) type-contiguous | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ❌A | ➖ | ❌A | ➕ | ➖ | ➕ | ➕ |
-| [F57](https://stoppels.ch/tar/F57.html) number-size-base256 | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➖ | ➖ | ➕ | ➕ | ➕ | ➖ | ➖ |
+| [F55](https://stoppels.ch/tar/F55.html) type-contiguous | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ❌A | ➖ | ❌A | ➕ | ➖ | ➕ | ➕ |
+| [F56](https://stoppels.ch/tar/F56.html) number-size-base256 | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➖ | ➖ | ➕ | ➕ | ➕ | ➖ | ➖ |
 | [N05](https://stoppels.ch/tar/N05.html) name-dot | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
 | [N06](https://stoppels.ch/tar/N06.html) name-leading-dot-slash | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
 | [N07](https://stoppels.ch/tar/N07.html) symlink-absolute | ➕ | ➕ | ➕ | ❌A | ➖ | ➕ | ➕ | ❌B | ➖ | ➖ | ❌C | ➖ | ❌C | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➖ | ➖ | ➕ | ➕ | ➕ |
@@ -115,15 +115,15 @@ extracted by every implementation.
 | [F44](https://stoppels.ch/tar/F44.html) pax-global-size-empty | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️C | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️D | ⚠️D |
 | [F45](https://stoppels.ch/tar/F45.html) type-gnu-sparse | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️C | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️C | ⚠️B | ✅ | ⚠️C | ⚠️C |
 | [F46](https://stoppels.ch/tar/F46.html) pax-size-on-symlink | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️C | ⚠️C | ⚠️C | ⚠️D | ✅ | ⚠️E | ⚠️A | ⚠️C | ⚠️C | ✅ | ⚠️F | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️G | ⚠️G |
-| [F47](https://stoppels.ch/tar/F47.html) magic-gnu-version-00 | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️A | ⚠️A |
-| [F48](https://stoppels.ch/tar/F48.html) checksum-wrong-after-first-member | ✅ | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️C | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️C | ⚠️C | ⚠️A | ✅ | ✅ | ✅ | ✅ |
-| [F49](https://stoppels.ch/tar/F49.html) pax-record-length-plus | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️A | ⚠️C | ⚠️A | ⚠️B | ✅ | ⚠️D | ⚠️D |
-| [F50](https://stoppels.ch/tar/F50.html) pax-record-empty-line | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️C | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️D | ⚠️D |
-| [F51](https://stoppels.ch/tar/F51.html) pax-size-underscore | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️C | ⚠️C | ⚠️C | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️B | ✅ | ⚠️B | ✅ | ✅ | ⚠️B | ⚠️ | ⚠️B | ⚠️B | ✅ | ⚠️D | ⚠️D |
-| [F52](https://stoppels.ch/tar/F52.html) number-size-plus | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ⚠️A | ⚠️A |
-| [F53](https://stoppels.ch/tar/F53.html) type-gnu-volume-label | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️B | ✅ | ⚠️B | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B |
-| [F54](https://stoppels.ch/tar/F54.html) type-gnu-old-long-name | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️C | ✅ | ⚠️A | ⚠️C | ✅ | ✅ | ✅ |
-| [F55](https://stoppels.ch/tar/F55.html) format-pax-header-without-magic | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️C | ⚠️C |
+| [F47](https://stoppels.ch/tar/F47.html) checksum-wrong-after-first-member | ✅ | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️C | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️C | ⚠️C | ⚠️A | ✅ | ✅ | ✅ | ✅ |
+| [F48](https://stoppels.ch/tar/F48.html) pax-record-length-plus | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️A | ⚠️C | ⚠️A | ⚠️B | ✅ | ⚠️D | ⚠️D |
+| [F49](https://stoppels.ch/tar/F49.html) pax-record-empty-line | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️C | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️D | ⚠️D |
+| [F50](https://stoppels.ch/tar/F50.html) pax-size-underscore | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️C | ⚠️C | ⚠️C | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️B | ✅ | ⚠️B | ✅ | ✅ | ⚠️B | ⚠️ | ⚠️B | ⚠️B | ✅ | ⚠️D | ⚠️D |
+| [F51](https://stoppels.ch/tar/F51.html) number-size-plus | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ⚠️A | ⚠️A |
+| [F52](https://stoppels.ch/tar/F52.html) type-gnu-volume-label | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️B | ✅ | ⚠️B | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B |
+| [F53](https://stoppels.ch/tar/F53.html) type-gnu-old-long-name | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️C | ✅ | ⚠️A | ⚠️C | ✅ | ✅ | ✅ |
+| [F54](https://stoppels.ch/tar/F54.html) format-pax-header-without-magic | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️C | ⚠️C |
+| [N48](https://stoppels.ch/tar/N48.html) magic-gnu-version-00 | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️A | ⚠️A |
 | **to reject: names** | | | | | | | | | | | | | | | | | | | | | | | | |
 | [N08](https://stoppels.ch/tar/N08.html) extended-pax-path-and-gnu-long-name | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️C | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️C | ⚠️A | ⚠️C | ✅ | ⚠️A | ✅ | ✅ |
 | [N09](https://stoppels.ch/tar/N09.html) extended-two-pax-headers | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️C | ⚠️A | ✅ | ✅ | ✅ | ⚠️C | ⚠️A | ⚠️C | ✅ | ⚠️A | ⚠️D | ⚠️D |
@@ -156,13 +156,13 @@ extracted by every implementation.
 | [N40](https://stoppels.ch/tar/N40.html) pax-global-linkpath | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️C | ⚠️B | ⚠️C | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️D | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️E | ⚠️E |
 | [N41](https://stoppels.ch/tar/N41.html) pax-gnu-sparse-name | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️C | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️C | ⚠️B | ⚠️C | ⚠️B | ⚠️B | ⚠️D | ⚠️D |
 | **to reject: kinds** | | | | | | | | | | | | | | | | | | | | | | | | |
+| [F60](https://stoppels.ch/tar/F60.html) trailing-slash-file-with-size | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️C | ⚠️C | ⚠️C | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️C | ⚠️C | ⚠️C | ⚠️C | ✅ | ⚠️C | ⚠️C | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️B |
 | [K01](https://stoppels.ch/tar/K01.html) kind-trailing-slash-file | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A |
 | [K02](https://stoppels.ch/tar/K02.html) linkname-on-file | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A |
 | [K03](https://stoppels.ch/tar/K03.html) symlink-trailing-slash | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️D |
 | [K04](https://stoppels.ch/tar/K04.html) name-empty-with-prefix | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️B | ✅ | ⚠️B | ✅ | ⚠️C | ⚠️C |
-| [K05](https://stoppels.ch/tar/K05.html) trailing-slash-file-with-size | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️C | ⚠️C | ⚠️C | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️C | ⚠️C | ⚠️C | ⚠️C | ✅ | ⚠️C | ⚠️C | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️B |
-| [K06](https://stoppels.ch/tar/K06.html) hardlink-trailing-slash | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️D | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️D |
-| [K07](https://stoppels.ch/tar/K07.html) symlink-named-dot | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B |
+| [K05](https://stoppels.ch/tar/K05.html) hardlink-trailing-slash | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️D | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️D |
+| [K06](https://stoppels.ch/tar/K06.html) symlink-named-dot | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B |
 | **to reject: order and state** | | | | | | | | | | | | | | | | | | | | | | | | |
 | [S03](https://stoppels.ch/tar/S03.html) hardlink-missing-target | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️A |
 | [S04](https://stoppels.ch/tar/S04.html) hardlink-to-itself | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️C | ✅ | ⚠️C | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A |
@@ -189,10 +189,10 @@ What the implementations that accept a case extract, where it is not the expecte
 - F17 pax-global-comment: A: `pax_global_header` (52 B, e00a4a95), `project/`, `project/README` (6 B, 5891b5b5)
 - F28 pax-newline-in-comment: A: `a` (512 B, 917dba8e); B: `PaxHeader` (25 B, 99e4ec94), `a` (0 B, e3b0c442), `smuggled` (0 B, e3b0c442)
 - F31 pax-xattr-not-utf8: A: `PaxHeader` (29 B, e2035909), `a` (2 B, 87428fc5)
-- F58 pax-newline-in-comment-path: A: `smuggled` (2 B, 87428fc5); B: `PaxHeader` (30 B, f8e8849d), `a` (2 B, 87428fc5)
-- F59 pax-newline-in-comment-then-size: A: `a` (0 B, e3b0c442), `smuggled` (0 B, e3b0c442); B: `PaxHeader` (35 B, 988f9a93), `a` (512 B, 917dba8e)
-- F60 pax-nul-in-xattr: A: `header-name` (12 B, a578eb49); B: `PaxHeader` (43 B, cb1fca8c), `header-name` (12 B, a578eb49)
-- K08 dir-name-empty-with-prefix: A: nothing
+- F57 pax-newline-in-comment-path: A: `smuggled` (2 B, 87428fc5); B: `PaxHeader` (30 B, f8e8849d), `a` (2 B, 87428fc5)
+- F58 pax-newline-in-comment-then-size: A: `a` (0 B, e3b0c442), `smuggled` (0 B, e3b0c442); B: `PaxHeader` (35 B, 988f9a93), `a` (512 B, 917dba8e)
+- F59 pax-nul-in-xattr: A: `header-name` (12 B, a578eb49); B: `PaxHeader` (43 B, cb1fca8c), `header-name` (12 B, a578eb49)
+- K07 dir-name-empty-with-prefix: A: nothing
 - N01 gnu-long-name: A: `dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/`, `dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/fffffffffffffffffffffffffffffffffffffff` (5 B, bbdbb75b)
 - N02 name-fills-field: A: `nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn0000644` (5 B, 0e716a5f)
 - N03 pax-long-name: A: `dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/`, `dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/fffffffffffffffffffffffffffffffffffffff` (5 B, bbdbb75b); B: `PaxHeader` (131 B, 8cc43c67), `dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/`, `dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/fffffffffffffffffffffffffffffffffffffff0000644` (5 B, bbdbb75b)
@@ -209,7 +209,7 @@ What the implementations that accept a case extract, where it is not the expecte
 - F18 pax-global-comment-after-members: A: `a` (2 B, 87428fc5), `b` (2 B, 02638299), `pax_global_header` (19 B, 89c2f7ac)
 - F42 pax-comment-not-utf8: A: `PaxHeader` (14 B, eeb3db03), `a` (2 B, 87428fc5)
 - F43 pax-global-comment-not-utf8: A: `a` (2 B, 87428fc5), `pax_global_header` (14 B, eeb3db03)
-- F56 type-contiguous: A: nothing
+- F55 type-contiguous: A: nothing
 - N07 symlink-absolute: A: `link` → `DEST/tar-minefield-nonexistent`; B: `link` → `tar-minefield-nonexistent`; C: `link` (0 B, e3b0c442)
 - N35 symlink-escapes: A: nothing; B: `link` (0 B, e3b0c442)
 - S16 hardlink-target-spelled-differently: A: `a` (2 B, 87428fc5), `h` (0 B, e3b0c442); B: `a` (2 B, 87428fc5)
@@ -246,15 +246,15 @@ What the implementations that accept a case extract, where it is not the expecte
 - F44 pax-global-size-empty: A: `a` (512 B, 917dba8e); B: `a` (0 B, e3b0c442); C: `a` (0 B, e3b0c442), `smuggled` (0 B, e3b0c442); D: `a` (512 B, 917dba8e), `pax_global_header` (8 B, facaf1d1)
 - F45 type-gnu-sparse: A: `a` (1026 B, f93a4465); B: nothing; C: `a` (2 B, fb8e20fc)
 - F46 pax-size-on-symlink: A: `b` (2 B, 02638299), `l` → `target`, `smuggled` (0 B, e3b0c442); B: `b` (2 B, 02638299), `l` → `smuggled`; C: `b` (2 B, 02638299), `l` → `target`; D: `b` (2 B, 02638299), `l` (512 B, 917dba8e); E: `b` (2 B, 02638299), `l` (0 B, e3b0c442), `smuggled` (0 B, e3b0c442); F: `b` (2 B, 02638299), `smuggled` (0 B, e3b0c442); G: `PaxHeader` (12 B, 609af461), `b` (2 B, 02638299), `l` → `target`, `smuggled` (0 B, e3b0c442)
-- F47 magic-gnu-version-00: A: `a` (2 B, 87428fc5); B: `p/`, `p/a` (2 B, 87428fc5)
-- F48 checksum-wrong-after-first-member: A: `a` (2 B, 87428fc5), `c` (2 B, a3a5e715), `smuggled` (0 B, e3b0c442); B: `a` (2 B, 87428fc5); C: `a` (2 B, 87428fc5), `b` (512 B, 917dba8e), `c` (2 B, a3a5e715)
-- F49 pax-record-length-plus: A: `header-name` (12 B, a578eb49); B: `renamed` (12 B, a578eb49); C: `+renamed` (12 B, a578eb49); D: `PaxHeader` (17 B, 4967ce11), `header-name` (12 B, a578eb49)
-- F50 pax-record-empty-line: A: `header-name` (12 B, a578eb49); B: `renamed` (12 B, a578eb49); C: `rename` (12 B, a578eb49); D: `PaxHeader` (30 B, c4cbcc5a), `header-name` (12 B, a578eb49)
-- F51 pax-size-underscore: A: `a` (5 B, 62a7dc9c); B: `a` (0 B, e3b0c442), `smuggled` (0 B, e3b0c442); C: `a` (512 B, 917dba8e); D: `PaxHeader` (13 B, 1214c57b), `a` (0 B, e3b0c442), `smuggled` (0 B, e3b0c442)
-- F52 number-size-plus: A: `a` (512 B, 917dba8e); B: `a` (0 B, e3b0c442), `smuggled` (0 B, e3b0c442)
-- F53 type-gnu-volume-label: A: `a` (2 B, 87428fc5); B: `a` (2 B, 87428fc5), `label` (0 B, e3b0c442)
-- F54 type-gnu-old-long-name: A: `@LongLink` (10 B, 7dc95644), `header-name` (12 B, a578eb49); B: `long-name` (12 B, a578eb49); C: `header-name` (12 B, a578eb49)
-- F55 format-pax-header-without-magic: A: `renamed` (12 B, a578eb49); B: `header-name` (12 B, a578eb49); C: `PaxHeader` (16 B, 4800427e), `header-name` (12 B, a578eb49)
+- F47 checksum-wrong-after-first-member: A: `a` (2 B, 87428fc5), `c` (2 B, a3a5e715), `smuggled` (0 B, e3b0c442); B: `a` (2 B, 87428fc5); C: `a` (2 B, 87428fc5), `b` (512 B, 917dba8e), `c` (2 B, a3a5e715)
+- F48 pax-record-length-plus: A: `header-name` (12 B, a578eb49); B: `renamed` (12 B, a578eb49); C: `+renamed` (12 B, a578eb49); D: `PaxHeader` (17 B, 4967ce11), `header-name` (12 B, a578eb49)
+- F49 pax-record-empty-line: A: `header-name` (12 B, a578eb49); B: `renamed` (12 B, a578eb49); C: `rename` (12 B, a578eb49); D: `PaxHeader` (30 B, c4cbcc5a), `header-name` (12 B, a578eb49)
+- F50 pax-size-underscore: A: `a` (5 B, 62a7dc9c); B: `a` (0 B, e3b0c442), `smuggled` (0 B, e3b0c442); C: `a` (512 B, 917dba8e); D: `PaxHeader` (13 B, 1214c57b), `a` (0 B, e3b0c442), `smuggled` (0 B, e3b0c442)
+- F51 number-size-plus: A: `a` (512 B, 917dba8e); B: `a` (0 B, e3b0c442), `smuggled` (0 B, e3b0c442)
+- F52 type-gnu-volume-label: A: `a` (2 B, 87428fc5); B: `a` (2 B, 87428fc5), `label` (0 B, e3b0c442)
+- F53 type-gnu-old-long-name: A: `@LongLink` (10 B, 7dc95644), `header-name` (12 B, a578eb49); B: `long-name` (12 B, a578eb49); C: `header-name` (12 B, a578eb49)
+- F54 format-pax-header-without-magic: A: `renamed` (12 B, a578eb49); B: `header-name` (12 B, a578eb49); C: `PaxHeader` (16 B, 4800427e), `header-name` (12 B, a578eb49)
+- N48 magic-gnu-version-00: A: `a` (2 B, 87428fc5); B: `p/`, `p/a` (2 B, 87428fc5)
 - N08 extended-pax-path-and-gnu-long-name: A: `from-pax` (12 B, a578eb49); B: `from-gnu` (12 B, a578eb49); C: `from-header` (12 B, a578eb49)
 - N09 extended-two-pax-headers: A: `second` (12 B, a578eb49); B: `first` (12 B, a578eb49); C: `header-name` (12 B, a578eb49); D: `PaxHeader` (15 B, 7c8761f1), `header-name` (12 B, a578eb49)
 - N10 format-star: A: `ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /`, `ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000 /a` (2 B, 87428fc5); B: `ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/`, `ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/a` (2 B, 87428fc5); C: `ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000/`, `ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp15000000000 15000000000/a` (2 B, 87428fc5); D: `a` (2 B, 87428fc5)
@@ -285,13 +285,13 @@ What the implementations that accept a case extract, where it is not the expecte
 - N39 gnu-long-name-size-without-nul: A: `name-rest` (12 B, a578eb49); B: `name` (12 B, a578eb49); C: `header-name` (12 B, a578eb49)
 - N40 pax-global-linkpath: A: `l` → `global-target`, `m` → `global-target`; B: `l` → `header-target-l`, `m` → `header-target-m`; C: `l` (0 B, e3b0c442), `m` (0 B, e3b0c442); D: nothing; E: `l` → `header-target-l`, `m` → `header-target-m`, `pax_global_header` (26 B, 5d0ee02c)
 - N41 pax-gnu-sparse-name: A: `sparse-name` (12 B, a578eb49); B: `path-name` (12 B, a578eb49); C: `header-name` (12 B, a578eb49); D: `PaxHeader` (49 B, 6721488d), `header-name` (12 B, a578eb49)
+- F60 trailing-slash-file-with-size: A: `a/`, `b` (2 B, 02638299), `smuggled` (0 B, e3b0c442); B: `a/`, `b` (2 B, 02638299); C: `a` (512 B, 917dba8e), `b` (2 B, 02638299)
 - K01 kind-trailing-slash-file: A: `a/`; B: `a` (0 B, e3b0c442)
 - K02 linkname-on-file: A: `a` (19 B, bc345849)
 - K03 symlink-trailing-slash: A: `link` → `target`, `target/`; B: `link/`, `target/`; C: `link` (0 B, e3b0c442); D: `target/`
 - K04 name-empty-with-prefix: A: `dir/`; B: `dir` (0 B, e3b0c442); C: nothing
-- K05 trailing-slash-file-with-size: A: `a/`, `b` (2 B, 02638299), `smuggled` (0 B, e3b0c442); B: `a/`, `b` (2 B, 02638299); C: `a` (512 B, 917dba8e), `b` (2 B, 02638299)
-- K06 hardlink-trailing-slash: A: `a` (2 B, 87428fc5), `b` (2 B, 87428fc5); B: `a` (2 B, 87428fc5), `b/`; C: `a` (2 B, 87428fc5), `b` (0 B, e3b0c442); D: `a` (2 B, 87428fc5)
-- K07 symlink-named-dot: A: `_` → `d`, `d/`, `f` (2 B, 092fcfbb); B: `d/`, `f` (2 B, 092fcfbb)
+- K05 hardlink-trailing-slash: A: `a` (2 B, 87428fc5), `b` (2 B, 87428fc5); B: `a` (2 B, 87428fc5), `b/`; C: `a` (2 B, 87428fc5), `b` (0 B, e3b0c442); D: `a` (2 B, 87428fc5)
+- K06 symlink-named-dot: A: `_` → `d`, `d/`, `f` (2 B, 092fcfbb); B: `d/`, `f` (2 B, 092fcfbb)
 - S03 hardlink-missing-target: A: nothing; B: `h` (0 B, e3b0c442)
 - S04 hardlink-to-itself: A: `a` (2 B, 87428fc5); B: nothing; C: `a` (0 B, e3b0c442)
 - S05 hardlink-to-later-member: A: `f` (2 B, 092fcfbb), `h` (2 B, 092fcfbb); B: `f` (2 B, 092fcfbb); C: `f` (2 B, 092fcfbb), `h` (0 B, e3b0c442)
