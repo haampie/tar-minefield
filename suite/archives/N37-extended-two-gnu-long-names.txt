@@ -1,0 +1,83 @@
+N37-extended-two-gnu-long-names: must reject
+
+Two GNU long names for one member: the first, the last, or the header's?
+
+The archive has two GNU long name headers, with `first` and `second`, then the member, whose header
+has GNU's magic and the name `header-name`.
+
+GNU's format does not say what two long names for one member mean. In POSIX, the typeflags `A` to
+`Z` are reserved for custom implementations, and a reader that does not recognize one
+extracts that header as a regular file. This case is ambiguous because a reader that
+knows GNU long names extracts the member either as `first` or as `second`. A reader that discards
+both long names extracts `header-name`, and one that applies each long name to the next header
+extracts a file `first` that contains `second`, then `header-name`.
+
+Decision point: which of two GNU long names applies.
+Seen in: none of the scanned tarballs.
+See also: N09, two pax extended headers for one member.
+
+0x000000  header: GNU long name
+          name     [  0,100)  "././@LongLink" + 87 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000006" + NUL  6
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011227\0 "  4759: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "L"  GNU long name
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar "
+          version  [263,265)  " " + NUL
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: GNU long name
+          6 bytes: the name and a NUL, then 506 NUL
+          "first" + NUL
+0x000400  header: GNU long name
+          name     [  0,100)  "././@LongLink" + 87 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000007" + NUL  7
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011230\0 "  4760: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "L"  GNU long name
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar "
+          version  [263,265)  " " + NUL
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data: GNU long name
+          7 bytes: the name and a NUL, then 505 NUL
+          "second" + NUL
+0x000800  header: regular file
+          name     [  0,100)  "header-name" + 89 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000014" + NUL  12
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011231\0 "  4761: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar "
+          version  [263,265)  " " + NUL
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000a00  data
+          12 bytes, then 500 NUL to the end of the block
+          "which name?\n"
+0x000c00  2 zero blocks: the end-of-archive marker
+0x001000  end of file

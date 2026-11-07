@@ -327,6 +327,9 @@ def name_features(name, kind, features):
         features.add("name.leading-dot-slash")
     if name in (b".", b"./"):
         features.add("name.dot")
+    # the root of the tree as a file or a link, which normalizing to the root hides: `.`, `./.`
+    if not normalize(name) and kind != "dir":
+        features.add(f"name.dot-on-{kind}")
     if b"//" in name.strip(b"/"):
         features.add("name.double-slash")
     if b"." in parts[1:]:
@@ -764,6 +767,9 @@ class Scanner:
         elif kind == "dir" and key in self.implied:
             features.add("tree.dir-after-contents")
         if kind == "hardlink":
+            # normalize() drops the leading slash, which makes it the member of that name
+            if linkname.startswith(b"/"):
+                features.add("hardlink.absolute")
             target = normalize(linkname)
             if target == key:
                 features.add("hardlink.to-itself")

@@ -8,8 +8,8 @@ one region, 2 bytes at offset 1024, and the real size 1026. Its data is those 2 
 In POSIX, the typeflags `A` to `Z` are reserved for custom implementations, and a
 reader that does not recognize one extracts the member as a regular file, `a` of 2
 bytes. As a GNU sparse file, the member is extracted as a file `a` that contains 1024 zero bytes,
-followed by `ab`. This case is ambiguous because `a` is the data as stored, 2 bytes, or the file it
-expands to, 1026 bytes.
+followed by `ab`. This case is ambiguous because `a` is either the data as stored, 2 bytes, or the
+file it expands to, 1026 bytes.
 
 Decision point: whether a sparse member is expanded.
 Seen in: none of the scanned tarballs.

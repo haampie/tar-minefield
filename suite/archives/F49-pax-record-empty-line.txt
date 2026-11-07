@@ -1,0 +1,62 @@
+F49-pax-record-empty-line: must reject
+
+An empty line between two pax records.
+
+The archive has a file whose pax header has the record `comment=x`, followed by a newline,
+followed by the record `path=renamed`. Its header has the name `header-name`.
+
+In POSIX, an extended header consists of records, each of which starts with its
+length, so a newline between two of them is not a record. This case is ambiguous
+because a reader can handle the empty line in one of three ways. A reader that skips it reads
+`path=renamed`, and the file is `renamed`. One that stops there, or ignores the extended header,
+keeps `header-name`. One that takes the newline for the start of the next record reads its length
+from one byte too early, and cuts the name to `rename`.
+
+Decision point: whether a pax header may have bytes between its records.
+Seen in: none of the scanned tarballs.
+See also: F36, a record length that is one short.
+
+0x000000  header: pax extended header, two records, with a newline between them
+          name     [  0,100)  "PaxHeader" + 91 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000036" + NUL  30
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011100\0 "  4672: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "x"  pax extended header
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: a comment, an empty line, and a path
+          30 bytes, then 482 NUL
+          "13 comment=x\n\n16 path=renamed\n"
+0x000400  header: regular file
+          name     [  0,100)  "header-name" + 89 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000014" + NUL  12
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011271\0 "  4793: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          12 bytes, then 500 NUL to the end of the block
+          "which name?\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

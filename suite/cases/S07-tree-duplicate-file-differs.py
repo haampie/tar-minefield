@@ -2,10 +2,9 @@
 
 The archive has two files named `a`: the first contains `first`, the last `last`.
 
-In POSIX, existing files [can be overwritten][overwritten], but need not be, and overwriting is
-called permitted in its [application usage][overwrite]. This case is ambiguous because either copy
-can be the file: an extractor that overwrites files keeps the last copy, and one that does not, such
-as GNU tar with `--keep-old-files`, keeps the first.
+In POSIX, existing files [may be overwritten][overwrite], but need not be. This case is ambiguous
+because either copy can be the file: an extractor that overwrites files keeps the last copy, and one
+that does not, such as GNU tar with `--keep-old-files`, keeps the first.
 
 Decision point: which of two members of one path is the file.
 Seen in: fish 4.7.1, where `Cargo.toml` and `Cargo.lock` are appended again without their last

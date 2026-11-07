@@ -2,8 +2,8 @@
 
 The archive has one member, whose pax header has `GNU.sparse.major=1`, `GNU.sparse.minor=0`,
 `GNU.sparse.name=a`, `GNU.sparse.realsize=1026` and `path=GNUSparseFile.0/a`. Its data is a sparse
-map of one region, 2 bytes at offset 1024, as the lines `1`, `1024` and `2` padded with NULs to a
-block, followed by those 2 bytes, `ab`.
+map of one region, 2 bytes at offset 1024: the lines `1`, `1024` and `2`, followed by NULs up to
+the end of the block, followed by those 2 bytes, `ab`.
 
 In POSIX, keywords such as GNU's are [implementation extensions][keyword-extension], which are not
 defined, so a reader that ignores them applies the pax [`path`][path], and extracts

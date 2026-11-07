@@ -188,9 +188,9 @@ def implementations(work, only=None):
             binary = os.path.join(target, "release", "runner")
             found.append(("Rust tar", "tar 0.4.46, unpack",
                           lambda a, d, b=binary: [b, "tar", a, d]))
-            found.append(("Rust astral-tokio-tar", "astral-tokio-tar 0.7.0, unpack",
+            found.append(("Rust astral-tokio-tar", "astral-tokio-tar 0.7.1, unpack",
                           lambda a, d, b=binary: [b, "astral-tokio-tar", a, d]))
-            found.append(("Rust tar-codec, as in uv", "tar-codec 0.0.15, with the policies of uv 0.13",
+            found.append(("Rust tar-codec, as in uv", "tar-codec 0.0.16, with the policies of uv 0.13",
                           lambda a, d, b=binary: [b, "tar-codec-uv", a, d]))
         else:
             print("rust runner:", err, file=sys.stderr)

@@ -7,6 +7,6 @@ publish = false
 # Extract a tar archive with the unpack of a Rust tar library, for contrib/matrix/matrix.py.
 [dependencies]
 tar = "=0.4.46"
-astral-tokio-tar = "=0.7.0"
-tar-codec = "=0.0.15"
+astral-tokio-tar = "=0.7.1"
+tar-codec = "=0.0.16"
 tokio = { version = "1", features = ["rt", "fs"] }

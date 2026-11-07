@@ -1,11 +1,11 @@
-r"""The POSIX magic with a version that is neither `00` nor NULs.
+r"""The POSIX magic with a version that is neither `"00"` nor NULs.
 
-The archive has one file, `a`, whose magic `ustar\0` is followed by the version `01`.
+The archive has one file, `a`, whose magic `"ustar\0"` is followed by the version `"01"`.
 
-In [POSIX][version], the version is `00`. The default policy tolerates NULs instead, as some Java
-archivers write them, but no other version. This case is ambiguous because a reader takes the header
-in one of three ways: as ustar, ignoring the version; as in a format not defined in POSIX, and
-stops; or as a v7 header, without the fields that ustar added.
+In [POSIX][version], the version is `"00"`. The default policy tolerates NULs instead, as some Java
+archivers write them, but no other version. This case is ambiguous because a reader can take the
+header in one of three ways: as ustar, ignoring the version; as in a format not defined in POSIX,
+and stops; or as a v7 header, without the fields that ustar added.
 
 Decision point: which format the header is in.
 Seen in: none of the scanned tarballs.

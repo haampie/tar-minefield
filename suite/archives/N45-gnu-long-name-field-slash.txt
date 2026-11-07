@@ -1,0 +1,62 @@
+N45-gnu-long-name-field-slash: must accept, and extract its tree
+
+A file with a GNU long name and typeflag NUL, whose name field ends in a slash.
+
+The archive has a GNU long name header whose data is 99 `p`s, followed by a slash, followed by
+`file.py`, followed by a NUL, then the member, of typeflag NUL and GNU's magic, whose name field
+contains the first 100 bytes of that name: the 99 `p`s, followed by the slash.
+
+The long name replaces the name field, so the member is a regular file, `file.py` under the
+directory of 99 `p`s, which does not have a member of its own. The long name header is GNU tar's own
+format for long names. A name that ends in a slash was the old way to archive a
+directory. A reader that decides the kind by the name field, before the long name is applied,
+extracts a directory instead. A reader that does not apply the long name extracts a file of 99 `p`s,
+by the name field without its slash.
+
+Seen in: sdists of Python packages that maturin wrote.
+See also: K01, a regular file whose name ends in a slash.
+
+0x000000  header: GNU long name
+          name     [  0,100)  "././@LongLink" + 87 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000154" + NUL  108
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011233\0 "  4763: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "L"  GNU long name
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar "
+          version  [263,265)  " " + NUL
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: GNU long name
+          108 bytes: the name and a NUL, then 404 NUL
+          "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/file.py" + NUL
+0x000400  header: regular file (pre-POSIX), typeflag NUL, a name field that ends in a slash
+          name     [  0,100)  "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/"
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000010" + NUL  8
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "034655\0 "  14765: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  1 NUL  regular file (pre-POSIX)
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar "
+          version  [263,265)  " " + NUL
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          8 bytes, then 504 NUL to the end of the block
+          "print()\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

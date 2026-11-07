@@ -1,0 +1,76 @@
+N42-gnu-long-name-dir: must accept, and extract its tree
+
+A directory with a long name in a GNU long name, then a file.
+
+The archive has a GNU long name header with a name of 120 `d`s, followed by a slash. Then a
+directory whose header has GNU's magic and the first 100 bytes of that name, then a file `a` with
+GNU's magic.
+
+The long name applies to the directory, and to no later member: the tree is the directory and `a`.
+This is GNU tar's own format for long names.
+
+Seen in: tarballs produced by GNU tar.
+See also: N01, a long name of a file.
+
+0x000000  header: GNU long name
+          name     [  0,100)  "././@LongLink" + 87 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000172" + NUL  122
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011233\0 "  4763: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "L"  GNU long name
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar "
+          version  [263,265)  " " + NUL
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: GNU long name
+          122 bytes: the name and a NUL, then 390 NUL
+          "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/" + NUL
+0x000400  header: directory
+          name     [  0,100)  "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+          mode     [100,108)  "0000755" + NUL  755 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000000" + NUL  0
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "032565\0 "  13685: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "5"  directory
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar "
+          version  [263,265)  " " + NUL
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  header: regular file
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007300\0 "  3776: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar "
+          version  [263,265)  " " + NUL
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000800  data
+          2 bytes, then 510 NUL to the end of the block
+          "a\n"
+0x000a00  2 zero blocks: the end-of-archive marker
+0x000e00  end of file

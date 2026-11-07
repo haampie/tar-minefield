@@ -1,0 +1,77 @@
+F58-pax-newline-in-comment-then-size: must accept, and extract its tree
+
+A newline in a pax `comment`, which split on lines leaves a `size` record before the real one.
+
+The archive has a file `a`, whose pax header has a `comment` with a newline in it, `x\n10 size=0`,
+then the record `size=512`, and whose header has the size 512 too. The 512 bytes after the header
+are the header of an empty file `smuggled`.
+
+pax records are delimited by their length, so the comment is one record, which is
+ignored, and the pax size overrides the size field: `a` contains the
+512 bytes. This case is not ambiguous. A reader that splits records on lines finds a record
+`size=0` before `size=512`, and one that takes the first, rather than the last,
+extracts an empty `a`, then `smuggled`.
+
+Seen in: none of the scanned tarballs.
+See also: F28, a `size` record in a comment on a file without a pax size.
+
+0x000000  header: pax extended header, a comment with a newline, then size=512
+          name     [  0,100)  "PaxHeader" + 91 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000043" + NUL  35
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011076\0 "  4670: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "x"  pax extended header
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: pax records
+          35 bytes of pax records, then 477 NUL
+          "23 comment=x\n10 size=0\n"
+          "12 size=512\n"
+0x000400  header: regular file, size 512
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000001000" + NUL  512
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007337\0 "  3807: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  header: regular file, the data of a
+          name     [  0,100)  "smuggled" + 92 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000000" + NUL  0
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "010725\0 "  4565: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

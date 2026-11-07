@@ -4,9 +4,9 @@ The archive has a global header, typeflag `g`, with one record, a `comment` of t
 `\xff\xfe`, which are not UTF-8, then a file `a`.
 
 In POSIX, the value of every specified keyword, `comment` among them, is in [UTF-8][utf-8-keyword],
-and every [comment][comment] is ignored. The value can be seen as bound by the rule for UTF-8, which
-makes the archive invalid, or as never read, as the comment is ignored. This case is ambiguous
-because the archive is invalid, or has the file `a`.
+and every [comment][comment] is ignored. The value can be seen either as bound by the rule for
+UTF-8, which makes the archive invalid, or as never read, as the comment is ignored. This case is
+ambiguous because the archive is either invalid or has the file `a`.
 
 Decision point: whether a comment is decoded before it is ignored.
 Seen in: none of the scanned tarballs.
