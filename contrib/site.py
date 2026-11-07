@@ -888,26 +888,27 @@ def mtimes_svg(union):
     out = []
     for t in range(0, peak + 1, tick):
         y = base - t * scale
-        out.append(f'<line x1="{left}" x2="{width}" y1="{y:.1f}" y2="{y:.1f}" class="grid"/>'
+        out.append(f'<line x1="{left}" x2="{width}" y1="{y:.1f}" y2="{y:.1f}" class="mtimes-grid"/>'
                    f'<text x="{left - 6}" y="{y + 4:.1f}" text-anchor="end">{t:,}</text>')
     for i, b in enumerate(bins):
         x, w, h = left + i * step + gap / 2, step - gap, counts[b] * scale
         r = min(4, w / 2, h)
         # rounded at the top, square on the baseline
-        out.append(f'<path d="M{x:.1f},{base}v{-(h - r):.1f}q0,{-r:.1f} {r:.1f},{-r:.1f}'
+        out.append(f'<path class="mtimes-bar" d="M{x:.1f},{base}v{-(h - r):.1f}q0,{-r:.1f} {r:.1f},{-r:.1f}'
                    f'h{w - 2 * r:.1f}q{r:.1f},0 {r:.1f},{r:.1f}v{h - r:.1f}z">'
                    f"<title>{b}: {counts[b]:,} tarball{'s' if counts[b] != 1 else ''}</title></path>")
         start = b.split("–")[0]
         if start.endswith("0"):
             # a decade at the left edge of its first bin
             edge = left + i * step
-            out.append(f'<line x1="{edge:.1f}" x2="{edge:.1f}" y1="{base}" y2="{base + 5}" class="grid"/>'
+            out.append(f'<line x1="{edge:.1f}" x2="{edge:.1f}" y1="{base}" y2="{base + 5}" class="mtimes-grid"/>'
                        f'<text x="{edge:.1f}" y="{base + 18}" text-anchor="middle">{start}</text>')
-    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" '
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" class="mtimes" viewBox="0 0 {width} {height}" '
+           f'width="{width}" '
            f'height="{height}" role="img"><title>Tarballs by the median mtime of their members, in '
-           "bins of two years</title><style>text { font: 12px system-ui, sans-serif; fill: #59636e; } "
-           "path { fill: #0969da; } path:hover { fill: #0550ae; } "
-           ".grid { stroke: #d0d7de; stroke-width: 1; }</style>" + "".join(out) + "</svg>")
+           "bins of two years</title><style>.mtimes { font: 12px system-ui, sans-serif; fill: #59636e; } "
+           ".mtimes-bar { fill: #0969da; } .mtimes-bar:hover { fill: #0550ae; } "
+           ".mtimes-grid { stroke: #d0d7de; stroke-width: 1; }</style>" + "".join(out) + "</svg>")
     return svg, counts["fixed"], counts["unknown"]
 
 
@@ -1092,7 +1093,7 @@ def index_image(results, cases):
     svg = matrix.svg(results, cases)
     width = int(re.search(r'width="(\d+)"', svg).group(1))
     height = width * 630 / 1200
-    bottom = float(re.findall(r'<line class="rule"[^>]* y1="([\d.]+)"', svg)[1])
+    bottom = float(re.findall(r'<line class="matrix-rule"[^>]* y1="([\d.]+)"', svg)[1])
     box = f"0 {bottom - height:.1f} {width} {height:.1f}"
     return re.sub(r'width="\d+" height="\d+" viewBox="[^"]*"',
                   f'width="1200" height="630" viewBox="{box}"', svg, count=1)
@@ -1121,7 +1122,7 @@ def case_image(case, info, results):
            f"{esc(badge)}</text>",
            f'<text x="{left + 12.5 * len(badge) + 34}" y="52" style="font-size:22px;fill:#59636e">'
            "(draft)</text>",
-           f'<text x="{left}" y="112" style="font-size:38px;font-weight:700"><tspan class="id" '
+           f'<text x="{left}" y="112" style="font-size:38px;font-weight:700"><tspan class="matrix-id" '
            f'style="font-weight:400">{esc(ident)}</tspan> {esc(name)}</text>']
     for i, line in enumerate(textwrap.wrap(info["description"].replace("`", ""), 80)[:2]):
         out.append(f'<text x="{left}" y="{156 + 30 * i}" style="font-size:22px;fill:#59636e">'
@@ -1133,11 +1134,11 @@ def case_image(case, info, results):
     cells, _ = matrix.case_cells(info, results["cases"].get(case, {}), names)
     for n in names:
         out.append(matrix.cell_svg(round(xs[n], 1), top, round(cw, 1), ch, cells[n])
-                   .replace('<text class="cell ', '<text style="font-size:20px" class="cell '))
+                   .replace('<text class="matrix-cell ', '<text style="font-size:20px" class="matrix-cell '))
     out.append(f'<text x="{width - left}" y="{height - 30}" text-anchor="end" '
                f'style="font-size:18px;fill:#59636e">'
                f'{esc(matrix.SITE.split("//")[1])}{ident}.html</text>')
-    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" '
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" class="matrix" width="1200" height="630" '
             f'viewBox="0 0 {width} {height}">{matrix.svg_style()}{"".join(out)}</svg>\n')
 
 

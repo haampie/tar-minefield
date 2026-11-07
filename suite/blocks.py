@@ -294,7 +294,7 @@ def runs(data, x, y, scale, h):
         if i == len(data) or byte_class(data[i]) != byte_class(data[start]):
             cls = byte_class(data[start])
             if cls != "nul":
-                out.append(f'<rect class="{cls}" x="{x + start * scale:g}" y="{y}" '
+                out.append(f'<rect class="blocks-{cls}" x="{x + start * scale:g}" y="{y}" '
                            f'width="{(i - start) * scale:g}" height="{h}"/>')
             start = i
     return "".join(out)
@@ -330,7 +330,7 @@ def block_map(archive, title):
         for k in range(0, len(data), BLOCK):
             block = data[k : k + BLOCK]
             label = what if k == 0 else f"{what.split(':')[0]}, continued"
-            out.append(f'<text class="mono" x="4" y="{y + 11}">{offset + k:#08x}</text>'
+            out.append(f'<text class="blocks-mono" x="4" y="{y + 11}">{offset + k:#08x}</text>'
                        f'<text x="{left}" y="{y + 11}">{esc(label)}</text>')
             y += 16
             if k == 0 and details and not isinstance(details[0], str):
@@ -339,18 +339,18 @@ def block_map(archive, title):
                     x = left + start * scale
                     hover = f"{field} [{start},{start + w}): {show_field(field, raw)}" + (
                         f", {meaning}" if meaning else "")
-                    out.append(f'<g><title>{esc(hover)}</title><rect class="field" x="{x:g}" '
+                    out.append(f'<g><title>{esc(hover)}</title><rect class="blocks-field" x="{x:g}" '
                                f'y="{y}" width="{w * scale:g}" height="{h}"/>'
                                f"{runs(raw, x, y, scale, h)}</g>")
                     if w * scale >= 6 * len(field) + 4:
-                        out.append(f'<text class="small" x="{x + w * scale / 2:g}" '
+                        out.append(f'<text class="blocks-small" x="{x + w * scale / 2:g}" '
                                    f'y="{y + h + 11}">{esc(field)}</text>')
                     if explicit or (field in ("name", "linkname") and raw.strip(b"\0")):
-                        texts.append((x, f"{field} {show_field(field, raw)}", "mono accent" if explicit
-                                      else "mono"))
+                        texts.append((x, f"{field} {show_field(field, raw)}", "blocks-mono blocks-accent"
+                                      if explicit else "blocks-mono"))
                 for field, start, w, raw, meaning, explicit in details:
                     if explicit:
-                        out.append(f'<rect class="explicit" x="{left + start * scale - 1:g}" '
+                        out.append(f'<rect class="blocks-explicit" x="{left + start * scale - 1:g}" '
                                    f'y="{y - 1}" width="{w * scale + 2:g}" height="{h + 2}"/>')
                 svg, y = callouts(texts, left, right, y + h + 14)
                 out.append(svg)
@@ -359,7 +359,7 @@ def block_map(archive, title):
                 hover = "; ".join(lines) or "512 NUL"
                 if len(data) > BLOCK:
                     hover = f"bytes {k} to {k + BLOCK} of {len(data)}: {hover}"
-                out.append(f'<g><title>{esc(hover)}</title><rect class="field" x="{left}" '
+                out.append(f'<g><title>{esc(hover)}</title><rect class="blocks-field" x="{left}" '
                            f'y="{y}" width="{BLOCK * scale:g}" height="{h}"/>'
                            f"{runs(block, left, y, scale, h)}</g>")
                 y += h + 4
@@ -367,26 +367,26 @@ def block_map(archive, title):
                     for line in lines[1:]:
                         if len(line) > 116:
                             line = clip(line, 115)
-                        out.append(f'<text class="mono" x="{left}" y="{y + 12}">{esc(line)}</text>')
+                        out.append(f'<text class="blocks-mono" x="{left}" y="{y + 12}">{esc(line)}</text>')
                         y += 14
             y += 10
-    out.append(f'<text class="mono" x="4" y="{y + 11}">{archive.size:#08x}</text>'
+    out.append(f'<text class="blocks-mono" x="4" y="{y + 11}">{archive.size:#08x}</text>'
                f'<text x="{left}" y="{y + 11}">end of file</text>')
     y += 34
     x = left
     for cls, _, meaning in BYTE_CLASSES + [("explicit", None, "written by the case itself")]:
-        out.append(f'<rect class="field {cls}" x="{x}" y="{y - 10}" width="12" height="12"/>'
+        out.append(f'<rect class="blocks-field blocks-{cls}" x="{x}" y="{y - 10}" width="12" height="12"/>'
                    f'<text x="{x + 16}" y="{y}">{esc(meaning)}</text>')
         x += 16 + 6 * len(meaning) + 14
     width, height = max(right, x) + 8, y + 8
-    colours = "".join(f".{c}{{fill:{colour}}}" for c, colour, _ in BYTE_CLASSES)
-    style = (f"<style>text{{font-family:{FONT};font-size:12px;fill:#1f2328}}"
-             ".mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;"
-             "font-size:11px;fill:#59636e}.accent{fill:#bc4c00;font-weight:600}"
-             ".small{font-size:10px;text-anchor:middle;fill:#59636e}"
-             f".field{{fill:#ffffff;stroke:#59636e;stroke-width:0.75}}{colours}"
-             ".explicit{fill:none;stroke:#bc4c00;stroke-width:2}</style>"
+    colours = "".join(f".blocks-{c}{{fill:{colour}}}" for c, colour, _ in BYTE_CLASSES)
+    style = (f"<style>.blocks{{font-family:{FONT};font-size:12px;fill:#1f2328}}"
+             ".blocks-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;"
+             "font-size:11px;fill:#59636e}.blocks-accent{fill:#bc4c00;font-weight:600}"
+             ".blocks-small{font-size:10px;text-anchor:middle;fill:#59636e}"
+             f".blocks-field{{fill:#ffffff;stroke:#59636e;stroke-width:0.75}}{colours}"
+             ".blocks-explicit{fill:none;stroke:#bc4c00;stroke-width:2}</style>"
              '<rect width="100%" height="100%" fill="#ffffff"/>')
-    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width:g}" height="{height}" '
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" class="blocks" width="{width:g}" height="{height}" '
             f'viewBox="0 0 {width:g} {height}" role="img"><title>{esc(title)}</title>{style}'
             f'{"".join(out)}</svg>\n')
