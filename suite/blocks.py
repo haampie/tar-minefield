@@ -350,7 +350,7 @@ def block_map(archive, title):
                                       else "mono"))
                 for field, start, w, raw, meaning, explicit in details:
                     if explicit:
-                        out.append(f'<rect class="mark" x="{left + start * scale - 1:g}" '
+                        out.append(f'<rect class="explicit" x="{left + start * scale - 1:g}" '
                                    f'y="{y - 1}" width="{w * scale + 2:g}" height="{h + 2}"/>')
                 svg, y = callouts(texts, left, right, y + h + 14)
                 out.append(svg)
@@ -374,7 +374,7 @@ def block_map(archive, title):
                f'<text x="{left}" y="{y + 11}">end of file</text>')
     y += 34
     x = left
-    for cls, _, meaning in BYTE_CLASSES + [("mark", None, "written by the case itself")]:
+    for cls, _, meaning in BYTE_CLASSES + [("explicit", None, "written by the case itself")]:
         out.append(f'<rect class="field {cls}" x="{x}" y="{y - 10}" width="12" height="12"/>'
                    f'<text x="{x + 16}" y="{y}">{esc(meaning)}</text>')
         x += 16 + 6 * len(meaning) + 14
@@ -385,7 +385,7 @@ def block_map(archive, title):
              "font-size:11px;fill:#59636e}.accent{fill:#bc4c00;font-weight:600}"
              ".small{font-size:10px;text-anchor:middle;fill:#59636e}"
              f".field{{fill:#ffffff;stroke:#59636e;stroke-width:0.75}}{colours}"
-             ".mark{fill:none;stroke:#bc4c00;stroke-width:2}</style>"
+             ".explicit{fill:none;stroke:#bc4c00;stroke-width:2}</style>"
              '<rect width="100%" height="100%" fill="#ffffff"/>')
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width:g}" height="{height}" '
             f'viewBox="0 0 {width:g} {height}" role="img"><title>{esc(title)}</title>{style}'
