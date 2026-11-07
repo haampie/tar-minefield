@@ -8,8 +8,8 @@ consecutive blocks on disk. [Implementations without such extensions][contiguous
 a regular file. A reader that does not recognize typeflag `7` extracts it [as a regular
 file][unknown-type] too. This case is tolerated because POSIX gives it one reading: as a regular
 file, or as a contiguous file where they are supported, the file is `a` with its data. A strict
-parser may reject it, as it may any typeflag it does not support; a reader that skips such a
-typeflag extracts nothing.
+parser may reject it, as it may reject any typeflag that it does not support. A reader that skips
+the member extracts nothing.
 
 Seen in: none of the scanned tarballs.
 See also: F16, an unknown typeflag with a size.

@@ -1,7 +1,7 @@
 """A symlink with an empty linkname field and a pax `linkpath`.
 
-The archive has a symlink `l`, whose pax header has `linkpath=target`, and whose header has an empty
-linkname field.
+The archive has a symlink, of typeflag `2`, with the name `l` and an empty linkname field. Its pax
+header has `linkpath=target`.
 
 The pax `linkpath` [overrides][linkpath] the linkname field, so the empty field is not used, and
 `l` points to `target`.

@@ -1,8 +1,8 @@
 """A symlink with a long target, in a GNU long link name.
 
-The archive has a GNU long link name header, typeflag `K`, whose data is 120 `t`s, followed by a
-NUL, then a symlink `l`, whose header has GNU's magic and, in its linkname field, the first 100
-`t`s.
+The archive has a GNU long link name header, of typeflag `K`, whose data is 120 `t`s, followed by a
+NUL. After it is a symlink, of typeflag `2`, with the name `l` and GNU's magic. Its linkname field
+contains the first 100 `t`s.
 
 The long link name replaces the linkname field, so `l` points to the 120 `t`s. This is GNU tar's
 own format for long link targets.

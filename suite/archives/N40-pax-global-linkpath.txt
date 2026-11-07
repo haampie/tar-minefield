@@ -7,8 +7,8 @@ The archive starts with a global header with `linkpath=global-target`, then has 
 
 In POSIX, a global header applies to every later member, and a `linkpath`
 overrides the linkname field, so both symlinks point to `global-target`. This case is
-ambiguous in practice because, with the global `linkpath` ignored, the symlinks keep their own
-targets.
+ambiguous in practice because a reader that ignores the global `linkpath` keeps the targets of the
+symlinks.
 
 Decision point: whether a global `linkpath` applies.
 Seen in: none of the scanned tarballs.

@@ -1,6 +1,6 @@
 S19-tree-through-symlink-inside: must reject
 
-A member written through a symlink, which stays inside the destination.
+A member written through a symlink that points inside the destination.
 
 The archive has the directories `d` and `x`, a symlink `x/l` to `../d`, then a file `x/l/f`.
 
@@ -8,8 +8,8 @@ In POSIX, files are created by pathname resolution, which follows
 the link, so the file is written to `d/f`, inside the destination. This case is ambiguous in
 practice because a reader that writes through the link extracts `d/f`, and one that does not either
 fails or skips `f`. A reader that creates symlinks after the other members writes `f` to a directory
-`x/l`, and then fails to create the link. It is rejected as writing through any symlink is: to stay
-inside the destination, a reader that writes through links has to resolve each of them at every
+`x/l`, and then fails to create the link. It is rejected, as is writing through any symlink: a
+reader that writes through links stays inside the destination only if it resolves each link at every
 write.
 
 Decision point: whether a member may be written through a symlink.

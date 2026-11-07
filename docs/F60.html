@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a regular file, of typeflag <code>0</code>, with the name <code>a/</code> and size 512. Its data is a block that is the header of an empty file <code>smuggled</code>. Then a file <code>b</code>.</p>
-<p>In POSIX, a regular file is followed by <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20number%20of%20logical%20records%20written%20following%20the%20header%20shall%20be%20%28size%2B511%29%2F512">(size+511)/512</a> blocks of data, so the header of <code>smuggled</code> is data. A member is extracted as a file of its <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">own type</a>, but a name that ends in a slash <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=ends%20with%20one%20or%20more%20trailing%20%3Cslash%3E%20characters%20shall%20not%20be%20resolved%20successfully%20unless">resolves only to a directory</a>, so this is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">error</a>. A name that ends in a slash was the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_18_03:~:text=the%20convention%20of%20using%20a%20filename%20ending%20with%20%3Cslash%3E%20was%20adopted%20to%20specify%20a%20directory%20on%20the%20archive">old way</a> to archive a directory. This case is ambiguous in practice because a file has data and a directory does not. A reader that goes by the typeflag extracts a file <code>a</code> of 512 bytes, and <code>b</code>. A reader that takes <code>a/</code> for a directory either skips its 512 bytes, and extracts a directory <code>a</code> and <code>b</code>, or does not read data for it, and extracts <code>smuggled</code> as well.</p>
+<p>The archive has a regular file, of typeflag <code>0</code>, with the name <code>a/</code> and size 512. Its data is a block that is the header of an empty file <code>smuggled</code>. After it is a file <code>b</code>.</p>
+<p>In POSIX, a regular file is followed by <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20number%20of%20logical%20records%20written%20following%20the%20header%20shall%20be%20%28size%2B511%29%2F512">(size+511)/512</a> blocks of data, so the header of <code>smuggled</code> is data. A member is extracted as a file of its <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">own type</a>, but a name that ends in a slash <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=ends%20with%20one%20or%20more%20trailing%20%3Cslash%3E%20characters%20shall%20not%20be%20resolved%20successfully%20unless">resolves only to a directory</a>, so this is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">error</a>. A name that ends in a slash was the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_18_03:~:text=the%20convention%20of%20using%20a%20filename%20ending%20with%20%3Cslash%3E%20was%20adopted%20to%20specify%20a%20directory%20on%20the%20archive">old way</a> to archive a directory. This case is ambiguous in practice because a file has data and a directory does not. A reader that goes by the typeflag extracts a file <code>a</code> of 512 bytes, and a file <code>b</code>. A reader that takes <code>a/</code> for a directory either skips its 512 bytes or does not read data for it. If it skips them, it extracts a directory <code>a</code> and a file <code>b</code>. If it does not, it extracts the empty file <code>smuggled</code> as well.</p>
 <p><strong>Decision point:</strong> whether a regular file whose name ends in a slash has data.</p>
 <p><strong>Seen in:</strong> not measured: 7 of the scanned tarballs have a regular file whose name ends in a slash, such as sendmail 8.18.2, and the scans do not record its size.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -53,16 +53,17 @@
 A regular file `a/` with a size: a directory without data, or a file with data?
 
 The archive has a regular file, of typeflag `0`, with the name `a/` and size 512. Its data is a
-block that is the header of an empty file `smuggled`. Then a file `b`.
+block that is the header of an empty file `smuggled`. After it is a file `b`.
 
 In POSIX, a regular file is followed by (size+511)/512 blocks of data, so the
 header of `smuggled` is data. A member is extracted as a file of its own type, but a
 name that ends in a slash resolves only to a directory, so this is an
 error. A name that ends in a slash was the old way to archive a
 directory. This case is ambiguous in practice because a file has data and a directory does not. A
-reader that goes by the typeflag extracts a file `a` of 512 bytes, and `b`. A reader that takes `a/`
-for a directory either skips its 512 bytes, and extracts a directory `a` and `b`, or does not read
-data for it, and extracts `smuggled` as well.
+reader that goes by the typeflag extracts a file `a` of 512 bytes, and a file `b`. A reader that
+takes `a/` for a directory either skips its 512 bytes or does not read data for it. If it skips
+them, it extracts a directory `a` and a file `b`. If it does not, it extracts the empty file
+`smuggled` as well.
 
 Decision point: whether a regular file whose name ends in a slash has data.
 Seen in: not measured: 7 of the scanned tarballs have a regular file whose name ends in a slash,

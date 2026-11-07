@@ -5,10 +5,10 @@ A newline in a pax `comment`, which split on lines leaves a `path` record.
 The archive has a file `a`, whose pax header has one record, a `comment` with a newline in it,
 `x\n17 path=smuggled`.
 
-pax records are delimited by their length, so a comment can contain newlines, and
-in POSIX every comment is ignored: the file is `a`. This case is not ambiguous. A reader
-that splits records on lines, and ignores their lengths, finds a second record, `path=smuggled`,
-and extracts the file as `smuggled`.
+pax records are delimited by their length, so a comment can contain newlines. In
+POSIX, every comment is ignored, so the file is `a`. This case is not ambiguous. A reader
+that splits records on lines finds a second record, `path=smuggled`, and extracts the file as
+`smuggled`.
 
 Seen in: none of the scanned tarballs.
 See also: F28, the same with a `size` record.

@@ -1,7 +1,7 @@
 {
  "id": "S19",
  "verdict": "reject",
- "description": "A member written through a symlink, which stays inside the destination.",
+ "description": "A member written through a symlink that points inside the destination.",
  "features": [
   "tree.through-symlink"
  ]

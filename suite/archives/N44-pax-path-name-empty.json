@@ -1,7 +1,7 @@
 {
  "id": "N44",
  "verdict": "accept",
- "description": "A member with an empty name field and a pax `path`.",
+ "description": "A regular file with an empty name field and a pax `path`.",
  "features": [],
  "tree": [
   {

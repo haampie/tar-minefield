@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>N48 magic-gnu-version-00 · Tar file extraction test suite</title>
-<meta name="description" content="A prefix in a header with GNU&#x27;s magic and the version &quot;00&quot;: part of the name, or not?">
+<meta name="description" content="A prefix in a header with the magic &quot;ustar &quot; and the version &quot;00&quot;: part of the name, or not?">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N48 magic-gnu-version-00 · Tar file extraction test suite">
-<meta property="og:description" content="A prefix in a header with GNU&#x27;s magic and the version &quot;00&quot;: part of the name, or not?">
+<meta property="og:description" content="A prefix in a header with the magic &quot;ustar &quot; and the version &quot;00&quot;: part of the name, or not?">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N48.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N48.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/a391bc862d09bf33.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/f63805843012c6a9.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of N48 magic-gnu-version-00">
@@ -24,7 +24,7 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="F54.html" rel="prev" title="F54 format-pax-header-without-magic">‹ F54 format-pax-header-without-magic</a><a href="index.html">tar-minefield</a><a class="next" href="N08.html" rel="next" title="N08 extended-pax-path-and-gnu-long-name">N08 extended-pax-path-and-gnu-long-name ›</a></nav>
 <h1><code>N48</code> magic-gnu-version-00</h1>
-<p>A prefix in a header with GNU&#x27;s magic and the version <code>&quot;00&quot;</code>: part of the name, or not?</p>
+<p>A prefix in a header with the magic <code>&quot;ustar &quot;</code> and the version <code>&quot;00&quot;</code>: part of the name, or not?</p>
 <div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>name</dd>
@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has one file, whose header has GNU&#x27;s magic, <code>&quot;ustar &quot;</code>, the version <code>&quot;00&quot;</code>, the name <code>a</code> and the prefix <code>p</code>.</p>
-<p>The ustar format defines the pathname as the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=by%20concatenating%20prefix%20%28up%20to%20the%20first%20NUL%20character%29%2C%20a%20%3Cslash%3E%20character%2C%20and%20name">prefix</a>, followed by <code>/</code>, followed by the name. GNU&#x27;s format has a very similar magic, but no prefix field: in GNU&#x27;s own definition, its magic is the 8 bytes <code>&quot;ustar  \0&quot;</code>, in place of ustar&#x27;s magic and version. This case is ambiguous because the 8 bytes of this header, <code>&quot;ustar 00&quot;</code>, are of neither format: a reader that checks the magic before the prefix extracts <code>a</code>, as a GNU or a v7 header, and one that reads the prefix regardless extracts <code>p/a</code>.</p>
+<p>The archive has one file, whose header has the name <code>a</code>, the prefix <code>p</code>, the magic <code>&quot;ustar &quot;</code> and the version <code>&quot;00&quot;</code>.</p>
+<p>The ustar format defines the pathname as the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=by%20concatenating%20prefix%20%28up%20to%20the%20first%20NUL%20character%29%2C%20a%20%3Cslash%3E%20character%2C%20and%20name">prefix</a>, followed by <code>/</code>, followed by the name. GNU&#x27;s format has a very similar magic, but it does not have a prefix field: in GNU&#x27;s own definition, its magic is the 8 bytes <code>&quot;ustar \0&quot;</code>, in place of ustar&#x27;s magic and version. This case is ambiguous because the 8 bytes of this header, <code>&quot;ustar 00&quot;</code>, are of neither format: a reader that checks the magic before the prefix extracts <code>a</code>, as a GNU or a v7 header, and one that reads the prefix regardless extracts <code>p/a</code>.</p>
 <p><strong>Decision point:</strong> which magic and version make the prefix part of the name.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -50,17 +50,17 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>N48-magic-gnu-version-00: must reject
 
-A prefix in a header with GNU&#x27;s magic and the version `&quot;00&quot;`: part of the name, or not?
+A prefix in a header with the magic `&quot;ustar &quot;` and the version `&quot;00&quot;`: part of the name, or not?
 
-The archive has one file, whose header has GNU&#x27;s magic, `&quot;ustar &quot;`, the version `&quot;00&quot;`, the name
-`a` and the prefix `p`.
+The archive has one file, whose header has the name `a`, the prefix `p`, the magic `&quot;ustar &quot;` and
+the version `&quot;00&quot;`.
 
 The ustar format defines the pathname as the prefix, followed by `/`, followed by the
-name. GNU&#x27;s format has a very similar magic, but no prefix field: in GNU&#x27;s own definition, its magic
-is the 8 bytes `&quot;ustar  \0&quot;`, in place of ustar&#x27;s magic and version. This case is ambiguous because
-the 8 bytes of this header, `&quot;ustar 00&quot;`, are of neither format: a reader that checks the magic
-before the prefix extracts `a`, as a GNU or a v7 header, and one that reads the prefix regardless
-extracts `p/a`.
+name. GNU&#x27;s format has a very similar magic, but it does not have a prefix field: in GNU&#x27;s own
+definition, its magic is the 8 bytes `&quot;ustar \0&quot;`, in place of ustar&#x27;s magic and version. This case
+is ambiguous because the 8 bytes of this header, `&quot;ustar 00&quot;`, are of neither format: a reader that
+checks the magic before the prefix extracts `a`, as a GNU or a v7 header, and one that reads the
+prefix regardless extracts `p/a`.
 
 Decision point: which magic and version make the prefix part of the name.
 Seen in: none of the scanned tarballs.

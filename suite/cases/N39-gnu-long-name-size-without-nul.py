@@ -1,7 +1,7 @@
 """A GNU long name whose size leaves out its NUL, with bytes after it.
 
 The archive has a GNU long name header of size 4, whose data block contains `name-rest`, followed by
-NULs, so the size covers only `name`. Then a file whose header has GNU's magic and the name
+NULs, so the size covers only `name`. After it is a file whose header has GNU's magic and the name
 `header-name`.
 
 This case is ambiguous because the name ends either at the size, and is `name`, or at the first NUL

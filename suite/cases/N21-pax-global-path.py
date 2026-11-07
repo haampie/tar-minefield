@@ -3,8 +3,8 @@
 The archive starts with a global header with `path=global-name`, then has the files `a` and `b`.
 
 In [POSIX][global], a global header applies to every later member, so with a `path` all of them have
-one name, `global-name`. This case is ambiguous in practice because, with the global `path` ignored,
-the members keep their own names, `a` and `b`.
+one name, `global-name`. This case is ambiguous in practice because a reader that ignores the global
+`path` keeps the names of the members, `a` and `b`.
 
 Decision point: whether a global `path` applies.
 Seen in: none of the scanned tarballs.

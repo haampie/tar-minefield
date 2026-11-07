@@ -105,7 +105,7 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="S14.html"><code>S14</code></a> tree-symlink-then-dir</td><td>A symlink to a directory, then a directory of the same name.</td><td>extracts <code>a</code> → <code>target</code>, <code>target/</code></td></tr>
 <tr><td><a href="S15.html"><code>S15</code></a> tree-file-then-hardlink</td><td>A file, then a hardlink of the same name to another file.</td><td>extracts <code>a</code> (2 B, 02638299), <code>b</code> (2 B, 02638299)</td></tr>
 <tr><td><a href="S17.html"><code>S17</code></a> hardlink-then-file-again</td><td>A file, a hardlink to it, then the file again: does the link keep the first contents?</td><td>extracts <code>a</code> (7 B, 480c2336), <code>b</code> (7 B, 480c2336)</td></tr>
-<tr><td><a href="S18.html"><code>S18</code></a> hardlink-absolute</td><td>A hardlink to an absolute path, which a member has as its name without the slash.</td><td>extracts <code>etc/</code>, <code>etc/passwd</code> (22 B, cf754f09), <code>l</code> (22 B, cf754f09)</td></tr></table></div>
+<tr><td><a href="S18.html"><code>S18</code></a> hardlink-absolute</td><td>A hardlink to <code>/etc/passwd</code>, in an archive with a member <code>etc/passwd</code>.</td><td>extracts <code>etc/</code>, <code>etc/passwd</code> (22 B, cf754f09), <code>l</code> (22 B, cf754f09)</td></tr></table></div>
 
 <hr class="wide">
 <footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>

@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>N44 pax-path-name-empty · Tar file extraction test suite</title>
-<meta name="description" content="A member with an empty name field and a pax path.">
+<meta name="description" content="A regular file with an empty name field and a pax path.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N44 pax-path-name-empty · Tar file extraction test suite">
-<meta property="og:description" content="A member with an empty name field and a pax path.">
+<meta property="og:description" content="A regular file with an empty name field and a pax path.">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N44.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N44.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/535c46426e8b5d57.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/3779f6ddb6425c16.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of N44 pax-path-name-empty">
@@ -24,7 +24,7 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="N43.html" rel="prev" title="N43 pax-long-dir">‹ N43 pax-long-dir</a><a href="index.html">tar-minefield</a><a class="next" href="N45.html" rel="next" title="N45 gnu-long-name-field-slash">N45 gnu-long-name-field-slash ›</a></nav>
 <h1><code>N44</code> pax-path-name-empty</h1>
-<p>A member with an empty name field and a pax <code>path</code>.</p>
+<p>A regular file with an empty name field and a pax <code>path</code>.</p>
 <div class="verdict accept wide"><p><span class="badge">Accept</span><span class="badge-draft">(draft)</span> Every implementation must accept this archive, and extract the expected tree below.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>name</dd>
@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a file whose pax header has <code>path=a</code>, and whose header has an empty name field.</p>
+<p>The archive has a regular file, of typeflag <code>0</code>, with an empty name field. Its pax header has <code>path=a</code>.</p>
 <p>The pax <code>path</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20name%20and%20prefix%20fields%20in%20the%20following%20header%20block%28s%29">overrides</a> the name and prefix fields, so the empty name field is not used, and the file is <code>a</code>.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
@@ -52,9 +52,10 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>N44-pax-path-name-empty: must accept, and extract its tree
 
-A member with an empty name field and a pax `path`.
+A regular file with an empty name field and a pax `path`.
 
-The archive has a file whose pax header has `path=a`, and whose header has an empty name field.
+The archive has a regular file, of typeflag `0`, with an empty name field. Its pax header has
+`path=a`.
 
 The pax `path` overrides the name and prefix fields, so the empty name field is not used,
 and the file is `a`.

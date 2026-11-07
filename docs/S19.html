@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>S19 tree-through-symlink-inside · Tar file extraction test suite</title>
-<meta name="description" content="A member written through a symlink, which stays inside the destination.">
+<meta name="description" content="A member written through a symlink that points inside the destination.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="S19 tree-through-symlink-inside · Tar file extraction test suite">
-<meta property="og:description" content="A member written through a symlink, which stays inside the destination.">
+<meta property="og:description" content="A member written through a symlink that points inside the destination.">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/S19.html">
 <meta property="og:url" content="https://stoppels.ch/tar/S19.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/538e606392f29a08.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/a0ccae68bc275351.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of S19 tree-through-symlink-inside">
@@ -24,7 +24,7 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="S18.html" rel="prev" title="S18 hardlink-absolute">‹ S18 hardlink-absolute</a><a href="index.html">tar-minefield</a><a class="next" href="gnu-tar.html" rel="next" title="GNU tar">GNU tar ›</a></nav>
 <h1><code>S19</code> tree-through-symlink-inside</h1>
-<p>A member written through a symlink, which stays inside the destination.</p>
+<p>A member written through a symlink that points inside the destination.</p>
 <div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>order and state</dd>
@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has the directories <code>d</code> and <code>x</code>, a symlink <code>x/l</code> to <code>../d</code>, then a file <code>x/l/f</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a>, files are created by pathname resolution, which <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=In%20all%20other%20cases%2C%20the%20system%20shall%20prefix%20the%20remaining%20pathname">follows</a> the link, so the file is written to <code>d/f</code>, inside the destination. This case is ambiguous in practice because a reader that writes through the link extracts <code>d/f</code>, and one that does not either fails or skips <code>f</code>. A reader that creates symlinks after the other members writes <code>f</code> to a directory <code>x/l</code>, and then fails to create the link. It is rejected as writing through any symlink is: to stay inside the destination, a reader that writes through links has to resolve each of them at every write.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a>, files are created by pathname resolution, which <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=In%20all%20other%20cases%2C%20the%20system%20shall%20prefix%20the%20remaining%20pathname">follows</a> the link, so the file is written to <code>d/f</code>, inside the destination. This case is ambiguous in practice because a reader that writes through the link extracts <code>d/f</code>, and one that does not either fails or skips <code>f</code>. A reader that creates symlinks after the other members writes <code>f</code> to a directory <code>x/l</code>, and then fails to create the link. It is rejected, as is writing through any symlink: a reader that writes through links stays inside the destination only if it resolves each link at every write.</p>
 <p><strong>Decision point:</strong> whether a member may be written through a symlink.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -50,7 +50,7 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>S19-tree-through-symlink-inside: must reject
 
-A member written through a symlink, which stays inside the destination.
+A member written through a symlink that points inside the destination.
 
 The archive has the directories `d` and `x`, a symlink `x/l` to `../d`, then a file `x/l/f`.
 
@@ -58,8 +58,8 @@ In POSIX, files are created by pathname resolution, which follows
 the link, so the file is written to `d/f`, inside the destination. This case is ambiguous in
 practice because a reader that writes through the link extracts `d/f`, and one that does not either
 fails or skips `f`. A reader that creates symlinks after the other members writes `f` to a directory
-`x/l`, and then fails to create the link. It is rejected as writing through any symlink is: to stay
-inside the destination, a reader that writes through links has to resolve each of them at every
+`x/l`, and then fails to create the link. It is rejected, as is writing through any symlink: a
+reader that writes through links stays inside the destination only if it resolves each link at every
 write.
 
 Decision point: whether a member may be written through a symlink.
