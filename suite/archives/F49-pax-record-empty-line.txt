@@ -7,10 +7,10 @@ followed by the record `path=renamed`. Its header has the name `header-name`.
 
 In POSIX, an extended header consists of records, each of which starts with its
 length, so a newline between two of them is not a record. This case is ambiguous
-because a reader that skips the empty line reads `path=renamed`, and the file is `renamed`; one
-that stops there, or ignores the extended header, keeps `header-name`; and one that takes the
-newline for the start of the next record reads its length from one byte too early, and cuts the
-name to `rename`.
+because a reader can handle the empty line in one of three ways. A reader that skips it reads
+`path=renamed`, and the file is `renamed`. One that stops there, or ignores the extended header,
+keeps `header-name`. One that takes the newline for the start of the next record reads its length
+from one byte too early, and cuts the name to `rename`.
 
 Decision point: whether a pax header may have bytes between its records.
 Seen in: none of the scanned tarballs.

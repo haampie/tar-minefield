@@ -6,9 +6,10 @@ data is `long-name`, followed by a NUL, then a file whose header has GNU's magic
 
 Some readers take typeflag `N` for a GNU long name, as `L`. In POSIX, the typeflags `A` to `Z` are
 reserved for [custom implementations][custom-type], and a reader that does not recognize one
-extracts the member [as a regular file][unknown-type]. This case is ambiguous because the member is
-`long-name`, to a reader that takes `N` for a long name, or `header-name`, after a file `@LongLink`
-that contains the name, or alone, to a reader that skips a type it does not know.
+extracts the member [as a regular file][unknown-type]. This case is ambiguous because a reader can
+take the `N` header in one of three ways. A reader that takes it for a long name extracts the member
+as `long-name`. One that extracts it as a regular file extracts a file `@LongLink` that contains the
+name, then `header-name`. One that skips a type it does not know extracts `header-name` alone.
 
 Decision point: whether typeflag `N` is a long name.
 Seen in: none of the scanned tarballs.

@@ -6,9 +6,10 @@ The archive has a file `a`, then a hardlink `b/` to `a`.
 
 A hardlink is a link to a file archived before it, but a name that ends in a slash
 resolves only to a directory, which a link to a regular file cannot be, so this is
-an error. This case is ambiguous in practice because the member is a hardlink `b`,
-with the slash dropped, a directory `b`, by the slash, or an empty file `b`, to a reader that
-makes a regular file of a link it cannot create.
+an error. This case is ambiguous in practice because a reader can take the member
+in one of three ways. A reader that drops the slash extracts a hardlink `b`. One that goes by the
+slash extracts a directory `b`. One that makes a regular file of a link it cannot create extracts an
+empty file `b`.
 
 Decision point: whether the typeflag or the trailing slash decides the kind of a link.
 Seen in: none of the scanned tarballs.

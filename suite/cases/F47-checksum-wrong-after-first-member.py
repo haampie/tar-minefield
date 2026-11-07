@@ -5,10 +5,10 @@ wrong, then a block that is the header of an empty file `smuggled`, as the data 
 `c`.
 
 In POSIX, the [checksum][checksum-sum] is a sum of the bytes of the header, but it is not said what
-a reader does with a header whose checksum is wrong. This case is ambiguous because a reader that
-takes it for the end of the archive extracts `a`, one that skips blocks until it finds a header with
-a right checksum extracts `a`, `smuggled` and `c`, and one that does not check it extracts `a`, `b`
-and `c`.
+a reader does with a header whose checksum is wrong. This case is ambiguous because a reader can
+take the header in one of three ways. A reader that takes it for the end of the archive extracts
+`a`. One that skips blocks until it finds a header with a correct checksum extracts `a`, `smuggled`
+and `c`. One that does not check the checksum extracts `a`, `b` and `c`.
 
 Decision point: what a reader does after a header whose checksum is wrong.
 Seen in: none of the scanned tarballs.

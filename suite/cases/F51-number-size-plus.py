@@ -2,12 +2,12 @@
 
 The archive has a file `a`, whose size field is `+0000001000`, then an empty file `smuggled`.
 
-In [POSIX][zero-filled], numeric fields are octal numbers filled with leading zeros, without a
-sign. Read leniently, this case is ambiguous because the size is 512, which is octal 1000, if the
-sign is skipped (and the next block is the data of `a`); 0, if the number ends at the sign (and the
-next block is the header of `smuggled`); or a size far past the end of the archive, to a reader
+In [POSIX][zero-filled], numeric fields are octal numbers filled with leading zeros, without a sign.
+Read leniently, this case is ambiguous because a reader can read the size in one of three ways. A
+reader that skips the sign reads 512, which is octal 1000, and the next block is the data of `a`.
+One that ends the number at the sign reads 0, and the next block is the header of `smuggled`. One
 that takes a sign for the start of a base-64 number, as some early test versions of GNU tar wrote
-them (and the rest of the archive is the data of `a`).
+them, reads a size far past the end of the archive, and the rest of the archive is the data of `a`.
 
 Decision point: whether a numeric field may have a sign.
 Seen in: none of the scanned tarballs.

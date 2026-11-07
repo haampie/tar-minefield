@@ -4,9 +4,10 @@ The archive has a file `a`, whose pax header has `size=5_12` and whose header ha
 an empty file `smuggled`.
 
 In [POSIX][size-decimal], a pax size is a decimal number. Read leniently, this case is ambiguous
-because the size is either 512, if the underscore is taken for a separator of digits (and the next
-block is the data of `a`), 5, if the number ends at the underscore (and `a` is the first 5 bytes of
-the next block), or 0, as the header specifies (and the next block is the header of `smuggled`).
+because a reader can read the size in one of three ways. A reader that takes the underscore for a
+separator of digits reads 512, and the next block is the data of `a`. One that ends the number at
+the underscore reads 5, and `a` is the first 5 bytes of the next block. One that keeps the size of
+the header reads 0, and the next block is the header of `smuggled`.
 
 Decision point: how a pax size that is not a decimal number is read.
 Seen in: none of the scanned tarballs.
