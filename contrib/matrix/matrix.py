@@ -599,13 +599,15 @@ def esc(text):
 
 
 def svg_style():
-    colours = "".join(f".{cls}{{fill:{fill}}}.{cls}-ink{{fill:{ink}}}"
+    colours = "".join(f".matrix-{cls}{{fill:{fill}}}.matrix-{cls}-ink{{fill:{ink}}}"
                       for cls, (fill, ink) in {c[0]: c[1] for c in CLASSES.values()}.items())
     return (
-        f"<style>text{{font-family:{FONT};font-size:12px;fill:#1f2328}}.head{{font-weight:600}}"
-        f".cell{{font-size:11px;font-weight:700;text-anchor:middle}}.rule{{stroke:#d0d7de}}{colours}"
-        ".id{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}"
-        ".none{stroke:#8c959f;stroke-dasharray:2 2}.hit{fill:transparent}a.row:hover .hit{fill:#eaeef2}a.row:hover .name{text-decoration:underline}"
+        f"<style>.matrix{{font-family:{FONT};font-size:12px;fill:#1f2328}}.matrix-head{{font-weight:600}}"
+        f".matrix-cell{{font-size:11px;font-weight:700;text-anchor:middle}}.matrix-rule{{stroke:#d0d7de}}"
+        f"{colours}"
+        ".matrix-id{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}"
+        ".matrix-none{stroke:#8c959f;stroke-dasharray:2 2}.matrix-hit{fill:transparent}"
+        ".matrix-row:hover .matrix-hit{fill:#eaeef2}.matrix-row:hover .matrix-name{text-decoration:underline}"
         '</style><rect width="100%" height="100%" fill="#ffffff"/>'
     )
 
@@ -615,8 +617,8 @@ def cell_svg(x, y, w, h, symbol):
     to MATRIX.md and the page of the case, which list the trees."""
     base = next(c for c in CLASSES if symbol.startswith(c))
     cls, mark = CLASSES[base][0], CLASSES[base][3]
-    return (f'<rect class="{cls}" x="{x}" y="{y}" width="{w}" height="{h}" rx="3"/>'
-            f'<text class="cell {cls}-ink" x="{x + w / 2}" y="{y + h / 2 + 4}">{mark}</text>')
+    return (f'<rect class="matrix-{cls}" x="{x}" y="{y}" width="{w}" height="{h}" rx="3"/>'
+            f'<text class="matrix-cell matrix-{cls}-ink" x="{x + w / 2}" y="{y + h / 2 + 4}">{mark}</text>')
 
 
 def used(results, cases):
@@ -629,8 +631,8 @@ def used(results, cases):
 def legend_svg(x, y, symbols):
     out = []
     for c in (CLASSES[s] for s in CLASSES if s in symbols):
-        out.append(f'<rect class="{c[0]}" x="{x}" y="{y - 12}" width="16" height="16" rx="3"/>'
-                   f'<text class="cell {c[0]}-ink" x="{x + 8}" y="{y}">{c[3]}</text>'
+        out.append(f'<rect class="matrix-{c[0]}" x="{x}" y="{y - 12}" width="16" height="16" rx="3"/>'
+                   f'<text class="matrix-cell matrix-{c[0]}-ink" x="{x + 8}" y="{y}">{c[3]}</text>'
                    f'<text x="{x + 22}" y="{y}">{esc(c[2])}</text>')
         y += 21
     return "".join(out), y
@@ -660,10 +662,10 @@ def svg(results, cases, link=None, column_link=None):
     out, y = [], top
     for n in names:
         name = f'<text transform="translate({xs[n] + cw / 2 + 4},{top - 8}) rotate(-60)">{esc(n)}</text>'
-        out.append(f'<a class="column" href="{esc(column_link(n))}">{name}</a>' if column_link else name)
+        out.append(f'<a class="matrix-column" href="{esc(column_link(n))}">{name}</a>' if column_link else name)
     if column_link:
         # only with the links, so that the SVG without them, and the images made of it, stay the same
-        out.append("<style>a.column:hover text{fill:#0969da;text-decoration:underline}</style>")
+        out.append("<style>.matrix-column:hover text{fill:#0969da;text-decoration:underline}</style>")
     # the bars: outcomes stacked from the bottom, with the number of each where it fits
     bar = 2 * len(cases)
     out.append(f'<text x="{right}" y="{y + bar / 2 + 4}">all {len(cases)} cases</text>')
@@ -675,10 +677,10 @@ def svg(results, cases, link=None, column_link=None):
                 continue
             h = bar * k / len(cases)
             out.append(f'<g><title>{esc(n)}: {k} of {len(cases)}, {esc(CLASSES[symbol][2])}</title>'
-                       f'<rect class="{CLASSES[symbol][0]}" x="{xs[n]}" y="{bottom - h:.1f}" '
+                       f'<rect class="matrix-{CLASSES[symbol][0]}" x="{xs[n]}" y="{bottom - h:.1f}" '
                        f'width="{cw}" height="{h:.1f}"/>')
             if h >= 14:
-                out.append(f'<text class="cell {CLASSES[symbol][0]}-ink" x="{xs[n] + cw / 2}" '
+                out.append(f'<text class="matrix-cell matrix-{CLASSES[symbol][0]}-ink" x="{xs[n] + cw / 2}" '
                            f'y="{bottom - h / 2 + 4:.1f}">{k}</text>')
             # a white line between outcomes, which tells apart the two of one colour
             out.append(f'<line x1="{xs[n]}" x2="{xs[n] + cw}" y1="{bottom - h:.1f}" '
@@ -689,16 +691,16 @@ def svg(results, cases, link=None, column_link=None):
     for case, info in cases.items():
         if category(info) != previous:
             previous = category(info)
-            out.append(f'<line class="rule" x1="10" x2="{end}" y1="{y + 10}" y2="{y + 10}"/>'
-                       f'<text class="head" x="10" y="{y + 26}">{esc(GROUPS[previous])}</text>')
+            out.append(f'<line class="matrix-rule" x1="10" x2="{end}" y1="{y + 10}" y2="{y + 10}"/>'
+                       f'<text class="matrix-head" x="10" y="{y + 26}">{esc(GROUPS[previous])}</text>')
             y += 34
         # with links, the whole row is one, over a rect that highlights it on hover
         if link:
-            out.append(f'<a class="row" href="{esc(link(case))}"><rect class="hit" x="10" '
+            out.append(f'<a class="matrix-row" href="{esc(link(case))}"><rect class="matrix-hit" x="10" '
                        f'y="{y - gap / 2}" width="{end - 10}" height="{ch + gap}" rx="3"/>')
         ident, name = label(case, info).split(" ", 1)
-        out.append(f'<text class="name id" x="{left - 10}" y="{y + ch / 2 + 4}" text-anchor="end">'
-                   f'{esc(ident)}</text><text class="name" x="{right}" y="{y + ch / 2 + 4}">'
+        out.append(f'<text class="matrix-name matrix-id" x="{left - 10}" y="{y + ch / 2 + 4}" text-anchor="end">'
+                   f'{esc(ident)}</text><text class="matrix-name" x="{right}" y="{y + ch / 2 + 4}">'
                    f"{esc(name)}</text>")
         cells, _ = case_cells(info, results["cases"].get(case, {}), names)
         for n in names:
@@ -710,8 +712,8 @@ def svg(results, cases, link=None, column_link=None):
     out.append(legend)
     # the rotated name of the last column reaches past it, by the cosine of 60°
     width, height = int(max(x + 20 + 7 * len(names[-1]) / 2, end + 10)), y + 4
-    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
-            f'viewBox="0 0 {width} {height}" role="img"><title>What implementations make of every '
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" class="matrix" width="{width}" '
+            f'height="{height}" viewBox="0 0 {width} {height}" role="img"><title>What implementations make of every '
             f'case of the test suite</title>{svg_style()}{"".join(out)}</svg>\n')
 
 
