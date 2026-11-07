@@ -1,7 +1,7 @@
 {
  "id": "S18",
  "verdict": "reject",
- "description": "A hardlink to an absolute path, which a member has as its name without the slash.",
+ "description": "A hardlink to `/etc/passwd`, in an archive with a member `etc/passwd`.",
  "features": [
   "hardlink.absolute"
  ]

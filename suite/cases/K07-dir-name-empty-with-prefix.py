@@ -2,9 +2,9 @@
 
 The archive has one directory, of typeflag `5`, with an empty name field and the prefix `dir`.
 
-In [POSIX][prefix], the pathname is the prefix, followed by `/`, followed by the name, which here is
-empty, so the pathname is `dir/`, and the member is a directory `dir`, by its typeflag and by its
-name alike.
+In [POSIX][prefix], the pathname is the prefix, followed by `/`, followed by the name. The name is
+empty here, so the pathname is `dir/`. The typeflag and the trailing slash both make the member a
+directory `dir`.
 
 Seen in: not measured, as the scans do not record an empty name field. Python's `tarfile` writes
 one, with the prefix, for a directory whose last component is 100 bytes or longer, in a path of at

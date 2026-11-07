@@ -1,4 +1,4 @@
-"""A hardlink to an absolute path, which a member has as its name without the slash.
+"""A hardlink to `/etc/passwd`, in an archive with a member `etc/passwd`.
 
 The archive has a directory `etc`, a file `etc/passwd`, then a hardlink `l` to `/etc/passwd`.
 
@@ -10,7 +10,7 @@ the destination.
 
 Decision point: whether a hardlink may have an absolute target.
 Seen in: not measured, as earlier versions of the scanner dropped the leading slash of the targets
-of hardlinks: 28 of the scanned tarballs have a hardlink that may have one.
+of hardlinks: 28 of the scanned tarballs have a hardlink whose target may be absolute.
 See also: N12, an absolute name, and S16, a hardlink to `./a`.
 """
 

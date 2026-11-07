@@ -6,8 +6,8 @@ then a file `a`.
 GNU's format has the label of an archive as its first header, of typeflag `V`, which is not a file.
 In POSIX, the typeflags `A` to `Z` are reserved for [custom implementations][custom-type], and a
 reader that does not recognize one extracts the member [as a regular file][unknown-type]. This case
-is ambiguous because the tree is either `a` alone, if the label is skipped, or an empty file `label`
-as well.
+is ambiguous because the tree is either `a` alone, if the label is skipped, or `a` and an empty file
+`label`, if the label is extracted as a regular file.
 
 Decision point: whether a volume label is extracted.
 Seen in: none of the scanned tarballs.

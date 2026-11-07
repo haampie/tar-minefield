@@ -1,8 +1,8 @@
 """A directory with a long name in a GNU long name, then a file.
 
-The archive has a GNU long name header with a name of 120 `d`s, followed by a slash. Then a
-directory whose header has GNU's magic and the first 100 bytes of that name, then a file `a` with
-GNU's magic.
+The archive has a GNU long name header with a name of 120 `d`s, followed by a slash. After it is a
+directory whose header has GNU's magic and the first 100 bytes of that name. Last is a file `a`,
+also with GNU's magic.
 
 The long name applies to the directory, and to no later member: the tree is the directory and `a`.
 This is GNU tar's own format for long names.

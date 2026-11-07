@@ -1,7 +1,7 @@
 {
  "id": "F58",
  "verdict": "accept",
- "description": "A newline in a pax `comment`, which split on lines leaves a `size` record before the real one.",
+ "description": "A newline in a pax `comment`, which split on lines leaves a `size` record before the last one.",
  "features": [
   "pax.newline-in-value.comment"
  ],

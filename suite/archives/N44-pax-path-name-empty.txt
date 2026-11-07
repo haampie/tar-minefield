@@ -1,8 +1,9 @@
 N44-pax-path-name-empty: must accept, and extract its tree
 
-A member with an empty name field and a pax `path`.
+A regular file with an empty name field and a pax `path`.
 
-The archive has a file whose pax header has `path=a`, and whose header has an empty name field.
+The archive has a regular file, of typeflag `0`, with an empty name field. Its pax header has
+`path=a`.
 
 The pax `path` overrides the name and prefix fields, so the empty name field is not used,
 and the file is `a`.

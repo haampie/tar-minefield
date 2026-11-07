@@ -1,8 +1,8 @@
 """A file with a GNU long name and typeflag NUL, whose name field ends in a slash.
 
 The archive has a GNU long name header whose data is 99 `p`s, followed by a slash, followed by
-`file.py`, followed by a NUL, then the member, of typeflag NUL and GNU's magic, whose name field
-contains the first 100 bytes of that name: the 99 `p`s, followed by the slash.
+`file.py`, followed by a NUL. After it is a regular file, of typeflag NUL, with GNU's magic. Its
+name field contains the first 100 bytes of the long name: the 99 `p`s, followed by the slash.
 
 The long name replaces the name field, so the member is a regular file, `file.py` under the
 directory of 99 `p`s, which does not have a member of its own. The long name header is GNU tar's own

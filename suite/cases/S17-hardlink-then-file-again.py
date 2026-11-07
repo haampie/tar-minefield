@@ -5,10 +5,10 @@ contains `second`.
 
 A [hardlink][hardlink] is a second name for a file archived before it, and an existing file [can be
 overwritten][overwrite]. In POSIX, it is not specified whether a file is overwritten in place, with
-the new contents written into it, or replaced, with a new file in its place. Overwritten in place,
-`a` and `b` are still one file, so `b` contains `second`. Replaced, `b` keeps the old file, which
-contains `first`. This case is ambiguous because `b` contains either `first` or `second`, and `a`
-contains `second` either way.
+the new contents written into it, or replaced, with a new file in its place. If `a` is overwritten
+in place, `a` and `b` are still one file, so `b` contains `second`. If `a` is replaced, `b` keeps
+the old file, which contains `first`. This case is ambiguous because `b` contains either `first` or
+`second`, and `a` contains `second` either way.
 
 Decision point: whether a file is overwritten in place or replaced.
 Seen in: 87 of the scanned tarballs have the same file twice, but none of them has a hardlink.
