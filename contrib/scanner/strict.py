@@ -51,7 +51,7 @@ STRICT = [
     ("number.chksum.*", "framing",
      "a checksum field written in a way that implementations differ on"),
     ("magic.posix-version-nuls", "framing", "POSIX magic with NULs as its version"),
-    ("magic.posix-with-odd-version", "framing", "POSIX magic with a version other than `00` or NULs"),
+    ("magic.posix-with-odd-version", "framing", 'POSIX magic with a version other than `"00"` or NULs'),
     ("magic.*", "framing", "a header that implementations may not recognize as one"),
     ("type.unknown-*", "framing", "an unknown typeflag: data or no data"),
     ("type.gnu-sparse", "framing", "GNU's old sparse files"),
@@ -185,7 +185,7 @@ ALLOWED = [
     ("pax.value-not-utf8.[ug]id", "outside the tree"),
     ("pax.value-not-utf8.[ug]name", "outside the tree"),
     ("pax.newline-in-value.comment",
-     "a comment with newlines: pax records are delimited by their length"),
+     "a comment with newlines, since pax records are delimited by their length"),
 ]
 
 # The default policy: the strict criteria that it lets through, and how; it rejects the others.
@@ -198,22 +198,26 @@ DEFAULT = [
     ("name.dot-component", "normalize", "`a/./b` is `a/b`"),
     ("name.double-slash", "normalize", "`a//b` is `a/b`"),
     ("hardlink.target-spelled-differently", "normalize", "a hardlink to `./a` is one to `a`"),
-    ("symlink.absolute", "accept", "created as it is: writing through a symlink is rejected"),
-    ("symlink.escapes", "accept", "created as it is: writing through a symlink is rejected"),
+    ("symlink.absolute", "accept",
+     "the symlink is created as it is, and writing through a symlink is rejected"),
+    ("symlink.escapes", "accept",
+     "the symlink is created as it is, and writing through a symlink is rejected"),
     ("end.data-after", "accept", "junk after the two zero blocks is ignored"),
     ("end.missing", "accept", "implementations that extract it extract the same tree"),
-    ("pax-global.after-members", "accept", "if every global header has only a `comment`"),
-    ("magic.posix-version-nuls", "accept", "as some Java archivers write it: `ustar\\0\\0\\0`"),
+    ("pax-global.after-members", "accept", "only if every global header has only a `comment`"),
+    ("magic.posix-version-nuls", "accept", 'some Java archivers write `"ustar\\0\\0\\0"`'),
     ("name.control-character", "accept",
-     "created as it is: every implementation reads the name alike, and the risk is in its use"),
-    ("number.*.leading-space", "accept",
-     "octal padded with spaces, not zeros, which implementations read alike"),
+     "the name is created as it is, as every implementation reads it alike, and the risk is in "
+     "its use"),
+    ("number.*.leading-space", "accept", "implementations read octal padded with spaces alike"),
     ("number.*.base256", "accept",
      "a reader that does not support base-256 cannot take it for octal, so it has one reading"),
     ("type.contiguous", "accept",
-     "a regular file, which in POSIX implementations without contiguous files should make of them"),
+     "the file is extracted as a regular file, as POSIX asks of implementations without "
+     "contiguous files"),
     ("pax.size-disagrees", "accept",
-     "the pax size frames the member, as POSIX says: it is how sizes over 8 GiB are written"),
+     "the pax size frames the member, as in POSIX, and is how sizes of 8 GiB and over are "
+     "written"),
     ("pax*.value-not-utf8.comment", "accept",
      "a comment is ignored, so a reader need not decode it to check its encoding"),
     ("pax.newline-in-value.SCHILY.xattr.*", "accept", "xattrs are not extracted"),
@@ -670,7 +674,7 @@ def main():
                         for v, k in versions.most_common())
             + f"; the other {len(union) - len(old):,} were scanned by a later version. What the "
             "earlier versions did record rules out most of these features: a tarball without a "
-            "pax `size` has no pax size with a leading zero. `UNREPORTED` in "
+            "pax `size` does not have a pax size with a leading zero. `UNREPORTED` in "
             "`contrib/scanner/strict.py` says how, for each version.\n"
         )
         missing = collections.Counter(f for r in old for f in unmeasured_criteria(r))

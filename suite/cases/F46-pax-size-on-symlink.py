@@ -8,7 +8,7 @@ data][no-data] is stored for a symlink, whose size field [is zero][link-size-zer
 ambiguous because the next block is either the data of `l`, 512 bytes to skip, or the header of
 `smuggled`, which is then a member of its own.
 
-Decision point: whether a pax size applies to a member that has no data.
+Decision point: whether a pax size applies to a member that does not have data.
 Seen in: none of the scanned tarballs.
 See also: F15, a pax size on a directory, and F35, a pax size on a hardlink.
 """

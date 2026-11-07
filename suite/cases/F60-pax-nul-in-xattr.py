@@ -1,7 +1,8 @@
 """A NUL in the value of a pax xattr, before a `path` record.
 
-The archive has a file whose pax header has the record `SCHILY.xattr.user.a`, whose value is `x`, a
-NUL and `y`, then the record `path=renamed`, and whose header has the name `header-name`.
+The archive has a file whose pax header has two records: `SCHILY.xattr.user.a`, whose value is
+`x`, followed by a NUL, followed by `y`, and then `path=renamed`. Its header has the name
+`header-name`.
 
 pax records are delimited by their [length][record-length], and [all characters][value-data] of a
 value are data, so the NUL is part of the value of the xattr, and the file is `renamed`. This case

@@ -3,14 +3,14 @@ N41-pax-gnu-sparse-name: must reject
 A pax `GNU.sparse.name` on a file that is not sparse, after a `path`.
 
 The archive has a file whose pax header has `path=path-name`, then `GNU.sparse.name=sparse-name`,
-and whose header has the name `header-name`. The pax header has no other keys of GNU's sparse
+and whose header has the name `header-name`. The pax header does not have other keys of GNU's sparse
 format.
 
 In GNU's pax format of sparse files, the name of a sparse file is in `GNU.sparse.name`. In POSIX,
 keywords such as GNU's are implementation extensions, which are not defined.
-This case is ambiguous because the name is `sparse-name`, to a reader that applies `GNU.sparse.name`
-to any file, as the last of two records with a name, or `path-name`, to one that applies it only to
-a sparse file.
+This case is ambiguous because the name is either `sparse-name`, to a reader that applies
+`GNU.sparse.name` to any file, as the last of two records with a name, or `path-name`, to one that
+applies it only to a sparse file.
 
 Decision point: whether `GNU.sparse.name` applies to a file that is not sparse.
 Seen in: none of the scanned tarballs.

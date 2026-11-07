@@ -1,7 +1,6 @@
 """A regular file with a link target.
 
-The archive has one member, `a`, whose header has typeflag `0`, a regular file, and the linkname
-`target`.
+The archive has one regular file, `a`, of typeflag `0`, with the linkname `target`.
 
 [POSIX][linkname] gives a linkname meaning only for links, and a member is extracted as a file of
 its [own type][file-type], so the member is a file. This case is ambiguous only to a reader that

@@ -1,17 +1,15 @@
 """A regular file `a/` with a size: a directory without data, or a file with data?
 
-The archive has a member whose header has typeflag `0`, a regular file, the name `a/` and the size
-512, then a block that is the header of an empty file `smuggled`, as the data of `a/`, then a file
-`b`.
+The archive has a regular file, of typeflag `0`, with the name `a/` and size 512. Its data is a
+block that is the header of an empty file `smuggled`. Then a file `b`.
 
 In POSIX, a regular file is followed by [(size+511)/512][records-follow] blocks of data, so the
 header of `smuggled` is data. A member is extracted as a file of its [own type][file-type], but a
 name that ends in a slash [resolves only to a directory][trailing-slash], so this is an
-[error][cannot-create]. A name that ends in a slash was the old way to archive a directory, in the
-[rationale][slash-convention] of POSIX. This case is ambiguous in practice. A reader that goes by
-the typeflag extracts a file `a` of 512 bytes, and `b`. A reader that takes `a/` for a directory
-either skips its 512 bytes, and extracts a directory `a` and `b`, or reads no data for it, and
-extracts `smuggled` as well.
+[error][cannot-create]. A name that ends in a slash was the [old way][slash-convention] to archive a
+directory. This case is ambiguous in practice. A reader that goes by the typeflag extracts a file
+`a` of 512 bytes, and `b`. A reader that takes `a/` for a directory either skips its 512 bytes, and
+extracts a directory `a` and `b`, or does not read data for it, and extracts `smuggled` as well.
 
 Decision point: whether a regular file whose name ends in a slash has data.
 Seen in: not measured: 7 of the scanned tarballs have a regular file whose name ends in a slash,

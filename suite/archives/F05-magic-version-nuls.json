@@ -1,7 +1,7 @@
 {
  "id": "F05",
  "verdict": "tolerate",
- "description": "The POSIX magic with NULs for its version, `ustar\\0\\0\\0`, as some Java archivers write.",
+ "description": "The POSIX magic with NULs for its version, `\"ustar\\0\\0\\0\"`, as some Java archivers write.",
  "features": [
   "magic.posix-version-nuls"
  ],

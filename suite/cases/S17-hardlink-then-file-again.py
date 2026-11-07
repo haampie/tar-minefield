@@ -3,13 +3,12 @@
 The archive has a file `a` that contains `first`, then a hardlink `b` to `a`, then a file `a` that
 contains `second`.
 
-A [hardlink][hardlink] is a link to a file archived before it, and existing files [can be
-overwritten][overwritten], only when the tests of `-p`, `-u` and `-o invalid=` allow it. The
-normative text does not say whether a file is overwritten in place, and so through every link to
-it, or replaced by a new file; its [application usage][overwrite], which is informative, says that
-overwriting may fail on the permissions of the first file, which fits writing in place. This case
-is ambiguous because `b` contains `first`, if `a` is replaced, or `second`, if it is overwritten in
-place, and `a` contains `second` either way.
+A [hardlink][hardlink] is a second name for a file archived before it, and an existing file [can be
+overwritten][overwrite]. In POSIX, it is not specified whether a file is overwritten in place, with
+the new contents written into it, or replaced, with a new file in its place. Overwritten in place,
+`a` and `b` are still one file, so `b` contains `second`. Replaced, `b` keeps the old file, which
+contains `first`. This case is ambiguous because `b` contains either `first` or `second`, and `a`
+contains `second` either way.
 
 Decision point: whether a file is overwritten in place or replaced.
 Seen in: 87 of the scanned tarballs have the same file twice, but none of them has a hardlink.

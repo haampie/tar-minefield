@@ -142,6 +142,10 @@ SENTENCES = {
                               "(size+511)/512"),
     "contiguous": (USTAR, "Implementations without such extensions should treat this file as a "
                           "regular file (type 0)"),
+    "high-performance": (USTAR, "Reserved to represent a file to which an implementation has "
+                                "associated some high-performance attribute"),
+    "contiguous-files": (RATIONALE_USTAR, "The value 7 in the typeflag field is intended to define "
+                                          "how contiguous files can be stored in a ustar archive"),
     "slash-convention": (RATIONALE_USTAR, "the convention of using a filename ending with <slash> "
                                           "was adopted to specify a directory on the archive"),
     # Sentences of other pages, as (page, section or None, sentence)

@@ -1,7 +1,6 @@
 """A directory with an empty name field and a prefix.
 
-The archive has one member, whose header has typeflag `5`, a directory, an empty name field and the
-prefix `dir`.
+The archive has one directory, of typeflag `5`, with an empty name field and the prefix `dir`.
 
 In [POSIX][prefix], the pathname is the prefix, followed by `/`, followed by the name, which here is
 empty, so the pathname is `dir/`, and the member is a directory `dir`, by its typeflag and by its

@@ -1,7 +1,7 @@
 """A directory with a long name in a pax `path`, then a file.
 
-The archive has a directory whose pax header has a `path` of 120 `d`s and a slash, and whose header
-has the first 100 bytes of that path, then a file `a`.
+The archive has a directory whose pax header has a `path` of 120 `d`s, followed by a slash, and
+whose header has the first 100 bytes of that path, then a file `a`.
 
 The pax `path` [overrides][path] the name field of the directory, and an [extended header][extended]
 applies to the next file only: the tree is the directory and `a`.

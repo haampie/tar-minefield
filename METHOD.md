@@ -92,7 +92,7 @@ Framing:
   contiguous files (`7`).
 - A pax `size` that disagrees with the header's size ([POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20size%20field%20in%20the%20following%20header%20block%28s%29) says the pax size wins: it is how
   sizes over 8 GiB are written), the bug class of CVE-2025-62518 (tokio-tar), a pax `size` on a
-  member that has no data, and a pax `size` applied to an extended header rather than to the
+  member that does not have data, and a pax `size` applied to an extended header rather than to the
   member, the bug class of GHSA-3pv8-6f4r-ffg2 (tar-rs) and CVE-2026-53655 (node-tar).
 - pax numbers, which are ASCII decimal digits: a sign, leading whitespace, other digits of Unicode
   (which conversions of strings to numbers, such as Python's `int`, accept), leading zeros
@@ -105,7 +105,7 @@ Framing:
   that no implementation applies), keys with whitespace (GNU tar strips it, `tarfile` does not).
 - The end of the archive: a lone zero block, zero blocks followed by more members (GNU tar's
   `--ignore-zeros`), data other than zeros after the end-of-archive marker, no marker at all.
-- Recognizing a header: v7 headers without magic, the POSIX magic `ustar\0` with the GNU version
+- Recognizing a header: v7 headers without magic, the POSIX magic `"ustar\0"` with the GNU version
   field and vice versa, damaged magic.
 - Global pax headers: a `size` in one, one between an extended header and its member, which the
   extended header may apply to, and one after the first member, whose values apply to the members
@@ -168,7 +168,7 @@ parser would trip over:
 - the global pax header with only a `comment` that `git archive` writes, and so every GitHub
   release tarball,
 - long names in a pax `path`, in a GNU long name, and split by the ustar prefix, under a parent
-  directory that has no member of its own,
+  directory that does not have a member of its own,
 - names of exactly 100 bytes, without a NUL,
 - vendor pax keys that do not affect the tree: an xattr in `SCHILY.xattr.*`, as libarchive and
   star write them, with a value that is not UTF-8,
@@ -210,7 +210,7 @@ costs. The tolerated cases are:
   archive is complete is known by other means, such as a published checksum, or the decompression
   of a compressed archive.
 - a global pax header with only a `comment` after the first member.
-- the POSIX magic with NULs for its version, `ustar\0\0\0`, which some Java archivers write,
+- the POSIX magic with NULs for its version, `"ustar\0\0\0"`, which some Java archivers write,
   as in the tarballs of Apache's commons-lang, Solr and Hadoop. Any other version is rejected.
 - contiguous files, typeflag `7`, as regular files: in POSIX, implementations without contiguous
   files should treat them so.

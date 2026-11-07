@@ -1,14 +1,14 @@
 """A file with a GNU long name and typeflag NUL, whose name field ends in a slash.
 
-The archive has a GNU long name header with the name of 99 `p`s, a slash and `file.py`, then the
-member, of typeflag NUL and GNU's magic, whose name field has the first 100 bytes of that name: the
-99 `p`s and the slash.
+The archive has a GNU long name header with the name of 99 `p`s, followed by a slash, followed by
+`file.py`, then the member, of typeflag NUL and GNU's magic, whose name field contains the first 100
+bytes of that name: the 99 `p`s, followed by the slash.
 
 The long name replaces the name field, so the member is a regular file, `file.py` under the
-directory of 99 `p`s, which has no member of its own. This is GNU tar's own format for long names.
-A name that ends in a slash was the old way to archive a directory, in the
-[rationale][slash-convention] of POSIX. A reader that decides the kind by the name field, before the
-long name is applied, extracts a directory instead.
+directory of 99 `p`s, which does not have a member of its own. This is GNU tar's own format for long
+names. A name that ends in a slash was the [old way][slash-convention] to archive a directory. A
+reader that decides the kind by the name field, before the long name is applied, extracts a
+directory instead.
 
 Seen in: sdists of Python packages that maturin wrote.
 See also: K01, a regular file whose name ends in a slash.

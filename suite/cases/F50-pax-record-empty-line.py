@@ -1,7 +1,7 @@
 """An empty line between two pax records.
 
-The archive has a file whose pax header has the record `comment=x`, then a newline, then the record
-`path=renamed`, and whose header has the name `header-name`.
+The archive has a file whose pax header has the record `comment=x`, followed by a newline,
+followed by the record `path=renamed`. Its header has the name `header-name`.
 
 In POSIX, an extended header [consists of records][records], each of which starts with its
 [length][record-length], so a newline between two of them is not a record. This case is ambiguous

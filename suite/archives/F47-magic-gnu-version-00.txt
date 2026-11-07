@@ -1,16 +1,16 @@
 F47-magic-gnu-version-00: must reject
 
-A prefix in a header with GNU's magic and the version `00`: part of the name, or not?
+A prefix in a header with GNU's magic and the version `"00"`: part of the name, or not?
 
-The archive has one file, whose header has GNU's magic, `ustar` and a space, the version `00`, the
-name `a` and the prefix `p`.
+The archive has one file, whose header has GNU's magic, `"ustar "`, the version `"00"`, the name
+`a` and the prefix `p`.
 
-The magic field is the specification of the format that the archive was written in. In the
-ustar format, whose magic is `ustar` and a NUL, and whose version is `00`, the pathname
-is the prefix, a slash and the name. GNU's format has the magic `ustar` and a space, the
-version of a space and a NUL, and other fields where ustar has its prefix. This case is ambiguous
-because the header has the magic of one format and the version of the other, so that the file is
-`p/a`, read as ustar, or `a`, read as GNU's format or as a v7 header, which has no prefix.
+The ustar format defines the pathname as the prefix, followed by `/`, followed by the
+name. GNU's format has a very similar magic, but no prefix field: in GNU's own definition, its magic
+is the 8 bytes `"ustar  \0"`, in place of ustar's magic and version. This case is ambiguous because
+the 8 bytes of this header, `"ustar 00"`, are of neither format: a reader that checks the magic
+before the prefix extracts `a`, as a GNU or a v7 header, and one that reads the prefix regardless
+extracts `p/a`.
 
 Decision point: which magic and version make the prefix part of the name.
 Seen in: none of the scanned tarballs.

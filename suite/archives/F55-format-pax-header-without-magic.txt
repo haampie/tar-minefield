@@ -2,16 +2,12 @@ F55-format-pax-header-without-magic: must reject
 
 A pax extended header without magic: a header, or a file?
 
-The archive has a pax header, typeflag `x`, without magic or version, whose data is the record
+The archive has a header of typeflag `x`, without magic or version, whose data is the record
 `path=renamed`, then a file whose header has the POSIX magic and the name `header-name`.
 
-In POSIX, the format of an archive is detected on input, but it is not specified from
-which headers, and the magic field is the specification of the format that the archive was
-written in: a header without it is not one of ustar, or of pax, whose header block is that of
-ustar. To a reader of ustar before pax, an extended header is a
-regular file. This case is ambiguous because the member is `renamed`, to a reader that takes the
-header for an extended header by its typeflag, or `header-name`, after a file `PaxHeader` that
-contains the record, or alone, to a reader that skips it.
+In POSIX, ustar and pax headers have the magic `"ustar\0"`. This header has typeflag `x`
+but no magic. This case is ambiguous because the file is `renamed` if the header is parsed as an
+extended header, and `header-name` if it is not.
 
 Decision point: whether a header without magic may be an extended header.
 Seen in: none of the scanned tarballs.

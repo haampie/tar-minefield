@@ -1,8 +1,8 @@
 """A checksum padded with spaces rather than zeros.
 
 The archive has one file, `a`, whose size and checksum fields are padded with spaces: the checksum
-is `" 10672\\0 "`, a space, five octal digits, a NUL and a space, and the size is
-`"         15\\0"`, spaces, the digits and a NUL.
+is `" 10672\\0 "`, a space, followed by five octal digits, followed by a NUL, followed by a space,
+and the size is `"         15\\0"`, spaces, followed by the digits, followed by a NUL.
 
 The sum is the same as that of a header padded with zeros, so an implementation that accepts the
 archive must extract `a`, also one that checks the checksum before the other fields.
