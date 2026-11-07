@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a file <code>a</code> of 512 bytes, whose size field is in base-256: the byte 0x80, followed by 512 as a binary number.</p>
-<p>Sizes of 8 GiB and over do not fit in the 11 octal digits of the size field. In pax, they are written in a <code>size</code> record. In GNU&#x27;s format, they are written in base-256, which its first byte tells apart from octal. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal, so base-256 is an extension. This case is tolerated because it has one reading, here 512: a reader that does not support base-256 cannot take it for octal. It is a small instance of the base-256 sizes of large files, which no case can contain.</p>
+<p>The archive has a file <code>a</code> of 512 bytes, whose size field is in base-256: the byte <code>0x80</code>, followed by 512 as a binary number.</p>
+<p>Sizes of 8 GiB and over do not fit in the 11 octal digits of the size field. In pax, they are written in a <code>size</code> record. In GNU&#x27;s format, they are written in base-256. The first byte of the field, <code>0x80</code>, tells it apart from octal. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal, so base-256 is an extension. This case is tolerated because it has one reading, here 512: a reader that does not support base-256 cannot take it for octal. It is a small instance of the base-256 sizes of large files, which no case can contain.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>512 bytes, sha256 <code title="a0b708e633655e5bdde514831e5ea443671e7e1b5f704613ae051824d0fa50f6">a0b708e6</code></td></tr></table></div>
@@ -54,15 +54,15 @@
 
 A size of 512 in base-256.
 
-The archive has a file `a` of 512 bytes, whose size field is in base-256: the byte 0x80, followed
+The archive has a file `a` of 512 bytes, whose size field is in base-256: the byte `0x80`, followed
 by 512 as a binary number.
 
 Sizes of 8 GiB and over do not fit in the 11 octal digits of the size field. In pax, they are
-written in a `size` record. In GNU&#x27;s format, they are written in base-256, which its first byte
-tells apart from octal. In POSIX, numeric fields are octal, so base-256 is an
-extension. This case is tolerated because it has one reading, here 512: a reader that does not
-support base-256 cannot take it for octal. It is a small instance of the base-256 sizes of large
-files, which no case can contain.
+written in a `size` record. In GNU&#x27;s format, they are written in base-256. The first byte of the
+field, `0x80`, tells it apart from octal. In POSIX, numeric fields are octal, so
+base-256 is an extension. This case is tolerated because it has one reading, here 512: a reader that
+does not support base-256 cannot take it for octal. It is a small instance of the base-256 sizes of
+large files, which no case can contain.
 
 Seen in: none of the scanned tarballs.
 See also: F29 and F30, a negative size and a size past 64 bits, in base-256.

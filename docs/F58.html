@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>F58 pax-newline-in-comment-then-size · Tar file extraction test suite</title>
-<meta name="description" content="A newline in a pax comment, which split on lines leaves a size record before the real one.">
+<meta name="description" content="A newline in a pax comment, which split on lines leaves a size record before the last one.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F58 pax-newline-in-comment-then-size · Tar file extraction test suite">
-<meta property="og:description" content="A newline in a pax comment, which split on lines leaves a size record before the real one.">
+<meta property="og:description" content="A newline in a pax comment, which split on lines leaves a size record before the last one.">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F58.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F58.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/953b775b3dbb4353.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/e615798107a61925.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of F58 pax-newline-in-comment-then-size">
@@ -24,7 +24,7 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="F57.html" rel="prev" title="F57 pax-newline-in-comment-path">‹ F57 pax-newline-in-comment-path</a><a href="index.html">tar-minefield</a><a class="next" href="F59.html" rel="next" title="F59 pax-nul-in-xattr">F59 pax-nul-in-xattr ›</a></nav>
 <h1><code>F58</code> pax-newline-in-comment-then-size</h1>
-<p>A newline in a pax <code>comment</code>, which split on lines leaves a <code>size</code> record before the real one.</p>
+<p>A newline in a pax <code>comment</code>, which split on lines leaves a <code>size</code> record before the last one.</p>
 <div class="verdict accept wide"><p><span class="badge">Accept</span><span class="badge-draft">(draft)</span> Every implementation must accept this archive, and extract the expected tree below.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>framing</dd>
@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a file <code>a</code>, whose pax header has a <code>comment</code> with a newline in it, <code>x\n10 size=0</code>, then the record <code>size=512</code>, and whose header has the size 512 too. The 512 bytes after the header are the header of an empty file <code>smuggled</code>.</p>
-<p>pax records are delimited by their <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">length</a>, so the comment is one record, which is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=All%20characters%20in%20the%20%3Cvalue%3E%20field%20shall%20be%20ignored%20by%20pax">ignored</a>, and the pax size <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20size%20field%20in%20the%20following%20header%20block%28s%29">overrides</a> the size field: <code>a</code> contains the 512 bytes. This case is not ambiguous. A reader that splits records on lines finds a record <code>size=0</code> before <code>size=512</code>, and one that takes the first, rather than the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=When%20extended%20header%20records%20conflict%2C%20the%20last%20one%20given%20in%20the%20header%20shall%20take%20precedence">last</a>, extracts an empty <code>a</code>, then <code>smuggled</code>.</p>
+<p>The archive has a file <code>a</code>. Its pax header has two records: a <code>comment</code> with a newline in it, <code>x\n10 size=0</code>, then <code>size=512</code>. Its header has the size 512 too. The 512 bytes after the header are the header of an empty file <code>smuggled</code>.</p>
+<p>pax records are delimited by their <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">length</a>, so the comment is one record. In POSIX, a comment is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=All%20characters%20in%20the%20%3Cvalue%3E%20field%20shall%20be%20ignored%20by%20pax">ignored</a>, and the pax size <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20size%20field%20in%20the%20following%20header%20block%28s%29">overrides</a> the size field: <code>a</code> contains the 512 bytes. This case is not ambiguous. A reader that splits records on lines finds a record <code>size=0</code> before <code>size=512</code>. In POSIX, the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=When%20extended%20header%20records%20conflict%2C%20the%20last%20one%20given%20in%20the%20header%20shall%20take%20precedence">last</a> of two records applies, and a reader that takes the first extracts an empty <code>a</code>, then <code>smuggled</code>.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>512 bytes, sha256 <code title="917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b">917dba8e</code></td></tr></table></div>
@@ -52,17 +52,17 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>F58-pax-newline-in-comment-then-size: must accept, and extract its tree
 
-A newline in a pax `comment`, which split on lines leaves a `size` record before the real one.
+A newline in a pax `comment`, which split on lines leaves a `size` record before the last one.
 
-The archive has a file `a`, whose pax header has a `comment` with a newline in it, `x\n10 size=0`,
-then the record `size=512`, and whose header has the size 512 too. The 512 bytes after the header
-are the header of an empty file `smuggled`.
+The archive has a file `a`. Its pax header has two records: a `comment` with a newline in it, `x\n10
+size=0`, then `size=512`. Its header has the size 512 too. The 512 bytes after the header are the
+header of an empty file `smuggled`.
 
-pax records are delimited by their length, so the comment is one record, which is
-ignored, and the pax size overrides the size field: `a` contains the
-512 bytes. This case is not ambiguous. A reader that splits records on lines finds a record
-`size=0` before `size=512`, and one that takes the first, rather than the last,
-extracts an empty `a`, then `smuggled`.
+pax records are delimited by their length, so the comment is one record. In POSIX,
+a comment is ignored, and the pax size overrides the size field: `a`
+contains the 512 bytes. This case is not ambiguous. A reader that splits records on lines finds a
+record `size=0` before `size=512`. In POSIX, the last of two records applies, and a
+reader that takes the first extracts an empty `a`, then `smuggled`.
 
 Seen in: none of the scanned tarballs.
 See also: F28, a `size` record in a comment on a file without a pax size.

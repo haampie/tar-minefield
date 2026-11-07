@@ -64,7 +64,7 @@ published there.</p>
 <tr><td><a href="F28.html"><code>F28</code></a></td><td>pax-newline-in-comment</td><td>A newline in a pax <code>comment</code>, which split on lines leaves a <code>size</code> record.</td><td class=n>none</td></tr>
 <tr><td><a href="F31.html"><code>F31</code></a></td><td>pax-xattr-not-utf8</td><td>An xattr in a pax header whose value is not UTF-8, as libarchive and star write them.</td><td class=n>0.04%</td></tr>
 <tr><td><a href="F57.html"><code>F57</code></a></td><td>pax-newline-in-comment-path</td><td>A newline in a pax <code>comment</code>, which split on lines leaves a <code>path</code> record.</td><td class=n>none</td></tr>
-<tr><td><a href="F58.html"><code>F58</code></a></td><td>pax-newline-in-comment-then-size</td><td>A newline in a pax <code>comment</code>, which split on lines leaves a <code>size</code> record before the real one.</td><td class=n>none</td></tr>
+<tr><td><a href="F58.html"><code>F58</code></a></td><td>pax-newline-in-comment-then-size</td><td>A newline in a pax <code>comment</code>, which split on lines leaves a <code>size</code> record before the last one.</td><td class=n>none</td></tr>
 <tr><td><a href="F59.html"><code>F59</code></a></td><td>pax-nul-in-xattr</td><td>A NUL in the value of a pax xattr, before a <code>path</code> record.</td><td class=n>0.04%</td></tr>
 <tr><td><a href="K07.html"><code>K07</code></a></td><td>dir-name-empty-with-prefix</td><td>A directory with an empty name field and a prefix.</td><td class=n>7.65%</td></tr>
 <tr><td><a href="N01.html"><code>N01</code></a></td><td>gnu-long-name</td><td>A name over 100 bytes, in a GNU long name.</td><td class=n>not measured</td></tr>
@@ -75,7 +75,7 @@ published there.</p>
 <tr><td><a href="N28.html"><code>N28</code></a></td><td>pax-long-hardlink</td><td>A hardlink with a long name and a long target, in a pax <code>path</code> and <code>linkpath</code> respectively.</td><td class=n>0.04%</td></tr>
 <tr><td><a href="N42.html"><code>N42</code></a></td><td>gnu-long-name-dir</td><td>A directory with a long name in a GNU long name, then a file.</td><td class=n>not measured</td></tr>
 <tr><td><a href="N43.html"><code>N43</code></a></td><td>pax-long-dir</td><td>A directory with a long name in a pax <code>path</code>, then a file.</td><td class=n>not measured</td></tr>
-<tr><td><a href="N44.html"><code>N44</code></a></td><td>pax-path-name-empty</td><td>A member with an empty name field and a pax <code>path</code>.</td><td class=n>not measured</td></tr>
+<tr><td><a href="N44.html"><code>N44</code></a></td><td>pax-path-name-empty</td><td>A regular file with an empty name field and a pax <code>path</code>.</td><td class=n>not measured</td></tr>
 <tr><td><a href="N45.html"><code>N45</code></a></td><td>gnu-long-name-field-slash</td><td>A file with a GNU long name and typeflag NUL, whose name field ends in a slash.</td><td class=n>4.38%</td></tr>
 <tr><td><a href="N46.html"><code>N46</code></a></td><td>pax-linkpath-linkname-empty</td><td>A symlink with an empty linkname field and a pax <code>linkpath</code>.</td><td class=n>not measured</td></tr>
 <tr><td><a href="N47.html"><code>N47</code></a></td><td>gnu-long-link</td><td>A symlink with a long target, in a GNU long link name.</td><td class=n>0.04%</td></tr>
@@ -144,7 +144,7 @@ published there.</p>
 <tr><td><a href="F52.html"><code>F52</code></a></td><td>type-gnu-volume-label</td><td>A GNU volume label, typeflag <code>V</code>: a file, or skipped?</td><td class=n>none</td></tr>
 <tr><td><a href="F53.html"><code>F53</code></a></td><td>type-gnu-old-long-name</td><td>A header of typeflag <code>N</code>, which some readers take for a long name: a name, or a file?</td><td class=n>none</td></tr>
 <tr><td><a href="F54.html"><code>F54</code></a></td><td>format-pax-header-without-magic</td><td>A pax extended header without magic: a header, or a file?</td><td class=n>none</td></tr>
-<tr><td><a href="N48.html"><code>N48</code></a></td><td>magic-gnu-version-00</td><td>A prefix in a header with GNU&#x27;s magic and the version <code>&quot;00&quot;</code>: part of the name, or not?</td><td class=n>none</td></tr></table></div>
+<tr><td><a href="N48.html"><code>N48</code></a></td><td>magic-gnu-version-00</td><td>A prefix in a header with the magic <code>&quot;ustar &quot;</code> and the version <code>&quot;00&quot;</code>: part of the name, or not?</td><td class=n>none</td></tr></table></div>
 <h3 id="to-reject-names">To reject: names<a class="anchor" href="#to-reject-names" aria-label="Link to this section">¶</a></h3>
 <div class="wide"><table class="cases"><colgroup><col style="width: 14%"><col style="width: 24%"><col style="width: 48%"><col style="width: 14%"></colgroup><tr><th>identifier</th><th>name</th><th>what it is</th><th class=n>prevalence</th></tr>
 <tr><td><a href="N08.html"><code>N08</code></a></td><td>extended-pax-path-and-gnu-long-name</td><td>A pax <code>path</code> and a GNU long name for one member, and a third name in its header.</td><td class=n>none</td></tr>
@@ -202,8 +202,8 @@ published there.</p>
 <tr><td><a href="S14.html"><code>S14</code></a></td><td>tree-symlink-then-dir</td><td>A symlink to a directory, then a directory of the same name.</td><td class=n>none</td></tr>
 <tr><td><a href="S15.html"><code>S15</code></a></td><td>tree-file-then-hardlink</td><td>A file, then a hardlink of the same name to another file.</td><td class=n>0.03%</td></tr>
 <tr><td><a href="S17.html"><code>S17</code></a></td><td>hardlink-then-file-again</td><td>A file, a hardlink to it, then the file again: does the link keep the first contents?</td><td class=n>0.11%</td></tr>
-<tr><td><a href="S18.html"><code>S18</code></a></td><td>hardlink-absolute</td><td>A hardlink to an absolute path, which a member has as its name without the slash.</td><td class=n>≤0.03%<a href="#unmeasured">*</a></td></tr>
-<tr><td><a href="S19.html"><code>S19</code></a></td><td>tree-through-symlink-inside</td><td>A member written through a symlink, which stays inside the destination.</td><td class=n>none</td></tr></table></div>
+<tr><td><a href="S18.html"><code>S18</code></a></td><td>hardlink-absolute</td><td>A hardlink to <code>/etc/passwd</code>, in an archive with a member <code>etc/passwd</code>.</td><td class=n>≤0.03%<a href="#unmeasured">*</a></td></tr>
+<tr><td><a href="S19.html"><code>S19</code></a></td><td>tree-through-symlink-inside</td><td>A member written through a symlink that points inside the destination.</td><td class=n>none</td></tr></table></div>
 <p class="note" id="unmeasured">* An upper bound. The exact share is likely lower, and awaits a new scan of all tarballs.</p>
 <h2 id="tarballs">Data to support the default policy<a class="anchor" href="#tarballs" aria-label="Link to this section">¶</a></h2>
 <p>The default policy accepts 99.80% of the 82,586 distinct release tarballs of Spack, nixpkgs, Guix and live-bootstrap, and samples of PyPI, crates.io and RubyGems. See <a href="seen-in.html#rejected">the list of the 168 it rejects</a>, and why.</p>

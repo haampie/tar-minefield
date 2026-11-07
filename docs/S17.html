@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code> that contains <code>first</code>, then a hardlink <code>b</code> to <code>a</code>, then a file <code>a</code> that contains <code>second</code>.</p>
-<p>A <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">hardlink</a> is a second name for a file archived before it, and an existing file <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_16:~:text=In%20read%20mode%2C%20implementations%20are%20permitted%20to%20overwrite%20files%20when%20the%20archive%20has%20multiple%20members%20with%20the%20same%20name">can be overwritten</a>. In POSIX, it is not specified whether a file is overwritten in place, with the new contents written into it, or replaced, with a new file in its place. Overwritten in place, <code>a</code> and <code>b</code> are still one file, so <code>b</code> contains <code>second</code>. Replaced, <code>b</code> keeps the old file, which contains <code>first</code>. This case is ambiguous because <code>b</code> contains either <code>first</code> or <code>second</code>, and <code>a</code> contains <code>second</code> either way.</p>
+<p>A <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">hardlink</a> is a second name for a file archived before it, and an existing file <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_16:~:text=In%20read%20mode%2C%20implementations%20are%20permitted%20to%20overwrite%20files%20when%20the%20archive%20has%20multiple%20members%20with%20the%20same%20name">can be overwritten</a>. In POSIX, it is not specified whether a file is overwritten in place, with the new contents written into it, or replaced, with a new file in its place. If <code>a</code> is overwritten in place, <code>a</code> and <code>b</code> are still one file, so <code>b</code> contains <code>second</code>. If <code>a</code> is replaced, <code>b</code> keeps the old file, which contains <code>first</code>. This case is ambiguous because <code>b</code> contains either <code>first</code> or <code>second</code>, and <code>a</code> contains <code>second</code> either way.</p>
 <p><strong>Decision point:</strong> whether a file is overwritten in place or replaced.</p>
 <p><strong>Seen in:</strong> 87 of the scanned tarballs have the same file twice, but none of them has a hardlink.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -57,10 +57,10 @@ contains `second`.
 
 A hardlink is a second name for a file archived before it, and an existing file can be
 overwritten. In POSIX, it is not specified whether a file is overwritten in place, with
-the new contents written into it, or replaced, with a new file in its place. Overwritten in place,
-`a` and `b` are still one file, so `b` contains `second`. Replaced, `b` keeps the old file, which
-contains `first`. This case is ambiguous because `b` contains either `first` or `second`, and `a`
-contains `second` either way.
+the new contents written into it, or replaced, with a new file in its place. If `a` is overwritten
+in place, `a` and `b` are still one file, so `b` contains `second`. If `a` is replaced, `b` keeps
+the old file, which contains `first`. This case is ambiguous because `b` contains either `first` or
+`second`, and `a` contains `second` either way.
 
 Decision point: whether a file is overwritten in place or replaced.
 Seen in: 87 of the scanned tarballs have the same file twice, but none of them has a hardlink.

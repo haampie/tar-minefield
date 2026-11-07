@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive starts with a global header with <code>linkpath=global-target</code>, then has the symlinks <code>l</code> to <code>header-target-l</code> and <code>m</code> to <code>header-target-m</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">POSIX</a>, a global header applies to every later member, and a <code>linkpath</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20linkname%20field">overrides</a> the linkname field, so both symlinks point to <code>global-target</code>. This case is ambiguous in practice because, with the global <code>linkpath</code> ignored, the symlinks keep their own targets.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">POSIX</a>, a global header applies to every later member, and a <code>linkpath</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20linkname%20field">overrides</a> the linkname field, so both symlinks point to <code>global-target</code>. This case is ambiguous in practice because a reader that ignores the global <code>linkpath</code> keeps the targets of the symlinks.</p>
 <p><strong>Decision point:</strong> whether a global <code>linkpath</code> applies.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -57,8 +57,8 @@ The archive starts with a global header with `linkpath=global-target`, then has 
 
 In POSIX, a global header applies to every later member, and a `linkpath`
 overrides the linkname field, so both symlinks point to `global-target`. This case is
-ambiguous in practice because, with the global `linkpath` ignored, the symlinks keep their own
-targets.
+ambiguous in practice because a reader that ignores the global `linkpath` keeps the targets of the
+symlinks.
 
 Decision point: whether a global `linkpath` applies.
 Seen in: none of the scanned tarballs.

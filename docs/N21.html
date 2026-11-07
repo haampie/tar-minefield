@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive starts with a global header with <code>path=global-name</code>, then has the files <code>a</code> and <code>b</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">POSIX</a>, a global header applies to every later member, so with a <code>path</code> all of them have one name, <code>global-name</code>. This case is ambiguous in practice because, with the global <code>path</code> ignored, the members keep their own names, <code>a</code> and <code>b</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">POSIX</a>, a global header applies to every later member, so with a <code>path</code> all of them have one name, <code>global-name</code>. This case is ambiguous in practice because a reader that ignores the global <code>path</code> keeps the names of the members, <code>a</code> and <code>b</code>.</p>
 <p><strong>Decision point:</strong> whether a global <code>path</code> applies.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,8 +55,8 @@ A global pax header with a `path`.
 The archive starts with a global header with `path=global-name`, then has the files `a` and `b`.
 
 In POSIX, a global header applies to every later member, so with a `path` all of them have
-one name, `global-name`. This case is ambiguous in practice because, with the global `path` ignored,
-the members keep their own names, `a` and `b`.
+one name, `global-name`. This case is ambiguous in practice because a reader that ignores the global
+`path` keeps the names of the members, `a` and `b`.
 
 Decision point: whether a global `path` applies.
 Seen in: none of the scanned tarballs.

@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a symlink <code>l</code>, whose pax header has <code>linkpath=target</code>, and whose header has an empty linkname field.</p>
+<p>The archive has a symlink, of typeflag <code>2</code>, with the name <code>l</code> and an empty linkname field. Its pax header has <code>linkpath=target</code>.</p>
 <p>The pax <code>linkpath</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20linkname%20field">overrides</a> the linkname field, so the empty field is not used, and <code>l</code> points to <code>target</code>.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
@@ -54,8 +54,8 @@
 
 A symlink with an empty linkname field and a pax `linkpath`.
 
-The archive has a symlink `l`, whose pax header has `linkpath=target`, and whose header has an empty
-linkname field.
+The archive has a symlink, of typeflag `2`, with the name `l` and an empty linkname field. Its pax
+header has `linkpath=target`.
 
 The pax `linkpath` overrides the linkname field, so the empty field is not used, and
 `l` points to `target`.

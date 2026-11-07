@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a file whose pax header has two records: <code>SCHILY.xattr.user.a</code>, whose value is <code>x</code>, followed by a NUL, followed by <code>y</code>, and then <code>path=renamed</code>. Its header has the name <code>header-name</code>.</p>
-<p>pax records are delimited by their <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">length</a>, and <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=all%20characters%20within%20the%20%3Cvalue%3E%20field%20shall%20be%20considered%20data%20for%20the%20field">all characters</a> of a value are data, so the NUL is part of the value of the xattr, and the file is <code>renamed</code>. This case is not ambiguous. A reader that ends the data of a pax header at its first NUL, or discards a header that contains one, loses the <code>path</code> record, and extracts <code>header-name</code>.</p>
+<p>The archive has a file whose pax header has two records. The first is <code>SCHILY.xattr.user.a</code>, whose value is <code>x</code>, followed by a NUL, followed by <code>y</code>. The second is <code>path=renamed</code>. The header of the file has the name <code>header-name</code>.</p>
+<p>pax records are delimited by their <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">length</a>, and <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=all%20characters%20within%20the%20%3Cvalue%3E%20field%20shall%20be%20considered%20data%20for%20the%20field">all characters</a> of a value are data. So the NUL is part of the value of the xattr, and the file is <code>renamed</code>. This case is not ambiguous. A reader that ends the data of a pax header at its first NUL, or discards a header that contains one, loses the <code>path</code> record, and extracts <code>header-name</code>.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>renamed</code></td><td>file</td><td>12 bytes, sha256 <code title="a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee">a578eb49</code></td></tr></table></div>
@@ -54,12 +54,12 @@
 
 A NUL in the value of a pax xattr, before a `path` record.
 
-The archive has a file whose pax header has two records: `SCHILY.xattr.user.a`, whose value is
-`x`, followed by a NUL, followed by `y`, and then `path=renamed`. Its header has the name
-`header-name`.
+The archive has a file whose pax header has two records. The first is `SCHILY.xattr.user.a`, whose
+value is `x`, followed by a NUL, followed by `y`. The second is `path=renamed`. The header of the
+file has the name `header-name`.
 
 pax records are delimited by their length, and all characters of a
-value are data, so the NUL is part of the value of the xattr, and the file is `renamed`. This case
+value are data. So the NUL is part of the value of the xattr, and the file is `renamed`. This case
 is not ambiguous. A reader that ends the data of a pax header at its first NUL, or discards a header
 that contains one, loses the `path` record, and extracts `header-name`.
 

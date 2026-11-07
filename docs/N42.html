@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a GNU long name header with a name of 120 <code>d</code>s, followed by a slash. Then a directory whose header has GNU&#x27;s magic and the first 100 bytes of that name, then a file <code>a</code> with GNU&#x27;s magic.</p>
+<p>The archive has a GNU long name header with a name of 120 <code>d</code>s, followed by a slash. After it is a directory whose header has GNU&#x27;s magic and the first 100 bytes of that name. Last is a file <code>a</code>, also with GNU&#x27;s magic.</p>
 <p>The long name applies to the directory, and to no later member: the tree is the directory and <code>a</code>. This is GNU tar&#x27;s own format for long names.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
@@ -55,9 +55,9 @@
 
 A directory with a long name in a GNU long name, then a file.
 
-The archive has a GNU long name header with a name of 120 `d`s, followed by a slash. Then a
-directory whose header has GNU&#x27;s magic and the first 100 bytes of that name, then a file `a` with
-GNU&#x27;s magic.
+The archive has a GNU long name header with a name of 120 `d`s, followed by a slash. After it is a
+directory whose header has GNU&#x27;s magic and the first 100 bytes of that name. Last is a file `a`,
+also with GNU&#x27;s magic.
 
 The long name applies to the directory, and to no later member: the tree is the directory and `a`.
 This is GNU tar&#x27;s own format for long names.

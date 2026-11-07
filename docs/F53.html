@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a header of typeflag <code>N</code>, in the GNU format, with the name <code>././@LongLink</code>, whose data is <code>long-name</code>, followed by a NUL, then a file whose header has GNU&#x27;s magic and the name <code>header-name</code>.</p>
-<p>Some readers take typeflag <code>N</code> for a GNU long name, as <code>L</code>. In POSIX, the typeflags <code>A</code> to <code>Z</code> are reserved for <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=are%20reserved%20for%20custom%20implementations">custom implementations</a>, and a reader that does not recognize one extracts the member <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file">as a regular file</a>. This case is ambiguous because a reader can take the <code>N</code> header in one of three ways. A reader that takes it for a long name extracts the member as <code>long-name</code>. One that extracts it as a regular file extracts a file <code>@LongLink</code> that contains the name, then <code>header-name</code>. One that skips a type it does not know extracts <code>header-name</code> alone.</p>
+<p>Some readers take typeflag <code>N</code> for a GNU long name, like typeflag <code>L</code>. In POSIX, the typeflags <code>A</code> to <code>Z</code> are reserved for <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=are%20reserved%20for%20custom%20implementations">custom implementations</a>, and a reader that does not recognize one extracts the member <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file">as a regular file</a>. This case is ambiguous because a reader can take the <code>N</code> header in one of three ways. A reader that takes it for a long name extracts the member as <code>long-name</code>. One that extracts it as a regular file extracts a file <code>@LongLink</code> that contains the name, then <code>header-name</code>. One that skips a type it does not know extracts <code>header-name</code> alone.</p>
 <p><strong>Decision point:</strong> whether typeflag <code>N</code> is a long name.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -56,12 +56,13 @@ The archive has a header of typeflag `N`, in the GNU format, with the name `././
 data is `long-name`, followed by a NUL, then a file whose header has GNU&#x27;s magic and the name
 `header-name`.
 
-Some readers take typeflag `N` for a GNU long name, as `L`. In POSIX, the typeflags `A` to `Z` are
-reserved for custom implementations, and a reader that does not recognize one
-extracts the member as a regular file. This case is ambiguous because a reader can
-take the `N` header in one of three ways. A reader that takes it for a long name extracts the member
-as `long-name`. One that extracts it as a regular file extracts a file `@LongLink` that contains the
-name, then `header-name`. One that skips a type it does not know extracts `header-name` alone.
+Some readers take typeflag `N` for a GNU long name, like typeflag `L`. In POSIX, the typeflags `A`
+to `Z` are reserved for custom implementations, and a reader that does not recognize
+one extracts the member as a regular file. This case is ambiguous because a reader
+can take the `N` header in one of three ways. A reader that takes it for a long name extracts the
+member as `long-name`. One that extracts it as a regular file extracts a file `@LongLink` that
+contains the name, then `header-name`. One that skips a type it does not know extracts `header-name`
+alone.
 
 Decision point: whether typeflag `N` is a long name.
 Seen in: none of the scanned tarballs.

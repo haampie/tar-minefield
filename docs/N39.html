@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a GNU long name header of size 4, whose data block contains <code>name-rest</code>, followed by NULs, so the size covers only <code>name</code>. Then a file whose header has GNU&#x27;s magic and the name <code>header-name</code>.</p>
+<p>The archive has a GNU long name header of size 4, whose data block contains <code>name-rest</code>, followed by NULs, so the size covers only <code>name</code>. After it is a file whose header has GNU&#x27;s magic and the name <code>header-name</code>.</p>
 <p>This case is ambiguous because the name ends either at the size, and is <code>name</code>, or at the first NUL in the block, and is <code>name-rest</code>. This is not properly defined by GNU&#x27;s format; all we know is that archives created by GNU tar always include the NUL in the size. A lenient reader could also ignore a long name without its NUL, and extract <code>header-name</code>. A reader that does not know typeflag <code>L</code> could extract <code>header-name</code> too, after a file <code>@LongLink</code> that contains <code>name</code>.</p>
 <p><strong>Decision point:</strong> whether a GNU long name ends at its size or at a NUL.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
@@ -53,7 +53,7 @@
 A GNU long name whose size leaves out its NUL, with bytes after it.
 
 The archive has a GNU long name header of size 4, whose data block contains `name-rest`, followed by
-NULs, so the size covers only `name`. Then a file whose header has GNU&#x27;s magic and the name
+NULs, so the size covers only `name`. After it is a file whose header has GNU&#x27;s magic and the name
 `header-name`.
 
 This case is ambiguous because the name ends either at the size, and is `name`, or at the first NUL
