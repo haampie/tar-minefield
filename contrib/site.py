@@ -221,10 +221,26 @@ def prevalence(k, n):
     return "none" if not k else "&lt;0.01%" if 10000 * k < n else f"{100 * k / n:.2f}%"
 
 
+# Tarballs scanned before the scan reported a feature are counted as having it, which makes the
+# count an upper bound; one that reaches this share of all tarballs says too little, and the
+# count is shown as not measured instead
+BOUND_SHARE = 0.01
+
+
+def bounded(k, unmeasured, n):
+    """Whether a count of k of n tarballs, of which unmeasured were not measured, is shown as an
+    upper bound rather than as not measured."""
+    return k + unmeasured < BOUND_SHARE * n
+
+
+def at_most(share):
+    """An upper bound on a share, as prevalence() writes it."""
+    return share if share.startswith("&lt;") else "≤" + share
+
+
 # The footnote of the index for a prevalence marked with *
-UNMEASURED = ('<p class="note" id="unmeasured">* Not measured in some tarballs, which were scanned '
-              "before the scan reported this, and what it did record does not rule it out. The "
-              "case's page says how many.</p>")
+UNMEASURED = ('<p class="note" id="unmeasured">* An upper bound. The exact share is likely '
+              "lower, and awaits a new scan of all tarballs.</p>")
 
 
 # The indexes of the lists of tarballs, which every case looks up its features in: made once per
@@ -533,12 +549,12 @@ def policy(info, features):
     """What the default policy does with a case, as HTML."""
     if info["verdict"] == "reject":
         return "rejects it"
+    # the reasons alone, once each: the names of the features are not introduced on the site
     if info["verdict"] == "accept":
-        reasons = [f"<code>{html.escape(f)}</code>: {inline(strict.classify(f)[2])}" for f in features]
-        return "accepts it" + (", as it allows " + "; ".join(reasons) if reasons else "")
-    rules = [strict.default_rule(f) for f in features]
-    return "; ".join(f"{how}s <code>{html.escape(f)}</code>: {inline(why)}"
-                     for f, (_, how, why) in zip(features, rules))
+        reasons = list(dict.fromkeys(inline(strict.classify(f)[2]) for f in features))
+        return "accepts it" + (", as it allows " + " and ".join(reasons) if reasons else "")
+    rules = dict.fromkeys((how, inline(why)) for _, how, why in map(strict.default_rule, features))
+    return "; ".join(f"{how}s it: {why}" for how, why in rules)
 
 
 def data_section(ident, features, names, short, rated, union):
@@ -546,7 +562,7 @@ def data_section(ident, features, names, short, rated, union):
     with them: a sentence where it rejects all or none of them for the features, and a column
     where it rejects some. seen-in.html lists them: all that it rejects, or else examples."""
     if not features:
-        why = UNTOLD.get(ident, "the scan reports no feature of it on its own")
+        why = UNTOLD.get(ident, "the scan does not report a feature of it on its own")
         return f"<p>This case is not measured in release tarballs: {why}.</p>"
 
     def rejected(r):
@@ -557,26 +573,35 @@ def data_section(ident, features, names, short, rated, union):
         with_it = having(features, rs)
         counts.append((n, len(rs), len(with_it), sum(rejected(r) for r in with_it),
                        len(unmeasured(features, rs))))
-    _, _, k, j, u = counts[-1]
+    _, union_total, k, j, u = counts[-1]
     mixed = 0 < j < k
+    bound = bounded(k, u, union_total)
     rows = []
     for i, (n, total, k, j, un) in enumerate(counts):
-        cells = [html.escape(n), f"{total:,}", f"{k:,}" + ("*" if un else ""),
-                 prevalence(k, total) + ("*" if un else "")]
+        if not un:
+            cells = [html.escape(n), f"{total:,}", f"{k:,}", prevalence(k, total)]
+        elif bound:
+            cells = [html.escape(n), f"{total:,}", f"≤{k + un:,}*",
+                     at_most(prevalence(k + un, total)) + "*"]
+        else:
+            cells = [html.escape(n), f"{total:,}", "–", "–"]
         cells += [str(j)] if mixed else []
         tr = '<tr class="total">' if i == len(counts) - 1 else "<tr>"
         rows.append(tr + "<td>" + "</td><td class=n>".join(cells) + "</td></tr>")
     policy = ("" if not k else " The default policy rejects some of them, as the last column "
               "says, and accepts the others." if mixed else " The default policy rejects all of "
               "them." if j else " The default policy accepts them.")
-    note = (f'<p class="note">* Not measured in {u:,} tarballs, which were scanned before the scan '
-            "reported this, and what it did record does not rule it out. They are counted as not "
-            "having it, so the share may be higher.</p>\n"
-            if u else "")
+    note = ("" if not u else
+            '<p class="note">Note: cells with * are upper bounds. The exact count is likely lower, '
+            "and awaits a new scan of all tarballs.</p>\n" if bound else
+            '<p class="note">Note: cells with – were not measured. The count awaits a new scan of '
+            "all tarballs.</p>\n")
     caveats = "".join(f'<p class="note">{CAVEATS[f]}</p>\n' for f in features if f in CAVEATS)
     return (
-        f"<p>Release tarballs of {ecosystems(names)} with "
-        + ", ".join(f"<code>{html.escape(f)}</code>" for f in features) + "." + policy + "</p>\n"
+        # what the scan counts is not named: its features are not introduced on the site
+        "<p>The table below shows how many release tarballs have the features of this test case."
+        + policy
+        + "</p>\n"
         + table("data-policy" if mixed else "data", rows) + "\n" + note + caveats
         + ("" if not k else f'<p>See <a href="seen-in.html#{ident}">'
            + (f"the list of the {j:,} it rejects" if mixed
@@ -1128,10 +1153,13 @@ def index_page(cases, results, data):
             ident, name = matrix.label(case, info).split(" ", 1)
             features = features_of(case, info)
             k = len(having(features, union))
+            u = len(unmeasured(features, union)) if features else 0
             share = prevalence(k, len(union)) if features else "not measured"
-            if features and unmeasured(features, union):
-                share += '<a href="#unmeasured">*</a>'
+            if u and bounded(k, u, len(union)):
+                share = at_most(prevalence(k + u, len(union))) + '<a href="#unmeasured">*</a>'
                 footnote = True
+            elif u:
+                share = "not measured"
             rows.append(f'<tr><td><a href="{ident}.html"><code>{ident}</code></a></td>'
                         f"<td>{html.escape(name)}</td><td>{inline(info['description'])}</td>"
                         f"<td class=n>{share}</td></tr>")
