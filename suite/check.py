@@ -65,30 +65,39 @@ def entry(path, dest=None):
     if stat.S_ISDIR(st.st_mode):
         return {"kind": "directory"}
     if stat.S_ISREG(st.st_mode):
-        # a file that an extractor leaves without read permission, such as mode 000, is read all
-        # the same: made readable for a moment, then given its mode back
-        unreadable = not st.st_mode & stat.S_IRUSR
-        if unreadable:
-            os.chmod(path, st.st_mode | stat.S_IRUSR)
-        try:
-            with open(path, "rb") as f:
-                data = f.read()
-        finally:
-            if unreadable:
-                os.chmod(path, stat.S_IMODE(st.st_mode))
+        # a file that the extractor left unreadable, such as with the mode 000, is read all the
+        # same; whether it is executable is of its mode as extracted
+        if not os.access(path, os.R_OK):
+            os.chmod(path, stat.S_IMODE(st.st_mode) | stat.S_IRUSR)
+        with open(path, "rb") as f:
+            data = f.read()
         return {"kind": "file", "size": len(data), "sha256": hashlib.sha256(data).hexdigest(),
                 "executable": bool(st.st_mode & stat.S_IXUSR)}
     return {"kind": "other"}
 
 
+def walkable(path):
+    """Let a directory that the extractor left without read, write or search permission be listed,
+    entered and removed: the mode of a directory is not part of the tree, and os.walk skips one
+    that it cannot list without saying so."""
+    st = os.lstat(path)
+    if stat.S_ISDIR(st.st_mode) and stat.S_IMODE(st.st_mode) & stat.S_IRWXU != stat.S_IRWXU:
+        os.chmod(path, stat.S_IMODE(st.st_mode) | stat.S_IRWXU)
+
+
 def walk(top, dest=None):
-    """The tree under top: {path: entry}, without following links to directories."""
+    """The tree under top: {path: entry}, without following links to directories. Directories are
+    made walkable as they are reached, so that whatever mode the extractor gave them, their contents
+    are seen, and can be removed afterwards."""
     tree = {}
+    walkable(top)
     for dirpath, dirnames, filenames in os.walk(top):
         for name in dirnames + filenames:
             path = os.path.join(dirpath, name)
             tree[os.path.relpath(path, top).replace(os.sep, "/")] = entry(path, dest)
         dirnames[:] = [d for d in dirnames if not os.path.islink(os.path.join(dirpath, d))]
+        for d in dirnames:
+            walkable(os.path.join(dirpath, d))
     return tree
 
 
