@@ -8,9 +8,10 @@ format.
 
 In GNU's pax format of sparse files, the name of a sparse file is in `GNU.sparse.name`. In POSIX,
 keywords such as GNU's are implementation extensions, which are not defined.
-This case is ambiguous because the name is either `sparse-name`, to a reader that applies
-`GNU.sparse.name` to any file, as the last of two records with a name, or `path-name`, to one that
-applies it only to a sparse file.
+This case is ambiguous because the name is either `sparse-name` or `path-name`. A reader that
+applies `GNU.sparse.name` to any file extracts `sparse-name`, either because it gives that record
+precedence over `path`, or because it is the later of the two. A reader that applies it only to a
+sparse file extracts `path-name`, and one that ignores both records extracts `header-name`.
 
 Decision point: whether `GNU.sparse.name` applies to a file that is not sparse.
 Seen in: none of the scanned tarballs.

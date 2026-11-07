@@ -7,9 +7,10 @@ has GNU's magic and the name `header-name`.
 
 GNU's format does not say what two long names for one member mean. In POSIX, the typeflags `A` to
 `Z` are reserved for custom implementations, and a reader that does not recognize one
-extracts the member as a regular file. This case is ambiguous because the member is
-`first` or `second`, to a reader that knows GNU long names, or `header-name`, to one that does not,
-after two files `././@LongLink` that contain the names.
+extracts that header as a regular file. This case is ambiguous because a reader that
+knows GNU long names extracts the member either as `first` or as `second`. A reader that discards
+both long names extracts `header-name`, and one that applies each long name to the next header
+extracts a file `first` that contains `second`, then `header-name`.
 
 Decision point: which of two GNU long names applies.
 Seen in: none of the scanned tarballs.

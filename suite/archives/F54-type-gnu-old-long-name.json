@@ -1,8 +1,0 @@
-{
- "id": "F54",
- "verdict": "reject",
- "description": "A header of typeflag `N`, which some readers take for a long name: a name, or a file?",
- "features": [
-  "type.unknown-N"
- ]
-}

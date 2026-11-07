@@ -1,0 +1,80 @@
+F60-trailing-slash-file-with-size: must reject
+
+A regular file `a/` with a size: a directory without data, or a file with data?
+
+The archive has a regular file, of typeflag `0`, with the name `a/` and size 512. Its data is a
+block that is the header of an empty file `smuggled`. Then a file `b`.
+
+In POSIX, a regular file is followed by (size+511)/512 blocks of data, so the
+header of `smuggled` is data. A member is extracted as a file of its own type, but a
+name that ends in a slash resolves only to a directory, so this is an
+error. A name that ends in a slash was the old way to archive a
+directory. This case is ambiguous in practice because a file has data and a directory does not. A
+reader that goes by the typeflag extracts a file `a` of 512 bytes, and `b`. A reader that takes `a/`
+for a directory either skips its 512 bytes, and extracts a directory `a` and `b`, or does not read
+data for it, and extracts `smuggled` as well.
+
+Decision point: whether a regular file whose name ends in a slash has data.
+Seen in: not measured: 7 of the scanned tarballs have a regular file whose name ends in a slash,
+such as sendmail 8.18.2, and the scans do not record its size.
+See also: K01, the same with the size 0.
+
+0x000000  header: regular file, typeflag of a file, name of a directory, size 512
+          name     [  0,100)  "a/" + 98 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000001000" + NUL  512
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007416\0 "  3854: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  header: regular file, the data of a/, or a header after a directory without data
+          name     [  0,100)  "smuggled" + 92 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000000" + NUL  0
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "010725\0 "  4565: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000400  header: regular file
+          name     [  0,100)  "b" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007341\0 "  3809: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          2 bytes, then 510 NUL to the end of the block
+          "b\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

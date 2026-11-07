@@ -1,8 +1,0 @@
-{
- "id": "F52",
- "verdict": "reject",
- "description": "A size with a plus sign, `+0000001000`.",
- "features": [
-  "number.size.invalid-character"
- ]
-}

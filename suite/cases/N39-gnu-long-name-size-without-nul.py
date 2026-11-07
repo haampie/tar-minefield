@@ -8,7 +8,7 @@ This case is ambiguous because the name ends either at the size, and is `name`, 
 in the block, and is `name-rest`. This is not properly defined by GNU's format; all we know is that
 archives created by GNU tar always include the NUL in the size. A lenient reader could also ignore a
 long name without its NUL, and extract `header-name`. A reader that does not know typeflag `L` could
-extract `header-name` too, after a file `././@LongLink` that contains `name`.
+extract `header-name` too, after a file `@LongLink` that contains `name`.
 
 Decision point: whether a GNU long name ends at its size or at a NUL.
 Seen in: none of the scanned tarballs.

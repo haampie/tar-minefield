@@ -1,8 +1,0 @@
-{
- "id": "F51",
- "verdict": "reject",
- "description": "A pax `size` with an underscore, `5_12`, which some conversions of strings to numbers accept.",
- "features": [
-  "pax.invalid-size"
- ]
-}

@@ -1,8 +1,0 @@
-{
- "id": "K05",
- "verdict": "reject",
- "description": "A regular file `a/` with a size: a directory without data, or a file with data?",
- "features": [
-  "name.trailing-slash-on-file"
- ]
-}

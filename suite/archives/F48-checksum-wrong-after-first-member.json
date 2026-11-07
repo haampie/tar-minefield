@@ -1,6 +1,0 @@
-{
- "id": "F48",
- "verdict": "reject",
- "description": "A header with a wrong checksum after the first member: the end, a block to skip, or a header?",
- "features": []
-}

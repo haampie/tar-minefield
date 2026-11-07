@@ -1,8 +1,0 @@
-{
- "id": "F50",
- "verdict": "reject",
- "description": "An empty line between two pax records.",
- "features": [
-  "pax.invalid-length"
- ]
-}

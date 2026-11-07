@@ -2,8 +2,9 @@ N47-gnu-long-link: must accept, and extract its tree
 
 A symlink with a long target, in a GNU long link name.
 
-The archive has a GNU long link name header, typeflag `K`, whose data is a target of 120 `t`s, then
-a symlink `l`, whose header has GNU's magic and, in its linkname field, the first 100 `t`s.
+The archive has a GNU long link name header, typeflag `K`, whose data is 120 `t`s, followed by a
+NUL, then a symlink `l`, whose header has GNU's magic and, in its linkname field, the first 100
+`t`s.
 
 The long link name replaces the linkname field, so `l` points to the 120 `t`s. This is GNU tar's
 own format for long link targets.

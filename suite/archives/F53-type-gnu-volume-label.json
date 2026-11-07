@@ -1,8 +1,0 @@
-{
- "id": "F53",
- "verdict": "reject",
- "description": "A GNU volume label, typeflag `V`: a file, or skipped?",
- "features": [
-  "type.unknown-V"
- ]
-}
