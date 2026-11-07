@@ -218,6 +218,9 @@ costs. The tolerated cases are:
   GNU tar write them, in many CPAN tarballs: [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers) has leading zeros,
   and [the scans](contrib/data) find no tarball where implementations read such a field
   differently.
+- sizes in base-256, as GNU's format writes sizes of 8 GiB and over: a reader that does not
+  support base-256 cannot take it for octal, so it has one reading. In pax, such sizes are in a
+  `size` record.
 - newlines in the values of xattr pax keys, which are not extracted.
 - a pax `size` that disagrees with the header's, when the pax size frames the member, as POSIX
   says. A strict parser may reject a header whose size field has room for the size but gives

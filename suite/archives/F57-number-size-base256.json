@@ -1,6 +1,6 @@
 {
  "id": "F57",
- "verdict": "accept",
+ "verdict": "tolerate",
  "description": "A size of 512 in base-256.",
  "features": [
   "number.size.base256"
