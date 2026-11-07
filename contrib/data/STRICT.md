@@ -73,16 +73,17 @@ The strict criteria that the default policy lets through, and how; it rejects al
 | `name.dot-component` | normalize | `a/./b` is `a/b` | 10 |
 | `name.double-slash` | normalize | `a//b` is `a/b` | 2 |
 | `hardlink.target-spelled-differently` | normalize | a hardlink to `./a` is one to `a` | 0 |
-| `symlink.absolute` | accept | created as it is: writing through a symlink is rejected | 89 |
-| `symlink.escapes` | accept | created as it is: writing through a symlink is rejected | 2 |
+| `symlink.absolute` | accept | the symlink is created as it is, and writing through a symlink is rejected | 89 |
+| `symlink.escapes` | accept | the symlink is created as it is, and writing through a symlink is rejected | 2 |
 | `end.data-after` | accept | junk after the two zero blocks is ignored | 25 |
 | `end.missing` | accept | implementations that extract it extract the same tree | 22 |
-| `pax-global.after-members` | accept | if every global header has only a `comment` | 82 |
-| `magic.posix-version-nuls` | accept | as some Java archivers write it: `ustar\0\0\0` | 60 |
-| `name.control-character` | accept | created as it is: every implementation reads the name alike, and the risk is in its use | 11 |
-| `number.*.leading-space` | accept | octal padded with spaces, not zeros, which implementations read alike | 819 |
-| `type.contiguous` | accept | a regular file, which in POSIX implementations without contiguous files should make of them | 0 |
-| `pax.size-disagrees` | accept | the pax size frames the member, as POSIX says: it is how sizes over 8 GiB are written | 0 |
+| `pax-global.after-members` | accept | only if every global header has only a `comment` | 82 |
+| `magic.posix-version-nuls` | accept | some Java archivers write `"ustar\0\0\0"` | 60 |
+| `name.control-character` | accept | the name is created as it is, as every implementation reads it alike, and the risk is in its use | 11 |
+| `number.*.leading-space` | accept | implementations read octal padded with spaces alike | 819 |
+| `number.*.base256` | accept | a reader that does not support base-256 cannot take it for octal, so it has one reading | 0 |
+| `type.contiguous` | accept | the file is extracted as a regular file, as POSIX asks of implementations without contiguous files | 0 |
+| `pax.size-disagrees` | accept | the pax size frames the member, as in POSIX, and is how sizes of 8 GiB and over are written | 0 |
 | `pax*.value-not-utf8.comment` | accept | a comment is ignored, so a reader need not decode it to check its encoding | 0 |
 | `pax.newline-in-value.SCHILY.xattr.*` | accept | xattrs are not extracted | 12 |
 | `pax.newline-in-value.LIBARCHIVE.xattr.*` | accept | xattrs are not extracted | 0 |
@@ -132,7 +133,7 @@ Other criteria reject no tarball here. That is no proof that they cost nothing: 
 
 ## Not measured
 
-Of the 82,586 tarballs, 62,536 were scanned by `25bfa32e6e71`, a version of `tarscan.py` that did not report `pax.empty-value.*`, `pax-global.empty-value.*`, `pax.value-not-utf8.*`, `pax-global.value-not-utf8.*`, `pax.size-leading-zero`, `pax.size-too-large`, `extended.gnu-long-and-pax`, `number.*.base256-too-large`, `format.pax-after-v7`, `linkname.not-utf8`, `name.dot-on-*`, `hardlink.absolute`; 19,972 were scanned by `7078a34ab512`, a version of `tarscan.py` that did not report `format.pax-after-v7`, `linkname.not-utf8`, `name.dot-on-*`, `hardlink.absolute`; 78 were scanned by `5b9b83abac66`, a version of `tarscan.py` that did not report `format.pax-after-v7`, `linkname.not-utf8`, `name.dot-on-*`, `hardlink.absolute`; the other 0 were scanned by a later version. What the earlier versions did record rules out most of these features: a tarball without a pax `size` has no pax size with a leading zero. `UNREPORTED` in `contrib/scanner/strict.py` says how, for each version.
+Of the 82,586 tarballs, 62,536 were scanned by `25bfa32e6e71`, a version of `tarscan.py` that did not report `pax.empty-value.*`, `pax-global.empty-value.*`, `pax.value-not-utf8.*`, `pax-global.value-not-utf8.*`, `pax.size-leading-zero`, `pax.size-too-large`, `extended.gnu-long-and-pax`, `number.*.base256-too-large`, `format.pax-after-v7`, `linkname.not-utf8`, `name.dot-on-*`, `hardlink.absolute`; 19,972 were scanned by `7078a34ab512`, a version of `tarscan.py` that did not report `format.pax-after-v7`, `linkname.not-utf8`, `name.dot-on-*`, `hardlink.absolute`; 78 were scanned by `5b9b83abac66`, a version of `tarscan.py` that did not report `format.pax-after-v7`, `linkname.not-utf8`, `name.dot-on-*`, `hardlink.absolute`; the other 0 were scanned by a later version. What the earlier versions did record rules out most of these features: a tarball without a pax `size` does not have a pax size with a leading zero. `UNREPORTED` in `contrib/scanner/strict.py` says how, for each version.
 
 It does not rule out all strict criteria. These are not measured in some tarballs, which they may reject, more than the tables above say:
 
