@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, then a header of a file <code>b</code> of 512 bytes whose checksum is 0, which is wrong, then a block that is the header of an empty file <code>smuggled</code>, as the data of <code>b</code>, then a file <code>c</code>.</p>
-<p>In POSIX, the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20simple%20sum%20of%20all%20octets%20in%20the%20header%20logical%20record">checksum</a> is a sum of the bytes of the header, but it is not said what a reader does with a header whose checksum is wrong. This case is ambiguous because a reader that takes it for the end of the archive extracts <code>a</code>, one that skips blocks until it finds a header with a right checksum extracts <code>a</code>, <code>smuggled</code> and <code>c</code>, and one that does not check it extracts <code>a</code>, <code>b</code> and <code>c</code>.</p>
+<p>In POSIX, the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20simple%20sum%20of%20all%20octets%20in%20the%20header%20logical%20record">checksum</a> is a sum of the bytes of the header, but it is not said what a reader does with a header whose checksum is wrong. This case is ambiguous because a reader can take the header in one of three ways. A reader that takes it for the end of the archive extracts <code>a</code>. One that skips blocks until it finds a header with a correct checksum extracts <code>a</code>, <code>smuggled</code> and <code>c</code>. One that does not check the checksum extracts <code>a</code>, <code>b</code> and <code>c</code>.</p>
 <p><strong>Decision point:</strong> what a reader does after a header whose checksum is wrong.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -57,10 +57,10 @@ wrong, then a block that is the header of an empty file `smuggled`, as the data 
 `c`.
 
 In POSIX, the checksum is a sum of the bytes of the header, but it is not said what
-a reader does with a header whose checksum is wrong. This case is ambiguous because a reader that
-takes it for the end of the archive extracts `a`, one that skips blocks until it finds a header with
-a right checksum extracts `a`, `smuggled` and `c`, and one that does not check it extracts `a`, `b`
-and `c`.
+a reader does with a header whose checksum is wrong. This case is ambiguous because a reader can
+take the header in one of three ways. A reader that takes it for the end of the archive extracts
+`a`. One that skips blocks until it finds a header with a correct checksum extracts `a`, `smuggled`
+and `c`. One that does not check the checksum extracts `a`, `b` and `c`.
 
 Decision point: what a reader does after a header whose checksum is wrong.
 Seen in: none of the scanned tarballs.

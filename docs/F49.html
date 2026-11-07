@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file whose pax header has the record <code>comment=x</code>, followed by a newline, followed by the record <code>path=renamed</code>. Its header has the name <code>header-name</code>.</p>
-<p>In POSIX, an extended header <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=An%20extended%20header%20shall%20consist%20of%20one%20or%20more%20records">consists of records</a>, each of which starts with its <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">length</a>, so a newline between two of them is not a record. This case is ambiguous because a reader that skips the empty line reads <code>path=renamed</code>, and the file is <code>renamed</code>; one that stops there, or ignores the extended header, keeps <code>header-name</code>; and one that takes the newline for the start of the next record reads its length from one byte too early, and cuts the name to <code>rename</code>.</p>
+<p>In POSIX, an extended header <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=An%20extended%20header%20shall%20consist%20of%20one%20or%20more%20records">consists of records</a>, each of which starts with its <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">length</a>, so a newline between two of them is not a record. This case is ambiguous because a reader can handle the empty line in one of three ways. A reader that skips it reads <code>path=renamed</code>, and the file is <code>renamed</code>. One that stops there, or ignores the extended header, keeps <code>header-name</code>. One that takes the newline for the start of the next record reads its length from one byte too early, and cuts the name to <code>rename</code>.</p>
 <p><strong>Decision point:</strong> whether a pax header may have bytes between its records.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -57,10 +57,10 @@ followed by the record `path=renamed`. Its header has the name `header-name`.
 
 In POSIX, an extended header consists of records, each of which starts with its
 length, so a newline between two of them is not a record. This case is ambiguous
-because a reader that skips the empty line reads `path=renamed`, and the file is `renamed`; one
-that stops there, or ignores the extended header, keeps `header-name`; and one that takes the
-newline for the start of the next record reads its length from one byte too early, and cuts the
-name to `rename`.
+because a reader can handle the empty line in one of three ways. A reader that skips it reads
+`path=renamed`, and the file is `renamed`. One that stops there, or ignores the extended header,
+keeps `header-name`. One that takes the newline for the start of the next record reads its length
+from one byte too early, and cuts the name to `rename`.
 
 Decision point: whether a pax header may have bytes between its records.
 Seen in: none of the scanned tarballs.

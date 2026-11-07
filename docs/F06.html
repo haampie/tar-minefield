@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one file, <code>a</code>, with the byte <code>0xe9</code> in its <code>uname</code>, and a checksum that is the sum of the bytes of its header taken as signed numbers.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20octet%20in%20the%20header%20shall%20be%20treated%20as%20an%20unsigned%20value">POSIX</a>, the checksum is the sum of the bytes of a header taken as unsigned numbers. Some old tars added them as signed. With a byte over 127 in the header, the two totals differ, and the checksum matches only the signed one. This case is ambiguous because a reader takes the header in one of three ways: as valid, by the signed sum, and extracts <code>a</code>; as invalid, and stops; or as invalid, and skips ahead to the next header.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20octet%20in%20the%20header%20shall%20be%20treated%20as%20an%20unsigned%20value">POSIX</a>, the checksum is the sum of the bytes of a header taken as unsigned numbers. Some old tars added them as signed. With a byte over 127 in the header, the two totals differ, and the checksum matches only the signed one. This case is ambiguous because a reader can take the header in one of three ways: as valid, by the signed sum, and extracts <code>a</code>; as invalid, and stops; or as invalid, and skips ahead to the next header.</p>
 <p><strong>Decision point:</strong> whether a signed checksum makes a header valid.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -57,9 +57,9 @@ of the bytes of its header taken as signed numbers.
 
 In POSIX, the checksum is the sum of the bytes of a header taken as unsigned numbers.
 Some old tars added them as signed. With a byte over 127 in the header, the two totals differ, and
-the checksum matches only the signed one. This case is ambiguous because a reader takes the header
-in one of three ways: as valid, by the signed sum, and extracts `a`; as invalid, and stops; or as
-invalid, and skips ahead to the next header.
+the checksum matches only the signed one. This case is ambiguous because a reader can take the
+header in one of three ways: as valid, by the signed sum, and extracts `a`; as invalid, and stops;
+or as invalid, and skips ahead to the next header.
 
 Decision point: whether a signed checksum makes a header valid.
 Seen in: none of the scanned tarballs.

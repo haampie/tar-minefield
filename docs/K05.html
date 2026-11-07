@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, then a hardlink <code>b/</code> to <code>a</code>.</p>
-<p>A <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">hardlink</a> is a link to a file archived before it, but a name that ends in a slash <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=ends%20with%20one%20or%20more%20trailing%20%3Cslash%3E%20characters%20shall%20not%20be%20resolved%20successfully%20unless">resolves only to a directory</a>, which a link to a regular file cannot be, so this is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">error</a>. This case is ambiguous in practice because the member is a hardlink <code>b</code>, with the slash dropped, a directory <code>b</code>, by the slash, or an empty file <code>b</code>, to a reader that makes a regular file of a link it cannot create.</p>
+<p>A <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">hardlink</a> is a link to a file archived before it, but a name that ends in a slash <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=ends%20with%20one%20or%20more%20trailing%20%3Cslash%3E%20characters%20shall%20not%20be%20resolved%20successfully%20unless">resolves only to a directory</a>, which a link to a regular file cannot be, so this is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">error</a>. This case is ambiguous in practice because a reader can take the member in one of three ways. A reader that drops the slash extracts a hardlink <code>b</code>. One that goes by the slash extracts a directory <code>b</code>. One that makes a regular file of a link it cannot create extracts an empty file <code>b</code>.</p>
 <p><strong>Decision point:</strong> whether the typeflag or the trailing slash decides the kind of a link.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -56,9 +56,10 @@ The archive has a file `a`, then a hardlink `b/` to `a`.
 
 A hardlink is a link to a file archived before it, but a name that ends in a slash
 resolves only to a directory, which a link to a regular file cannot be, so this is
-an error. This case is ambiguous in practice because the member is a hardlink `b`,
-with the slash dropped, a directory `b`, by the slash, or an empty file `b`, to a reader that
-makes a regular file of a link it cannot create.
+an error. This case is ambiguous in practice because a reader can take the member
+in one of three ways. A reader that drops the slash extracts a hardlink `b`. One that goes by the
+slash extracts a directory `b`. One that makes a regular file of a link it cannot create extracts an
+empty file `b`.
 
 Decision point: whether the typeflag or the trailing slash decides the kind of a link.
 Seen in: none of the scanned tarballs.

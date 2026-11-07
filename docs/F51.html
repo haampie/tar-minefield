@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, whose size field is <code>+0000001000</code>, then an empty file <code>smuggled</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal numbers filled with leading zeros, without a sign. Read leniently, this case is ambiguous because the size is 512, which is octal 1000, if the sign is skipped (and the next block is the data of <code>a</code>); 0, if the number ends at the sign (and the next block is the header of <code>smuggled</code>); or a size far past the end of the archive, to a reader that takes a sign for the start of a base-64 number, as some early test versions of GNU tar wrote them (and the rest of the archive is the data of <code>a</code>).</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal numbers filled with leading zeros, without a sign. Read leniently, this case is ambiguous because a reader can read the size in one of three ways. A reader that skips the sign reads 512, which is octal 1000, and the next block is the data of <code>a</code>. One that ends the number at the sign reads 0, and the next block is the header of <code>smuggled</code>. One that takes a sign for the start of a base-64 number, as some early test versions of GNU tar wrote them, reads a size far past the end of the archive, and the rest of the archive is the data of <code>a</code>.</p>
 <p><strong>Decision point:</strong> whether a numeric field may have a sign.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -54,12 +54,12 @@ A size with a plus sign, `+0000001000`.
 
 The archive has a file `a`, whose size field is `+0000001000`, then an empty file `smuggled`.
 
-In POSIX, numeric fields are octal numbers filled with leading zeros, without a
-sign. Read leniently, this case is ambiguous because the size is 512, which is octal 1000, if the
-sign is skipped (and the next block is the data of `a`); 0, if the number ends at the sign (and the
-next block is the header of `smuggled`); or a size far past the end of the archive, to a reader
+In POSIX, numeric fields are octal numbers filled with leading zeros, without a sign.
+Read leniently, this case is ambiguous because a reader can read the size in one of three ways. A
+reader that skips the sign reads 512, which is octal 1000, and the next block is the data of `a`.
+One that ends the number at the sign reads 0, and the next block is the header of `smuggled`. One
 that takes a sign for the start of a base-64 number, as some early test versions of GNU tar wrote
-them (and the rest of the archive is the data of `a`).
+them, reads a size far past the end of the archive, and the rest of the archive is the data of `a`.
 
 Decision point: whether a numeric field may have a sign.
 Seen in: none of the scanned tarballs.

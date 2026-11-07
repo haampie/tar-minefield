@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one file, <code>a</code>, whose magic <code>&quot;ustar\0&quot;</code> is followed by the version <code>&quot;01&quot;</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20version%20field%20is%20two%20octets%20containing%20the%20characters%20%2200%22">POSIX</a>, the version is <code>&quot;00&quot;</code>. The default policy tolerates NULs instead, as some Java archivers write them, but no other version. This case is ambiguous because a reader takes the header in one of three ways: as ustar, ignoring the version; as in a format not defined in POSIX, and stops; or as a v7 header, without the fields that ustar added.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20version%20field%20is%20two%20octets%20containing%20the%20characters%20%2200%22">POSIX</a>, the version is <code>&quot;00&quot;</code>. The default policy tolerates NULs instead, as some Java archivers write them, but no other version. This case is ambiguous because a reader can take the header in one of three ways: as ustar, ignoring the version; as in a format not defined in POSIX, and stops; or as a v7 header, without the fields that ustar added.</p>
 <p><strong>Decision point:</strong> which format the header is in.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,9 +55,9 @@ The POSIX magic with a version that is neither `&quot;00&quot;` nor NULs.
 The archive has one file, `a`, whose magic `&quot;ustar\0&quot;` is followed by the version `&quot;01&quot;`.
 
 In POSIX, the version is `&quot;00&quot;`. The default policy tolerates NULs instead, as some Java
-archivers write them, but no other version. This case is ambiguous because a reader takes the header
-in one of three ways: as ustar, ignoring the version; as in a format not defined in POSIX, and
-stops; or as a v7 header, without the fields that ustar added.
+archivers write them, but no other version. This case is ambiguous because a reader can take the
+header in one of three ways: as ustar, ignoring the version; as in a format not defined in POSIX,
+and stops; or as a v7 header, without the fields that ustar added.
 
 Decision point: which format the header is in.
 Seen in: none of the scanned tarballs.

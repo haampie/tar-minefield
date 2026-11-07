@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a directory <code>d</code>, then a symlink <code>.</code> to <code>d</code>, then a file <code>f</code>.</p>
-<p>The special filename <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=The%20special%20filename%20dot%20shall%20refer%20to%20the%20directory%20specified%20by%20its%20predecessor">dot</a> refers to the directory that it is in, so in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a> a member <code>.</code> is the directory that the archive is extracted to. Creating a symlink there fails, as <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/symlink.html#:~:text=The%20path2%20argument%20names%20an%20existing%20file">the name exists</a>, which is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">error</a>. This case is ambiguous in practice because the symlink is dropped, as a name that normalizes to the root, and the tree is <code>d</code> and <code>f</code>, or is created under another name, such as <code>_</code>, or the member is an error.</p>
+<p>The special filename <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=The%20special%20filename%20dot%20shall%20refer%20to%20the%20directory%20specified%20by%20its%20predecessor">dot</a> refers to the directory that it is in, so in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a> a member <code>.</code> is the directory that the archive is extracted to. Creating a symlink there fails, as <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/symlink.html#:~:text=The%20path2%20argument%20names%20an%20existing%20file">the name exists</a>, which is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">error</a>. This case is ambiguous in practice because a reader can take the symlink in one of three ways. A reader that normalizes the name to the root drops the symlink, and extracts <code>d</code> and <code>f</code>. One that renames the member creates the symlink under another name, such as <code>_</code>. Other readers report an error.</p>
 <p><strong>Decision point:</strong> whether a link may have the name <code>.</code>.</p>
 <p><strong>Seen in:</strong> not measured: 64 of the scanned tarballs have a member <code>.</code> or <code>./</code>, and the scans did not record its kind.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -57,8 +57,9 @@ The archive has a directory `d`, then a symlink `.` to `d`, then a file `f`.
 The special filename dot refers to the directory that it is in, so in POSIX a
 member `.` is the directory that the archive is extracted to. Creating a symlink there fails, as
 the name exists, which is an error. This case is ambiguous in
-practice because the symlink is dropped, as a name that normalizes to the root, and the tree is `d`
-and `f`, or is created under another name, such as `_`, or the member is an error.
+practice because a reader can take the symlink in one of three ways. A reader that normalizes the
+name to the root drops the symlink, and extracts `d` and `f`. One that renames the member creates
+the symlink under another name, such as `_`. Other readers report an error.
 
 Decision point: whether a link may have the name `.`.
 Seen in: not measured: 64 of the scanned tarballs have a member `.` or `./`, and the scans

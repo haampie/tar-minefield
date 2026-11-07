@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, whose pax header has <code>size=5_12</code> and whose header has the size 0, then an empty file <code>smuggled</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a>, a pax size is a decimal number. Read leniently, this case is ambiguous because the size is either 512, if the underscore is taken for a separator of digits (and the next block is the data of <code>a</code>), 5, if the number ends at the underscore (and <code>a</code> is the first 5 bytes of the next block), or 0, as the header specifies (and the next block is the header of <code>smuggled</code>).</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a>, a pax size is a decimal number. Read leniently, this case is ambiguous because a reader can read the size in one of three ways. A reader that takes the underscore for a separator of digits reads 512, and the next block is the data of <code>a</code>. One that ends the number at the underscore reads 5, and <code>a</code> is the first 5 bytes of the next block. One that keeps the size of the header reads 0, and the next block is the header of <code>smuggled</code>.</p>
 <p><strong>Decision point:</strong> how a pax size that is not a decimal number is read.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -56,9 +56,10 @@ The archive has a file `a`, whose pax header has `size=5_12` and whose header ha
 an empty file `smuggled`.
 
 In POSIX, a pax size is a decimal number. Read leniently, this case is ambiguous
-because the size is either 512, if the underscore is taken for a separator of digits (and the next
-block is the data of `a`), 5, if the number ends at the underscore (and `a` is the first 5 bytes of
-the next block), or 0, as the header specifies (and the next block is the header of `smuggled`).
+because a reader can read the size in one of three ways. A reader that takes the underscore for a
+separator of digits reads 512, and the next block is the data of `a`. One that ends the number at
+the underscore reads 5, and `a` is the first 5 bytes of the next block. One that keeps the size of
+the header reads 0, and the next block is the header of `smuggled`.
 
 Decision point: how a pax size that is not a decimal number is read.
 Seen in: none of the scanned tarballs.
