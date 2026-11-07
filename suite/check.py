@@ -65,8 +65,17 @@ def entry(path, dest=None):
     if stat.S_ISDIR(st.st_mode):
         return {"kind": "directory"}
     if stat.S_ISREG(st.st_mode):
-        with open(path, "rb") as f:
-            data = f.read()
+        # a file that an extractor leaves without read permission, such as mode 000, is read all
+        # the same: made readable for a moment, then given its mode back
+        unreadable = not st.st_mode & stat.S_IRUSR
+        if unreadable:
+            os.chmod(path, st.st_mode | stat.S_IRUSR)
+        try:
+            with open(path, "rb") as f:
+                data = f.read()
+        finally:
+            if unreadable:
+                os.chmod(path, stat.S_IMODE(st.st_mode))
         return {"kind": "file", "size": len(data), "sha256": hashlib.sha256(data).hexdigest(),
                 "executable": bool(st.st_mode & stat.S_IXUSR)}
     return {"kind": "other"}
