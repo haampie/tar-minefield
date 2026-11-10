@@ -1,0 +1,8 @@
+{
+ "id": "S27",
+ "verdict": "reject",
+ "description": "A hardlink whose target is reached through a symlink.",
+ "features": [
+  "hardlink.missing-target"
+ ]
+}

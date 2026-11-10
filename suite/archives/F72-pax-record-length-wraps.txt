@@ -1,0 +1,64 @@
+F72-pax-record-length-wraps: must reject
+
+A pax record whose length is 2^32 + 24, which wraps around to 24 in 32 bits.
+
+The archive has a pax header of 24 bytes with one record, `4294967320 path=renamed` followed by a
+newline. Its length says 4294967320, which is 2^32 + 24, and the record has 24 bytes. After it is
+the member, whose header has the name `header-name`.
+
+In POSIX, the length of a record counts its bytes, and this one says that the
+record is longer than its header. This case is ambiguous in practice because a reader that keeps the
+length in 32 bits reads 24, which is where the record ends, and extracts `renamed`. One that reads
+the whole number finds a record that runs past the end of the header: it reports an error, or drops
+the record and extracts `header-name`, or takes the rest of the header for the value, and extracts a
+file whose name is `renamed`, followed by a newline.
+
+Decision point: whether a pax record whose length runs past its header is recognized as malformed.
+Seen in: none of the scanned tarballs.
+See also: F36, a pax record whose length is one byte short, and F30, a base-256 size that wraps
+around.
+
+0x000000  header: pax extended header, one record, whose length is 2^32 too large
+          name     [  0,100)  "PaxHeader" + 91 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000030" + NUL  24
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011072\0 "  4666: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "x"  pax extended header
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: a pax record of 24 bytes that says it has 4294967320
+          24 bytes, then 488 NUL
+          "4294967320 path=renamed\n"
+0x000400  header: regular file
+          name     [  0,100)  "header-name" + 89 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000014" + NUL  12
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011271\0 "  4793: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          12 bytes, then 500 NUL to the end of the block
+          "which name?\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

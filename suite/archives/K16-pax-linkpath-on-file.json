@@ -1,0 +1,8 @@
+{
+ "id": "K16",
+ "verdict": "reject",
+ "description": "A regular file with a link target in its pax header.",
+ "features": [
+  "extended.linkpath-on-file"
+ ]
+}

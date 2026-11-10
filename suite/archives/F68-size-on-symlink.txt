@@ -1,0 +1,78 @@
+F68-size-on-symlink: must reject
+
+A size in the header of a symlink, which takes the next header for its data.
+
+The archive has a symlink `l` to `target`, whose size field is 512, then an empty file `smuggled`,
+then a file `b`.
+
+In POSIX, an archive does not store data for a symlink, and its size is specified as
+zero, so the next block is the header of `smuggled`. This case is ambiguous in
+practice because a reader can take the size in one of four ways. A reader that ignores it extracts
+the link, `smuggled` and `b`. One that skips 512 bytes of data extracts the link and `b`. One that
+reads the data as the target of the link extracts a link to `smuggled`, which is the string at the
+start of that block. One that extracts a symlink as a file writes that block as its contents. Other
+readers report an error.
+
+Decision point: whether the size in the header of a symlink applies.
+Seen in: none of the scanned tarballs.
+See also: F46, a pax `size` on a symlink, and F34, a size in the header of a hardlink.
+
+0x000000  header: symlink, no data, but its size field is 512
+          name     [  0,100)  "l" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000001000" + NUL  512
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "010563\0 "  4467: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "2"  symlink
+          linkname [157,257)  "target" + 94 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  header: regular file, the block that the size covers
+          name     [  0,100)  "smuggled" + 92 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000000" + NUL  0
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "010725\0 "  4565: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000400  header: regular file
+          name     [  0,100)  "b" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007341\0 "  3809: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          2 bytes, then 510 NUL to the end of the block
+          "b\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

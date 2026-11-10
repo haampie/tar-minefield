@@ -1,0 +1,8 @@
+{
+ "id": "F78",
+ "verdict": "reject",
+ "description": "A NUL in a pax key, before a `path` record.",
+ "features": [
+  "pax.nul-in-key"
+ ]
+}

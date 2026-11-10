@@ -1,0 +1,8 @@
+{
+ "id": "F69",
+ "verdict": "reject",
+ "description": "A size with the prefix `0o`, `0o000001000`.",
+ "features": [
+  "number.size.invalid-character"
+ ]
+}

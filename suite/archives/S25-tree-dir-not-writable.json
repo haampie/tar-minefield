@@ -1,0 +1,19 @@
+{
+ "id": "S25",
+ "verdict": "accept",
+ "description": "A directory without write permission, before the file in it.",
+ "features": [],
+ "tree": [
+  {
+   "path": "d",
+   "kind": "directory"
+  },
+  {
+   "path": "d/f",
+   "kind": "file",
+   "executable": false,
+   "size": 2,
+   "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6"
+  }
+ ]
+}

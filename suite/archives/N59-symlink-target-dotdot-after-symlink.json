@@ -1,0 +1,33 @@
+{
+ "id": "N59",
+ "verdict": "accept",
+ "description": "A symlink whose target has `..` after a component that is a symlink.",
+ "features": [],
+ "tree": [
+  {
+   "path": "d",
+   "kind": "directory"
+  },
+  {
+   "path": "d/sub",
+   "kind": "directory"
+  },
+  {
+   "path": "d/x",
+   "kind": "file",
+   "executable": false,
+   "size": 2,
+   "sha256": "73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac"
+  },
+  {
+   "path": "s",
+   "kind": "symlink",
+   "target": "d/sub"
+  },
+  {
+   "path": "t",
+   "kind": "symlink",
+   "target": "s/../x"
+  }
+ ]
+}

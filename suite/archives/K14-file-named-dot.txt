@@ -1,0 +1,62 @@
+K14-file-named-dot: must reject
+
+A regular file `.`: dropped, renamed, or an error?
+
+The archive has a regular file `.`, then a file `b`.
+
+The special filename dot refers to the directory that it is in, so in POSIX a
+member `.` is the directory that the archive is extracted to. A file cannot be created there, which
+is an error. This case is ambiguous in practice because a reader can take the
+member in one of three ways. A reader that normalizes the name to the root, or skips a member whose
+name it cannot use, drops the file, and extracts `b` without an error. One that renames the member
+creates the file under another name, such as `_`. Other readers report an error.
+
+Decision point: whether a file may have the name `.`.
+Seen in: not measured, as the scans did not record the kind of a member `.`: 64 of the scanned
+tarballs have a member `.` or `./`.
+See also: K06, a symlink `.`, and N05, a directory `./`.
+
+0x000000  header: regular file, a file named .
+          name     [  0,100)  "." + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000017" + NUL  15
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007263\0 "  3763: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data
+          15 bytes, then 497 NUL to the end of the block
+          "a file named .\n"
+0x000400  header: regular file
+          name     [  0,100)  "b" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007341\0 "  3809: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          2 bytes, then 510 NUL to the end of the block
+          "b\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

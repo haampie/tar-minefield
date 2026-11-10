@@ -1,0 +1,8 @@
+{
+ "id": "S29",
+ "verdict": "reject",
+ "description": "A hardlink whose mode is executable, to a file whose mode is not.",
+ "features": [
+  "hardlink.mode-differs"
+ ]
+}

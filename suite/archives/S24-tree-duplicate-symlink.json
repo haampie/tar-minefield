@@ -1,0 +1,8 @@
+{
+ "id": "S24",
+ "verdict": "reject",
+ "description": "The same symlink twice, with different targets: the first, or the last?",
+ "features": [
+  "tree.duplicate.symlink-symlink"
+ ]
+}

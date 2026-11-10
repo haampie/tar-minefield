@@ -1,0 +1,60 @@
+K08-type-fifo: must reject
+
+A FIFO: created, an empty file, or left out?
+
+The archive has a FIFO `p`, of typeflag `6`, then a file `b`.
+
+In POSIX, typeflag `6` is a FIFO, of which an archive has the existence, and not contents. A
+reader that cannot create one has an error: only a type that can have data is
+extracted as a regular file instead. A tree of files, directories and links does not
+have a place for a FIFO. This case is ambiguous in practice because a reader can take the member in
+one of four ways. A reader that supports FIFOs creates one. One that extracts every member that is
+not a directory or a link as a file creates an empty file `p`. One that skips the kinds of members
+that it does not extract leaves `p` out, without an error. Other readers report an error.
+
+Decision point: what a reader makes of a member that is not a file, a directory or a link.
+Seen in: not measured as a feature, but the scans record the kinds of members: one tarball, forktty
+1.3, has a FIFO, and none has a device.
+See also: F16, an unknown typeflag.
+
+0x000000  header: FIFO, a FIFO
+          name     [  0,100)  "p" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000000" + NUL  0
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007363\0 "  3827: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "6"  FIFO
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  header: regular file
+          name     [  0,100)  "b" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007341\0 "  3809: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000400  data
+          2 bytes, then 510 NUL to the end of the block
+          "b\n"
+0x000600  2 zero blocks: the end-of-archive marker
+0x000a00  end of file

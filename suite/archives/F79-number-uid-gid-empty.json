@@ -1,0 +1,18 @@
+{
+ "id": "F79",
+ "verdict": "accept",
+ "description": "Uid and gid fields without digits, as the writers of most crates leave them.",
+ "features": [
+  "number.uid.no-digits",
+  "number.gid.no-digits"
+ ],
+ "tree": [
+  {
+   "path": "a",
+   "kind": "file",
+   "executable": false,
+   "size": 2,
+   "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7"
+  }
+ ]
+}

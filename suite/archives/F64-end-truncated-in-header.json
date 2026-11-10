@@ -1,0 +1,6 @@
+{
+ "id": "F64",
+ "verdict": "reject",
+ "description": "An archive that ends inside a header.",
+ "features": []
+}

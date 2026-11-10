@@ -1,0 +1,8 @@
+{
+ "id": "F63",
+ "verdict": "reject",
+ "description": "An archive that ends after the data of a file, before the end of its block.",
+ "features": [
+  "end.unpadded"
+ ]
+}

@@ -1,0 +1,8 @@
+{
+ "id": "F72",
+ "verdict": "reject",
+ "description": "A pax record whose length is 2^32 + 24, which wraps around to 24 in 32 bits.",
+ "features": [
+  "pax.invalid-length"
+ ]
+}

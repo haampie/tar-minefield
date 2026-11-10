@@ -1,0 +1,42 @@
+K15-file-trailing-dot: must reject
+
+A regular file whose name ends in `/.`: a file `a`, or a directory?
+
+The archive has one regular file, of typeflag `0`, with the name `a/.`.
+
+The special filename dot refers to the directory that it is in, so `a/.` is `a`, and resolves
+only if `a` is a directory. In POSIX, a member is extracted as a file of its own type,
+so this is an error. This case is ambiguous in practice because a reader can take
+the member in one of four ways. A reader that normalizes the name extracts a file `a`. One that
+first creates the parent directories of a member creates a directory `a`, and leaves it empty. One
+that renames a component that it cannot create extracts the file under another name in that
+directory, such as `a/_`. Other readers report an error.
+
+Decision point: whether a name that ends in `/.` is normalized.
+Seen in: not measured, as earlier versions of the scanner did not tell such a name from others with
+a `.` component: at most 10 of the scanned tarballs.
+See also: K01, a regular file whose name ends in a slash, and N50, a name with a `.` component.
+
+0x000000  header: regular file, typeflag of a file, name of a directory
+          name     [  0,100)  "a/." + 97 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000033" + NUL  27
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007501\0 "  3905: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data
+          27 bytes, then 485 NUL to the end of the block
+          "a file, or in a directory?\n"
+0x000400  2 zero blocks: the end-of-archive marker
+0x000800  end of file

@@ -1,0 +1,8 @@
+{
+ "id": "K12",
+ "verdict": "reject",
+ "description": "An ACL in a pax header that gives the owner of a file the execute permission.",
+ "features": [
+  "pax.acl"
+ ]
+}

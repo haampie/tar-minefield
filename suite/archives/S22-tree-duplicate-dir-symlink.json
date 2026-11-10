@@ -1,0 +1,8 @@
+{
+ "id": "S22",
+ "verdict": "reject",
+ "description": "An empty directory, then a symlink of the same name: replaced, kept, or the link inside it?",
+ "features": [
+  "tree.duplicate.dir-symlink"
+ ]
+}

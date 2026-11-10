@@ -151,8 +151,8 @@ Kind:
 - A file or link named `.`, which is the root of the tree, and a file whose name ends in `/.`.
 - A link target in the linkname field of a member that is not a link, or in its pax `linkpath`.
 - FIFOs and devices, which the tree does not have: created, extracted as empty files, or left out.
-- What makes a file executable besides the mode of its header: a pax `mode`, an ACL in a pax
-  header, a mode in base-256.
+- Whether a file is executable: a mode in base-256, and what can decide it besides the mode of
+  the header, a pax `mode` and an ACL in a pax header.
 
 Order and state:
 

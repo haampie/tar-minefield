@@ -1,0 +1,38 @@
+F80-number-uid-base256: must accept, and extract its tree
+
+A uid and a gid in base-256, as GNU's format writes those over 2097151.
+
+The archive has a file `a` with GNU's magic, whose uid and gid fields are 3000000 in base-256: the
+byte `0x80`, followed by the number in binary.
+
+A uid or gid over 2097151 does not fit in the 7 octal digits of its field. In pax, it is written in
+a record of the extended header. In GNU's format, it is written in base-256, as a size
+of 8 GiB or more is. The owner of a file is not part of the tree, so a reader that does not restore
+owners need not read the number, and every implementation must extract `a`.
+
+Seen in: 214 of the scanned tarballs, whose makers have a large uid.
+See also: F56, a size in base-256.
+
+0x000000  header: regular file, uid and gid 3000000, in base-256
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "\x80\0\0\0\0-\xc6\xc0"  3000000: base-256
+          gid      [116,124)  "\x80\0\0\0\0-\xc6\xc0"  3000000: base-256
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "010206\0 "  4230: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar "
+          version  [263,265)  " " + NUL
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data
+          2 bytes, then 510 NUL to the end of the block
+          "a\n"
+0x000400  2 zero blocks: the end-of-archive marker
+0x000800  end of file

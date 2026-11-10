@@ -1,0 +1,8 @@
+{
+ "id": "F62",
+ "verdict": "reject",
+ "description": "A `SCHILY.realsize` record on a file that is not sparse.",
+ "features": [
+  "pax.SCHILY.realsize"
+ ]
+}

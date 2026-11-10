@@ -1,0 +1,8 @@
+{
+ "id": "S28",
+ "verdict": "reject",
+ "description": "A hardlink to `a/`, where `a` is a file.",
+ "features": [
+  "hardlink.target-trailing-slash"
+ ]
+}
