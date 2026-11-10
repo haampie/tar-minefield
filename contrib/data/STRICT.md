@@ -94,7 +94,7 @@ Tarballs that each criterion rejects, per ecosystem. Default: what the default p
 
 | category | criterion | default | crates | guix | live-bootstrap | nix | pypi | rubygems | spack | alone | examples |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| framing | `number.*.leading-space`: a size, mode or checksum written in a way that implementations differ on | accept | 0 | 272 (2.68%) | 8 (4.68%) | 545 (2.87%) | 0 | 0 | 196 (0.52%) | 745 | Catalyst-DispatchType-Regex@5.90035, Test-Future-IO-Impl@0.14, PPIx-Utilities@1.001000 |
+| framing | `number.*.leading-space`: a numeric field written in a way that implementations differ on | accept | 0 | 272 (2.68%) | 8 (4.68%) | 545 (2.87%) | 0 | 0 | 196 (0.52%) | 745 | Catalyst-DispatchType-Regex@5.90035, Test-Future-IO-Impl@0.14, PPIx-Utilities@1.001000 |
 | framing | `pax-global.after-members`: a global header after the first member | accept | 0 | 6 (0.06%) | 0 | 7 (0.04%) | 0 | 0 | 71 (0.19%) | 81 | rpm@4.20.1, x42-plugins@20230701, openmp@14.0.6.src |
 | framing | `magic.posix-version-nuls`: POSIX magic with NULs as its version | accept | 0 | 18 (0.18%) | 0 | 9 (0.05%) | 0 | 0 | 33 (0.09%) | 0 | commons-lang@2.6-src, apache-solr@3.6.2-src, commons-logging@1.2-src |
 | framing | `end.data-after`: data other than zeros after the end-of-archive marker | accept | 0 | 10 (0.10%) | 0 | 8 (0.04%) | 0 | 0 | 8 (0.02%) | 3 | tcp_wrappers_7.6, commons-lang@2.6-src, xml-commons-resolver@1.2 |
@@ -133,15 +133,29 @@ Other criteria reject no tarball here. That is no proof that they cost nothing: 
 
 ## Not measured
 
-Of the 82,586 tarballs, 62,536 were scanned by `25bfa32e6e71`, a version of `tarscan.py` that did not report `pax.empty-value.*`, `pax-global.empty-value.*`, `pax.value-not-utf8.*`, `pax-global.value-not-utf8.*`, `pax.size-leading-zero`, `pax.size-too-large`, `extended.gnu-long-and-pax`, `number.*.base256-too-large`, `format.pax-after-v7`, `linkname.not-utf8`, `name.dot-on-*`, `hardlink.absolute`; 19,972 were scanned by `7078a34ab512`, a version of `tarscan.py` that did not report `format.pax-after-v7`, `linkname.not-utf8`, `name.dot-on-*`, `hardlink.absolute`; 78 were scanned by `5b9b83abac66`, a version of `tarscan.py` that did not report `format.pax-after-v7`, `linkname.not-utf8`, `name.dot-on-*`, `hardlink.absolute`; the other 0 were scanned by a later version. What the earlier versions did record rules out most of these features: a tarball without a pax `size` does not have a pax size with a leading zero. `UNREPORTED` in `contrib/scanner/strict.py` says how, for each version.
+Of the 82,586 tarballs, 62,536 were scanned by `25bfa32e6e71`, a version of `tarscan.py` that did not report `pax.empty-value.*`, `pax-global.empty-value.*`, `pax.value-not-utf8.*`, `pax-global.value-not-utf8.*`, `pax.size-leading-zero`, `pax.size-too-large`, `extended.gnu-long-and-pax`, `number.*.base256-too-large`, `format.pax-after-v7`, `linkname.not-utf8`, `name.dot-on-*`, `hardlink.absolute`, `type.fifo`, `type.chardev`, `type.blockdev`, `end.unpadded`, `pax.mode`, `pax.acl`, `pax.size-repeated`, `pax-global.size-repeated`, `pax.nul-in-key`, `pax-global.nul-in-key`, `number.chksum.leading-nul`, `number.chksum.gap-in-digits`, `number.chksum.invalid-character`, `extended.name-dotdot`, `name.trailing-dot-on-*`, `hardlink.target-trailing-slash`, `hardlink.mode-differs`, `tree.duplicate.dir-file`, `tree.duplicate.dir-hardlink`, `tree.duplicate.dir-symlink`, `tree.duplicate.dir-chardev`, `tree.duplicate.dir-blockdev`, `tree.duplicate.dir-fifo`; 19,972 were scanned by `7078a34ab512`, a version of `tarscan.py` that did not report `format.pax-after-v7`, `linkname.not-utf8`, `name.dot-on-*`, `hardlink.absolute`, `type.fifo`, `type.chardev`, `type.blockdev`, `end.unpadded`, `pax.mode`, `pax.acl`, `pax.size-repeated`, `pax-global.size-repeated`, `pax.nul-in-key`, `pax-global.nul-in-key`, `number.chksum.leading-nul`, `number.chksum.gap-in-digits`, `number.chksum.invalid-character`, `extended.name-dotdot`, `name.trailing-dot-on-*`, `hardlink.target-trailing-slash`, `hardlink.mode-differs`, `tree.duplicate.dir-file`, `tree.duplicate.dir-hardlink`, `tree.duplicate.dir-symlink`, `tree.duplicate.dir-chardev`, `tree.duplicate.dir-blockdev`, `tree.duplicate.dir-fifo`; 78 were scanned by `5b9b83abac66`, a version of `tarscan.py` that did not report `format.pax-after-v7`, `linkname.not-utf8`, `name.dot-on-*`, `hardlink.absolute`, `type.fifo`, `type.chardev`, `type.blockdev`, `end.unpadded`, `pax.mode`, `pax.acl`, `pax.size-repeated`, `pax-global.size-repeated`, `pax.nul-in-key`, `pax-global.nul-in-key`, `number.chksum.leading-nul`, `number.chksum.gap-in-digits`, `number.chksum.invalid-character`, `extended.name-dotdot`, `name.trailing-dot-on-*`, `hardlink.target-trailing-slash`, `hardlink.mode-differs`, `tree.duplicate.dir-file`, `tree.duplicate.dir-hardlink`, `tree.duplicate.dir-symlink`, `tree.duplicate.dir-chardev`, `tree.duplicate.dir-blockdev`, `tree.duplicate.dir-fifo`; the other 0 were scanned by a later version. What the earlier versions did record rules out most of these features: a tarball without a pax `size` does not have a pax size with a leading zero. `UNREPORTED` in `contrib/scanner/strict.py` says how, for each version.
 
 It does not rule out all strict criteria. These are not measured in some tarballs, which they may reject, more than the tables above say:
 
 | criterion | tarballs not measured |
 |---|---:|
+| `tree.duplicate.dir-file` | 82,548 |
 | `linkname.not-utf8` | 5,051 |
+| `tree.duplicate.dir-symlink` | 4,850 |
+| `extended.name-dotdot` | 1,003 |
+| `tree.duplicate.dir-hardlink` | 233 |
+| `hardlink.mode-differs` | 233 |
 | `name.dot-on-*` | 67 |
+| `pax.acl` | 45 |
 | `hardlink.absolute` | 28 |
+| `end.unpadded` | 22 |
+| `name.trailing-dot-on-*` | 10 |
+| `pax.mode` | 9 |
+| `pax.nul-in-key` | 9 |
+| `number.*.invalid-character` | 7 |
+| `hardlink.target-trailing-slash` | 2 |
+| `type.fifo` | 1 |
+| `tree.duplicate.dir-fifo` | 1 |
 
 It does not rule out these allowed features, in fields outside the tree, which the table below counts only where they were reported: `pax.value-not-utf8.mtime` in 10,787, `pax.value-not-utf8.atime` in 703, `pax.value-not-utf8.ctime` in 687, `number.uid.base256-too-large` in 143, `number.gid.base256-too-large` in 136, `pax.value-not-utf8.uid` in 100, `pax.value-not-utf8.gid` in 67.
 
@@ -153,27 +167,27 @@ Not ambiguous, or confined to fields outside the tree. Tarballs of all ecosystem
 |---|---|---:|
 | `name.fills-field` | a name of exactly 100 bytes, without NUL | 7,869 |
 | `ustar.prefix` | the ustar prefix field | 6,317 |
-| `number.uid.no-digits` | outside the tree | 5,394 |
-| `number.gid.no-digits` | outside the tree | 5,394 |
+| `number.uid.no-digits` | outside the tree, and read alike | 5,394 |
+| `number.gid.no-digits` | outside the tree, and read alike | 5,394 |
 | `type.nul` | the typeflag NUL of regular files, from before POSIX | 3,616 |
 | `v7.bytes-after-linkname` | bytes in fields that v7 headers do not use | 2,843 |
 | `name.dir-without-trailing-slash` | a directory without a trailing slash: the typeflag says | 1,269 |
 | `tree.dir-after-contents` | directories after their contents | 1,008 |
 | `name.non-ascii` | UTF-8 names | 789 |
-| `number.uid.base256` | outside the tree | 214 |
-| `number.gid.base256` | outside the tree | 197 |
+| `number.uid.base256` | outside the tree, and read alike | 214 |
+| `number.gid.base256` | outside the tree, and read alike | 197 |
 | `tree.duplicate.dir-dir` | the same directory twice | 157 |
-| `number.uid.leading-space` | outside the tree | 152 |
-| `number.gid.leading-space` | outside the tree | 152 |
-| `number.mtime.leading-space` | outside the tree | 66 |
-| `number.mtime.no-digits` | outside the tree | 40 |
+| `number.uid.leading-space` | outside the tree, and read alike | 152 |
+| `number.gid.leading-space` | outside the tree, and read alike | 152 |
+| `number.mtime.leading-space` | outside the tree, and read alike | 66 |
+| `number.mtime.no-digits` | outside the tree, and read alike | 40 |
 | `linkname.no-nul` | a linkname of exactly 100 bytes, without NUL | 35 |
 | `pax.nul-in-value.SCHILY.xattr.*` | NUL in xattrs, which are outside the tree | 32 |
 | `pax.value-not-utf8.SCHILY.xattr.*` | binary values of vendor pax keys, such as xattrs, outside the tree | 31 |
 | `name.not-nfc` | names not in NFC: one tree, whose names macOS may normalize | 29 |
 | `pax.LIBARCHIVE.creationtime` | vendor pax keys outside the tree | 21 |
-| `number.uid.no-terminator` | outside the tree | 12 |
-| `number.gid.no-terminator` | outside the tree | 11 |
+| `number.uid.no-terminator` | outside the tree, and read alike | 12 |
+| `number.gid.no-terminator` | outside the tree, and read alike | 11 |
 | `pax.LIBARCHIVE.symlinktype` | vendor pax keys outside the tree | 2 |
 
 Names that some filesystems do not allow, so that extraction fails there only: `platform.case-collision` 834, `platform.windows-reserved-name` 507, `platform.windows-invalid-character` 208, `platform.windows-trailing-dot-or-space` 35, `platform.normalization-collision` 20.
