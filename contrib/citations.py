@@ -166,6 +166,12 @@ SENTENCES = {
     "time-decimal": (FILE_TIMES, "All of these time records shall be formatted as a decimal "
                                  "representation of the time in seconds since the Epoch"),
     "dir-permissions": (RATIONALE, "with sufficient permissions to allow file creation"),
+    "special-no-data": (USTAR, "the meaning of the size field is unspecified by this volume of "
+                               "POSIX.1-2024, and no data logical records shall be stored on the "
+                               "medium"),
+    "fifo-size": (USTAR, "for type 6, the size field shall be ignored when reading"),
+    "globexthdr-name": (OPTIONS, "If no -o globexthdr.name=string is specified, pax shall use the "
+                                 "following default value"),
     # Sentences of other pages, as (page, section or None, sentence)
     "slashes": (DEFINITIONS, "tag_03_254", "Multiple successive <slash> characters are considered "
                                            "to be the same as one <slash>"),
