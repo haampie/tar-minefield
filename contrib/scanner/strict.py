@@ -34,6 +34,7 @@ import sys
 import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import tarscan  # noqa: E402
 from report import ecosystems, load, origin, tidy_tables  # noqa: E402
 
 SITE = "https://stoppels.ch/tar/"
@@ -46,22 +47,34 @@ STRICT = [
     ("checksum.*", "framing", "a checksum that matches only one way of summing"),
     # Numeric fields that shape the tree are one criterion per problem: see criterion()
     ("number.[*].*", "framing",
-     "a size, mode or checksum written in a way that implementations differ on"),
+     "a numeric field written in a way that implementations differ on"),
     ("number.size.*", "framing", "a size written in a way that implementations differ on"),
     ("number.chksum.*", "framing",
      "a checksum field written in a way that implementations differ on"),
+    ("number.uid.*", "framing",
+     "a uid that is not a number, at which some implementations end the archive"),
+    ("number.gid.*", "framing",
+     "a gid that is not a number, at which some implementations end the archive"),
+    ("number.mtime.*", "framing",
+     "an mtime that is not a number, at which some implementations end the archive"),
     ("magic.posix-version-nuls", "framing", "POSIX magic with NULs as its version"),
     ("magic.posix-with-odd-version", "framing", 'POSIX magic with a version other than `"00"` or NULs'),
     ("magic.*", "framing", "a header that implementations may not recognize as one"),
     ("type.unknown-*", "framing", "an unknown typeflag: data or no data"),
     ("type.gnu-sparse", "framing", "GNU's old sparse files"),
     ("type.contiguous", "framing", "contiguous files (7)"),
+    ("type.fifo", "kind", "a FIFO, which the tree does not have: created, an empty file, or left out"),
+    ("type.chardev", "kind", "a character device, which the tree does not have"),
+    ("type.blockdev", "kind", "a block device, which the tree does not have"),
     ("pax.invalid-size", "framing", "a pax size that is not a number"),
     ("pax.size-leading-zero", "framing",
      "a pax size with leading zeros, which a reader may take as octal"),
     ("pax.size-too-large", "framing",
      "a pax size of 2^63 or more, which readers wrap, cut or reject"),
     ("pax.size-on-*", "framing", "a pax size on a member without data"),
+    ("pax.size-repeated", "framing", "a pax size twice in one header: the first, or the last"),
+    ("pax.SCHILY.realsize", "framing",
+     "star's size of a sparse file, which libarchive cuts the data of any file to"),
     ("size.on-*", "framing", "a size on a member without data, which some implementations skip"),
     ("pax.size-*", "framing", "a pax size that disagrees with the header"),
     ("extended.pax-size-before-gnu-long", "framing", "a pax size that a GNU long name may take"),
@@ -78,6 +91,8 @@ STRICT = [
     ("pax.no-newline", "framing", "a pax record that does not end in a newline"),
     ("pax.no-equals", "framing", "a pax record without `=`"),
     ("pax.empty-key", "framing", "a pax record with an empty key"),
+    ("pax.nul-in-key", "framing",
+     "a NUL in a pax key, at which some implementations end the records"),
     ("pax.empty-value.size", "framing", "an empty pax size, which in POSIX removes it"),
     ("pax-global.empty-value.size", "framing",
      "an empty size in a global header, which in POSIX removes the size of every later member"),
@@ -86,6 +101,8 @@ STRICT = [
      "pax headers after a v7 header, which a reader that takes the format of the first header "
      "extracts as files"),
     ("end.missing", "framing", "no end-of-archive marker"),
+    ("end.unpadded", "framing", "an archive that ends before the data of its last member is "
+                                "padded to a block"),
     ("end.lone-zero-block", "framing", "an end-of-archive marker of one zero block, not two"),
     ("end.data-after", "framing", "data other than zeros after the end-of-archive marker"),
     ("end.archive-after", "framing", "another archive after the end-of-archive marker"),
@@ -100,6 +117,8 @@ STRICT = [
     ("name.double-slash", "name", "a name like `a//b`"),
     ("name.trailing-slash-on-file", "kind", "a regular file named like a directory, `a/`"),
     ("name.trailing-slash-on-*", "kind", "a link whose name ends in a slash"),
+    ("name.trailing-dot-on-*", "kind",
+     "a member that is not a directory whose name ends in `/.`, which is a directory"),
     ("name.absolute", "name", "an absolute name"),
     ("name.dotdot", "name", "a name with `..`"),
     ("name.empty", "name", "an empty name"),
@@ -109,11 +128,17 @@ STRICT = [
     ("name.not-utf8", "name", "a name that is not UTF-8"),
     ("linkname.not-utf8", "name", "a link target that is not UTF-8"),
     ("name.bytes-after-nul", "name", "bytes after the NUL that ends a name"),
+    ("linkname.bytes-after-nul", "name", "bytes after the NUL that ends a link target"),
     ("gnu-long.empty", "name", "an empty GNU long name or link: the field in the header, or none"),
     ("gnu-long.no-nul", "name",
      "a GNU long name or link whose size leaves out its NUL: it ends at the size, or at a NUL after"),
     ("gnu-long.nul-inside", "name", "bytes after the NUL that ends a GNU long name or link"),
     ("name.*", "name", "a name that implementations may normalize differently"),
+    ("extended.name-dotdot", "name",
+     "an extended header whose own name has `..`: a reader that does not know its typeflag "
+     "extracts it as a file of that name"),
+    ("extended.linkpath-on-*", "kind",
+     "a link target in an extended header of a member that is not a link"),
     ("extended.gnu-long-and-pax", "name",
      "a GNU long name or link and a pax header for one member, which may apply to the other"),
     ("extended.*", "name", "several sources for one name or link target"),
@@ -140,6 +165,10 @@ STRICT = [
     ("symlink.escapes", "name", "a symlink that points out of the archive"),
     ("symlink.*", "name", "a symlink target that implementations may handle differently"),
     ("pax.SCHILY.filetype", "kind", "a pax key that changes the kind"),
+    ("pax.mode", "kind",
+     "a pax `mode`, which is not a keyword of POSIX: ignored, or the mode of the member"),
+    ("pax.acl", "kind",
+     "an ACL in a pax header, which decides whether a file is executable where it is applied"),
     ("linkname.on-*", "kind", "a link target on a member that is not a link"),
     ("number.mode.*", "kind", "a mode written in a way that implementations differ on"),
     ("tree.duplicate.file-file", "order and state", "the same file twice"),
@@ -152,6 +181,11 @@ STRICT = [
      "a hardlink to an absolute path: the member of that name without the slash, or the file "
      "outside the destination"),
     ("hardlink.to-symlink", "order and state", "a hardlink to a symlink"),
+    ("hardlink.target-trailing-slash", "order and state",
+     "a hardlink to a file, spelled with a trailing slash or `/.`, which is a directory"),
+    ("hardlink.mode-differs", "order and state",
+     "a hardlink whose mode is executable and whose target's is not, or the reverse: one file "
+     "with two modes"),
     ("hardlink.*", "order and state", "a hardlink to a later member, no member, or a misspelling"),
     ("pax-global.*", "framing",
      "records of a global header that implementations may split differently"),
@@ -164,16 +198,17 @@ ALLOWED = [
     ("name.not-nfc", "names not in NFC: one tree, whose names macOS may normalize"),
     ("name.dir-without-trailing-slash", "a directory without a trailing slash: the typeflag says"),
     ("ustar.prefix", "the ustar prefix field"),
-    ("number.uid.*", "outside the tree"),
-    ("number.gid.*", "outside the tree"),
-    ("number.mtime.*", "outside the tree"),
-    ("number.devmajor.*", "outside the tree"),
-    ("number.devminor.*", "outside the tree"),
+] + [
+    (f"number.{field}.{how}", "outside the tree" + (", and read alike" if alike else ""))
+    for field in ("uid", "gid", "mtime")
+    for how, alike in (("no-digits", True), ("no-terminator", True), ("leading-space", True),
+                       ("base256", True), ("base256-negative", False),
+                       ("base256-too-large", False))
+] + [
     ("type.nul", "the typeflag NUL of regular files, from before POSIX"),
     ("v7.bytes-after-linkname", "bytes in fields that v7 headers do not use"),
     ("tree.dir-after-contents", "directories after their contents"),
     ("tree.duplicate.dir-dir", "the same directory twice"),
-    ("pax.SCHILY.*", "vendor pax keys outside the tree"),
     ("pax.LIBARCHIVE.*", "vendor pax keys outside the tree"),
     ("pax.nul-in-value.SCHILY.xattr.*", "NUL in xattrs, which are outside the tree"),
     ("pax.nul-in-value.LIBARCHIVE.xattr.*", "NUL in xattrs, which are outside the tree"),
@@ -191,7 +226,8 @@ ALLOWED = [
 # The default policy: the strict criteria that it lets through, and how; it rejects the others.
 # A strict parser normalizes these names to the path they refer to, which is what tarscan.py
 # compares to find duplicates, so normalizing hides none. The rest it accepts as they are, some
-# only if condition() is true.
+# only if condition() is true. The first rule that matches a criterion applies, and one that
+# rejects makes an exception to a rule after it.
 DEFAULT = [
     ("name.leading-dot-slash", "normalize", "`./a` is `a`"),
     ("name.dot", "normalize", "`.` is the root of the tree"),
@@ -210,6 +246,8 @@ DEFAULT = [
      "the name is created as it is, as every implementation reads it alike, and the risk is in "
      "its use"),
     ("number.*.leading-space", "accept", "implementations read octal padded with spaces alike"),
+    ("number.mode.base256*", "reject",
+     "a mode fits in octal, and of the readers of base-256 some do not read a mode in it"),
     ("number.*.base256", "accept",
      "a reader that does not support base-256 cannot take it for octal, so it has one reading"),
     ("type.contiguous", "accept",
@@ -245,9 +283,12 @@ def assessed(r):
 
 
 def criterion(feature):
-    """The criterion of a strict feature: a problem of numeric fields that shape the tree is one
-    criterion for all of them, as a strict parser has one rule for it."""
-    return re.sub(r"^number\.(size|mode|chksum)\.", "number.*.", feature)
+    """The criterion of a strict feature: a problem of numeric fields is one criterion for all of
+    them, as a strict parser has one rule for it. A mode in base-256 is a criterion of its own, as
+    the default policy accepts base-256 in the other fields, where it is written."""
+    if feature.startswith("number.mode.base256"):
+        return feature
+    return re.sub(r"^number\.(size|mode|chksum|uid|gid|mtime)\.", "number.*.", feature)
 
 
 def strict_features(r):
@@ -258,10 +299,11 @@ def strict_features(r):
 
 
 def default_rule(feature):
-    """The rule of DEFAULT for a strict feature: (pattern, how, why), or None if rejected."""
+    """The rule of DEFAULT for a strict feature: (pattern, how, why), or None if rejected, as it is
+    by no rule, or by one that makes an exception to a later rule."""
     for rule in DEFAULT:
         if fnmatch.fnmatchcase(feature, rule[0]):
-            return rule
+            return rule if rule[1] != "reject" else None
     return None
 
 
@@ -307,9 +349,10 @@ def may_have_7078a34ab512(r):
     UTF-8 if it has links, as no version recorded the bytes of link targets, a member that is not a
     directory with a name that is the root, such as `.` or `./.`, if it has one of the names that
     those give and members that are not directories, and a hardlink to an absolute path if it has
-    hardlinks and a hardlink feature or an absolute name, as their targets were normalized."""
+    hardlinks and a hardlink feature or an absolute name, as their targets were normalized. And
+    the features of LATER_2: see may_have_later_2."""
     fingerprint, kinds, features = r.get("fingerprint", {}), r.get("kinds", {}), r["features"]
-    may = set()
+    may = may_have_later_2(r)
     root = "name.dot" in features or "name.absolute" in features or (
         "name.leading-dot-slash" in features and ("name.dot-component" in features or any(
             f.startswith("name.trailing-slash-on-") for f in features)))
@@ -326,10 +369,67 @@ def may_have_7078a34ab512(r):
     return may
 
 
+def may_have_later_2(r):
+    """The features of LATER_2 that a tarball may have, from what every version recorded of it.
+    The kinds of its members say whether it has a FIFO or a device. Its data can end without
+    padding only if it has no end-of-archive marker. Its pax keys and the shapes of its checksum
+    fields are in its fingerprint, which keeps the 8 most common of each, so that a tarball with
+    8 may have others. The name of an extended header is recorded with `*` for the components
+    that are not its own, one of which may be `..`. A name that ends in `/.` has a `.` component,
+    and a hardlink to a file spelled with a trailing slash is spelled differently, unless a member
+    has that name. A member can be at the path of a directory that is not a member, and a hardlink
+    can have another mode than its target, in any tarball that has such members."""
+    fingerprint, kinds, features = r.get("fingerprint", {}), r.get("kinds", {}), r["features"]
+    may = {f"type.{k}" for k in tarscan.SPECIAL if kinds.get(k)}
+    may |= {f"tree.duplicate.dir-{k}" for k in kinds if k != "dir"}
+    if "end.missing" in features:
+        may.add("end.unpadded")
+    for kind, keys in (("pax", fingerprint.get("pax_keys", {})),
+                       ("pax-global", fingerprint.get("pax_global_keys", {}))):
+        many = len(keys) >= 8
+        if many or any("\0" in k for k in keys):
+            may.add(f"{kind}.nul-in-key")
+        if f"{kind}.repeated-key" in features and (many or "size" in keys):
+            may.add(f"{kind}.size-repeated")
+        if kind == "pax" and (many or "mode" in keys):
+            may.add("pax.mode")
+        if kind == "pax" and (many or any(k.endswith(".xattr.*") or k.startswith("SCHILY.acl.")
+                                          for k in keys)):
+            may.add("pax.acl")
+    shapes = fingerprint.get("checksum", {})
+    if len(shapes) >= 8:
+        may |= {f"number.chksum.{how}" for how in ("leading-nul", "gap-in-digits",
+                                                   "invalid-character")}
+    may |= {f for shape in shapes for f in tarscan.checksum_features(shape)
+            if f != "number.chksum.leading-space"}
+    names = [n.split("/") for key in ("pax_header_name", "pax_global_header_name", "gnu_long_name")
+             for n in fingerprint.get(key, {})]
+    if any(".." in parts or "*" in parts for parts in names) or any(
+            len(fingerprint.get(key, {})) >= 8
+            for key in ("pax_header_name", "pax_global_header_name", "gnu_long_name")):
+        may.add("extended.name-dotdot")
+    if "name.dot-component" in features and any(k != "dir" for k in kinds):
+        may.add("name.trailing-dot-on-*")
+    if kinds.get("hardlink"):
+        if kinds.get("file"):
+            may.add("hardlink.mode-differs")
+        if any(f == "hardlink.target-spelled-differently" or f == "name.dot-component"
+               or f.startswith("name.trailing-slash-on-") for f in features):
+            may.add("hardlink.target-trailing-slash")
+    return may
+
+
 # Versions of tarscan.py that did not report some features: (those features, and a function of a
 # tarball that version scanned to the ones it may have). A tarball that may have none of them is
 # measured for them all the same; the others are not, until they are scanned again.
-LATER = ["format.pax-after-v7", "linkname.not-utf8", "name.dot-on-*", "hardlink.absolute"]
+# The features that the scanner reports since the cases of issue 50: no scan has them yet
+LATER_2 = (["type.fifo", "type.chardev", "type.blockdev", "end.unpadded", "pax.mode", "pax.acl",
+            "pax.size-repeated", "pax-global.size-repeated", "pax.nul-in-key",
+            "pax-global.nul-in-key", "number.chksum.leading-nul", "number.chksum.gap-in-digits",
+            "number.chksum.invalid-character", "extended.name-dotdot", "name.trailing-dot-on-*",
+            "hardlink.target-trailing-slash", "hardlink.mode-differs"]
+           + [f"tree.duplicate.dir-{k}" for k in ("file", "hardlink", "symlink") + tarscan.SPECIAL])
+LATER = ["format.pax-after-v7", "linkname.not-utf8", "name.dot-on-*", "hardlink.absolute"] + LATER_2
 UNREPORTED = {
     "25bfa32e6e71": (
         ["pax.empty-value.*", "pax-global.empty-value.*", "pax.value-not-utf8.*",
@@ -598,6 +698,8 @@ def main():
     print("| criterion | how | why | tarballs |")
     print("|---|---|---|---|")
     for pattern, how, why in DEFAULT:
+        if how == "reject":
+            continue
         count = sum(
             1 for r in union
             if any(fnmatch.fnmatchcase(f, pattern) and condition(f, r) for f in strict_features(r))

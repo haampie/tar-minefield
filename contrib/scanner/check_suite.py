@@ -37,6 +37,8 @@ RECORDS = [
     b"15 comment=a\nb\n",
     b"12 path=a\0b\n",
     b"11 path=ab\n11 path=cd\n",
+    b"9 size=0\n9 size=1\n",
+    b"11 pa\0th=a\n",
 ]
 
 
