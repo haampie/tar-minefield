@@ -20,6 +20,7 @@ import urllib.request
 BASE = "https://pubs.opengroup.org/onlinepubs/9799919799"
 PAGE = f"{BASE}/utilities/pax.html"
 PATHNAMES = f"{BASE}/basedefs/V1_chap04.html"  # General Concepts, with Pathname Resolution
+DEFINITIONS = f"{BASE}/basedefs/V1_chap03.html"
 LINK = f"{BASE}/functions/link.html"
 SYMLINK = f"{BASE}/functions/symlink.html"
 # The sections, by their ids on the page
@@ -34,6 +35,8 @@ PAX_HEADER = "tag_20_94_13_02"  # pax Header Block
 PAX_EXTENDED = "tag_20_94_13_03"  # pax Extended Header
 PRECEDENCE = "tag_20_94_13_04"  # pax Extended Header Keyword Precedence
 USTAR = "tag_20_94_13_06"  # ustar Interchange Format
+FILE_TIMES = "tag_20_94_13_05"  # pax Extended Header File Times
+RATIONALE = "tag_20_94_18"
 RATIONALE_USTAR = "tag_20_94_18_03"  # RATIONALE: ustar Interchange Format
 FUTURE_DIRECTIONS = "tag_20_94_19"
 SENTENCES = {
@@ -149,7 +152,27 @@ SENTENCES = {
                                           "how contiguous files can be stored in a ustar archive"),
     "slash-convention": (RATIONALE_USTAR, "the convention of using a filename ending with <slash> "
                                           "was adopted to specify a directory on the archive"),
+    "block-512": (USTAR, "Each logical record shall be a fixed-size logical record of 512 octets"),
+    "fifo": (USTAR, "the archiving of a FIFO file archives the existence of this file and not its "
+                    "contents"),
+    "mode": (USTAR, "The mode field provides 12 bits"),
+    "uid-gid": (USTAR, "The uid and gid fields are the user and group ID of the owner and group of "
+                       "the file"),
+    "uid-large": (PAX_EXTENDED, "pax shall include a uid extended header record for each file whose "
+                                "owner ID is greater than 2097151"),
+    "keyword-reserved": (PAX_EXTENDED, "Keywords consisting entirely of lowercase letters, digits, "
+                                       "and periods are reserved for future standardization"),
+    "keyword-equals": (PAX_EXTENDED, "A keyword shall not include an <equals-sign>"),
+    "time-decimal": (FILE_TIMES, "All of these time records shall be formatted as a decimal "
+                                 "representation of the time in seconds since the Epoch"),
+    "dir-permissions": (RATIONALE, "with sufficient permissions to allow file creation"),
     # Sentences of other pages, as (page, section or None, sentence)
+    "slashes": (DEFINITIONS, "tag_03_254", "Multiple successive <slash> characters are considered "
+                                           "to be the same as one <slash>"),
+    "dot-dot": (PATHNAMES, "tag_04_16", "The special filename dot-dot shall refer to the parent "
+                                        "directory of its predecessor directory"),
+    "link-dir": (LINK, None, "If path1 names a directory, link() shall fail unless the process has "
+                             "appropriate privileges"),
     "null-pathname": (PATHNAMES, "tag_04_16", "A null pathname shall not be successfully resolved"),
     "link-follows": (LINK, None, "If path1 names a symbolic link, it is implementation-defined"),
     "symlink-string": (SYMLINK, None, "shall be treated only as a string and shall not be "
