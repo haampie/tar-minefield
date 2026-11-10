@@ -1,7 +1,7 @@
 {
  "id": "F79",
  "verdict": "accept",
- "description": "Uid and gid fields without digits, as the writers of most crates leave them.",
+ "description": "Uid and gid fields without digits, as in most crates.",
  "features": [
   "number.uid.no-digits",
   "number.gid.no-digits"

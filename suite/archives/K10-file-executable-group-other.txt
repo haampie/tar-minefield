@@ -4,10 +4,10 @@ Files that their group or others may execute, and their owner may not.
 
 The archive has two files: `g`, with the mode 654, and `o`, with the mode 645.
 
-The mode field has an execute permission for the owner of a file, one for its group, and one
-for others. In the tree, a file is executable if its owner may execute it, and here the owner may
-not, so neither file is executable. A reader that takes any of the three permissions for that of the
-owner makes both executable.
+The mode field contains an execute permission for the owner of a file, one for its group,
+and one for others. In the tree, a file is executable if its owner may execute it, and here the
+owner may not, so neither file is executable. A reader that takes any of the three permissions for
+that of the owner makes both executable.
 
 Seen in: not measured, as the scans do not record modes.
 See also: K09, an executable file.

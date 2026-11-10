@@ -5,11 +5,11 @@ octal digits, followed by a NUL. The digits are the correct sum.
 
 In [POSIX][zero-filled], numeric fields are octal numbers filled with leading zeros, and each is
 [terminated][numeric] by a space or a NUL. This case is ambiguous in practice because a reader can
-take the header of `b` in one of four ways. A reader that skips the NUL in front finds the correct
-sum, and extracts `a`, `b` and `c`. One that ends the number at its first NUL does not find the sum;
-if it takes a header with a wrong checksum for the end of the archive, it extracts `a`, without an
-error. One that skips blocks until it finds a header with a correct checksum extracts `a` and `c`.
-Other readers report an error.
+take the header of `b` in one of four ways. A reader that skips the NUL in front reads a correct
+checksum, and extracts `a`, `b` and `c`. One that ends the number at its first NUL reads a checksum
+without digits, which is wrong; if it takes a header with a wrong checksum for the end of the
+archive, it extracts `a`, without an error. One that skips blocks until it finds a header with a
+correct checksum extracts `a` and `c`. Other readers report an error.
 
 Decision point: how a checksum with a NUL before its digits is read.
 Seen in: none of the scanned tarballs.

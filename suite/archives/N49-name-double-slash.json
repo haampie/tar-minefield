@@ -1,7 +1,7 @@
 {
  "id": "N49",
  "verdict": "tolerate",
- "description": "A name with two slashes in a row, `a//b`.",
+ "description": "A name with two consecutive slashes, `a//b`.",
  "features": [
   "name.double-slash"
  ],

@@ -5,9 +5,9 @@ The archive has the files `a`, `b` and `c`. The uid field of `b` is `0000008`.
 In [POSIX][zero-filled], numeric fields are octal numbers filled with leading zeros, and 8 is not an
 octal digit. The [owner][uid-gid] of a file is not part of the tree, but its field is part of the
 header. This case is ambiguous in practice because a reader can take the header of `b` in one of
-three ways. A reader that does not read the uid, or that reads the digits it can, extracts `a`, `b`
-and `c`. One that takes a header with a field that is not a number for the end of the archive
-extracts `a`, without an error. Other readers report an error.
+three ways. A reader that does not read the uid, or that reads it up to the 8, extracts `a`, `b` and
+`c`. One that takes a header with a field that is not a number for the end of the archive extracts
+`a`, without an error. Other readers report an error.
 
 Decision point: whether a header with a uid that is not a number is a header.
 Seen in: none of the scanned tarballs.

@@ -6,9 +6,9 @@ The archive has a file `b`, a directory `a/`, then a symlink `a` to `b`.
 
 In POSIX, a member is extracted as a file of its own type, and creating a symlink at a
 path that exists fails. This case is ambiguous because a reader can take the
-symlink in one of four ways. A reader that first removes what is at the path replaces the directory
-with the link. One that keeps what is there leaves the directory, without an error. One that creates
-the link as `ln -s b a` does creates it inside the directory, as `a/b`. Other readers report an
+symlink in one of four ways. A reader that replaces the directory extracts the link `a`. One that
+keeps the directory extracts it and `b` alone, without an error. One that makes the link inside a
+directory that is at its path, as `ln -s b a` does, extracts a link `a/b`. Other readers report an
 error.
 
 Decision point: whether a symlink replaces a directory.

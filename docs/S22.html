@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>b</code>, a directory <code>a/</code>, then a symlink <code>a</code> to <code>b</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">POSIX</a>, a member is extracted as a file of its own type, and creating a symlink at a path that exists <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/symlink.html#:~:text=The%20path2%20argument%20names%20an%20existing%20file">fails</a>. This case is ambiguous because a reader can take the symlink in one of four ways. A reader that first removes what is at the path replaces the directory with the link. One that keeps what is there leaves the directory, without an error. One that creates the link as <code>ln -s b a</code> does creates it inside the directory, as <code>a/b</code>. Other readers report an error.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">POSIX</a>, a member is extracted as a file of its own type, and creating a symlink at a path that exists <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/symlink.html#:~:text=The%20path2%20argument%20names%20an%20existing%20file">fails</a>. This case is ambiguous because a reader can take the symlink in one of four ways. A reader that replaces the directory extracts the link <code>a</code>. One that keeps the directory extracts it and <code>b</code> alone, without an error. One that makes the link inside a directory that is at its path, as <code>ln -s b a</code> does, extracts a link <code>a/b</code>. Other readers report an error.</p>
 <p><strong>Decision point:</strong> whether a symlink replaces a directory.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs has a symlink at the path of a directory that is a member.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -56,9 +56,9 @@ The archive has a file `b`, a directory `a/`, then a symlink `a` to `b`.
 
 In POSIX, a member is extracted as a file of its own type, and creating a symlink at a
 path that exists fails. This case is ambiguous because a reader can take the
-symlink in one of four ways. A reader that first removes what is at the path replaces the directory
-with the link. One that keeps what is there leaves the directory, without an error. One that creates
-the link as `ln -s b a` does creates it inside the directory, as `a/b`. Other readers report an
+symlink in one of four ways. A reader that replaces the directory extracts the link `a`. One that
+keeps the directory extracts it and `b` alone, without an error. One that makes the link inside a
+directory that is at its path, as `ln -s b a` does, extracts a link `a/b`. Other readers report an
 error.
 
 Decision point: whether a symlink replaces a directory.

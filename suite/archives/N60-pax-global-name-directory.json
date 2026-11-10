@@ -1,7 +1,7 @@
 {
  "id": "N60",
  "verdict": "accept",
- "description": "A global pax header whose own name has a directory.",
+ "description": "A global pax header that is itself named in a directory.",
  "features": [],
  "tree": [
   {

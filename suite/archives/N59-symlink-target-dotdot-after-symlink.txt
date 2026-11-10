@@ -8,8 +8,8 @@ symlink `t` to `s/../x`.
 The target of a symlink is a string, which is not resolved when the link is
 created, so `t` is created with the target `s/../x`. When `t` is followed, `s` is resolved first,
 and `..` is then the parent of `d/sub`: the link leads to `d/x`. A reader that normalizes the target
-as text removes `s/..`, and creates a link to `x`, which is not in the archive. Either target stays
-inside the destination.
+as it normalizes names drops `s/..`, and extracts a link to `x`, which is not in the archive. Both
+targets are inside the destination.
 
 Seen in: not measured, as the scans do not record the targets of symlinks.
 See also: N35, a symlink whose target leads out of the destination.

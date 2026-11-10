@@ -2,11 +2,11 @@
 
 The archive has a file `a`, whose pax header has the record `TARMINEFIELD.unknown=1`.
 
-In [POSIX][keyword-extension], a keyword is one of its list or an extension of an implementation,
-such as the `SCHILY.*` keys of star, the `LIBARCHIVE.*` keys of libarchive and the `GNU.*` keys of
-GNU tar. It is not specified what a reader does with a keyword that it does not know. A reader does
-not know the extensions of every writer, and one that rejected them could not read the archives of
-the others, so every implementation must extract `a`.
+In [POSIX][keyword-extension], a key is a specified one or an implementation extension, such as the
+`SCHILY.*` keys of star, the `LIBARCHIVE.*` keys of libarchive and the `GNU.*` keys of GNU tar. It
+is not specified what a reader does with a key that it does not know. A reader does not know the
+extensions of every writer, and one that rejects a key that it does not know rejects the archives of
+the writers of that key, so every implementation must extract `a`.
 
 Seen in: tarballs of bsdtar and star, with keys such as `LIBARCHIVE.creationtime` and `SCHILY.dev`.
 """

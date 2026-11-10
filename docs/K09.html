@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has two files: <code>r</code>, with the mode 644, and <code>x</code>, a shell script with the mode 755.</p>
-<p>The <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20mode%20field%20provides%2012%20bits">mode</a> field has the permissions of a file, of which one is the execute permission of its owner. A script or a program is of use only with that permission, so whether a file is executable is part of the tree. The file <code>x</code> is executable, and <code>r</code> is not. A reader that creates every file with the same mode extracts <code>x</code> without it.</p>
+<p>The <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20mode%20field%20provides%2012%20bits">mode</a> field contains the permissions of a file, of which one is the execute permission of its owner. A script or a program does not run without that permission, so whether a file is executable is part of the tree. The file <code>x</code> is executable, and <code>r</code> is not. A reader that creates every file with the same mode extracts <code>x</code> without it.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>r</code></td><td>file</td><td>2 bytes, sha256 <code title="8e54b0ca18020275e4aef1ca0eb5e197e066c065c1864817652a8a39c55402cd">8e54b0ca</code></td></tr>
@@ -57,10 +57,10 @@ An executable file.
 
 The archive has two files: `r`, with the mode 644, and `x`, a shell script with the mode 755.
 
-The mode field has the permissions of a file, of which one is the execute permission of its
-owner. A script or a program is of use only with that permission, so whether a file is executable is
-part of the tree. The file `x` is executable, and `r` is not. A reader that creates every file with
-the same mode extracts `x` without it.
+The mode field contains the permissions of a file, of which one is the execute permission of
+its owner. A script or a program does not run without that permission, so whether a file is
+executable is part of the tree. The file `x` is executable, and `r` is not. A reader that creates
+every file with the same mode extracts `x` without it.
 
 Seen in: tarballs with scripts and programs, such as `configure`.
 

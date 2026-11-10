@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>t</code>, a file <code>a</code>, then a symlink <code>a</code> to <code>t</code>.</p>
-<p>In POSIX, existing files <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">can be overwritten</a>, but creating a symlink at a path that exists <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/symlink.html#:~:text=The%20path2%20argument%20names%20an%20existing%20file">fails</a>, so a reader has to remove the file first. This case is ambiguous because the tree has either the link, which replaces the file, or the file, with an error for the link or without one.</p>
+<p>In POSIX, existing files <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">can be overwritten</a>, but creating a symlink at a path that exists <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/symlink.html#:~:text=The%20path2%20argument%20names%20an%20existing%20file">fails</a>, so a reader that extracts the link replaces the file. This case is ambiguous because the tree has either the link, which replaces the file, or the file, with an error for the link or without one.</p>
 <p><strong>Decision point:</strong> whether a later member replaces an earlier one of another kind.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,9 +55,9 @@ A file, then a symlink of the same name.
 The archive has a file `t`, a file `a`, then a symlink `a` to `t`.
 
 In POSIX, existing files can be overwritten, but creating a symlink at a path that
-exists fails, so a reader has to remove the file first. This case is ambiguous
-because the tree has either the link, which replaces the file, or the file, with an error for the
-link or without one.
+exists fails, so a reader that extracts the link replaces the file. This case is
+ambiguous because the tree has either the link, which replaces the file, or the file, with an error
+for the link or without one.
 
 Decision point: whether a later member replaces an earlier one of another kind.
 Seen in: none of the scanned tarballs.

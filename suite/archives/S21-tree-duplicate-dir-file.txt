@@ -6,9 +6,9 @@ The archive has a directory `a/`, then a file `a`.
 
 In POSIX, a member is extracted as a file of its own type, and existing files can be
 overwritten, but it is not specified whether overwriting includes replacing a
-directory with a file. An empty directory can be removed without losing anything. This case is
-ambiguous because the tree has either the file, which replaces the directory, or the directory, with
-an error for the file or without one.
+directory with a file. Replacing an empty directory does not delete a file. This case is ambiguous
+because the tree has either the file, which replaces the directory, or the directory, with an error
+for the file or without one.
 
 Decision point: whether a later member replaces an earlier one of another kind.
 Seen in: none of the scanned tarballs has a file at the path of a directory that is a member.

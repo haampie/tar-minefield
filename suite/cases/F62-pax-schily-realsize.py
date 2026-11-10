@@ -2,10 +2,10 @@
 
 The archive has a file `a` of 5 bytes, `12345`, whose pax header has the record `SCHILY.realsize=2`.
 
-The key `SCHILY.realsize` is star's. Of a sparse file, whose holes are not stored, it is the size of
-the file as it was, and the size field is that of the data that is stored. In
-[POSIX][keyword-extension], such a key is an extension of an implementation, which another reader
-need not know. This file is not sparse: the archive does not say where its holes are. This case is
+In star's format of sparse files, whose holes are not stored, the size of a file with its holes is
+in `SCHILY.realsize`, and the size field is that of the data that is stored. In
+[POSIX][keyword-extension], such a key is an implementation extension, which another reader need not
+know. The file `a` is not sparse: the archive does not have a list of its holes. This case is
 ambiguous in practice because a reader that does not know the key extracts the 5 bytes, and one that
 takes the real size for the size of the file extracts its first 2 bytes, `12`.
 

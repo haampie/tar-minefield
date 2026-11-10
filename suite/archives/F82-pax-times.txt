@@ -7,10 +7,10 @@ The archive has a file `a`, whose pax header has the records `mtime=1700000000.1
 
 In POSIX, the records `mtime` and `atime` are decimal numbers of seconds, which can
 have a decimal point and digits after it. The key `ctime` was removed from POSIX in 2004, and GNU
-tar writes it in the same format: in an archive in the pax format, it writes `atime` and `ctime` for
+tar writes it in the same format: in an archive in pax format, it writes `atime` and `ctime` for
 every member, and `mtime` when it has a fraction of a second. Times are not part of the tree.
 
-Seen in: hundreds of tarballs, made by GNU tar in the pax format.
+Seen in: hundreds of tarballs, produced by GNU tar in pax format.
 
 0x000000  header: pax extended header, times with fractions
           name     [  0,100)  "PaxHeader" + 91 NUL

@@ -1,7 +1,7 @@
 {
  "id": "F65",
  "verdict": "accept",
- "description": "An archive without members: the two zero blocks that end it, and nothing else.",
+ "description": "An archive without members: only the two zero blocks that end it.",
  "features": [],
  "tree": []
 }

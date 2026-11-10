@@ -6,9 +6,9 @@ The archive has one file, whose pax header has the record `path=a=b`, and whose 
 `header-name`.
 
 After its length, a pax record is a keyword, followed by `=`, followed by a value, followed by a
-newline, and a keyword does not include an equals sign. So the first `=` of the
+newline, and a keyword does not contain an equals sign. So the first `=` of the
 record ends the keyword, the value is `a=b`, and the file has that name. A reader that splits the
-record at its last `=` reads a key that it does not know, and extracts `header-name`.
+record at its last `=` reads a keyword that it does not know, and extracts `header-name`.
 
 Seen in: not measured, as the scans do not record the names of members.
 

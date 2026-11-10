@@ -40,8 +40,8 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one symlink, <code>l</code>, whose linkname field contains <code>safe</code>, followed by a NUL, followed by <code>../x</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=except%20when%20all%20characters%20in%20the%20array%20contain%20non%2DNUL%20characters%20including%20the%20last%20character">POSIX</a>, the linkname field is a string that ends with a NUL, unless it fills the field, so the target is <code>safe</code>. Copied as a whole, the field is <code>safe</code> as a C string, which ends at the first NUL, but <code>safe\0../x</code> in languages whose strings can contain a NUL: creating the link then fails, or a check of the target reads another string than the one that is used.</p>
-<p>The bytes after the NUL have no meaning and no writer puts them there, so a strict parser rejects them rather than guess what they are for.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=except%20when%20all%20characters%20in%20the%20array%20contain%20non%2DNUL%20characters%20including%20the%20last%20character">POSIX</a>, the linkname field is a string that ends with a NUL, except when it fills the field, so the target is <code>safe</code>. Copied as a whole, the field is <code>safe</code> as a C string, which ends at the first NUL, but <code>safe\0../x</code> in languages whose strings can contain a NUL: creating the link then fails, or the string that is checked is not the one that is used.</p>
+<p>The bytes after the NUL do not mean anything, and writers do not put them there, so a strict parser rejects them rather than guess what they are for.</p>
 <p><strong>Decision point:</strong> where a link target ends.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -56,13 +56,13 @@ Bytes after the NUL that ends the target of a symlink.
 The archive has one symlink, `l`, whose linkname field contains `safe`, followed by a NUL, followed
 by `../x`.
 
-In POSIX, the linkname field is a string that ends with a NUL, unless it fills the
+In POSIX, the linkname field is a string that ends with a NUL, except when it fills the
 field, so the target is `safe`. Copied as a whole, the field is `safe` as a C string, which ends at
 the first NUL, but `safe\0../x` in languages whose strings can contain a NUL: creating the link then
-fails, or a check of the target reads another string than the one that is used.
+fails, or the string that is checked is not the one that is used.
 
-The bytes after the NUL have no meaning and no writer puts them there, so a strict parser rejects
-them rather than guess what they are for.
+The bytes after the NUL do not mean anything, and writers do not put them there, so a strict parser
+rejects them rather than guess what they are for.
 
 Decision point: where a link target ends.
 Seen in: none of the scanned tarballs.

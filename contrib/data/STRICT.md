@@ -150,12 +150,12 @@ It does not rule out all strict criteria. These are not measured in some tarball
 | `hardlink.absolute` | 28 |
 | `end.unpadded` | 22 |
 | `name.trailing-dot-on-*` | 10 |
-| `pax.mode` | 9 |
 | `pax.nul-in-key` | 9 |
+| `pax.mode` | 9 |
 | `number.*.invalid-character` | 7 |
 | `hardlink.target-trailing-slash` | 2 |
-| `type.fifo` | 1 |
 | `tree.duplicate.dir-fifo` | 1 |
+| `type.fifo` | 1 |
 
 It does not rule out these allowed features, in fields outside the tree, which the table below counts only where they were reported: `pax.value-not-utf8.mtime` in 10,787, `pax.value-not-utf8.atime` in 703, `pax.value-not-utf8.ctime` in 687, `number.uid.base256-too-large` in 143, `number.gid.base256-too-large` in 136, `pax.value-not-utf8.uid` in 100, `pax.value-not-utf8.gid` in 67.
 

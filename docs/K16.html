@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one regular file, <code>a</code>, of typeflag <code>0</code>, whose pax header has the record <code>linkpath=target</code>.</p>
-<p>A <code>linkpath</code> record <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20linkname%20field">overrides</a> the linkname field, and in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20linked%2Dto%20name%20is%20specified%20in%20the%20linkname%20field">POSIX</a> a linkname has a meaning only for links. A member is extracted as a file of its <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">own type</a>, so the member is a file. This case is ambiguous only to a reader that goes by the link target, and makes a link to <code>target</code>. Other readers extract the file, or report an error for a record that does not belong to it.</p>
+<p>A <code>linkpath</code> record <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20linkname%20field">overrides</a> the linkname field, and in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20linked%2Dto%20name%20is%20specified%20in%20the%20linkname%20field">POSIX</a> a linkname has a meaning only for links. A member is extracted as a file of its <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">own type</a>, so the member is a file. This case is ambiguous only to a reader that goes by the link target, and makes a link to <code>target</code>. Other readers extract the file, or report an error.</p>
 <p><strong>Decision point:</strong> whether a link target makes a member a link.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -58,8 +58,7 @@ The archive has one regular file, `a`, of typeflag `0`, whose pax header has the
 A `linkpath` record overrides the linkname field, and in POSIX a linkname
 has a meaning only for links. A member is extracted as a file of its own type, so the
 member is a file. This case is ambiguous only to a reader that goes by the link target, and makes a
-link to `target`. Other readers extract the file, or report an error for a record that does not
-belong to it.
+link to `target`. Other readers extract the file, or report an error.
 
 Decision point: whether a link target makes a member a link.
 Seen in: none of the scanned tarballs.

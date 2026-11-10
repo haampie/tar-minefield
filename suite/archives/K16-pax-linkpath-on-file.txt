@@ -8,8 +8,7 @@ The archive has one regular file, `a`, of typeflag `0`, whose pax header has the
 A `linkpath` record overrides the linkname field, and in POSIX a linkname
 has a meaning only for links. A member is extracted as a file of its own type, so the
 member is a file. This case is ambiguous only to a reader that goes by the link target, and makes a
-link to `target`. Other readers extract the file, or report an error for a record that does not
-belong to it.
+link to `target`. Other readers extract the file, or report an error.
 
 Decision point: whether a link target makes a member a link.
 Seen in: none of the scanned tarballs.

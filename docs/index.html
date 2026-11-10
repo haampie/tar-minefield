@@ -66,9 +66,9 @@ published there.</p>
 <tr><td><a href="F57.html"><code>F57</code></a></td><td>pax-newline-in-comment-path</td><td>A newline in a pax <code>comment</code>, which split on lines leaves a <code>path</code> record.</td><td class=n>none</td></tr>
 <tr><td><a href="F58.html"><code>F58</code></a></td><td>pax-newline-in-comment-then-size</td><td>A newline in a pax <code>comment</code>, which split on lines leaves a <code>size</code> record before the last one.</td><td class=n>none</td></tr>
 <tr><td><a href="F59.html"><code>F59</code></a></td><td>pax-nul-in-xattr</td><td>A NUL in the value of a pax xattr, before a <code>path</code> record.</td><td class=n>0.04%</td></tr>
-<tr><td><a href="F65.html"><code>F65</code></a></td><td>archive-without-members</td><td>An archive without members: the two zero blocks that end it, and nothing else.</td><td class=n>not measured</td></tr>
-<tr><td><a href="F79.html"><code>F79</code></a></td><td>number-uid-gid-empty</td><td>Uid and gid fields without digits, as the writers of most crates leave them.</td><td class=n>6.53%</td></tr>
-<tr><td><a href="F80.html"><code>F80</code></a></td><td>number-uid-base256</td><td>A uid and a gid in base-256, as GNU&#x27;s format writes those over 2097151.</td><td class=n>0.28%</td></tr>
+<tr><td><a href="F65.html"><code>F65</code></a></td><td>archive-without-members</td><td>An archive without members: only the two zero blocks that end it.</td><td class=n>not measured</td></tr>
+<tr><td><a href="F79.html"><code>F79</code></a></td><td>number-uid-gid-empty</td><td>Uid and gid fields without digits, as in most crates.</td><td class=n>6.53%</td></tr>
+<tr><td><a href="F80.html"><code>F80</code></a></td><td>number-uid-base256</td><td>A uid and a gid in base-256, as GNU tar writes those over 2097151.</td><td class=n>0.28%</td></tr>
 <tr><td><a href="F81.html"><code>F81</code></a></td><td>pax-unknown-key</td><td>A pax header with a key that readers do not know.</td><td class=n>not measured</td></tr>
 <tr><td><a href="F82.html"><code>F82</code></a></td><td>pax-times</td><td>A pax header with the times of a file, with fractions of a second, as GNU tar writes it.</td><td class=n>not measured</td></tr>
 <tr><td><a href="K07.html"><code>K07</code></a></td><td>dir-name-empty-with-prefix</td><td>A directory with an empty name field and a prefix.</td><td class=n>7.65%</td></tr>
@@ -92,7 +92,7 @@ published there.</p>
 <tr><td><a href="N57.html"><code>N57</code></a></td><td>ustar-prefix-fills-field</td><td>A prefix of exactly 155 bytes, which fills the prefix field without a NUL.</td><td class=n>7.65%</td></tr>
 <tr><td><a href="N58.html"><code>N58</code></a></td><td>ustar-prefix-under-pax</td><td>A name split between the prefix and name fields, under a pax header without a <code>path</code>.</td><td class=n>7.65%</td></tr>
 <tr><td><a href="N59.html"><code>N59</code></a></td><td>symlink-target-dotdot-after-symlink</td><td>A symlink whose target has <code>..</code> after a component that is a symlink.</td><td class=n>not measured</td></tr>
-<tr><td><a href="N60.html"><code>N60</code></a></td><td>pax-global-name-directory</td><td>A global pax header whose own name has a directory.</td><td class=n>not measured</td></tr>
+<tr><td><a href="N60.html"><code>N60</code></a></td><td>pax-global-name-directory</td><td>A global pax header that is itself named in a directory.</td><td class=n>not measured</td></tr>
 <tr><td><a href="S01.html"><code>S01</code></a></td><td>tree-dir-after-contents</td><td>A directory after its contents.</td><td class=n>1.22%</td></tr>
 <tr><td><a href="S02.html"><code>S02</code></a></td><td>tree-duplicate-dir</td><td>The same directory twice, as <code>tar cf x.tar d d/sub</code> writes.</td><td class=n>0.19%</td></tr>
 <tr><td><a href="S25.html"><code>S25</code></a></td><td>tree-dir-not-writable</td><td>A directory without write permission, before the file in it.</td><td class=n>not measured</td></tr></table></div>
@@ -114,7 +114,7 @@ published there.</p>
 <tr><td><a href="N07.html"><code>N07</code></a></td><td>symlink-absolute</td><td>A symlink to an absolute path, created as it is.</td><td class=n>0.11%</td></tr>
 <tr><td><a href="N15.html"><code>N15</code></a></td><td>name-control-character</td><td>A control character in a name, here a newline, created as it is.</td><td class=n>0.01%</td></tr>
 <tr><td><a href="N35.html"><code>N35</code></a></td><td>symlink-escapes</td><td>A relative symlink whose target leads out of the destination.</td><td class=n>&lt;0.01%</td></tr>
-<tr><td><a href="N49.html"><code>N49</code></a></td><td>name-double-slash</td><td>A name with two slashes in a row, <code>a//b</code>.</td><td class=n>&lt;0.01%</td></tr>
+<tr><td><a href="N49.html"><code>N49</code></a></td><td>name-double-slash</td><td>A name with two consecutive slashes, <code>a//b</code>.</td><td class=n>&lt;0.01%</td></tr>
 <tr><td><a href="N50.html"><code>N50</code></a></td><td>name-dot-component</td><td>A name with a <code>.</code> component, <code>c/./d</code>.</td><td class=n>0.01%</td></tr>
 <tr><td><a href="S16.html"><code>S16</code></a></td><td>hardlink-target-spelled-differently</td><td>A hardlink to <code>./a</code>, where the member is named <code>a</code>.</td><td class=n>none</td></tr></table></div>
 <h3 id="to-reject-framing">To reject: framing<a class="anchor" href="#to-reject-framing" aria-label="Link to this section">¶</a></h3>
@@ -214,7 +214,7 @@ published there.</p>
 <tr><td><a href="N41.html"><code>N41</code></a></td><td>pax-gnu-sparse-name</td><td>A pax <code>GNU.sparse.name</code> on a file that is not sparse, after a <code>path</code>.</td><td class=n>none</td></tr>
 <tr><td><a href="N51.html"><code>N51</code></a></td><td>linkname-bytes-after-nul</td><td>Bytes after the NUL that ends the target of a symlink.</td><td class=n>none</td></tr>
 <tr><td><a href="N52.html"><code>N52</code></a></td><td>extended-name-dotdot</td><td>A pax header whose own name leads out of the destination.</td><td class=n>not measured</td></tr>
-<tr><td><a href="N53.html"><code>N53</code></a></td><td>name-dotdot-inside</td><td>A name with <code>..</code> that stays inside the destination, <code>a/../b</code>.</td><td class=n>&lt;0.01%</td></tr></table></div>
+<tr><td><a href="N53.html"><code>N53</code></a></td><td>name-dotdot-inside</td><td>A name with <code>..</code> that does not lead out of the destination, <code>a/../b</code>.</td><td class=n>&lt;0.01%</td></tr></table></div>
 <h3 id="to-reject-kinds">To reject: kinds<a class="anchor" href="#to-reject-kinds" aria-label="Link to this section">¶</a></h3>
 <div class="wide"><table class="cases"><colgroup><col style="width: 14%"><col style="width: 24%"><col style="width: 48%"><col style="width: 14%"></colgroup><tr><th>identifier</th><th>name</th><th>what it is</th><th class=n>prevalence</th></tr>
 <tr><td><a href="F60.html"><code>F60</code></a></td><td>trailing-slash-file-with-size</td><td>A regular file <code>a/</code> with a size: a directory without data, or a file with data?</td><td class=n>&lt;0.01%</td></tr>
@@ -224,9 +224,9 @@ published there.</p>
 <tr><td><a href="K04.html"><code>K04</code></a></td><td>name-empty-with-prefix</td><td>A regular file with an empty name and a prefix: <code>dir/</code>, or no name?</td><td class=n>&lt;0.01%</td></tr>
 <tr><td><a href="K05.html"><code>K05</code></a></td><td>hardlink-trailing-slash</td><td>A hardlink whose name ends in a slash: a link, or a directory?</td><td class=n>none</td></tr>
 <tr><td><a href="K06.html"><code>K06</code></a></td><td>symlink-named-dot</td><td>A symlink <code>.</code>: dropped, renamed, or an error?</td><td class=n>≤0.08%<a href="#unmeasured">*</a></td></tr>
-<tr><td><a href="K08.html"><code>K08</code></a></td><td>type-fifo</td><td>A FIFO: created, an empty file, or left out?</td><td class=n>&lt;0.01%<a href="#unmeasured">*</a></td></tr>
+<tr><td><a href="K08.html"><code>K08</code></a></td><td>type-fifo</td><td>A FIFO: created, an empty file, or skipped?</td><td class=n>&lt;0.01%<a href="#unmeasured">*</a></td></tr>
 <tr><td><a href="K11.html"><code>K11</code></a></td><td>pax-mode</td><td>A pax <code>mode</code> record on a file.</td><td class=n>≤0.01%<a href="#unmeasured">*</a></td></tr>
-<tr><td><a href="K12.html"><code>K12</code></a></td><td>pax-acl</td><td>An ACL in a pax header that gives the owner of a file the execute permission.</td><td class=n>≤0.05%<a href="#unmeasured">*</a></td></tr>
+<tr><td><a href="K12.html"><code>K12</code></a></td><td>pax-acl</td><td>An ACL in a pax header with the execute permission for the owner of a file.</td><td class=n>≤0.05%<a href="#unmeasured">*</a></td></tr>
 <tr><td><a href="K13.html"><code>K13</code></a></td><td>number-mode-base256</td><td>A mode in base-256.</td><td class=n>none</td></tr>
 <tr><td><a href="K14.html"><code>K14</code></a></td><td>file-named-dot</td><td>A regular file <code>.</code>: dropped, renamed, or an error?</td><td class=n>≤0.08%<a href="#unmeasured">*</a></td></tr>
 <tr><td><a href="K15.html"><code>K15</code></a></td><td>file-trailing-dot</td><td>A regular file whose name ends in <code>/.</code>: a file <code>a</code>, or a directory?</td><td class=n>≤0.01%<a href="#unmeasured">*</a></td></tr>
@@ -257,7 +257,7 @@ published there.</p>
 <tr><td><a href="S26.html"><code>S26</code></a></td><td>hardlink-to-dir</td><td>A hardlink to a directory.</td><td class=n>none</td></tr>
 <tr><td><a href="S27.html"><code>S27</code></a></td><td>hardlink-through-symlink</td><td>A hardlink whose target is reached through a symlink.</td><td class=n>none</td></tr>
 <tr><td><a href="S28.html"><code>S28</code></a></td><td>hardlink-target-trailing-slash</td><td>A hardlink to <code>a/</code>, where <code>a</code> is a file.</td><td class=n>&lt;0.01%<a href="#unmeasured">*</a></td></tr>
-<tr><td><a href="S29.html"><code>S29</code></a></td><td>hardlink-mode-differs</td><td>A hardlink whose mode is executable, to a file whose mode is not.</td><td class=n>≤0.28%<a href="#unmeasured">*</a></td></tr></table></div>
+<tr><td><a href="S29.html"><code>S29</code></a></td><td>hardlink-mode-differs</td><td>A hardlink with the mode 755, to a file with the mode 644.</td><td class=n>≤0.28%<a href="#unmeasured">*</a></td></tr></table></div>
 <p class="note" id="unmeasured">* An upper bound. The exact share is likely lower, and awaits a new scan of all tarballs.</p>
 <h2 id="tarballs">Data to support the default policy<a class="anchor" href="#tarballs" aria-label="Link to this section">¶</a></h2>
 <p>The default policy accepts 99.80% of the 82,586 distinct release tarballs of Spack, nixpkgs, Guix and live-bootstrap, and samples of PyPI, crates.io and RubyGems. See <a href="seen-in.html#rejected">the list of the 168 it rejects</a>, and why.</p>

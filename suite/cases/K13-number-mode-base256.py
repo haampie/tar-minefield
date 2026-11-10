@@ -3,11 +3,11 @@
 The archive has a file `a`, whose mode field is 755 in base-256: the byte `0x80`, followed by the
 number in binary.
 
-GNU's format writes a number in base-256 when it does not fit in the octal digits of its field, as a
-large size or uid does not. A [mode][mode] has 12 bits, which always fit, so a writer does not have
-a reason to write it in base-256, and not every reader of base-256 sizes reads a mode in it. This
-case is ambiguous in practice because a reader can take the field in one of three ways. A reader
-that reads base-256 in every numeric field extracts `a` as an executable file. One that reads
+In GNU's format, a number is written in base-256 when it does not fit in the octal digits of its
+field, as a large size or uid does not. A [mode][mode] has 12 bits, which always fit, so writers do
+not have a reason to write it in base-256, and not every reader of base-256 sizes reads a mode in
+it. This case is ambiguous in practice because a reader can take the field in one of three ways. A
+reader that reads base-256 in every numeric field extracts `a` as an executable file. One that reads
 base-256 in some fields only does not find octal digits in this one, and extracts `a` without the
 execute permission. Other readers report an error.
 

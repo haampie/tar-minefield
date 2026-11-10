@@ -1,7 +1,7 @@
 {
  "id": "S29",
  "verdict": "reject",
- "description": "A hardlink whose mode is executable, to a file whose mode is not.",
+ "description": "A hardlink with the mode 755, to a file with the mode 644.",
  "features": [
   "hardlink.mode-differs"
  ]

@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has the directories <code>d/</code> and <code>d/sub/</code>, a file <code>d/x</code>, a symlink <code>s</code> to <code>d/sub</code>, then a symlink <code>t</code> to <code>s/../x</code>.</p>
-<p>The target of a symlink is a <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/symlink.html#:~:text=shall%20be%20treated%20only%20as%20a%20string%20and%20shall%20not%20be%20validated%20as%20a%20pathname">string</a>, which is not resolved when the link is created, so <code>t</code> is created with the target <code>s/../x</code>. When <code>t</code> is followed, <code>s</code> is resolved first, and <code>..</code> is then the parent of <code>d/sub</code>: the link leads to <code>d/x</code>. A reader that normalizes the target as text removes <code>s/..</code>, and creates a link to <code>x</code>, which is not in the archive. Either target stays inside the destination.</p>
+<p>The target of a symlink is a <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/symlink.html#:~:text=shall%20be%20treated%20only%20as%20a%20string%20and%20shall%20not%20be%20validated%20as%20a%20pathname">string</a>, which is not resolved when the link is created, so <code>t</code> is created with the target <code>s/../x</code>. When <code>t</code> is followed, <code>s</code> is resolved first, and <code>..</code> is then the parent of <code>d/sub</code>: the link leads to <code>d/x</code>. A reader that normalizes the target as it normalizes names drops <code>s/..</code>, and extracts a link to <code>x</code>, which is not in the archive. Both targets are inside the destination.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>d/</code></td><td>directory</td><td></td></tr>
@@ -64,8 +64,8 @@ symlink `t` to `s/../x`.
 The target of a symlink is a string, which is not resolved when the link is
 created, so `t` is created with the target `s/../x`. When `t` is followed, `s` is resolved first,
 and `..` is then the parent of `d/sub`: the link leads to `d/x`. A reader that normalizes the target
-as text removes `s/..`, and creates a link to `x`, which is not in the archive. Either target stays
-inside the destination.
+as it normalizes names drops `s/..`, and extracts a link to `x`, which is not in the archive. Both
+targets are inside the destination.
 
 Seen in: not measured, as the scans do not record the targets of symlinks.
 See also: N35, a symlink whose target leads out of the destination.

@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>F65 archive-without-members · Tar file extraction test suite</title>
-<meta name="description" content="An archive without members: the two zero blocks that end it, and nothing else.">
+<meta name="description" content="An archive without members: only the two zero blocks that end it.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F65 archive-without-members · Tar file extraction test suite">
-<meta property="og:description" content="An archive without members: the two zero blocks that end it, and nothing else.">
+<meta property="og:description" content="An archive without members: only the two zero blocks that end it.">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F65.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F65.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/35d11a6a4aac1ded.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/c7b487b664287ef5.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of F65 archive-without-members">
@@ -24,7 +24,7 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="F59.html" rel="prev" title="F59 pax-nul-in-xattr">‹ F59 pax-nul-in-xattr</a><a href="index.html">tar-minefield</a><a class="next" href="F79.html" rel="next" title="F79 number-uid-gid-empty">F79 number-uid-gid-empty ›</a></nav>
 <h1><code>F65</code> archive-without-members</h1>
-<p>An archive without members: the two zero blocks that end it, and nothing else.</p>
+<p>An archive without members: only the two zero blocks that end it.</p>
 <div class="verdict accept wide"><p><span class="badge">Accept</span><span class="badge-draft">(draft)</span> Every implementation must accept this archive, and extract the expected tree below.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>framing</dd>
@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has the end-of-archive marker, two zero blocks, without a member before it.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros">POSIX</a>, an archive ends with two zero blocks, and it is not said that a member comes before them. GNU tar writes such an archive when it is given an empty list of files, and RubyGems does for a gem without files. The tree is empty.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros">POSIX</a>, an archive ends with two zero blocks, and it is not said that a member comes before them. GNU tar writes such an archive for an empty list of files, and RubyGems for a gem without files. The tree is empty.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 </table></div>
@@ -52,13 +52,13 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>F65-archive-without-members: must accept, and extract its tree
 
-An archive without members: the two zero blocks that end it, and nothing else.
+An archive without members: only the two zero blocks that end it.
 
 The archive has the end-of-archive marker, two zero blocks, without a member before it.
 
 In POSIX, an archive ends with two zero blocks, and it is not said that a member comes before
-them. GNU tar writes such an archive when it is given an empty list of files, and RubyGems does for
-a gem without files. The tree is empty.
+them. GNU tar writes such an archive for an empty list of files, and RubyGems for a gem without
+files. The tree is empty.
 
 Seen in: 38 gems that do not have files, such as lil 0.0.4 and slds 0.1.1.
 See also: F66, a file of 0 bytes, which is rejected.

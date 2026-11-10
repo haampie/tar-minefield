@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a/f</code>, then a file <code>a</code>. It does not have a member for the directory <code>a</code>.</p>
-<p>To extract <code>a/f</code>, a reader <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=if%20intermediate%20directories%20are%20necessary%20to%20extract%20an%20archive%20member">creates the directory</a> <code>a</code>. The second member is a file at the path of that directory. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">POSIX</a>, a member is extracted as a file of its own type, and existing files <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">can be overwritten</a>, but it is not specified whether a directory and its contents are removed for it. This case is ambiguous because a reader can take the second member in one of three ways. A reader that replaces what is at the path removes the directory with <code>a/f</code>, and extracts the file <code>a</code> alone. One that keeps what is there leaves <code>a/f</code>, and skips the file <code>a</code> without an error. Other readers report an error.</p>
+<p>A reader <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=if%20intermediate%20directories%20are%20necessary%20to%20extract%20an%20archive%20member">creates the directory</a> <code>a</code> for <code>a/f</code>. The second member is a file at the path of that directory. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">POSIX</a>, a member is extracted as a file of its own type, and existing files <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">can be overwritten</a>, but it is not specified whether overwriting includes replacing a directory and its contents with a file. This case is ambiguous because a reader can take the second member in one of three ways. A reader that replaces the directory with the file extracts the file <code>a</code> alone, without <code>a/f</code>. One that keeps the directory extracts <code>a/f</code>, and skips the file <code>a</code> without an error. Other readers report an error.</p>
 <p><strong>Decision point:</strong> whether a file replaces a directory that has contents.</p>
 <p><strong>Seen in:</strong> not measured, as earlier versions of the scanner compared the names of members only, and the directory is not a member.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -54,13 +54,13 @@ A file in a directory that is not a member, then a file with the name of that di
 
 The archive has a file `a/f`, then a file `a`. It does not have a member for the directory `a`.
 
-To extract `a/f`, a reader creates the directory `a`. The second member is a file at
-the path of that directory. In POSIX, a member is extracted as a file of its own type,
-and existing files can be overwritten, but it is not specified whether a directory
-and its contents are removed for it. This case is ambiguous because a reader can take the second
-member in one of three ways. A reader that replaces what is at the path removes the directory with
-`a/f`, and extracts the file `a` alone. One that keeps what is there leaves `a/f`, and skips the
-file `a` without an error. Other readers report an error.
+A reader creates the directory `a` for `a/f`. The second member is a file at the
+path of that directory. In POSIX, a member is extracted as a file of its own type, and
+existing files can be overwritten, but it is not specified whether overwriting
+includes replacing a directory and its contents with a file. This case is ambiguous because a reader
+can take the second member in one of three ways. A reader that replaces the directory with the file
+extracts the file `a` alone, without `a/f`. One that keeps the directory extracts `a/f`, and skips
+the file `a` without an error. Other readers report an error.
 
 Decision point: whether a file replaces a directory that has contents.
 Seen in: not measured, as earlier versions of the scanner compared the names of members only, and

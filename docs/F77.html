@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has the files <code>a</code>, <code>b</code> and <code>c</code>. The checksum field of <code>b</code> is a NUL, followed by six octal digits, followed by a NUL. The digits are the correct sum.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal numbers filled with leading zeros, and each is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20numeric%20field%20is%20terminated%20by%20one%20or%20more%20%3Cspace%3E%20or%20NUL%20characters">terminated</a> by a space or a NUL. This case is ambiguous in practice because a reader can take the header of <code>b</code> in one of four ways. A reader that skips the NUL in front finds the correct sum, and extracts <code>a</code>, <code>b</code> and <code>c</code>. One that ends the number at its first NUL does not find the sum; if it takes a header with a wrong checksum for the end of the archive, it extracts <code>a</code>, without an error. One that skips blocks until it finds a header with a correct checksum extracts <code>a</code> and <code>c</code>. Other readers report an error.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal numbers filled with leading zeros, and each is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20numeric%20field%20is%20terminated%20by%20one%20or%20more%20%3Cspace%3E%20or%20NUL%20characters">terminated</a> by a space or a NUL. This case is ambiguous in practice because a reader can take the header of <code>b</code> in one of four ways. A reader that skips the NUL in front reads a correct checksum, and extracts <code>a</code>, <code>b</code> and <code>c</code>. One that ends the number at its first NUL reads a checksum without digits, which is wrong; if it takes a header with a wrong checksum for the end of the archive, it extracts <code>a</code>, without an error. One that skips blocks until it finds a header with a correct checksum extracts <code>a</code> and <code>c</code>. Other readers report an error.</p>
 <p><strong>Decision point:</strong> how a checksum with a NUL before its digits is read.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -57,11 +57,11 @@ octal digits, followed by a NUL. The digits are the correct sum.
 
 In POSIX, numeric fields are octal numbers filled with leading zeros, and each is
 terminated by a space or a NUL. This case is ambiguous in practice because a reader can
-take the header of `b` in one of four ways. A reader that skips the NUL in front finds the correct
-sum, and extracts `a`, `b` and `c`. One that ends the number at its first NUL does not find the sum;
-if it takes a header with a wrong checksum for the end of the archive, it extracts `a`, without an
-error. One that skips blocks until it finds a header with a correct checksum extracts `a` and `c`.
-Other readers report an error.
+take the header of `b` in one of four ways. A reader that skips the NUL in front reads a correct
+checksum, and extracts `a`, `b` and `c`. One that ends the number at its first NUL reads a checksum
+without digits, which is wrong; if it takes a header with a wrong checksum for the end of the
+archive, it extracts `a`, without an error. One that skips blocks until it finds a header with a
+correct checksum extracts `a` and `c`. Other readers report an error.
 
 Decision point: how a checksum with a NUL before its digits is read.
 Seen in: none of the scanned tarballs.

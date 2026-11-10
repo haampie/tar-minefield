@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has the files <code>a</code>, <code>b</code> and <code>c</code>. The uid field of <code>b</code> is <code>0000008</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal numbers filled with leading zeros, and 8 is not an octal digit. The <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20uid%20and%20gid%20fields%20are%20the%20user%20and%20group%20ID%20of%20the%20owner%20and%20group%20of%20the%20file">owner</a> of a file is not part of the tree, but its field is part of the header. This case is ambiguous in practice because a reader can take the header of <code>b</code> in one of three ways. A reader that does not read the uid, or that reads the digits it can, extracts <code>a</code>, <code>b</code> and <code>c</code>. One that takes a header with a field that is not a number for the end of the archive extracts <code>a</code>, without an error. Other readers report an error.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal numbers filled with leading zeros, and 8 is not an octal digit. The <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20uid%20and%20gid%20fields%20are%20the%20user%20and%20group%20ID%20of%20the%20owner%20and%20group%20of%20the%20file">owner</a> of a file is not part of the tree, but its field is part of the header. This case is ambiguous in practice because a reader can take the header of <code>b</code> in one of three ways. A reader that does not read the uid, or that reads it up to the 8, extracts <code>a</code>, <code>b</code> and <code>c</code>. One that takes a header with a field that is not a number for the end of the archive extracts <code>a</code>, without an error. Other readers report an error.</p>
 <p><strong>Decision point:</strong> whether a header with a uid that is not a number is a header.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -57,9 +57,9 @@ The archive has the files `a`, `b` and `c`. The uid field of `b` is `0000008`.
 In POSIX, numeric fields are octal numbers filled with leading zeros, and 8 is not an
 octal digit. The owner of a file is not part of the tree, but its field is part of the
 header. This case is ambiguous in practice because a reader can take the header of `b` in one of
-three ways. A reader that does not read the uid, or that reads the digits it can, extracts `a`, `b`
-and `c`. One that takes a header with a field that is not a number for the end of the archive
-extracts `a`, without an error. Other readers report an error.
+three ways. A reader that does not read the uid, or that reads it up to the 8, extracts `a`, `b` and
+`c`. One that takes a header with a field that is not a number for the end of the archive extracts
+`a`, without an error. Other readers report an error.
 
 Decision point: whether a header with a uid that is not a number is a header.
 Seen in: none of the scanned tarballs.

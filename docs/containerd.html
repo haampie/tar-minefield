@@ -101,7 +101,7 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="N41.html"><code>N41</code></a> pax-gnu-sparse-name</td><td>A pax <code>GNU.sparse.name</code> on a file that is not sparse, after a <code>path</code>.</td><td>extracts <code>path-name</code> (12 B, a578eb49)</td></tr>
 <tr><td><a href="N51.html"><code>N51</code></a> linkname-bytes-after-nul</td><td>Bytes after the NUL that ends the target of a symlink.</td><td>extracts <code>l</code> → <code>safe</code></td></tr>
 <tr><td><a href="N52.html"><code>N52</code></a> extended-name-dotdot</td><td>A pax header whose own name leads out of the destination.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="N53.html"><code>N53</code></a> name-dotdot-inside</td><td>A name with <code>..</code> that stays inside the destination, <code>a/../b</code>.</td><td>extracts <code>a/</code>, <code>b</code> (2 B, 02638299)</td></tr>
+<tr><td><a href="N53.html"><code>N53</code></a> name-dotdot-inside</td><td>A name with <code>..</code> that does not lead out of the destination, <code>a/../b</code>.</td><td>extracts <code>a/</code>, <code>b</code> (2 B, 02638299)</td></tr>
 <tr><td><a href="F60.html"><code>F60</code></a> trailing-slash-file-with-size</td><td>A regular file <code>a/</code> with a size: a directory without data, or a file with data?</td><td>extracts <code>a</code> (512 B, 917dba8e), <code>b</code> (2 B, 02638299)</td></tr>
 <tr><td><a href="K01.html"><code>K01</code></a> kind-trailing-slash-file</td><td>A regular file whose name ends in a slash: a file, or a directory?</td><td>extracts <code>a</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="K02.html"><code>K02</code></a> linkname-on-file</td><td>A regular file with a link target.</td><td>extracts <code>a</code> (19 B, bc345849)</td></tr>
@@ -109,9 +109,9 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="K04.html"><code>K04</code></a> name-empty-with-prefix</td><td>A regular file with an empty name and a prefix: <code>dir/</code>, or no name?</td><td>extracts <code>dir</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="K05.html"><code>K05</code></a> hardlink-trailing-slash</td><td>A hardlink whose name ends in a slash: a link, or a directory?</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>b</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="K06.html"><code>K06</code></a> symlink-named-dot</td><td>A symlink <code>.</code>: dropped, renamed, or an error?</td><td>extracts <code>d/</code>, <code>f</code> (2 B, 092fcfbb)</td></tr>
-<tr><td><a href="K08.html"><code>K08</code></a> type-fifo</td><td>A FIFO: created, an empty file, or left out?</td><td>extracts <code>b</code> (2 B, 02638299), <code>p</code> (other)</td></tr>
+<tr><td><a href="K08.html"><code>K08</code></a> type-fifo</td><td>A FIFO: created, an empty file, or skipped?</td><td>extracts <code>b</code> (2 B, 02638299), <code>p</code> (other)</td></tr>
 <tr><td><a href="K11.html"><code>K11</code></a> pax-mode</td><td>A pax <code>mode</code> record on a file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="K12.html"><code>K12</code></a> pax-acl</td><td>An ACL in a pax header that gives the owner of a file the execute permission.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
+<tr><td><a href="K12.html"><code>K12</code></a> pax-acl</td><td>An ACL in a pax header with the execute permission for the owner of a file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="K13.html"><code>K13</code></a> number-mode-base256</td><td>A mode in base-256.</td><td>extracts <code>a</code> (2 B, 87428fc5, executable)</td></tr>
 <tr><td><a href="K14.html"><code>K14</code></a> file-named-dot</td><td>A regular file <code>.</code>: dropped, renamed, or an error?</td><td>extracts <code>b</code> (2 B, 02638299)</td></tr>
 <tr><td><a href="K15.html"><code>K15</code></a> file-trailing-dot</td><td>A regular file whose name ends in <code>/.</code>: a file <code>a</code>, or a directory?</td><td>extracts <code>a</code> (27 B, a75c49d7)</td></tr>
@@ -134,10 +134,10 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="S24.html"><code>S24</code></a> tree-duplicate-symlink</td><td>The same symlink twice, with different targets: the first, or the last?</td><td>extracts <code>a</code> → <code>second</code>, <code>first</code> (6 B, b640e840), <code>second</code> (7 B, 480c2336)</td></tr>
 <tr><td><a href="S27.html"><code>S27</code></a> hardlink-through-symlink</td><td>A hardlink whose target is reached through a symlink.</td><td>extracts <code>d/</code>, <code>d/f</code> (2 B, 092fcfbb), <code>h</code> (2 B, 092fcfbb), <code>s</code> → <code>d</code></td></tr>
 <tr><td><a href="S28.html"><code>S28</code></a> hardlink-target-trailing-slash</td><td>A hardlink to <code>a/</code>, where <code>a</code> is a file.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>h</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="S29.html"><code>S29</code></a> hardlink-mode-differs</td><td>A hardlink whose mode is executable, to a file whose mode is not.</td><td>extracts <code>a</code> (2 B, 87428fc5, executable), <code>h</code> (2 B, 87428fc5, executable)</td></tr></table></div>
+<tr><td><a href="S29.html"><code>S29</code></a> hardlink-mode-differs</td><td>A hardlink with the mode 755, to a file with the mode 644.</td><td>extracts <code>a</code> (2 B, 87428fc5, executable), <code>h</code> (2 B, 87428fc5, executable)</td></tr></table></div>
 <h2 id="rejects"><span class="mark bad" title="rejects a case to accept, or extracts another tree than the expected one, or crashes on it" role="img" aria-label="rejects a case to accept, or extracts another tree than the expected one, or crashes on it">✗</span>Rejects cases to accept, or extracts another tree (2)<a class="anchor" href="#rejects" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
-<tr><td><a href="N60.html"><code>N60</code></a> pax-global-name-directory</td><td>A global pax header whose own name has a directory.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>g/</code></td></tr>
+<tr><td><a href="N60.html"><code>N60</code></a> pax-global-name-directory</td><td>A global pax header that is itself named in a directory.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>g/</code></td></tr>
 <tr><td><a href="S25.html"><code>S25</code></a> tree-dir-not-writable</td><td>A directory without write permission, before the file in it.</td><td>error: open DEST/d/f: permission denied</td></tr></table></div>
 
 <hr class="wide">

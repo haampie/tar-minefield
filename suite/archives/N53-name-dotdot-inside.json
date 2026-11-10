@@ -1,7 +1,7 @@
 {
  "id": "N53",
  "verdict": "reject",
- "description": "A name with `..` that stays inside the destination, `a/../b`.",
+ "description": "A name with `..` that does not lead out of the destination, `a/../b`.",
  "features": [
   "name.dotdot"
  ]

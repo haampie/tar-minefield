@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>S29 hardlink-mode-differs · Tar file extraction test suite</title>
-<meta name="description" content="A hardlink whose mode is executable, to a file whose mode is not.">
+<meta name="description" content="A hardlink with the mode 755, to a file with the mode 644.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="S29 hardlink-mode-differs · Tar file extraction test suite">
-<meta property="og:description" content="A hardlink whose mode is executable, to a file whose mode is not.">
+<meta property="og:description" content="A hardlink with the mode 755, to a file with the mode 644.">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/S29.html">
 <meta property="og:url" content="https://stoppels.ch/tar/S29.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/fc4f858751491b0a.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/3e0eab88b6cd6abd.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of S29 hardlink-mode-differs">
@@ -24,7 +24,7 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="S28.html" rel="prev" title="S28 hardlink-target-trailing-slash">‹ S28 hardlink-target-trailing-slash</a><a href="index.html">tar-minefield</a><a class="next" href="gnu-tar.html" rel="next" title="GNU tar">GNU tar ›</a></nav>
 <h1><code>S29</code> hardlink-mode-differs</h1>
-<p>A hardlink whose mode is executable, to a file whose mode is not.</p>
+<p>A hardlink with the mode 755, to a file with the mode 644.</p>
 <div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>order and state</dd>
@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code> with the mode 644, then a hardlink <code>h</code> to <code>a</code> whose header has the mode 755.</p>
-<p>A <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">hardlink</a> is a second name for a file archived before it, and a file has one mode, whatever its names. A writer stores the mode of the file in both headers, so that they agree, and here they do not. This case is ambiguous because a reader can take the mode of the link in one of three ways. A reader that does not apply it leaves the file as the first header made it, and neither name is executable. One that applies the mode of every header makes the file executable, under both names. One that copies the file, where others link, makes <code>h</code> executable and leaves <code>a</code> as it was.</p>
+<p>A <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">hardlink</a> is a second name for a file archived before it, and a file has one mode, whatever its names. Writers write the mode of the file in both headers, so that the two are the same; here they differ. This case is ambiguous because a reader can take the mode of the link in one of three ways. A reader that does not apply it extracts a file that is not executable, under both names. One that applies the mode of every header extracts an executable file, under both names. One that copies the file, where others link, extracts <code>h</code> as an executable file, and <code>a</code> as one that is not.</p>
 <p><strong>Decision point:</strong> whether the mode in the header of a hardlink applies to the file.</p>
 <p><strong>Seen in:</strong> not measured, as the scans do not record modes: 233 of the scanned tarballs have hardlinks.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -50,17 +50,18 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>S29-hardlink-mode-differs: must reject
 
-A hardlink whose mode is executable, to a file whose mode is not.
+A hardlink with the mode 755, to a file with the mode 644.
 
 The archive has a file `a` with the mode 644, then a hardlink `h` to `a` whose header has the mode
 755.
 
 A hardlink is a second name for a file archived before it, and a file has one mode,
-whatever its names. A writer stores the mode of the file in both headers, so that they agree, and
-here they do not. This case is ambiguous because a reader can take the mode of the link in one of
-three ways. A reader that does not apply it leaves the file as the first header made it, and neither
-name is executable. One that applies the mode of every header makes the file executable, under both
-names. One that copies the file, where others link, makes `h` executable and leaves `a` as it was.
+whatever its names. Writers write the mode of the file in both headers, so that the two are the
+same; here they differ. This case is ambiguous because a reader can take the mode of the link in one
+of three ways. A reader that does not apply it extracts a file that is not executable, under both
+names. One that applies the mode of every header extracts an executable file, under both names. One
+that copies the file, where others link, extracts `h` as an executable file, and `a` as one that is
+not.
 
 Decision point: whether the mode in the header of a hardlink applies to the file.
 Seen in: not measured, as the scans do not record modes: 233 of the scanned tarballs have hardlinks.

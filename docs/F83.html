@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a FIFO <code>p</code>, of typeflag <code>6</code>, whose size field is 512, then an empty file <code>smuggled</code>, then a file <code>b</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20meaning%20of%20the%20size%20field%20is%20unspecified%20by%20this%20volume%20of%20POSIX.1%2D2024%2C%20and%20no%20data%20logical%20records%20shall%20be%20stored%20on%20the%20medium">POSIX</a>, an archive does not store data for a FIFO or a device, and the size of a FIFO is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=for%20type%206%2C%20the%20size%20field%20shall%20be%20ignored%20when%20reading">ignored when reading</a>, so the next block is the header of <code>smuggled</code>. For a device, a reader does not have such a rule: the meaning of its size is unspecified. This case is ambiguous in practice because a reader that ignores the size extracts <code>smuggled</code> and <code>b</code>, and one that skips 512 bytes of data, or extracts them as the contents of a file <code>p</code>, extracts <code>b</code> without <code>smuggled</code>. What they make of the FIFO itself differs as well.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20meaning%20of%20the%20size%20field%20is%20unspecified%20by%20this%20volume%20of%20POSIX.1%2D2024%2C%20and%20no%20data%20logical%20records%20shall%20be%20stored%20on%20the%20medium">POSIX</a>, an archive does not store data for a FIFO or a device, and the size of a FIFO is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=for%20type%206%2C%20the%20size%20field%20shall%20be%20ignored%20when%20reading">ignored</a> by a reader, so the next block is the header of <code>smuggled</code>. For a device, it is not specified whether a reader ignores the size. This case is ambiguous in practice because a reader that ignores the size extracts <code>smuggled</code> and <code>b</code>, and one that skips 512 bytes of data, or extracts them as the contents of a file <code>p</code>, extracts <code>b</code> without <code>smuggled</code>.</p>
 <p><strong>Decision point:</strong> whether the size in the header of a FIFO applies.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -56,11 +56,10 @@ The archive has a FIFO `p`, of typeflag `6`, whose size field is 512, then an em
 then a file `b`.
 
 In POSIX, an archive does not store data for a FIFO or a device, and the size of
-a FIFO is ignored when reading, so the next block is the header of `smuggled`. For a
-device, a reader does not have such a rule: the meaning of its size is unspecified. This case is
-ambiguous in practice because a reader that ignores the size extracts `smuggled` and `b`, and one
-that skips 512 bytes of data, or extracts them as the contents of a file `p`, extracts `b` without
-`smuggled`. What they make of the FIFO itself differs as well.
+a FIFO is ignored by a reader, so the next block is the header of `smuggled`. For a
+device, it is not specified whether a reader ignores the size. This case is ambiguous in practice
+because a reader that ignores the size extracts `smuggled` and `b`, and one that skips 512 bytes of
+data, or extracts them as the contents of a file `p`, extracts `b` without `smuggled`.
 
 Decision point: whether the size in the header of a FIFO applies.
 Seen in: none of the scanned tarballs.

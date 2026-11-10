@@ -122,7 +122,7 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="K05.html"><code>K05</code></a> hardlink-trailing-slash</td><td>A hardlink whose name ends in a slash: a link, or a directory?</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>b</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="K06.html"><code>K06</code></a> symlink-named-dot</td><td>A symlink <code>.</code>: dropped, renamed, or an error?</td><td>extracts <code>d/</code>, <code>f</code> (2 B, 092fcfbb)</td></tr>
 <tr><td><a href="K11.html"><code>K11</code></a> pax-mode</td><td>A pax <code>mode</code> record on a file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="K12.html"><code>K12</code></a> pax-acl</td><td>An ACL in a pax header that gives the owner of a file the execute permission.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
+<tr><td><a href="K12.html"><code>K12</code></a> pax-acl</td><td>An ACL in a pax header with the execute permission for the owner of a file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="K13.html"><code>K13</code></a> number-mode-base256</td><td>A mode in base-256.</td><td>extracts <code>a</code> (2 B, 87428fc5, executable)</td></tr>
 <tr><td><a href="K14.html"><code>K14</code></a> file-named-dot</td><td>A regular file <code>.</code>: dropped, renamed, or an error?</td><td>extracts <code>b</code> (2 B, 02638299)</td></tr>
 <tr><td><a href="K15.html"><code>K15</code></a> file-trailing-dot</td><td>A regular file whose name ends in <code>/.</code>: a file <code>a</code>, or a directory?</td><td>extracts <code>a</code> (27 B, a75c49d7)</td></tr>
@@ -139,12 +139,12 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="S23.html"><code>S23</code></a> tree-duplicate-file-symlink</td><td>A file, then a symlink of the same name.</td><td>extracts <code>a</code> → <code>t</code>, <code>t</code> (2 B, fe8edeeb)</td></tr>
 <tr><td><a href="S24.html"><code>S24</code></a> tree-duplicate-symlink</td><td>The same symlink twice, with different targets: the first, or the last?</td><td>extracts <code>a</code> → <code>second</code>, <code>first</code> (6 B, b640e840), <code>second</code> (7 B, 480c2336)</td></tr>
 <tr><td><a href="S28.html"><code>S28</code></a> hardlink-target-trailing-slash</td><td>A hardlink to <code>a/</code>, where <code>a</code> is a file.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>h</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="S29.html"><code>S29</code></a> hardlink-mode-differs</td><td>A hardlink whose mode is executable, to a file whose mode is not.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>h</code> (2 B, 87428fc5)</td></tr></table></div>
+<tr><td><a href="S29.html"><code>S29</code></a> hardlink-mode-differs</td><td>A hardlink with the mode 755, to a file with the mode 644.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>h</code> (2 B, 87428fc5)</td></tr></table></div>
 <h2 id="rejects"><span class="mark bad" title="rejects a case to accept, or extracts another tree than the expected one, or crashes on it" role="img" aria-label="rejects a case to accept, or extracts another tree than the expected one, or crashes on it">✗</span>Rejects cases to accept, or extracts another tree (4)<a class="anchor" href="#rejects" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
 <tr><td><a href="F28.html"><code>F28</code></a> pax-newline-in-comment</td><td>A newline in a pax <code>comment</code>, which split on lines leaves a <code>size</code> record.</td><td>extracts <code>a</code> (512 B, 917dba8e)</td></tr>
 <tr><td><a href="F57.html"><code>F57</code></a> pax-newline-in-comment-path</td><td>A newline in a pax <code>comment</code>, which split on lines leaves a <code>path</code> record.</td><td>extracts <code>smuggled</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="F65.html"><code>F65</code></a> archive-without-members</td><td>An archive without members: the two zero blocks that end it, and nothing else.</td><td>error: Error: TAR_BAD_ARCHIVE: Unrecognized archive format</td></tr>
+<tr><td><a href="F65.html"><code>F65</code></a> archive-without-members</td><td>An archive without members: only the two zero blocks that end it.</td><td>error: Error: TAR_BAD_ARCHIVE: Unrecognized archive format</td></tr>
 <tr><td><a href="N46.html"><code>N46</code></a> pax-linkpath-linkname-empty</td><td>A symlink with an empty linkname field and a pax <code>linkpath</code>.</td><td>error: Error: TAR_ENTRY_INVALID: linkpath required</td></tr></table></div>
 
 <hr class="wide">

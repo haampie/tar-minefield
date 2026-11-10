@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one file, <code>c/./d</code>.</p>
-<p>The special filename <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=The%20special%20filename%20dot%20shall%20refer%20to%20the%20directory%20specified%20by%20its%20predecessor">dot</a> refers to the directory that it is in, so in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a> the file is <code>c/d</code>. This case is ambiguous only to a reader that compares names as bytes, to which <code>c/./d</code> and <code>c/d</code> are two names for one path. The default policy tolerates it, and normalizes the name to <code>c/d</code>, so that a second member of that path is a duplicate.</p>
+<p>The special filename <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=The%20special%20filename%20dot%20shall%20refer%20to%20the%20directory%20specified%20by%20its%20predecessor">dot</a> refers to the directory that it is in, so in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a> the file is <code>c/d</code>. This case is ambiguous only to a reader that compares names as strings, to which <code>c/./d</code> and <code>c/d</code> are two names for one path. The default policy tolerates it. In the default policy, <code>c/./d</code> and <code>c/d</code> in one archive are a duplicate.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>c/</code></td><td>directory</td><td></td></tr>
@@ -59,13 +59,13 @@ A name with a `.` component, `c/./d`.
 The archive has one file, `c/./d`.
 
 The special filename dot refers to the directory that it is in, so in POSIX the
-file is `c/d`. This case is ambiguous only to a reader that compares names as bytes, to which
-`c/./d` and `c/d` are two names for one path. The default policy tolerates it, and normalizes the
-name to `c/d`, so that a second member of that path is a duplicate.
+file is `c/d`. This case is ambiguous only to a reader that compares names as strings, to which
+`c/./d` and `c/d` are two names for one path. The default policy tolerates it. In the default
+policy, `c/./d` and `c/d` in one archive are a duplicate.
 
 Decision point: whether a name is normalized before it is compared with others.
 Seen in: 10 of the scanned tarballs, such as besu 24.1.2 and xdaliclock 2.49.
-See also: N06, the name `./a`, and N49, a name with two slashes in a row.
+See also: N06, the name `./a`, and N49, a name with two consecutive slashes.
 
 0x000000  header: regular file
           name     [  0,100)  &quot;c/./d&quot; + 95 NUL
@@ -265,7 +265,7 @@ See also: N06, the name `./a`, and N49, a name with two slashes in a row.
 <p>See <a href="seen-in.html#N50">a sample of these 10 tarballs</a>, with the sha256 of each and an example from it.</p>
 <h2 id="see-also">See also<a class="anchor" href="#see-also" aria-label="Link to this section">¶</a></h2>
 <ul>
-<li><a href="N06.html"><code>N06</code></a>: the name <code>./a</code>, and <a href="N49.html"><code>N49</code></a>, a name with two slashes in a row.</li>
+<li><a href="N06.html"><code>N06</code></a>: the name <code>./a</code>, and <a href="N49.html"><code>N49</code></a>, a name with two consecutive slashes.</li>
 </ul>
 
 <hr class="wide">

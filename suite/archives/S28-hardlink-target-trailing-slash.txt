@@ -7,12 +7,12 @@ The archive has a file `a`, then a hardlink `h` whose target is `a/`.
 A pathname that ends in a slash resolves only to a directory, and `a` is a file,
 so as a path the target does not resolve, and a link that cannot be made is an error.
 This case is ambiguous because `h` is either a link to `a`, to a reader that normalizes the target
-as it normalizes names, or that looks up the member without the slash, or an error, to one that
-resolves the target as a path. A reader that leaves `h` out without an error does neither.
+as it normalizes names, or an error, to one that resolves the target as a path. Neither reading
+skips the link without an error, as some readers do.
 
 Decision point: whether the target of a hardlink is normalized.
-Seen in: not measured, as earlier versions of the scanner normalized the targets of hardlinks: at
-most 2 of the scanned tarballs.
+Seen in: not measured, as earlier versions of the scanner normalized the targets of hardlinks: 2 of
+the scanned tarballs may have such a target.
 See also: S16, a hardlink to `./a`, which is tolerated, and K05, a hardlink whose name ends in a
 slash.
 

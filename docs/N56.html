@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one file, whose pax header has the record <code>path=a=b</code>, and whose header has the name <code>header-name</code>.</p>
-<p>After its length, a pax record is a keyword, followed by <code>=</code>, followed by a value, followed by a newline, and a keyword <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=A%20keyword%20shall%20not%20include%20an%20%3Cequals%2Dsign%3E">does not include</a> an equals sign. So the first <code>=</code> of the record ends the keyword, the value is <code>a=b</code>, and the file has that name. A reader that splits the record at its last <code>=</code> reads a key that it does not know, and extracts <code>header-name</code>.</p>
+<p>After its length, a pax record is a keyword, followed by <code>=</code>, followed by a value, followed by a newline, and a keyword <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=A%20keyword%20shall%20not%20include%20an%20%3Cequals%2Dsign%3E">does not contain</a> an equals sign. So the first <code>=</code> of the record ends the keyword, the value is <code>a=b</code>, and the file has that name. A reader that splits the record at its last <code>=</code> reads a keyword that it does not know, and extracts <code>header-name</code>.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a=b</code></td><td>file</td><td>12 bytes, sha256 <code title="a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee">a578eb49</code></td></tr></table></div>
@@ -58,9 +58,9 @@ The archive has one file, whose pax header has the record `path=a=b`, and whose 
 `header-name`.
 
 After its length, a pax record is a keyword, followed by `=`, followed by a value, followed by a
-newline, and a keyword does not include an equals sign. So the first `=` of the
+newline, and a keyword does not contain an equals sign. So the first `=` of the
 record ends the keyword, the value is `a=b`, and the file has that name. A reader that splits the
-record at its last `=` reads a key that it does not know, and extracts `header-name`.
+record at its last `=` reads a keyword that it does not know, and extracts `header-name`.
 
 Seen in: not measured, as the scans do not record the names of members.
 

@@ -150,7 +150,7 @@ Kind:
 - A trailing slash on the name of a link.
 - A file or link named `.`, which is the root of the tree, and a file whose name ends in `/.`.
 - A link target in the linkname field of a member that is not a link, or in its pax `linkpath`.
-- FIFOs and devices, which the tree does not have: created, extracted as empty files, or left out.
+- FIFOs and devices, which the tree does not have: created, extracted as empty files, or skipped.
 - Whether a file is executable: a mode in base-256, and what can decide it besides the mode of
   the header, a pax `mode` and an ACL in a pax header.
 

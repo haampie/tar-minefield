@@ -1,7 +1,7 @@
 {
  "id": "F80",
  "verdict": "accept",
- "description": "A uid and a gid in base-256, as GNU's format writes those over 2097151.",
+ "description": "A uid and a gid in base-256, as GNU tar writes those over 2097151.",
  "features": [
   "number.uid.base256",
   "number.gid.base256"

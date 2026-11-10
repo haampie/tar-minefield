@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a directory <code>d/</code> with a file <code>d/f</code>, a symlink <code>s</code> to <code>d</code>, then a hardlink <code>h</code> to <code>s/f</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file archived before it, and <code>s/f</code> is not the name of a member. As a path, <code>s/f</code> leads through the symlink to <code>d/f</code>, which is a member. This case is ambiguous because <code>h</code> is either a link to <code>d/f</code>, to a reader that resolves the target as a path on the file system, or an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=it%20shall%20be%20an%20error%20if%20these%20files%20cannot%20be%20linked%20when%20the%20archive%20is%20extracted">error</a>, to one that looks for a member of that name. A reader that leaves <code>h</code> out without an error does neither.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file archived before it, and <code>s/f</code> is not the name of a member. As a path, <code>s/f</code> resolves through the symlink to <code>d/f</code>, which is a member. This case is ambiguous because <code>h</code> is either a link to <code>d/f</code>, to a reader that resolves the target as a path on the filesystem, or an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=it%20shall%20be%20an%20error%20if%20these%20files%20cannot%20be%20linked%20when%20the%20archive%20is%20extracted">error</a>, to one that takes the target for the name of a member. Neither reading skips the link without an error, as some readers do.</p>
 <p><strong>Decision point:</strong> whether the target of a hardlink is a path or the name of a member.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -56,14 +56,14 @@ The archive has a directory `d/` with a file `d/f`, a symlink `s` to `d`, then a
 `s/f`.
 
 In POSIX, the target of a hardlink is a file archived before it, and `s/f` is not the
-name of a member. As a path, `s/f` leads through the symlink to `d/f`, which is a member. This case
-is ambiguous because `h` is either a link to `d/f`, to a reader that resolves the target as a path
-on the file system, or an error, to one that looks for a member of that name. A reader
-that leaves `h` out without an error does neither.
+name of a member. As a path, `s/f` resolves through the symlink to `d/f`, which is a member. This
+case is ambiguous because `h` is either a link to `d/f`, to a reader that resolves the target as a
+path on the filesystem, or an error, to one that takes the target for the name of a
+member. Neither reading skips the link without an error, as some readers do.
 
 Decision point: whether the target of a hardlink is a path or the name of a member.
 Seen in: none of the scanned tarballs.
-See also: S16 and S11: a hardlink to `./a`, and a member written through a symlink.
+See also: S16, a hardlink to `./a`, and S11, a member written through a symlink.
 
 0x000000  header: directory
           name     [  0,100)  &quot;d/&quot; + 98 NUL
@@ -413,7 +413,7 @@ See also: S16 and S11: a hardlink to `./a`, and a member written through a symli
 
 <h2 id="see-also">See also<a class="anchor" href="#see-also" aria-label="Link to this section">¶</a></h2>
 <ul>
-<li><a href="S16.html"><code>S16</code></a> and <a href="S11.html"><code>S11</code></a>: a hardlink to <code>./a</code>, and a member written through a symlink.</li>
+<li><a href="S16.html"><code>S16</code></a>: a hardlink to <code>./a</code>, and <a href="S11.html"><code>S11</code></a>, a member written through a symlink.</li>
 </ul>
 
 <hr class="wide">

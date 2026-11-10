@@ -63,7 +63,7 @@ STRICT = [
     ("type.unknown-*", "framing", "an unknown typeflag: data or no data"),
     ("type.gnu-sparse", "framing", "GNU's old sparse files"),
     ("type.contiguous", "framing", "contiguous files (7)"),
-    ("type.fifo", "kind", "a FIFO, which the tree does not have: created, an empty file, or left out"),
+    ("type.fifo", "kind", "a FIFO, which the tree does not have: created, an empty file, or skipped"),
     ("type.chardev", "kind", "a character device, which the tree does not have"),
     ("type.blockdev", "kind", "a block device, which the tree does not have"),
     ("pax.invalid-size", "framing", "a pax size that is not a number"),

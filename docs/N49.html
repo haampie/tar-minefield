@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>N49 name-double-slash · Tar file extraction test suite</title>
-<meta name="description" content="A name with two slashes in a row, a//b.">
+<meta name="description" content="A name with two consecutive slashes, a//b.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N49 name-double-slash · Tar file extraction test suite">
-<meta property="og:description" content="A name with two slashes in a row, a//b.">
+<meta property="og:description" content="A name with two consecutive slashes, a//b.">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N49.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N49.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/1d5cadb6ec3319bb.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/0a5b195e41bf6ee7.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of N49 name-double-slash">
@@ -24,7 +24,7 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="N35.html" rel="prev" title="N35 symlink-escapes">‹ N35 symlink-escapes</a><a href="index.html">tar-minefield</a><a class="next" href="N50.html" rel="next" title="N50 name-dot-component">N50 name-dot-component ›</a></nav>
 <h1><code>N49</code> name-double-slash</h1>
-<p>A name with two slashes in a row, <code>a//b</code>.</p>
+<p>A name with two consecutive slashes, <code>a//b</code>.</p>
 <div class="verdict tolerate wide"><p><span class="badge">Tolerate</span><span class="badge-draft">(draft)</span> A strict parser may reject this archive. If it accepts it, it must extract the expected tree below.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>name</dd>
@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one file, <code>a//b</code>.</p>
-<p>In POSIX, files are created by <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">pathname resolution</a>, and in a pathname <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap03.html#tag_03_254:~:text=Multiple%20successive%20%3Cslash%3E%20characters%20are%20considered%20to%20be%20the%20same%20as%20one%20%3Cslash%3E">several slashes in a row</a> are the same as one, so the file is <code>a/b</code>. This case is ambiguous to a reader that compares names as bytes, to which <code>a//b</code> and <code>a/b</code> are two names for one path, and to one that takes what is between the two slashes for a component with an empty name, which it cannot create. The default policy tolerates it, and normalizes the name to <code>a/b</code>, so that a second member of that path is a duplicate.</p>
+<p>In POSIX, files are created by <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">pathname resolution</a>, and in a pathname <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap03.html#tag_03_254:~:text=Multiple%20successive%20%3Cslash%3E%20characters%20are%20considered%20to%20be%20the%20same%20as%20one%20%3Cslash%3E">consecutive slashes</a> are the same as one, so the file is <code>a/b</code>. This case is ambiguous to a reader that compares names as strings, to which <code>a//b</code> and <code>a/b</code> are two names for one path, and to one that takes what is between the two slashes for a component with an empty name, which it cannot create. The default policy tolerates it. In the default policy, <code>a//b</code> and <code>a/b</code> in one archive are a duplicate.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a/</code></td><td>directory</td><td></td></tr>
@@ -54,16 +54,16 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>N49-name-double-slash: tolerated: a strict parser may reject it; if it accepts it, it must extract its tree, and the default policy accepts it
 
-A name with two slashes in a row, `a//b`.
+A name with two consecutive slashes, `a//b`.
 
 The archive has one file, `a//b`.
 
-In POSIX, files are created by pathname resolution, and in a pathname several slashes
-in a row are the same as one, so the file is `a/b`. This case is ambiguous to a reader
-that compares names as bytes, to which `a//b` and `a/b` are two names for one path, and to one that
+In POSIX, files are created by pathname resolution, and in a pathname consecutive
+slashes are the same as one, so the file is `a/b`. This case is ambiguous to a reader that
+compares names as strings, to which `a//b` and `a/b` are two names for one path, and to one that
 takes what is between the two slashes for a component with an empty name, which it cannot create.
-The default policy tolerates it, and normalizes the name to `a/b`, so that a second member of that
-path is a duplicate.
+The default policy tolerates it. In the default policy, `a//b` and `a/b` in one archive are a
+duplicate.
 
 Decision point: whether a name is normalized before it is compared with others.
 Seen in: 2 of the scanned tarballs: shapemapper 2.1.5, and a binary distribution of GHC 9.0.2.

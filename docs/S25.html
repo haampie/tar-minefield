@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a directory <code>d/</code> with the mode 555, then a file <code>d/f</code>.</p>
-<p>This is what a writer makes of a directory that is read-only: the directory first, with its mode, and then its contents. A reader that gives the directory its mode when it creates it cannot create <code>d/f</code> in it, unless it runs as root. It is in the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_18:~:text=with%20sufficient%20permissions%20to%20allow%20file%20creation">rationale of POSIX</a> that a reader can create a directory with enough permissions to create files in it, and set its mode after all files are extracted. The mode of a directory is not part of the tree, which is <code>d</code> and <code>d/f</code>.</p>
+<p>This is how <code>tar cf x.tar d</code> writes a directory <code>d</code> that is read-only: the directory first, with its mode, and then its contents. A reader that gives the directory its mode when it creates it cannot create <code>d/f</code> in it, except as root. It is in the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_18:~:text=with%20sufficient%20permissions%20to%20allow%20file%20creation">rationale of POSIX</a> that a reader can create a directory with enough permissions to create files in it, and set its mode after all files are extracted. The mode of a directory is not part of the tree, which is <code>d</code> and <code>d/f</code>.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>d/</code></td><td>directory</td><td></td></tr>
@@ -57,11 +57,11 @@ A directory without write permission, before the file in it.
 
 The archive has a directory `d/` with the mode 555, then a file `d/f`.
 
-This is what a writer makes of a directory that is read-only: the directory first, with its mode,
-and then its contents. A reader that gives the directory its mode when it creates it cannot create
-`d/f` in it, unless it runs as root. It is in the rationale of POSIX that a
-reader can create a directory with enough permissions to create files in it, and set its mode after
-all files are extracted. The mode of a directory is not part of the tree, which is `d` and `d/f`.
+This is how `tar cf x.tar d` writes a directory `d` that is read-only: the directory first, with its
+mode, and then its contents. A reader that gives the directory its mode when it creates it cannot
+create `d/f` in it, except as root. It is in the rationale of POSIX that a reader
+can create a directory with enough permissions to create files in it, and set its mode after all
+files are extracted. The mode of a directory is not part of the tree, which is `d` and `d/f`.
 
 Seen in: not measured, as the scans do not record modes.
 See also: S01, a directory after its contents.
