@@ -161,7 +161,7 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="N56.html"><code>N56</code></a> pax-path-equals-sign</td><td>A pax <code>path</code> that contains an equals sign, <code>a=b</code>.</td><td>extracts <code>PaxHeader</code> (12 B, 05b394af), <code>header-name</code> (12 B, a578eb49)</td></tr>
 <tr><td><a href="N57.html"><code>N57</code></a> ustar-prefix-fills-field</td><td>A prefix of exactly 155 bytes, which fills the prefix field without a NUL.</td><td>extracts <code>file</code> (9 B, 7dd9c6f9)</td></tr>
 <tr><td><a href="N58.html"><code>N58</code></a> ustar-prefix-under-pax</td><td>A name split between the prefix and name fields, under a pax header without a <code>path</code>.</td><td>extracts <code>PaxHeader</code> (11 B, 2fb5f8c5), <code>a</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="N60.html"><code>N60</code></a> pax-global-name-directory</td><td>A global pax header that is itself named in a directory.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>g/</code>, <code>g/pax_global_header</code> (27 B, 0ba91dca)</td></tr>
+<tr><td><a href="N60.html"><code>N60</code></a> pax-global-name-directory</td><td>A global pax header whose own name is in a directory.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>g/</code>, <code>g/pax_global_header</code> (27 B, 0ba91dca)</td></tr>
 <tr><td><a href="S25.html"><code>S25</code></a> tree-dir-not-writable</td><td>A directory without write permission, before the file in it.</td><td>extracts <code>d/</code></td></tr>
 <tr><td><a href="F14.html"><code>F14</code></a> pax-size-disagrees</td><td>A pax <code>size</code> that disagrees with the header&#x27;s, so that a reader of the header&#x27;s misses a member.</td><td>extracts <code>PaxHeader</code> (9 B, 33638443), <code>a</code> (512 B, 917dba8e)</td></tr>
 <tr><td><a href="F18.html"><code>F18</code></a> pax-global-comment-after-members</td><td>A global pax header with only a <code>comment</code>, after the first member.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>b</code> (2 B, 02638299), <code>pax_global_header</code> (19 B, 89c2f7ac)</td></tr>
@@ -170,6 +170,6 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="N49.html"><code>N49</code></a> name-double-slash</td><td>A name with two consecutive slashes, <code>a//b</code>.</td><td>extracts <code>a/</code></td></tr></table></div>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

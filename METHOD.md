@@ -137,8 +137,8 @@ Name:
   header's name.
 - Normalization: `./a` and `a`, `a//b`, `a/./b`, `a/../b`, a trailing slash, `.`, an empty name,
   `\` as a separator on Windows, drive letters.
-- The names of extended headers themselves, which an implementation that does not know their
-  typeflag extracts them under, as files.
+- The names of extended headers themselves, under which an implementation that does not know
+  their typeflag extracts the headers as files.
 - The same questions for link targets: `linkpath`, GNU long links (`K`) and the linkname field.
 - A `path` or `linkpath` in a global pax header, and empty values in one, which in [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=previously%20entered%20extended%20header%20value%2C%20or%20global%20extended%20header%20value%20of%20the%20same%20name) remove an
   earlier global value.
@@ -151,19 +151,19 @@ Kind:
 - A file or link named `.`, which is the root of the tree, and a file whose name ends in `/.`.
 - A link target in the linkname field of a member that is not a link, or in its pax `linkpath`.
 - FIFOs and devices, which the tree does not have: created, extracted as empty files, or skipped.
-- Whether a file is executable: a mode in base-256, and what can decide it besides the mode of
-  the header, a pax `mode` and an ACL in a pax header.
+- Whether a file is executable: a mode in base-256, and what besides the mode of the header can
+  decide it: a pax `mode`, and an ACL in a pax header.
 
 Order and state:
 
 - Duplicate paths: file and file (last wins, or first wins), file and directory, directory and
   directory, symlink and file (replace the symlink, or write through it), symlink and symlink, and
-  a file or symlink at the path of a directory, also of one that is not a member itself.
+  a file or symlink at the path of a directory, including one that is not a member itself.
 - Writing through a symlink: a member `a/b` after a symlink `a`.
 - Hardlinks to a later member, to a member that does not exist, to a directory, to a symlink (link
   the symlink or its target), to themselves, to an absolute path, to a target spelled
   differently from the member it names (`./a` and `a`, or `a/`, which is not a file), to a target
-  reached through a symlink, or with another mode than their target.
+  reached through a symlink, or with a mode other than that of their target.
 
 ## Verdicts
 

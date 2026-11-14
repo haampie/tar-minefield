@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file whose pax header has two records. The first is <code>11 comment</code>, followed by a newline, which does not have an equals sign. The second is <code>path=renamed</code>. The header of the file has the name <code>header-name</code>.</p>
-<p>In POSIX, an extended header consists of <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=An%20extended%20header%20shall%20consist%20of%20one%20or%20more%20records">records</a>, and a record is <code>&lt;length&gt; &lt;key&gt;=&lt;value&gt;</code>, followed by a newline, so the first record is malformed. Records are delimited by their <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">length</a>, so a reader can skip it. This case is ambiguous in practice because a reader can take the header in one of three ways. A reader that skips the malformed record applies the <code>path</code>, and extracts <code>renamed</code>. One that stops reading records at the malformed one, without an error, extracts <code>header-name</code>. Other readers report an error.</p>
+<p>In POSIX, an extended header consists of <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=An%20extended%20header%20shall%20consist%20of%20one%20or%20more%20records">records</a>, and a record is <code>&lt;length&gt; &lt;key&gt;=&lt;value&gt;</code>, followed by a newline, so the first record is malformed. Records are delimited by their <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">length</a>, so a reader can skip the malformed record. This case is ambiguous in practice because a reader can take the header in one of three ways. A reader that skips the malformed record applies the <code>path</code>, and extracts <code>renamed</code>. One that stops reading records at the malformed one, without an error, extracts <code>header-name</code>. Other readers report an error.</p>
 <p><strong>Decision point:</strong> whether a pax record without <code>=</code> is skipped, is the last one that is read, or is an error.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -58,10 +58,10 @@ has the name `header-name`.
 
 In POSIX, an extended header consists of records, and a record is `&lt;length&gt;
 &lt;key&gt;=&lt;value&gt;`, followed by a newline, so the first record is malformed. Records are delimited by
-their length, so a reader can skip it. This case is ambiguous in practice because a
-reader can take the header in one of three ways. A reader that skips the malformed record applies
-the `path`, and extracts `renamed`. One that stops reading records at the malformed one, without an
-error, extracts `header-name`. Other readers report an error.
+their length, so a reader can skip the malformed record. This case is ambiguous in
+practice because a reader can take the header in one of three ways. A reader that skips the
+malformed record applies the `path`, and extracts `renamed`. One that stops reading records at the
+malformed one, without an error, extracts `header-name`. Other readers report an error.
 
 Decision point: whether a pax record without `=` is skipped, is the last one that is read, or is an
 error.
@@ -355,6 +355,6 @@ See also: F36, a pax record whose length is one byte short.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

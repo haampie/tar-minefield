@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>N60 pax-global-name-directory · Tar file extraction test suite</title>
-<meta name="description" content="A global pax header that is itself named in a directory.">
+<meta name="description" content="A global pax header whose own name is in a directory.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N60 pax-global-name-directory · Tar file extraction test suite">
-<meta property="og:description" content="A global pax header that is itself named in a directory.">
+<meta property="og:description" content="A global pax header whose own name is in a directory.">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N60.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N60.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/7a43e69cbe180720.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/6c1f30fd9d27a62e.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of N60 pax-global-name-directory">
@@ -24,7 +24,7 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="N59.html" rel="prev" title="N59 symlink-target-dotdot-after-symlink">‹ N59 symlink-target-dotdot-after-symlink</a><a href="index.html">tar-minefield</a><a class="next" href="S01.html" rel="next" title="S01 tree-dir-after-contents">S01 tree-dir-after-contents ›</a></nav>
 <h1><code>N60</code> pax-global-name-directory</h1>
-<p>A global pax header that is itself named in a directory.</p>
+<p>A global pax header whose own name is in a directory.</p>
 <div class="verdict accept wide"><p><span class="badge">Accept</span><span class="badge-draft">(draft)</span> Every implementation must accept this archive, and extract the expected tree below.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>name</dd>
@@ -52,7 +52,7 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>N60-pax-global-name-directory: must accept, and extract its tree
 
-A global pax header that is itself named in a directory.
+A global pax header whose own name is in a directory.
 
 The archive has a global header that is itself named `g/pax_global_header`, with a `comment` record,
 then a file `a`.
@@ -345,6 +345,6 @@ See also: F17, the global header that `git archive` writes, and N52, a pax heade
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

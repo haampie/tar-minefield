@@ -8,10 +8,10 @@ has the name `header-name`.
 
 In POSIX, an extended header consists of records, and a record is `<length>
 <key>=<value>`, followed by a newline, so the first record is malformed. Records are delimited by
-their length, so a reader can skip it. This case is ambiguous in practice because a
-reader can take the header in one of three ways. A reader that skips the malformed record applies
-the `path`, and extracts `renamed`. One that stops reading records at the malformed one, without an
-error, extracts `header-name`. Other readers report an error.
+their length, so a reader can skip the malformed record. This case is ambiguous in
+practice because a reader can take the header in one of three ways. A reader that skips the
+malformed record applies the `path`, and extracts `renamed`. One that stops reading records at the
+malformed one, without an error, extracts `header-name`. Other readers report an error.
 
 Decision point: whether a pax record without `=` is skipped, is the last one that is read, or is an
 error.

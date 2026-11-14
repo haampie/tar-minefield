@@ -1,4 +1,4 @@
-"""A global pax header that is itself named in a directory.
+"""A global pax header whose own name is in a directory.
 
 The archive has a global header that is itself named `g/pax_global_header`, with a `comment` record,
 then a file `a`.

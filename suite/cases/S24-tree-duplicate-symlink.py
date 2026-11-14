@@ -3,7 +3,7 @@
 The archive has the files `first` and `second`, a symlink `a` to `first`, then a symlink `a` to
 `second`.
 
-In POSIX, a file [may be overwritten][overwrite] when an archive has several members of one name,
+In POSIX, a file [can be overwritten][overwrite] when an archive has several members of one name,
 but creating a symlink at a path that exists [fails][symlink-exists], so a reader that does not
 replace the first link keeps it. This case is ambiguous because `a` points either to `second`, or to
 `first`, with an error for the second link or without one.

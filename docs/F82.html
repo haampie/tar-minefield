@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, whose pax header has the records <code>mtime=1700000000.123456789</code>, <code>atime=1700000001.5</code> and <code>ctime=1700000002.000000001</code>.</p>
-<p>In POSIX, the records <code>mtime</code> and <code>atime</code> are <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_05:~:text=All%20of%20these%20time%20records%20shall%20be%20formatted%20as%20a%20decimal%20representation%20of%20the%20time%20in%20seconds%20since%20the%20Epoch">decimal numbers of seconds</a>, which can have a decimal point and digits after it. The key <code>ctime</code> was removed from POSIX in 2004, and GNU tar writes it in the same format: in an archive in pax format, it writes <code>atime</code> and <code>ctime</code> for every member, and <code>mtime</code> when it has a fraction of a second. Times are not part of the tree.</p>
+<p>In POSIX, the records <code>mtime</code> and <code>atime</code> are <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_05:~:text=All%20of%20these%20time%20records%20shall%20be%20formatted%20as%20a%20decimal%20representation%20of%20the%20time%20in%20seconds%20since%20the%20Epoch">decimal numbers of seconds</a>, which can have a decimal point and digits after it. The key <code>ctime</code> was removed from POSIX in 2004, and GNU tar writes it in the same format: in an archive in pax format, it writes <code>atime</code> and <code>ctime</code> for every member, and <code>mtime</code> when the time has a fraction of a second. Times are not part of the tree.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>2 bytes, sha256 <code title="87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7">87428fc5</code></td></tr></table></div>
@@ -60,7 +60,7 @@ The archive has a file `a`, whose pax header has the records `mtime=1700000000.1
 In POSIX, the records `mtime` and `atime` are decimal numbers of seconds, which can
 have a decimal point and digits after it. The key `ctime` was removed from POSIX in 2004, and GNU
 tar writes it in the same format: in an archive in pax format, it writes `atime` and `ctime` for
-every member, and `mtime` when it has a fraction of a second. Times are not part of the tree.
+every member, and `mtime` when the time has a fraction of a second. Times are not part of the tree.
 
 Seen in: hundreds of tarballs, produced by GNU tar in pax format.
 
@@ -339,6 +339,6 @@ Seen in: hundreds of tarballs, produced by GNU tar in pax format.
 <p>This case is not measured in release tarballs: the scan does not report a feature of it on its own.</p>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

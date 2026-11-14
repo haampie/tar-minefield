@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has the files <code>first</code> and <code>second</code>, a symlink <code>a</code> to <code>first</code>, then a symlink <code>a</code> to <code>second</code>.</p>
-<p>In POSIX, a file <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_16:~:text=In%20read%20mode%2C%20implementations%20are%20permitted%20to%20overwrite%20files%20when%20the%20archive%20has%20multiple%20members%20with%20the%20same%20name">may be overwritten</a> when an archive has several members of one name, but creating a symlink at a path that exists <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/symlink.html#:~:text=The%20path2%20argument%20names%20an%20existing%20file">fails</a>, so a reader that does not replace the first link keeps it. This case is ambiguous because <code>a</code> points either to <code>second</code>, or to <code>first</code>, with an error for the second link or without one.</p>
+<p>In POSIX, a file <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_16:~:text=In%20read%20mode%2C%20implementations%20are%20permitted%20to%20overwrite%20files%20when%20the%20archive%20has%20multiple%20members%20with%20the%20same%20name">can be overwritten</a> when an archive has several members of one name, but creating a symlink at a path that exists <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/symlink.html#:~:text=The%20path2%20argument%20names%20an%20existing%20file">fails</a>, so a reader that does not replace the first link keeps it. This case is ambiguous because <code>a</code> points either to <code>second</code>, or to <code>first</code>, with an error for the second link or without one.</p>
 <p><strong>Decision point:</strong> whether a later member of the same name replaces an earlier one.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,7 +55,7 @@ The same symlink twice, with different targets: the first, or the last?
 The archive has the files `first` and `second`, a symlink `a` to `first`, then a symlink `a` to
 `second`.
 
-In POSIX, a file may be overwritten when an archive has several members of one name,
+In POSIX, a file can be overwritten when an archive has several members of one name,
 but creating a symlink at a path that exists fails, so a reader that does not
 replace the first link keeps it. This case is ambiguous because `a` points either to `second`, or to
 `first`, with an error for the second link or without one.
@@ -451,6 +451,6 @@ See also: S07, the same file twice with different contents.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>
