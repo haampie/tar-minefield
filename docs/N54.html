@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one file, whose pax header has the <code>path</code> <code>日本語/café.txt</code>, in UTF-8, and whose header has the name <code>nihongo/cafe.txt</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20extended%20header%20records%20shall%20be%20encoded%20according%20to%20the%20ISO%2FIEC%2010646%2D1%3A2020%20standard%20UTF%2D8%20encoding">POSIX</a>, pax records are UTF-8, and a <code>path</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20name%20and%20prefix%20fields%20in%20the%20following%20header%20block%28s%29">overrides</a> the name of the header: it is how a name that is not ASCII is stored in a pax archive. So the file is <code>日本語/café.txt</code>. A reader that decodes the record in another encoding, such as Latin-1, extracts a file of another name.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20extended%20header%20records%20shall%20be%20encoded%20according%20to%20the%20ISO%2FIEC%2010646%2D1%3A2020%20standard%20UTF%2D8%20encoding">POSIX</a>, pax records are UTF-8, and a <code>path</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20name%20and%20prefix%20fields%20in%20the%20following%20header%20block%28s%29">overrides</a> the name of the header: it is how a name that is not ASCII is stored in a pax archive. So the file is <code>日本語/café.txt</code>. A reader that decodes the record in another encoding, such as Latin-1, extracts a file under another name.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>日本語/</code></td><td>directory</td><td></td></tr>
@@ -60,7 +60,7 @@ has the name `nihongo/cafe.txt`.
 
 In POSIX, pax records are UTF-8, and a `path` overrides the name of the header: it
 is how a name that is not ASCII is stored in a pax archive. So the file is `日本語/café.txt`. A reader
-that decodes the record in another encoding, such as Latin-1, extracts a file of another name.
+that decodes the record in another encoding, such as Latin-1, extracts a file under another name.
 
 Seen in: 789 of the scanned tarballs have names that are not ASCII, in a pax `path` or in the name
 field.

@@ -10,7 +10,7 @@ reader can read the size in one of four ways. A reader that tells base-256 apart
 high bit of the first byte, and drops the rest of that byte, reads 512, and the next block is the
 data of `a`. One that keeps the other bits of the first byte reads a size far past the end of the
 archive. One that reads octal digits reads 0, as the field does not have any, and the next block is
-the header of `smuggled`. One that skips the block, as it does a block that is not a header,
+the header of `smuggled`. One that skips the block, as it does with a block that is not a header,
 extracts `smuggled` alone, without an error.
 
 Decision point: which first bytes make a numeric field base-256.

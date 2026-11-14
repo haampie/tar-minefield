@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has 0 bytes.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros">POSIX</a>, an archive ends with two zero blocks, which this file does not have. Such a file can be what is left of a download that failed. This case is ambiguous in practice because a reader either takes the end of the file for the end of an archive without members, without an error, or does not take the file for an archive, which is an error.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros">POSIX</a>, an archive ends with two zero blocks, which this file does not have. Such a file can be what is left of a download that failed. This case is ambiguous in practice because a reader either takes the file for an archive without members, without an error, or rejects it as not an archive.</p>
 <p><strong>Decision point:</strong> whether a file of 0 bytes is an archive.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -56,8 +56,8 @@ The archive has 0 bytes.
 
 In POSIX, an archive ends with two zero blocks, which this file does not have. Such a file
 can be what is left of a download that failed. This case is ambiguous in practice because a reader
-either takes the end of the file for the end of an archive without members, without an error, or
-does not take the file for an archive, which is an error.
+either takes the file for an archive without members, without an error, or rejects it as not an
+archive.
 
 Decision point: whether a file of 0 bytes is an archive.
 Seen in: none of the scanned tarballs.
@@ -117,6 +117,6 @@ without an end-of-archive marker.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

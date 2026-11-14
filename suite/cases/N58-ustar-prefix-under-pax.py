@@ -8,8 +8,8 @@ without a record [comes from the header][header-fallback]. The pax header does n
 the name is that of the header: the [prefix][prefix], followed by `/`, followed by the name, which
 is `p/a`. A reader that drops the prefix of a member that has a pax header extracts `a`.
 
-Seen in: 32 of the scanned tarballs have members with a prefix, and pax headers that do not have a
-`path`, such as clamav 1.5.4 and Audacity 4.0.0.
+Seen in: 32 of the scanned tarballs, such as clamav 1.5.4 and Audacity 4.0.0, have members with a
+prefix, and pax headers that do not have a `path`.
 See also: N04, a name split between the prefix and name fields, and N03, a long name in a pax
 `path`.
 """

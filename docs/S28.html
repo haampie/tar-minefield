@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, then a hardlink <code>h</code> whose target is <code>a/</code>.</p>
-<p>A pathname that ends in a slash <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=ends%20with%20one%20or%20more%20trailing%20%3Cslash%3E%20characters%20shall%20not%20be%20resolved%20successfully%20unless">resolves only to a directory</a>, and <code>a</code> is a file, so as a path the target does not resolve, and a link that cannot be made is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=it%20shall%20be%20an%20error%20if%20these%20files%20cannot%20be%20linked%20when%20the%20archive%20is%20extracted">error</a>. This case is ambiguous because <code>h</code> is either a link to <code>a</code>, to a reader that normalizes the target as it normalizes names, or an error, to one that resolves the target as a path. Some readers skip the link without an error, which is neither of these readings.</p>
+<p>A pathname that ends in a slash <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=ends%20with%20one%20or%20more%20trailing%20%3Cslash%3E%20characters%20shall%20not%20be%20resolved%20successfully%20unless">resolves only to a directory</a>, and <code>a</code> is a file, so as a path the target does not resolve, and a link that cannot be made is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=it%20shall%20be%20an%20error%20if%20these%20files%20cannot%20be%20linked%20when%20the%20archive%20is%20extracted">error</a>. This case is ambiguous because <code>h</code> is either a link to <code>a</code>, to a reader that normalizes the target as it normalizes names, or an error, to one that resolves the target as a path. Some readers instead skip the link, without an error.</p>
 <p><strong>Decision point:</strong> whether the target of a hardlink is normalized.</p>
 <p><strong>Seen in:</strong> not measured, as earlier versions of the scanner normalized the targets of hardlinks: 2 of the scanned tarballs may have such a target.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -57,8 +57,8 @@ The archive has a file `a`, then a hardlink `h` whose target is `a/`.
 A pathname that ends in a slash resolves only to a directory, and `a` is a file,
 so as a path the target does not resolve, and a link that cannot be made is an error.
 This case is ambiguous because `h` is either a link to `a`, to a reader that normalizes the target
-as it normalizes names, or an error, to one that resolves the target as a path. Some readers skip
-the link without an error, which is neither of these readings.
+as it normalizes names, or an error, to one that resolves the target as a path. Some readers instead
+skip the link, without an error.
 
 Decision point: whether the target of a hardlink is normalized.
 Seen in: not measured, as earlier versions of the scanner normalized the targets of hardlinks: 2 of

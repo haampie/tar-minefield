@@ -8,7 +8,7 @@ file][unknown-type] instead. A FIFO is not part of the tree, which has files, di
 This case is ambiguous in practice because a reader can take the member in one of four ways. A
 reader that supports FIFOs creates one. One that extracts every member that is not a directory or a
 link as a file extracts an empty file `p`. One that skips the kinds of members that it does not
-extract extracts `b` alone, without an error. Other readers report an error.
+support extracts `b` alone, without an error. Other readers report an error.
 
 Decision point: what a reader does with a member that is not a file, a directory or a link.
 Seen in: not measured, as earlier versions of the scanner did not report it: the scans did record

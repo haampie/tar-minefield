@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code> with the mode 644, whose pax header has the record <code>SCHILY.acl.access=user::rwx,group::r-x,other::r-x</code>.</p>
-<p>The key <code>SCHILY.acl.access</code> is star&#x27;s, for the access control list of a file, and libarchive and GNU tar write it too. The entries <code>user::</code>, <code>group::</code> and <code>other::</code> of such a list are the permissions of the owner, the group and others, which are also in the mode. Writers write both as they are on the filesystem, where they are the same; in this archive the mode is 644, and the list says 755. This case is ambiguous because a reader that does not apply ACLs extracts <code>a</code> with the mode 644, and one that applies them extracts <code>a</code> as an executable file.</p>
+<p>The key <code>SCHILY.acl.access</code>, for the access control list of a file, is star&#x27;s, and libarchive and GNU tar write it too. The entries <code>user::</code>, <code>group::</code> and <code>other::</code> of such a list are the permissions of the owner, the group and others, which are also in the mode. Writers write both as they are on the filesystem, where they are the same; in this archive the mode is 644, and the list says 755. This case is ambiguous because a reader that does not apply ACLs extracts <code>a</code> with the mode 644, and one that applies them extracts <code>a</code> as an executable file.</p>
 <p><strong>Decision point:</strong> whether an ACL in a pax header is applied.</p>
 <p><strong>Seen in:</strong> not measured, as the scans do not record all pax keys of a tarball, only its 8 most common, and do not record the names of xattrs: a key <code>SCHILY.acl.*</code> is not among those of any tarball, and 45 of the scanned tarballs have more keys, or xattrs, which an ACL can be in.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,12 +55,12 @@ An ACL in a pax header with the execute permission for the owner of a file.
 The archive has a file `a` with the mode 644, whose pax header has the record
 `SCHILY.acl.access=user::rwx,group::r-x,other::r-x`.
 
-The key `SCHILY.acl.access` is star&#x27;s, for the access control list of a file, and libarchive and GNU
-tar write it too. The entries `user::`, `group::` and `other::` of such a list are the permissions
-of the owner, the group and others, which are also in the mode. Writers write both as they are on
-the filesystem, where they are the same; in this archive the mode is 644, and the list says 755.
-This case is ambiguous because a reader that does not apply ACLs extracts `a` with the mode 644, and
-one that applies them extracts `a` as an executable file.
+The key `SCHILY.acl.access`, for the access control list of a file, is star&#x27;s, and libarchive and
+GNU tar write it too. The entries `user::`, `group::` and `other::` of such a list are the
+permissions of the owner, the group and others, which are also in the mode. Writers write both as
+they are on the filesystem, where they are the same; in this archive the mode is 644, and the list
+says 755. This case is ambiguous because a reader that does not apply ACLs extracts `a` with the
+mode 644, and one that applies them extracts `a` as an executable file.
 
 Decision point: whether an ACL in a pax header is applied.
 Seen in: not measured, as the scans do not record all pax keys of a tarball, only its 8 most common,

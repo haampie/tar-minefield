@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, whose size field is the byte <code>0x81</code>, followed by 512 as a binary number of 11 bytes, then an empty file <code>smuggled</code>.</p>
-<p>In GNU&#x27;s format, a number in base-256 starts with the byte <code>0x80</code>, and a negative one with <code>0xff</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal, so base-256 is an extension, and what any other first byte over <code>0x7f</code> means is not specified. Read leniently, this case is ambiguous because a reader can read the size in one of four ways. A reader that tells base-256 apart from octal by the high bit of the first byte, and drops the rest of that byte, reads 512, and the next block is the data of <code>a</code>. One that keeps the other bits of the first byte reads a size far past the end of the archive. One that reads octal digits reads 0, as the field does not have any, and the next block is the header of <code>smuggled</code>. One that skips the block, as it does a block that is not a header, extracts <code>smuggled</code> alone, without an error.</p>
+<p>In GNU&#x27;s format, a number in base-256 starts with the byte <code>0x80</code>, and a negative one with <code>0xff</code>. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal, so base-256 is an extension, and what any other first byte over <code>0x7f</code> means is not specified. Read leniently, this case is ambiguous because a reader can read the size in one of four ways. A reader that tells base-256 apart from octal by the high bit of the first byte, and drops the rest of that byte, reads 512, and the next block is the data of <code>a</code>. One that keeps the other bits of the first byte reads a size far past the end of the archive. One that reads octal digits reads 0, as the field does not have any, and the next block is the header of <code>smuggled</code>. One that skips the block, as it does with a block that is not a header, extracts <code>smuggled</code> alone, without an error.</p>
 <p><strong>Decision point:</strong> which first bytes make a numeric field base-256.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -62,7 +62,7 @@ reader can read the size in one of four ways. A reader that tells base-256 apart
 high bit of the first byte, and drops the rest of that byte, reads 512, and the next block is the
 data of `a`. One that keeps the other bits of the first byte reads a size far past the end of the
 archive. One that reads octal digits reads 0, as the field does not have any, and the next block is
-the header of `smuggled`. One that skips the block, as it does a block that is not a header,
+the header of `smuggled`. One that skips the block, as it does with a block that is not a header,
 extracts `smuggled` alone, without an error.
 
 Decision point: which first bytes make a numeric field base-256.
@@ -286,6 +286,6 @@ See also: F56, a size in base-256, and F30, a base-256 size that wraps around.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

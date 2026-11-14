@@ -7,7 +7,7 @@ has the name `nihongo/cafe.txt`.
 
 In POSIX, pax records are UTF-8, and a `path` overrides the name of the header: it
 is how a name that is not ASCII is stored in a pax archive. So the file is `日本語/café.txt`. A reader
-that decodes the record in another encoding, such as Latin-1, extracts a file of another name.
+that decodes the record in another encoding, such as Latin-1, extracts a file under another name.
 
 Seen in: 789 of the scanned tarballs have names that are not ASCII, in a pax `path` or in the name
 field.
