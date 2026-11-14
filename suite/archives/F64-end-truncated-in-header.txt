@@ -1,0 +1,40 @@
+F64-end-truncated-in-header: must reject
+
+An archive that ends inside a header.
+
+The archive has a file `a`, then the first 300 bytes of the header of a file `b`, and ends there.
+
+In POSIX, a header is a block of 512 bytes, so the archive is cut short. This case is
+ambiguous in practice because a reader can take the 300 bytes in one of three ways. A reader that
+takes an incomplete block for the end of the archive extracts `a`, without an error. One that reads
+a header from the bytes that are there extracts `a` and an empty `b`. Other readers report an error.
+
+Decision point: whether a header that is cut short ends the archive.
+Seen in: none of the scanned tarballs.
+See also: F08, an archive that ends inside the data of a member, and F04, one that ends after a
+complete member.
+
+0x000000  header: regular file
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007340\0 "  3808: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data
+          2 bytes, then 510 NUL to the end of the block
+          "a\n"
+0x000400  header: the first 300 of its 512 bytes, of a file b
+          300 bytes, and then the file ends
+0x00052c  end of file

@@ -1,0 +1,9 @@
+{
+ "id": "F74",
+ "verdict": "reject",
+ "description": "A pax `size` twice in one header: the first, or the last?",
+ "features": [
+  "pax.size-repeated",
+  "pax.repeated-key"
+ ]
+}

@@ -1,0 +1,83 @@
+F61-number-uid-not-octal: must reject
+
+A uid with the digit 8, in a header after the first member.
+
+The archive has the files `a`, `b` and `c`. The uid field of `b` is `0000008`.
+
+In POSIX, numeric fields are octal numbers filled with leading zeros, and 8 is not an
+octal digit. The owner of a file is not part of the tree, but its field is part of the
+header. This case is ambiguous in practice because a reader can take the header of `b` in one of
+three ways. A reader that does not read the uid, or that reads it up to the 8, extracts `a`, `b` and
+`c`. One that takes a header with a field that is not a number for the end of the archive extracts
+`a`, without an error. Other readers report an error.
+
+Decision point: whether a header whose uid is not a number counts as a header.
+Seen in: none of the scanned tarballs.
+See also: F37, a size with the digit 9, and F47, a header with a wrong checksum after the first
+member.
+
+0x000000  header: regular file
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007340\0 "  3808: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data
+          2 bytes, then 510 NUL to the end of the block
+          "a\n"
+0x000400  header: regular file, a uid that is not octal
+          name     [  0,100)  "b" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000008" + NUL
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007351\0 "  3817: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          2 bytes, then 510 NUL to the end of the block
+          "b\n"
+0x000800  header: regular file
+          name     [  0,100)  "c" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007342\0 "  3810: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000a00  data
+          2 bytes, then 510 NUL to the end of the block
+          "c\n"
+0x000c00  2 zero blocks: the end-of-archive marker
+0x001000  end of file

@@ -1,0 +1,62 @@
+N60-pax-global-name-directory: must accept, and extract its tree
+
+A global pax header whose own name is in a directory.
+
+The archive has a global header that is itself named `g/pax_global_header`, with a `comment` record,
+then a file `a`.
+
+The name of a global header is not the name of a member, and a reader that knows pax
+does not use it. So the tree is the file `a`, without a directory `g`. A reader that creates the
+parent directories of every header, before it looks at its typeflag, leaves an empty directory `g`.
+Writers give these headers a name in a directory: by default, a global header is
+named `$TMPDIR/GlobalHead.%p.%n`, with the process ID and a sequence number, and an extended header
+`%d/PaxHeaders.%p/%f`, with the directory and the name of its member.
+
+Seen in: gpa 0.11.0 and 0.11.1 and drbd 9.3.3, whose global headers GNU tar named
+`/tmp/GlobalHead.1`.
+See also: F17, the global header that `git archive` writes, and N52, a pax header named with `..`.
+
+0x000000  header: pax global header, named in a directory
+          name     [  0,100)  "g/pax_global_header" + 81 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000033" + NUL  27
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "013061\0 "  5681: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "g"  pax global header
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: pax records
+          27 bytes of pax records, then 485 NUL
+          "27 comment=a global header\n"
+0x000400  header: regular file
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007340\0 "  3808: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          2 bytes, then 510 NUL to the end of the block
+          "a\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

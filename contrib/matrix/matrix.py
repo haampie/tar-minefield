@@ -313,7 +313,8 @@ def describe(tree):
         elif e["kind"] == "symlink":
             parts.append(f"`{path}` → `{text(e['target'])}`")
         elif e["kind"] == "file":
-            parts.append(f"`{path}` ({e['size']} B, {e['sha256'][:8]})")
+            executable = ", executable" if e.get("executable") else ""
+            parts.append(f"`{path}` ({e['size']} B, {e['sha256'][:8]}{executable})")
         else:
             parts.append(f"`{path}` ({e['kind']})")
     return ", ".join(parts) or "nothing"

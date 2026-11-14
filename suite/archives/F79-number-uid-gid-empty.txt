@@ -1,0 +1,36 @@
+F79-number-uid-gid-empty: must accept, and extract its tree
+
+Uid and gid fields without digits, as in most crates.
+
+The archive has a file `a` with GNU's magic, whose uid and gid fields are 8 NULs each.
+
+In POSIX, the uid and gid fields are the owner and the group of a file, which are not
+part of the tree, and as numeric fields they are octal numbers, which an empty field
+is not. Some writers write them without digits, and a reader takes an empty field for 0, or does not
+read it.
+
+Seen in: 5394 of the scanned tarballs, most of them crates.
+
+0x000000  header: regular file, uid and gid of NULs
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  8 NUL
+          gid      [116,124)  8 NUL
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "006040\0 "  3104: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar "
+          version  [263,265)  " " + NUL
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data
+          2 bytes, then 510 NUL to the end of the block
+          "a\n"
+0x000400  2 zero blocks: the end-of-archive marker
+0x000800  end of file

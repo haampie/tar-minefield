@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>node-tar · Tar file extraction test suite</title>
-<meta name="description" content="The 95 of 134 cases of the tar-minefield test suite where node-tar does not follow the draft default policy, and what it makes of them.">
+<meta name="description" content="The 131 of 188 cases of the tar-minefield test suite where node-tar does not follow the draft default policy, and what it makes of them.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="node-tar · Tar file extraction test suite">
-<meta property="og:description" content="The 95 of 134 cases of the tar-minefield test suite where node-tar does not follow the draft default policy, and what it makes of them.">
+<meta property="og:description" content="The 131 of 188 cases of the tar-minefield test suite where node-tar does not follow the draft default policy, and what it makes of them.">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/node-tar.html">
 <meta property="og:url" content="https://stoppels.ch/tar/node-tar.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/5cbfa959926678b5.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/8a1f80e00797de5c.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of every case of the test suite">
@@ -28,16 +28,16 @@
 <dt>Version</dt><dd>tar 7.5.22</dd>
 <dt>Other configurations</dt><dd><ul><li><a href="node-tar-strict.html">node-tar, strict</a></li></ul></dd>
 </dl>
-<p>This implementation follows the <a href="index.html#policy">default policy</a> in 39 of 134 cases:</p>
+<p>This implementation follows the <a href="index.html#policy">default policy</a> in 57 of 188 cases:</p>
 <ul>
-<li>it rejects 6 of the 96 cases to reject</li>
-<li>it extracts the expected tree in 18 of the 21 cases to accept</li>
-<li>it accepts 15 of the 17 tolerated cases</li>
+<li>it rejects 8 of the 133 cases to reject</li>
+<li>it extracts the expected tree in 32 of the 36 cases to accept</li>
+<li>it accepts 17 of the 19 tolerated cases</li>
 </ul>
 <p class="note">The default policy is a working draft. Where an implementation does not do as it
 says, that can be a choice rather than a bug.</p>
-<p>On the other 95, it does not:</p>
-<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (90)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
+<p>On the other 131, it does not:</p>
+<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (125)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
 <tr><td><a href="F03.html"><code>F03</code></a> end-lone-zero-block</td><td>An end-of-archive marker of one zero block, not two.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F07.html"><code>F07</code></a> end-archive-after</td><td>Another archive after the end-of-archive marker.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
@@ -78,6 +78,22 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="F52.html"><code>F52</code></a> type-gnu-volume-label</td><td>A GNU volume label, typeflag <code>V</code>: a file, or skipped?</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F53.html"><code>F53</code></a> type-gnu-old-long-name</td><td>A header of typeflag <code>N</code>, which some readers take for a long name: a name, or a file?</td><td>extracts <code>long-name</code> (12 B, a578eb49)</td></tr>
 <tr><td><a href="F54.html"><code>F54</code></a> format-pax-header-without-magic</td><td>A pax extended header without magic: a header, or a file?</td><td>extracts <code>renamed</code> (12 B, a578eb49)</td></tr>
+<tr><td><a href="F61.html"><code>F61</code></a> number-uid-not-octal</td><td>A uid with the digit 8, in a header after the first member.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>b</code> (2 B, 02638299), <code>c</code> (2 B, a3a5e715)</td></tr>
+<tr><td><a href="F62.html"><code>F62</code></a> pax-schily-realsize</td><td>A <code>SCHILY.realsize</code> record on a file that is not sparse.</td><td>extracts <code>a</code> (5 B, 5994471a)</td></tr>
+<tr><td><a href="F64.html"><code>F64</code></a> end-truncated-in-header</td><td>An archive that ends inside a header.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
+<tr><td><a href="F67.html"><code>F67</code></a> extended-without-member</td><td>An extended header without a member after it.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
+<tr><td><a href="F68.html"><code>F68</code></a> size-on-symlink</td><td>A size in the header of a symlink, which takes the next header for its data.</td><td>extracts <code>b</code> (2 B, 02638299), <code>l</code> → <code>target</code></td></tr>
+<tr><td><a href="F69.html"><code>F69</code></a> number-size-octal-prefix</td><td>A size with the prefix <code>0o</code>, <code>0o000001000</code>.</td><td>extracts <code>a</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
+<tr><td><a href="F70.html"><code>F70</code></a> number-size-minus</td><td>A size with a minus sign, <code>-0000001000</code>.</td><td>extracts <code>a</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
+<tr><td><a href="F71.html"><code>F71</code></a> number-size-base256-marker</td><td>A size whose first byte is <code>0x81</code>: base-256, or not a number?</td><td>extracts <code>smuggled</code> (0 B, e3b0c442)</td></tr>
+<tr><td><a href="F72.html"><code>F72</code></a> pax-record-length-wraps</td><td>A pax record whose length is 2^32 + 24, which wraps around to 24 in 32 bits.</td><td>extracts <code>header-name</code> (12 B, a578eb49)</td></tr>
+<tr><td><a href="F73.html"><code>F73</code></a> pax-record-without-equals</td><td>A pax record without <code>=</code>, before a <code>path</code> record.</td><td>extracts <code>renamed</code> (12 B, a578eb49)</td></tr>
+<tr><td><a href="F74.html"><code>F74</code></a> pax-size-twice</td><td>A pax <code>size</code> twice in one header: the first, or the last?</td><td>extracts <code>a</code> (512 B, 917dba8e)</td></tr>
+<tr><td><a href="F75.html"><code>F75</code></a> pax-size-decimal-point</td><td>A pax <code>size</code> with a decimal point, <code>512.0</code>.</td><td>extracts <code>a</code> (512 B, 917dba8e)</td></tr>
+<tr><td><a href="F76.html"><code>F76</code></a> checksum-byte-after-nul</td><td>A byte after the NUL that ends a checksum, in a header after the first member.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>b</code> (2 B, 02638299), <code>c</code> (2 B, a3a5e715)</td></tr>
+<tr><td><a href="F77.html"><code>F77</code></a> checksum-leading-nul</td><td>A checksum with a NUL before its digits, in a header after the first member.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>c</code> (2 B, a3a5e715)</td></tr>
+<tr><td><a href="F78.html"><code>F78</code></a> pax-nul-in-key</td><td>A NUL in a pax key, before a <code>path</code> record.</td><td>extracts <code>renamed</code> (12 B, a578eb49)</td></tr>
+<tr><td><a href="F83.html"><code>F83</code></a> size-on-fifo</td><td>A size in the header of a FIFO, which takes the next header for its data.</td><td>extracts <code>b</code> (2 B, 02638299)</td></tr>
 <tr><td><a href="N48.html"><code>N48</code></a> magic-gnu-version-00</td><td>A prefix in a header with the magic <code>&quot;ustar &quot;</code> and the version <code>&quot;00&quot;</code>: part of the name, or not?</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="N08.html"><code>N08</code></a> extended-pax-path-and-gnu-long-name</td><td>A pax <code>path</code> and a GNU long name for one member, and a third name in its header.</td><td>extracts <code>from-pax</code> (12 B, a578eb49)</td></tr>
 <tr><td><a href="N09.html"><code>N09</code></a> extended-two-pax-headers</td><td>Two pax extended headers for one member, with different paths.</td><td>extracts <code>second</code> (12 B, a578eb49)</td></tr>
@@ -107,12 +123,22 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="N39.html"><code>N39</code></a> gnu-long-name-size-without-nul</td><td>A GNU long name whose size leaves out its NUL, with bytes after it.</td><td>extracts <code>name</code> (12 B, a578eb49)</td></tr>
 <tr><td><a href="N40.html"><code>N40</code></a> pax-global-linkpath</td><td>A global pax header with a <code>linkpath</code>.</td><td>extracts <code>l</code> → <code>global-target</code>, <code>m</code> → <code>global-target</code></td></tr>
 <tr><td><a href="N41.html"><code>N41</code></a> pax-gnu-sparse-name</td><td>A pax <code>GNU.sparse.name</code> on a file that is not sparse, after a <code>path</code>.</td><td>extracts <code>path-name</code> (12 B, a578eb49)</td></tr>
+<tr><td><a href="N51.html"><code>N51</code></a> linkname-bytes-after-nul</td><td>Bytes after the NUL that ends the target of a symlink.</td><td>extracts <code>l</code> → <code>safe</code></td></tr>
+<tr><td><a href="N52.html"><code>N52</code></a> extended-name-dotdot</td><td>A pax header whose own name leads out of the destination.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
+<tr><td><a href="N53.html"><code>N53</code></a> name-dotdot-inside</td><td>A name with <code>..</code> that does not lead out of the destination, <code>a/../b</code>.</td><td>extracts <code>a/</code></td></tr>
 <tr><td><a href="F60.html"><code>F60</code></a> trailing-slash-file-with-size</td><td>A regular file <code>a/</code> with a size: a directory without data, or a file with data?</td><td>extracts <code>a/</code>, <code>b</code> (2 B, 02638299), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="K01.html"><code>K01</code></a> kind-trailing-slash-file</td><td>A regular file whose name ends in a slash: a file, or a directory?</td><td>extracts <code>a/</code></td></tr>
 <tr><td><a href="K03.html"><code>K03</code></a> symlink-trailing-slash</td><td>A symlink whose name ends in a slash.</td><td>extracts <code>link</code> → <code>target</code>, <code>target/</code></td></tr>
 <tr><td><a href="K04.html"><code>K04</code></a> name-empty-with-prefix</td><td>A regular file with an empty name and a prefix: <code>dir/</code>, or no name?</td><td>extracts <code>dir</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="K05.html"><code>K05</code></a> hardlink-trailing-slash</td><td>A hardlink whose name ends in a slash: a link, or a directory?</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>b</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="K06.html"><code>K06</code></a> symlink-named-dot</td><td>A symlink <code>.</code>: dropped, renamed, or an error?</td><td>extracts <code>d/</code>, <code>f</code> (2 B, 092fcfbb)</td></tr>
+<tr><td><a href="K08.html"><code>K08</code></a> type-fifo</td><td>A FIFO: created, an empty file, or skipped?</td><td>extracts <code>b</code> (2 B, 02638299)</td></tr>
+<tr><td><a href="K11.html"><code>K11</code></a> pax-mode</td><td>A pax <code>mode</code> record on a file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
+<tr><td><a href="K12.html"><code>K12</code></a> pax-acl</td><td>An ACL in a pax header with the execute permission for the owner of a file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
+<tr><td><a href="K13.html"><code>K13</code></a> number-mode-base256</td><td>A mode in base-256.</td><td>extracts <code>a</code> (2 B, 87428fc5, executable)</td></tr>
+<tr><td><a href="K14.html"><code>K14</code></a> file-named-dot</td><td>A regular file <code>.</code>: dropped, renamed, or an error?</td><td>extracts <code>b</code> (2 B, 02638299)</td></tr>
+<tr><td><a href="K15.html"><code>K15</code></a> file-trailing-dot</td><td>A regular file whose name ends in <code>/.</code>: a file <code>a</code>, or a directory?</td><td>extracts <code>a</code> (27 B, a75c49d7)</td></tr>
+<tr><td><a href="K16.html"><code>K16</code></a> pax-linkpath-on-file</td><td>A regular file with a link target in its pax header.</td><td>extracts <code>a</code> (19 B, bc345849)</td></tr>
 <tr><td><a href="S03.html"><code>S03</code></a> hardlink-missing-target</td><td>A hardlink to a member that is not in the archive.</td><td>extracts nothing</td></tr>
 <tr><td><a href="S04.html"><code>S04</code></a> hardlink-to-itself</td><td>A hardlink to itself.</td><td>extracts nothing</td></tr>
 <tr><td><a href="S05.html"><code>S05</code></a> hardlink-to-later-member</td><td>A hardlink to a member that comes later.</td><td>extracts <code>f</code> (2 B, 092fcfbb)</td></tr>
@@ -128,16 +154,26 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="S15.html"><code>S15</code></a> tree-file-then-hardlink</td><td>A file, then a hardlink of the same name to another file.</td><td>extracts <code>a</code> (2 B, 02638299), <code>b</code> (2 B, 02638299)</td></tr>
 <tr><td><a href="S17.html"><code>S17</code></a> hardlink-then-file-again</td><td>A file, a hardlink to it, then the file again: does the link keep the first contents?</td><td>extracts <code>a</code> (7 B, 480c2336), <code>b</code> (6 B, b640e840)</td></tr>
 <tr><td><a href="S18.html"><code>S18</code></a> hardlink-absolute</td><td>A hardlink to <code>/etc/passwd</code>, in an archive with a member <code>etc/passwd</code>.</td><td>extracts <code>etc/</code>, <code>etc/passwd</code> (22 B, cf754f09), <code>l</code> (22 B, cf754f09)</td></tr>
-<tr><td><a href="S19.html"><code>S19</code></a> tree-through-symlink-inside</td><td>A member written through a symlink that points inside the destination.</td><td>extracts <code>d/</code>, <code>x/</code>, <code>x/l</code> → <code>../d</code></td></tr></table></div>
-<h2 id="rejects"><span class="mark bad" title="rejects a case to accept, or extracts another tree than the expected one, or crashes on it" role="img" aria-label="rejects a case to accept, or extracts another tree than the expected one, or crashes on it">✗</span>Rejects cases to accept, or extracts another tree (5)<a class="anchor" href="#rejects" aria-label="Link to this section">¶</a></h2>
+<tr><td><a href="S19.html"><code>S19</code></a> tree-through-symlink-inside</td><td>A member written through a symlink that points inside the destination.</td><td>extracts <code>d/</code>, <code>x/</code>, <code>x/l</code> → <code>../d</code></td></tr>
+<tr><td><a href="S20.html"><code>S20</code></a> tree-file-at-implied-dir</td><td>A file in a directory that is not a member, then a file with the name of that directory.</td><td>extracts <code>a/</code>, <code>a/f</code> (2 B, 092fcfbb)</td></tr>
+<tr><td><a href="S21.html"><code>S21</code></a> tree-duplicate-dir-file</td><td>An empty directory, then a file of the same name.</td><td>extracts <code>a</code> (26 B, 7732fd2c)</td></tr>
+<tr><td><a href="S22.html"><code>S22</code></a> tree-duplicate-dir-symlink</td><td>An empty directory, then a symlink of the same name: replaced, kept, or the link inside it?</td><td>extracts <code>a</code> → <code>b</code>, <code>b</code> (2 B, 02638299)</td></tr>
+<tr><td><a href="S23.html"><code>S23</code></a> tree-duplicate-file-symlink</td><td>A file, then a symlink of the same name.</td><td>extracts <code>a</code> → <code>t</code>, <code>t</code> (2 B, fe8edeeb)</td></tr>
+<tr><td><a href="S24.html"><code>S24</code></a> tree-duplicate-symlink</td><td>The same symlink twice, with different targets: the first, or the last?</td><td>extracts <code>a</code> → <code>second</code>, <code>first</code> (6 B, b640e840), <code>second</code> (7 B, 480c2336)</td></tr>
+<tr><td><a href="S26.html"><code>S26</code></a> hardlink-to-dir</td><td>A hardlink to a directory.</td><td>extracts <code>d/</code>, <code>d/f</code> (2 B, 092fcfbb)</td></tr>
+<tr><td><a href="S27.html"><code>S27</code></a> hardlink-through-symlink</td><td>A hardlink whose target is reached through a symlink.</td><td>extracts <code>d/</code>, <code>d/f</code> (2 B, 092fcfbb), <code>s</code> → <code>d</code></td></tr>
+<tr><td><a href="S28.html"><code>S28</code></a> hardlink-target-trailing-slash</td><td>A hardlink to <code>a/</code>, where <code>a</code> is a file.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>h</code> (2 B, 87428fc5)</td></tr>
+<tr><td><a href="S29.html"><code>S29</code></a> hardlink-mode-differs</td><td>A hardlink with the mode 755, to a file with the mode 644.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>h</code> (2 B, 87428fc5)</td></tr></table></div>
+<h2 id="rejects"><span class="mark bad" title="rejects a case to accept, or extracts another tree than the expected one, or crashes on it" role="img" aria-label="rejects a case to accept, or extracts another tree than the expected one, or crashes on it">✗</span>Rejects cases to accept, or extracts another tree (6)<a class="anchor" href="#rejects" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
 <tr><td><a href="F28.html"><code>F28</code></a> pax-newline-in-comment</td><td>A newline in a pax <code>comment</code>, which split on lines leaves a <code>size</code> record.</td><td>extracts <code>a</code> (512 B, 917dba8e)</td></tr>
 <tr><td><a href="F57.html"><code>F57</code></a> pax-newline-in-comment-path</td><td>A newline in a pax <code>comment</code>, which split on lines leaves a <code>path</code> record.</td><td>extracts <code>smuggled</code> (2 B, 87428fc5)</td></tr>
+<tr><td><a href="F65.html"><code>F65</code></a> archive-without-members</td><td>An archive without members: only the two zero blocks that end it.</td><td>error: Error: TAR_BAD_ARCHIVE: Unrecognized archive format</td></tr>
 <tr><td><a href="N46.html"><code>N46</code></a> pax-linkpath-linkname-empty</td><td>A symlink with an empty linkname field and a pax <code>linkpath</code>.</td><td>extracts nothing</td></tr>
 <tr><td><a href="N07.html"><code>N07</code></a> symlink-absolute</td><td>A symlink to an absolute path, created as it is.</td><td>extracts <code>link</code> → <code>tar-minefield-nonexistent</code></td></tr>
 <tr><td><a href="N35.html"><code>N35</code></a> symlink-escapes</td><td>A relative symlink whose target leads out of the destination.</td><td>extracts nothing</td></tr></table></div>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

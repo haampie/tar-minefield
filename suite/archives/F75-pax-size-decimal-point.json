@@ -1,0 +1,8 @@
+{
+ "id": "F75",
+ "verdict": "reject",
+ "description": "A pax `size` with a decimal point, `512.0`.",
+ "features": [
+  "pax.invalid-size"
+ ]
+}

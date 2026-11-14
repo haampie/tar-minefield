@@ -1,0 +1,8 @@
+{
+ "id": "F71",
+ "verdict": "reject",
+ "description": "A size whose first byte is `0x81`: base-256, or not a number?",
+ "features": [
+  "number.size.invalid-character"
+ ]
+}

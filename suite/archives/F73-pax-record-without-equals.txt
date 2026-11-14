@@ -1,0 +1,63 @@
+F73-pax-record-without-equals: must reject
+
+A pax record without `=`, before a `path` record.
+
+The archive has a file whose pax header has two records. The first is `11 comment`, followed by a
+newline, and does not have an equals sign. The second is `path=renamed`. The header of the file has
+the name `header-name`.
+
+In POSIX, an extended header consists of records, and a record is `<length>
+<key>=<value>`, followed by a newline, so the first record is malformed. Records are delimited by
+their length, so a reader can skip the malformed record. This case is ambiguous in
+practice because a reader can take the header in one of three ways. A reader that skips the
+malformed record applies the `path`, and extracts `renamed`. One that stops reading records at the
+malformed one, without an error, extracts `header-name`. Other readers report an error.
+
+Decision point: whether a reader skips a pax record without `=`, stops at it, or reports an error.
+Seen in: none of the scanned tarballs.
+See also: F36, a pax record whose length is one byte short.
+
+0x000000  header: pax extended header, a record without =, then a path
+          name     [  0,100)  "PaxHeader" + 91 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000033" + NUL  27
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011075\0 "  4669: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "x"  pax extended header
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: pax records, of which the first does not have =
+          27 bytes, then 485 NUL
+          "11 comment\n16 path=renamed\n"
+0x000400  header: regular file
+          name     [  0,100)  "header-name" + 89 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000014" + NUL  12
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011271\0 "  4793: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          12 bytes, then 500 NUL to the end of the block
+          "which name?\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

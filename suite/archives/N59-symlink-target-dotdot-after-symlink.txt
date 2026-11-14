@@ -1,0 +1,111 @@
+N59-symlink-target-dotdot-after-symlink: must accept, and extract its tree
+
+A symlink whose target has `..` after a component that is a symlink.
+
+The archive has the directories `d/` and `d/sub/`, a file `d/x`, a symlink `s` to `d/sub`, then a
+symlink `t` to `s/../x`.
+
+The target of a symlink is a string, which is not resolved when the link is
+created, so `t` is created with the target `s/../x`. When `t` is followed, `s` is resolved first,
+and `..` is then the parent of `d/sub`: the link leads to `d/x`. A reader that normalizes the target
+as it normalizes names drops `s/..`, and extracts a link to `x`, which is not in the archive. Both
+targets are inside the destination.
+
+Seen in: not measured, as the scans do not record the targets of symlinks.
+See also: N35, a symlink whose target leads out of the destination.
+
+0x000000  header: directory
+          name     [  0,100)  "d/" + 98 NUL
+          mode     [100,108)  "0000755" + NUL  755 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000000" + NUL  0
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007430\0 "  3864: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "5"  directory
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  header: directory
+          name     [  0,100)  "d/sub/" + 94 NUL
+          mode     [100,108)  "0000755" + NUL  755 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000000" + NUL  0
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "010221\0 "  4241: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "5"  directory
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000400  header: regular file
+          name     [  0,100)  "d/x" + 97 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007612\0 "  3978: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          2 bytes, then 510 NUL to the end of the block
+          "x\n"
+0x000800  header: symlink
+          name     [  0,100)  "s" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000000" + NUL  0
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "010317\0 "  4303: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "2"  symlink
+          linkname [157,257)  "d/sub" + 95 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000a00  header: symlink, a target that leads to d/x
+          name     [  0,100)  "t" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000000" + NUL  0
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "010230\0 "  4248: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "2"  symlink
+          linkname [157,257)  "s/../x" + 94 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000c00  2 zero blocks: the end-of-archive marker
+0x001000  end of file

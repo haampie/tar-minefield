@@ -1,0 +1,42 @@
+K13-number-mode-base256: must reject
+
+A mode in base-256.
+
+The archive has a file `a`, whose mode field is 755 in base-256: the byte `0x80`, followed by the
+number in binary.
+
+In GNU's format, a number is written in base-256 when it does not fit in the octal digits of its
+field, as a large size or uid does not. A mode has 12 bits, which always fit, so writers do
+not have a reason to write it in base-256, and not every reader of base-256 sizes reads base-256 in
+a mode. This case is ambiguous in practice because a reader can take the field in one of three ways.
+A reader that reads base-256 in every numeric field extracts `a` as an executable file. One that
+reads base-256 only in some fields does not find octal digits in this one, and extracts `a` without
+the execute permission. Other readers report an error.
+
+Decision point: whether a mode may be in base-256.
+Seen in: none of the scanned tarballs.
+See also: F56, a size in base-256, and F80, a uid in base-256.
+
+0x000000  header: regular file, mode 755, in base-256
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "\x80\0\0\0\0\0\x01\xed"  493: base-256
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007360\0 "  3824: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data
+          2 bytes, then 510 NUL to the end of the block
+          "a\n"
+0x000400  2 zero blocks: the end-of-archive marker
+0x000800  end of file

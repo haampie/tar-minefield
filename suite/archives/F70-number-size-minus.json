@@ -1,0 +1,8 @@
+{
+ "id": "F70",
+ "verdict": "reject",
+ "description": "A size with a minus sign, `-0000001000`.",
+ "features": [
+  "number.size.invalid-character"
+ ]
+}

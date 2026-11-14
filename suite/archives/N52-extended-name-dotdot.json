@@ -1,0 +1,8 @@
+{
+ "id": "N52",
+ "verdict": "reject",
+ "description": "A pax header whose own name leads out of the destination.",
+ "features": [
+  "extended.name-dotdot"
+ ]
+}

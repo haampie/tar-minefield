@@ -1,0 +1,60 @@
+F67-extended-without-member: must reject
+
+An extended header without a member after it.
+
+The archive has a file `a`, then a pax header with the record `path=renamed`, then the
+end-of-archive marker.
+
+In POSIX, an extended header applies to the file that follows it, and here the
+end-of-archive marker follows it. Such an archive may be cut short just before its last member. This
+case is ambiguous in practice because a reader either ignores the header, and extracts `a` without
+an error, or reports an error.
+
+Decision point: whether an extended header without a member is an error.
+Seen in: none of the scanned tarballs.
+See also: F64, an archive that ends inside a header.
+
+0x000000  header: regular file
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007340\0 "  3808: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data
+          2 bytes, then 510 NUL to the end of the block
+          "a\n"
+0x000400  header: pax extended header, the records of a member that is not there
+          name     [  0,100)  "PaxHeader" + 91 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000020" + NUL  16
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011071\0 "  4665: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "x"  pax extended header
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data: pax records
+          16 bytes of pax records, then 496 NUL
+          "16 path=renamed\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

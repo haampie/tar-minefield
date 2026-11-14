@@ -1,0 +1,38 @@
+N50-name-dot-component: tolerated: a strict parser may reject it; if it accepts it, it must extract its tree, and the default policy accepts it
+
+A name with a `.` component, `c/./d`.
+
+The archive has one file, `c/./d`.
+
+The special filename dot refers to the directory that it is in, so in POSIX the
+file is `c/d`. This case is ambiguous only to a reader that compares names as strings, to which
+`c/./d` and `c/d` are two names for one path. The default policy tolerates it, and takes `c/./d` and
+`c/d` in one archive for a duplicate.
+
+Decision point: whether a name is normalized before it is compared with others.
+Seen in: 10 of the scanned tarballs, such as besu 24.1.2 and xdaliclock 2.49.
+See also: N06, the name `./a`, and N49, a name with two consecutive slashes.
+
+0x000000  header: regular file
+          name     [  0,100)  "c/./d" + 95 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007722\0 "  4050: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data
+          2 bytes, then 510 NUL to the end of the block
+          "d\n"
+0x000400  2 zero blocks: the end-of-archive marker
+0x000800  end of file

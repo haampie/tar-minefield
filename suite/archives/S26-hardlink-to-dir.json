@@ -1,0 +1,8 @@
+{
+ "id": "S26",
+ "verdict": "reject",
+ "description": "A hardlink to a directory.",
+ "features": [
+  "hardlink.to-dir"
+ ]
+}

@@ -1,0 +1,8 @@
+{
+ "id": "K08",
+ "verdict": "reject",
+ "description": "A FIFO: created, an empty file, or skipped?",
+ "features": [
+  "type.fifo"
+ ]
+}

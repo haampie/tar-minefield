@@ -1,0 +1,8 @@
+{
+ "id": "F67",
+ "verdict": "reject",
+ "description": "An extended header without a member after it.",
+ "features": [
+  "extended.without-member"
+ ]
+}

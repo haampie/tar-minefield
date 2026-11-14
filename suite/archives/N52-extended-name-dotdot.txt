@@ -1,0 +1,63 @@
+N52-extended-name-dotdot: must reject
+
+A pax header whose own name leads out of the destination.
+
+The archive has a pax header that is itself named `../tar-minefield-escaped`, with a `comment`
+record, then a file `a`.
+
+The name of an extended header is not the name of a member: a reader that knows pax reads its
+records, and does not use its name. A ustar reader that predates pax extracts the header as a
+file of that name, which contains the records, and a reader that does not recognize
+the header does the same. In this archive, that file is written outside the destination. This case
+is ambiguous because the tree is either the file `a`, or `a` and a file next to the destination.
+That file is harmless: its contents say what happened.
+
+Decision point: whether the name of an extended header is checked as the name of a member is.
+Seen in: not measured, as the scans do not record the components of an extended header's name that
+come from its member: 1003 of the scanned tarballs may have such a name.
+See also: N16, a name with `..`, and F39, pax headers after a v7 header.
+
+0x000000  header: pax extended header, named to lead out of the destination
+          name     [  0,100)  "../tar-minefield-escaped" + 76 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000162" + NUL  114
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "013574\0 "  6012: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "x"  pax extended header
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: pax records
+          114 bytes of pax records, then 398 NUL
+          "114 comment=If this is a file outside the directory you extracted to, the extractor wrote a pax header as a file.\n"
+0x000400  header: regular file
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007340\0 "  3808: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          2 bytes, then 510 NUL to the end of the block
+          "a\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

@@ -1,0 +1,86 @@
+F76-checksum-byte-after-nul: must reject
+
+A byte after the NUL that ends a checksum, in a header after the first member.
+
+The archive has the files `a`, `b` and `c`. The checksum field of `b` is six octal digits, followed
+by a NUL, followed by the letter `x`. The digits are the correct checksum.
+
+In POSIX, a numeric field is terminated by one or more spaces or NULs, and the checksum
+field has 8 bytes. It is not specified what may follow the terminator. Most writers end the six
+digits with a NUL and a space, and here the last byte is the letter `x`. This case is ambiguous in
+practice because a reader can take the header of `b` in one of three ways. A reader that reads the
+digits up to the NUL reads a correct checksum, and extracts `a`, `b` and `c`. One that checks every
+byte of the field, and skips blocks until it finds a header with a correct checksum, extracts `a`
+and `c`, without an error. Other readers report an error.
+
+Decision point: whether the bytes after the terminator of a checksum are part of it.
+Seen in: not measured, as earlier versions of the scanner did not record it: 7 of the scanned
+tarballs have a checksum field with a byte that is not a digit, a space or a NUL.
+See also: F47, a header with a wrong checksum after the first member, and F32, a checksum padded
+with spaces.
+
+0x000000  header: regular file
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007340\0 "  3808: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data
+          2 bytes, then 510 NUL to the end of the block
+          "a\n"
+0x000400  header: regular file, its checksum ends in a NUL and x
+          name     [  0,100)  "b" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007341\0x"  3809: the unsigned sum, as the case writes it
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          2 bytes, then 510 NUL to the end of the block
+          "b\n"
+0x000800  header: regular file
+          name     [  0,100)  "c" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007342\0 "  3810: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000a00  data
+          2 bytes, then 510 NUL to the end of the block
+          "c\n"
+0x000c00  2 zero blocks: the end-of-archive marker
+0x001000  end of file

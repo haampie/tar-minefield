@@ -1,0 +1,22 @@
+{
+ "id": "K10",
+ "verdict": "accept",
+ "description": "Files executable by their group or others, but not by their owner.",
+ "features": [],
+ "tree": [
+  {
+   "path": "g",
+   "kind": "file",
+   "executable": false,
+   "size": 2,
+   "sha256": "768c71d785bf6bbbf8c4d6af6582041f2659027140a962cd0c55b11eddfd5e3d"
+  },
+  {
+   "path": "o",
+   "kind": "file",
+   "executable": false,
+   "size": 2,
+   "sha256": "7427d152005f9ed0fa31c76ef9963cf4bb47dce6e2768111d9eb0edbfe59c704"
+  }
+ ]
+}

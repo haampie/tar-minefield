@@ -1,0 +1,8 @@
+{
+ "id": "S21",
+ "verdict": "reject",
+ "description": "An empty directory, then a file of the same name.",
+ "features": [
+  "tree.duplicate.dir-file"
+ ]
+}

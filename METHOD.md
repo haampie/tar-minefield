@@ -83,7 +83,10 @@ Framing:
 - Numeric fields: a leading NUL (GNU tar skips it, `tarfile` stops at it), spaces or NULs
   between digits, no terminator, digits 8 and 9, an empty field, base-256 (positive and
   negative, and sizes past 64 bits, which some readers wrap around).
-- Checksums: signed versus unsigned sums, and the formats of the checksum field.
+- Checksums: signed versus unsigned sums, a NUL before the digits of the field, and bytes after
+  its terminator, which make some implementations skip a member.
+- Numeric fields outside the tree, such as the uid: where one is not a number, some
+  implementations end the archive at its header, without an error.
 - Sizes of members that carry no data in some implementations: directories, hardlinks, symlinks,
   devices, fifos.
 - Unknown typeflags: [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file) treats them as regular files with data, an implementation may also skip
@@ -99,12 +102,18 @@ Framing:
   (decimal to [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number), octal to `strtoul(s, NULL, 0)`), and values past 64 bits.
 - Empty values in pax headers, which in [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field) remove a key: an empty `size` leaves a member
   without a size, which implementations take as 0, as the header's size, or reject.
-- pax record framing: the length counts itself, leading zeros in the length, data after the last
-  record, records not ending in a newline, values that contain a newline (records are delimited by
+- pax record framing: the length counts itself, leading zeros in the length, a length that
+  wraps around in 32 bits, data after the last record, records not ending in a newline, records
+  without `=`, values that contain a newline (records are delimited by
   length, so an implementation that splits on lines sees different records, even in a `comment`
-  that no implementation applies), keys with whitespace (GNU tar strips it, `tarfile` does not).
+  that no implementation applies), keys with whitespace (GNU tar strips it, `tarfile` does not),
+  keys with a NUL, and a `size` twice in one header.
+- pax keys that change the contents of a file from inside: `SCHILY.realsize`, to which libarchive
+  cuts the data of any file.
 - The end of the archive: a lone zero block, zero blocks followed by more members (GNU tar's
-  `--ignore-zeros`), data other than zeros after the end-of-archive marker, no marker at all.
+  `--ignore-zeros`), data other than zeros after the end-of-archive marker, no marker at all, an
+  archive that ends inside a header or before the data of its last member is padded to a block,
+  and a file of 0 bytes.
 - Recognizing a header: v7 headers without magic, the POSIX magic `"ustar\0"` with the GNU version
   field and vice versa, damaged magic.
 - Global pax headers: a `size` in one, one between an extended header and its member, which the
@@ -126,8 +135,10 @@ Name:
   [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20extended%20header%20records%20shall%20be%20encoded%20according%20to%20the%20ISO%2FIEC%2010646%2D1%3A2020%20standard%20UTF%2D8%20encoding) does not allow, but libarchive and star write xattrs as.
 - An empty pax `path` or `linkpath`, which in [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block) removes it, rather than falling back to the
   header's name.
-- Normalization: `./a` and `a`, `a//b`, `a/./b`, a trailing slash, `.`, an empty name, `\` as a
-  separator on Windows, drive letters.
+- Normalization: `./a` and `a`, `a//b`, `a/./b`, `a/../b`, a trailing slash, `.`, an empty name,
+  `\` as a separator on Windows, drive letters.
+- The names of extended headers themselves, which an implementation that does not know their
+  typeflag uses when it extracts the headers as files.
 - The same questions for link targets: `linkpath`, GNU long links (`K`) and the linkname field.
 - A `path` or `linkpath` in a global pax header, and empty values in one, which in [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=previously%20entered%20extended%20header%20value%2C%20or%20global%20extended%20header%20value%20of%20the%20same%20name) remove an
   earlier global value.
@@ -137,17 +148,22 @@ Kind:
 - A regular file whose name ends in a slash: the historical convention for directories. GNU tar
   1.35, `tarfile` and Ubuntu's patched GNU tar 1.35 make three different trees of one archive.
 - A trailing slash on the name of a link.
-- A file or link named `.`, which is the root of the tree.
-- A link target in the linkname field of a member that is not a link.
+- A file or link named `.`, which is the root of the tree, and a file whose name ends in `/.`.
+- A link target in the linkname field of a member that is not a link, or in its pax `linkpath`.
+- FIFOs and devices, which the tree does not have: created, extracted as empty files, or skipped.
+- Whether a file is executable: a mode in base-256, and what besides the mode of the header can
+  decide it (a pax `mode`, and an ACL in a pax header).
 
 Order and state:
 
 - Duplicate paths: file and file (last wins, or first wins), file and directory, directory and
-  directory, symlink and file (replace the symlink, or write through it).
+  directory, symlink and file (replace the symlink, or write through it), symlink and symlink, and
+  a file or symlink at the path of a directory, including one that is not a member itself.
 - Writing through a symlink: a member `a/b` after a symlink `a`.
 - Hardlinks to a later member, to a member that does not exist, to a directory, to a symlink (link
-  the symlink or its target), to themselves, to an absolute path, or to a target spelled
-  differently from the member it names (`./a` and `a`).
+  the symlink or its target), to themselves, to an absolute path, to a target spelled
+  differently from the member it names (`./a` and `a`, or `a/` where `a` is a file), to a target
+  reached through a symlink, or with a mode other than that of their target.
 
 ## Verdicts
 
@@ -173,7 +189,10 @@ parser would trip over:
 - vendor pax keys that do not affect the tree: an xattr in `SCHILY.xattr.*`, as libarchive and
   star write them, with a value that is not UTF-8,
 - directories after their contents,
-- the same directory listed twice, as `tar cf x.tar dir dir/sub` writes.
+- the same directory listed twice, as `tar cf x.tar dir dir/sub` writes,
+- executable files, and a read-only directory before its contents,
+- uid and gid fields that are empty, or in base-256,
+- an archive without members.
 
 Real archives also have numeric fields terminated by a space, and the AppleDouble `._` files of
 macOS, which no case to accept covers yet.
@@ -220,7 +239,8 @@ costs. The tolerated cases are:
   differently.
 - sizes in base-256, as GNU's format writes sizes of 8 GiB and over: a reader that does not
   support base-256 cannot take it for octal, so it has one reading. In pax, such sizes are in a
-  `size` record.
+  `size` record. A mode in base-256 is rejected: a mode fits in octal, and not every reader of
+  base-256 sizes reads base-256 in a mode.
 - newlines in the values of xattr pax keys, which are not extracted.
 - a pax `size` that disagrees with the header's, when the pax size frames the member, as POSIX
   says. A strict parser may reject a header whose size field has room for the size but gives
