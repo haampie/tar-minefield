@@ -23,6 +23,6 @@ TREE = [D("p"), F("p/a", b"a\n")]
 
 
 def build(a):
-    a.pax([(b"mtime", b"1")], note="without a path")
+    a.pax([(b"mtime", b"1")], note="without a path record")
     a.file(b"a", b"a\n", prefix=b"p")
     a.end()

@@ -24,6 +24,6 @@ FEATURES = ["pax.acl"]
 
 def build(a):
     a.pax([(b"SCHILY.acl.access", b"user::rwx,group::r-x,other::r-x")],
-          note="an ACL that says 755")
+          note="an ACL equal to the mode 755")
     a.file(b"a", b"a\n")
     a.end()

@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a pax header that is itself named <code>../tar-minefield-escaped</code>, with a <code>comment</code> record, then a file <code>a</code>.</p>
-<p>The name of an extended header is not the name of a member: a reader that knows pax reads its records, and does not use its name. A reader of ustar before pax <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=the%20header%20block%20fields%20are%20used%20to%20create%20a%20regular%20file%20that%20contains%20the%20extended%20header%20records%20as%20data">extracts the header as a file</a> of that name, which contains the records, and a reader that does not recognize the header does the same. In this archive, that file is written outside the destination. This case is ambiguous because the tree is either the file <code>a</code>, or <code>a</code> and a file next to the destination. That file is harmless: its contents say what happened.</p>
+<p>The name of an extended header is not the name of a member: a reader that knows pax reads its records, and does not use its name. A ustar reader that predates pax <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=the%20header%20block%20fields%20are%20used%20to%20create%20a%20regular%20file%20that%20contains%20the%20extended%20header%20records%20as%20data">extracts the header as a file</a> of that name, which contains the records, and a reader that does not recognize the header does the same. In this archive, that file is written outside the destination. This case is ambiguous because the tree is either the file <code>a</code>, or <code>a</code> and a file next to the destination. That file is harmless: its contents say what happened.</p>
 <p><strong>Decision point:</strong> whether the name of an extended header is checked as the name of a member is.</p>
 <p><strong>Seen in:</strong> not measured, as the scans do not record the components of the name of an extended header that come from its member: 1003 of the scanned tarballs may have such a name.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -56,7 +56,7 @@ The archive has a pax header that is itself named `../tar-minefield-escaped`, wi
 record, then a file `a`.
 
 The name of an extended header is not the name of a member: a reader that knows pax reads its
-records, and does not use its name. A reader of ustar before pax extracts the header as a
+records, and does not use its name. A ustar reader that predates pax extracts the header as a
 file of that name, which contains the records, and a reader that does not recognize
 the header does the same. In this archive, that file is written outside the destination. This case
 is ambiguous because the tree is either the file `a`, or `a` and a file next to the destination.

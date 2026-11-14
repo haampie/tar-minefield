@@ -7,7 +7,7 @@ In [POSIX][hardlink], the target of a hardlink is a file archived before it, and
 name of a member. As a path, `s/f` resolves through the symlink to `d/f`, which is a member. This
 case is ambiguous because `h` is either a link to `d/f`, to a reader that resolves the target as a
 path on the filesystem, or an [error][link-error], to one that takes the target for the name of a
-member. Neither reading skips the link without an error, though some readers do.
+member. Some readers skip the link without an error, which is neither of these readings.
 
 Decision point: whether the target of a hardlink is a path or the name of a member.
 Seen in: none of the scanned tarballs.

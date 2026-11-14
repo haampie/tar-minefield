@@ -12,7 +12,7 @@ that of the owner makes both executable.
 Seen in: not measured, as the scans do not record modes.
 See also: K09, an executable file.
 
-0x000000  header: regular file, executable for its group only
+0x000000  header: regular file, executable by its group only
           name     [  0,100)  "g" + 99 NUL
           mode     [100,108)  "0000654" + NUL  654 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -33,7 +33,7 @@ See also: K09, an executable file.
 0x000200  data
           2 bytes, then 510 NUL to the end of the block
           "g\n"
-0x000400  header: regular file, executable for others only
+0x000400  header: regular file, executable by others only
           name     [  0,100)  "o" + 99 NUL
           mode     [100,108)  "0000645" + NUL  645 (octal)
           uid      [108,116)  "0000000" + NUL  0

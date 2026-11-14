@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a pax header of 24 bytes with one record, <code>4294967320 path=renamed</code>, followed by a newline. Its length says 4294967320, which is 2^32 + 24, and the record has 24 bytes. After it is the member, whose header has the name <code>header-name</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">POSIX</a>, the length of a record counts its bytes, and this one says that the record is longer than its header. This case is ambiguous in practice because a reader that keeps the length in 32 bits reads 24, which is where the record ends, and extracts <code>renamed</code>. One that reads the whole number finds a record that runs past the end of the header: it reports an error, or drops the record and extracts <code>header-name</code>, or takes the rest of the header for the value, and extracts a file whose name is <code>renamed</code>, followed by a newline.</p>
+<p>The archive has a pax header whose data is 24 bytes, with one record, <code>4294967320 path=renamed</code>, followed by a newline. Its length says 4294967320, which is 2^32 + 24, and the record has 24 bytes. After it is the member, whose header has the name <code>header-name</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">POSIX</a>, the length of a record counts its bytes, and this one says that the record is longer than the data of its header. This case is ambiguous in practice because a reader that keeps the length in 32 bits reads 24, which is where the record ends, and extracts <code>renamed</code>. One that reads the whole number finds a record that runs past the end of the header: it reports an error, or drops the record and extracts <code>header-name</code>, or takes the rest of the header for the value, and extracts a file whose name is <code>renamed</code>, followed by a newline.</p>
 <p><strong>Decision point:</strong> whether a pax record whose length runs past its header is recognized as malformed.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,16 +52,16 @@
 
 A pax record whose length is 2^32 + 24, which wraps around to 24 in 32 bits.
 
-The archive has a pax header of 24 bytes with one record, `4294967320 path=renamed`, followed by a
-newline. Its length says 4294967320, which is 2^32 + 24, and the record has 24 bytes. After it is
-the member, whose header has the name `header-name`.
+The archive has a pax header whose data is 24 bytes, with one record, `4294967320 path=renamed`,
+followed by a newline. Its length says 4294967320, which is 2^32 + 24, and the record has 24 bytes.
+After it is the member, whose header has the name `header-name`.
 
 In POSIX, the length of a record counts its bytes, and this one says that the
-record is longer than its header. This case is ambiguous in practice because a reader that keeps the
-length in 32 bits reads 24, which is where the record ends, and extracts `renamed`. One that reads
-the whole number finds a record that runs past the end of the header: it reports an error, or drops
-the record and extracts `header-name`, or takes the rest of the header for the value, and extracts a
-file whose name is `renamed`, followed by a newline.
+record is longer than the data of its header. This case is ambiguous in practice because a reader
+that keeps the length in 32 bits reads 24, which is where the record ends, and extracts `renamed`.
+One that reads the whole number finds a record that runs past the end of the header: it reports an
+error, or drops the record and extracts `header-name`, or takes the rest of the header for the
+value, and extracts a file whose name is `renamed`, followed by a newline.
 
 Decision point: whether a pax record whose length runs past its header is recognized as malformed.
 Seen in: none of the scanned tarballs.
@@ -355,6 +355,6 @@ around.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

@@ -15,7 +15,7 @@ Seen in: 32 of the scanned tarballs have members with a prefix, and pax headers 
 See also: N04, a name split between the prefix and name fields, and N03, a long name in a pax
 `path`.
 
-0x000000  header: pax extended header, without a path
+0x000000  header: pax extended header, without a path record
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

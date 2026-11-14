@@ -21,6 +21,6 @@ TREE = [D("日本語"), F("日本語/café.txt", b"which name?\n")]
 
 
 def build(a):
-    a.pax([(b"path", "日本語/café.txt".encode())], note="a path in UTF-8")
+    a.pax([(b"path", "日本語/café.txt".encode())], note="a path in UTF-8 that is not ASCII")
     a.file(b"nihongo/cafe.txt", b"which name?\n")
     a.end()

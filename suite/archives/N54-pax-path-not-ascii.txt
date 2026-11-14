@@ -13,7 +13,7 @@ Seen in: 789 of the scanned tarballs have names that are not ASCII, in a pax `pa
 field.
 See also: N03, a long name in a pax `path`, and N18, a name that is not UTF-8.
 
-0x000000  header: pax extended header, a path in UTF-8
+0x000000  header: pax extended header, a path in UTF-8 that is not ASCII
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

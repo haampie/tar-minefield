@@ -4,7 +4,7 @@ The archive has a pax header that is itself named `../tar-minefield-escaped`, wi
 record, then a file `a`.
 
 The name of an extended header is not the name of a member: a reader that knows pax reads its
-records, and does not use its name. A reader of ustar before pax [extracts the header as a
+records, and does not use its name. A ustar reader that predates pax [extracts the header as a
 file][pre-pax-reader] of that name, which contains the records, and a reader that does not recognize
 the header does the same. In this archive, that file is written outside the destination. This case
 is ambiguous because the tree is either the file `a`, or `a` and a file next to the destination.

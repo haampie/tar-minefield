@@ -7,9 +7,9 @@ In [POSIX][no-data], an archive does not store data for a symlink, whose size fi
 zero][link-size-zero], so the next block is the header of `smuggled`. This case is ambiguous in
 practice because a reader can take the size in one of five ways. A reader that ignores it extracts
 the link, `smuggled` and `b`. One that skips 512 bytes of data extracts the link and `b`. One that
-reads the data as the target of the link extracts a link to `smuggled`, which is the string at the
-start of that block. One that extracts a symlink as a file writes that block as its contents. Other
-readers report an error.
+reads the data as the target of the link extracts a link to `smuggled`, the name at the start of
+that header. One that extracts a symlink as a file writes that block as its contents. Other readers
+report an error.
 
 Decision point: whether the size in the header of a symlink applies.
 Seen in: none of the scanned tarballs.
@@ -22,7 +22,8 @@ FEATURES = ["size.on-symlink"]
 
 
 def build(a):
-    a.header(b"l", b"2", 512, linkname=b"target", note="no data, but its size field is 512")
+    a.header(b"l", b"2", 512, linkname=b"target",
+             note="a symlink, which has no data, but its size field is 512")
     a.file(b"smuggled", b"", note="the block that the size covers")
     a.file(b"b", b"b\n")
     a.end()

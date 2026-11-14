@@ -19,6 +19,6 @@ TREE = [F("g", b"g\n"), F("o", b"o\n")]
 
 
 def build(a):
-    a.file(b"g", b"g\n", mode=0o654, note="executable for its group only")
-    a.file(b"o", b"o\n", mode=0o645, note="executable for others only")
+    a.file(b"g", b"g\n", mode=0o654, note="executable by its group only")
+    a.file(b"o", b"o\n", mode=0o645, note="executable by others only")
     a.end()
