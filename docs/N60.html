@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a global header that is itself named <code>g/pax_global_header</code>, with a <code>comment</code> record, then a file <code>a</code>.</p>
-<p>The name of a <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Represents%20global%20extended%20header%20records%20for%20the%20following%20files%20in%20the%20archive">global header</a> is not the name of a member, and a reader that knows pax does not use it. So the tree is the file <code>a</code>, without a directory <code>g</code>. A reader that creates the parent directories of every header, before it looks at its typeflag, leaves an empty directory <code>g</code>. Writers name these headers in a directory: <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_04:~:text=If%20no%20%2Do%20globexthdr.name%3Dstring%20is%20specified%2C%20pax%20shall%20use%20the%20following%20default%20value">by default</a>, a global header is named <code>$TMPDIR/GlobalHead.%p.%n</code>, with the process ID and a sequence number, and an extended header <code>%d/PaxHeaders.%p/%f</code>, with the directory and the name of its member.</p>
+<p>The name of a <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Represents%20global%20extended%20header%20records%20for%20the%20following%20files%20in%20the%20archive">global header</a> is not the name of a member, and a reader that knows pax does not use it. So the tree is the file <code>a</code>, without a directory <code>g</code>. A reader that creates the parent directories of every header, before it looks at its typeflag, leaves an empty directory <code>g</code>. Writers give these headers a name in a directory: <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_04:~:text=If%20no%20%2Do%20globexthdr.name%3Dstring%20is%20specified%2C%20pax%20shall%20use%20the%20following%20default%20value">by default</a>, a global header is named <code>$TMPDIR/GlobalHead.%p.%n</code>, with the process ID and a sequence number, and an extended header <code>%d/PaxHeaders.%p/%f</code>, with the directory and the name of its member.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>2 bytes, sha256 <code title="87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7">87428fc5</code></td></tr></table></div>
@@ -60,8 +60,8 @@ then a file `a`.
 The name of a global header is not the name of a member, and a reader that knows pax
 does not use it. So the tree is the file `a`, without a directory `g`. A reader that creates the
 parent directories of every header, before it looks at its typeflag, leaves an empty directory `g`.
-Writers name these headers in a directory: by default, a global header is named
-`$TMPDIR/GlobalHead.%p.%n`, with the process ID and a sequence number, and an extended header
+Writers give these headers a name in a directory: by default, a global header is
+named `$TMPDIR/GlobalHead.%p.%n`, with the process ID and a sequence number, and an extended header
 `%d/PaxHeaders.%p/%f`, with the directory and the name of its member.
 
 Seen in: gpa 0.11.0 and 0.11.1 and drbd 9.3.3, whose global headers GNU tar named

@@ -83,8 +83,8 @@ Framing:
 - Numeric fields: a leading NUL (GNU tar skips it, `tarfile` stops at it), spaces or NULs
   between digits, no terminator, digits 8 and 9, an empty field, base-256 (positive and
   negative, and sizes past 64 bits, which some readers wrap around).
-- Checksums: signed versus unsigned sums, and the formats of the checksum field: a NUL before
-  its digits, and bytes after its terminator, which make some implementations skip a member.
+- Checksums: signed versus unsigned sums, a NUL before the digits of the field, and bytes after
+  its terminator, which make some implementations skip a member.
 - Numeric fields outside the tree, such as the uid: where one is not a number, some
   implementations end the archive at its header, without an error.
 - Sizes of members that carry no data in some implementations: directories, hardlinks, symlinks,
@@ -108,8 +108,8 @@ Framing:
   length, so an implementation that splits on lines sees different records, even in a `comment`
   that no implementation applies), keys with whitespace (GNU tar strips it, `tarfile` does not),
   keys with a NUL, and a `size` twice in one header.
-- pax keys that change the contents of a file from inside: `SCHILY.realsize`, which libarchive
-  cuts the data of any file to.
+- pax keys that change the contents of a file from inside: `SCHILY.realsize`, to which libarchive
+  cuts the data of any file.
 - The end of the archive: a lone zero block, zero blocks followed by more members (GNU tar's
   `--ignore-zeros`), data other than zeros after the end-of-archive marker, no marker at all, an
   archive that ends inside a header or before the data of its last member is padded to a block,
@@ -137,8 +137,8 @@ Name:
   header's name.
 - Normalization: `./a` and `a`, `a//b`, `a/./b`, `a/../b`, a trailing slash, `.`, an empty name,
   `\` as a separator on Windows, drive letters.
-- The names of extended headers themselves, under which an implementation that does not know
-  their typeflag extracts the headers as files.
+- The names of extended headers themselves, which an implementation that does not know their
+  typeflag uses when it extracts the headers as files.
 - The same questions for link targets: `linkpath`, GNU long links (`K`) and the linkname field.
 - A `path` or `linkpath` in a global pax header, and empty values in one, which in [POSIX](https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=previously%20entered%20extended%20header%20value%2C%20or%20global%20extended%20header%20value%20of%20the%20same%20name) remove an
   earlier global value.

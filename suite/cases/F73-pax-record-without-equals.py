@@ -11,8 +11,7 @@ practice because a reader can take the header in one of three ways. A reader tha
 malformed record applies the `path`, and extracts `renamed`. One that stops reading records at the
 malformed one, without an error, extracts `header-name`. Other readers report an error.
 
-Decision point: whether a pax record without `=` is skipped, is the last one that is read, or is an
-error.
+Decision point: whether a reader skips a pax record without `=`, stops at it, or reports an error.
 Seen in: none of the scanned tarballs.
 See also: F36, a pax record whose length is one byte short.
 """

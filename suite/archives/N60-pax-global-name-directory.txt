@@ -8,8 +8,8 @@ then a file `a`.
 The name of a global header is not the name of a member, and a reader that knows pax
 does not use it. So the tree is the file `a`, without a directory `g`. A reader that creates the
 parent directories of every header, before it looks at its typeflag, leaves an empty directory `g`.
-Writers name these headers in a directory: by default, a global header is named
-`$TMPDIR/GlobalHead.%p.%n`, with the process ID and a sequence number, and an extended header
+Writers give these headers a name in a directory: by default, a global header is
+named `$TMPDIR/GlobalHead.%p.%n`, with the process ID and a sequence number, and an extended header
 `%d/PaxHeaders.%p/%f`, with the directory and the name of its member.
 
 Seen in: gpa 0.11.0 and 0.11.1 and drbd 9.3.3, whose global headers GNU tar named

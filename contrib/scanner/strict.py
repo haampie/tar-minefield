@@ -74,7 +74,7 @@ STRICT = [
     ("pax.size-on-*", "framing", "a pax size on a member without data"),
     ("pax.size-repeated", "framing", "a pax size twice in one header: the first, or the last"),
     ("pax.SCHILY.realsize", "framing",
-     "star's size of a sparse file, which libarchive cuts the data of any file to"),
+     "star's size of a sparse file, to which libarchive cuts the data of any file"),
     ("size.on-*", "framing", "a size on a member without data, which some implementations skip"),
     ("pax.size-*", "framing", "a pax size that disagrees with the header"),
     ("extended.pax-size-before-gnu-long", "framing", "a pax size that a GNU long name may take"),

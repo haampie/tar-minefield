@@ -9,7 +9,7 @@ three ways. A reader that does not read the uid, or that reads it up to the 8, e
 `c`. One that takes a header with a field that is not a number for the end of the archive extracts
 `a`, without an error. Other readers report an error.
 
-Decision point: whether a header with a uid that is not a number is a header.
+Decision point: whether a header whose uid is not a number counts as a header.
 Seen in: none of the scanned tarballs.
 See also: F37, a size with the digit 9, and F47, a header with a wrong checksum after the first
 member.

@@ -15,7 +15,7 @@ one that applies them extracts `a` as an executable file.
 Decision point: whether an ACL in a pax header is applied.
 Seen in: not measured, as the scans do not record all pax keys of a tarball, only its 8 most common,
 and do not record the names of xattrs: a key `SCHILY.acl.*` is not among those of any tarball, and
-45 of the scanned tarballs have xattrs, which an ACL can be in, or more keys.
+45 of the scanned tarballs have more keys, or xattrs, which an ACL can be in.
 See also: K09, an executable file, and F31, an xattr in a pax header.
 
 0x000000  header: pax extended header, an ACL equal to the mode 755
