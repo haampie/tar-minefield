@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, whose pax header has the record <code>TARMINEFIELD.unknown=1</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=or%20a%20keyword%20provided%20as%20an%20implementation%20extension">POSIX</a>, a key is a specified one or an implementation extension, such as the <code>SCHILY.*</code> keys of star, the <code>LIBARCHIVE.*</code> keys of libarchive and the <code>GNU.*</code> keys of GNU tar. It is not specified what a reader does with a key that it does not know. A reader does not know the extensions of every writer, and one that rejects an unknown key rejects the archives of the writers that use it, so every implementation must extract <code>a</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=or%20a%20keyword%20provided%20as%20an%20implementation%20extension">POSIX</a>, a key is either specified or an implementation extension, such as the <code>SCHILY.*</code> keys of star, the <code>LIBARCHIVE.*</code> keys of libarchive and the <code>GNU.*</code> keys of GNU tar. It is not specified what a reader does with a key that it does not know. A reader does not know the extensions of every writer, and one that rejects an unknown key rejects the archives of the writers that use it, so every implementation must extract <code>a</code>.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>2 bytes, sha256 <code title="87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7">87428fc5</code></td></tr></table></div>
@@ -56,7 +56,7 @@ A pax header with a key that readers do not know.
 
 The archive has a file `a`, whose pax header has the record `TARMINEFIELD.unknown=1`.
 
-In POSIX, a key is a specified one or an implementation extension, such as the
+In POSIX, a key is either specified or an implementation extension, such as the
 `SCHILY.*` keys of star, the `LIBARCHIVE.*` keys of libarchive and the `GNU.*` keys of GNU tar. It
 is not specified what a reader does with a key that it does not know. A reader does not know the
 extensions of every writer, and one that rejects an unknown key rejects the archives of the writers

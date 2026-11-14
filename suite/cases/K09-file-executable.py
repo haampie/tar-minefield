@@ -2,7 +2,7 @@
 
 The archive has two files: `r`, with the mode 644, and `x`, a shell script with the mode 755.
 
-The [mode][mode] field contains the permissions of a file, of which one is the execute permission of
+The [mode][mode] field contains the permissions of a file, one of which is the execute permission of
 its owner. A script or a program does not run without that permission, so whether a file is
 executable is part of the tree. The file `x` is executable, and `r` is not. A reader that creates
 every file with the same mode extracts `x` without the execute permission.

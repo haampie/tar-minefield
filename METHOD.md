@@ -162,7 +162,7 @@ Order and state:
 - Writing through a symlink: a member `a/b` after a symlink `a`.
 - Hardlinks to a later member, to a member that does not exist, to a directory, to a symlink (link
   the symlink or its target), to themselves, to an absolute path, to a target spelled
-  differently from the member it names (`./a` and `a`, or `a/`, which is not a file), to a target
+  differently from the member it names (`./a` and `a`, or `a/` where `a` is a file), to a target
   reached through a symlink, or with a mode other than that of their target.
 
 ## Verdicts

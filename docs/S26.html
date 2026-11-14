@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a directory <code>d</code> with a file <code>d/f</code>, then a hardlink <code>h</code> to <code>d</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, a hardlink is a link to a file of any type archived before it, including a directory. On most systems, a directory <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/link.html#:~:text=If%20path1%20names%20a%20directory%2C%20link%28%29%20shall%20fail%20unless%20the%20process%20has%20appropriate%20privileges">cannot be linked</a>, and a link that cannot be made is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=it%20shall%20be%20an%20error%20if%20these%20files%20cannot%20be%20linked%20when%20the%20archive%20is%20extracted">error</a>, or its data is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=either%20the%20data%20shall%20be%20restored%20from%20the%20original%20file">restored from the original file</a>. This case is ambiguous in practice because a reader can take the link in one of five ways. A reader that creates a member of the kind of its target extracts an empty directory <code>h</code>. One that copies the target where it cannot link extracts a copy of the directory with its contents, so that the tree has <code>h/f</code>. One that makes a regular file of a link that it cannot create extracts an empty file <code>h</code>. One that skips a link that it cannot make extracts <code>d</code> and <code>d/f</code> alone, without an error. Other readers report an error.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, a hardlink is a link to a file of any type archived before it, including a directory. On most systems, a directory <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/link.html#:~:text=If%20path1%20names%20a%20directory%2C%20link%28%29%20shall%20fail%20unless%20the%20process%20has%20appropriate%20privileges">cannot be linked</a>, and a link that cannot be made is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=it%20shall%20be%20an%20error%20if%20these%20files%20cannot%20be%20linked%20when%20the%20archive%20is%20extracted">error</a>, or its data is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=either%20the%20data%20shall%20be%20restored%20from%20the%20original%20file">restored from the original file</a>. This case is ambiguous in practice because a reader can take the link in one of five ways. A reader that creates a member of the same kind as its target extracts an empty directory <code>h</code>. One that copies the target where it cannot link extracts a copy of the directory with its contents, so that the tree has <code>h/f</code>. One that makes a regular file of a link that it cannot create extracts an empty file <code>h</code>. One that skips a link that it cannot make extracts <code>d</code> and <code>d/f</code> alone, without an error. Other readers report an error.</p>
 <p><strong>Decision point:</strong> what a hardlink to a directory does.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -58,11 +58,11 @@ In POSIX, a hardlink is a link to a file of any type archived before it, includi
 directory. On most systems, a directory cannot be linked, and a link that cannot be made
 is an error, or its data is restored from the original file. This case is
 ambiguous in practice because a reader can take the link in one of five ways. A reader that creates
-a member of the kind of its target extracts an empty directory `h`. One that copies the target where
-it cannot link extracts a copy of the directory with its contents, so that the tree has `h/f`. One
-that makes a regular file of a link that it cannot create extracts an empty file `h`. One that skips
-a link that it cannot make extracts `d` and `d/f` alone, without an error. Other readers report an
-error.
+a member of the same kind as its target extracts an empty directory `h`. One that copies the target
+where it cannot link extracts a copy of the directory with its contents, so that the tree has `h/f`.
+One that makes a regular file of a link that it cannot create extracts an empty file `h`. One that
+skips a link that it cannot make extracts `d` and `d/f` alone, without an error. Other readers
+report an error.
 
 Decision point: what a hardlink to a directory does.
 Seen in: none of the scanned tarballs.

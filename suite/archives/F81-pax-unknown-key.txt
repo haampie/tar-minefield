@@ -4,7 +4,7 @@ A pax header with a key that readers do not know.
 
 The archive has a file `a`, whose pax header has the record `TARMINEFIELD.unknown=1`.
 
-In POSIX, a key is a specified one or an implementation extension, such as the
+In POSIX, a key is either specified or an implementation extension, such as the
 `SCHILY.*` keys of star, the `LIBARCHIVE.*` keys of libarchive and the `GNU.*` keys of GNU tar. It
 is not specified what a reader does with a key that it does not know. A reader does not know the
 extensions of every writer, and one that rejects an unknown key rejects the archives of the writers
