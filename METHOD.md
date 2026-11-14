@@ -240,7 +240,7 @@ costs. The tolerated cases are:
 - sizes in base-256, as GNU's format writes sizes of 8 GiB and over: a reader that does not
   support base-256 cannot take it for octal, so it has one reading. In pax, such sizes are in a
   `size` record. A mode in base-256 is rejected: a mode fits in octal, and not every reader of
-  base-256 sizes reads a mode in it.
+  base-256 sizes reads base-256 in a mode.
 - newlines in the values of xattr pax keys, which are not extracted.
 - a pax `size` that disagrees with the header's, when the pax size frames the member, as POSIX
   says. A strict parser may reject a header whose size field has room for the size but gives

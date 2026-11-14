@@ -247,7 +247,7 @@ DEFAULT = [
      "its use"),
     ("number.*.leading-space", "accept", "implementations read octal padded with spaces alike"),
     ("number.mode.base256*", "reject",
-     "a mode fits in octal, and not every reader of base-256 sizes reads a mode in it"),
+     "a mode fits in octal, and not every reader of base-256 sizes reads base-256 in a mode"),
     ("number.*.base256", "accept",
      "a reader that does not support base-256 cannot take it for octal, so it has one reading"),
     ("type.contiguous", "accept",

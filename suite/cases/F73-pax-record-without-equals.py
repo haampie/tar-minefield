@@ -1,8 +1,8 @@
 """A pax record without `=`, before a `path` record.
 
 The archive has a file whose pax header has two records. The first is `11 comment`, followed by a
-newline, which does not have an equals sign. The second is `path=renamed`. The header of the file
-has the name `header-name`.
+newline, and does not have an equals sign. The second is `path=renamed`. The header of the file has
+the name `header-name`.
 
 In POSIX, an extended header consists of [records][records], and a record is `<length>
 <key>=<value>`, followed by a newline, so the first record is malformed. Records are delimited by
