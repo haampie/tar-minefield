@@ -8,8 +8,8 @@ whatever its names. Writers write the mode of the file in both headers, so that 
 same; here they differ. This case is ambiguous because a reader can take the mode of the link in one
 of three ways. A reader that does not apply it extracts a file that is not executable, under both
 names. One that applies the mode of every header extracts an executable file, under both names. One
-that copies the file, where others link, extracts `h` as an executable file, and `a` as one that is
-not.
+that copies the file instead of linking it extracts `h` as an executable file, and `a` as one that
+is not.
 
 Decision point: whether the mode in the header of a hardlink applies to the file.
 Seen in: not measured, as the scans do not record modes: 233 of the scanned tarballs have hardlinks.

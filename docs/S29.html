@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code> with the mode 644, then a hardlink <code>h</code> to <code>a</code> whose header has the mode 755.</p>
-<p>A <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">hardlink</a> is a second name for a file archived before it, and a file has one mode, whatever its names. Writers write the mode of the file in both headers, so that the two are the same; here they differ. This case is ambiguous because a reader can take the mode of the link in one of three ways. A reader that does not apply it extracts a file that is not executable, under both names. One that applies the mode of every header extracts an executable file, under both names. One that copies the file, where others link, extracts <code>h</code> as an executable file, and <code>a</code> as one that is not.</p>
+<p>A <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">hardlink</a> is a second name for a file archived before it, and a file has one mode, whatever its names. Writers write the mode of the file in both headers, so that the two are the same; here they differ. This case is ambiguous because a reader can take the mode of the link in one of three ways. A reader that does not apply it extracts a file that is not executable, under both names. One that applies the mode of every header extracts an executable file, under both names. One that copies the file instead of linking it extracts <code>h</code> as an executable file, and <code>a</code> as one that is not.</p>
 <p><strong>Decision point:</strong> whether the mode in the header of a hardlink applies to the file.</p>
 <p><strong>Seen in:</strong> not measured, as the scans do not record modes: 233 of the scanned tarballs have hardlinks.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -60,8 +60,8 @@ whatever its names. Writers write the mode of the file in both headers, so that 
 same; here they differ. This case is ambiguous because a reader can take the mode of the link in one
 of three ways. A reader that does not apply it extracts a file that is not executable, under both
 names. One that applies the mode of every header extracts an executable file, under both names. One
-that copies the file, where others link, extracts `h` as an executable file, and `a` as one that is
-not.
+that copies the file instead of linking it extracts `h` as an executable file, and `a` as one that
+is not.
 
 Decision point: whether the mode in the header of a hardlink applies to the file.
 Seen in: not measured, as the scans do not record modes: 233 of the scanned tarballs have hardlinks.
@@ -320,6 +320,6 @@ See also: S17, a file, a hardlink to it, then the file again, and K09, an execut
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

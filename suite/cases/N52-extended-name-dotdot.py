@@ -11,8 +11,8 @@ is ambiguous because the tree is either the file `a`, or `a` and a file next to 
 That file is harmless: its contents say what happened.
 
 Decision point: whether the name of an extended header is checked as the name of a member is.
-Seen in: not measured, as the scans do not record the components of the name of an extended header
-that come from its member: 1003 of the scanned tarballs may have such a name.
+Seen in: not measured, as the scans do not record the components of an extended header's name that
+come from its member: 1003 of the scanned tarballs may have such a name.
 See also: N16, a name with `..`, and F39, pax headers after a v7 header.
 """
 

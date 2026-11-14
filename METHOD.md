@@ -152,7 +152,7 @@ Kind:
 - A link target in the linkname field of a member that is not a link, or in its pax `linkpath`.
 - FIFOs and devices, which the tree does not have: created, extracted as empty files, or skipped.
 - Whether a file is executable: a mode in base-256, and what besides the mode of the header can
-  decide it: a pax `mode`, and an ACL in a pax header.
+  decide it (a pax `mode`, and an ACL in a pax header).
 
 Order and state:
 
