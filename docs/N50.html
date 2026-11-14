@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one file, <code>c/./d</code>.</p>
-<p>The special filename <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=The%20special%20filename%20dot%20shall%20refer%20to%20the%20directory%20specified%20by%20its%20predecessor">dot</a> refers to the directory that it is in, so in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a> the file is <code>c/d</code>. This case is ambiguous only to a reader that compares names as strings, to which <code>c/./d</code> and <code>c/d</code> are two names for one path. The default policy tolerates it. In the default policy, <code>c/./d</code> and <code>c/d</code> in one archive are a duplicate.</p>
+<p>The special filename <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=The%20special%20filename%20dot%20shall%20refer%20to%20the%20directory%20specified%20by%20its%20predecessor">dot</a> refers to the directory that it is in, so in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a> the file is <code>c/d</code>. This case is ambiguous only to a reader that compares names as strings, to which <code>c/./d</code> and <code>c/d</code> are two names for one path. The default policy tolerates it, and takes <code>c/./d</code> and <code>c/d</code> in one archive for a duplicate.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>c/</code></td><td>directory</td><td></td></tr>
@@ -60,8 +60,8 @@ The archive has one file, `c/./d`.
 
 The special filename dot refers to the directory that it is in, so in POSIX the
 file is `c/d`. This case is ambiguous only to a reader that compares names as strings, to which
-`c/./d` and `c/d` are two names for one path. The default policy tolerates it. In the default
-policy, `c/./d` and `c/d` in one archive are a duplicate.
+`c/./d` and `c/d` are two names for one path. The default policy tolerates it, and takes `c/./d` and
+`c/d` in one archive for a duplicate.
 
 Decision point: whether a name is normalized before it is compared with others.
 Seen in: 10 of the scanned tarballs, such as besu 24.1.2 and xdaliclock 2.49.
@@ -269,6 +269,6 @@ See also: N06, the name `./a`, and N49, a name with two consecutive slashes.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

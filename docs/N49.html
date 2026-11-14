@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has one file, <code>a//b</code>.</p>
-<p>In POSIX, files are created by <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">pathname resolution</a>, and in a pathname <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap03.html#tag_03_254:~:text=Multiple%20successive%20%3Cslash%3E%20characters%20are%20considered%20to%20be%20the%20same%20as%20one%20%3Cslash%3E">consecutive slashes</a> are the same as one, so the file is <code>a/b</code>. This case is ambiguous to a reader that compares names as strings, to which <code>a//b</code> and <code>a/b</code> are two names for one path, and to one that takes what is between the two slashes for a component with an empty name, which it cannot create. The default policy tolerates it. In the default policy, <code>a//b</code> and <code>a/b</code> in one archive are a duplicate.</p>
+<p>In POSIX, files are created by <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">pathname resolution</a>, and in a pathname <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap03.html#tag_03_254:~:text=Multiple%20successive%20%3Cslash%3E%20characters%20are%20considered%20to%20be%20the%20same%20as%20one%20%3Cslash%3E">consecutive slashes</a> are the same as one, so the file is <code>a/b</code>. This case is ambiguous to a reader that compares names as strings, to which <code>a//b</code> and <code>a/b</code> are two names for one path, and to one that takes what is between the two slashes for a component with an empty name, which it cannot create. The default policy tolerates it, and takes <code>a//b</code> and <code>a/b</code> in one archive for a duplicate.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a/</code></td><td>directory</td><td></td></tr>
@@ -62,8 +62,7 @@ In POSIX, files are created by pathname resolution, and in a pathname consecutiv
 slashes are the same as one, so the file is `a/b`. This case is ambiguous to a reader that
 compares names as strings, to which `a//b` and `a/b` are two names for one path, and to one that
 takes what is between the two slashes for a component with an empty name, which it cannot create.
-The default policy tolerates it. In the default policy, `a//b` and `a/b` in one archive are a
-duplicate.
+The default policy tolerates it, and takes `a//b` and `a/b` in one archive for a duplicate.
 
 Decision point: whether a name is normalized before it is compared with others.
 Seen in: 2 of the scanned tarballs: shapemapper 2.1.5, and a binary distribution of GHC 9.0.2.
@@ -271,6 +270,6 @@ See also: N06, the name `./a`, and N50, a name with a `.` component.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

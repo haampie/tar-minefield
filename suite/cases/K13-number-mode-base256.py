@@ -8,7 +8,7 @@ field, as a large size or uid does not. A [mode][mode] has 12 bits, which always
 not have a reason to write it in base-256, and not every reader of base-256 sizes reads a mode in
 it. This case is ambiguous in practice because a reader can take the field in one of three ways. A
 reader that reads base-256 in every numeric field extracts `a` as an executable file. One that reads
-base-256 in some fields only does not find octal digits in this one, and extracts `a` without the
+base-256 only in some fields does not find octal digits in this one, and extracts `a` without the
 execute permission. Other readers report an error.
 
 Decision point: whether a mode may be in base-256.

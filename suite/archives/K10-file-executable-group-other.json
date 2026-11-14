@@ -1,7 +1,7 @@
 {
  "id": "K10",
  "verdict": "accept",
- "description": "Files that their group or others may execute, and their owner may not.",
+ "description": "Files executable by their group or others, but not by their owner.",
  "features": [],
  "tree": [
   {

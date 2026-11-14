@@ -7,8 +7,8 @@ The archive has a file `a`, whose pax header has the record `TARMINEFIELD.unknow
 In POSIX, a key is a specified one or an implementation extension, such as the
 `SCHILY.*` keys of star, the `LIBARCHIVE.*` keys of libarchive and the `GNU.*` keys of GNU tar. It
 is not specified what a reader does with a key that it does not know. A reader does not know the
-extensions of every writer, and one that rejects a key that it does not know rejects the archives of
-the writers of that key, so every implementation must extract `a`.
+extensions of every writer, and one that rejects an unknown key rejects the archives of the writers
+that use it, so every implementation must extract `a`.
 
 Seen in: tarballs of bsdtar and star, with keys such as `LIBARCHIVE.creationtime` and `SCHILY.dev`.
 

@@ -3,8 +3,8 @@
 The archive has a regular file `.`, then a file `b`.
 
 The special filename [dot][dot] refers to the directory that it is in, so in [POSIX][resolution] a
-member `.` is the directory that the archive is extracted to. A file cannot be created there, which
-is an [error][cannot-create]. This case is ambiguous in practice because a reader can take the
+member `.` is the directory that the archive is extracted to. A file cannot be created at that path,
+which is an [error][cannot-create]. This case is ambiguous in practice because a reader can take the
 member in one of three ways. A reader that normalizes the name to the root, or skips a member whose
 name it cannot use, drops the file, and extracts `b` without an error. One that renames the member
 creates the file under another name, such as `_`. Other readers report an error.

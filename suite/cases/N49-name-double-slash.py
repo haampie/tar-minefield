@@ -6,8 +6,7 @@ In POSIX, files are created by [pathname resolution][resolution], and in a pathn
 slashes][slashes] are the same as one, so the file is `a/b`. This case is ambiguous to a reader that
 compares names as strings, to which `a//b` and `a/b` are two names for one path, and to one that
 takes what is between the two slashes for a component with an empty name, which it cannot create.
-The default policy tolerates it. In the default policy, `a//b` and `a/b` in one archive are a
-duplicate.
+The default policy tolerates it, and takes `a//b` and `a/b` in one archive for a duplicate.
 
 Decision point: whether a name is normalized before it is compared with others.
 Seen in: 2 of the scanned tarballs: shapemapper 2.1.5, and a binary distribution of GHC 9.0.2.

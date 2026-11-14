@@ -1,6 +1,6 @@
 K10-file-executable-group-other: must accept, and extract its tree
 
-Files that their group or others may execute, and their owner may not.
+Files executable by their group or others, but not by their owner.
 
 The archive has two files: `g`, with the mode 654, and `o`, with the mode 645.
 

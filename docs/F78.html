@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file whose pax header has two records. The key of the first is <code>pa</code>, followed by a NUL, followed by <code>th</code>, and its value is <code>x</code>. The second is <code>path=renamed</code>. The header of the file has the name <code>header-name</code>.</p>
-<p>pax records are delimited by their <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">length</a>, so the first record has a key that readers do not know, and the file is <code>renamed</code>. This case is ambiguous in practice because a reader that reads the records by their length extracts <code>renamed</code>, one that ends the data of a pax header at its first NUL, or discards a header that contains one, loses the <code>path</code> record and extracts <code>header-name</code>, and other readers report an error. Some tarballs have a NUL in the value of an xattr, and a reader must still apply the records after it. A NUL in a key does not mean anything, so a strict parser rejects it.</p>
+<p>pax records are delimited by their <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">length</a>, so the first record has a key that readers do not know, and the file is <code>renamed</code>. This case is ambiguous in practice because a reader can take the header in one of three ways. A reader that reads the records by their length extracts <code>renamed</code>. One that ends the data of a pax header at its first NUL, or discards a header that contains one, loses the <code>path</code> record and extracts <code>header-name</code>. Other readers report an error. Some tarballs have a NUL in the value of an xattr, and a reader must still apply the records after it. A NUL in a key does not mean anything, so a strict parser rejects it.</p>
 <p><strong>Decision point:</strong> whether the records of a pax header end at a NUL in a key.</p>
 <p><strong>Seen in:</strong> not measured, as the scans do not record all pax keys of a tarball, only its 8 most common: none of those has a NUL, and 9 of the scanned tarballs have more keys.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -58,11 +58,11 @@ has the name `header-name`.
 
 pax records are delimited by their length, so the first record has a key that
 readers do not know, and the file is `renamed`. This case is ambiguous in practice because a reader
-that reads the records by their length extracts `renamed`, one that ends the data of a pax header at
-its first NUL, or discards a header that contains one, loses the `path` record and extracts
-`header-name`, and other readers report an error. Some tarballs have a NUL in the value of an xattr,
-and a reader must still apply the records after it. A NUL in a key does not mean anything, so a
-strict parser rejects it.
+can take the header in one of three ways. A reader that reads the records by their length extracts
+`renamed`. One that ends the data of a pax header at its first NUL, or discards a header that
+contains one, loses the `path` record and extracts `header-name`. Other readers report an error.
+Some tarballs have a NUL in the value of an xattr, and a reader must still apply the records after
+it. A NUL in a key does not mean anything, so a strict parser rejects it.
 
 Decision point: whether the records of a pax header end at a NUL in a key.
 Seen in: not measured, as the scans do not record all pax keys of a tarball, only its 8 most common:
@@ -359,6 +359,6 @@ pax `path`.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

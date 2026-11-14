@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a GNU long link name header, of typeflag <code>K</code>, whose data is 120 <code>t</code>s, followed by a NUL. After it is a GNU long name header, of typeflag <code>L</code>, whose data is 120 <code>l</code>s, followed by a NUL. After those is a symlink, of typeflag <code>2</code>, with GNU&#x27;s magic, whose name and linkname fields contain the first 100 bytes of each.</p>
+<p>The archive has a GNU long link name header, of typeflag <code>K</code>, whose data is 120 <code>t</code>s, followed by a NUL. After it is a GNU long name header, of typeflag <code>L</code>, whose data is 120 <code>l</code>s, followed by a NUL. After those is a symlink, of typeflag <code>2</code>, with GNU&#x27;s magic, whose name and linkname fields contain the first 100 bytes of the name and the target.</p>
 <p>The long name replaces the name field, and the long link name the linkname field, so the symlink has a name of 120 <code>l</code>s and points to 120 <code>t</code>s. GNU tar writes the two headers in this order.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
@@ -57,7 +57,7 @@ A symlink with a long name and a long target, in GNU&#x27;s long link and long n
 The archive has a GNU long link name header, of typeflag `K`, whose data is 120 `t`s, followed by a
 NUL. After it is a GNU long name header, of typeflag `L`, whose data is 120 `l`s, followed by a NUL.
 After those is a symlink, of typeflag `2`, with GNU&#x27;s magic, whose name and linkname fields contain
-the first 100 bytes of each.
+the first 100 bytes of the name and the target.
 
 The long name replaces the name field, and the long link name the linkname field, so the symlink has
 a name of 120 `l`s and points to 120 `t`s. GNU tar writes the two headers in this order.
@@ -402,6 +402,6 @@ See also: N47, a long link name alone, and N01, a long name of a file.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

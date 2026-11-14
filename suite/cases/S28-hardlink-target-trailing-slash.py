@@ -6,7 +6,7 @@ A pathname that ends in a slash [resolves only to a directory][trailing-slash], 
 so as a path the target does not resolve, and a link that cannot be made is an [error][link-error].
 This case is ambiguous because `h` is either a link to `a`, to a reader that normalizes the target
 as it normalizes names, or an error, to one that resolves the target as a path. Neither reading
-skips the link without an error, as some readers do.
+skips the link without an error, though some readers do.
 
 Decision point: whether the target of a hardlink is normalized.
 Seen in: not measured, as earlier versions of the scanner normalized the targets of hardlinks: 2 of

@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code> with GNU&#x27;s magic, whose uid and gid fields are 3000000 in base-256: the byte <code>0x80</code>, followed by the number in binary.</p>
-<p>A uid or gid over 2097151 does not fit in the 7 octal digits of its field. In pax, it is written in a <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=pax%20shall%20include%20a%20uid%20extended%20header%20record%20for%20each%20file%20whose%20owner%20ID%20is%20greater%20than%202097151">record</a> of the extended header. In GNU&#x27;s format, it is written in base-256, as a size of 8 GiB and over is. The owner of a file is not part of the tree, so a reader need not read the number, and every implementation must extract <code>a</code>.</p>
+<p>A uid or gid over 2097151 does not fit in the 7 octal digits of its field. In pax, it is written in a <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=pax%20shall%20include%20a%20uid%20extended%20header%20record%20for%20each%20file%20whose%20owner%20ID%20is%20greater%20than%202097151">record</a> of the extended header. In GNU&#x27;s format, it is written in base-256, as a size of 8 GiB and over is. The owner and the group of a file are not part of the tree, so a reader need not read those numbers, and every implementation must extract <code>a</code>.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>2 bytes, sha256 <code title="87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7">87428fc5</code></td></tr></table></div>
@@ -59,8 +59,8 @@ byte `0x80`, followed by the number in binary.
 
 A uid or gid over 2097151 does not fit in the 7 octal digits of its field. In pax, it is written in
 a record of the extended header. In GNU&#x27;s format, it is written in base-256, as a size
-of 8 GiB and over is. The owner of a file is not part of the tree, so a reader need not read the
-number, and every implementation must extract `a`.
+of 8 GiB and over is. The owner and the group of a file are not part of the tree, so a reader need
+not read those numbers, and every implementation must extract `a`.
 
 Seen in: 214 of the scanned tarballs.
 See also: F56, a size in base-256.
@@ -267,6 +267,6 @@ See also: F56, a size in base-256.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

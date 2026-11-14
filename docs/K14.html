@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a regular file <code>.</code>, then a file <code>b</code>.</p>
-<p>The special filename <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=The%20special%20filename%20dot%20shall%20refer%20to%20the%20directory%20specified%20by%20its%20predecessor">dot</a> refers to the directory that it is in, so in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a> a member <code>.</code> is the directory that the archive is extracted to. A file cannot be created there, which is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">error</a>. This case is ambiguous in practice because a reader can take the member in one of three ways. A reader that normalizes the name to the root, or skips a member whose name it cannot use, drops the file, and extracts <code>b</code> without an error. One that renames the member creates the file under another name, such as <code>_</code>. Other readers report an error.</p>
+<p>The special filename <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=The%20special%20filename%20dot%20shall%20refer%20to%20the%20directory%20specified%20by%20its%20predecessor">dot</a> refers to the directory that it is in, so in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a> a member <code>.</code> is the directory that the archive is extracted to. A file cannot be created at that path, which is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">error</a>. This case is ambiguous in practice because a reader can take the member in one of three ways. A reader that normalizes the name to the root, or skips a member whose name it cannot use, drops the file, and extracts <code>b</code> without an error. One that renames the member creates the file under another name, such as <code>_</code>. Other readers report an error.</p>
 <p><strong>Decision point:</strong> whether a file may have the name <code>.</code>.</p>
 <p><strong>Seen in:</strong> not measured, as the scans did not record the kind of a member <code>.</code>: 64 of the scanned tarballs have a member <code>.</code> or <code>./</code>.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,8 +55,8 @@ A regular file `.`: dropped, renamed, or an error?
 The archive has a regular file `.`, then a file `b`.
 
 The special filename dot refers to the directory that it is in, so in POSIX a
-member `.` is the directory that the archive is extracted to. A file cannot be created there, which
-is an error. This case is ambiguous in practice because a reader can take the
+member `.` is the directory that the archive is extracted to. A file cannot be created at that path,
+which is an error. This case is ambiguous in practice because a reader can take the
 member in one of three ways. A reader that normalizes the name to the root, or skips a member whose
 name it cannot use, drops the file, and extracts `b` without an error. One that renames the member
 creates the file under another name, such as `_`. Other readers report an error.
@@ -354,6 +354,6 @@ See also: K06, a symlink `.`, and N05, a directory `./`.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

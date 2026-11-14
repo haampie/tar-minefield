@@ -14,7 +14,7 @@ That file is harmless: its contents say what happened.
 
 Decision point: whether the name of an extended header is checked as the name of a member is.
 Seen in: not measured, as the scans do not record the components of the name of an extended header
-that are those of a member: 1003 of the scanned tarballs may have such a name.
+that come from its member: 1003 of the scanned tarballs may have such a name.
 See also: N16, a name with `..`, and F39, pax headers after a v7 header.
 
 0x000000  header: pax extended header, named to lead out of the destination

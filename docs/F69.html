@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, whose size field is <code>0o000001000</code>, then an empty file <code>smuggled</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal numbers filled with leading zeros, and <code>o</code> is not a digit. Read leniently, this case is ambiguous because the size is either 512, octal 1000, if the conversion of the field to a number accepts <code>0o</code> as the prefix of an octal number, as Python&#x27;s <code>int</code> does (and the next block is the data of <code>a</code>), or 0, if the number ends at the <code>o</code> (and the next block is the header of <code>smuggled</code>).</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are octal numbers filled with leading zeros, and <code>o</code> is not a digit. Read leniently, this case is ambiguous because a reader can take the size in one of two ways. A reader whose conversion of the field to a number accepts <code>0o</code> as the prefix of an octal number, as Python&#x27;s <code>int</code> does, reads 512, octal 1000 (and the next block is the data of <code>a</code>). One that ends the number at the <code>o</code> reads 0 (and the next block is the header of <code>smuggled</code>).</p>
 <p><strong>Decision point:</strong> how a numeric field with a letter is read.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,10 +55,10 @@ A size with the prefix `0o`, `0o000001000`.
 The archive has a file `a`, whose size field is `0o000001000`, then an empty file `smuggled`.
 
 In POSIX, numeric fields are octal numbers filled with leading zeros, and `o` is not
-a digit. Read leniently, this case is ambiguous because the size is either 512, octal 1000, if the
-conversion of the field to a number accepts `0o` as the prefix of an octal number, as Python&#x27;s `int`
-does (and the next block is the data of `a`), or 0, if the number ends at the `o` (and the next
-block is the header of `smuggled`).
+a digit. Read leniently, this case is ambiguous because a reader can take the size in one of two
+ways. A reader whose conversion of the field to a number accepts `0o` as the prefix of an octal
+number, as Python&#x27;s `int` does, reads 512, octal 1000 (and the next block is the data of `a`). One
+that ends the number at the `o` reads 0 (and the next block is the header of `smuggled`).
 
 Decision point: how a numeric field with a letter is read.
 Seen in: none of the scanned tarballs.
@@ -281,6 +281,6 @@ See also: F37, a size with the digit 9, and F51, a size with a plus sign.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

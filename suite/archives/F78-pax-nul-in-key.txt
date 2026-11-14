@@ -8,11 +8,11 @@ has the name `header-name`.
 
 pax records are delimited by their length, so the first record has a key that
 readers do not know, and the file is `renamed`. This case is ambiguous in practice because a reader
-that reads the records by their length extracts `renamed`, one that ends the data of a pax header at
-its first NUL, or discards a header that contains one, loses the `path` record and extracts
-`header-name`, and other readers report an error. Some tarballs have a NUL in the value of an xattr,
-and a reader must still apply the records after it. A NUL in a key does not mean anything, so a
-strict parser rejects it.
+can take the header in one of three ways. A reader that reads the records by their length extracts
+`renamed`. One that ends the data of a pax header at its first NUL, or discards a header that
+contains one, loses the `path` record and extracts `header-name`. Other readers report an error.
+Some tarballs have a NUL in the value of an xattr, and a reader must still apply the records after
+it. A NUL in a key does not mean anything, so a strict parser rejects it.
 
 Decision point: whether the records of a pax header end at a NUL in a key.
 Seen in: not measured, as the scans do not record all pax keys of a tarball, only its 8 most common:
