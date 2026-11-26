@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a header of typeflag <code>X</code>, named <code>PaxHeader</code>, whose data is the pax record <code>path=from-x</code>, then a file whose header has the name <code>from-header</code>.</p>
-<p>Solaris tar writes extended headers with typeflag <code>X</code>, instead of the <code>x</code> of POSIX. In POSIX, the typeflags <code>A</code> to <code>Z</code> are reserved for <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=are%20reserved%20for%20custom%20implementations">custom implementations</a>, and a reader that does not recognize one extracts the member <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file">as a regular file</a>. This case is ambiguous because the member is <code>from-x</code>, to a reader that takes <code>X</code> for <code>x</code>, or <code>from-header</code>, after a file <code>PaxHeader</code> that contains the record, or alone, to a reader that skips a type it does not know.</p>
+<p>The archive has a header of typeflag <code>X</code> named <code>PaxHeader</code> containing the pax record <code>path=from-x</code>, followed by a file whose ustar header gives the name <code>from-header</code>.</p>
+<p>Solaris tar writes extended headers with typeflag <code>X</code> instead of POSIX&#x27;s <code>x</code>. Under POSIX, typeflags <code>A</code> to <code>Z</code> are reserved for <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=are%20reserved%20for%20custom%20implementations">custom implementations</a>, and a reader that does not recognize one extracts it <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file">as a regular file</a>. A reader that treats <code>X</code> as a pax extended header extracts the file as <code>from-x</code>. A reader that treats <code>X</code> as an unknown regular file extracts <code>PaxHeader</code> (containing <code>15 path=from-x </code>) followed by <code>from-header</code>, while one that skips unknown typeflags extracts <code>from-header</code> alone.</p>
 <p><strong>Decision point:</strong> whether typeflag <code>X</code> is an extended header.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,14 +52,16 @@
 
 A Solaris extended header, typeflag `X`: a pax header, or a file?
 
-The archive has a header of typeflag `X`, named `PaxHeader`, whose data is the pax record
-`path=from-x`, then a file whose header has the name `from-header`.
+The archive has a header of typeflag `X` named `PaxHeader` containing the pax record `path=from-x`,
+followed by a file whose ustar header gives the name `from-header`.
 
-Solaris tar writes extended headers with typeflag `X`, instead of the `x` of POSIX. In POSIX, the
+Solaris tar writes extended headers with typeflag `X` instead of POSIX&#x27;s `x`. Under POSIX,
 typeflags `A` to `Z` are reserved for custom implementations, and a reader that does
-not recognize one extracts the member as a regular file. This case is ambiguous
-because the member is `from-x`, to a reader that takes `X` for `x`, or `from-header`, after a file
-`PaxHeader` that contains the record, or alone, to a reader that skips a type it does not know.
+not recognize one extracts it as a regular file. A reader that treats `X` as a pax
+extended header extracts the file as `from-x`. A reader that treats `X` as an unknown regular file
+extracts `PaxHeader` (containing `15 path=from-x
+`) followed by `from-header`, while one that skips
+unknown typeflags extracts `from-header` alone.
 
 Decision point: whether typeflag `X` is an extended header.
 Seen in: none of the scanned tarballs.
@@ -352,6 +354,6 @@ See also: F16, an unknown typeflag with a size.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

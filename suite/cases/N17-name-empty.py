@@ -2,11 +2,9 @@
 
 The archive has one file whose name field is all NULs.
 
-The name is an empty pathname, which [does not resolve][null-pathname], so it would create an
-invalid filename. In [POSIX][invalid-name], it is then implementation-defined whether the member is
-stored, and under what name, and the member may be [ignored][ignore-invalid], with an error. This
-case is ambiguous because it is implementation-defined whether the member is skipped with an error,
-or stored under a name the implementation chooses.
+An empty pathname [does not resolve][null-pathname]. Under [POSIX][invalid-name], it is
+implementation-defined whether a member with an invalid filename is extracted and under what name,
+or [skipped with an error][ignore-invalid].
 
 Decision point: what an empty name refers to.
 Seen in: none of the scanned tarballs.

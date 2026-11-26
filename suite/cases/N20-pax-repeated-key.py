@@ -1,11 +1,11 @@
 """One pax key twice in one extended header.
 
-The archive has one file, whose pax header has the records `path=first` and `path=second`, and whose
-header has the name `header-name`.
+The archive has one file with both `path=first` and `path=second` in its pax header, and
+`header-name` in its ustar name field.
 
-In [POSIX][last-wins], the last of conflicting records in one header takes precedence, so the name
-is `second`. This case is ambiguous in practice because the name is also read as `first`, or as the
-header's own, with the records discarded.
+When records in the same pax header conflict, [POSIX][last-wins] gives precedence to the last one,
+making the filename `second`. However, some readers keep the first record (`first`) or discard the
+conflicting records and fall back to `header-name`.
 
 Decision point: which of two values of one key applies.
 Seen in: libmygpo-qt 1.2.0, with xattr keys.

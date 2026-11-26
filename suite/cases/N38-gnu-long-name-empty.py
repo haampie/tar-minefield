@@ -1,15 +1,14 @@
 """An empty GNU long name: the name in the header, or none?
 
-The archive has a GNU long name header of size 0, then a file whose header has GNU's magic and the
-name `header-name`.
+The archive has a GNU long name header (typeflag `L`) of size 0, followed by a file with GNU magic
+and `header-name` in its ustar name field.
 
-A GNU long name replaces the name of the next member, and GNU's format does not say what an empty
-one means. If it applies, the pathname of the member is empty, and in POSIX an [empty
-pathname][null-pathname] does not resolve. This case is ambiguous because a reader can take the
-empty long name in one of three ways. A reader that ignores it extracts `header-name`. One that
-applies it gives the member an empty name, which is skipped, rejected or taken for `.`. One that
-takes the name of the long name header itself extracts the member as `././@LongLink`. To a reader
-that does not know typeflag `L`, the member is `header-name`, after an empty file `@LongLink`.
+A GNU long name overrides the next member's ustar name field, and GNU's specification does not say
+what a zero-length `L` header means. A reader that ignores the empty `L` header extracts
+`header-name`. A reader that applies the empty string gives the member an [empty
+pathname][null-pathname], which is skipped, rejected, or resolved to `.`. A reader that accidentally
+uses the `L` header's own ustar name extracts `././@LongLink`, while one that does not recognize
+typeflag `L` extracts an empty file `@LongLink` followed by `header-name`.
 
 Decision point: whether an empty GNU long name replaces the name in the header.
 Seen in: none of the scanned tarballs.

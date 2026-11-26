@@ -2,12 +2,12 @@ N12-name-absolute: must reject
 
 An absolute name, which points outside the directory the archive is extracted to.
 
-The archive has one file, `/tmp/tar-minefield-absolute`, whose name is a path from the root.
+The archive has one file, `/tmp/tar-minefield-absolute`, with a leading slash.
 
-The case is rejected because the name, taken as it is, leads out of the destination, not because it
-is ambiguous. In POSIX, files are created by pathname resolution, which follows the
-name out of the destination. The file is harmless, and in `/tmp`, so that an extractor that follows
-the name writes it without running as root.
+In POSIX, files are created by pathname resolution, which follows an absolute path
+outside the destination directory. A strict parser rejects the archive to prevent writing outside
+the destination. The test payload targets `/tmp` with harmless text so that a naive extractor can
+write it without root privileges.
 
 Decision point: whether an absolute name is rejected, made relative, or followed.
 Seen in: dtv-scan-tables (`/usr/share/dvb/`) and masurca 3.3.1.

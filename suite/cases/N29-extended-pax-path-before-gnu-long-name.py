@@ -1,15 +1,13 @@
 """A pax `path`, then a GNU long name, then the member: which name does it get?
 
-The archive has a pax header with `path=from-pax`, then a GNU long name `from-gnu`, then a file
-whose header has the name `from-header`.
+The archive has a pax header with `path=from-pax`, a GNU long name header for `from-gnu`, and a file
+whose ustar header gives the name `from-header`.
 
-In POSIX, an [extended header][extended] applies to the file that follows it, which here is the GNU
-long name: a typeflag `L`, which is [reserved for custom implementations][custom-type], and so is
-extracted [as a regular file][unknown-type], with an error. Read by POSIX alone, the archive has a
-file `from-pax`, which contains the long name, and the member `from-header`. Most readers that know
-GNU long names give the member one of the two long names instead. This case is ambiguous because the
-member is `from-pax` or `from-gnu`, to a reader that knows GNU long names, or `from-header`, after a
-file `from-pax` that contains the long name.
+In POSIX, an [extended header][extended] applies to the file that follows it. Because typeflag `L`
+is [reserved for custom implementations][custom-type], a pure POSIX reader extracts the `L` header
+[as a regular file][unknown-type] named `from-pax` (containing `from-gnu\0`), followed by the file
+`from-header`. Readers that support both extensions instead apply either `from-pax` or `from-gnu` to
+the file member.
 
 Decision point: which of several sources gives a member its name, and whether a pax header applies
 to a GNU long name.

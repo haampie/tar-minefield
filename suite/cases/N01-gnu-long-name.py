@@ -1,8 +1,10 @@
 """A name over 100 bytes, in a GNU long name.
 
-The archive has a GNU long name header, typeflag `L`, whose data is the name of the next member, of
-60 `d`s, followed by a slash, followed by 60 `f`s; then the member, whose header has GNU's magic and
-that name cut to 100 bytes. This is GNU tar's own format for long names.
+The archive has a GNU long name header (typeflag `L`) whose payload is the next member's name—60
+`d`s, a slash, and 60 `f`s—followed by a file with GNU magic whose ustar name field holds the first
+100 bytes of that name.
+
+Typeflag `L` is GNU tar's format for names that do not fit in the 100-byte ustar name field.
 
 Seen in: tarballs produced by GNU tar.
 """

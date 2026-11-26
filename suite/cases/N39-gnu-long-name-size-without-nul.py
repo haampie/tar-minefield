@@ -1,14 +1,15 @@
 """A GNU long name whose size leaves out its NUL, with bytes after it.
 
-The archive has a GNU long name header of size 4, whose data block contains `name-rest`, followed by
-NULs, so the size covers only `name`. After it is a file whose header has GNU's magic and the name
-`header-name`.
+The archive has a GNU long name header (typeflag `L`) of size 4 whose data block contains
+`name-rest` padded with NULs (so the 4-byte size covers only `name`), followed by a file with GNU
+magic and `header-name` in its ustar name field.
 
-This case is ambiguous because the name ends either at the size, and is `name`, or at the first NUL
-in the block, and is `name-rest`. This is not properly defined by GNU's format; all we know is that
-archives created by GNU tar always include the NUL in the size. A lenient reader could also ignore a
-long name without its NUL, and extract `header-name`. A reader that does not know typeflag `L` could
-extract `header-name` too, after a file `@LongLink` that contains `name`.
+GNU tar always includes the terminating NUL in the `L` header's size, and its format does not define
+what happens when the size stops before the NUL. A reader that slices the payload to the declared
+4-byte size extracts `name`, whereas one that reads the data block up to the first NUL extracts
+`name-rest`. A reader that discards a long name lacking a NUL within its declared size falls back to
+`header-name`, while one that does not recognize typeflag `L` extracts a 4-byte file `@LongLink`
+followed by `header-name`.
 
 Decision point: whether a GNU long name ends at its size or at a NUL.
 Seen in: none of the scanned tarballs.

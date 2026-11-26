@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive starts with a global header with <code>linkpath=global-target</code>, then has the symlinks <code>l</code> to <code>header-target-l</code> and <code>m</code> to <code>header-target-m</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">POSIX</a>, a global header applies to every later member, and a <code>linkpath</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20linkname%20field">overrides</a> the linkname field, so both symlinks point to <code>global-target</code>. This case is ambiguous in practice because a reader that ignores the global <code>linkpath</code> keeps the targets of the symlinks.</p>
+<p>The archive starts with a global header containing <code>linkpath=global-target</code>, followed by symlinks <code>l</code> (with ustar linkname <code>header-target-l</code>) and <code>m</code> (with ustar linkname <code>header-target-m</code>).</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">POSIX</a>, a global header applies to every subsequent member that does not override it, and <code>linkpath</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20linkname%20field">overrides</a> the ustar linkname field, making both symlinks point to <code>global-target</code>. A reader that ignores <code>linkpath</code> in a global header leaves <code>l</code> and <code>m</code> pointing to their ustar targets.</p>
 <p><strong>Decision point:</strong> whether a global <code>linkpath</code> applies.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,13 +52,13 @@
 
 A global pax header with a `linkpath`.
 
-The archive starts with a global header with `linkpath=global-target`, then has the symlinks `l` to
-`header-target-l` and `m` to `header-target-m`.
+The archive starts with a global header containing `linkpath=global-target`, followed by symlinks
+`l` (with ustar linkname `header-target-l`) and `m` (with ustar linkname `header-target-m`).
 
-In POSIX, a global header applies to every later member, and a `linkpath`
-overrides the linkname field, so both symlinks point to `global-target`. This case is
-ambiguous in practice because a reader that ignores the global `linkpath` keeps the targets of the
-symlinks.
+In POSIX, a global header applies to every subsequent member that does not override it,
+and `linkpath` overrides the ustar linkname field, making both symlinks point to
+`global-target`. A reader that ignores `linkpath` in a global header leaves `l` and `m` pointing to
+their ustar targets.
 
 Decision point: whether a global `linkpath` applies.
 Seen in: none of the scanned tarballs.
@@ -366,6 +366,6 @@ See also: N21, a global pax header with a `path`.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

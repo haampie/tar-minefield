@@ -39,7 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a GNU long name header, typeflag <code>L</code>, whose data is the name of the next member, of 60 <code>d</code>s, followed by a slash, followed by 60 <code>f</code>s; then the member, whose header has GNU&#x27;s magic and that name cut to 100 bytes. This is GNU tar&#x27;s own format for long names.</p>
+<p>The archive has a GNU long name header (typeflag <code>L</code>) whose payload is the next member&#x27;s name—60 <code>d</code>s, a slash, and 60 <code>f</code>s—followed by a file with GNU magic whose ustar name field holds the first 100 bytes of that name.</p>
+<p>Typeflag <code>L</code> is GNU tar&#x27;s format for names that do not fit in the 100-byte ustar name field.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/</code></td><td>directory</td><td></td></tr>
@@ -54,9 +55,11 @@
 
 A name over 100 bytes, in a GNU long name.
 
-The archive has a GNU long name header, typeflag `L`, whose data is the name of the next member, of
-60 `d`s, followed by a slash, followed by 60 `f`s; then the member, whose header has GNU&#x27;s magic and
-that name cut to 100 bytes. This is GNU tar&#x27;s own format for long names.
+The archive has a GNU long name header (typeflag `L`) whose payload is the next member&#x27;s name—60
+`d`s, a slash, and 60 `f`s—followed by a file with GNU magic whose ustar name field holds the first
+100 bytes of that name.
+
+Typeflag `L` is GNU tar&#x27;s format for names that do not fit in the 100-byte ustar name field.
 
 Seen in: tarballs produced by GNU tar.
 
@@ -333,6 +336,6 @@ Seen in: tarballs produced by GNU tar.
 <p>This case is not measured in release tarballs: the scan does not report a feature of it on its own.</p>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

@@ -1,15 +1,14 @@
 """An empty pax `path`, which in POSIX deletes a path: the pax one, or the header's name too?
 
-The archive has one file, whose pax header has an empty `path=`, and whose header has the name
-`from-header`.
+The archive has one file with an empty `path=` record in its pax header and `from-header` in its
+ustar name field.
 
-In [POSIX][empty-value], a record with an empty value deletes any header block field of the same
-name, and a field of the header that a keyword deletes [is ignored][corresponding]. The header does
-not have a field named `path`, which [overrides][path] `name` and `prefix`. This case is ambiguous
-because, if deletion goes by the name of the keyword, `path=` deletes nothing in the header, and the
-member is `from-header`; if it goes by the header field that the keyword overrides, it deletes the
-name too, and leaves a member without a name, which is undefined, as an empty pathname [does not
-resolve][null-pathname].
+Under [POSIX][empty-value], an empty pax value deletes any header field of the same name, and any
+header field overridden or deleted by a pax record [is ignored][corresponding]. Because the ustar
+header has `name` and `prefix` fields rather than a field literally named `path` (which
+[overrides][path] both), `path=` can be read in two ways: if it only clears a previous `path`, the
+member falls back to `from-header`; if it deletes the overridden ustar fields as well, the member is
+left with an empty pathname, which [does not resolve][null-pathname].
 
 Decision point: what an empty pax path means: no name, an empty name, or the header's name.
 Seen in: none of the scanned tarballs.
