@@ -1,16 +1,15 @@
-"""A prefix of exactly 155 bytes, which fills the prefix field without a NUL.
+"""A 155-byte ustar prefix that fills the entire field without a trailing NUL.
 
-The archive has one file whose prefix field is 155 `p`s, without a NUL, and whose name field is
-`file`.
+The archive has one file with 155 `p`s (and no NUL) in its prefix field and `file` in its name
+field.
 
-In [POSIX][prefix], the pathname is the prefix up to its first NUL, followed by `/`, followed by the
-name. A prefix that fills its field does not have a NUL, and ends where the field ends, as a
-[name][name-full] of 100 bytes does. So `file` is in a directory whose name is the 155 `p`s.
+Under [POSIX][prefix], a member's pathname is its prefix (up to the first NUL), a slash, and its
+name. Like a 100-byte name field, a full 155-byte prefix [does not need a terminating
+NUL][name-full] and ends at the field boundary, placing `file` inside a directory of 155 `p`s.
 
-Seen in: not measured, as the scans do not record the length of a prefix: thousands of tarballs have
-one.
-See also: N02, a name that fills its field, and N04, a name split between the prefix and name
-fields.
+Seen in: not measured, as the scanner does not record prefix lengths; thousands of tarballs use the
+prefix field.
+See also: N02, a 100-byte name without a NUL, and N04, a name split across prefix and name.
 """
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}
 D = lambda path: {"path": path, "kind": "directory"}

@@ -1,7 +1,7 @@
 {
  "id": "N50",
  "verdict": "tolerate",
- "description": "A name with a `.` component, `c/./d`.",
+ "description": "A name with an inner `.` component: `c/./d`.",
  "features": [
   "name.dot-component"
  ],

@@ -1,18 +1,18 @@
 N56-pax-path-equals-sign: must accept, and extract its tree
 
-A pax `path` that contains an equals sign, `a=b`.
+A pax `path` value containing an equals sign: `a=b`.
 
-The archive has one file, whose pax header has the record `path=a=b`, and whose header has the name
-`header-name`.
+The archive has one file with `path=a=b` in its pax header and `header-name` in its ustar name
+field.
 
-After its length, a pax record is a keyword, followed by `=`, followed by a value, followed by a
-newline, and a keyword does not contain an equals sign. So the first `=` of the
-record ends the keyword, the value is `a=b`, and the file has that name. A reader that splits the
-record at its last `=` reads a keyword that it does not know, and extracts `header-name`.
+In a pax record `<length> <key>=<value>`, followed by a newline, the keyword cannot
+contain an equals sign. The first `=` therefore separates the keyword from the
+value, giving `path` the value `a=b`. A reader that splits on the last `=` instead sees an unknown
+key `path=a` and falls back to `header-name`.
 
-Seen in: not measured, as the scans do not record the names of members.
+Seen in: not measured, as the scanner does not record member names.
 
-0x000000  header: pax extended header, a path with an equals sign
+0x000000  header: pax extended header, path=a=b
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

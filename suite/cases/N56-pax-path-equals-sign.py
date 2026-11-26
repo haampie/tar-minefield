@@ -1,14 +1,14 @@
-"""A pax `path` that contains an equals sign, `a=b`.
+"""A pax `path` value containing an equals sign: `a=b`.
 
-The archive has one file, whose pax header has the record `path=a=b`, and whose header has the name
-`header-name`.
+The archive has one file with `path=a=b` in its pax header and `header-name` in its ustar name
+field.
 
-After its length, a pax record is a keyword, followed by `=`, followed by a value, followed by a
-newline, and a keyword [does not contain][keyword-equals] an equals sign. So the first `=` of the
-record ends the keyword, the value is `a=b`, and the file has that name. A reader that splits the
-record at its last `=` reads a keyword that it does not know, and extracts `header-name`.
+In a pax record `<length> <key>=<value>`, followed by a newline, the keyword [cannot
+contain][keyword-equals] an equals sign. The first `=` therefore separates the keyword from the
+value, giving `path` the value `a=b`. A reader that splits on the last `=` instead sees an unknown
+key `path=a` and falls back to `header-name`.
 
-Seen in: not measured, as the scans do not record the names of members.
+Seen in: not measured, as the scanner does not record member names.
 """
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}
 
@@ -19,6 +19,6 @@ TREE = [F("a=b", b"which name?\n")]
 
 
 def build(a):
-    a.pax([(b"path", b"a=b")], note="a path with an equals sign")
+    a.pax([(b"path", b"a=b")], note="path=a=b")
     a.file(b"header-name", b"which name?\n")
     a.end()

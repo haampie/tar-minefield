@@ -1,18 +1,16 @@
-"""A name with `..` that does not lead out of the destination, `a/../b`.
+"""A name with `..` that stays inside the destination: `a/../b`.
 
-The archive has a directory `a/`, then a file `a/../b`.
+The archive has a directory `a/`, followed by a file `a/../b`.
 
-The special filename [dot-dot][dot-dot] refers to the parent of the directory that it is in, so in
-[POSIX][resolution] the file is `b`, next to `a`. This case is ambiguous in practice because a
-reader can take the name in one of four ways. A reader that resolves the name extracts `b`. One that
-drops the `..` extracts `a/b`. One that skips a member whose name has `..` extracts the directory
-alone, without an error. Other readers report an error.
+Because [dot-dot][dot-dot] refers to the parent directory, [POSIX][resolution] resolves `a/../b` to
+`b` alongside `a`. Readers handle `a/../b` in four ways: resolve the path and extract `b`, strip the
+`..` component and extract `a/b`, skip the member and leave only `a/`, or reject any path containing
+`..`.
 
-Decision point: whether a name with `..` is rejected, rewritten, skipped, or followed.
+Decision point: whether a member name containing `..` is rejected, stripped, skipped, or resolved.
 Seen in: 4 PyPI sdists, such as spdk 26.9 (`spdk-26.9/../scripts/rpc.py`) and bt-test-interfaces
-0.0.5 (`bt-test-interfaces-0.0.5/../.git/config`), where the names do not lead out of the
-destination either.
-See also: N16, a name with `..` that leads out of the destination.
+0.0.5 (`bt-test-interfaces-0.0.5/../.git/config`), whose paths also stay inside the destination.
+See also: N16, a name with `..` that escapes the destination.
 """
 
 VERDICT = "reject"
@@ -22,5 +20,5 @@ FEATURES = ["name.dotdot"]
 
 def build(a):
     a.directory(b"a/")
-    a.file(b"a/../b", b"b\n", note="a name with .. that resolves to b")
+    a.file(b"a/../b", b"b\n", note="resolves to b")
     a.end()

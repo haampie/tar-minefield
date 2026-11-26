@@ -1,19 +1,20 @@
 N54-pax-path-not-ascii: must accept, and extract its tree
 
-A pax `path` in UTF-8 that is not ASCII.
+A non-ASCII UTF-8 pax `path`.
 
-The archive has one file, whose pax header has the `path` `日本語/café.txt`, in UTF-8, and whose header
-has the name `nihongo/cafe.txt`.
+The archive has one file with `path=日本語/café.txt` (encoded in UTF-8) in its pax header and
+`nihongo/cafe.txt` in its ustar name field.
 
-In POSIX, pax records are UTF-8, and a `path` overrides the name of the header: it
-is how a name that is not ASCII is stored in a pax archive. So the file is `日本語/café.txt`. A reader
-that decodes the record in another encoding, such as Latin-1, extracts a file under another name.
+In POSIX, pax records use UTF-8 and a `path` record overrides the ustar name and
+prefix fields, which is the standard way to store non-ASCII filenames. The extracted file is
+`日本語/café.txt`. A reader that decodes the pax record using a different character set, such as
+Latin-1, extracts the file under a mangled name.
 
-Seen in: 789 of the scanned tarballs have names that are not ASCII, in a pax `path` or in the name
-field.
-See also: N03, a long name in a pax `path`, and N18, a name that is not UTF-8.
+Seen in: 789 of the scanned tarballs have non-ASCII names, either in a pax `path` or in the ustar
+name field.
+See also: N03, a long name in a pax `path`, and N18, a non-UTF-8 name.
 
-0x000000  header: pax extended header, a path in UTF-8 that is not ASCII
+0x000000  header: pax extended header, non-ASCII UTF-8 path
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

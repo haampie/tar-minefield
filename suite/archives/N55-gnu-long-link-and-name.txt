@@ -1,17 +1,17 @@
 N55-gnu-long-link-and-name: must accept, and extract its tree
 
-A symlink with a long name and a long target, in GNU's long link and long name headers.
+A symlink with both a GNU long link target (`K`) and a GNU long name (`L`).
 
-The archive has a GNU long link name header, of typeflag `K`, whose data is 120 `t`s, followed by a
-NUL. After it is a GNU long name header, of typeflag `L`, whose data is 120 `l`s, followed by a NUL.
-After those is a symlink, of typeflag `2`, with GNU's magic, whose name and linkname fields contain
-the first 100 bytes of the name and the target.
+The archive has a GNU long link header (typeflag `K`) containing 120 `t`s and a NUL, followed by a
+GNU long name header (typeflag `L`) containing 120 `l`s and a NUL, and then a symlink (typeflag `2`)
+with GNU magic whose ustar name and linkname fields hold the 100-byte prefixes.
 
-The long name replaces the name field, and the long link name the linkname field, so the symlink has
-a name of 120 `l`s and points to 120 `t`s. GNU tar writes the two headers in this order.
+The `L` header overrides the ustar name field and the `K` header overrides the linkname field,
+producing a symlink named with 120 `l`s that points to 120 `t`s. GNU tar always emits `K` before `L`
+when both are needed.
 
 Seen in: tarballs produced by GNU tar.
-See also: N47, a long link name alone, and N01, a long name of a file.
+See also: N47, a GNU long link name alone, and N01, a GNU long file name.
 
 0x000000  header: GNU long link name
           name     [  0,100)  "././@LongLink" + 87 NUL

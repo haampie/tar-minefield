@@ -1,13 +1,13 @@
-"""A name with a `.` component, `c/./d`.
+"""A name with an inner `.` component: `c/./d`.
 
 The archive has one file, `c/./d`.
 
-The special filename [dot][dot] refers to the directory that it is in, so in [POSIX][resolution] the
-file is `c/d`. This case is ambiguous only to a reader that compares names as strings, to which
-`c/./d` and `c/d` are two names for one path. The default policy tolerates it, and takes `c/./d` and
-`c/d` in one archive for a duplicate.
+Because [dot][dot] refers to its enclosing directory, [POSIX][resolution] resolves `c/./d` to `c/d`.
+A reader that compares member names as raw strings fails to notice that `c/./d` and `c/d` name the
+same file. The default policy tolerates `c/./d`, and treats `c/./d` and `c/d` in the same archive as
+duplicates.
 
-Decision point: whether a name is normalized before it is compared with others.
+Decision point: whether `.` components are normalized before comparing member names.
 Seen in: 10 of the scanned tarballs, such as besu 24.1.2 and xdaliclock 2.49.
 See also: N06, the name `./a`, and N49, a name with two consecutive slashes.
 """

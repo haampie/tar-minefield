@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>N55 gnu-long-link-and-name · Tar file extraction test suite</title>
-<meta name="description" content="A symlink with a long name and a long target, in GNU&#x27;s long link and long name headers.">
+<meta name="description" content="A symlink with both a GNU long link target (K) and a GNU long name (L).">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="N55 gnu-long-link-and-name · Tar file extraction test suite">
-<meta property="og:description" content="A symlink with a long name and a long target, in GNU&#x27;s long link and long name headers.">
+<meta property="og:description" content="A symlink with both a GNU long link target (K) and a GNU long name (L).">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/N55.html">
 <meta property="og:url" content="https://stoppels.ch/tar/N55.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/bfafa831a541683a.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/5cc373fa907dcf10.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of N55 gnu-long-link-and-name">
@@ -24,7 +24,7 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="N54.html" rel="prev" title="N54 pax-path-not-ascii">‹ N54 pax-path-not-ascii</a><a href="index.html">tar-minefield</a><a class="next" href="N56.html" rel="next" title="N56 pax-path-equals-sign">N56 pax-path-equals-sign ›</a></nav>
 <h1><code>N55</code> gnu-long-link-and-name</h1>
-<p>A symlink with a long name and a long target, in GNU&#x27;s long link and long name headers.</p>
+<p>A symlink with both a GNU long link target (<code>K</code>) and a GNU long name (<code>L</code>).</p>
 <div class="verdict accept wide"><p><span class="badge">Accept</span><span class="badge-draft">(draft)</span> Every implementation must accept this archive, and extract the expected tree below.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>name</dd>
@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a GNU long link name header, of typeflag <code>K</code>, whose data is 120 <code>t</code>s, followed by a NUL. After it is a GNU long name header, of typeflag <code>L</code>, whose data is 120 <code>l</code>s, followed by a NUL. After those is a symlink, of typeflag <code>2</code>, with GNU&#x27;s magic, whose name and linkname fields contain the first 100 bytes of the name and the target.</p>
-<p>The long name replaces the name field, and the long link name the linkname field, so the symlink has a name of 120 <code>l</code>s and points to 120 <code>t</code>s. GNU tar writes the two headers in this order.</p>
+<p>The archive has a GNU long link header (typeflag <code>K</code>) containing 120 <code>t</code>s and a NUL, followed by a GNU long name header (typeflag <code>L</code>) containing 120 <code>l</code>s and a NUL, and then a symlink (typeflag <code>2</code>) with GNU magic whose ustar name and linkname fields hold the 100-byte prefixes.</p>
+<p>The <code>L</code> header overrides the ustar name field and the <code>K</code> header overrides the linkname field, producing a symlink named with 120 <code>l</code>s that points to 120 <code>t</code>s. GNU tar always emits <code>K</code> before <code>L</code> when both are needed.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll</code></td><td>symlink</td><td>→ <code>tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt</code></td></tr></table></div>
@@ -52,18 +52,18 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>N55-gnu-long-link-and-name: must accept, and extract its tree
 
-A symlink with a long name and a long target, in GNU&#x27;s long link and long name headers.
+A symlink with both a GNU long link target (`K`) and a GNU long name (`L`).
 
-The archive has a GNU long link name header, of typeflag `K`, whose data is 120 `t`s, followed by a
-NUL. After it is a GNU long name header, of typeflag `L`, whose data is 120 `l`s, followed by a NUL.
-After those is a symlink, of typeflag `2`, with GNU&#x27;s magic, whose name and linkname fields contain
-the first 100 bytes of the name and the target.
+The archive has a GNU long link header (typeflag `K`) containing 120 `t`s and a NUL, followed by a
+GNU long name header (typeflag `L`) containing 120 `l`s and a NUL, and then a symlink (typeflag `2`)
+with GNU magic whose ustar name and linkname fields hold the 100-byte prefixes.
 
-The long name replaces the name field, and the long link name the linkname field, so the symlink has
-a name of 120 `l`s and points to 120 `t`s. GNU tar writes the two headers in this order.
+The `L` header overrides the ustar name field and the `K` header overrides the linkname field,
+producing a symlink named with 120 `l`s that points to 120 `t`s. GNU tar always emits `K` before `L`
+when both are needed.
 
 Seen in: tarballs produced by GNU tar.
-See also: N47, a long link name alone, and N01, a long name of a file.
+See also: N47, a GNU long link name alone, and N01, a GNU long file name.
 
 0x000000  header: GNU long link name
           name     [  0,100)  &quot;././@LongLink&quot; + 87 NUL
@@ -398,10 +398,10 @@ See also: N47, a long link name alone, and N01, a long name of a file.
 <p>See <a href="seen-in.html#N55">a sample of these 35 tarballs</a>, with the sha256 of each and an example from it.</p>
 <h2 id="see-also">See also<a class="anchor" href="#see-also" aria-label="Link to this section">¶</a></h2>
 <ul>
-<li><a href="N47.html"><code>N47</code></a>: a long link name alone, and <a href="N01.html"><code>N01</code></a>, a long name of a file.</li>
+<li><a href="N47.html"><code>N47</code></a>: a GNU long link name alone, and <a href="N01.html"><code>N01</code></a>, a GNU long file name.</li>
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

@@ -1,19 +1,18 @@
-"""A pax header whose own name leads out of the destination.
+"""A pax header whose own ustar name escapes the destination directory.
 
-The archive has a pax header that is itself named `../tar-minefield-escaped`, with a `comment`
-record, then a file `a`.
+The archive has a pax header named `../tar-minefield-escaped` with a `comment` record, followed by a
+file `a`.
 
-The name of an extended header is not the name of a member: a reader that knows pax reads its
-records, and does not use its name. A ustar reader that predates pax [extracts the header as a
-file][pre-pax-reader] of that name, which contains the records, and a reader that does not recognize
-the header does the same. In this archive, that file is written outside the destination. This case
-is ambiguous because the tree is either the file `a`, or `a` and a file next to the destination.
-That file is harmless: its contents say what happened.
+A pax-aware reader parses an extended header's records and ignores its ustar name field, extracting
+only `a`. However, a legacy ustar reader, or any reader that does not recognize typeflag `x`,
+[extracts the pax header as a regular file][pre-pax-reader] containing the raw records. Here that
+fallback writes `../tar-minefield-escaped` outside the destination directory (with a harmless text
+payload explaining what happened).
 
-Decision point: whether the name of an extended header is checked as the name of a member is.
-Seen in: not measured, as the scans do not record the components of an extended header's name that
-come from its member: 1003 of the scanned tarballs may have such a name.
-See also: N16, a name with `..`, and F39, pax headers after a v7 header.
+Decision point: whether an extended header's ustar name is validated like a member name.
+Seen in: not measured, as the scanner does not record the member-derived parts of an extended
+header's name; 1003 scanned tarballs may have such a name.
+See also: N16, a member name with `..`, and F39, pax headers after a v7 header.
 """
 
 VERDICT = "reject"
@@ -24,6 +23,6 @@ FEATURES = ["extended.name-dotdot"]
 def build(a):
     a.pax([(b"comment", b"If this is a file outside the directory you extracted to, the extractor "
                         b"wrote a pax header as a file.")],
-          name=b"../tar-minefield-escaped", note="named to lead out of the destination")
+          name=b"../tar-minefield-escaped", note="ustar name with ..")
     a.file(b"a", b"a\n")
     a.end()

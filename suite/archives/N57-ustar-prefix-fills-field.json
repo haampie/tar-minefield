@@ -1,7 +1,7 @@
 {
  "id": "N57",
  "verdict": "accept",
- "description": "A prefix of exactly 155 bytes, which fills the prefix field without a NUL.",
+ "description": "A 155-byte ustar prefix that fills the entire field without a trailing NUL.",
  "features": [],
  "tree": [
   {

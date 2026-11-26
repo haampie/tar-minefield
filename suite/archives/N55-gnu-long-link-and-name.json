@@ -1,7 +1,7 @@
 {
  "id": "N55",
  "verdict": "accept",
- "description": "A symlink with a long name and a long target, in GNU's long link and long name headers.",
+ "description": "A symlink with both a GNU long link target (`K`) and a GNU long name (`L`).",
  "features": [
   "linkname.no-nul"
  ],

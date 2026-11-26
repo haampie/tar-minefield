@@ -1,18 +1,18 @@
-"""A global pax header whose own name is in a directory.
+"""A global pax header whose ustar name contains a directory component.
 
-The archive has a global header that is itself named `g/pax_global_header`, with a `comment` record,
-then a file `a`.
+The archive has a global pax header named `g/pax_global_header` with a `comment` record, followed by
+a file `a`.
 
-The name of a [global header][global-files] is not the name of a member, and a reader that knows pax
-does not use it. So the tree is the file `a`, without a directory `g`. A reader that creates the
-parent directories of every header, before it looks at its typeflag, leaves an empty directory `g`.
-Writers give these headers a name in a directory: [by default][globexthdr-name], a global header is
-named `$TMPDIR/GlobalHead.%p.%n`, with the process ID and a sequence number, and an extended header
-`%d/PaxHeaders.%p/%f`, with the directory and the name of its member.
+A [global pax header][global-files] is metadata, not an archive member, and a pax-aware reader
+ignores its ustar name field. Archivers routinely include a directory in that field: [by
+default][globexthdr-name], POSIX names global headers `$TMPDIR/GlobalHead.%p.%n` and extended
+headers `%d/PaxHeaders.%p/%f`. The extracted tree is therefore just `a`. A reader that creates
+parent directories for a header's ustar name before checking its typeflag leaves behind an empty
+directory `g`.
 
 Seen in: gpa 0.11.0 and 0.11.1 and drbd 9.3.3, whose global headers GNU tar named
 `/tmp/GlobalHead.1`.
-See also: F17, the global header that `git archive` writes, and N52, a pax header named with `..`.
+See also: F17, the global header written by `git archive`, and N52, a pax header named with `..`.
 """
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}
 
@@ -24,6 +24,6 @@ TREE = [F("a", b"a\n")]
 
 def build(a):
     a.pax([(b"comment", b"a global header")], typeflag=b"g", name=b"g/pax_global_header",
-          note="named in a directory")
+          note="ustar name in a subdirectory")
     a.file(b"a", b"a\n")
     a.end()

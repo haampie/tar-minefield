@@ -1,7 +1,7 @@
 {
  "id": "N58",
  "verdict": "accept",
- "description": "A name split between the prefix and name fields, under a pax header without a `path`.",
+ "description": "A ustar prefix and name under a pax header that has no `path` record.",
  "features": [],
  "tree": [
   {

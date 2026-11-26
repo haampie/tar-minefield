@@ -1,7 +1,7 @@
 {
  "id": "N59",
  "verdict": "accept",
- "description": "A symlink whose target has `..` after a component that is a symlink.",
+ "description": "A symlink target with `..` after a symlink component: `s/../x`.",
  "features": [],
  "tree": [
   {

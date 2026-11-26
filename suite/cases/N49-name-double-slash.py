@@ -1,14 +1,14 @@
-"""A name with two consecutive slashes, `a//b`.
+"""A name with two consecutive slashes: `a//b`.
 
 The archive has one file, `a//b`.
 
-In POSIX, files are created by [pathname resolution][resolution], and in a pathname [consecutive
-slashes][slashes] are the same as one, so the file is `a/b`. This case is ambiguous to a reader that
-compares names as strings, to which `a//b` and `a/b` are two names for one path, and to one that
-takes what is between the two slashes for a component with an empty name, which it cannot create.
-The default policy tolerates it, and takes `a//b` and `a/b` in one archive for a duplicate.
+POSIX creates extracted files by [pathname resolution][resolution], which treats [multiple
+consecutive slashes][slashes] as a single slash, resolving `a//b` to `a/b`. A reader that splits
+paths on every slash sees an empty path component between the slashes and fails to create it, while
+one that compares member names as raw strings fails to recognize `a//b` and `a/b` as the same path.
+The default policy tolerates `a//b`, and treats `a//b` and `a/b` in the same archive as duplicates.
 
-Decision point: whether a name is normalized before it is compared with others.
+Decision point: whether consecutive slashes in a member name are collapsed.
 Seen in: 2 of the scanned tarballs: shapemapper 2.1.5, and a binary distribution of GHC 9.0.2.
 See also: N06, the name `./a`, and N50, a name with a `.` component.
 """

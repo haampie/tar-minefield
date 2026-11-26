@@ -83,8 +83,8 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="N37.html"><code>N37</code></a> extended-two-gnu-long-names</td><td>Two GNU long names for one member: the first, the last, or the header&#x27;s?</td><td>extracts <code>second</code> (12 B, a578eb49)</td></tr>
 <tr><td><a href="N40.html"><code>N40</code></a> pax-global-linkpath</td><td>A global pax header with a <code>linkpath</code>.</td><td>extracts <code>l</code> → <code>global-target</code>, <code>m</code> → <code>global-target</code></td></tr>
 <tr><td><a href="N41.html"><code>N41</code></a> pax-gnu-sparse-name</td><td>A pax <code>GNU.sparse.name</code> on a file that is not sparse, after a <code>path</code>.</td><td>extracts <code>path-name</code> (12 B, a578eb49)</td></tr>
-<tr><td><a href="N51.html"><code>N51</code></a> linkname-bytes-after-nul</td><td>Bytes after the NUL that ends the target of a symlink.</td><td>extracts <code>l</code> → <code>safe</code></td></tr>
-<tr><td><a href="N52.html"><code>N52</code></a> extended-name-dotdot</td><td>A pax header whose own name leads out of the destination.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
+<tr><td><a href="N51.html"><code>N51</code></a> linkname-bytes-after-nul</td><td>Trailing bytes after the NUL terminator in a symlink target.</td><td>extracts <code>l</code> → <code>safe</code></td></tr>
+<tr><td><a href="N52.html"><code>N52</code></a> extended-name-dotdot</td><td>A pax header whose own ustar name escapes the destination directory.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="K11.html"><code>K11</code></a> pax-mode</td><td>A pax <code>mode</code> record on a file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="K12.html"><code>K12</code></a> pax-acl</td><td>An ACL in a pax header with the execute permission for the owner of a file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="S04.html"><code>S04</code></a> hardlink-to-itself</td><td>A hardlink to itself.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>

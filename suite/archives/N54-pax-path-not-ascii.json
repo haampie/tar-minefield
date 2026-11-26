@@ -1,7 +1,7 @@
 {
  "id": "N54",
  "verdict": "accept",
- "description": "A pax `path` in UTF-8 that is not ASCII.",
+ "description": "A non-ASCII UTF-8 pax `path`.",
  "features": [
   "name.non-ascii"
  ],

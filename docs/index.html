@@ -86,13 +86,13 @@ published there.</p>
 <tr><td><a href="N45.html"><code>N45</code></a></td><td>gnu-long-name-field-slash</td><td>A file with a GNU long name and typeflag NUL, whose name field ends in a slash.</td><td class=n>4.38%</td></tr>
 <tr><td><a href="N46.html"><code>N46</code></a></td><td>pax-linkpath-linkname-empty</td><td>A symlink with an empty linkname field and a pax <code>linkpath</code>.</td><td class=n>not measured</td></tr>
 <tr><td><a href="N47.html"><code>N47</code></a></td><td>gnu-long-link</td><td>A symlink with a long target, in a GNU long link name.</td><td class=n>0.04%</td></tr>
-<tr><td><a href="N54.html"><code>N54</code></a></td><td>pax-path-not-ascii</td><td>A pax <code>path</code> in UTF-8 that is not ASCII.</td><td class=n>0.96%</td></tr>
-<tr><td><a href="N55.html"><code>N55</code></a></td><td>gnu-long-link-and-name</td><td>A symlink with a long name and a long target, in GNU&#x27;s long link and long name headers.</td><td class=n>0.04%</td></tr>
-<tr><td><a href="N56.html"><code>N56</code></a></td><td>pax-path-equals-sign</td><td>A pax <code>path</code> that contains an equals sign, <code>a=b</code>.</td><td class=n>not measured</td></tr>
-<tr><td><a href="N57.html"><code>N57</code></a></td><td>ustar-prefix-fills-field</td><td>A prefix of exactly 155 bytes, which fills the prefix field without a NUL.</td><td class=n>7.65%</td></tr>
-<tr><td><a href="N58.html"><code>N58</code></a></td><td>ustar-prefix-under-pax</td><td>A name split between the prefix and name fields, under a pax header without a <code>path</code>.</td><td class=n>7.65%</td></tr>
-<tr><td><a href="N59.html"><code>N59</code></a></td><td>symlink-target-dotdot-after-symlink</td><td>A symlink whose target has <code>..</code> after a component that is a symlink.</td><td class=n>not measured</td></tr>
-<tr><td><a href="N60.html"><code>N60</code></a></td><td>pax-global-name-directory</td><td>A global pax header whose own name is in a directory.</td><td class=n>not measured</td></tr>
+<tr><td><a href="N54.html"><code>N54</code></a></td><td>pax-path-not-ascii</td><td>A non-ASCII UTF-8 pax <code>path</code>.</td><td class=n>0.96%</td></tr>
+<tr><td><a href="N55.html"><code>N55</code></a></td><td>gnu-long-link-and-name</td><td>A symlink with both a GNU long link target (<code>K</code>) and a GNU long name (<code>L</code>).</td><td class=n>0.04%</td></tr>
+<tr><td><a href="N56.html"><code>N56</code></a></td><td>pax-path-equals-sign</td><td>A pax <code>path</code> value containing an equals sign: <code>a=b</code>.</td><td class=n>not measured</td></tr>
+<tr><td><a href="N57.html"><code>N57</code></a></td><td>ustar-prefix-fills-field</td><td>A 155-byte ustar prefix that fills the entire field without a trailing NUL.</td><td class=n>7.65%</td></tr>
+<tr><td><a href="N58.html"><code>N58</code></a></td><td>ustar-prefix-under-pax</td><td>A ustar prefix and name under a pax header that has no <code>path</code> record.</td><td class=n>7.65%</td></tr>
+<tr><td><a href="N59.html"><code>N59</code></a></td><td>symlink-target-dotdot-after-symlink</td><td>A symlink target with <code>..</code> after a symlink component: <code>s/../x</code>.</td><td class=n>not measured</td></tr>
+<tr><td><a href="N60.html"><code>N60</code></a></td><td>pax-global-name-directory</td><td>A global pax header whose ustar name contains a directory component.</td><td class=n>not measured</td></tr>
 <tr><td><a href="S01.html"><code>S01</code></a></td><td>tree-dir-after-contents</td><td>A directory after its contents.</td><td class=n>1.22%</td></tr>
 <tr><td><a href="S02.html"><code>S02</code></a></td><td>tree-duplicate-dir</td><td>The same directory twice, as <code>tar cf x.tar d d/sub</code> writes.</td><td class=n>0.19%</td></tr>
 <tr><td><a href="S25.html"><code>S25</code></a></td><td>tree-dir-not-writable</td><td>A directory without write permission, before the file in it.</td><td class=n>not measured</td></tr></table></div>
@@ -114,8 +114,8 @@ published there.</p>
 <tr><td><a href="N07.html"><code>N07</code></a></td><td>symlink-absolute</td><td>A symlink to an absolute path, created as it is.</td><td class=n>0.11%</td></tr>
 <tr><td><a href="N15.html"><code>N15</code></a></td><td>name-control-character</td><td>A control character in a name, here a newline, created as it is.</td><td class=n>0.01%</td></tr>
 <tr><td><a href="N35.html"><code>N35</code></a></td><td>symlink-escapes</td><td>A relative symlink whose target leads out of the destination.</td><td class=n>&lt;0.01%</td></tr>
-<tr><td><a href="N49.html"><code>N49</code></a></td><td>name-double-slash</td><td>A name with two consecutive slashes, <code>a//b</code>.</td><td class=n>&lt;0.01%</td></tr>
-<tr><td><a href="N50.html"><code>N50</code></a></td><td>name-dot-component</td><td>A name with a <code>.</code> component, <code>c/./d</code>.</td><td class=n>0.01%</td></tr>
+<tr><td><a href="N49.html"><code>N49</code></a></td><td>name-double-slash</td><td>A name with two consecutive slashes: <code>a//b</code>.</td><td class=n>&lt;0.01%</td></tr>
+<tr><td><a href="N50.html"><code>N50</code></a></td><td>name-dot-component</td><td>A name with an inner <code>.</code> component: <code>c/./d</code>.</td><td class=n>0.01%</td></tr>
 <tr><td><a href="S16.html"><code>S16</code></a></td><td>hardlink-target-spelled-differently</td><td>A hardlink to <code>./a</code>, where the member is named <code>a</code>.</td><td class=n>none</td></tr></table></div>
 <h3 id="to-reject-framing">To reject: framing<a class="anchor" href="#to-reject-framing" aria-label="Link to this section">¶</a></h3>
 <div class="wide"><table class="cases"><colgroup><col style="width: 14%"><col style="width: 24%"><col style="width: 48%"><col style="width: 14%"></colgroup><tr><th>identifier</th><th>name</th><th>what it is</th><th class=n>prevalence</th></tr>
@@ -212,9 +212,9 @@ published there.</p>
 <tr><td><a href="N39.html"><code>N39</code></a></td><td>gnu-long-name-size-without-nul</td><td>A GNU long name whose size leaves out its NUL, with bytes after it.</td><td class=n>none</td></tr>
 <tr><td><a href="N40.html"><code>N40</code></a></td><td>pax-global-linkpath</td><td>A global pax header with a <code>linkpath</code>.</td><td class=n>none</td></tr>
 <tr><td><a href="N41.html"><code>N41</code></a></td><td>pax-gnu-sparse-name</td><td>A pax <code>GNU.sparse.name</code> on a file that is not sparse, after a <code>path</code>.</td><td class=n>none</td></tr>
-<tr><td><a href="N51.html"><code>N51</code></a></td><td>linkname-bytes-after-nul</td><td>Bytes after the NUL that ends the target of a symlink.</td><td class=n>none</td></tr>
-<tr><td><a href="N52.html"><code>N52</code></a></td><td>extended-name-dotdot</td><td>A pax header whose own name leads out of the destination.</td><td class=n>not measured</td></tr>
-<tr><td><a href="N53.html"><code>N53</code></a></td><td>name-dotdot-inside</td><td>A name with <code>..</code> that does not lead out of the destination, <code>a/../b</code>.</td><td class=n>&lt;0.01%</td></tr></table></div>
+<tr><td><a href="N51.html"><code>N51</code></a></td><td>linkname-bytes-after-nul</td><td>Trailing bytes after the NUL terminator in a symlink target.</td><td class=n>none</td></tr>
+<tr><td><a href="N52.html"><code>N52</code></a></td><td>extended-name-dotdot</td><td>A pax header whose own ustar name escapes the destination directory.</td><td class=n>not measured</td></tr>
+<tr><td><a href="N53.html"><code>N53</code></a></td><td>name-dotdot-inside</td><td>A name with <code>..</code> that stays inside the destination: <code>a/../b</code>.</td><td class=n>&lt;0.01%</td></tr></table></div>
 <h3 id="to-reject-kinds">To reject: kinds<a class="anchor" href="#to-reject-kinds" aria-label="Link to this section">¶</a></h3>
 <div class="wide"><table class="cases"><colgroup><col style="width: 14%"><col style="width: 24%"><col style="width: 48%"><col style="width: 14%"></colgroup><tr><th>identifier</th><th>name</th><th>what it is</th><th class=n>prevalence</th></tr>
 <tr><td><a href="F60.html"><code>F60</code></a></td><td>trailing-slash-file-with-size</td><td>A regular file <code>a/</code> with a size: a directory without data, or a file with data?</td><td class=n>&lt;0.01%</td></tr>

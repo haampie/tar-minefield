@@ -1,7 +1,7 @@
 {
  "id": "N56",
  "verdict": "accept",
- "description": "A pax `path` that contains an equals sign, `a=b`.",
+ "description": "A pax `path` value containing an equals sign: `a=b`.",
  "features": [],
  "tree": [
   {

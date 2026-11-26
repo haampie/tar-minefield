@@ -1,7 +1,7 @@
 {
  "id": "N51",
  "verdict": "reject",
- "description": "Bytes after the NUL that ends the target of a symlink.",
+ "description": "Trailing bytes after the NUL terminator in a symlink target.",
  "features": [
   "linkname.bytes-after-nul"
  ]
