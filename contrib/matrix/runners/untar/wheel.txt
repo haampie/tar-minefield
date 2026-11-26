@@ -1,0 +1,2 @@
+# The wheel of untar, a pure Python package, from PyPI: url and sha256.
+https://files.pythonhosted.org/packages/b3/28/e6e4d876a933e243bb3d68694b7dab632d02f042c5b35df93ffc8ad9d712/untar-0.5.0-py3-none-any.whl fb1bc7fdd4c6a1c66e7cc01934b0de779f3056ea8a012dc58bfb39021aa07bf2

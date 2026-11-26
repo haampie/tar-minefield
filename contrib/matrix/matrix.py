@@ -65,6 +65,18 @@ TARFILE = (
 )
 
 
+# the wheel's directory is on sys.path, as -I leaves out PYTHONPATH
+UNTAR = (
+    "import sys\n"
+    "sys.path.insert(0, sys.argv[1])\n"
+    "import untar\n"
+    "try:\n"
+    "    untar.extract(sys.argv[2], sys.argv[3])\n"
+    "except Exception as e:\n"
+    "    sys.exit(f'{type(e).__name__}: {e}')\n"
+)
+
+
 def tool(name):
     """A program from the environment variable of its name in capitals, or from PATH."""
     return os.environ.get(name.upper()) or shutil.which(name)
@@ -86,6 +98,29 @@ def fetch_jars(listing, into):
                     raise ValueError(f"{path}: sha1 mismatch")
                 with open(target, "wb") as f:
                     f.write(data)
+
+
+def fetch_wheel(listing, into):
+    """The wheel that listing names, from PyPI, checked by its sha256 and unpacked into a
+    directory, which is returned."""
+    import urllib.request
+    import zipfile
+
+    url, sha256 = next(l.split() for l in open(listing) if l.strip() and not l.startswith("#"))
+    target = os.path.join(into, sha256)
+    if not os.path.isdir(target):
+        with urllib.request.urlopen(url) as r:
+            data = r.read()
+        if hashlib.sha256(data).hexdigest() != sha256:
+            raise ValueError(f"{url}: sha256 mismatch")
+        wheel = os.path.join(into, os.path.basename(url))
+        os.makedirs(into, exist_ok=True)
+        with open(wheel, "wb") as f:
+            f.write(data)
+        with zipfile.ZipFile(wheel) as z:
+            z.extractall(target + ".tmp")
+        os.rename(target + ".tmp", target)
+    return target
 
 
 def build_mescc_untar(build):
@@ -172,6 +207,13 @@ def implementations(work, only=None):
                       lambda a, d, f=f: [python, "-I", "-c", TARFILE, a, d, f]))
     build = os.path.join(work, "build")
     os.makedirs(build, exist_ok=True)
+    if want("untar (PyPI)"):
+        lib = fetch_wheel(os.path.join(RUNNERS, "untar", "wheel.txt"), os.path.join(build, "untar"))
+        code, out, _ = check.run([python, "-I", "-c", "import sys; sys.path.insert(0, sys.argv[1]);"
+                                  " import untar; print(untar.__version__)", lib])
+        version = f"untar {out.strip()}, extract, on {pyversion}" if code == 0 else "?"
+        found.append(("untar (PyPI)", version,
+                      lambda a, d, l=lib: [python, "-I", "-c", UNTAR, l, a, d]))
     if want("Go containerd archive.Apply") and shutil.which("go"):
         binary = os.path.join(build, "containerd-runner")
         code, _, err = check.run(["go", "build", "-o", binary, "."], cwd=os.path.join(RUNNERS, "containerd"))
@@ -487,6 +529,7 @@ POPULARITY = [
     "Go containerd archive.Apply",
     "Rust tar", "Rust astral-tokio-tar", "Rust tar-codec, as in uv",
     "RubyGems", "R untar, internal", "Perl Archive::Tar", "Haskell tar", "Julia Tar.jl",
+    "untar (PyPI)",
     "live-bootstrap untar", "live-bootstrap untar, --non-strict",
 ]
 # The page of every implementation on the site, by a name of its own: the column may be renamed,
@@ -499,6 +542,7 @@ SLUGS = {
     "Python tarfile, filter=data, as in pip": "tarfile-data",
     "Python tarfile, filter=tar": "tarfile-tar",
     "Python tarfile, filter=fully_trusted": "tarfile-trusted",
+    "untar (PyPI)": "untar",
     "node-tar": "node-tar",
     "node-tar, strict": "node-tar-strict",
     "tar-fs": "tar-fs",

@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/S27.html">
 <meta property="og:url" content="https://stoppels.ch/tar/S27.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/a72cb195bf45bbfd.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/363084500950227f.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of S27 hardlink-through-symlink">
@@ -397,6 +397,7 @@ See also: S16, a hardlink to `./a`, and S11, a member extracted through a symlin
 <tr><td><a href="archive-tar.html">Perl Archive::Tar</a></td><td>Archive::Tar 3.12 of Perl v5.44.0</td><td>✅ rejects</td><td>error: No such file in archive: &#x27;s/f&#x27; at contrib/matrix/runners/perl/extract.pl line 14. Could not find file &#x27;s/f&#x27; in memory. at contrib/matrix/runners/perl/extract.pl line 14. Making hard link from &#x27;s/f&#x27; t…</td></tr>
 <tr><td><a href="haskell-tar.html">Haskell tar</a></td><td>tar 0.7.2.0, extract, of GHC 9.14</td><td>✅ rejects</td><td>error: DEST/s/f: copyFile:atomicCopyFileContents:withReplacementFile:copyFileToHandle:openFileWithCloseOnExec: does not exist (No such file or directory)</td></tr>
 <tr><td><a href="julia-tar.html">Julia Tar.jl</a></td><td>Tar 1.10.0 of Julia 1.13.3</td><td>✅ rejects</td><td>error: Tarball contains hardlink with non-existent target: - path = &quot;h&quot; - target = &quot;s/f&quot; Refusing to extract — possible attack!</td></tr>
+<tr><td><a href="untar.html">untar (PyPI)</a></td><td>untar 0.5.0, extract, on CPython 3.15.2</td><td>✅ rejects</td><td>error: Error: Archive hardlinks s/f, which is not extracted</td></tr>
 <tr><td><a href="live-bootstrap.html">live-bootstrap untar</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it</td><td>✅ rejects</td><td>error: unable to create hardlinks</td></tr>
 <tr><td><a href="live-bootstrap-nonstrict.html">live-bootstrap untar, --non-strict</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it</td><td>⚠️ accepts</td><td>tree B: <code>d/</code>, <code>d/f</code> (2 B, 092fcfbb), <code>s</code> → <code>d</code></td></tr></table></div>
 <h2 id="prevalence-in-release-tarballs">Prevalence in release tarballs<a class="anchor" href="#prevalence-in-release-tarballs" aria-label="Link to this section">¶</a></h2>

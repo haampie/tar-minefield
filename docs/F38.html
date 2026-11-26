@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F38.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F38.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/1bbc48abe663a217.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/be4e177d02a22ab3.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of F38 size-on-hardlink-without-pax">
@@ -350,6 +350,7 @@ See also: F34, the same in an archive with a pax header, which marks it as pax.
 <tr><td><a href="archive-tar.html">Perl Archive::Tar</a></td><td>Archive::Tar 3.12 of Perl v5.44.0</td><td>⚠️ accepts</td><td>tree A: <code>a</code> (2 B, 87428fc5), <code>h</code> (2 B, 87428fc5), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="haskell-tar.html">Haskell tar</a></td><td>tar 0.7.2.0, extract, of GHC 9.14</td><td>⚠️ accepts</td><td>tree B: <code>a</code> (2 B, 87428fc5), <code>h</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="julia-tar.html">Julia Tar.jl</a></td><td>Tar 1.10.0 of Julia 1.13.3</td><td>✅ rejects</td><td>error: hardlink with non-zero size Tar.Header(&quot;h&quot;, :hardlink, 0o644, 512, &quot;a&quot;)</td></tr>
+<tr><td><a href="untar.html">untar (PyPI)</a></td><td>untar 0.5.0, extract, on CPython 3.15.2</td><td>✅ rejects</td><td>error: Error: Archive contains h of type b&#x27;1&#x27; with size 512</td></tr>
 <tr><td><a href="live-bootstrap.html">live-bootstrap untar</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it</td><td>✅ rejects</td><td>error: unable to create hardlinks</td></tr>
 <tr><td><a href="live-bootstrap-nonstrict.html">live-bootstrap untar, --non-strict</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it</td><td>⚠️ accepts</td><td>tree E: <code>a</code> (2 B, 87428fc5)</td></tr></table></div>
 <h2 id="prevalence-in-release-tarballs">Prevalence in release tarballs<a class="anchor" href="#prevalence-in-release-tarballs" aria-label="Link to this section">¶</a></h2>

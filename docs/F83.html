@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F83.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F83.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/8637c83d70be73c0.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/46c0cb9d1da02347.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of F83 size-on-fifo">
@@ -348,6 +348,7 @@ See also: F68, a non-zero size on a symlink, and K08, a FIFO.
 <tr><td><a href="archive-tar.html">Perl Archive::Tar</a></td><td>Archive::Tar 3.12 of Perl v5.44.0</td><td>⚠️ accepts</td><td>tree A: <code>b</code> (2 B, 02638299), <code>p</code> (other), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="haskell-tar.html">Haskell tar</a></td><td>tar 0.7.2.0, extract, of GHC 9.14</td><td>⚠️ accepts</td><td>tree C: <code>b</code> (2 B, 02638299)</td></tr>
 <tr><td><a href="julia-tar.html">Julia Tar.jl</a></td><td>Tar 1.10.0 of Julia 1.13.3</td><td>✅ rejects</td><td>error: unsupported entry type Tar.Header(&quot;p&quot;, :fifo, 0o644, 512, &quot;&quot;)</td></tr>
+<tr><td><a href="untar.html">untar (PyPI)</a></td><td>untar 0.5.0, extract, on CPython 3.15.2</td><td>✅ rejects</td><td>error: Error: Archive contains p of type b&#x27;6&#x27; with size 512</td></tr>
 <tr><td><a href="live-bootstrap.html">live-bootstrap untar</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it</td><td>✅ rejects</td><td>error: unable to create FIFO</td></tr>
 <tr><td><a href="live-bootstrap-nonstrict.html">live-bootstrap untar, --non-strict</a></td><td>mescc-tools-extra a151c245e512, as live-bootstrap pins it</td><td>⚠️ accepts</td><td>tree C: <code>b</code> (2 B, 02638299)</td></tr></table></div>
 <h2 id="prevalence-in-release-tarballs">Prevalence in release tarballs<a class="anchor" href="#prevalence-in-release-tarballs" aria-label="Link to this section">¶</a></h2>

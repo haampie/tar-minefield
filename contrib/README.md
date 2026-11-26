@@ -27,7 +27,8 @@ it. WORK contains the builds of the programs in `matrix/runners/`, whose depende
 and the extractions: each in a directory of its own, two levels below a directory that catches what
 is written outside it. Run it in a throwaway directory, or a container, as some cases
 escape in lenient extractors. It uses what is installed: GNU tar, the untar of live-bootstrap (with
-git and a C compiler), bsdtar, BusyBox, 7-Zip, Python's `tarfile` with each of its filters, Go
+git and a C compiler), bsdtar, BusyBox, 7-Zip, Python's `tarfile` with each of its filters, untar from PyPI (with the wheel of
+`matrix/runners/untar/wheel.txt`, which it downloads and checks), Go
 (containerd's `archive.Apply`, which reads with `archive/tar`), Rust, Haskell (cabal), .NET, Java (with the jars
 of `matrix/runners/java/jars.txt`, which it downloads and checks), PHP (its `PharData`), R (its
 `Rscript`), Ruby, Perl, Julia and Node.js (node-tar and tar-fs): each on PATH, or in an environment

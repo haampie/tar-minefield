@@ -281,6 +281,18 @@
       "size": 7
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e47fbedb2823cf1ae4d4cdb8273635be2024cb870588e259c9b23d76ae49d484",
+      "size": 7
+     }
+    }
    }
   },
   "F02-end-data-after": {
@@ -571,6 +583,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains data after the end-of-archive marker",
+    "outside": {},
+    "tree": {}
    }
   },
   "F03-end-lone-zero-block": {
@@ -861,6 +878,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive is truncated",
+    "outside": {},
+    "tree": {}
    }
   },
   "F04-end-missing": {
@@ -1151,6 +1173,18 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
    }
   },
   "F05-magic-version-nuls": {
@@ -1413,6 +1447,18 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
    }
   },
   "F06-checksum-signed": {
@@ -1638,6 +1684,11 @@
    },
    "tar-fs": {
     "error": "Error: Invalid tar header. Maybe the tar is corrupted or it needs to be gunzipped?",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a header with an invalid checksum",
     "outside": {},
     "tree": {}
    }
@@ -1942,6 +1993,11 @@
       "size": 57
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains data after the end-of-archive marker",
+    "outside": {},
+    "tree": {}
    }
   },
   "F08-end-truncated-in-member": {
@@ -2188,6 +2244,11 @@
    },
    "tar-fs": {
     "error": "Error: Unexpected end of data",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive is truncated",
     "outside": {},
     "tree": {}
    }
@@ -2510,6 +2571,11 @@
       "size": 44
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a lone zero block",
+    "outside": {},
+    "tree": {}
    }
   },
   "F10-extended-pax-size-before-gnu-long": {
@@ -2852,6 +2918,11 @@
       "size": 512
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains both a pax header and a GNU long name for one member",
+    "outside": {},
+    "tree": {}
    }
   },
   "F11-magic-odd-version": {
@@ -3114,6 +3185,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a header with the magic b'ustar\\x0001'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F12-number-size-gap": {
@@ -3386,6 +3462,11 @@
       "size": 0
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid number b'000000 1000\\x00'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F13-pax-newline-in-path": {
@@ -3667,6 +3748,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a newline in the pax path",
+    "outside": {},
+    "tree": {}
    }
   },
   "F14-pax-size-disagrees": {
@@ -4071,6 +4157,11 @@
       "size": 0
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a with pax size 0 and size 512",
+    "outside": {},
+    "tree": {}
    }
   },
   "F15-pax-size-on-dir": {
@@ -4391,6 +4482,11 @@
       "size": 0
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains dir/ with pax size 512 and size 0",
+    "outside": {},
+    "tree": {}
    }
   },
   "F16-type-unknown": {
@@ -4595,6 +4691,11 @@
    },
    "tar-fs": {
     "error": "Error: unsupported type for DEST/unknown (null)",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains unknown of unsupported type b'Z'",
     "outside": {},
     "tree": {}
    }
@@ -4958,6 +5059,21 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "project": {
+      "kind": "directory"
+     },
+     "project/README": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "5891b5b522d5df086d0ff0b110fbd9d21bb4fc7163af34d08286a2e846f6be03",
+      "size": 6
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -5417,6 +5533,24 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     }
+    }
    }
   },
   "F19-pax-global-between-extended-and-member": {
@@ -5717,6 +5851,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a global pax header after an extended header",
+    "outside": {},
+    "tree": {}
    }
   },
   "F20-pax-global-size": {
@@ -6107,6 +6246,11 @@
       "size": 0
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a global pax path, linkpath or size",
+    "outside": {},
+    "tree": {}
    }
   },
   "F21-pax-size-empty": {
@@ -6424,6 +6568,11 @@
       "size": 512
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax size b''",
+    "outside": {},
+    "tree": {}
    }
   },
   "F22-pax-size-negative": {
@@ -6719,6 +6868,11 @@
    },
    "tar-fs": {
     "error": "Error: Invalid header",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax size b'-512'",
     "outside": {},
     "tree": {}
    }
@@ -7062,6 +7216,11 @@
       "size": 512
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax size b'+512'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F24-pax-size-leading-space": {
@@ -7396,6 +7555,11 @@
       "size": 512
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax size b' 512'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F25-pax-size-not-ascii-digits": {
@@ -7732,6 +7896,11 @@
    },
    "tar-fs": {
     "error": "Error: Invalid header",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax size b'\\xd9\\xa5\\xd9\\xa1\\xd9\\xa2'",
     "outside": {},
     "tree": {}
    }
@@ -8113,6 +8282,11 @@
       "size": 777
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax size b'0777'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F27-pax-size-too-large": {
@@ -8417,6 +8591,11 @@
    },
    "tar-fs": {
     "error": "Error: Unexpected end of data",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive is truncated",
     "outside": {},
     "tree": {}
    }
@@ -8834,6 +9013,24 @@
       "size": 0
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     },
+     "smuggled": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+     }
+    }
    }
   },
   "F29-number-size-base256-negative": {
@@ -9014,6 +9211,11 @@
    },
    "tar-fs": {
     "error": "Error: Invalid header",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a negative number",
     "outside": {},
     "tree": {}
    }
@@ -9206,6 +9408,11 @@
    },
    "tar-fs": {
     "error": "Error: Unexpected end of data",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive is truncated",
     "outside": {},
     "tree": {}
    }
@@ -9510,6 +9717,18 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
    }
   },
   "F32-checksum-leading-space": {
@@ -9783,6 +10002,18 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "184294b2fb6512fb777010e132d602fa64c13999e4d8a5537ed6d039b8eb91ff",
+      "size": 13
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -10095,6 +10326,11 @@
       "size": 0
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains dir of type b'5' with size 512",
+    "outside": {},
+    "tree": {}
    }
   },
   "F34-size-on-hardlink": {
@@ -10558,6 +10794,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains h of type b'1' with size 512",
+    "outside": {},
+    "tree": {}
    }
   },
   "F35-pax-size-on-hardlink": {
@@ -11033,6 +11274,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains h with pax size 512 and size 0",
+    "outside": {},
+    "tree": {}
    }
   },
   "F36-pax-record-length-short": {
@@ -11272,6 +11518,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax header",
+    "outside": {},
+    "tree": {}
    }
   },
   "F37-number-size-not-octal": {
@@ -11486,6 +11737,11 @@
       "size": 0
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid number b'00000000090\\x00'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F38-size-on-hardlink-without-pax": {
@@ -11943,6 +12199,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains h of type b'1' with size 512",
+    "outside": {},
+    "tree": {}
    }
   },
   "F39-format-pax-after-v7": {
@@ -12363,6 +12624,11 @@
     "error": "Error: Invalid tar header: unknown format.",
     "outside": {},
     "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a pax header, and a header without magic",
+    "outside": {},
+    "tree": {}
    }
   },
   "F40-number-size-no-terminator": {
@@ -12646,6 +12912,11 @@
       "size": 10
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid number b'000000000012'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F41-number-size-leading-nul": {
@@ -12979,6 +13250,11 @@
       "size": 512
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid number b'\\x000000001000\\x00'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F42-pax-comment-not-utf8": {
@@ -13264,6 +13540,18 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -13569,6 +13857,18 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
    }
   },
   "F44-pax-global-size-empty": {
@@ -13862,6 +14162,11 @@
       "size": 512
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a global pax path, linkpath or size",
+    "outside": {},
+    "tree": {}
    }
   },
   "F45-type-gnu-sparse": {
@@ -14073,6 +14378,11 @@
    },
    "tar-fs": {
     "error": "Error: unsupported type for DEST/a (null)",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a sparse file a, which is not supported",
     "outside": {},
     "tree": {}
    }
@@ -14518,6 +14828,11 @@
       "target": "target"
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains l with pax size 512 and size 0",
+    "outside": {},
+    "tree": {}
    }
   },
   "F47-checksum-wrong-after-first-member": {
@@ -14878,6 +15193,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a header with an invalid checksum",
+    "outside": {},
+    "tree": {}
    }
   },
   "F48-pax-record-length-plus": {
@@ -15131,6 +15451,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax header",
+    "outside": {},
+    "tree": {}
    }
   },
   "F49-pax-record-empty-line": {
@@ -15377,6 +15702,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax header",
+    "outside": {},
+    "tree": {}
    }
   },
   "F50-pax-size-underscore": {
@@ -15709,6 +16039,11 @@
       "size": 5
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax size b'5_12'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F51-number-size-plus": {
@@ -15928,6 +16263,11 @@
       "size": 512
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid number b'+0000001000\\x00'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F52-type-gnu-volume-label": {
@@ -16223,6 +16563,11 @@
     "error": "Error: unsupported type for DEST/label (null)",
     "outside": {},
     "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains label of unsupported type b'V'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F53-type-gnu-old-long-name": {
@@ -16510,6 +16855,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains ././@LongLink of unsupported type b'N'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F54-format-pax-header-without-magic": {
@@ -16791,6 +17141,11 @@
     "error": "Error: Invalid tar header: unknown format.",
     "outside": {},
     "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a pax header, and a header without magic",
+    "outside": {},
+    "tree": {}
    }
   },
   "F55-type-contiguous": {
@@ -17039,6 +17394,11 @@
     "error": "Error: unsupported type for DEST/a (contiguous-file)",
     "outside": {},
     "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a of unsupported type b'7'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F56-number-size-base256": {
@@ -17277,6 +17637,18 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a0b708e633655e5bdde514831e5ea443671e7e1b5f704613ae051824d0fa50f6",
+      "size": 512
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -17572,6 +17944,18 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -17883,6 +18267,18 @@
       "size": 512
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "917dba8e5120183529f6939caddf79878ed752eaf72b9a195a0450eac5d4de3b",
+      "size": 512
+     }
+    }
    }
   },
   "F59-pax-nul-in-xattr": {
@@ -18168,6 +18564,18 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "renamed": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -18559,6 +18967,11 @@
    },
    "tar-fs": {
     "error": "Error: EISDIR: illegal operation on a directory, open 'DEST/a/'",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains non-directory a/ named like a directory",
     "outside": {},
     "tree": {}
    }
@@ -19024,6 +19437,30 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     },
+     "b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     },
+     "c": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a3a5e715f0cc574a73c3f9bebb6bc24f32ffd5b67b387244c2c909da779a1478",
+      "size": 2
+     }
+    }
    }
   },
   "F62-pax-schily-realsize": {
@@ -19326,6 +19763,11 @@
       "size": 5
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains the pax b'SCHILY.realsize', which is not supported",
+    "outside": {},
+    "tree": {}
    }
   },
   "F63-end-unpadded": {
@@ -19572,6 +20014,11 @@
    },
    "tar-fs": {
     "error": "Error: Unexpected end of data",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive is truncated",
     "outside": {},
     "tree": {}
    }
@@ -19849,6 +20296,11 @@
     "error": "Error: Unexpected end of data",
     "outside": {},
     "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive is truncated",
+    "outside": {},
+    "tree": {}
    }
   },
   "F65-archive-without-members": {
@@ -19968,6 +20420,11 @@
     "tree": {}
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {}
@@ -20091,6 +20548,11 @@
    },
    "tar-fs": {
     "error": null,
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive is empty",
     "outside": {},
     "tree": {}
    }
@@ -20381,6 +20843,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive ends after an extended header",
+    "outside": {},
+    "tree": {}
    }
   },
   "F68-size-on-symlink": {
@@ -20794,6 +21261,11 @@
       "target": "target"
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains l of type b'2' with size 512",
+    "outside": {},
+    "tree": {}
    }
   },
   "F69-number-size-octal-prefix": {
@@ -21016,6 +21488,11 @@
       "size": 0
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid number b'0o000001000\\x00'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F70-number-size-minus": {
@@ -21205,6 +21682,11 @@
     "error": "Error: Invalid header",
     "outside": {},
     "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid number b'-0000001000\\x00'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F71-number-size-base256-marker": {
@@ -21389,6 +21871,11 @@
       "size": 0
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid number b'\\x81\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F72-pax-record-length-wraps": {
@@ -21635,6 +22122,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax header",
+    "outside": {},
+    "tree": {}
    }
   },
   "F73-pax-record-without-equals": {
@@ -21874,6 +22366,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax record",
+    "outside": {},
+    "tree": {}
    }
   },
   "F74-pax-size-twice": {
@@ -22216,6 +22713,11 @@
       "size": 512
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains the pax b'size' twice in one header",
+    "outside": {},
+    "tree": {}
    }
   },
   "F75-pax-size-decimal-point": {
@@ -22554,6 +23056,11 @@
       "size": 512
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax size b'512.0'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F76-checksum-byte-after-nul": {
@@ -23083,6 +23590,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid number b'007341\\x00x'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F77-checksum-leading-nul": {
@@ -23473,6 +23985,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid number b'\\x00007341\\x00'",
+    "outside": {},
+    "tree": {}
    }
   },
   "F78-pax-nul-in-key": {
@@ -23754,6 +24271,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax record",
+    "outside": {},
+    "tree": {}
    }
   },
   "F79-number-uid-gid-empty": {
@@ -24044,6 +24566,18 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
    }
   },
   "F80-number-uid-base256": {
@@ -24310,6 +24844,18 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -24615,6 +25161,18 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
    }
   },
   "F82-pax-times": {
@@ -24907,6 +25465,18 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -25263,6 +25833,11 @@
     "error": "Error: unsupported type for DEST/p (fifo)",
     "outside": {},
     "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains p of type b'6' with size 512",
+    "outside": {},
+    "tree": {}
    }
   },
   "K01-kind-trailing-slash-file": {
@@ -25494,6 +26069,11 @@
    },
    "tar-fs": {
     "error": "Error: EISDIR: illegal operation on a directory, open 'DEST/a/'",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains non-directory a/ named like a directory",
     "outside": {},
     "tree": {}
    }
@@ -25748,6 +26328,18 @@
     "tree": {}
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "bc34584905a5181d95c6e40e9230db4c9e2d85e6e73d3335837078cd12168cb9",
+      "size": 19
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -26040,6 +26632,11 @@
       "kind": "directory"
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains non-directory link/ named like a directory",
+    "outside": {},
+    "tree": {}
    }
   },
   "K04-name-empty-with-prefix": {
@@ -26268,6 +26865,11 @@
    },
    "tar-fs": {
     "error": "Error: EISDIR: illegal operation on a directory, open 'DEST/dir/'",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains non-directory dir/ named like a directory",
     "outside": {},
     "tree": {}
    }
@@ -26646,6 +27248,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains non-directory b/ named like a directory",
+    "outside": {},
+    "tree": {}
    }
   },
   "K06-symlink-named-dot": {
@@ -26926,6 +27533,11 @@
       "kind": "directory"
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains non-directory . where a directory is",
+    "outside": {},
+    "tree": {}
    }
   },
   "K07-dir-name-empty-with-prefix": {
@@ -27121,6 +27733,15 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "dir": {
+      "kind": "directory"
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -27428,6 +28049,11 @@
    },
    "tar-fs": {
     "error": "Error: unsupported type for DEST/p (fifo)",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains p of unsupported type b'6'",
     "outside": {},
     "tree": {}
    }
@@ -27848,6 +28474,24 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "r": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "8e54b0ca18020275e4aef1ca0eb5e197e066c065c1864817652a8a39c55402cd",
+      "size": 2
+     },
+     "x": {
+      "executable": true,
+      "kind": "file",
+      "sha256": "a8076d3d28d21e02012b20eaf7dbf75409a6277134439025f282e368e3305abf",
+      "size": 10
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -28298,6 +28942,24 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "g": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "768c71d785bf6bbbf8c4d6af6582041f2659027140a962cd0c55b11eddfd5e3d",
+      "size": 2
+     },
+     "o": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "7427d152005f9ed0fa31c76ef9963cf4bb47dce6e2768111d9eb0edbfe59c704",
+      "size": 2
+     }
+    }
    }
   },
   "K11-pax-mode": {
@@ -28593,6 +29255,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains the pax b'mode', which is not supported",
+    "outside": {},
+    "tree": {}
    }
   },
   "K12-pax-acl": {
@@ -28895,6 +29562,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains the pax b'SCHILY.acl.access', which is not supported",
+    "outside": {},
+    "tree": {}
    }
   },
   "K13-number-mode-base256": {
@@ -29136,6 +29808,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid number b'\\x80\\x00\\x00\\x00\\x00\\x00\\x01\\xed'",
+    "outside": {},
+    "tree": {}
    }
   },
   "K14-file-named-dot": {
@@ -29332,6 +30009,11 @@
    },
    "tar-fs": {
     "error": "Error: EISDIR: illegal operation on a directory, open 'DEST/'",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains non-directory . where a directory is",
     "outside": {},
     "tree": {}
    }
@@ -29583,6 +30265,11 @@
       "size": 27
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains non-directory a/. named like a directory",
+    "outside": {},
+    "tree": {}
    }
   },
   "K16-pax-linkpath-on-file": {
@@ -29847,6 +30534,18 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "bc34584905a5181d95c6e40e9230db4c9e2d85e6e73d3335837078cd12168cb9",
+      "size": 19
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -30199,6 +30898,21 @@
       "size": 5
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd": {
+      "kind": "directory"
+     },
+     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "bbdbb75b415ee9a40f0b3796a8b41a0b7723afe5726b870474ad220a4886d06d",
+      "size": 5
+     }
+    }
    }
   },
   "N02-name-fills-field": {
@@ -30479,6 +31193,18 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0e716a5fef4e6dc1bcfff22ad52f73ca4eee3f4ea8292f4a1918daa32592889f",
+      "size": 5
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -30863,6 +31589,21 @@
       "size": 5
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd": {
+      "kind": "directory"
+     },
+     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd/ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "bbdbb75b415ee9a40f0b3796a8b41a0b7723afe5726b870474ad220a4886d06d",
+      "size": 5
+     }
+    }
    }
   },
   "N04-ustar-prefix": {
@@ -31219,6 +31960,21 @@
       "size": 9
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp": {
+      "kind": "directory"
+     },
+     "pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/file": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "7dd9c6f93ad04e58505b507580eaf064f0240ce4567f9ca5e741ec09a5cc08be",
+      "size": 9
+     }
+    }
    }
   },
   "N05-name-dot": {
@@ -31485,6 +32241,18 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -31785,6 +32553,18 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
    }
   },
   "N07-symlink-absolute": {
@@ -31991,6 +32771,16 @@
     "error": "Error: DEST/link is not a valid symlink",
     "outside": {},
     "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "link": {
+      "kind": "symlink",
+      "target": "/tar-minefield-nonexistent"
+     }
+    }
    }
   },
   "N08-extended-pax-path-and-gnu-long-name": {
@@ -32246,6 +33036,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains both a pax header and a GNU long name for one member",
+    "outside": {},
+    "tree": {}
    }
   },
   "N09-extended-two-pax-headers": {
@@ -32506,6 +33301,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains two pax headers for one member",
+    "outside": {},
+    "tree": {}
    }
   },
   "N10-format-star": {
@@ -32842,6 +33642,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a star header with a long prefix",
+    "outside": {},
+    "tree": {}
    }
   },
   "N11-gnu-prefix-field": {
@@ -33145,6 +33950,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a name prefix in a header that is not ustar",
+    "outside": {},
+    "tree": {}
    }
   },
   "N12-name-absolute": {
@@ -33418,6 +34228,11 @@
       "size": 89
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains unsafe path /tmp/tar-minefield-absolute",
+    "outside": {},
+    "tree": {}
    }
   },
   "N13-name-backslash": {
@@ -33701,6 +34516,11 @@
       "size": 21
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a backslash in the name a\\b",
+    "outside": {},
+    "tree": {}
    }
   },
   "N14-name-bytes-after-nul": {
@@ -33977,6 +34797,11 @@
       "size": 10
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains bytes after the NUL of the name \u2026",
+    "outside": {},
+    "tree": {}
    }
   },
   "N15-name-control-character": {
@@ -34260,6 +35085,18 @@
       "size": 21
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a\nb": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "93d2f8418e760b244545798b892899921327396ea6913af7482bd1c845b9d2bb",
+      "size": 21
+     }
+    }
    }
   },
   "N16-name-dotdot": {
@@ -34453,6 +35290,11 @@
       "size": 85
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains unsafe path tar-minefield/../../tar-minefield-escaped",
+    "outside": {},
+    "tree": {}
    }
   },
   "N17-name-empty": {
@@ -34580,6 +35422,11 @@
    },
    "tar-fs": {
     "error": "Error: EISDIR: illegal operation on a directory, open 'DEST/'",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains non-directory  where a directory is",
     "outside": {},
     "tree": {}
    }
@@ -34851,6 +35698,11 @@
       "size": 8
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a name that is not UTF-8 b'caf\\xe9'",
+    "outside": {},
+    "tree": {}
    }
   },
   "N19-pax-nul-in-path": {
@@ -35067,6 +35919,11 @@
    },
    "tar-fs": {
     "error": "TypeError [ERR_INVALID_ARG_VALUE]: The argument 'path' must be a string, Uint8Array, or URL without null bytes. Received 'DEST...",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax path b'a\\x00b'",
     "outside": {},
     "tree": {}
    }
@@ -35350,6 +36207,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains the pax b'path' twice in one header",
+    "outside": {},
+    "tree": {}
    }
   },
   "N21-pax-global-path": {
@@ -35734,6 +36596,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a global pax path, linkpath or size",
+    "outside": {},
+    "tree": {}
    }
   },
   "N22-pax-path-empty": {
@@ -35945,6 +36812,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax path b''",
+    "outside": {},
+    "tree": {}
    }
   },
   "N23-extended-gnu-long-then-pax": {
@@ -36214,6 +37086,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains both a pax header and a GNU long name for one member",
+    "outside": {},
+    "tree": {}
    }
   },
   "N24-pax-hdrcharset-binary": {
@@ -36509,6 +37386,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains the pax b'hdrcharset', which is not supported",
+    "outside": {},
+    "tree": {}
    }
   },
   "N25-symlink-empty-target": {
@@ -36656,6 +37538,11 @@
    },
    "tar-fs": {
     "error": "TypeError [ERR_INVALID_ARG_TYPE]: The \"paths[1]\" argument must be of type string. Received null",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains symlink link without a target",
     "outside": {},
     "tree": {}
    }
@@ -36918,6 +37805,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a global pax path, linkpath or size",
+    "outside": {},
+    "tree": {}
    }
   },
   "N27-pax-long-symlink": {
@@ -37306,6 +38198,22 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -37748,6 +38656,24 @@
       "size": 7
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     },
+     "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "c97ecfda4d205190b973232dcfdb0c29748521c2534dd866bcc782f30b086738",
+      "size": 7
+     }
+    }
    }
   },
   "N29-extended-pax-path-before-gnu-long-name": {
@@ -38010,6 +38936,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains both a pax header and a GNU long name for one member",
+    "outside": {},
+    "tree": {}
    }
   },
   "N30-name-drive-letter": {
@@ -38346,6 +39277,11 @@
       "size": 35
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains unsafe path C:/drive-letter",
+    "outside": {},
+    "tree": {}
    }
   },
   "N31-pax-linkpath-not-utf8": {
@@ -38594,6 +39530,11 @@
       "target": "caf\ufffd"
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a name that is not UTF-8 b'caf\\xe9'",
+    "outside": {},
+    "tree": {}
    }
   },
   "N32-linkname-not-utf8": {
@@ -38820,6 +39761,11 @@
       "target": "caf\ufffd"
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a name that is not UTF-8 b'caf\\xe9'",
+    "outside": {},
+    "tree": {}
    }
   },
   "N33-type-solaris-extended": {
@@ -39091,6 +40037,11 @@
     "error": "Error: unsupported type for DEST/PaxHeader (null)",
     "outside": {},
     "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains PaxHeader of unsupported type b'X'",
+    "outside": {},
+    "tree": {}
    }
   },
   "N34-pax-linkpath-empty": {
@@ -39281,6 +40232,11 @@
       "target": "from-header"
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an invalid pax linkpath b''",
+    "outside": {},
+    "tree": {}
    }
   },
   "N35-symlink-escapes": {
@@ -39484,6 +40440,16 @@
     "error": "Error: DEST/link is not a valid symlink",
     "outside": {},
     "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "link": {
+      "kind": "symlink",
+      "target": "../escaped"
+     }
+    }
    }
   },
   "N36-pax-gnu-sparse": {
@@ -39836,6 +40802,11 @@
       "size": 514
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains the pax b'GNU.sparse.major', which is not supported",
+    "outside": {},
+    "tree": {}
    }
   },
   "N37-extended-two-gnu-long-names": {
@@ -40083,6 +41054,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains two b'L' headers for one member",
+    "outside": {},
+    "tree": {}
    }
   },
   "N38-gnu-long-name-empty": {
@@ -40261,6 +41237,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains an empty GNU long name",
+    "outside": {},
+    "tree": {}
    }
   },
   "N39-gnu-long-name-size-without-nul": {
@@ -40523,6 +41504,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a GNU long name without a NUL at its end b'name'",
+    "outside": {},
+    "tree": {}
    }
   },
   "N40-pax-global-linkpath": {
@@ -40854,6 +41840,11 @@
       "target": "header-target-m"
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a global pax path, linkpath or size",
+    "outside": {},
+    "tree": {}
    }
   },
   "N41-pax-gnu-sparse-name": {
@@ -41142,6 +42133,11 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains the pax b'GNU.sparse.name', which is not supported",
+    "outside": {},
+    "tree": {}
    }
   },
   "N42-gnu-long-name-dir": {
@@ -41471,6 +42467,21 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     },
+     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd": {
+      "kind": "directory"
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -41855,6 +42866,21 @@
       "kind": "directory"
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     },
+     "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd": {
+      "kind": "directory"
+     }
+    }
    }
   },
   "N44-pax-path-name-empty": {
@@ -42107,6 +43133,18 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -42446,6 +43484,21 @@
       "size": 8
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp": {
+      "kind": "directory"
+     },
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/file.py": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "d8594fa1268ecabc62af7c9e2449b8c46db0f426cd9aad384c67efe59e582b3e",
+      "size": 8
+     }
+    }
    }
   },
   "N46-pax-linkpath-linkname-empty": {
@@ -42663,6 +43716,16 @@
     "tree": {}
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "l": {
+      "kind": "symlink",
+      "target": "target"
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -42893,6 +43956,16 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "l": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -43187,6 +44260,11 @@
    },
    "tar-fs": {
     "error": "Error: Invalid tar header: unknown format.",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains a header with the magic b'ustar 00'",
     "outside": {},
     "tree": {}
    }
@@ -43526,6 +44604,21 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "kind": "directory"
+     },
+     "a/b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "0263829989b6fd954f72baaf2fc64bc2e2f01d692d4de72986ea808f6e99813f",
+      "size": 2
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -43895,6 +44988,21 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "c": {
+      "kind": "directory"
+     },
+     "c/d": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "8d74beec1be996322ad76813bafb92d40839895d6dd7ee808b17ca201eac98be",
+      "size": 2
+     }
+    }
    }
   },
   "N51-linkname-bytes-after-nul": {
@@ -44131,6 +45239,11 @@
       "target": "safe"
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains bytes after the NUL of the link target b'safe\\x00../x'",
+    "outside": {},
+    "tree": {}
    }
   },
   "N52-extended-name-dotdot": {
@@ -44411,6 +45524,18 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -44716,6 +45841,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains unsafe path a/../b",
+    "outside": {},
+    "tree": {}
    }
   },
   "N54-pax-path-not-ascii": {
@@ -45090,6 +46220,21 @@
       "size": 12
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "\u65e5\u672c\u8a9e": {
+      "kind": "directory"
+     },
+     "\u65e5\u672c\u8a9e/caf\u00e9.txt": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
    }
   },
   "N55-gnu-long-link-and-name": {
@@ -45312,6 +46457,16 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll": {
+      "kind": "symlink",
+      "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -45612,6 +46767,18 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a=b": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee",
+      "size": 12
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -45978,6 +47145,21 @@
       "size": 9
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp": {
+      "kind": "directory"
+     },
+     "ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/file": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "7dd9c6f93ad04e58505b507580eaf064f0240ce4567f9ca5e741ec09a5cc08be",
+      "size": 9
+     }
+    }
    }
   },
   "N58-ustar-prefix-under-pax": {
@@ -46330,6 +47512,21 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "p": {
+      "kind": "directory"
+     },
+     "p/a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -46964,6 +48161,32 @@
       "target": "s/../x"
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "d": {
+      "kind": "directory"
+     },
+     "d/sub": {
+      "kind": "directory"
+     },
+     "d/x": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "73cb3858a687a8494ca3323053016282f3dad39d42cf62ca4e79dda2aac7d9ac",
+      "size": 2
+     },
+     "s": {
+      "kind": "symlink",
+      "target": "d/sub"
+     },
+     "t": {
+      "kind": "symlink",
+      "target": "s/../x"
+     }
+    }
    }
   },
   "N60-pax-global-name-directory": {
@@ -47274,6 +48497,18 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -47633,6 +48868,21 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "d": {
+      "kind": "directory"
+     },
+     "d/a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -48080,6 +49330,24 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "d": {
+      "kind": "directory"
+     },
+     "d/sub": {
+      "kind": "directory"
+     },
+     "d/sub/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
+     }
+    }
    }
   },
   "S03-hardlink-missing-target": {
@@ -48207,6 +49475,11 @@
    },
    "tar-fs": {
     "error": "Error: DEST/h is not a valid hardlink",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive hardlinks missing, which is not extracted",
     "outside": {},
     "tree": {}
    }
@@ -48457,6 +49730,11 @@
     "error": "Error: DEST/a is not a valid hardlink",
     "outside": {},
     "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive hardlinks a to itself",
+    "outside": {},
+    "tree": {}
    }
   },
   "S05-hardlink-to-later-member": {
@@ -48684,6 +49962,11 @@
    },
    "tar-fs": {
     "error": "Error: DEST/h is not a valid hardlink",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive hardlinks f, which is not extracted",
     "outside": {},
     "tree": {}
    }
@@ -49137,6 +50420,11 @@
       "target": "f"
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive hardlinks s, which is a symlink",
+    "outside": {},
+    "tree": {}
    }
   },
   "S07-tree-duplicate-file-differs": {
@@ -49427,6 +50715,11 @@
       "size": 5
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "FileExistsError: [Errno 17] File exists: 'a'",
+    "outside": {},
+    "tree": {}
    }
   },
   "S08-tree-duplicate-file-dir": {
@@ -49686,6 +50979,11 @@
       "size": 13
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive writes through a, which is not a directory",
+    "outside": {},
+    "tree": {}
    }
   },
   "S09-tree-duplicate-file-identical": {
@@ -49976,6 +51274,11 @@
       "size": 5
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "FileExistsError: [Errno 17] File exists: 'a'",
+    "outside": {},
+    "tree": {}
    }
   },
   "S10-tree-symlink-then-file": {
@@ -50284,6 +51587,11 @@
       "size": 28
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "FileExistsError: [Errno 17] File exists: 'a'",
+    "outside": {},
+    "tree": {}
    }
   },
   "S11-tree-through-symlink": {
@@ -50522,6 +51830,11 @@
    },
    "tar-fs": {
     "error": "Error: DEST/d is not a valid symlink",
+    "outside": {},
+    "tree": {}
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive writes through d, which is not a directory",
     "outside": {},
     "tree": {}
    }
@@ -50817,6 +52130,11 @@
       "size": 7
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive writes through a, which is not a directory",
+    "outside": {},
+    "tree": {}
    }
   },
   "S13-hardlink-empty-target": {
@@ -51111,6 +52429,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive hardlinks , which is not extracted",
+    "outside": {},
+    "tree": {}
    }
   },
   "S14-tree-symlink-then-dir": {
@@ -51409,6 +52732,11 @@
       "kind": "directory"
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive writes through a, which is not a directory",
+    "outside": {},
+    "tree": {}
    }
   },
   "S15-tree-file-then-hardlink": {
@@ -51843,6 +53171,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "FileExistsError: [Errno 17] File exists: 'b' -> 'a'",
+    "outside": {},
+    "tree": {}
    }
   },
   "S16-hardlink-target-spelled-differently": {
@@ -52230,6 +53563,24 @@
     }
    },
    "tar-fs": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     },
+     "h": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
+   },
+   "untar (PyPI)": {
     "error": null,
     "outside": {},
     "tree": {
@@ -52662,6 +54013,11 @@
       "size": 7
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "FileExistsError: [Errno 17] File exists: 'a'",
+    "outside": {},
+    "tree": {}
    }
   },
   "S18-hardlink-absolute": {
@@ -53080,6 +54436,11 @@
       "size": 22
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains unsafe path /etc/passwd",
+    "outside": {},
+    "tree": {}
    }
   },
   "S19-tree-through-symlink-inside": {
@@ -53501,6 +54862,11 @@
       "target": "../d"
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive writes through l, which is not a directory",
+    "outside": {},
+    "tree": {}
    }
   },
   "S20-tree-file-at-implied-dir": {
@@ -53857,6 +55223,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains non-directory a where a directory is",
+    "outside": {},
+    "tree": {}
    }
   },
   "S21-tree-duplicate-dir-file": {
@@ -54108,6 +55479,11 @@
       "kind": "directory"
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive contains non-directory a where a directory is",
+    "outside": {},
+    "tree": {}
    }
   },
   "S22-tree-duplicate-dir-symlink": {
@@ -54487,6 +55863,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "FileExistsError: [Errno 17] File exists: 'b' -> 'a'",
+    "outside": {},
+    "tree": {}
    }
   },
   "S23-tree-duplicate-file-symlink": {
@@ -54887,6 +56268,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "FileExistsError: [Errno 17] File exists: 't' -> 'a'",
+    "outside": {},
+    "tree": {}
    }
   },
   "S24-tree-duplicate-symlink": {
@@ -55421,6 +56807,11 @@
       "size": 7
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "FileExistsError: [Errno 17] File exists: 'second' -> 'a'",
+    "outside": {},
+    "tree": {}
    }
   },
   "S25-tree-dir-not-writable": {
@@ -55739,6 +57130,21 @@
     "tree": {
      "d": {
       "kind": "directory"
+     }
+    }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "d": {
+      "kind": "directory"
+     },
+     "d/f": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "092fcfbbcfca3b5be7ae1b5e58538e92c35ab273ae13664fed0d67484c8e78a6",
+      "size": 2
      }
     }
    }
@@ -56129,6 +57535,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive hardlinks d, which is a directory",
+    "outside": {},
+    "tree": {}
    }
   },
   "S27-hardlink-through-symlink": {
@@ -56631,6 +58042,11 @@
       "target": "d"
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive hardlinks s/f, which is not extracted",
+    "outside": {},
+    "tree": {}
    }
   },
   "S28-hardlink-target-trailing-slash": {
@@ -56980,6 +58396,11 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": "Error: Archive hardlinks a/, named like a directory",
+    "outside": {},
+    "tree": {}
    }
   },
   "S29-hardlink-mode-differs": {
@@ -57396,6 +58817,24 @@
       "size": 2
      }
     }
+   },
+   "untar (PyPI)": {
+    "error": null,
+    "outside": {},
+    "tree": {
+     "a": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     },
+     "h": {
+      "executable": false,
+      "kind": "file",
+      "sha256": "87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7",
+      "size": 2
+     }
+    }
    }
   }
  },
@@ -57495,6 +58934,10 @@
   {
    "name": "tar-fs",
    "version": "tar-fs 3.1.3, on tar-stream 3.2.2"
+  },
+  {
+   "name": "untar (PyPI)",
+   "version": "untar 0.5.0, extract, on CPython 3.15.2"
   }
  ]
 }
