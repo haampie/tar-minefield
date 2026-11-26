@@ -1,12 +1,11 @@
 """A pax record whose length has a plus sign, `+17`.
 
-The archive has a file whose pax header has one record, `+17 path=renamed`, followed by a newline,
-which is 17 bytes, and whose header has the name `header-name`.
+The archive has a file with a single 17-byte pax record, `+17 path=renamed` followed by a newline,
+and `header-name` in its ustar name field.
 
-In POSIX, the [length][record-length] of a pax record is its decimal length in octets, as `%d`
-writes it, without a sign. Read leniently, this case is ambiguous because the record is either
-`path=renamed`, and the file is `renamed`, or no record, and the file is `header-name`, to a reader
-that ignores the record or the whole extended header.
+In POSIX, a pax record's [length][record-length] is its decimal length in octets, as `%d` writes
+it, without a sign. A lenient reader that accepts `+17` as 17 applies `path=renamed`, whereas one
+that ignores the malformed record or discards the pax header falls back to `header-name`.
 
 Decision point: whether the length of a pax record may have a sign.
 Seen in: none of the scanned tarballs.

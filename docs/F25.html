@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a file <code>a</code>, whose pax header has the size <code>٥١٢</code>, which is 512 in Arabic-Indic digits (U+0665 U+0661 U+0662, in UTF-8), and whose header has the size 0, then an empty file <code>smuggled</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a>, a pax size is ASCII decimal digits. Python&#x27;s <code>int</code> and Java&#x27;s <code>Long.parseLong</code> take any decimal digit of Unicode, and so read it as 512. Read leniently, this case is ambiguous because the size is either 512, as read that way (and the next block is the data of <code>a</code>), or 0, as the header specifies (and the next block is the header of <code>smuggled</code>). Neither follows from POSIX, which does not say what a <code>size</code> record that is not a decimal number means.</p>
+<p>The archive has a file <code>a</code> whose pax header sets <code>size</code> to <code>٥١٢</code> (512 in UTF-8 Arabic-Indic digits, U+0665 U+0661 U+0662) and whose ustar header has size 0, followed by an empty file <code>smuggled</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a>, a pax size uses ASCII decimal digits. Read leniently, number parsers that accept any Unicode decimal digit, such as Python&#x27;s <code>int</code> and Java&#x27;s <code>Long.parseLong</code>, parse <code>٥١٢</code> as 512 and consume the next block as <code>a</code>&#x27;s data, while a reader that rejects non-ASCII digits and falls back to the ustar size of 0 reads the next block as <code>smuggled</code>&#x27;s header. Neither follows from POSIX, which does not say what a <code>size</code> record that is not a decimal number means.</p>
 <p><strong>Decision point:</strong> which digits a pax number may have.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,14 +52,14 @@
 
 A pax `size` in Arabic-Indic digits, `٥١٢`, which some conversions of strings read as 512.
 
-The archive has a file `a`, whose pax header has the size `٥١٢`, which is 512 in Arabic-Indic digits
-(U+0665 U+0661 U+0662, in UTF-8), and whose header has the size 0, then an empty file `smuggled`.
+The archive has a file `a` whose pax header sets `size` to `٥١٢` (512 in UTF-8 Arabic-Indic digits,
+U+0665 U+0661 U+0662) and whose ustar header has size 0, followed by an empty file `smuggled`.
 
-In POSIX, a pax size is ASCII decimal digits. Python&#x27;s `int` and Java&#x27;s
-`Long.parseLong` take any decimal digit of Unicode, and so read it as 512. Read leniently, this case
-is ambiguous because the size is either 512, as read that way (and the next block is the data of
-`a`), or 0, as the header specifies (and the next block is the header of `smuggled`). Neither
-follows from POSIX, which does not say what a `size` record that is not a decimal number means.
+In POSIX, a pax size uses ASCII decimal digits. Read leniently, number parsers that
+accept any Unicode decimal digit, such as Python&#x27;s `int` and Java&#x27;s `Long.parseLong`, parse `٥١٢` as
+512 and consume the next block as `a`&#x27;s data, while a reader that rejects non-ASCII digits and falls
+back to the ustar size of 0 reads the next block as `smuggled`&#x27;s header. Neither follows from POSIX,
+which does not say what a `size` record that is not a decimal number means.
 
 Decision point: which digits a pax number may have.
 Seen in: none of the scanned tarballs.
@@ -362,6 +362,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

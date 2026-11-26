@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a GNU long name header of size 0, then a file whose header has GNU&#x27;s magic and the name <code>header-name</code>.</p>
-<p>A GNU long name replaces the name of the next member, and GNU&#x27;s format does not say what an empty one means. If it applies, the pathname of the member is empty, and in POSIX an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=A%20null%20pathname%20shall%20not%20be%20successfully%20resolved">empty pathname</a> does not resolve. This case is ambiguous because a reader can take the empty long name in one of three ways. A reader that ignores it extracts <code>header-name</code>. One that applies it gives the member an empty name, which is skipped, rejected or taken for <code>.</code>. One that takes the name of the long name header itself extracts the member as <code>././@LongLink</code>. To a reader that does not know typeflag <code>L</code>, the member is <code>header-name</code>, after an empty file <code>@LongLink</code>.</p>
+<p>The archive has a GNU long name header (typeflag <code>L</code>) of size 0, followed by a file with GNU magic and <code>header-name</code> in its ustar name field.</p>
+<p>A GNU long name overrides the next member&#x27;s ustar name field, and GNU&#x27;s specification does not say what a zero-length <code>L</code> header means. If it applies, the member&#x27;s pathname is empty, and in POSIX an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=A%20null%20pathname%20shall%20not%20be%20successfully%20resolved">empty pathname</a> does not resolve. A reader that ignores the empty <code>L</code> header extracts <code>header-name</code>. One that applies it gives the member an empty name, which is skipped, rejected, or taken for <code>.</code>. One that uses the <code>L</code> header&#x27;s own ustar name extracts <code>././@LongLink</code>, while a reader that does not recognize typeflag <code>L</code> extracts an empty file <code>@LongLink</code> followed by <code>header-name</code>.</p>
 <p><strong>Decision point:</strong> whether an empty GNU long name replaces the name in the header.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,16 +52,16 @@
 
 An empty GNU long name: the name in the header, or none?
 
-The archive has a GNU long name header of size 0, then a file whose header has GNU&#x27;s magic and the
-name `header-name`.
+The archive has a GNU long name header (typeflag `L`) of size 0, followed by a file with GNU magic
+and `header-name` in its ustar name field.
 
-A GNU long name replaces the name of the next member, and GNU&#x27;s format does not say what an empty
-one means. If it applies, the pathname of the member is empty, and in POSIX an empty
-pathname does not resolve. This case is ambiguous because a reader can take the
-empty long name in one of three ways. A reader that ignores it extracts `header-name`. One that
-applies it gives the member an empty name, which is skipped, rejected or taken for `.`. One that
-takes the name of the long name header itself extracts the member as `././@LongLink`. To a reader
-that does not know typeflag `L`, the member is `header-name`, after an empty file `@LongLink`.
+A GNU long name overrides the next member&#x27;s ustar name field, and GNU&#x27;s specification does not say
+what a zero-length `L` header means. If it applies, the member&#x27;s pathname is empty, and in POSIX an
+empty pathname does not resolve. A reader that ignores the empty `L` header
+extracts `header-name`. One that applies it gives the member an empty name, which is skipped,
+rejected, or taken for `.`. One that uses the `L` header&#x27;s own ustar name extracts `././@LongLink`,
+while a reader that does not recognize typeflag `L` extracts an empty file `@LongLink` followed by
+`header-name`.
 
 Decision point: whether an empty GNU long name replaces the name in the header.
 Seen in: none of the scanned tarballs.
@@ -319,6 +319,6 @@ See also: N17, an empty name, and N22, an empty pax `path`.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

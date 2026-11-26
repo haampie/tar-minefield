@@ -1,12 +1,12 @@
 r"""A global pax `comment` that is not UTF-8.
 
-The archive has a global header, typeflag `g`, with one record, a `comment` of the two bytes
-`\xff\xfe`, which are not UTF-8, then a file `a`.
+The archive has a global header (typeflag `g`) with a single `comment` record containing the two
+non-UTF-8 bytes `\xff\xfe`, followed by a file `a`.
 
-In POSIX, the value of every specified keyword, `comment` among them, is in [UTF-8][utf-8-keyword],
-and every [comment][comment] is ignored. The value can be seen either as bound by the rule for
-UTF-8, which makes the archive invalid, or as never read, as the comment is ignored. This case is
-ambiguous because the archive is either invalid or has the file `a`.
+In POSIX, every standard keyword value, including `comment`, is encoded in [UTF-8][utf-8-keyword],
+yet every [comment][comment] is ignored. A reader that validates UTF-8 on all standard records
+before ignoring comments rejects the archive, whereas one that skips `comment` records without
+decoding them extracts `a`.
 
 Decision point: whether a comment is decoded before it is ignored.
 Seen in: none of the scanned tarballs.

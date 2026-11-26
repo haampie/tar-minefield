@@ -1,12 +1,12 @@
 """A symlink whose name ends in a slash.
 
-The archive has a directory `target/`, then a symlink `link/` to `target`. With the slash, the name
-refers to what the link points to.
+The archive has a directory `target/`, followed by a symlink `link/` to `target`. With the trailing
+slash, the name refers to what the link points to.
 
-In [POSIX][file-type], a member is extracted as a file of its own type, here a symlink, but
-`symlink()` [fails on a name][symlink-slash] that ends in a slash, so this is an
-[error][cannot-create]. This case is ambiguous in practice because the member is either a symlink
-`link`, by its typeflag, or a directory `link`, by its trailing slash.
+Under [POSIX][file-type], a member is extracted with its archived file type (here a symlink), yet
+`symlink()` [fails on a path][symlink-slash] ending in a slash, resulting in an
+[error][cannot-create]. A reader that strips the trailing slash extracts a symlink `link`, whereas
+one that classifies the member by its trailing slash extracts a directory `link`.
 
 Decision point: what a trailing slash on a link means.
 Seen in: none of the scanned tarballs.

@@ -1,11 +1,11 @@
 """A member under a file.
 
-The archive has a file `a`, then a file `a/b`, whose name refers to `a` as a directory.
+The archive has a file `a`, followed by a file `a/b` whose path treats `a` as a directory.
 
-In [POSIX][intermediate], the directory `a` that `a/b` needs is made as with `mkdir()`, which fails
-as `a` exists, so `a` is kept, `a/b` is not created, and a ["diagnostic message"][cannot-create] is
-written. This case is ambiguous in practice because a reader that replaces the file `a` with a
-directory extracts `a/b` as well.
+Under [POSIX][intermediate], creating the parent directory `a` for `a/b` (as with `mkdir()`) fails
+because `a` already exists as a regular file, so `a` is kept, `a/b` is not created, and the
+extractor writes a [diagnostic message][cannot-create]. A reader that instead unlinks the regular
+file `a` and replaces it with a directory extracts `a/b`.
 
 Decision point: whether a member under a file replaces it.
 Seen in: sendmail 8.18.2 and unclutter 8, where the file is a v7 directory named `a/`.

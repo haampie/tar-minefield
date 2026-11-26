@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has one file. Its pax header has <code>hdrcharset=BINARY</code> and the path <code>caf\xe9</code>, which is <code>café</code> in Latin-1 and not UTF-8; its ustar header has the name <code>cafe</code>.</p>
-<p>With <code>hdrcharset=BINARY</code>, the pax path is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=values%20recorded%20in%20extended%20headers%20for%20affected%20files%20are%20unencoded%20binary%20data">unencoded binary data</a>, here the bytes <code>caf\xe9</code>. But in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_11:~:text=cannot%20be%20translated%20between%20the%20codeset%20in%20use%20for%20that%20extended%20header%20record%20and%20the%20character%20set%20of%20the%20current%20locale">POSIX</a>, a &quot;diagnostic message&quot; is also required for a name that cannot be translated &quot;between the codeset in use for that extended header record and the character set of the current locale&quot;, and by default the file is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_04:~:text=pax%20shall%20act%20as%20if%20%2Doinvalid%3Dbypass%20were%20specified">bypassed</a>. This case is ambiguous because the file is either created under those bytes, or bypassed, in a UTF-8 locale, to which they cannot be translated.</p>
+<p>The archive has one file with <code>hdrcharset=BINARY</code> and <code>path=caf\xe9</code> (<code>café</code> in Latin-1) in its pax header, and <code>cafe</code> in its ustar name field.</p>
+<p>With <code>hdrcharset=BINARY</code>, the pax path is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=values%20recorded%20in%20extended%20headers%20for%20affected%20files%20are%20unencoded%20binary%20data">unencoded binary data</a>, here the raw bytes <code>caf\xe9</code>. However, <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_11:~:text=cannot%20be%20translated%20between%20the%20codeset%20in%20use%20for%20that%20extended%20header%20record%20and%20the%20character%20set%20of%20the%20current%20locale">POSIX</a> also requires a diagnostic message when a path cannot be translated to the current locale&#x27;s character set, and by default the file is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_04:~:text=pax%20shall%20act%20as%20if%20%2Doinvalid%3Dbypass%20were%20specified">bypassed</a>. In a UTF-8 locale, a reader may extract the raw bytes <code>caf\xe9</code>, decode or replace <code>\xe9</code>, fall back to <code>cafe</code>, or bypass the file.</p>
 <p><strong>Decision point:</strong> whether a pax path declared as bytes is created as it is.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,15 +52,14 @@
 
 A pax path that is not UTF-8, declared as bytes with `hdrcharset=BINARY`.
 
-The archive has one file. Its pax header has `hdrcharset=BINARY` and the path `caf\xe9`, which is
-`café` in Latin-1 and not UTF-8; its ustar header has the name `cafe`.
+The archive has one file with `hdrcharset=BINARY` and `path=caf\xe9` (`café` in Latin-1) in its pax
+header, and `cafe` in its ustar name field.
 
-With `hdrcharset=BINARY`, the pax path is unencoded binary data, here the bytes
-`caf\xe9`. But in POSIX, a &quot;diagnostic message&quot; is also required for a name that
-cannot be translated &quot;between the codeset in use for that extended header record and the character
-set of the current locale&quot;, and by default the file is bypassed. This case is ambiguous
-because the file is either created under those bytes, or bypassed, in a UTF-8 locale, to which they
-cannot be translated.
+With `hdrcharset=BINARY`, the pax path is unencoded binary data, here the raw bytes
+`caf\xe9`. However, POSIX also requires a diagnostic message when a path cannot be
+translated to the current locale&#x27;s character set, and by default the file is bypassed. In
+a UTF-8 locale, a reader may extract the raw bytes `caf\xe9`, decode or replace `\xe9`, fall back to
+`cafe`, or bypass the file.
 
 Decision point: whether a pax path declared as bytes is created as it is.
 Seen in: none of the scanned tarballs.
@@ -349,6 +348,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

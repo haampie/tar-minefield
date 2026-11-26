@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a header of typeflag <code>N</code>, in the GNU format, with the name <code>././@LongLink</code>, whose data is <code>long-name</code>, followed by a NUL, then a file whose header has GNU&#x27;s magic and the name <code>header-name</code>.</p>
-<p>Some readers take typeflag <code>N</code> for a GNU long name, like typeflag <code>L</code>. In POSIX, the typeflags <code>A</code> to <code>Z</code> are reserved for <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=are%20reserved%20for%20custom%20implementations">custom implementations</a>, and a reader that does not recognize one extracts the member <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file">as a regular file</a>. This case is ambiguous because a reader can take the <code>N</code> header in one of three ways. A reader that takes it for a long name extracts the member as <code>long-name</code>. One that extracts it as a regular file extracts a file <code>@LongLink</code> that contains the name, then <code>header-name</code>. One that skips a type it does not know extracts <code>header-name</code> alone.</p>
+<p>The archive has a GNU-format header of typeflag <code>N</code> named <code>././@LongLink</code> whose payload is <code>long-name</code> followed by a NUL, and then a file with GNU magic and the ustar name <code>header-name</code>.</p>
+<p>Some readers treat typeflag <code>N</code> as a GNU long name, like typeflag <code>L</code>. In POSIX, typeflags <code>A</code> to <code>Z</code> are reserved for <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=are%20reserved%20for%20custom%20implementations">custom implementations</a>, and a reader that does not recognize one extracts it <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file">as a regular file</a>. A reader that treats <code>N</code> as a long name extracts the following member as <code>long-name</code>. A reader that extracts <code>N</code> as a regular file creates <code>@LongLink</code> containing the name, followed by <code>header-name</code>, whereas one that skips unknown typeflags extracts <code>header-name</code> alone.</p>
 <p><strong>Decision point:</strong> whether typeflag <code>N</code> is a long name.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,17 +52,15 @@
 
 A header of typeflag `N`, which some readers take for a long name: a name, or a file?
 
-The archive has a header of typeflag `N`, in the GNU format, with the name `././@LongLink`, whose
-data is `long-name`, followed by a NUL, then a file whose header has GNU&#x27;s magic and the name
-`header-name`.
+The archive has a GNU-format header of typeflag `N` named `././@LongLink` whose payload is
+`long-name` followed by a NUL, and then a file with GNU magic and the ustar name `header-name`.
 
-Some readers take typeflag `N` for a GNU long name, like typeflag `L`. In POSIX, the typeflags `A`
-to `Z` are reserved for custom implementations, and a reader that does not recognize
-one extracts the member as a regular file. This case is ambiguous because a reader
-can take the `N` header in one of three ways. A reader that takes it for a long name extracts the
-member as `long-name`. One that extracts it as a regular file extracts a file `@LongLink` that
-contains the name, then `header-name`. One that skips a type it does not know extracts `header-name`
-alone.
+Some readers treat typeflag `N` as a GNU long name, like typeflag `L`. In POSIX, typeflags `A` to
+`Z` are reserved for custom implementations, and a reader that does not recognize one
+extracts it as a regular file. A reader that treats `N` as a long name extracts the
+following member as `long-name`. A reader that extracts `N` as a regular file creates `@LongLink`
+containing the name, followed by `header-name`, whereas one that skips unknown typeflags extracts
+`header-name` alone.
 
 Decision point: whether typeflag `N` is a long name.
 Seen in: none of the scanned tarballs.
@@ -355,6 +353,6 @@ See also: F16, an unknown typeflag with a size, and N33, a Solaris extended head
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

@@ -2,11 +2,12 @@ N21-pax-global-path: must reject
 
 A global pax header with a `path`.
 
-The archive starts with a global header with `path=global-name`, then has the files `a` and `b`.
+The archive starts with a global header containing `path=global-name`, followed by the files `a` and
+`b`.
 
-In POSIX, a global header applies to every later member, so with a `path` all of them have
-one name, `global-name`. This case is ambiguous in practice because a reader that ignores the global
-`path` keeps the names of the members, `a` and `b`.
+In POSIX, a global header applies to every subsequent member that does not override it,
+giving both files the name `global-name`. A reader that ignores `path` in a global header instead
+extracts `a` and `b` under their own ustar names.
 
 Decision point: whether a global `path` applies.
 Seen in: none of the scanned tarballs.

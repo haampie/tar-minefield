@@ -1,15 +1,14 @@
 """An empty `size` in a global pax header: does it delete the size of every later member, or set it?
 
-The archive has a global header, typeflag `g`, with the one record `size=`, then a file `a` with the
-size 512 in its header, then an empty file `smuggled`.
+The archive has a global header (typeflag `g`) with the single record `size=`, followed by a file
+`a` with size 512 in its ustar header, and then an empty file `smuggled`.
 
-In [POSIX][empty-value], a record with an empty value deletes any header block field of the same
-name, and a value in a global header [applies][global] to every file after it. So `size=` can be
-seen as deleting the size of `a`, whose size in the header is then [ignored][corresponding], so that
-`a` does not have a size. It can also be seen as an empty size, [assigned][g-assigned] to `a`, or as
-a record that deletes only earlier global values, so that the size in the header stands. This case
-is ambiguous because `a` does not have a size (and is invalid), the size 0 (and `smuggled` is a
-member), or the size 512 (and the next block is its data).
+Under [POSIX][empty-value], an empty pax value deletes any header field of the same name, and a
+global header value [applies][global] to all subsequent files. Read as deleting `a`'s size field
+(whose ustar value is then [ignored][corresponding]), `size=` leaves `a` without a size. Read as
+[assigning][g-assigned] an empty size to `a`, it gives size 0 (so `smuggled` is extracted as a
+member). Read as clearing only an earlier global `size`, it leaves `a`'s ustar size of 512 intact
+(consuming `smuggled`'s header as `a`'s data).
 
 Decision point: what an empty size in a global header deletes.
 Seen in: none of the scanned tarballs.

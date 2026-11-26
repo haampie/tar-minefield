@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has one file, <code>a</code>, whose magic <code>&quot;ustar\0&quot;</code> is followed by the version <code>&quot;01&quot;</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20version%20field%20is%20two%20octets%20containing%20the%20characters%20%2200%22">POSIX</a>, the version is <code>&quot;00&quot;</code>. The default policy tolerates NULs instead, as some Java archivers write them, but no other version. This case is ambiguous because a reader can take the header in one of three ways: as ustar, ignoring the version; as in a format not defined in POSIX, and stops; or as a v7 header, without the fields that ustar added.</p>
+<p>The archive has one file, <code>a</code>, with magic <code>&quot;ustar\0&quot;</code> and version <code>&quot;01&quot;</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=The%20version%20field%20is%20two%20octets%20containing%20the%20characters%20%2200%22">POSIX</a>, the version field is <code>&quot;00&quot;</code>. The default policy also tolerates two NULs, as written by some Java archivers, but rejects any other version. A reader may ignore the version and parse the header as ustar, reject the header as an unknown format, or fall back to treating it as a v7 header without the ustar fields.</p>
 <p><strong>Decision point:</strong> which format the header is in.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,12 +52,12 @@
 
 The POSIX magic with a version that is neither `&quot;00&quot;` nor NULs.
 
-The archive has one file, `a`, whose magic `&quot;ustar\0&quot;` is followed by the version `&quot;01&quot;`.
+The archive has one file, `a`, with magic `&quot;ustar\0&quot;` and version `&quot;01&quot;`.
 
-In POSIX, the version is `&quot;00&quot;`. The default policy tolerates NULs instead, as some Java
-archivers write them, but no other version. This case is ambiguous because a reader can take the
-header in one of three ways: as ustar, ignoring the version; as in a format not defined in POSIX,
-and stops; or as a v7 header, without the fields that ustar added.
+In POSIX, the version field is `&quot;00&quot;`. The default policy also tolerates two NULs, as
+written by some Java archivers, but rejects any other version. A reader may ignore the version and
+parse the header as ustar, reject the header as an unknown format, or fall back to treating it as a
+v7 header without the ustar fields.
 
 Decision point: which format the header is in.
 Seen in: none of the scanned tarballs.
@@ -265,6 +265,6 @@ See also: F05, the POSIX magic with NULs for its version, which is tolerated.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

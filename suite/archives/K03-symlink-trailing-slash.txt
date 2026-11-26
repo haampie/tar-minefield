@@ -2,13 +2,13 @@ K03-symlink-trailing-slash: must reject
 
 A symlink whose name ends in a slash.
 
-The archive has a directory `target/`, then a symlink `link/` to `target`. With the slash, the name
-refers to what the link points to.
+The archive has a directory `target/`, followed by a symlink `link/` to `target`. With the trailing
+slash, the name refers to what the link points to.
 
-In POSIX, a member is extracted as a file of its own type, here a symlink, but
-`symlink()` fails on a name that ends in a slash, so this is an
-error. This case is ambiguous in practice because the member is either a symlink
-`link`, by its typeflag, or a directory `link`, by its trailing slash.
+Under POSIX, a member is extracted with its archived file type (here a symlink), yet
+`symlink()` fails on a path ending in a slash, resulting in an
+error. A reader that strips the trailing slash extracts a symlink `link`, whereas
+one that classifies the member by its trailing slash extracts a directory `link`.
 
 Decision point: what a trailing slash on a link means.
 Seen in: none of the scanned tarballs.

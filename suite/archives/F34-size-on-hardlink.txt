@@ -2,16 +2,15 @@ F34-size-on-hardlink: must reject
 
 A size in the header of a hardlink, in a pax archive, which takes the next header for its data.
 
-The archive has a file `a`, then a hardlink `h` to `a`, with a pax header and the size 512 in its
-header, then an empty file `smuggled`.
+The archive has a file `a`, a hardlink `h` to `a` preceded by a pax header and carrying size 512 in
+its ustar header, and an empty file `smuggled`.
 
-Read as pax, which its `x` header suggests, data on a hardlink is permitted, so the
-block after the header of `h` is its data, and what looks like the header of `smuggled` is that
-data. POSIX does not say what the data of a hardlink does: whether it replaces the contents of `a`,
-or is ignored. A reader that reads it as ustar, in which no data is stored for a hard
-link, reads `smuggled` as a member; the bytes do not say which it is. This case is ambiguous because
-the tree has either `a` and its link `h`, which contain `a\n` or that block, or `a`, `h` and
-`smuggled`.
+In the pax format (indicated by `h`'s `x` header), hardlinks may carry data blocks,
+making the block after `h` its data rather than `smuggled`'s header—though POSIX does not specify
+whether hardlink data overwrites `a` or is ignored. A reader that instead follows the ustar rule,
+where no data is stored for hardlinks, treats the next block as `smuggled`'s header.
+Depending on the reader, the extracted tree has `a` and `h` (containing either `a\n` or the 512-byte
+block), or `a`, `h` and `smuggled`.
 
 Decision point: whether a size in the header of a hardlink applies, in an archive with pax headers.
 Seen in: none of the scanned tarballs.

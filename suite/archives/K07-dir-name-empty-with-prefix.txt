@@ -2,15 +2,14 @@ K07-dir-name-empty-with-prefix: must accept, and extract its tree
 
 A directory with an empty name field and a prefix.
 
-The archive has one directory, of typeflag `5`, with an empty name field and the prefix `dir`.
+The archive has one directory (typeflag `5`) with an empty name field and `dir` in its prefix field.
 
-In POSIX, the pathname is the prefix, followed by `/`, followed by the name. The name is
-empty here, so the pathname is `dir/`. The typeflag and the trailing slash both make the member a
-directory `dir`.
+Under POSIX, joining the prefix, `/`, and the empty name field yields `dir/`. Both the
+typeflag and the trailing slash identify the member as the directory `dir`.
 
-Seen in: not measured, as the scans do not record an empty name field. Python's `tarfile` writes
-one, with the prefix, for a directory whose last component is 100 bytes or longer, in a path of at
-most 155 bytes, in the ustar format.
+Seen in: not measured, as the scanner does not record an empty name field. In ustar mode, Python's
+`tarfile` puts the path in the prefix field and leaves the name field empty for any directory whose
+path is at most 155 bytes and whose final component is 100 bytes or longer.
 See also: K04, the same with a regular file.
 
 0x000000  header: directory, an empty name, and the prefix dir

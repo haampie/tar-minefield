@@ -2,13 +2,13 @@ F46-pax-size-on-symlink: must reject
 
 A symlink with a pax `size`: data to skip, or none?
 
-The archive has a symlink `l` to `target`, whose pax header has `size=512` and whose header has the
-size 0, then an empty file `smuggled`, then a file `b`.
+The archive has a symlink `l` to `target` with `size=512` in its pax header and size 0 in its ustar
+header, followed by an empty file `smuggled` and a file `b`.
 
-In POSIX, a pax `size` overrides the size field of the header, but no
-data is stored for a symlink, whose size field is zero. This case is
-ambiguous because the next block is either the data of `l`, 512 bytes to skip, or the header of
-`smuggled`, which is then a member of its own.
+In POSIX, a pax `size` overrides the ustar size field, yet symlinks do not store
+data and their size field must be zero. A reader that honors `size=512`
+on the symlink skips the next block as `l`'s data and misses `smuggled`, whereas one that ignores
+sizes on symlinks reads the next block as `smuggled`'s header.
 
 Decision point: whether a pax size applies to a member that does not have data.
 Seen in: none of the scanned tarballs.

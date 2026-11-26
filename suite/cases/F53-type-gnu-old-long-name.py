@@ -1,16 +1,14 @@
 """A header of typeflag `N`, which some readers take for a long name: a name, or a file?
 
-The archive has a header of typeflag `N`, in the GNU format, with the name `././@LongLink`, whose
-data is `long-name`, followed by a NUL, then a file whose header has GNU's magic and the name
-`header-name`.
+The archive has a GNU-format header of typeflag `N` named `././@LongLink` whose payload is
+`long-name` followed by a NUL, and then a file with GNU magic and the ustar name `header-name`.
 
-Some readers take typeflag `N` for a GNU long name, like typeflag `L`. In POSIX, the typeflags `A`
-to `Z` are reserved for [custom implementations][custom-type], and a reader that does not recognize
-one extracts the member [as a regular file][unknown-type]. This case is ambiguous because a reader
-can take the `N` header in one of three ways. A reader that takes it for a long name extracts the
-member as `long-name`. One that extracts it as a regular file extracts a file `@LongLink` that
-contains the name, then `header-name`. One that skips a type it does not know extracts `header-name`
-alone.
+Some readers treat typeflag `N` as a GNU long name, like typeflag `L`. In POSIX, typeflags `A` to
+`Z` are reserved for [custom implementations][custom-type], and a reader that does not recognize one
+extracts it [as a regular file][unknown-type]. A reader that treats `N` as a long name extracts the
+following member as `long-name`. A reader that extracts `N` as a regular file creates `@LongLink`
+containing the name, followed by `header-name`, whereas one that skips unknown typeflags extracts
+`header-name` alone.
 
 Decision point: whether typeflag `N` is a long name.
 Seen in: none of the scanned tarballs.

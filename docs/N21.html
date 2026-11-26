@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive starts with a global header with <code>path=global-name</code>, then has the files <code>a</code> and <code>b</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">POSIX</a>, a global header applies to every later member, so with a <code>path</code> all of them have one name, <code>global-name</code>. This case is ambiguous in practice because a reader that ignores the global <code>path</code> keeps the names of the members, <code>a</code> and <code>b</code>.</p>
+<p>The archive starts with a global header containing <code>path=global-name</code>, followed by the files <code>a</code> and <code>b</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">POSIX</a>, a global header applies to every subsequent member that does not override it, giving both files the name <code>global-name</code>. A reader that ignores <code>path</code> in a global header instead extracts <code>a</code> and <code>b</code> under their own ustar names.</p>
 <p><strong>Decision point:</strong> whether a global <code>path</code> applies.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,11 +52,12 @@
 
 A global pax header with a `path`.
 
-The archive starts with a global header with `path=global-name`, then has the files `a` and `b`.
+The archive starts with a global header containing `path=global-name`, followed by the files `a` and
+`b`.
 
-In POSIX, a global header applies to every later member, so with a `path` all of them have
-one name, `global-name`. This case is ambiguous in practice because a reader that ignores the global
-`path` keeps the names of the members, `a` and `b`.
+In POSIX, a global header applies to every subsequent member that does not override it,
+giving both files the name `global-name`. A reader that ignores `path` in a global header instead
+extracts `a` and `b` under their own ustar names.
 
 Decision point: whether a global `path` applies.
 Seen in: none of the scanned tarballs.
@@ -429,6 +430,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a global header, typeflag <code>g</code>, with the one record <code>size=</code>, then a file <code>a</code> with the size 512 in its header, then an empty file <code>smuggled</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">POSIX</a>, a record with an empty value deletes any header block field of the same name, and a value in a global header <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">applies</a> to every file after it. So <code>size=</code> can be seen as deleting the size of <code>a</code>, whose size in the header is then <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">ignored</a>, so that <code>a</code> does not have a size. It can also be seen as an empty size, <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=If%20there%20is%20a%20typeflag%20g%20global%20extended%20header%20record%2C%20the%20affected%20attribute%20shall%20be%20assigned%20the%20%3Cvalue%3E">assigned</a> to <code>a</code>, or as a record that deletes only earlier global values, so that the size in the header stands. This case is ambiguous because <code>a</code> does not have a size (and is invalid), the size 0 (and <code>smuggled</code> is a member), or the size 512 (and the next block is its data).</p>
+<p>The archive has a global header (typeflag <code>g</code>) with the single record <code>size=</code>, followed by a file <code>a</code> with size 512 in its ustar header, and then an empty file <code>smuggled</code>.</p>
+<p>Under <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">POSIX</a>, an empty pax value deletes any header field of the same name, and a global header value <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=Each%20value%20shall%20affect%20all%20subsequent%20files%20that%20do%20not%20override%20that%20value">applies</a> to all subsequent files. Read as deleting <code>a</code>&#x27;s size field (whose ustar value is then <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">ignored</a>), <code>size=</code> leaves <code>a</code> without a size. Read as <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=If%20there%20is%20a%20typeflag%20g%20global%20extended%20header%20record%2C%20the%20affected%20attribute%20shall%20be%20assigned%20the%20%3Cvalue%3E">assigning</a> an empty size to <code>a</code>, it gives size 0 (so <code>smuggled</code> is extracted as a member). Read as clearing only an earlier global <code>size</code>, it leaves <code>a</code>&#x27;s ustar size of 512 intact (consuming <code>smuggled</code>&#x27;s header as <code>a</code>&#x27;s data).</p>
 <p><strong>Decision point:</strong> what an empty size in a global header deletes.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,16 +52,15 @@
 
 An empty `size` in a global pax header: does it delete the size of every later member, or set it?
 
-The archive has a global header, typeflag `g`, with the one record `size=`, then a file `a` with the
-size 512 in its header, then an empty file `smuggled`.
+The archive has a global header (typeflag `g`) with the single record `size=`, followed by a file
+`a` with size 512 in its ustar header, and then an empty file `smuggled`.
 
-In POSIX, a record with an empty value deletes any header block field of the same
-name, and a value in a global header applies to every file after it. So `size=` can be
-seen as deleting the size of `a`, whose size in the header is then ignored, so that
-`a` does not have a size. It can also be seen as an empty size, assigned to `a`, or as
-a record that deletes only earlier global values, so that the size in the header stands. This case
-is ambiguous because `a` does not have a size (and is invalid), the size 0 (and `smuggled` is a
-member), or the size 512 (and the next block is its data).
+Under POSIX, an empty pax value deletes any header field of the same name, and a
+global header value applies to all subsequent files. Read as deleting `a`&#x27;s size field
+(whose ustar value is then ignored), `size=` leaves `a` without a size. Read as
+assigning an empty size to `a`, it gives size 0 (so `smuggled` is extracted as a
+member). Read as clearing only an earlier global `size`, it leaves `a`&#x27;s ustar size of 512 intact
+(consuming `smuggled`&#x27;s header as `a`&#x27;s data).
 
 Decision point: what an empty size in a global header deletes.
 Seen in: none of the scanned tarballs.
@@ -369,6 +368,6 @@ See also: F20, a size in a global header, and F21, an empty size in an extended 
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

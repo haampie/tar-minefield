@@ -1,10 +1,10 @@
 """A member written through a symlink, which points out of the destination.
 
-The archive has a symlink `d` to `..`, then a file `d/tar-minefield-through-symlink`.
+The archive has a symlink `d` to `..`, followed by a file `d/tar-minefield-through-symlink`.
 
 The case is rejected because the file, written through the link, lands in the parent of the
 destination, not because it is ambiguous. In [POSIX][resolution], files are created by pathname
-resolution, which follows the link. The file is harmless.
+resolution, which follows the symlink. The test payload is harmless.
 
 Decision point: whether a member may be written through a symlink.
 Seen in: none of the scanned tarballs.

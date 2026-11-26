@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a file <code>a</code>, whose header has the size 512 and whose pax header has <code>size=0</code>, then an empty file <code>smuggled</code>.</p>
-<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20size%20field%20in%20the%20following%20header%20block%28s%29">POSIX</a> says that the pax size overrides the header&#x27;s: it is how sizes over 8 GiB, which do not fit in the header&#x27;s size field, are written, and archivers write various sizes in the header then. An implementation that takes the pax size, as it must, reads the next block as the header of another file, <code>smuggled</code>; an implementation that takes the header&#x27;s size, or does not know pax, reads that block as the data of <code>a</code>. An implementation that takes the header&#x27;s size is the bug of CVE-2025-62518 (astral-tokio-tar before 0.5.6, and tokio-tar). POSIX does not give a reason to reject the archive, as the header&#x27;s size is then to be <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">ignored</a>. A strict parser may reject it anyway, since a header with room for the size does not have a reason to give another, but must not extract <code>a</code> with 512 bytes.</p>
+<p>The archive has a file <code>a</code> with size 512 in its ustar header and <code>size=0</code> in its pax header, followed by an empty file <code>smuggled</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20size%20field%20in%20the%20following%20header%20block%28s%29">POSIX</a>, a pax <code>size</code> record overrides the ustar size field; this is how files over 8 GiB, which do not fit in the ustar field, are archived, and writers place various placeholder values in the ustar field. A compliant reader uses the pax size of 0 and reads the next block as <code>smuggled</code>&#x27;s header. A reader that uses the ustar size or does not support pax consumes that block as <code>a</code>&#x27;s data—the vulnerability in CVE-2025-62518 (astral-tokio-tar before 0.5.6 and tokio-tar). Because POSIX requires <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">ignoring</a> the ustar size when a pax <code>size</code> is present, the default policy tolerates this archive. A stricter parser may still reject a small file whose pax and ustar sizes disagree, provided it never extracts <code>a</code> with 512 bytes.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>0 bytes, sha256 <code title="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855">e3b0c442</code></td></tr>
@@ -56,18 +56,17 @@
 
 A pax `size` that disagrees with the header&#x27;s, so that a reader of the header&#x27;s misses a member.
 
-The archive has a file `a`, whose header has the size 512 and whose pax header has `size=0`, then
-an empty file `smuggled`.
+The archive has a file `a` with size 512 in its ustar header and `size=0` in its pax header,
+followed by an empty file `smuggled`.
 
-POSIX says that the pax size overrides the header&#x27;s: it is how sizes over 8 GiB,
-which do not fit in the header&#x27;s size field, are written, and archivers write various sizes in the
-header then. An implementation that takes the pax size, as it must, reads the next block as the
-header of another file, `smuggled`; an implementation that takes the header&#x27;s size, or does not know
-pax, reads that block as the data of `a`. An implementation that takes the header&#x27;s size is the bug
-of CVE-2025-62518 (astral-tokio-tar before 0.5.6, and tokio-tar). POSIX does not give a reason to
-reject the archive, as the header&#x27;s size is then to be ignored. A strict parser may
-reject it anyway, since a header with room for the size does not have a reason to give another, but
-must not extract `a` with 512 bytes.
+In POSIX, a pax `size` record overrides the ustar size field; this is how files
+over 8 GiB, which do not fit in the ustar field, are archived, and writers place various placeholder
+values in the ustar field. A compliant reader uses the pax size of 0 and reads the next block as
+`smuggled`&#x27;s header. A reader that uses the ustar size or does not support pax consumes that block
+as `a`&#x27;s data—the vulnerability in CVE-2025-62518 (astral-tokio-tar before 0.5.6 and tokio-tar).
+Because POSIX requires ignoring the ustar size when a pax `size` is present, the
+default policy tolerates this archive. A stricter parser may still reject a small file whose pax and
+ustar sizes disagree, provided it never extracts `a` with 512 bytes.
 
 Decision point: which of two sizes frames the member.
 Seen in: none of the scanned tarballs.
@@ -370,6 +369,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

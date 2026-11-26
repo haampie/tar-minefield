@@ -1,15 +1,14 @@
 """A pax `size` of 2^64 + 512, which wraps around to 512 in 64 bits.
 
-The archive has a file `a`, whose pax header has the size 2^64 + 512 and whose header has the size
-0, then an empty file `smuggled`.
+The archive has a file `a` with a pax `size` of 2^64 + 512 and a ustar size of 0, followed by an
+empty file `smuggled`.
 
-pax numbers can be of any length, but many implementations keep sizes in 64 bits. In
-[POSIX][size-decimal], the size is 2^64 + 512, which runs past the end of the archive. Read
-leniently, this case is ambiguous because the size is also either the header's size of 0, with the
-pax size discarded, which makes the next block the header of `smuggled`, or 512, wrapped around in
-64 bits, which makes it the data of `a`. Neither is a reading of POSIX, in which the size is what
-the record says, and the header's size is to be [ignored][corresponding] once a `size` record is
-there.
+In [POSIX][size-decimal], a pax size can have any number of decimal digits, so the size is 2^64 +
+512, which extends past the end of the archive. Many implementations store file sizes in a 64-bit
+integer: wrapping 2^64 + 512 modulo 2^64 yields 512 and consumes the next block as `a`'s data,
+whereas discarding the overflowing pax record and falling back to the ustar size of 0 (contrary to
+POSIX, which requires [ignoring][corresponding] the ustar size) treats the next block as
+`smuggled`'s header.
 
 Decision point: what a pax number too large for the reader means.
 Seen in: none of the scanned tarballs.

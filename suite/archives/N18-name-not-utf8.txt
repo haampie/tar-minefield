@@ -2,12 +2,11 @@ N18-name-not-utf8: must reject
 
 A name that is not UTF-8.
 
-The archive has one file, `caf\xe9`, whose name is Latin-1.
+The archive has one file, `caf\xe9`, with a Latin-1 name.
 
-In POSIX, the header is in ISO/IEC 646, that is ASCII, so the archive does not
-conform, and the encoding of other characters in names is implementation-defined.
-This case is ambiguous because the name on disk is either those bytes, or the name with the byte
-replaced, by U+FFFD or by `?`.
+In POSIX, ustar header characters come from ISO/IEC 646 (ASCII), and the encoding of
+any other bytes in a filename is implementation-defined. Depending on the reader,
+the extracted filename uses the raw bytes `caf\xe9`, or replaces `\xe9` with U+FFFD or `?`.
 
 Decision point: how a name that is not UTF-8 is decoded.
 Seen in: aspell-is 0.51.1-0 and aspell-nb 0.50.1-0.

@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has one file, <code>plain</code>, whose pax header has one record: a <code>path</code> with a newline in it, <code>good\n1 path=evil</code>.</p>
-<p>pax records are delimited by their length, so a value can contain a newline, and in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">POSIX</a> the path is <code>good\n1 path=evil</code>. Split on lines instead, the extended header has a second record, <code>path=evil</code>, and the path is <code>good</code> or <code>evil</code>. This case is ambiguous in practice because a reader that discards the records as malformed extracts the header&#x27;s name, <code>plain</code>.</p>
+<p>The archive has one file, <code>plain</code>, whose pax header has a single <code>path</code> record containing a newline: <code>good\n1 path=evil</code>.</p>
+<p>Because pax records are delimited by their <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">byte length</a>, a value can contain a newline, making the POSIX path <code>good\n1 path=evil</code>. A reader that splits the pax payload on newlines instead sees a second record, <code>path=evil</code>, and extracts either <code>good</code> or <code>evil</code>. A reader that discards the records as malformed falls back to the ustar header&#x27;s name, <code>plain</code>.</p>
 <p><strong>Decision point:</strong> whether a pax record is delimited by its length or by a newline.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs. Newlines in pax values are only in xattrs, such as Minion 10.31, which the default policy accepts as xattrs are not extracted.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,14 +52,13 @@
 
 A newline in a pax `path`, which split on lines is another record.
 
-The archive has one file, `plain`, whose pax header has one record: a `path` with a newline in it,
+The archive has one file, `plain`, whose pax header has a single `path` record containing a newline:
 `good\n1 path=evil`.
 
-pax records are delimited by their length, so a value can contain a newline, and in
-POSIX the path is `good\n1 path=evil`. Split on lines instead, the extended header
-has a second record, `path=evil`, and the path is `good` or `evil`. This case is ambiguous in
-practice because a reader that discards the records as malformed extracts the header&#x27;s name,
-`plain`.
+Because pax records are delimited by their byte length, a value can contain a
+newline, making the POSIX path `good\n1 path=evil`. A reader that splits the pax payload on newlines
+instead sees a second record, `path=evil`, and extracts either `good` or `evil`. A reader that
+discards the records as malformed falls back to the ustar header&#x27;s name, `plain`.
 
 Decision point: whether a pax record is delimited by its length or by a newline.
 Seen in: none of the scanned tarballs. Newlines in pax values are only in xattrs, such as Minion
@@ -348,6 +347,6 @@ Seen in: none of the scanned tarballs. Newlines in pax values are only in xattrs
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

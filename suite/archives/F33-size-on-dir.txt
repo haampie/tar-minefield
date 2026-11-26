@@ -2,11 +2,12 @@ F33-size-on-dir: must reject
 
 A size in the header of a directory, which takes the next header for its data.
 
-The archive has a directory `dir/`, whose size field is 512, then an empty file `dir/smuggled`.
+The archive has a directory `dir/` with a size field of 512, followed by an empty file
+`dir/smuggled`.
 
-In POSIX, no data is stored for a directory, whatever its size, so the next block is the
-header of a file, `dir/smuggled`. This case is ambiguous in practice because, if the size applies,
-that block is the directory's data instead, and the tree is a directory alone.
+Under POSIX, directories do not store data blocks regardless of size, so the next block
+is `dir/smuggled`'s header. A reader that honors a non-zero size on a directory consumes that block
+as the directory's data and extracts only `dir/`.
 
 Decision point: whether the size in the header of a directory applies.
 Seen in: none of the scanned tarballs.

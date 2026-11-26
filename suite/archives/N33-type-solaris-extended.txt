@@ -2,14 +2,15 @@ N33-type-solaris-extended: must reject
 
 A Solaris extended header, typeflag `X`: a pax header, or a file?
 
-The archive has a header of typeflag `X`, named `PaxHeader`, whose data is the pax record
-`path=from-x`, then a file whose header has the name `from-header`.
+The archive has a header of typeflag `X` named `PaxHeader` containing the pax record `path=from-x`,
+followed by a file whose ustar header gives the name `from-header`.
 
-Solaris tar writes extended headers with typeflag `X`, instead of the `x` of POSIX. In POSIX, the
+Solaris tar writes extended headers with typeflag `X` instead of POSIX's `x`. Under POSIX,
 typeflags `A` to `Z` are reserved for custom implementations, and a reader that does
-not recognize one extracts the member as a regular file. This case is ambiguous
-because the member is `from-x`, to a reader that takes `X` for `x`, or `from-header`, after a file
-`PaxHeader` that contains the record, or alone, to a reader that skips a type it does not know.
+not recognize one extracts it as a regular file. A reader that treats `X` as a pax
+extended header extracts the file as `from-x`. A reader that treats `X` as an unknown regular file
+extracts `PaxHeader` containing the record, followed by `from-header`, while one that skips unknown
+typeflags extracts `from-header` alone.
 
 Decision point: whether typeflag `X` is an extended header.
 Seen in: none of the scanned tarballs.

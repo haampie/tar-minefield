@@ -1,12 +1,12 @@
 """An unknown typeflag with a size: data, or no data?
 
-The archive has a member `unknown` of typeflag `Z`, which is not defined anywhere, with the size
-512. The 512 bytes after its header also form a valid header, of an empty file `smuggled`.
+The archive has a member `unknown` with an undefined typeflag `Z` and size 512. The 512-byte block
+after its header is a valid header for an empty file `smuggled`.
 
-[POSIX][unknown-type] says an unknown typeflag is read as a regular file, so those 512 bytes are the
-data of `unknown`. This case is ambiguous in practice because a reader that skips the member, rather
-than extract it as a file, has to decide whether it has data. If it does, the 512 bytes are skipped
-with it; if not, they are the header of the next member, and `smuggled` is extracted.
+Under [POSIX][unknown-type], an unrecognized typeflag is extracted as a regular file, making the
+next 512 bytes `unknown`'s data. A reader that instead skips unknown member types must decide
+whether `Z` carries data: skipping 512 bytes of data extracts nothing, whereas assuming `Z` has no
+data treats the next block as `smuggled`'s header.
 
 Decision point: whether an unknown typeflag has data.
 Seen in: none of the scanned tarballs.

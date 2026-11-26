@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a symlink <code>link</code>, whose pax header has an empty <code>linkpath=</code>, and whose header has the target <code>from-header</code>.</p>
-<p>In POSIX, a <code>linkpath</code> record <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20linkname%20field">overrides</a> the <code>linkname</code> field of the header, a record with an empty value <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">deletes</a> any field of the header of the same name, and a field of the header that a keyword overrides or deletes <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">is ignored</a>. The header does not have a field named <code>linkpath</code>. So, if deletion goes by the name of the keyword, <code>linkpath=</code> deletes nothing in the header, and the target <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=Otherwise%2C%20the%20attribute%20shall%20be%20determined%20from%20the%20ustar%20header%20block">comes from the header</a>: <code>from-header</code>. If it goes by the header field that the keyword overrides, <code>linkname</code> goes too, and the symlink is left without a target. If the record is applied like any other, its empty value <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=If%20there%20is%20a%20typeflag%20x%20extended%20header%20record%2C%20the%20affected%20attribute%20shall%20be%20assigned%20the%20%3Cvalue%3E">becomes the target</a>. This case is ambiguous because the target is <code>from-header</code>, missing, or empty.</p>
+<p>The archive has a symlink <code>link</code> with an empty <code>linkpath=</code> record in its pax header and <code>from-header</code> in its ustar linkname field.</p>
+<p>In POSIX, <code>linkpath</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20linkname%20field">overrides</a> the ustar <code>linkname</code> field, an empty value <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=If%20the%20%3Cvalue%3E%20field%20is%20zero%20length%2C%20it%20shall%20delete%20any%20header%20block%20field">deletes</a> any header field of the same name, and any header field overridden or deleted by a pax record <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=overrides%20or%20deletes%20a%20corresponding%20field%20in%20the%20ustar%20header%20block">is ignored</a>. The ustar header has no field named <code>linkpath</code>. If deletion goes by the keyword&#x27;s name, <code>linkpath=</code> deletes nothing in the header and the target <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=Otherwise%2C%20the%20attribute%20shall%20be%20determined%20from%20the%20ustar%20header%20block">comes from the header</a> (<code>from-header</code>). If it goes by the header field that the keyword overrides, <code>linkname</code> is deleted too and the symlink is left without a target. If the record is applied like any other, its empty value <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_04:~:text=If%20there%20is%20a%20typeflag%20x%20extended%20header%20record%2C%20the%20affected%20attribute%20shall%20be%20assigned%20the%20%3Cvalue%3E">becomes the target</a>.</p>
 <p><strong>Decision point:</strong> what an empty pax link path means: no target, an empty target, or the header&#x27;s.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,17 +52,16 @@
 
 An empty pax `linkpath`, which in POSIX deletes a target: the pax one, or the header&#x27;s too?
 
-The archive has a symlink `link`, whose pax header has an empty `linkpath=`, and whose header has
-the target `from-header`.
+The archive has a symlink `link` with an empty `linkpath=` record in its pax header and
+`from-header` in its ustar linkname field.
 
-In POSIX, a `linkpath` record overrides the `linkname` field of the header, a record
-with an empty value deletes any field of the header of the same name, and a field of
-the header that a keyword overrides or deletes is ignored. The header does not have
-a field named `linkpath`. So, if deletion goes by the name of the keyword, `linkpath=` deletes
-nothing in the header, and the target comes from the header: `from-header`. If it
-goes by the header field that the keyword overrides, `linkname` goes too, and the symlink is left
-without a target. If the record is applied like any other, its empty value becomes the
-target. This case is ambiguous because the target is `from-header`, missing, or empty.
+In POSIX, `linkpath` overrides the ustar `linkname` field, an empty value
+deletes any header field of the same name, and any header field overridden or deleted
+by a pax record is ignored. The ustar header has no field named `linkpath`. If
+deletion goes by the keyword&#x27;s name, `linkpath=` deletes nothing in the header and the target comes
+from the header (`from-header`). If it goes by the header field that the keyword
+overrides, `linkname` is deleted too and the symlink is left without a target. If the record is
+applied like any other, its empty value becomes the target.
 
 Decision point: what an empty pax link path means: no target, an empty target, or the header&#x27;s.
 Seen in: none of the scanned tarballs.
@@ -320,6 +319,6 @@ See also: N22, an empty pax `path`, and N25, a symlink with an empty target.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

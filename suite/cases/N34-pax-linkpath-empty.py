@@ -1,16 +1,15 @@
 """An empty pax `linkpath`, which in POSIX deletes a target: the pax one, or the header's too?
 
-The archive has a symlink `link`, whose pax header has an empty `linkpath=`, and whose header has
-the target `from-header`.
+The archive has a symlink `link` with an empty `linkpath=` record in its pax header and
+`from-header` in its ustar linkname field.
 
-In POSIX, a `linkpath` record [overrides][linkpath] the `linkname` field of the header, a record
-with an empty value [deletes][empty-value] any field of the header of the same name, and a field of
-the header that a keyword overrides or deletes [is ignored][corresponding]. The header does not have
-a field named `linkpath`. So, if deletion goes by the name of the keyword, `linkpath=` deletes
-nothing in the header, and the target [comes from the header][header-fallback]: `from-header`. If it
-goes by the header field that the keyword overrides, `linkname` goes too, and the symlink is left
-without a target. If the record is applied like any other, its empty value [becomes the
-target][x-assigned]. This case is ambiguous because the target is `from-header`, missing, or empty.
+In POSIX, `linkpath` [overrides][linkpath] the ustar `linkname` field, an empty value
+[deletes][empty-value] any header field of the same name, and any header field overridden or deleted
+by a pax record [is ignored][corresponding]. The ustar header has no field named `linkpath`. If
+deletion goes by the keyword's name, `linkpath=` deletes nothing in the header and the target [comes
+from the header][header-fallback] (`from-header`). If it goes by the header field that the keyword
+overrides, `linkname` is deleted too and the symlink is left without a target. If the record is
+applied like any other, its empty value [becomes the target][x-assigned].
 
 Decision point: what an empty pax link path means: no target, an empty target, or the header's.
 Seen in: none of the scanned tarballs.

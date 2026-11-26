@@ -1,14 +1,14 @@
 r"""A newline in a pax `comment`, which split on lines leaves a `size` record before the last one.
 
-The archive has a file `a`. Its pax header has two records: a `comment` with a newline in it, `x\n10
-size=0`, then `size=512`. Its header has the size 512 too. The 512 bytes after the header are the
-header of an empty file `smuggled`.
+The archive has a file `a` with size 512 in its ustar header and two records in its pax header: a
+`comment` containing `x\n10 size=0`, followed by `size=512`. The 512-byte data block of `a` is a
+valid header for an empty file `smuggled`.
 
-pax records are delimited by their [length][record-length], so the comment is one record. In POSIX,
-a comment is [ignored][comment], and the pax size [overrides][size-override] the size field: `a`
-contains the 512 bytes. This case is not ambiguous. A reader that splits records on lines finds a
-record `size=0` before `size=512`. In POSIX, the [last][last-wins] of two records applies, and a
-reader that takes the first extracts an empty `a`, then `smuggled`.
+Because pax records are delimited by their [byte length][record-length], the comment is a single
+record that [POSIX][comment] ignores, and `size=512` [overrides][size-override] the ustar size
+field, giving `a` the 512-byte block as its contents. A reader that splits the pax payload on
+newlines sees a `size=0` record before `size=512`; if it also takes the first `size` record instead
+of the [last][last-wins], it extracts an empty `a` followed by `smuggled`.
 
 Seen in: none of the scanned tarballs.
 See also: F28, a `size` record in a comment on a file without a pax size.

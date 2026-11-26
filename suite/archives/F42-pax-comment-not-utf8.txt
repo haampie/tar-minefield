@@ -2,13 +2,13 @@ F42-pax-comment-not-utf8: tolerated: a strict parser may reject it; if it accept
 
 A pax `comment` that is not UTF-8.
 
-The archive has one file, `a`, whose pax header has one record, a `comment` of the two bytes
-`\xff\xfe`, which are not UTF-8.
+The archive has one file, `a`, whose pax header has a single `comment` record containing the two
+non-UTF-8 bytes `\xff\xfe`.
 
-In POSIX, the value of every specified keyword, `comment` among them, is in UTF-8,
-and every comment is ignored. The value can be seen either as bound by the rule for
-UTF-8, which makes the archive invalid, or as never read, as the comment is ignored. This case is
-ambiguous because the archive is either invalid or has the file `a`.
+In POSIX, every standard keyword value, including `comment`, is encoded in UTF-8,
+yet every comment is ignored. A reader that validates UTF-8 on all standard records
+before ignoring comments rejects the archive, whereas one that skips `comment` records without
+decoding them extracts `a`.
 
 Decision point: whether a comment is decoded before it is ignored.
 Seen in: none of the scanned tarballs.

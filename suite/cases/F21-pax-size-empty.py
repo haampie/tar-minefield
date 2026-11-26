@@ -1,14 +1,14 @@
 """An empty pax `size`, which in POSIX removes the size rather than giving one.
 
-The archive has a file `a`, whose header has the size 512 and whose pax header has an empty
-`size=`, then an empty file `smuggled`.
+The archive has a file `a` with size 512 in its ustar header and an empty `size=` record in its pax
+header, followed by an empty file `smuggled`.
 
-[POSIX][empty-value] says that a record with an empty value deletes the field of that name, in the
-header too, so `size=` technically leaves `a` without a size field, and the header's is to be
-[ignored][corresponding]. But its order of precedence [assigns][x-assigned] the empty value, or,
-[failing that][header-fallback], the header's size, 512. This case is ambiguous because the size is
-either none (and the member is invalid), 0 (and `smuggled` is a member), or 512 (and the next block
-is the data of `a`).
+Under [POSIX][empty-value], an empty pax value deletes the corresponding attribute, including the
+ustar field, which is then [ignored][corresponding]—leaving `a` with no size at all. On the other
+hand, the POSIX precedence rules say to [assign][x-assigned] the pax value or [fall back to the
+ustar header][header-fallback] (512). Depending on how a reader resolves `size=`, it either rejects
+`a` for having no size, treats the empty string as 0 and extracts `smuggled`, or falls back to the
+ustar size of 512 and consumes `smuggled`'s header as `a`'s data.
 
 Decision point: what an empty pax size means: no size, a size of 0, or the header's size.
 Seen in: none of the scanned tarballs.

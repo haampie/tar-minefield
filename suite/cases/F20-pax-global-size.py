@@ -1,12 +1,12 @@
 """A global pax header with a `size`, which frames every member after it, or none.
 
-The archive starts with a global header with `size=512`, then has a file `a`, whose size field is
-0, then an empty file `smuggled`.
+The archive starts with a global header containing `size=512`, followed by a file `a` with size 0 in
+its ustar header, and then an empty file `smuggled`.
 
-In [POSIX][global], the records of a global header apply to every later member that does not
-override them, so the `size=512` is the size of `a`. This case is ambiguous in practice because,
-with global headers or the sizes in them ignored, the next block is not the data of `a` but the
-header of another file, `smuggled`.
+In [POSIX][global], global header records apply to every subsequent file that does not override
+them, giving `a` a size of 512 and making the next block `a`'s data. A reader that ignores global
+headers or ignores `size` in a global header uses `a`'s ustar size of 0 and reads the next block as
+`smuggled`'s header.
 
 Decision point: whether a `size` in a global header applies.
 Seen in: none of the scanned tarballs.

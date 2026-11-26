@@ -2,13 +2,14 @@ F30-number-size-base256-too-large: must reject
 
 A base-256 size of 2^64 + 512 in the header, which wraps around to 512 in 64 bits.
 
-The archive has a file `a`, whose size field is 2^64 + 512 in base 256, then an empty file
-`smuggled`.
+The archive has a file `a` whose size field encodes 2^64 + 512 in base 256, followed by an empty
+file `smuggled`.
 
-A base-256 number has 11 bytes, or 88 bits, after its first byte, `0x80`, but many implementations
-keep sizes in 64 bits. The whole number runs past the end of the archive. Read leniently, this case
-is ambiguous because its low 64 bits are 512, which makes the next block the data of `a`; a reader
-that skips the header instead extracts the next block as a file `smuggled`, without `a`.
+After the leading `0x80` marker byte, a base-256 size field holds 11 bytes (88 bits), whereas many
+implementations store sizes in a 64-bit integer. The full 88-bit value extends past the end of the
+archive. Read leniently, a reader that truncates the size to the low 64 bits gets 512 and consumes
+the next block as `a`'s data, while one that skips `a`'s header as invalid extracts `smuggled`
+without `a`.
 
 Decision point: what a size too large for the reader means.
 Seen in: none of the scanned tarballs.

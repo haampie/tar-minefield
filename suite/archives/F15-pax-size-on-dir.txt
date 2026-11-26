@@ -2,12 +2,12 @@ F15-pax-size-on-dir: must reject
 
 A pax `size` on a directory, which takes the next header for its data.
 
-The archive has a directory `dir/`, whose pax header has `size=512`, then an empty file
+The archive has a directory `dir/` with `size=512` in its pax header, followed by an empty file
 `dir/smuggled`.
 
-In POSIX, no data is stored for a directory, whatever its size, so the next block is the
-header of a file, `dir/smuggled`. This case is ambiguous in practice because, if the size applies,
-that block is the directory's data instead, and the tree is a directory alone.
+Under POSIX, directories do not store data blocks regardless of size, so the next block
+is `dir/smuggled`'s header. A reader that honors `size=512` on a directory consumes that block as
+the directory's data and extracts only `dir/`.
 
 Decision point: whether a pax `size` applies to a member without data.
 Seen in: llama_index_workflows 2.26.0, with a pax size on a directory.

@@ -1,14 +1,13 @@
 r"""A pax path that is not UTF-8, declared as bytes with `hdrcharset=BINARY`.
 
-The archive has one file. Its pax header has `hdrcharset=BINARY` and the path `caf\xe9`, which is
-`café` in Latin-1 and not UTF-8; its ustar header has the name `cafe`.
+The archive has one file with `hdrcharset=BINARY` and `path=caf\xe9` (`café` in Latin-1) in its pax
+header, and `cafe` in its ustar name field.
 
-With `hdrcharset=BINARY`, the pax path is [unencoded binary data][hdrcharset], here the bytes
-`caf\xe9`. But in [POSIX][untranslatable], a "diagnostic message" is also required for a name that
-cannot be translated "between the codeset in use for that extended header record and the character
-set of the current locale", and by default the file is [bypassed][bypass]. This case is ambiguous
-because the file is either created under those bytes, or bypassed, in a UTF-8 locale, to which they
-cannot be translated.
+With `hdrcharset=BINARY`, the pax path is [unencoded binary data][hdrcharset], here the raw bytes
+`caf\xe9`. However, [POSIX][untranslatable] also requires a diagnostic message when a path cannot be
+translated to the current locale's character set, and by default the file is [bypassed][bypass]. In
+a UTF-8 locale, a reader may extract the raw bytes `caf\xe9`, decode or replace `\xe9`, fall back to
+`cafe`, or bypass the file.
 
 Decision point: whether a pax path declared as bytes is created as it is.
 Seen in: none of the scanned tarballs.

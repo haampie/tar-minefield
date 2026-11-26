@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a GNU long name header of size 4, whose data block contains <code>name-rest</code>, followed by NULs, so the size covers only <code>name</code>. After it is a file whose header has GNU&#x27;s magic and the name <code>header-name</code>.</p>
-<p>This case is ambiguous because the name ends either at the size, and is <code>name</code>, or at the first NUL in the block, and is <code>name-rest</code>. This is not properly defined by GNU&#x27;s format; all we know is that archives created by GNU tar always include the NUL in the size. A lenient reader could also ignore a long name without its NUL, and extract <code>header-name</code>. A reader that does not know typeflag <code>L</code> could extract <code>header-name</code> too, after a file <code>@LongLink</code> that contains <code>name</code>.</p>
+<p>The archive has a GNU long name header (typeflag <code>L</code>) of size 4 whose data block contains <code>name-rest</code> padded with NULs (so the 4-byte size covers only <code>name</code>), followed by a file with GNU magic and <code>header-name</code> in its ustar name field.</p>
+<p>GNU tar always includes the terminating NUL in the <code>L</code> header&#x27;s size, and its format does not define what happens when the size stops before the NUL. A reader that slices the payload to the declared 4-byte size extracts <code>name</code>, whereas one that reads the data block up to the first NUL extracts <code>name-rest</code>. A reader that discards a long name lacking a NUL within its declared size falls back to <code>header-name</code>, while one that does not recognize typeflag <code>L</code> extracts a 4-byte file <code>@LongLink</code> followed by <code>header-name</code>.</p>
 <p><strong>Decision point:</strong> whether a GNU long name ends at its size or at a NUL.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,15 +52,16 @@
 
 A GNU long name whose size leaves out its NUL, with bytes after it.
 
-The archive has a GNU long name header of size 4, whose data block contains `name-rest`, followed by
-NULs, so the size covers only `name`. After it is a file whose header has GNU&#x27;s magic and the name
-`header-name`.
+The archive has a GNU long name header (typeflag `L`) of size 4 whose data block contains
+`name-rest` padded with NULs (so the 4-byte size covers only `name`), followed by a file with GNU
+magic and `header-name` in its ustar name field.
 
-This case is ambiguous because the name ends either at the size, and is `name`, or at the first NUL
-in the block, and is `name-rest`. This is not properly defined by GNU&#x27;s format; all we know is that
-archives created by GNU tar always include the NUL in the size. A lenient reader could also ignore a
-long name without its NUL, and extract `header-name`. A reader that does not know typeflag `L` could
-extract `header-name` too, after a file `@LongLink` that contains `name`.
+GNU tar always includes the terminating NUL in the `L` header&#x27;s size, and its format does not define
+what happens when the size stops before the NUL. A reader that slices the payload to the declared
+4-byte size extracts `name`, whereas one that reads the data block up to the first NUL extracts
+`name-rest`. A reader that discards a long name lacking a NUL within its declared size falls back to
+`header-name`, while one that does not recognize typeflag `L` extracts a 4-byte file `@LongLink`
+followed by `header-name`.
 
 Decision point: whether a GNU long name ends at its size or at a NUL.
 Seen in: none of the scanned tarballs.
@@ -353,6 +354,6 @@ See also: N14, bytes after the NUL that ends a name.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

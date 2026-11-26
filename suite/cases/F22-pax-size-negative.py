@@ -1,13 +1,13 @@
 """A negative pax `size`, which a member cannot have.
 
-The archive has a file `a`, whose pax header has `size=-512` and whose header has the size 0, then
-an empty file `smuggled`.
+The archive has a file `a` with `size=-512` in its pax header and size 0 in its ustar header,
+followed by an empty file `smuggled`.
 
-In [POSIX][size-decimal], a pax size is decimal digits, without a sign. Read leniently, this case is
-ambiguous because the size is either 0, as the header specifies (and the next block is the header of
-`smuggled`), or the pax size read as an unsigned number, almost 2^64 (which runs past the end of the
-archive). Neither follows from POSIX, which does not say what a `size` record that is not a decimal
-number means.
+In [POSIX][size-decimal], a pax size consists of unsigned decimal digits. Read leniently, a reader
+that discards the invalid pax record falls back to the ustar size of 0 and extracts `smuggled`,
+whereas one that parses `-512` into an unsigned integer wraps it near 2^64 and reads past the end of
+the archive. Neither follows from POSIX, which does not say what a `size` record that is not a
+decimal number means.
 
 Decision point: whether a pax size may be negative, and what a negative one means.
 Seen in: none of the scanned tarballs.

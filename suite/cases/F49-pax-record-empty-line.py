@@ -1,14 +1,13 @@
 """An empty line between two pax records.
 
-The archive has a file whose pax header has the record `comment=x`, followed by a newline,
-followed by the record `path=renamed`. Its header has the name `header-name`.
+The archive has a file whose pax header contains `comment=x`, an extra newline, and `path=renamed`.
+The file's ustar header gives the name `header-name`.
 
-In POSIX, an extended header [consists of records][records], each of which starts with its
-[length][record-length], so a newline between two of them is not a record. This case is ambiguous
-because a reader can handle the empty line in one of three ways. A reader that skips it reads
-`path=renamed`, and the file is `renamed`. One that stops there, or ignores the extended header,
-keeps `header-name`. One that takes the newline for the start of the next record reads its length
-from one byte too early, and cuts the name to `rename`.
+A POSIX extended header [consists of records][records] that each begin with a decimal
+[byte length][record-length], leaving no room for blank lines between records. A reader that skips
+the blank line applies `path=renamed`. A reader that stops parsing at the blank line or discards the
+pax header extracts `header-name`. A reader that takes the newline for the start of the next record
+reads its length from one byte too early and cuts the name to `rename`.
 
 Decision point: whether a pax header may have bytes between its records.
 Seen in: none of the scanned tarballs.

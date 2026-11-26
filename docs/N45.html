@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a GNU long name header whose data is 99 <code>p</code>s, followed by a slash, followed by <code>file.py</code>, followed by a NUL. After it is a regular file, of typeflag NUL, with GNU&#x27;s magic. Its name field contains the first 100 bytes of the long name: the 99 <code>p</code>s, followed by the slash.</p>
-<p>The long name replaces the name field, so the member is a regular file, <code>file.py</code> under the directory of 99 <code>p</code>s, which does not have a member of its own. The long name header is GNU tar&#x27;s own format for long names. A name that ends in a slash was the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_18_03:~:text=the%20convention%20of%20using%20a%20filename%20ending%20with%20%3Cslash%3E%20was%20adopted%20to%20specify%20a%20directory%20on%20the%20archive">old way</a> to archive a directory. A reader that decides the kind by the name field, before the long name is applied, extracts a directory instead. A reader that does not apply the long name extracts a file of 99 <code>p</code>s, by the name field without its slash.</p>
+<p>The archive has a GNU long name header (typeflag <code>L</code>) containing 99 <code>p</code>s, a slash, <code>file.py</code>, and a NUL, followed by a regular file of typeflag NUL with GNU magic. Because the ustar name field holds the first 100 bytes of the long name, it contains the 99 <code>p</code>s followed by <code>/</code>.</p>
+<p>Applying the GNU long name gives the member its full path (<code>file.py</code> inside a directory of 99 <code>p</code>s) as a regular file. However, a trailing slash was the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_18_03:~:text=the%20convention%20of%20using%20a%20filename%20ending%20with%20%3Cslash%3E%20was%20adopted%20to%20specify%20a%20directory%20on%20the%20archive">historical convention</a> for directories, and a reader that classifies the member from its 100-byte ustar name field before applying the long name mistakes the regular file for a directory. A reader that ignores the <code>L</code> header altogether strips the trailing slash from the ustar name field and extracts a regular file named with 99 <code>p</code>s.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp/</code></td><td>directory</td><td></td></tr>
@@ -55,16 +55,16 @@
 
 A file with a GNU long name and typeflag NUL, whose name field ends in a slash.
 
-The archive has a GNU long name header whose data is 99 `p`s, followed by a slash, followed by
-`file.py`, followed by a NUL. After it is a regular file, of typeflag NUL, with GNU&#x27;s magic. Its
-name field contains the first 100 bytes of the long name: the 99 `p`s, followed by the slash.
+The archive has a GNU long name header (typeflag `L`) containing 99 `p`s, a slash, `file.py`, and a
+NUL, followed by a regular file of typeflag NUL with GNU magic. Because the ustar name field holds
+the first 100 bytes of the long name, it contains the 99 `p`s followed by `/`.
 
-The long name replaces the name field, so the member is a regular file, `file.py` under the
-directory of 99 `p`s, which does not have a member of its own. The long name header is GNU tar&#x27;s own
-format for long names. A name that ends in a slash was the old way to archive a
-directory. A reader that decides the kind by the name field, before the long name is applied,
-extracts a directory instead. A reader that does not apply the long name extracts a file of 99 `p`s,
-by the name field without its slash.
+Applying the GNU long name gives the member its full path (`file.py` inside a directory of 99 `p`s)
+as a regular file. However, a trailing slash was the historical convention for
+directories, and a reader that classifies the member from its 100-byte ustar name field before
+applying the long name mistakes the regular file for a directory. A reader that ignores the `L`
+header altogether strips the trailing slash from the ustar name field and extracts a regular file
+named with 99 `p`s.
 
 Seen in: sdists of Python packages that maturin wrote.
 See also: K01, a regular file whose name ends in a slash.
@@ -356,6 +356,6 @@ See also: K01, a regular file whose name ends in a slash.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

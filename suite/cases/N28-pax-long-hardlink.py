@@ -1,11 +1,11 @@
 """A hardlink with a long name and a long target, in a pax `path` and `linkpath` respectively.
 
-The archive has a file whose pax `path` is 120 `t`s, then a hardlink to it, whose pax header has a
-`path` of 120 `h`s and a `linkpath` of 120 `t`s. Their headers have the names cut to 100 bytes, as
-writers put there.
+The archive has a file whose pax `path` is 120 `t`s, followed by a hardlink whose pax header sets
+`path` to 120 `h`s and `linkpath` to 120 `t`s. Their ustar fields hold the first 100 bytes of each
+name.
 
-In [POSIX][corresponding], a pax record overrides the corresponding field of the header, so the hard
-link is the 120 `h`s, and links to the file of 120 `t`s before it.
+In [POSIX][corresponding], pax records override the corresponding ustar fields, so the hardlink is
+named with 120 `h`s and links to the file of 120 `t`s.
 
 Seen in: pyDACP 1.0.1.
 """
