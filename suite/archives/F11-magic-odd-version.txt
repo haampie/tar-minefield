@@ -2,12 +2,12 @@ F11-magic-odd-version: must reject
 
 The POSIX magic with a version that is neither `"00"` nor NULs.
 
-The archive has one file, `a`, whose magic `"ustar\0"` is followed by the version `"01"`.
+The archive has one file, `a`, with magic `"ustar\0"` and version `"01"`.
 
-In POSIX, the version is `"00"`. The default policy tolerates NULs instead, as some Java
-archivers write them, but no other version. This case is ambiguous because a reader can take the
-header in one of three ways: as ustar, ignoring the version; as in a format not defined in POSIX,
-and stops; or as a v7 header, without the fields that ustar added.
+In POSIX, the version field is `"00"`. The default policy also tolerates two NULs, as
+written by some Java archivers, but rejects any other version. A reader may ignore the version and
+parse the header as ustar, reject the header as an unknown format, or fall back to treating it as a
+v7 header without the ustar fields.
 
 Decision point: which format the header is in.
 Seen in: none of the scanned tarballs.

@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a member <code>unknown</code> of typeflag <code>Z</code>, which is not defined anywhere, with the size 512. The 512 bytes after its header also form a valid header, of an empty file <code>smuggled</code>.</p>
-<p><a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file">POSIX</a> says an unknown typeflag is read as a regular file, so those 512 bytes are the data of <code>unknown</code>. This case is ambiguous in practice because a reader that skips the member, rather than extract it as a file, has to decide whether it has data. If it does, the 512 bytes are skipped with it; if not, they are the header of the next member, and <code>smuggled</code> is extracted.</p>
+<p>The archive has a member <code>unknown</code> with an undefined typeflag <code>Z</code> and size 512. The 512-byte block after its header is a valid header for an empty file <code>smuggled</code>.</p>
+<p>Under <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20file%20shall%20be%20extracted%20as%20if%20it%20were%20a%20regular%20file">POSIX</a>, an unrecognized typeflag is extracted as a regular file, making the next 512 bytes <code>unknown</code>&#x27;s data. A reader that instead skips unknown member types must decide whether <code>Z</code> carries data: skipping 512 bytes of data extracts nothing, whereas assuming <code>Z</code> has no data treats the next block as <code>smuggled</code>&#x27;s header.</p>
 <p><strong>Decision point:</strong> whether an unknown typeflag has data.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,13 +52,13 @@
 
 An unknown typeflag with a size: data, or no data?
 
-The archive has a member `unknown` of typeflag `Z`, which is not defined anywhere, with the size
-512. The 512 bytes after its header also form a valid header, of an empty file `smuggled`.
+The archive has a member `unknown` with an undefined typeflag `Z` and size 512. The 512-byte block
+after its header is a valid header for an empty file `smuggled`.
 
-POSIX says an unknown typeflag is read as a regular file, so those 512 bytes are the
-data of `unknown`. This case is ambiguous in practice because a reader that skips the member, rather
-than extract it as a file, has to decide whether it has data. If it does, the 512 bytes are skipped
-with it; if not, they are the header of the next member, and `smuggled` is extracted.
+Under POSIX, an unrecognized typeflag is extracted as a regular file, making the
+next 512 bytes `unknown`&#x27;s data. A reader that instead skips unknown member types must decide
+whether `Z` carries data: skipping 512 bytes of data extracts nothing, whereas assuming `Z` has no
+data treats the next block as `smuggled`&#x27;s header.
 
 Decision point: whether an unknown typeflag has data.
 Seen in: none of the scanned tarballs.
@@ -276,6 +276,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

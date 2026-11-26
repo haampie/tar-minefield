@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has one file, <code>a</code>, with the byte <code>0xe9</code> in its <code>uname</code>, and a checksum that is the sum of the bytes of its header taken as signed numbers.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20octet%20in%20the%20header%20shall%20be%20treated%20as%20an%20unsigned%20value">POSIX</a>, the checksum is the sum of the bytes of a header taken as unsigned numbers. Some old tars added them as signed. With a byte over 127 in the header, the two totals differ, and the checksum matches only the signed one. This case is ambiguous because a reader can take the header in one of three ways: as valid, by the signed sum, and extracts <code>a</code>; as invalid, and stops; or as invalid, and skips ahead to the next header.</p>
+<p>The archive has one file, <code>a</code>, with the byte <code>0xe9</code> in its <code>uname</code> field and a checksum computed as the signed sum of the header bytes.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20octet%20in%20the%20header%20shall%20be%20treated%20as%20an%20unsigned%20value">POSIX</a>, the checksum is the sum of the header bytes treated as unsigned values, whereas some old tars summed them as signed bytes. Because the header contains a byte over 127, the two sums differ and the checksum matches only the signed total. A reader that accepts the signed sum extracts <code>a</code>, whereas one that requires an unsigned sum rejects the header and either stops or skips ahead to the next header.</p>
 <p><strong>Decision point:</strong> whether a signed checksum makes a header valid.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,14 +52,14 @@
 
 A checksum that only matches as the signed sum of the header.
 
-The archive has one file, `a`, with the byte `0xe9` in its `uname`, and a checksum that is the sum
-of the bytes of its header taken as signed numbers.
+The archive has one file, `a`, with the byte `0xe9` in its `uname` field and a checksum computed as
+the signed sum of the header bytes.
 
-In POSIX, the checksum is the sum of the bytes of a header taken as unsigned numbers.
-Some old tars added them as signed. With a byte over 127 in the header, the two totals differ, and
-the checksum matches only the signed one. This case is ambiguous because a reader can take the
-header in one of three ways: as valid, by the signed sum, and extracts `a`; as invalid, and stops;
-or as invalid, and skips ahead to the next header.
+In POSIX, the checksum is the sum of the header bytes treated as unsigned values,
+whereas some old tars summed them as signed bytes. Because the header contains a byte over 127, the
+two sums differ and the checksum matches only the signed total. A reader that accepts the signed sum
+extracts `a`, whereas one that requires an unsigned sum rejects the header and either stops or skips
+ahead to the next header.
 
 Decision point: whether a signed checksum makes a header valid.
 Seen in: none of the scanned tarballs.
@@ -262,6 +262,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a file <code>a</code>, whose size field is 2^64 + 512 in base 256, then an empty file <code>smuggled</code>.</p>
-<p>A base-256 number has 11 bytes, or 88 bits, after its first byte, <code>0x80</code>, but many implementations keep sizes in 64 bits. The whole number runs past the end of the archive. Read leniently, this case is ambiguous because its low 64 bits are 512, which makes the next block the data of <code>a</code>; a reader that skips the header instead extracts the next block as a file <code>smuggled</code>, without <code>a</code>.</p>
+<p>The archive has a file <code>a</code> whose size field encodes 2^64 + 512 in base 256, followed by an empty file <code>smuggled</code>.</p>
+<p>After the leading <code>0x80</code> marker byte, a base-256 size field holds 11 bytes (88 bits), whereas many implementations store sizes in a 64-bit integer. The full 88-bit value extends past the end of the archive, but a reader that truncates it to the low 64 bits gets 512 and consumes the next block as <code>a</code>&#x27;s data. A reader that skips <code>a</code>&#x27;s header as invalid instead extracts <code>smuggled</code> without <code>a</code>.</p>
 <p><strong>Decision point:</strong> what a size too large for the reader means.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,13 +52,13 @@
 
 A base-256 size of 2^64 + 512 in the header, which wraps around to 512 in 64 bits.
 
-The archive has a file `a`, whose size field is 2^64 + 512 in base 256, then an empty file
-`smuggled`.
+The archive has a file `a` whose size field encodes 2^64 + 512 in base 256, followed by an empty
+file `smuggled`.
 
-A base-256 number has 11 bytes, or 88 bits, after its first byte, `0x80`, but many implementations
-keep sizes in 64 bits. The whole number runs past the end of the archive. Read leniently, this case
-is ambiguous because its low 64 bits are 512, which makes the next block the data of `a`; a reader
-that skips the header instead extracts the next block as a file `smuggled`, without `a`.
+After the leading `0x80` marker byte, a base-256 size field holds 11 bytes (88 bits), whereas many
+implementations store sizes in a 64-bit integer. The full 88-bit value extends past the end of the
+archive, but a reader that truncates it to the low 64 bits gets 512 and consumes the next block as
+`a`&#x27;s data. A reader that skips `a`&#x27;s header as invalid instead extracts `smuggled` without `a`.
 
 Decision point: what a size too large for the reader means.
 Seen in: none of the scanned tarballs.
@@ -276,6 +276,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a symlink <code>l</code> to <code>target</code>, whose pax header has <code>size=512</code> and whose header has the size 0, then an empty file <code>smuggled</code>, then a file <code>b</code>.</p>
-<p>In POSIX, a pax <code>size</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20size%20field%20in%20the%20following%20header%20block%28s%29">overrides</a> the size field of the header, but <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=No%20data%20logical%20records%20are%20stored%20for%20types%201%2C%202%2C%20or%205">no data</a> is stored for a symlink, whose size field <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20size%20field%20shall%20be%20specified%20as%20zero">is zero</a>. This case is ambiguous because the next block is either the data of <code>l</code>, 512 bytes to skip, or the header of <code>smuggled</code>, which is then a member of its own.</p>
+<p>The archive has a symlink <code>l</code> to <code>target</code> with <code>size=512</code> in its pax header and size 0 in its ustar header, followed by an empty file <code>smuggled</code> and a file <code>b</code>.</p>
+<p>In POSIX, a pax <code>size</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=This%20record%20shall%20override%20the%20size%20field%20in%20the%20following%20header%20block%28s%29">overrides</a> the ustar size field, yet symlinks <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=No%20data%20logical%20records%20are%20stored%20for%20types%201%2C%202%2C%20or%205">do not store data</a> and their size field <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20size%20field%20shall%20be%20specified%20as%20zero">must be zero</a>. A reader that honors <code>size=512</code> on the symlink skips the next block as <code>l</code>&#x27;s data and misses <code>smuggled</code>, whereas one that ignores sizes on symlinks reads the next block as <code>smuggled</code>&#x27;s header.</p>
 <p><strong>Decision point:</strong> whether a pax size applies to a member that does not have data.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,13 +52,13 @@
 
 A symlink with a pax `size`: data to skip, or none?
 
-The archive has a symlink `l` to `target`, whose pax header has `size=512` and whose header has the
-size 0, then an empty file `smuggled`, then a file `b`.
+The archive has a symlink `l` to `target` with `size=512` in its pax header and size 0 in its ustar
+header, followed by an empty file `smuggled` and a file `b`.
 
-In POSIX, a pax `size` overrides the size field of the header, but no
-data is stored for a symlink, whose size field is zero. This case is
-ambiguous because the next block is either the data of `l`, 512 bytes to skip, or the header of
-`smuggled`, which is then a member of its own.
+In POSIX, a pax `size` overrides the ustar size field, yet symlinks do not store
+data and their size field must be zero. A reader that honors `size=512`
+on the symlink skips the next block as `l`&#x27;s data and misses `smuggled`, whereas one that ignores
+sizes on symlinks reads the next block as `smuggled`&#x27;s header.
 
 Decision point: whether a pax size applies to a member that does not have data.
 Seen in: none of the scanned tarballs.
@@ -451,6 +451,6 @@ See also: F15, a pax size on a directory, and F35, a pax size on a hardlink.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

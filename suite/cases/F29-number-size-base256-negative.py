@@ -1,12 +1,14 @@
 """A negative base-256 size in the header, -512, which a member cannot have.
 
-The archive has a file `a`, whose size field is -512 in base 256, then an empty file `smuggled`.
+The archive has a file `a` whose size field encodes -512 in base 256, followed by an empty file
+`smuggled`.
 
-GNU tar writes numbers too large for octal in base 256: the first byte of the field is `0x80` for a
-positive number, and `0xff` for a negative one, in two's complement. A negative size is meaningless,
-but the encoding allows it. Read leniently, this case is ambiguous because the size is either 0 (and
-the next block is the header of `smuggled`), or 512 without its sign (and the next block is the data
-of `a`), or the field read as an unsigned number (which runs past the end of the archive).
+GNU tar encodes numbers that do not fit in octal using two's-complement base 256, with `0x80` in the
+first byte for positive values and `0xff` for negative values. Although a negative file size is
+meaningless, the format can represent it. A lenient reader might clamp or default the negative size
+to 0 (reading the next block as `smuggled`'s header), drop the sign and use 512 (consuming the next
+block as `a`'s data), or interpret the bytes as an unsigned number running past the end of the
+archive.
 
 Decision point: whether a size may be negative, and what a negative one means.
 Seen in: none of the scanned tarballs.

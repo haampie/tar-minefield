@@ -2,16 +2,16 @@ F26-pax-size-leading-zero: must reject
 
 A pax `size` with a leading zero, `0777`: 777 in decimal, as POSIX says, or 511 in octal.
 
-The archive has a file `a`, whose pax header has `size=0777` and whose header has the size 0, then
-two empty files, `smuggled-1` and `smuggled-2`.
+The archive has a file `a` with `size=0777` in its pax header and size 0 in its ustar header,
+followed by two empty files, `smuggled-1` and `smuggled-2`.
 
-A pax size is decimal, and POSIX does not forbid leading zeros, so the size is 777.
-But a reader that converts with C's `strtoul(s, NULL, 0)`, or that knows the header's octal numbers,
-reads `0777` as the octal number 511. This case is ambiguous in practice because the size is 777 in
-decimal, or 511 in octal, or the header's size of 0, with the pax size discarded. The data of `a`
-then takes two blocks, one, after which `smuggled-2` is a member, or none, and both `smuggled-1` and
-`smuggled-2` are. Only 777 is a reading of POSIX: the header's size is to be
-ignored once a `size` record is there.
+A pax size is a decimal number and POSIX does not forbid leading zeros, so the
+POSIX size is 777 bytes (spanning two 512-byte blocks and consuming both `smuggled-1` and
+`smuggled-2` as `a`'s data). However, a reader that parses pax numbers with C's `strtoul(s, NULL,
+0)` or treats leading-zero numbers as octal reads `0777` as 511 bytes (consuming one block, so
+`smuggled-2` is extracted as a separate file). A reader that rejects the leading zero and falls back
+to the ustar size of 0—contrary to POSIX, which requires ignoring the ustar size—
+extracts both `smuggled-1` and `smuggled-2`.
 
 Decision point: whether a pax number with a leading zero is decimal or octal.
 Seen in: none of the scanned tarballs.

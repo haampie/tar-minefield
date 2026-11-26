@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a directory <code>dir/</code>, whose size field is 512, then an empty file <code>dir/smuggled</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=No%20data%20logical%20records%20are%20stored%20for%20types%201%2C%202%2C%20or%205">POSIX</a>, no data is stored for a directory, whatever its size, so the next block is the header of a file, <code>dir/smuggled</code>. This case is ambiguous in practice because, if the size applies, that block is the directory&#x27;s data instead, and the tree is a directory alone.</p>
+<p>The archive has a directory <code>dir/</code> with a size field of 512, followed by an empty file <code>dir/smuggled</code>.</p>
+<p>Under <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=No%20data%20logical%20records%20are%20stored%20for%20types%201%2C%202%2C%20or%205">POSIX</a>, directories do not store data blocks regardless of size, so the next block is <code>dir/smuggled</code>&#x27;s header. A reader that honors a non-zero size on a directory consumes that block as the directory&#x27;s data and extracts only <code>dir/</code>.</p>
 <p><strong>Decision point:</strong> whether the size in the header of a directory applies.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,11 +52,12 @@
 
 A size in the header of a directory, which takes the next header for its data.
 
-The archive has a directory `dir/`, whose size field is 512, then an empty file `dir/smuggled`.
+The archive has a directory `dir/` with a size field of 512, followed by an empty file
+`dir/smuggled`.
 
-In POSIX, no data is stored for a directory, whatever its size, so the next block is the
-header of a file, `dir/smuggled`. This case is ambiguous in practice because, if the size applies,
-that block is the directory&#x27;s data instead, and the tree is a directory alone.
+Under POSIX, directories do not store data blocks regardless of size, so the next block
+is `dir/smuggled`&#x27;s header. A reader that honors a non-zero size on a directory consumes that block
+as the directory&#x27;s data and extracts only `dir/`.
 
 Decision point: whether the size in the header of a directory applies.
 Seen in: none of the scanned tarballs.
@@ -280,6 +281,6 @@ rejected as well.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

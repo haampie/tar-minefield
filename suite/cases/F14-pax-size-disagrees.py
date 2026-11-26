@@ -1,17 +1,16 @@
 """A pax `size` that disagrees with the header's, so that a reader of the header's misses a member.
 
-The archive has a file `a`, whose header has the size 512 and whose pax header has `size=0`, then
-an empty file `smuggled`.
+The archive has a file `a` with size 512 in its ustar header and `size=0` in its pax header,
+followed by an empty file `smuggled`.
 
-[POSIX][size-override] says that the pax size overrides the header's: it is how sizes over 8 GiB,
-which do not fit in the header's size field, are written, and archivers write various sizes in the
-header then. An implementation that takes the pax size, as it must, reads the next block as the
-header of another file, `smuggled`; an implementation that takes the header's size, or does not know
-pax, reads that block as the data of `a`. An implementation that takes the header's size is the bug
-of CVE-2025-62518 (astral-tokio-tar before 0.5.6, and tokio-tar). POSIX does not give a reason to
-reject the archive, as the header's size is then to be [ignored][corresponding]. A strict parser may
-reject it anyway, since a header with room for the size does not have a reason to give another, but
-must not extract `a` with 512 bytes.
+In [POSIX][size-override], a pax `size` record overrides the ustar size field; this is how files
+over 8 GiB, which do not fit in the ustar field, are archived, and writers place various placeholder
+values in the ustar field. A compliant reader uses the pax size of 0 and reads the next block as
+`smuggled`'s header. A reader that uses the ustar size or does not support pax consumes that block
+as `a`'s data—the vulnerability in CVE-2025-62518 (astral-tokio-tar before 0.5.6 and tokio-tar).
+Because POSIX requires [ignoring][corresponding] the ustar size when a pax `size` is present, the
+default policy tolerates this archive. A stricter parser may still reject a small file whose pax and
+ustar sizes disagree, provided it never extracts `a` with 512 bytes.
 
 Decision point: which of two sizes frames the member.
 Seen in: none of the scanned tarballs.

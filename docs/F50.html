@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a file <code>a</code>, whose pax header has <code>size=5_12</code> and whose header has the size 0, then an empty file <code>smuggled</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a>, a pax size is a decimal number. Read leniently, this case is ambiguous because a reader can read the size in one of three ways. A reader that takes the underscore for a separator of digits reads 512, and the next block is the data of <code>a</code>. One that ends the number at the underscore reads 5, and <code>a</code> is the first 5 bytes of the next block. One that keeps the size of the header reads 0, and the next block is the header of <code>smuggled</code>.</p>
+<p>The archive has a file <code>a</code> with <code>size=5_12</code> in its pax header and size 0 in its ustar header, followed by an empty file <code>smuggled</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a>, a pax size is an integer in decimal digits. A reader whose number parser allows underscores as digit separators (such as Python&#x27;s <code>int</code>) reads 512 and consumes the next block as <code>a</code>&#x27;s data. A reader that stops parsing at the underscore reads a size of 5 and extracts the first 5 bytes of the next block as <code>a</code>. A reader that ignores the invalid pax <code>size</code> falls back to the ustar size of 0 and reads the next block as <code>smuggled</code>&#x27;s header.</p>
 <p><strong>Decision point:</strong> how a pax size that is not a decimal number is read.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,14 +52,14 @@
 
 A pax `size` with an underscore, `5_12`, which some conversions of strings to numbers accept.
 
-The archive has a file `a`, whose pax header has `size=5_12` and whose header has the size 0, then
-an empty file `smuggled`.
+The archive has a file `a` with `size=5_12` in its pax header and size 0 in its ustar header,
+followed by an empty file `smuggled`.
 
-In POSIX, a pax size is a decimal number. Read leniently, this case is ambiguous
-because a reader can read the size in one of three ways. A reader that takes the underscore for a
-separator of digits reads 512, and the next block is the data of `a`. One that ends the number at
-the underscore reads 5, and `a` is the first 5 bytes of the next block. One that keeps the size of
-the header reads 0, and the next block is the header of `smuggled`.
+In POSIX, a pax size is an integer in decimal digits. A reader whose number parser
+allows underscores as digit separators (such as Python&#x27;s `int`) reads 512 and consumes the next
+block as `a`&#x27;s data. A reader that stops parsing at the underscore reads a size of 5 and extracts
+the first 5 bytes of the next block as `a`. A reader that ignores the invalid pax `size` falls back
+to the ustar size of 0 and reads the next block as `smuggled`&#x27;s header.
 
 Decision point: how a pax size that is not a decimal number is read.
 Seen in: none of the scanned tarballs.
@@ -368,6 +368,6 @@ are not ASCII.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

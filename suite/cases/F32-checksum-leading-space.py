@@ -1,11 +1,12 @@
 """A checksum padded with spaces rather than zeros.
 
-The archive has one file, `a`, whose size and checksum fields are padded with spaces: the checksum
-is `" 10672\\0 "`, a space, followed by five octal digits, followed by a NUL, followed by a space,
-and the size is `"         15\\0"`, spaces, followed by the digits, followed by a NUL.
+The archive has one file, `a`, with space-padded size and checksum fields: the checksum is
+`" 10672\\0 "` (a leading space, five octal digits, a NUL, and a trailing space), and the size is
+`"         15\\0"` (nine spaces, two octal digits, and a NUL).
 
-The sum is the same as that of a header padded with zeros, so an implementation that accepts the
-archive must extract `a`, also one that checks the checksum before the other fields.
+The header bytes sum to the same value as a zero-padded header, so any implementation that accepts
+the archive must extract `a`, including implementations that verify the checksum before parsing
+other fields.
 
 Decision point: whether the checksum field may start with a space.
 Seen in: 819 release tarballs, among them 674 from CPAN, such as Starman 0.4015, and PyPDF2

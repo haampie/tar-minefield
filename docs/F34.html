@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a file <code>a</code>, then a hardlink <code>h</code> to <code>a</code>, with a pax header and the size 512 in its header, then an empty file <code>smuggled</code>.</p>
-<p>Read as pax, which its <code>x</code> header suggests, data on a hardlink is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=data%20blocks%20for%20files%20of%20typeflag%201%20%28the%20digit%20one%29%20%28hard%20link%29%20may%20be%20included">permitted</a>, so the block after the header of <code>h</code> is its data, and what looks like the header of <code>smuggled</code> is that data. POSIX does not say what the data of a hardlink does: whether it replaces the contents of <code>a</code>, or is ignored. A reader that reads it as ustar, in which <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=No%20data%20logical%20records%20are%20stored%20for%20types%201%2C%202%2C%20or%205">no data</a> is stored for a hard link, reads <code>smuggled</code> as a member; the bytes do not say which it is. This case is ambiguous because the tree has either <code>a</code> and its link <code>h</code>, which contain <code>a\n</code> or that block, or <code>a</code>, <code>h</code> and <code>smuggled</code>.</p>
+<p>The archive has a file <code>a</code>, a hardlink <code>h</code> to <code>a</code> preceded by a pax header and carrying size 512 in its ustar header, and an empty file <code>smuggled</code>.</p>
+<p>In the pax format (indicated by <code>h</code>&#x27;s <code>x</code> header), hardlinks <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_02:~:text=data%20blocks%20for%20files%20of%20typeflag%201%20%28the%20digit%20one%29%20%28hard%20link%29%20may%20be%20included">may carry data blocks</a>, making the block after <code>h</code> its data rather than <code>smuggled</code>&#x27;s header—though POSIX does not specify whether hardlink data overwrites <code>a</code> or is ignored. A reader that instead follows the ustar rule, where <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=No%20data%20logical%20records%20are%20stored%20for%20types%201%2C%202%2C%20or%205">no data is stored</a> for hardlinks, treats the next block as <code>smuggled</code>&#x27;s header. Depending on the reader, the extracted tree has <code>a</code> and <code>h</code> (containing either <code>a\n</code> or the 512-byte block), or <code>a</code>, <code>h</code> and <code>smuggled</code>.</p>
 <p><strong>Decision point:</strong> whether a size in the header of a hardlink applies, in an archive with pax headers.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,16 +52,15 @@
 
 A size in the header of a hardlink, in a pax archive, which takes the next header for its data.
 
-The archive has a file `a`, then a hardlink `h` to `a`, with a pax header and the size 512 in its
-header, then an empty file `smuggled`.
+The archive has a file `a`, a hardlink `h` to `a` preceded by a pax header and carrying size 512 in
+its ustar header, and an empty file `smuggled`.
 
-Read as pax, which its `x` header suggests, data on a hardlink is permitted, so the
-block after the header of `h` is its data, and what looks like the header of `smuggled` is that
-data. POSIX does not say what the data of a hardlink does: whether it replaces the contents of `a`,
-or is ignored. A reader that reads it as ustar, in which no data is stored for a hard
-link, reads `smuggled` as a member; the bytes do not say which it is. This case is ambiguous because
-the tree has either `a` and its link `h`, which contain `a\n` or that block, or `a`, `h` and
-`smuggled`.
+In the pax format (indicated by `h`&#x27;s `x` header), hardlinks may carry data blocks,
+making the block after `h` its data rather than `smuggled`&#x27;s header—though POSIX does not specify
+whether hardlink data overwrites `a` or is ignored. A reader that instead follows the ustar rule,
+where no data is stored for hardlinks, treats the next block as `smuggled`&#x27;s header.
+Depending on the reader, the extracted tree has `a` and `h` (containing either `a\n` or the 512-byte
+block), or `a`, `h` and `smuggled`.
 
 Decision point: whether a size in the header of a hardlink applies, in an archive with pax headers.
 Seen in: none of the scanned tarballs.
@@ -455,6 +454,6 @@ in an archive without pax headers.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

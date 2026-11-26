@@ -2,13 +2,13 @@ F40-number-size-no-terminator: must reject
 
 A size of 12 octal digits, without a terminator.
 
-The archive has one file, `a`, whose size field is the 12 octal digits `000000000012`, without a
-NUL or a space after them, and whose data is the 10 bytes `0123456789`.
+The archive has one file, `a`, with 10 bytes of data (`0123456789`) and 12 octal digits
+(`000000000012`) filling its size field without a trailing NUL or space.
 
-In POSIX, every numeric field is terminated by a space or a NUL, so a size of 12 digits
-is invalid, as it does not leave room for a terminator. Read leniently, this case is ambiguous
-because the size is either 10, octal 12, if the field is read to its end (and `a` contains
-`0123456789`), or 1, if its last byte is taken for a terminator (and `a` contains `0`).
+In POSIX, every numeric field ends with at least one space or NUL, so a 12-digit size is
+invalid because it leaves no room for a terminator. A lenient reader that parses all 12 bytes reads
+octal 12 (10) and extracts `0123456789`, whereas one that treats the 12th byte as a terminator reads
+octal 1 and extracts only `0`.
 
 Decision point: whether a numeric field without a terminator is read to its end.
 Seen in: none of the scanned tarballs.

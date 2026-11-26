@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a file <code>a</code>, whose header has the size 0 and whose pax header has one record, a <code>comment</code> with a newline in it, <code>x\n12 size=512</code>, then an empty file <code>smuggled</code>.</p>
-<p>pax records are delimited by their length, so a comment can contain newlines, and in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=All%20characters%20in%20the%20%3Cvalue%3E%20field%20shall%20be%20ignored%20by%20pax">POSIX</a> every comment is ignored: <code>a</code> has the size in its header, which is 0, and the next block is the header of <code>smuggled</code>. This case is not ambiguous. A reader that splits records on lines, and ignores their lengths, finds a second record, <code>size=512</code>, and takes the block for the data of <code>a</code>.</p>
+<p>The archive has a file <code>a</code> with size 0 in its ustar header and a single <code>comment</code> record containing <code>x\n12 size=512</code> in its pax header, followed by an empty file <code>smuggled</code>.</p>
+<p>Because pax records are delimited by their byte length, a comment may contain newlines, and <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=All%20characters%20in%20the%20%3Cvalue%3E%20field%20shall%20be%20ignored%20by%20pax">POSIX</a> requires ignoring every <code>comment</code> record. The file <code>a</code> therefore keeps its ustar size of 0, and the next block is <code>smuggled</code>&#x27;s header. A reader that splits the pax payload on newlines instead of using record lengths sees a spurious <code>size=512</code> record and consumes <code>smuggled</code>&#x27;s header as <code>a</code>&#x27;s data.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>0 bytes, sha256 <code title="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855">e3b0c442</code></td></tr>
@@ -55,14 +55,14 @@
 
 A newline in a pax `comment`, which split on lines leaves a `size` record.
 
-The archive has a file `a`, whose header has the size 0 and whose pax header has one record, a
-`comment` with a newline in it, `x\n12 size=512`, then an empty file `smuggled`.
+The archive has a file `a` with size 0 in its ustar header and a single `comment` record containing
+`x\n12 size=512` in its pax header, followed by an empty file `smuggled`.
 
-pax records are delimited by their length, so a comment can contain newlines, and in
-POSIX every comment is ignored: `a` has the size in its header, which is 0, and the next
-block is the header of `smuggled`. This case is not ambiguous. A reader that splits records on
-lines, and ignores their lengths, finds a second record, `size=512`, and takes the block for the
-data of `a`.
+Because pax records are delimited by their byte length, a comment may contain newlines, and
+POSIX requires ignoring every `comment` record. The file `a` therefore keeps its ustar
+size of 0, and the next block is `smuggled`&#x27;s header. A reader that splits the pax payload on
+newlines instead of using record lengths sees a spurious `size=512` record and consumes `smuggled`&#x27;s
+header as `a`&#x27;s data.
 
 Seen in: none of the scanned tarballs. Newlines in pax values are only in xattrs, such as Minion
 10.31, which the default policy accepts as xattrs are not extracted.
@@ -365,6 +365,6 @@ Seen in: none of the scanned tarballs. Newlines in pax values are only in xattrs
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

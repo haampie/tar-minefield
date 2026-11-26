@@ -1,17 +1,17 @@
 """A regular file `a/` with a size: a directory without data, or a file with data?
 
-The archive has a regular file, of typeflag `0`, with the name `a/` and size 512. Its data is a
-block that is the header of an empty file `smuggled`. After it is a file `b`.
+The archive has a regular file (typeflag `0`) named `a/` with size 512, whose data block is a valid
+header for an empty file `smuggled`, followed by a file `b`.
 
-In POSIX, a regular file is followed by [(size+511)/512][records-follow] blocks of data, so the
-header of `smuggled` is data. A member is extracted as a file of its [own type][file-type], but a
-name that ends in a slash [resolves only to a directory][trailing-slash], so this is an
-[error][cannot-create]. A name that ends in a slash was the [old way][slash-convention] to archive a
-directory. This case is ambiguous in practice because a file has data and a directory does not. A
-reader that goes by the typeflag extracts a file `a` of 512 bytes, and a file `b`. A reader that
-takes `a/` for a directory either skips its 512 bytes or does not read data for it. If it skips
-them, it extracts a directory `a` and a file `b`. If it does not, it extracts the empty file
-`smuggled` as well.
+In POSIX, a regular file is followed by [(size+511)/512][records-follow] data blocks, making
+`smuggled`'s header the data of `a/`. A member is extracted with its [archived file
+type][file-type], yet a pathname ending in a slash [resolves only to a directory][trailing-slash],
+resulting in an [error][cannot-create]. Before ustar added a directory typeflag, a trailing slash
+was the [historical convention][slash-convention] for directories. Because regular files carry data
+and directories do not, readers split in three ways: a reader that follows the typeflag extracts a
+512-byte regular file `a` and `b`; one that treats `a/` as a directory and skips its 512 bytes
+extracts a directory `a` and `b`; and one that treats `a/` as a directory with no data blocks also
+extracts `smuggled`.
 
 Decision point: whether a regular file whose name ends in a slash has data.
 Seen in: not measured: 7 of the scanned tarballs have a regular file whose name ends in a slash,

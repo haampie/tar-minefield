@@ -2,14 +2,13 @@ F13-pax-newline-in-path: must reject
 
 A newline in a pax `path`, which split on lines is another record.
 
-The archive has one file, `plain`, whose pax header has one record: a `path` with a newline in it,
+The archive has one file, `plain`, whose pax header has a single `path` record containing a newline:
 `good\n1 path=evil`.
 
-pax records are delimited by their length, so a value can contain a newline, and in
-POSIX the path is `good\n1 path=evil`. Split on lines instead, the extended header
-has a second record, `path=evil`, and the path is `good` or `evil`. This case is ambiguous in
-practice because a reader that discards the records as malformed extracts the header's name,
-`plain`.
+Because pax records are delimited by their byte length, a value can contain a
+newline, making the POSIX path `good\n1 path=evil`. A reader that splits the pax payload on newlines
+instead sees a second record, `path=evil`, and extracts either `good` or `evil`. A reader that
+discards the malformed pax records falls back to the ustar header's name, `plain`.
 
 Decision point: whether a pax record is delimited by its length or by a newline.
 Seen in: none of the scanned tarballs. Newlines in pax values are only in xattrs, such as Minion

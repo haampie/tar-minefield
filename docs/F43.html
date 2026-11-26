@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a global header, typeflag <code>g</code>, with one record, a <code>comment</code> of the two bytes <code>\xff\xfe</code>, which are not UTF-8, then a file <code>a</code>.</p>
-<p>In POSIX, the value of every specified keyword, <code>comment</code> among them, is in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20value%20field%20for%20all%20other%20keywords%20specified%20by%20POSIX.1%2D2024%20shall%20be%20encoded%20using%20UTF%2D8">UTF-8</a>, and every <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=All%20characters%20in%20the%20%3Cvalue%3E%20field%20shall%20be%20ignored%20by%20pax">comment</a> is ignored. The value can be seen either as bound by the rule for UTF-8, which makes the archive invalid, or as never read, as the comment is ignored. This case is ambiguous because the archive is either invalid or has the file <code>a</code>.</p>
+<p>The archive has a global header (typeflag <code>g</code>) with a single <code>comment</code> record containing the two non-UTF-8 bytes <code>\xff\xfe</code>, followed by a file <code>a</code>.</p>
+<p>In POSIX, every standard keyword value, including <code>comment</code>, is encoded in <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20value%20field%20for%20all%20other%20keywords%20specified%20by%20POSIX.1%2D2024%20shall%20be%20encoded%20using%20UTF%2D8">UTF-8</a>, yet every <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=All%20characters%20in%20the%20%3Cvalue%3E%20field%20shall%20be%20ignored%20by%20pax">comment</a> is ignored. A reader that validates UTF-8 on all standard records before ignoring comments rejects the archive, whereas one that skips <code>comment</code> records without decoding them extracts <code>a</code>.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>a</code></td><td>file</td><td>2 bytes, sha256 <code title="87428fc522803d31065e7bce3cf03fe475096631e5e07bbd7a0fde60c4cf25c7">87428fc5</code></td></tr></table></div>
@@ -55,13 +55,13 @@
 
 A global pax `comment` that is not UTF-8.
 
-The archive has a global header, typeflag `g`, with one record, a `comment` of the two bytes
-`\xff\xfe`, which are not UTF-8, then a file `a`.
+The archive has a global header (typeflag `g`) with a single `comment` record containing the two
+non-UTF-8 bytes `\xff\xfe`, followed by a file `a`.
 
-In POSIX, the value of every specified keyword, `comment` among them, is in UTF-8,
-and every comment is ignored. The value can be seen either as bound by the rule for
-UTF-8, which makes the archive invalid, or as never read, as the comment is ignored. This case is
-ambiguous because the archive is either invalid or has the file `a`.
+In POSIX, every standard keyword value, including `comment`, is encoded in UTF-8,
+yet every comment is ignored. A reader that validates UTF-8 on all standard records
+before ignoring comments rejects the archive, whereas one that skips `comment` records without
+decoding them extracts `a`.
 
 Decision point: whether a comment is decoded before it is ignored.
 Seen in: none of the scanned tarballs.
@@ -354,6 +354,6 @@ See also: F42, the same comment in an extended header.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

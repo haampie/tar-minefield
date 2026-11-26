@@ -2,17 +2,17 @@ F10-extended-pax-size-before-gnu-long: must reject
 
 A pax `size` followed by a GNU long name: which of them does the size apply to?
 
-The archive has a pax header with `size=512`, then a GNU long name header with the name
-`long-name`, then the member, whose header has the name `short-name` and the size 0, then an empty
-file `smuggled`.
+The archive has a pax header with `size=512`, a GNU long name header for `long-name`, a file header
+named `short-name` with size 0, and finally an empty file `smuggled`.
 
-GNU's format does not say how the two extensions combine, and POSIX does not define
-GNU long names: in POSIX, the long name header is a file of an unknown type, so the pax size applies
-to it. This case is ambiguous because the size applies either to the long name header, and
-`smuggled` is a member of its own, or to the member, whose data then takes in the header of
-`smuggled`, or to both, so that the member has that data and `smuggled` is a member as well. A
-reader that does not know GNU long names extracts the member as `short-name`. This is the bug class
-of GHSA-3pv8-6f4r-ffg2 (tar-rs) and CVE-2026-53655 (node-tar).
+GNU's format does not specify how pax headers and GNU long names interact, and POSIX
+does not define GNU long names: to a pure POSIX reader, the typeflag `L` header is a file of unknown
+type, so the pax `size` applies to it. A reader that applies `size=512` to the long name header
+leaves `smuggled` as a separate member. A reader that applies `size=512` to the file member consumes
+`smuggled`'s header as the file's data, while one that applies `size=512` to both gives the file
+that data and still extracts `smuggled`. A reader that does not support GNU long names extracts the
+file as `short-name`. This is the bug class of GHSA-3pv8-6f4r-ffg2 (tar-rs) and CVE-2026-53655
+(node-tar).
 
 Decision point: which header a pax size applies to, when another extended header follows.
 Seen in: none of the scanned tarballs.

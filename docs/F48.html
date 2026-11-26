@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a file whose pax header has one record, <code>+17 path=renamed</code>, followed by a newline, which is 17 bytes, and whose header has the name <code>header-name</code>.</p>
-<p>In POSIX, the <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">length</a> of a pax record is its decimal length in octets, as <code>%d</code> writes it, without a sign. Read leniently, this case is ambiguous because the record is either <code>path=renamed</code>, and the file is <code>renamed</code>, or no record, and the file is <code>header-name</code>, to a reader that ignores the record or the whole extended header.</p>
+<p>The archive has a file with a single 17-byte pax record, <code>+17 path=renamed</code> followed by a newline, and <code>header-name</code> in its ustar name field.</p>
+<p>In POSIX, a pax record&#x27;s <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">length</a> is formatted as an unsigned decimal integer (<code>%d</code>) without a leading sign. A lenient reader that accepts <code>+17</code> as 17 applies <code>path=renamed</code>, whereas one that ignores the malformed record or discards the pax header falls back to <code>header-name</code>.</p>
 <p><strong>Decision point:</strong> whether the length of a pax record may have a sign.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,13 +52,12 @@
 
 A pax record whose length has a plus sign, `+17`.
 
-The archive has a file whose pax header has one record, `+17 path=renamed`, followed by a newline,
-which is 17 bytes, and whose header has the name `header-name`.
+The archive has a file with a single 17-byte pax record, `+17 path=renamed` followed by a newline,
+and `header-name` in its ustar name field.
 
-In POSIX, the length of a pax record is its decimal length in octets, as `%d`
-writes it, without a sign. Read leniently, this case is ambiguous because the record is either
-`path=renamed`, and the file is `renamed`, or no record, and the file is `header-name`, to a reader
-that ignores the record or the whole extended header.
+In POSIX, a pax record&#x27;s length is formatted as an unsigned decimal integer (`%d`)
+without a leading sign. A lenient reader that accepts `+17` as 17 applies `path=renamed`, whereas
+one that ignores the malformed record or discards the pax header falls back to `header-name`.
 
 Decision point: whether the length of a pax record may have a sign.
 Seen in: none of the scanned tarballs.
@@ -351,6 +350,6 @@ See also: F23, a pax size with a plus sign, and F36, a record length that is one
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

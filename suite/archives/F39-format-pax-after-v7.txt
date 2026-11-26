@@ -2,17 +2,14 @@ F39-format-pax-after-v7: must reject
 
 A v7 header first, then a member with a pax header: is the `x` header a header, or a file?
 
-The archive has a file `a` whose header is in the v7 format (without magic), then a pax header with
-`path=from-pax`, then a file whose header has the name `from-header`. The pax header and the header
-after it have the POSIX magic.
+The archive has a file `a` with a v7 header (no magic), followed by a pax header with
+`path=from-pax` and a file header named `from-header`, both carrying the POSIX magic.
 
-In POSIX, the format of an archive is detected on input, but it is not specified from
-which headers. A reader that decides it once, from the first header, parses it as a v7 archive, in
-which typeflag `x` is not defined, so the pax header is a regular file, `PaxHeader`, as it is to a
-reader of ustar before pax, and the member is `from-header`. A reader that looks
-at the magic of every header applies the pax header, and extracts the member as `from-pax`. This
-case is ambiguous because the tree has either `a`, `PaxHeader` and `from-header`, or `a` and
-`from-pax`, depending on how the format is detected.
+POSIX requires detecting the archive format on input, without specifying whether
+detection happens once or per header. A reader that locks in the v7 format from the first header
+does not recognize typeflag `x` and extracts the pax header as a regular file `PaxHeader` (just like
+a pre-pax ustar reader), followed by `from-header`. A reader that inspects each
+header's magic applies the pax header and extracts `a` and `from-pax`.
 
 Decision point: whether the format of an archive is decided once, by its first header, or for every
 header.
