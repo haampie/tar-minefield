@@ -229,6 +229,21 @@ def number(field, name, features):
     return (skip if skip is not None else 0), shape
 
 
+def checksum_features(shape):
+    """What the shape of a checksum field, as pattern() gives it, says of how it is written. Not
+    that it has no terminator: many tarballs have a checksum of eight digits."""
+    found = []
+    if shape.startswith("s") and "d" in shape:
+        found.append("number.chksum.leading-space")
+    if shape.startswith("n") and "d" in shape:
+        found.append("number.chksum.leading-nul")
+    if re.search(r"d[sn]+d", shape):
+        found.append("number.chksum.gap-in-digits")
+    if "9" in shape or "x" in shape:
+        found.append("number.chksum.invalid-character")
+    return found
+
+
 def cstring(field, name, features):
     """A NUL-terminated string field."""
     s, nul, rest = field.partition(b"\0")
@@ -274,6 +289,8 @@ def pax_records(data, features, kind):
             features.add(f"{kind}.key-whitespace")
         if not key.strip():
             features.add(f"{kind}.empty-key")
+        if b"\0" in key:
+            features.add(f"{kind}.nul-in-key")
         if b"\n" in value:
             features.add(f"{kind}.newline-in-value.{key_family(key)}")
         if b"\0" in value:
@@ -287,6 +304,8 @@ def pax_records(data, features, kind):
                 features.add(f"{kind}.value-not-utf8.{key_family(key)}")
         if key in keys:
             features.add(f"{kind}.repeated-key")
+            if key == b"size":
+                features.add(f"{kind}.size-repeated")
         keys.add(key)
         records.append((key, value))
         pos = end
@@ -299,6 +318,12 @@ def key_family(key):
         if key.startswith(prefix):
             return prefix + "*"
     return key
+
+
+def acl_key(key):
+    """Whether a pax key is an ACL: star's keys, or the xattr that Linux keeps a POSIX ACL in."""
+    return key.startswith(b"SCHILY.acl.") or bool(
+        re.fullmatch(rb"(SCHILY|LIBARCHIVE)\.xattr\.system\.posix_acl_(access|default)", key))
 
 
 def decode(name):
@@ -340,6 +365,9 @@ def name_features(name, kind, features):
         features.add("name.drive-letter")
     if name.endswith(b"/") and kind != "dir":
         features.add(f"name.trailing-slash-on-{kind}")
+    # a name that ends in `/.` resolves to a directory only, as one that ends in a slash does
+    if parts[-1] == b"." and normalize(name) and kind != "dir":
+        features.add(f"name.trailing-dot-on-{kind}")
     if kind == "dir" and not name.endswith(b"/"):
         features.add("name.dir-without-trailing-slash")
     if any(b < 32 or b == 127 for b in name):
@@ -388,6 +416,8 @@ KINDS = {
     b"6": "fifo",
 }
 EXTENDED = (b"x", b"X", b"g", b"L", b"K")
+# Kinds that the tree of METHOD.md does not have
+SPECIAL = ("chardev", "blockdev", "fifo")
 
 
 class Features:
@@ -415,6 +445,7 @@ class Scanner:
         self.mtimes = []
         self.pending = []  # extended headers for the next member, as (type, data, name)
         self.paths = {}  # normalized path -> kind
+        self.modes = {}  # normalized path of a file -> its mode
         self.raw_names = set()
         self.implied = set()
         self.nfc = {}
@@ -482,8 +513,8 @@ class Scanner:
         features.name = block[:100].split(b"\0", 1)[0]
         checksum_field = block[148:156]
         self.fingerprint["checksum"][pattern(checksum_field)] += 1
-        if pattern(checksum_field).startswith("s") and "d" in pattern(checksum_field):
-            features.add("number.chksum.leading-space")
+        for feature in checksum_features(pattern(checksum_field)):
+            features.add(feature)
         stored = octal_skip(checksum_field)
         unsigned = sum(block) - sum(checksum_field) + 8 * 32
         signed = unsigned - 256 * (BLOCK - len(block.translate(None, HIGH_BYTES)))
@@ -518,6 +549,7 @@ class Scanner:
             features.add("format.pax-after-v7")
         size, size_shape = number(block[124:136], "size", features)
         self.fingerprint["size"][size_shape] += 1
+        mode = 0
         for field, start, end in (
             ("mode", 100, 108),
             ("uid", 108, 116),
@@ -528,6 +560,8 @@ class Scanner:
             self.fingerprint[field][shape] += 1
             if field == "mtime" and type not in EXTENDED:
                 self.mtimes.append(value)
+            if field == "mode":
+                mode = value
         if fmt != "v7" and type not in EXTENDED:
             for field, start in (("devmajor", 329), ("devminor", 337)):
                 self.fingerprint[field][pattern(block[start : start + 8])] += 1
@@ -537,7 +571,7 @@ class Scanner:
             raise Error("negative size")
 
         if type in EXTENDED:
-            self._extended(type, block, size)
+            self._extended(type, block, fmt, size)
             return
 
         if type == b"S" and fmt == "gnu":
@@ -548,11 +582,16 @@ class Scanner:
                 if len(ext) < BLOCK:
                     raise Error("truncated in a sparse header")
                 extension = ext[504]
-        self._member(type, block, fmt, size)
+        self._member(type, block, fmt, size, mode)
 
-    def _extended(self, type, block, size):
+    def _extended(self, type, block, fmt, size):
         features = self.features
         name = block[:100].split(b"\0", 1)[0]
+        # the name of the header itself, which a reader that does not know its typeflag extracts
+        # it under, as a file
+        prefix = block[345:500].split(b"\0", 1)[0] if fmt == "posix" else b""
+        if b".." in (prefix + b"/" + name).split(b"/"):
+            features.add("extended.name-dotdot", name)
         if size > MAX_EXTENDED:
             raise Error(f"extended header of {size} bytes")
         data = self.stream.read(size)
@@ -584,7 +623,7 @@ class Scanner:
         else:
             self.pending.append((type.decode(), data, name))
 
-    def _member(self, type, block, fmt, size):
+    def _member(self, type, block, fmt, size, mode):
         features = self.features
         pending, self.pending = self.pending, []
         kind = KINDS.get(type)
@@ -595,6 +634,8 @@ class Scanner:
             features.add("type.contiguous")
         elif type == b"\0":
             features.add("type.nul")
+        elif kind in SPECIAL:
+            features.add(f"type.{kind}")
 
         # The name, from every source
         name, nul, _ = block[:100].partition(b"\0")
@@ -695,6 +736,10 @@ class Scanner:
                 features.add("pax.gnu-sparse")
             if key in (b"SCHILY.filetype", b"SCHILY.realsize", b"SUN.holesdata"):
                 features.add(f"pax.{decode(key)}")
+            if key == b"mode":
+                features.add("pax.mode")
+            if acl_key(key):
+                features.add("pax.acl")
             if key.startswith(b"LIBARCHIVE.") and not key.startswith(b"LIBARCHIVE.xattr."):
                 features.add(f"pax.{decode(key)}")
         if b"path" in pax:
@@ -724,10 +769,13 @@ class Scanner:
             features.add(f"size.on-{kind}")
         if kind == "symlink":
             self._symlink(name, linkname)
-        self._tree(name, kind, linkname)
+        self._tree(name, kind, linkname, mode)
         if kind == "file" or size:
-            if self.stream.skip(size + (-size % BLOCK)) < size:
+            skipped = self.stream.skip(size + (-size % BLOCK))
+            if skipped < size:
                 raise Error("truncated in member data")
+            if skipped < size + (-size % BLOCK):
+                features.add("end.unpadded")
 
     def _symlink(self, name, target):
         features = self.features
@@ -746,7 +794,7 @@ class Scanner:
                 elif part not in (b"", b"."):
                     depth += 1
 
-    def _tree(self, name, kind, linkname):
+    def _tree(self, name, kind, linkname, mode):
         features = self.features
         key = normalize(name)
         self.raw_names.add(name)
@@ -766,6 +814,9 @@ class Scanner:
             features.add(f"tree.duplicate.{self.paths[key]}-{kind}")
         elif kind == "dir" and key in self.implied:
             features.add("tree.dir-after-contents")
+        elif key in self.implied:
+            # a directory that is not a member, but that an earlier member is in
+            features.add(f"tree.duplicate.dir-{kind}")
         if kind == "hardlink":
             # normalize() drops the leading slash, which makes it the member of that name
             if linkname.startswith(b"/"):
@@ -779,6 +830,12 @@ class Scanner:
                     features.add(f"hardlink.to-{target_kind}")
                 if linkname not in self.raw_names:
                     features.add("hardlink.target-spelled-differently")
+                # a path that ends in a slash, or in `/.`, resolves to a directory only
+                if target_kind != "dir" and linkname.split(b"/")[-1] in (b"", b"."):
+                    features.add("hardlink.target-trailing-slash")
+                # one file with two modes, of which only one can be executable
+                if target_kind == "file" and (mode ^ self.modes.get(target, mode)) & 0o100:
+                    features.add("hardlink.mode-differs")
             else:
                 self.unresolved.append((name, target))
         try:
@@ -797,6 +854,8 @@ class Scanner:
             self.nfc.setdefault(nfc, key)
             self.folded.setdefault(folded, key)
         self.paths[key] = kind
+        if kind == "file":
+            self.modes[key] = mode
 
     def _finish(self):
         if self.pending:

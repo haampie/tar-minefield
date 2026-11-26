@@ -1,0 +1,40 @@
+K13-number-mode-base256: must reject
+
+A file mode encoded in base-256.
+
+The archive has a file `a` whose mode field encodes octal 755 in base-256: a leading `0x80` byte
+followed by a 7-byte big-endian integer.
+
+GNU tar uses base-256 for numbers that overflow their octal field, such as large file sizes or user
+IDs. Because a 12-bit mode always fits in four octal digits, archivers do not need base-256
+for the mode field, and some readers support base-256 only for sizes or IDs. A reader that accepts
+base-256 in every numeric field extracts `a` as executable. A reader that expects octal digits in
+the mode field does not find any and extracts `a` as non-executable, while others report an error.
+
+Decision point: whether base-256 encoding is accepted in the mode field.
+Seen in: none of the scanned tarballs.
+See also: F56, a size in base-256, and F80, a uid in base-256.
+
+0x000000  header: regular file, mode 755 in base-256
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "\x80\0\0\0\0\0\x01\xed"  493: base-256
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007360\0 "  3824: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data
+          2 bytes, then 510 NUL to the end of the block
+          "a\n"
+0x000400  2 zero blocks: the end-of-archive marker
+0x000800  end of file

@@ -1,0 +1,65 @@
+F78-pax-nul-in-key: must reject
+
+A NUL byte inside a pax key, before a `path` record.
+
+The archive has a file with two pax records. The first has the key `pa`, a NUL and `th`, and the
+value `x`; the second is `path=renamed`. The file's ustar header gives the name `header-name`.
+
+Because pax records are framed by their byte length, a length-based parser treats
+the first key as unknown and applies the following `path=renamed` record. A reader that stops
+parsing the pax payload at the first NUL, or discards any pax header containing a NUL, loses
+`path=renamed` and extracts `header-name`. Other readers report an error. Binary xattr values
+contain NUL bytes in some published tarballs, and a reader must still apply the records that follow
+them, but a NUL in a key has no meaning, so a strict parser rejects it.
+
+Decision point: whether a NUL in a pax key truncates or invalidates the pax header.
+Seen in: not measured, as the scanner records only the 8 most common pax keys per tarball; none of
+those contains a NUL, and 9 scanned tarballs have additional keys.
+See also: F59, a NUL in an xattr value, which the default policy accepts, and N19, a NUL in a pax
+`path`.
+
+0x000000  header: pax extended header, a key with a NUL, then a path
+          name     [  0,100)  "PaxHeader" + 91 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000033" + NUL  27
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011075\0 "  4669: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "x"  pax extended header
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: pax records
+          27 bytes of pax records, then 485 NUL
+          "11 pa\0th=x\n"
+          "16 path=renamed\n"
+0x000400  header: regular file
+          name     [  0,100)  "header-name" + 89 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000014" + NUL  12
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011271\0 "  4793: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          12 bytes, then 500 NUL to the end of the block
+          "which name?\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

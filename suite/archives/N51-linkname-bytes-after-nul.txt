@@ -1,0 +1,38 @@
+N51-linkname-bytes-after-nul: must reject
+
+Trailing bytes after the NUL terminator in a symlink target.
+
+The archive has a symlink `l` whose linkname field contains `safe`, a NUL byte, and `../x`.
+
+Under POSIX, the linkname field is NUL-terminated unless it fills all 100 bytes, so the
+link target is `safe`. A reader that copies the whole field instead of stopping at the first NUL
+sees `safe\0../x` in languages with length-delimited strings, whereas C system calls stop at the
+NUL. Creating the symlink then fails, or the string that is checked is not the one that is used.
+
+Because normal archivers zero-fill the remainder of the field and trailing bytes after the NUL have
+no valid purpose, a strict parser rejects the archive.
+
+Decision point: whether a linkname ends at its first NUL.
+Seen in: none of the scanned tarballs.
+See also: N14, trailing bytes after the NUL in a name.
+
+0x000000  header: symlink, bytes after the NUL in linkname
+          name     [  0,100)  "l" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000000" + NUL  0
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "010615\0 "  4493: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "2"  symlink
+          linkname [157,257)  "safe\0../x" + 91 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  2 zero blocks: the end-of-archive marker
+0x000600  end of file

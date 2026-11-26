@@ -1,0 +1,15 @@
+{
+ "id": "N55",
+ "verdict": "accept",
+ "description": "A symlink with both a GNU long link target (`K`) and a GNU long name (`L`).",
+ "features": [
+  "linkname.no-nul"
+ ],
+ "tree": [
+  {
+   "path": "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll",
+   "kind": "symlink",
+   "target": "tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt"
+  }
+ ]
+}

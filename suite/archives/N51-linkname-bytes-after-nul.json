@@ -1,0 +1,8 @@
+{
+ "id": "N51",
+ "verdict": "reject",
+ "description": "Trailing bytes after the NUL terminator in a symlink target.",
+ "features": [
+  "linkname.bytes-after-nul"
+ ]
+}

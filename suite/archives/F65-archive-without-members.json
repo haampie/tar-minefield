@@ -1,0 +1,7 @@
+{
+ "id": "F65",
+ "verdict": "accept",
+ "description": "An archive with no members, containing only the two trailing zero blocks.",
+ "features": [],
+ "tree": []
+}

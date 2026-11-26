@@ -1,0 +1,8 @@
+{
+ "id": "K12",
+ "verdict": "reject",
+ "description": "A pax ACL record that grants owner execute permission on a mode-644 file.",
+ "features": [
+  "pax.acl"
+ ]
+}

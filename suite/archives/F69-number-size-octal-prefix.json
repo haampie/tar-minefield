@@ -1,0 +1,8 @@
+{
+ "id": "F69",
+ "verdict": "reject",
+ "description": "A size field starting with the octal prefix `0o`.",
+ "features": [
+  "number.size.invalid-character"
+ ]
+}

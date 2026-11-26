@@ -1,0 +1,61 @@
+F62-pax-schily-realsize: must reject
+
+A `SCHILY.realsize` pax record on a non-sparse file.
+
+The archive has a 5-byte file `a` containing `12345`, preceded by a pax header with
+`SCHILY.realsize=2`.
+
+In star's sparse format, `SCHILY.realsize` holds the file's full size including holes, while the
+header's size field gives the stored data size. Under POSIX, this key is a
+vendor extension that other readers need not recognize. Here `a` is a regular file with no hole map.
+A reader that ignores `SCHILY.realsize` extracts all 5 bytes, whereas one that applies it truncates
+the file to its first 2 bytes, `12`.
+
+Decision point: whether `SCHILY.realsize` applies to a non-sparse file.
+Seen in: none of the scanned tarballs.
+See also: N36, GNU sparse pax keys.
+
+0x000000  header: pax extended header, SCHILY.realsize=2
+          name     [  0,100)  "PaxHeader" + 91 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000025" + NUL  21
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "011076\0 "  4670: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "x"  pax extended header
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: pax records
+          21 bytes of pax records, then 491 NUL
+          "21 SCHILY.realsize=2\n"
+0x000400  header: regular file
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000005" + NUL  5
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007343\0 "  3811: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          5 bytes, then 507 NUL to the end of the block
+          "12345"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

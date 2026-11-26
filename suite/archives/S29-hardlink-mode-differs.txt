@@ -1,0 +1,58 @@
+S29-hardlink-mode-differs: must reject
+
+A hardlink with mode 755 to a file with mode 644.
+
+The archive has a file `a` with mode 644, followed by a hardlink `h` to `a` with mode 755.
+
+A hardlink is a second directory entry for an existing file, and all hardlinks to one
+inode share a single mode. Archivers normally record the same mode in both headers, whereas here the
+modes disagree. A reader that ignores the hardlink's mode leaves the shared file at mode 644
+(non-executable under both names). A reader that applies the hardlink's mode changes the shared file
+to 755 (executable under both names). Finally, a reader that copies the target instead of
+hardlinking it leaves `a` non-executable and makes `h` executable.
+
+Decision point: whether a hardlink header's mode updates the linked file's mode.
+Seen in: not measured, as the scanner does not record modes; 233 scanned tarballs contain hardlinks.
+See also: S17, a file, a hardlink to it, then the file again, and K09, an executable file.
+
+0x000000  header: regular file
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007340\0 "  3808: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data
+          2 bytes, then 510 NUL to the end of the block
+          "a\n"
+0x000400  header: hardlink, mode 755 (target a has 644)
+          name     [  0,100)  "h" + 99 NUL
+          mode     [100,108)  "0000755" + NUL  755 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000000" + NUL  0
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007512\0 "  3914: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "1"  hardlink
+          linkname [157,257)  "a" + 99 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  2 zero blocks: the end-of-archive marker
+0x000a00  end of file

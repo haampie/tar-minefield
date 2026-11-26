@@ -1,0 +1,22 @@
+{
+ "id": "K09",
+ "verdict": "accept",
+ "description": "An executable file.",
+ "features": [],
+ "tree": [
+  {
+   "path": "r",
+   "kind": "file",
+   "executable": false,
+   "size": 2,
+   "sha256": "8e54b0ca18020275e4aef1ca0eb5e197e066c065c1864817652a8a39c55402cd"
+  },
+  {
+   "path": "x",
+   "kind": "file",
+   "executable": true,
+   "size": 10,
+   "sha256": "a8076d3d28d21e02012b20eaf7dbf75409a6277134439025f282e368e3305abf"
+  }
+ ]
+}

@@ -1,0 +1,9 @@
+{
+ "id": "F66",
+ "verdict": "tolerate",
+ "description": "A zero-byte file: an empty archive, or not an archive?",
+ "features": [
+  "archive.empty"
+ ],
+ "tree": []
+}

@@ -1,0 +1,63 @@
+S20-tree-file-at-implied-dir: must reject
+
+A file inside an implicit directory, followed by a regular file at that directory's path.
+
+The archive has a file `a/f`, followed by a file `a`, with no directory member for `a`.
+
+Extracting `a/f` requires creating the parent directory `a`. The next member is a
+regular file at the same path `a`. In POSIX, each member is extracted with its archived
+file type and existing files may be overwritten, but POSIX does not say whether a
+regular file can replace a non-empty directory. A reader that removes the directory to extract the
+file leaves only the file `a`, losing `a/f`. A reader that keeps the directory and ignores the
+conflicting file leaves `a/f`, while other readers report an error.
+
+Decision point: whether a regular file replaces a non-empty directory.
+Seen in: not measured, as earlier scanner versions only compared explicit member names, and `a` is
+an implicit directory.
+See also: S08, a file followed by a directory of the same name, and S12, a member under a regular
+file.
+
+0x000000  header: regular file, creates parent directory a
+          name     [  0,100)  "a/f" + 97 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007565\0 "  3957: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data
+          2 bytes, then 510 NUL to the end of the block
+          "f\n"
+0x000400  header: regular file, regular file at directory path a
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007340\0 "  3808: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000600  data
+          2 bytes, then 510 NUL to the end of the block
+          "a\n"
+0x000800  2 zero blocks: the end-of-archive marker
+0x000c00  end of file

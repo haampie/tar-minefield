@@ -1,0 +1,8 @@
+{
+ "id": "K14",
+ "verdict": "reject",
+ "description": "A regular file named `.`: skipped, renamed, or an error?",
+ "features": [
+  "name.dot-on-file"
+ ]
+}

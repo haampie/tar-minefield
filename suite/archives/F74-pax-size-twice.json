@@ -1,0 +1,9 @@
+{
+ "id": "F74",
+ "verdict": "reject",
+ "description": "Two `size` records in one pax header: first wins, or last wins?",
+ "features": [
+  "pax.size-repeated",
+  "pax.repeated-key"
+ ]
+}

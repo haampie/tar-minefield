@@ -1,0 +1,8 @@
+{
+ "id": "F67",
+ "verdict": "reject",
+ "description": "A trailing pax extended header with no member after it.",
+ "features": [
+  "extended.without-member"
+ ]
+}

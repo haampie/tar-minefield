@@ -1,0 +1,8 @@
+{
+ "id": "K15",
+ "verdict": "reject",
+ "description": "A regular file named `a/.`: a file `a`, or a directory?",
+ "features": [
+  "name.trailing-dot-on-file"
+ ]
+}

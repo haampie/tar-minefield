@@ -1,0 +1,41 @@
+F63-end-unpadded: must reject
+
+An archive that ends right after a file's data, without block padding.
+
+The archive has a 5-byte file `a` and ends immediately after those 5 bytes, with no padding to 512
+bytes and no zero blocks.
+
+A POSIX archive consists of 512-byte blocks, and file data occupies full
+blocks. Even though all 5 bytes of `a` are present, the final block is incomplete.
+A reader that reads only the file's byte count extracts `a` with its 5 bytes, sometimes without
+reporting an error. A reader that requires full 512-byte blocks fails on the short read, leaving `a`
+empty or unextracted. Most readers report an error.
+
+Decision point: whether a file in an unpadded final block is extracted.
+Seen in: not measured, as earlier scanner versions grouped this with archives missing the
+end-of-archive marker; 22 scanned tarballs lack that marker and may end this way.
+See also: F04, an archive that ends after a complete member, which is tolerated, and F08, one that
+ends inside file data.
+
+0x000000  header: regular file
+          name     [  0,100)  "a" + 99 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000005" + NUL  5
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007343\0 "  3811: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data: 5 bytes, which are not padded to a block
+          5 bytes, and then the file ends
+          "12345"
+0x000205  end of file

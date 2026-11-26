@@ -34,7 +34,10 @@ TYPES = {
     b"\0": "regular file (pre-POSIX)",
     b"1": "hardlink",
     b"2": "symlink",
+    b"3": "character device",
+    b"4": "block device",
     b"5": "directory",
+    b"6": "FIFO",
     b"x": "pax extended header",
     b"g": "pax global header",
     b"L": "GNU long name",
@@ -114,7 +117,8 @@ class Archive:
         """A ustar header. Fields not given are the usual ones: mode 644 for files and 755 for
         directories, uid and gid 0, mtime 0, empty names, and the POSIX magic `ustar\\0` with
         version `00`. A keyword with bytes for a field writes those bytes as they are, padded
-        with NULs; the checksum is computed, unless it is given too."""
+        with NULs; the checksum is computed, unless it is given too, as bytes or as a function
+        that writes the field from the unsigned sum."""
         values = {
             "name": name,
             "mode": 0o755 if typeflag == b"5" else 0o644,
@@ -167,6 +171,11 @@ class Archive:
             total = sum(block)
             chksum = b"%6o\0 " % total
             meaning = f"{total}: the unsigned sum, padded with spaces, as Perl's Archive::Tar writes it"
+        elif callable(raw.get("chksum")):
+            block[148:156] = b" " * 8
+            total = sum(block)
+            chksum = raw["chksum"](total)
+            meaning = f"{total}: the unsigned sum, as the case writes it"
         elif "chksum" in raw:
             chksum, meaning = raw["chksum"], "given"
         else:
@@ -231,6 +240,15 @@ class Archive:
         padded = data + bytes(-len(data) % BLOCK)
         pad = len(padded) - len(data)
         self._add(padded, title, [f"{len(data)} bytes" + (f", then {pad} NUL" if pad else ""), show(data)])
+        return self
+
+    def cut(self, data, title):
+        """Bytes as they are, without padding: where the archive ends inside a block."""
+        lines = [f"{len(data)} bytes, and then the file ends"]
+        if len(data) <= 100:
+            lines.append(show(data))
+        self.blocks.append((self.size, data, title, lines))
+        self.size += len(data)
         return self
 
     def zeros(self, count=1, note=""):
@@ -360,7 +378,7 @@ def block_map(archive, title):
                 if len(data) > BLOCK:
                     hover = f"bytes {k} to {k + BLOCK} of {len(data)}: {hover}"
                 out.append(f'<g><title>{esc(hover)}</title><rect class="blocks-field" x="{left}" '
-                           f'y="{y}" width="{BLOCK * scale:g}" height="{h}"/>'
+                           f'y="{y}" width="{len(block) * scale:g}" height="{h}"/>'
                            f"{runs(block, left, y, scale, h)}</g>")
                 y += h + 4
                 if k == 0:

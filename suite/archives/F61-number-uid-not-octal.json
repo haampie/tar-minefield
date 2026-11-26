@@ -1,0 +1,8 @@
+{
+ "id": "F61",
+ "verdict": "reject",
+ "description": "A uid with the digit 8, in a header after the first member.",
+ "features": [
+  "number.uid.invalid-character"
+ ]
+}

@@ -1,0 +1,17 @@
+{
+ "id": "K16",
+ "verdict": "tolerate",
+ "description": "A regular file with a `linkpath` record in its pax header.",
+ "features": [
+  "extended.linkpath-on-file"
+ ],
+ "tree": [
+  {
+   "path": "a",
+   "kind": "file",
+   "executable": false,
+   "size": 19,
+   "sha256": "bc34584905a5181d95c6e40e9230db4c9e2d85e6e73d3335837078cd12168cb9"
+  }
+ ]
+}

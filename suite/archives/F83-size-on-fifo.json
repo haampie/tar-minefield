@@ -1,0 +1,8 @@
+{
+ "id": "F83",
+ "verdict": "reject",
+ "description": "A non-zero size in a FIFO header, covering the next member's header.",
+ "features": [
+  "size.on-fifo"
+ ]
+}

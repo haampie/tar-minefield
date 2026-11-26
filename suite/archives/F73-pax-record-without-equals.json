@@ -1,0 +1,8 @@
+{
+ "id": "F73",
+ "verdict": "reject",
+ "description": "A pax record without `=`, before a `path` record.",
+ "features": [
+  "pax.no-equals"
+ ]
+}

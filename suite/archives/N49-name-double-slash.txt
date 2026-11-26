@@ -1,0 +1,39 @@
+N49-name-double-slash: tolerated: a strict parser may reject it; if it accepts it, it must extract its tree, and the default policy accepts it
+
+A name with two consecutive slashes: `a//b`.
+
+The archive has one file, `a//b`.
+
+POSIX creates extracted files by pathname resolution, which treats multiple
+consecutive slashes as a single slash, resolving `a//b` to `a/b`. A reader that splits
+paths on every slash sees an empty path component between the slashes and fails to create it, while
+one that compares member names as raw strings fails to recognize `a//b` and `a/b` as the same path.
+The default policy tolerates `a//b`, and treats `a//b` and `a/b` in the same archive as duplicates.
+
+Decision point: whether consecutive slashes in a member name are collapsed.
+Seen in: 2 of the scanned tarballs: shapemapper 2.1.5, and a binary distribution of GHC 9.0.2.
+See also: N06, the name `./a`, and N50, a name with a `.` component.
+
+0x000000  header: regular file
+          name     [  0,100)  "a//b" + 96 NUL
+          mode     [100,108)  "0000644" + NUL  644 (octal)
+          uid      [108,116)  "0000000" + NUL  0
+          gid      [116,124)  "0000000" + NUL  0
+          size     [124,136)  "00000000002" + NUL  2
+          mtime    [136,148)  "00000000000" + NUL  0
+          chksum   [148,156)  "007640\0 "  4000: the unsigned sum of the header, this field as spaces
+          typeflag [156,157)  "0"  regular file
+          linkname [157,257)  100 NUL
+          magic    [257,263)  "ustar" + NUL
+          version  [263,265)  "00"
+          uname    [265,297)  32 NUL
+          gname    [297,329)  32 NUL
+          devmajor [329,337)  "0000000" + NUL  0
+          devminor [337,345)  "0000000" + NUL  0
+          prefix   [345,500)  155 NUL
+          pad      [500,512)  12 NUL
+0x000200  data
+          2 bytes, then 510 NUL to the end of the block
+          "b\n"
+0x000400  2 zero blocks: the end-of-archive marker
+0x000800  end of file
