@@ -1,15 +1,15 @@
-"""A directory without write permission, before the file in it.
+"""A read-only directory member followed by a file inside it.
 
-The archive has a directory `d/` with the mode 555, then a file `d/f`.
+The archive has a directory `d/` with mode 555, followed by a file `d/f`.
 
-This is how `tar cf x.tar d` writes a directory `d` that is read-only: the directory first, with its
-mode, and then its contents. A reader that gives the directory its mode when it creates it cannot
-create `d/f` in it, except as root. It is in the [rationale of POSIX][dir-permissions] that a reader
-can create a directory with enough permissions to create files in it, and set its mode after all
-files are extracted. The mode of a directory is not part of the tree, which is `d` and `d/f`.
+Archiving a read-only directory with `tar cf x.tar d` writes the directory header (with mode 555)
+before the files inside it. An unprivileged reader that applies mode 555 immediately upon creating
+`d` cannot create `d/f`. As the [POSIX rationale][dir-permissions] notes, an extractor should create
+directories with write permission and defer applying their archived modes until extraction finishes.
+Directory modes are not part of the expected tree, which consists of `d` and `d/f`.
 
-Seen in: not measured, as the scans do not record modes.
-See also: S01, a directory after its contents.
+Seen in: not measured, as the scanner does not record directory modes.
+See also: S01, a directory member after its contents.
 """
 F = lambda path, contents: {"path": path, "kind": "file", "contents": contents, "executable": False}
 D = lambda path: {"path": path, "kind": "directory"}

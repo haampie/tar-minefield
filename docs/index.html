@@ -95,7 +95,7 @@ published there.</p>
 <tr><td><a href="N60.html"><code>N60</code></a></td><td>pax-global-name-directory</td><td>A global pax header whose ustar name contains a directory component.</td><td class=n>not measured</td></tr>
 <tr><td><a href="S01.html"><code>S01</code></a></td><td>tree-dir-after-contents</td><td>A directory after its contents.</td><td class=n>1.22%</td></tr>
 <tr><td><a href="S02.html"><code>S02</code></a></td><td>tree-duplicate-dir</td><td>The same directory twice, as <code>tar cf x.tar d d/sub</code> writes.</td><td class=n>0.19%</td></tr>
-<tr><td><a href="S25.html"><code>S25</code></a></td><td>tree-dir-not-writable</td><td>A directory without write permission, before the file in it.</td><td class=n>not measured</td></tr></table></div>
+<tr><td><a href="S25.html"><code>S25</code></a></td><td>tree-dir-not-writable</td><td>A read-only directory member followed by a file inside it.</td><td class=n>not measured</td></tr></table></div>
 <h3 id="tolerated">Tolerated<a class="anchor" href="#tolerated" aria-label="Link to this section">¶</a></h3>
 <div class="wide"><table class="cases"><colgroup><col style="width: 14%"><col style="width: 24%"><col style="width: 48%"><col style="width: 14%"></colgroup><tr><th>identifier</th><th>name</th><th>what it is</th><th class=n>prevalence</th></tr>
 <tr><td><a href="F01.html"><code>F01</code></a></td><td>number-leading-space</td><td>Numeric fields padded with spaces rather than zeros, as old tars wrote them.</td><td class=n>0.99%</td></tr>
@@ -249,15 +249,15 @@ published there.</p>
 <tr><td><a href="S17.html"><code>S17</code></a></td><td>hardlink-then-file-again</td><td>A file, a hardlink to it, then the file again: does the link keep the first contents?</td><td class=n>0.11%</td></tr>
 <tr><td><a href="S18.html"><code>S18</code></a></td><td>hardlink-absolute</td><td>A hardlink to <code>/etc/passwd</code>, in an archive with a member <code>etc/passwd</code>.</td><td class=n>≤0.03%<a href="#unmeasured">*</a></td></tr>
 <tr><td><a href="S19.html"><code>S19</code></a></td><td>tree-through-symlink-inside</td><td>A member written through a symlink that points inside the destination.</td><td class=n>none</td></tr>
-<tr><td><a href="S20.html"><code>S20</code></a></td><td>tree-file-at-implied-dir</td><td>A file in a directory that is not a member, then a file with the name of that directory.</td><td class=n>not measured</td></tr>
-<tr><td><a href="S21.html"><code>S21</code></a></td><td>tree-duplicate-dir-file</td><td>An empty directory, then a file of the same name.</td><td class=n>not measured</td></tr>
-<tr><td><a href="S22.html"><code>S22</code></a></td><td>tree-duplicate-dir-symlink</td><td>An empty directory, then a symlink of the same name: replaced, kept, or the link inside it?</td><td class=n>not measured</td></tr>
-<tr><td><a href="S23.html"><code>S23</code></a></td><td>tree-duplicate-file-symlink</td><td>A file, then a symlink of the same name.</td><td class=n>none</td></tr>
-<tr><td><a href="S24.html"><code>S24</code></a></td><td>tree-duplicate-symlink</td><td>The same symlink twice, with different targets: the first, or the last?</td><td class=n>none</td></tr>
+<tr><td><a href="S20.html"><code>S20</code></a></td><td>tree-file-at-implied-dir</td><td>A file inside an implicit directory, followed by a regular file at that directory&#x27;s path.</td><td class=n>not measured</td></tr>
+<tr><td><a href="S21.html"><code>S21</code></a></td><td>tree-duplicate-dir-file</td><td>An empty directory followed by a regular file of the same name.</td><td class=n>not measured</td></tr>
+<tr><td><a href="S22.html"><code>S22</code></a></td><td>tree-duplicate-dir-symlink</td><td>An empty directory followed by a symlink of the same name: replaced, kept, or placed inside?</td><td class=n>not measured</td></tr>
+<tr><td><a href="S23.html"><code>S23</code></a></td><td>tree-duplicate-file-symlink</td><td>A regular file followed by a symlink of the same name.</td><td class=n>none</td></tr>
+<tr><td><a href="S24.html"><code>S24</code></a></td><td>tree-duplicate-symlink</td><td>Two symlinks with the same name and different targets: first wins, or last wins?</td><td class=n>none</td></tr>
 <tr><td><a href="S26.html"><code>S26</code></a></td><td>hardlink-to-dir</td><td>A hardlink to a directory.</td><td class=n>none</td></tr>
-<tr><td><a href="S27.html"><code>S27</code></a></td><td>hardlink-through-symlink</td><td>A hardlink whose target is reached through a symlink.</td><td class=n>none</td></tr>
-<tr><td><a href="S28.html"><code>S28</code></a></td><td>hardlink-target-trailing-slash</td><td>A hardlink to <code>a/</code>, where <code>a</code> is a file.</td><td class=n>&lt;0.01%<a href="#unmeasured">*</a></td></tr>
-<tr><td><a href="S29.html"><code>S29</code></a></td><td>hardlink-mode-differs</td><td>A hardlink with the mode 755, to a file with the mode 644.</td><td class=n>≤0.28%<a href="#unmeasured">*</a></td></tr></table></div>
+<tr><td><a href="S27.html"><code>S27</code></a></td><td>hardlink-through-symlink</td><td>A hardlink whose target path traverses a symlink.</td><td class=n>none</td></tr>
+<tr><td><a href="S28.html"><code>S28</code></a></td><td>hardlink-target-trailing-slash</td><td>A hardlink to <code>a/</code>, where <code>a</code> is a regular file.</td><td class=n>&lt;0.01%<a href="#unmeasured">*</a></td></tr>
+<tr><td><a href="S29.html"><code>S29</code></a></td><td>hardlink-mode-differs</td><td>A hardlink with mode 755 to a file with mode 644.</td><td class=n>≤0.28%<a href="#unmeasured">*</a></td></tr></table></div>
 <p class="note" id="unmeasured">* An upper bound. The exact share is likely lower, and awaits a new scan of all tarballs.</p>
 <h2 id="tarballs">Data to support the default policy<a class="anchor" href="#tarballs" aria-label="Link to this section">¶</a></h2>
 <p>The default policy accepts 99.80% of the 82,586 distinct release tarballs of Spack, nixpkgs, Guix and live-bootstrap, and samples of PyPI, crates.io and RubyGems. See <a href="seen-in.html#rejected">the list of the 168 it rejects</a>, and why.</p>

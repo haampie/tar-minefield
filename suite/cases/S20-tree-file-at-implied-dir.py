@@ -1,19 +1,19 @@
-"""A file in a directory that is not a member, then a file with the name of that directory.
+"""A file inside an implicit directory, followed by a regular file at that directory's path.
 
-The archive has a file `a/f`, then a file `a`. It does not have a member for the directory `a`.
+The archive has a file `a/f`, followed by a file `a`, with no directory member for `a`.
 
-A reader [creates the directory][intermediate] `a` for `a/f`. The second member is a file at the
-path of that directory. In [POSIX][file-type], a member is extracted as a file of its own type, and
-existing files [can be overwritten][overwritten], but it is not specified whether overwriting
-includes replacing a directory and its contents with a file. This case is ambiguous because a reader
-can take the second member in one of three ways. A reader that replaces the directory with the file
-extracts the file `a` alone, without `a/f`. One that keeps the directory extracts `a/f`, and skips
-the file `a` without an error. Other readers report an error.
+Extracting `a/f` requires [creating the parent directory][intermediate] `a`. The next member is a
+regular file at the same path `a`. In [POSIX][file-type], each member is extracted with its archived
+file type and existing files [may be overwritten][overwritten], but POSIX does not say whether a
+regular file can replace a non-empty directory. A reader that removes the directory to extract the
+file leaves only the file `a`, losing `a/f`. A reader that keeps the directory and ignores the
+conflicting file leaves `a/f`, while other readers report an error.
 
-Decision point: whether a file replaces a directory that has contents.
-Seen in: not measured, as earlier versions of the scanner compared the names of members only, and
-the directory is not a member.
-See also: S08, a file, then a directory of the same name, and S12, a member under a file.
+Decision point: whether a regular file replaces a non-empty directory.
+Seen in: not measured, as earlier scanner versions only compared explicit member names, and `a` is
+an implicit directory.
+See also: S08, a file followed by a directory of the same name, and S12, a member under a regular
+file.
 """
 
 VERDICT = "reject"
@@ -22,6 +22,6 @@ FEATURES = ["tree.duplicate.dir-file"]
 
 
 def build(a):
-    a.file(b"a/f", b"f\n", note="in a directory that is not a member")
-    a.file(b"a", b"a\n", note="a file at the path of that directory")
+    a.file(b"a/f", b"f\n", note="creates parent directory a")
+    a.file(b"a", b"a\n", note="regular file at directory path a")
     a.end()

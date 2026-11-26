@@ -1,7 +1,7 @@
 {
  "id": "S21",
  "verdict": "reject",
- "description": "An empty directory, then a file of the same name.",
+ "description": "An empty directory followed by a regular file of the same name.",
  "features": [
   "tree.duplicate.dir-file"
  ]

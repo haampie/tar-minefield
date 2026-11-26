@@ -1,7 +1,7 @@
 {
  "id": "S29",
  "verdict": "reject",
- "description": "A hardlink with the mode 755, to a file with the mode 644.",
+ "description": "A hardlink with mode 755 to a file with mode 644.",
  "features": [
   "hardlink.mode-differs"
  ]

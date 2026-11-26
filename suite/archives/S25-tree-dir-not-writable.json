@@ -1,7 +1,7 @@
 {
  "id": "S25",
  "verdict": "accept",
- "description": "A directory without write permission, before the file in it.",
+ "description": "A read-only directory member followed by a file inside it.",
  "features": [],
  "tree": [
   {

@@ -1,16 +1,17 @@
 S24-tree-duplicate-symlink: must reject
 
-The same symlink twice, with different targets: the first, or the last?
+Two symlinks with the same name and different targets: first wins, or last wins?
 
-The archive has the files `first` and `second`, a symlink `a` to `first`, then a symlink `a` to
-`second`.
+The archive has the files `first` and `second`, a symlink `a` to `first`, and a second symlink `a`
+to `second`.
 
-In POSIX, a file can be overwritten when an archive has several members of one name,
-but creating a symlink at a path that exists fails, so a reader that does not
-replace the first link keeps it. This case is ambiguous because `a` points either to `second`, or to
-`first`, with an error for the second link or without one.
+POSIX allows overwriting existing files when an archive repeats a member name, but
+`symlink()` fails if the destination path exists. A reader that unlinks the
+existing symlink before creating the new one leaves `a` pointing to `second`, whereas one that does
+not unlink it leaves `a` pointing to `first` (either reporting an error or skipping the second
+symlink).
 
-Decision point: whether a later member of the same name replaces an earlier one.
+Decision point: whether a duplicate symlink replaces the earlier one.
 Seen in: none of the scanned tarballs.
 See also: S07, the same file twice with different contents.
 
@@ -74,7 +75,7 @@ See also: S07, the same file twice with different contents.
           devminor [337,345)  "0000000" + NUL  0
           prefix   [345,500)  155 NUL
           pad      [500,512)  12 NUL
-0x000a00  header: symlink, a again, with another target
+0x000a00  header: symlink, second symlink a
           name     [  0,100)  "a" + 99 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

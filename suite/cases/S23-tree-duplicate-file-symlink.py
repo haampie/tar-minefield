@@ -1,15 +1,15 @@
-"""A file, then a symlink of the same name.
+"""A regular file followed by a symlink of the same name.
 
-The archive has a file `t`, a file `a`, then a symlink `a` to `t`.
+The archive has a file `t`, a file `a`, and a symlink `a` to `t`.
 
-In POSIX, existing files [can be overwritten][overwritten], but creating a symlink at a path that
-exists [fails][symlink-exists], so a reader that extracts the link replaces the file. This case is
-ambiguous because the tree has either the link, which replaces the file, or the file, with an error
-for the link or without one.
+POSIX allows [overwriting existing files][overwritten], but `symlink()` [fails when the path already
+exists][symlink-exists], so extracting the symlink requires unlinking `a` first. A reader that
+removes the existing file extracts `a` as a symlink to `t`, whereas one that does not unlink it
+leaves the regular file `a` in place (either reporting an error or skipping the symlink).
 
-Decision point: whether a later member replaces an earlier one of another kind.
+Decision point: whether a symlink replaces an earlier regular file of the same name.
 Seen in: none of the scanned tarballs.
-See also: S10, a symlink, then a file of the same name.
+See also: S10, a symlink followed by a file of the same name.
 """
 
 VERDICT = "reject"
@@ -20,5 +20,5 @@ FEATURES = ["tree.duplicate.file-symlink"]
 def build(a):
     a.file(b"t", b"t\n")
     a.file(b"a", b"a file first\n")
-    a.symlink(b"a", b"t", note="a symlink, after a file")
+    a.symlink(b"a", b"t", note="symlink replacing file a")
     a.end()

@@ -1,7 +1,7 @@
 {
  "id": "S20",
  "verdict": "reject",
- "description": "A file in a directory that is not a member, then a file with the name of that directory.",
+ "description": "A file inside an implicit directory, followed by a regular file at that directory's path.",
  "features": [
   "tree.duplicate.dir-file"
  ]

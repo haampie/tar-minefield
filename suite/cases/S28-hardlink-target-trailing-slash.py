@@ -1,17 +1,17 @@
-"""A hardlink to `a/`, where `a` is a file.
+"""A hardlink to `a/`, where `a` is a regular file.
 
-The archive has a file `a`, then a hardlink `h` whose target is `a/`.
+The archive has a regular file `a`, followed by a hardlink `h` with linkname `a/`.
 
-A pathname that ends in a slash [resolves only to a directory][trailing-slash], and `a` is a file,
-so as a path the target does not resolve, and a link that cannot be made is an [error][link-error].
-This case is ambiguous because `h` is either a link to `a`, to a reader that normalizes the target
-as it normalizes names, or an error, to one that resolves the target as a path. Some readers instead
-skip the link, without an error.
+A pathname with a trailing slash [resolves only to a directory][trailing-slash]. Because `a` is a
+regular file, `a/` does not resolve as a filesystem path, and an uncreatable hardlink is an
+[error][link-error]. A reader that strips trailing slashes from hardlink targets links `h` to `a`,
+whereas one that passes `a/` to the OS or matches it verbatim against member names either reports an
+error or skips the link.
 
-Decision point: whether the target of a hardlink is normalized.
-Seen in: not measured, as earlier versions of the scanner normalized the targets of hardlinks: 2 of
-the scanned tarballs may have such a target.
-See also: S16, a hardlink to `./a`, which is tolerated, and K05, a hardlink whose name ends in a
+Decision point: whether a trailing slash on a hardlink target is stripped.
+Seen in: not measured, as earlier scanner versions stripped trailing slashes from hardlink targets;
+2 scanned tarballs may have such a target.
+See also: S16, a hardlink to `./a`, which is tolerated, and K05, a hardlink whose own name ends in a
 slash.
 """
 
@@ -22,5 +22,5 @@ FEATURES = ["hardlink.target-trailing-slash"]
 
 def build(a):
     a.file(b"a", b"a\n")
-    a.hardlink(b"h", b"a/", note="the target spelled a/")
+    a.hardlink(b"h", b"a/", note="target a/ for regular file a")
     a.end()

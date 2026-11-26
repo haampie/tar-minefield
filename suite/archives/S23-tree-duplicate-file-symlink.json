@@ -1,7 +1,7 @@
 {
  "id": "S23",
  "verdict": "reject",
- "description": "A file, then a symlink of the same name.",
+ "description": "A regular file followed by a symlink of the same name.",
  "features": [
   "tree.duplicate.file-symlink"
  ]

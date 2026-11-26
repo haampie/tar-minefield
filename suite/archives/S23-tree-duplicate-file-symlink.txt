@@ -1,17 +1,17 @@
 S23-tree-duplicate-file-symlink: must reject
 
-A file, then a symlink of the same name.
+A regular file followed by a symlink of the same name.
 
-The archive has a file `t`, a file `a`, then a symlink `a` to `t`.
+The archive has a file `t`, a file `a`, and a symlink `a` to `t`.
 
-In POSIX, existing files can be overwritten, but creating a symlink at a path that
-exists fails, so a reader that extracts the link replaces the file. This case is
-ambiguous because the tree has either the link, which replaces the file, or the file, with an error
-for the link or without one.
+POSIX allows overwriting existing files, but `symlink()` fails when the path already
+exists, so extracting the symlink requires unlinking `a` first. A reader that
+removes the existing file extracts `a` as a symlink to `t`, whereas one that does not unlink it
+leaves the regular file `a` in place (either reporting an error or skipping the symlink).
 
-Decision point: whether a later member replaces an earlier one of another kind.
+Decision point: whether a symlink replaces an earlier regular file of the same name.
 Seen in: none of the scanned tarballs.
-See also: S10, a symlink, then a file of the same name.
+See also: S10, a symlink followed by a file of the same name.
 
 0x000000  header: regular file
           name     [  0,100)  "t" + 99 NUL
@@ -55,7 +55,7 @@ See also: S10, a symlink, then a file of the same name.
 0x000600  data
           13 bytes, then 499 NUL to the end of the block
           "a file first\n"
-0x000800  header: symlink, a symlink, after a file
+0x000800  header: symlink, symlink replacing file a
           name     [  0,100)  "a" + 99 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

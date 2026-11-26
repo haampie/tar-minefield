@@ -1,17 +1,18 @@
-"""An empty directory, then a file of the same name.
+"""An empty directory followed by a regular file of the same name.
 
-The archive has a directory `a/`, then a file `a`.
+The archive has a directory `a/`, followed by a regular file `a`.
 
-In [POSIX][file-type], a member is extracted as a file of its own type, and existing files [can be
-overwritten][overwritten], but it is not specified whether overwriting includes replacing a
-directory with a file. Replacing an empty directory does not delete a file. This case is ambiguous
-because the tree has either the file, which replaces the directory, or the directory, with an error
-for the file or without one.
+In [POSIX][file-type], each member is extracted with its archived file type and existing files [may
+be overwritten][overwritten], but POSIX does not specify whether a regular file can replace an
+existing directory. Although removing an empty directory does not lose any extracted files, readers
+disagree on the result: a reader that removes the empty directory extracts the file `a`, whereas one
+that refuses to replace a directory leaves `a/` in place (either reporting an error or skipping the
+file).
 
-Decision point: whether a later member replaces an earlier one of another kind.
-Seen in: none of the scanned tarballs has a file at the path of a directory that is a member.
-See also: S08, a file, then a directory of the same name, and S20, a file at the path of a directory
-that has contents.
+Decision point: whether a regular file replaces an earlier empty directory.
+Seen in: none of the scanned tarballs has a file at the path of an explicit directory member.
+See also: S08, a file followed by a directory of the same name, and S20, a file at the path of a
+non-empty directory.
 """
 
 VERDICT = "reject"
