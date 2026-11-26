@@ -1,25 +1,23 @@
 F71-number-size-base256-marker: must reject
 
-A size whose first byte is `0x81`: base-256, or not a number?
+A size field starting with `0x81`: base-256, or invalid?
 
-The archive has a file `a`, whose size field is the byte `0x81`, followed by 512 as a binary number
-of 11 bytes, then an empty file `smuggled`.
+The archive has a file `a` whose size field starts with `0x81` followed by 512 as an 11-byte
+big-endian integer, then an empty file `smuggled`.
 
-In GNU's format, a number in base-256 starts with the byte `0x80`, and a negative one with `0xff`.
-In POSIX, numeric fields are octal, so base-256 is an extension, and what any other
-first byte over `0x7f` means is not specified. Read leniently, this case is ambiguous because a
-reader can read the size in one of four ways. A reader that tells base-256 apart from octal by the
-high bit of the first byte, and drops the rest of that byte, reads 512, and the next block is the
-data of `a`. One that keeps the other bits of the first byte reads a size far past the end of the
-archive. One that reads octal digits reads 0, as the field does not have any, and the next block is
-the header of `smuggled`. One that skips the block, as it does with a block that is not a header,
-extracts `smuggled` alone, without an error.
+In GNU's base-256 extension, positive numbers start with `0x80` and negative numbers with `0xff`.
+Standard POSIX numeric fields are octal, and other leading bytes above `0x7f` are
+undefined. A reader that checks only the high bit and masks off the rest of the first byte reads a
+size of 512, consuming the next block as `a`'s data. A reader that includes the low bit of `0x81` in
+the value reads a size of 2^88 + 512, far past the end of the archive. A reader that expects octal
+digits finds none, takes the size as 0, and reads the next block as `smuggled`'s header. Finally, a
+reader that skips `a`'s header as invalid extracts `smuggled` alone.
 
-Decision point: which first bytes make a numeric field base-256.
+Decision point: which leading bytes mark a base-256 numeric field.
 Seen in: none of the scanned tarballs.
 See also: F56, a size in base-256, and F30, a base-256 size that wraps around.
 
-0x000000  header: regular file, size 512, or 0, or 2^88 + 512
+0x000000  header: regular file, size 512, 0, or 2^88 + 512
           name     [  0,100)  "a" + 99 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -37,7 +35,7 @@ See also: F56, a size in base-256, and F30, a base-256 size that wraps around.
           devminor [337,345)  "0000000" + NUL  0
           prefix   [345,500)  155 NUL
           pad      [500,512)  12 NUL
-0x000200  header: regular file, the data of a, to a reader that takes 0x81 for base-256
+0x000200  header: regular file, a's data if 0x81 is read as base-256
           name     [  0,100)  "smuggled" + 92 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

@@ -1,7 +1,7 @@
 {
  "id": "F77",
  "verdict": "reject",
- "description": "A checksum with a NUL before its digits, in a header after the first member.",
+ "description": "A checksum with a leading NUL before its digits, after the first member.",
  "features": [
   "number.chksum.leading-nul"
  ]

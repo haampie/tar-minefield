@@ -1,22 +1,21 @@
 F63-end-unpadded: must reject
 
-An archive that ends after the data of a file, before the end of its block.
+An archive that ends right after a file's data, without block padding.
 
-The archive has a file `a` of 5 bytes, and ends right after those bytes, without padding to 512
-bytes and without zero blocks.
+The archive has a 5-byte file `a` and ends immediately after those 5 bytes, with no padding to 512
+bytes and no zero blocks.
 
-In POSIX, an archive is a series of blocks of 512 bytes, and the data of a file takes
-whole blocks. So this archive is cut short, although every byte of `a` is in it.
-This case is ambiguous in practice because a reader that reads the data by its size extracts `a`
-with its 5 bytes, and one that reads whole blocks cannot read the last one, and extracts an empty
-`a`, or does not extract `a`. Most readers report an error. Some of those that extract the 5 bytes
-do so without an error.
+A POSIX archive consists of 512-byte blocks, and file data occupies full
+blocks. Even though all 5 bytes of `a` are present, the final block is incomplete.
+A reader that reads only the file's byte count extracts `a` with its 5 bytes, sometimes without
+reporting an error. A reader that requires full 512-byte blocks fails on the short read, leaving `a`
+empty or unextracted.
 
-Decision point: whether a member whose last block is not complete is extracted.
-Seen in: not measured, as earlier versions of the scanner took such an archive for one without an
-end-of-archive marker: 22 of the scanned tarballs do not have that marker, and may end this way.
+Decision point: whether a file in an unpadded final block is extracted.
+Seen in: not measured, as earlier scanner versions grouped this with archives missing the
+end-of-archive marker; 22 scanned tarballs lack that marker and may end this way.
 See also: F04, an archive that ends after a complete member, which is tolerated, and F08, one that
-ends inside the data of a member.
+ends inside file data.
 
 0x000000  header: regular file
           name     [  0,100)  "a" + 99 NUL

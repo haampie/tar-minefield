@@ -39,9 +39,9 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a file <code>a</code>, then the first 300 bytes of the header of a file <code>b</code>, and ends there.</p>
-<p>In POSIX, a header is a <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20logical%20record%20shall%20be%20a%20fixed%2Dsize%20logical%20record%20of%20512%20octets">block of 512 bytes</a>, so the archive is cut short. This case is ambiguous in practice because a reader can take the 300 bytes in one of three ways. A reader that takes an incomplete block for the end of the archive extracts <code>a</code>, without an error. One that reads a header from the bytes that are there extracts <code>a</code> and an empty <code>b</code>. Other readers report an error.</p>
-<p><strong>Decision point:</strong> whether a header that is cut short ends the archive.</p>
+<p>The archive has a file <code>a</code>, followed by the first 300 bytes of a header for a file <code>b</code>, where the archive ends.</p>
+<p>Every POSIX header is a <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20logical%20record%20shall%20be%20a%20fixed%2Dsize%20logical%20record%20of%20512%20octets">512-byte block</a>, so this archive is truncated. Most readers report an error on the partial block. A reader that treats a short read as the end of the archive stops after extracting <code>a</code>, while one that parses the 300 available bytes as a header extracts both <code>a</code> and an empty <code>b</code>.</p>
+<p><strong>Decision point:</strong> whether a truncated header at the end of an archive is treated as EOF.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -52,17 +52,18 @@
 
 An archive that ends inside a header.
 
-The archive has a file `a`, then the first 300 bytes of the header of a file `b`, and ends there.
+The archive has a file `a`, followed by the first 300 bytes of a header for a file `b`, where the
+archive ends.
 
-In POSIX, a header is a block of 512 bytes, so the archive is cut short. This case is
-ambiguous in practice because a reader can take the 300 bytes in one of three ways. A reader that
-takes an incomplete block for the end of the archive extracts `a`, without an error. One that reads
-a header from the bytes that are there extracts `a` and an empty `b`. Other readers report an error.
+Every POSIX header is a 512-byte block, so this archive is truncated. Most readers
+report an error on the partial block. A reader that treats a short read as the end of the archive
+stops after extracting `a`, while one that parses the 300 available bytes as a header extracts both
+`a` and an empty `b`.
 
-Decision point: whether a header that is cut short ends the archive.
+Decision point: whether a truncated header at the end of an archive is treated as EOF.
 Seen in: none of the scanned tarballs.
-See also: F08, an archive that ends inside the data of a member, and F04, one that ends after a
-complete member.
+See also: F08, an archive that ends inside file data, and F04, one that ends after a complete
+member.
 
 0x000000  header: regular file
           name     [  0,100)  &quot;a&quot; + 99 NUL
@@ -208,10 +209,10 @@ complete member.
 <p>This case is not measured in release tarballs: the scan does not report a feature of it on its own.</p>
 <h2 id="see-also">See also<a class="anchor" href="#see-also" aria-label="Link to this section">¶</a></h2>
 <ul>
-<li><a href="F08.html"><code>F08</code></a>: an archive that ends inside the data of a member, and <a href="F04.html"><code>F04</code></a>, one that ends after a complete member.</li>
+<li><a href="F08.html"><code>F08</code></a>: an archive that ends inside file data, and <a href="F04.html"><code>F04</code></a>, one that ends after a complete member.</li>
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

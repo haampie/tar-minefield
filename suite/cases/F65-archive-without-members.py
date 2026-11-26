@@ -1,13 +1,13 @@
-"""An archive without members: only the two zero blocks that end it.
+"""An archive with no members, containing only the two trailing zero blocks.
 
-The archive has the end-of-archive marker, two zero blocks, without a member before it.
+The archive consists solely of the end-of-archive marker: two 512-byte zero blocks, with no members.
 
-In [POSIX][end], an archive ends with two zero blocks, and a member before them is not required. GNU
-tar writes such an archive for an empty list of files, and RubyGems for a gem without files. The
-tree is empty.
+In [POSIX][end], an archive ends with two zero blocks and need not contain any members. GNU tar
+writes this 1024-byte archive when given an empty file list, as does RubyGems for a gem with no
+files. The extracted tree is empty.
 
-Seen in: 38 gems that do not have files, such as lil 0.0.4 and slds 0.1.1.
-See also: F66, a file of 0 bytes, which is rejected.
+Seen in: 38 gems with no files, such as lil 0.0.4 and slds 0.1.1.
+See also: F66, a zero-byte file, which is rejected.
 """
 
 VERDICT = "accept"

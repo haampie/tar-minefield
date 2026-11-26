@@ -2,16 +2,14 @@ F73-pax-record-without-equals: must reject
 
 A pax record without `=`, before a `path` record.
 
-The archive has a file whose pax header has two records. The first is `11 comment`, followed by a
-newline, and does not have an equals sign. The second is `path=renamed`. The header of the file has
-the name `header-name`.
+The archive has a file with two pax records: `11 comment` (followed by a newline, with no equals
+sign) and `path=renamed`. The file's ustar header gives the name `header-name`.
 
-In POSIX, an extended header consists of records, and a record is `<length>
-<key>=<value>`, followed by a newline, so the first record is malformed. Records are delimited by
-their length, so a reader can skip the malformed record. This case is ambiguous in
-practice because a reader can take the header in one of three ways. A reader that skips the
-malformed record applies the `path`, and extracts `renamed`. One that stops reading records at the
-malformed one, without an error, extracts `header-name`. Other readers report an error.
+Every POSIX extended header record has the form `<length> <key>=<value>` followed by a
+newline, making the first record malformed. Because records are framed by their byte
+length, a parser can still locate the next record. A reader that skips the malformed
+record applies `path=renamed`, whereas one that stops parsing the pax header at the bad record falls
+back to `header-name`. Other readers report an error.
 
 Decision point: whether a reader skips a pax record without `=`, stops at it, or reports an error.
 Seen in: none of the scanned tarballs.

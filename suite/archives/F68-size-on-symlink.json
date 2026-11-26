@@ -1,7 +1,7 @@
 {
  "id": "F68",
  "verdict": "reject",
- "description": "A size in the header of a symlink, which takes the next header for its data.",
+ "description": "A non-zero size in a symlink header, covering the next member's header.",
  "features": [
   "size.on-symlink"
  ]

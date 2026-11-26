@@ -1,7 +1,7 @@
 {
  "id": "F82",
  "verdict": "accept",
- "description": "A pax header with the times of a file, with fractions of a second, as GNU tar writes it.",
+ "description": "Subsecond `mtime`, `atime` and `ctime` records in a pax header, as written by GNU tar.",
  "features": [],
  "tree": [
   {

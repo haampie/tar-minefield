@@ -40,7 +40,7 @@ says, that can be a choice rather than a bug.</p>
 <h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (20)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
 <tr><td><a href="F07.html"><code>F07</code></a> end-archive-after</td><td>Another archive after the end-of-archive marker.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="F62.html"><code>F62</code></a> pax-schily-realsize</td><td>A <code>SCHILY.realsize</code> record on a file that is not sparse.</td><td>extracts <code>a</code> (5 B, 5994471a)</td></tr>
+<tr><td><a href="F62.html"><code>F62</code></a> pax-schily-realsize</td><td>A <code>SCHILY.realsize</code> pax record on a non-sparse file.</td><td>extracts <code>a</code> (5 B, 5994471a)</td></tr>
 <tr><td><a href="N11.html"><code>N11</code></a> gnu-prefix-field</td><td>The prefix field of a header with GNU magic, which GNU tar uses for times in incremental archives.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="N14.html"><code>N14</code></a> name-bytes-after-nul</td><td>Bytes after the NUL that ends a name.</td><td>extracts <code>a</code> (10 B, ef476e8d)</td></tr>
 <tr><td><a href="N51.html"><code>N51</code></a> linkname-bytes-after-nul</td><td>Bytes after the NUL that ends the target of a symlink.</td><td>extracts <code>l</code> → <code>safe</code></td></tr>
@@ -61,11 +61,11 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="S29.html"><code>S29</code></a> hardlink-mode-differs</td><td>A hardlink with the mode 755, to a file with the mode 644.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>h</code> (2 B, 87428fc5)</td></tr></table></div>
 <h2 id="rejects"><span class="mark bad" title="rejects a case to accept, or extracts another tree than the expected one, or crashes on it" role="img" aria-label="rejects a case to accept, or extracts another tree than the expected one, or crashes on it">✗</span>Rejects cases to accept, or extracts another tree (3)<a class="anchor" href="#rejects" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
-<tr><td><a href="F81.html"><code>F81</code></a> pax-unknown-key</td><td>A pax header with a key that readers do not know.</td><td>error: at byte 0: decode policy rejected input: pax vendor extension TARMINEFIELD.unknown is not allowed</td></tr>
+<tr><td><a href="F81.html"><code>F81</code></a> pax-unknown-key</td><td>A pax header with an unrecognized vendor key.</td><td>error: at byte 0: decode policy rejected input: pax vendor extension TARMINEFIELD.unknown is not allowed</td></tr>
 <tr><td><a href="K10.html"><code>K10</code></a> file-executable-group-other</td><td>Files executable by their group or others, but not by their owner.</td><td>extracts <code>g</code> (2 B, 768c71d7, executable), <code>o</code> (2 B, 7427d152, executable)</td></tr>
 <tr><td><a href="N59.html"><code>N59</code></a> symlink-target-dotdot-after-symlink</td><td>A symlink whose target has <code>..</code> after a component that is a symlink.</td><td>error: at byte 2560: unsafe symbolic-link target &quot;s/../x&quot;: contains ambiguous parent-directory traversal</td></tr></table></div>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

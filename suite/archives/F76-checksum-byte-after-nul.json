@@ -1,7 +1,7 @@
 {
  "id": "F76",
  "verdict": "reject",
- "description": "A byte after the NUL that ends a checksum, in a header after the first member.",
+ "description": "A non-space byte after a checksum's NUL terminator, after the first member.",
  "features": [
   "number.chksum.invalid-character"
  ]

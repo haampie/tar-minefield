@@ -1,7 +1,7 @@
 {
  "id": "F71",
  "verdict": "reject",
- "description": "A size whose first byte is `0x81`: base-256, or not a number?",
+ "description": "A size field starting with `0x81`: base-256, or invalid?",
  "features": [
   "number.size.invalid-character"
  ]

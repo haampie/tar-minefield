@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>F66 archive-no-bytes · Tar file extraction test suite</title>
-<meta name="description" content="A file of 0 bytes: an archive without members, or not an archive?">
+<meta name="description" content="A zero-byte file: an empty archive, or not an archive?">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="F66 archive-no-bytes · Tar file extraction test suite">
-<meta property="og:description" content="A file of 0 bytes: an archive without members, or not an archive?">
+<meta property="og:description" content="A zero-byte file: an empty archive, or not an archive?">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/F66.html">
 <meta property="og:url" content="https://stoppels.ch/tar/F66.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/d46139270a902d8f.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/4f1a9d098be775d8.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of F66 archive-no-bytes">
@@ -24,7 +24,7 @@
 <a class="draft" href="index.html#policy">Working draft</a>
 <nav class="wide"><a class="prev" href="F64.html" rel="prev" title="F64 end-truncated-in-header">‹ F64 end-truncated-in-header</a><a href="index.html">tar-minefield</a><a class="next" href="F67.html" rel="next" title="F67 extended-without-member">F67 extended-without-member ›</a></nav>
 <h1><code>F66</code> archive-no-bytes</h1>
-<p>A file of 0 bytes: an archive without members, or not an archive?</p>
+<p>A zero-byte file: an empty archive, or not an archive?</p>
 <div class="verdict reject wide"><p><span class="badge">Reject</span><span class="badge-draft">(draft)</span> A strict parser must reject this archive.</p></div>
 <dl class="wide">
 <dt>Category</dt><dd>framing</dd>
@@ -39,9 +39,9 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has 0 bytes.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros">POSIX</a>, an archive ends with two zero blocks, which this file does not have. Such a file can be what is left of a download that failed. This case is ambiguous in practice because a reader either takes the file for an archive without members, without an error, or rejects it as not an archive.</p>
-<p><strong>Decision point:</strong> whether a file of 0 bytes is an archive.</p>
+<p>The archive is 0 bytes long.</p>
+<p>A <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros">POSIX</a> archive ends with two zero blocks, which an empty file lacks. A zero-byte file often results from a failed download or an aborted pipe. Some readers accept it as an archive with no members, while others reject it.</p>
+<p><strong>Decision point:</strong> whether a zero-byte file is a valid empty archive.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
 <p>Every block of 512 bytes, to scale, with its offset. Hover over a field for its bytes.</p>
@@ -50,19 +50,18 @@
 <details class="wide"><summary>Every block, as text</summary>
 <pre>F66-archive-no-bytes: must reject
 
-A file of 0 bytes: an archive without members, or not an archive?
+A zero-byte file: an empty archive, or not an archive?
 
-The archive has 0 bytes.
+The archive is 0 bytes long.
 
-In POSIX, an archive ends with two zero blocks, which this file does not have. Such a file
-can be what is left of a download that failed. This case is ambiguous in practice because a reader
-either takes the file for an archive without members, without an error, or rejects it as not an
-archive.
+A POSIX archive ends with two zero blocks, which an empty file lacks. A zero-byte file often
+results from a failed download or an aborted pipe. Some readers accept it as an archive with no
+members, while others reject it.
 
-Decision point: whether a file of 0 bytes is an archive.
+Decision point: whether a zero-byte file is a valid empty archive.
 Seen in: none of the scanned tarballs.
-See also: F65, an archive without members that ends with two zero blocks, and F04, an archive
-without an end-of-archive marker.
+See also: F65, an empty archive of two zero blocks, and F04, an archive without an end-of-archive
+marker.
 
 0x000000  end of file
 </pre>
@@ -113,10 +112,10 @@ without an end-of-archive marker.
 
 <h2 id="see-also">See also<a class="anchor" href="#see-also" aria-label="Link to this section">¶</a></h2>
 <ul>
-<li><a href="F65.html"><code>F65</code></a>: an archive without members that ends with two zero blocks, and <a href="F04.html"><code>F04</code></a>, an archive without an end-of-archive marker.</li>
+<li><a href="F65.html"><code>F65</code></a>: an empty archive of two zero blocks, and <a href="F04.html"><code>F04</code></a>, an archive without an end-of-archive marker.</li>
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

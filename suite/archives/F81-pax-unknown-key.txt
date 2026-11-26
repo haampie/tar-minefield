@@ -1,18 +1,19 @@
 F81-pax-unknown-key: must accept, and extract its tree
 
-A pax header with a key that readers do not know.
+A pax header with an unrecognized vendor key.
 
-The archive has a file `a`, whose pax header has the record `TARMINEFIELD.unknown=1`.
+The archive has a file `a` whose pax header contains `TARMINEFIELD.unknown=1`.
 
-In POSIX, a key is either specified or an implementation extension, such as the
-`SCHILY.*` keys of star, the `LIBARCHIVE.*` keys of libarchive and the `GNU.*` keys of GNU tar. It
-is not specified what a reader does with a key that it does not know. A reader does not know the
-extensions of every writer, and one that rejects an unknown key rejects the archives of the writers
-that use it, so every implementation must extract `a`.
+Beyond standard keywords, POSIX permits vendor-prefixed extension keys such as
+star's `SCHILY.*`, libarchive's `LIBARCHIVE.*` and GNU tar's `GNU.*`. POSIX does not say how a
+reader should handle an unfamiliar key, but no reader knows every archiver's extensions, and
+rejecting unknown keys would break archives from any writer that emits them. Readers must ignore the
+unrecognized record and extract `a`.
 
-Seen in: tarballs of bsdtar and star, with keys such as `LIBARCHIVE.creationtime` and `SCHILY.dev`.
+Seen in: tarballs from bsdtar and star, with keys such as `LIBARCHIVE.creationtime` and
+`SCHILY.dev`.
 
-0x000000  header: pax extended header, a key that readers do not know
+0x000000  header: pax extended header, unrecognized vendor key
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

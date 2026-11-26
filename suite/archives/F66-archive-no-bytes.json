@@ -1,7 +1,7 @@
 {
  "id": "F66",
  "verdict": "reject",
- "description": "A file of 0 bytes: an archive without members, or not an archive?",
+ "description": "A zero-byte file: an empty archive, or not an archive?",
  "features": [
   "archive.empty"
  ]

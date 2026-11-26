@@ -1,7 +1,7 @@
 {
  "id": "F79",
  "verdict": "accept",
- "description": "Uid and gid fields without digits, as in most crates.",
+ "description": "All-NUL uid and gid fields, as written in most Rust crates.",
  "features": [
   "number.uid.no-digits",
   "number.gid.no-digits"

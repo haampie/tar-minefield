@@ -1,24 +1,24 @@
 F72-pax-record-length-wraps: must reject
 
-A pax record whose length is 2^32 + 24, which wraps around to 24 in 32 bits.
+A pax record length of 2^32 + 24, which wraps to 24 in 32-bit arithmetic.
 
-The archive has a pax header whose data is 24 bytes, with one record, `4294967320 path=renamed`,
-followed by a newline. Its length says 4294967320, which is 2^32 + 24, and the record has 24 bytes.
-After it is the member, whose header has the name `header-name`.
+The archive has a 24-byte pax payload containing a single record, `4294967320 path=renamed`,
+followed by a newline. Its declared length of 4294967320 equals 2^32 + 24. The following file header
+has the name `header-name`.
 
-In POSIX, the length of a record counts its bytes, and this one says that the
-record is longer than the data of its header. This case is ambiguous in practice because a reader
-that keeps the length in 32 bits reads 24, which is where the record ends, and extracts `renamed`.
-One that reads the whole number finds a record that runs past the end of the header: it reports an
-error, or drops the record and extracts `header-name`, or takes the rest of the header for the
-value, and extracts a file whose name is `renamed`, followed by a newline.
+In POSIX, a pax record's length gives its byte count, which here exceeds the pax
+header's 24-byte payload. A reader that stores the length in a 32-bit integer wraps it to 24,
+matches the record boundary, and extracts `renamed`. A reader that parses the full integer sees a
+record extending past the pax header: it either reports an error, drops the record and extracts
+`header-name`, or takes the rest of the payload as the value and extracts `renamed` with a trailing
+newline.
 
-Decision point: whether a pax record whose length runs past its header is recognized as malformed.
+Decision point: whether a pax record length that overflows 32 bits is rejected.
 Seen in: none of the scanned tarballs.
 See also: F36, a pax record whose length is one byte short, and F30, a base-256 size that wraps
 around.
 
-0x000000  header: pax extended header, one record, whose length is 2^32 too large
+0x000000  header: pax extended header, record length 2^32 + 24
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

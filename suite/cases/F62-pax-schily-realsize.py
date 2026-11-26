@@ -1,17 +1,17 @@
-"""A `SCHILY.realsize` record on a file that is not sparse.
+"""A `SCHILY.realsize` pax record on a non-sparse file.
 
-The archive has a file `a` of 5 bytes, `12345`, whose pax header has the record `SCHILY.realsize=2`.
+The archive has a 5-byte file `a` containing `12345`, preceded by a pax header with
+`SCHILY.realsize=2`.
 
-In star's format for sparse files, whose holes are not stored, the size of a file with its holes is
-in `SCHILY.realsize`, and the size field is that of the stored data. In [POSIX][keyword-extension],
-such a key is an implementation extension, which another reader need not know. The file `a` is not
-sparse: the archive does not have a list of its holes. This case is ambiguous in practice because a
-reader that does not know the key extracts the 5 bytes, and one that takes the real size for the
-size of the file extracts its first 2 bytes, `12`.
+In star's sparse format, `SCHILY.realsize` holds the file's full size including holes, while the
+header's size field gives the stored data size. Under [POSIX][keyword-extension], this key is a
+vendor extension that other readers need not recognize. Here `a` is a regular file with no hole map.
+A reader that ignores `SCHILY.realsize` extracts all 5 bytes, whereas one that applies it truncates
+the file to its first 2 bytes, `12`.
 
-Decision point: whether `SCHILY.realsize` applies to a file that is not sparse.
+Decision point: whether `SCHILY.realsize` applies to a non-sparse file.
 Seen in: none of the scanned tarballs.
-See also: N36, GNU's pax keys of sparse files.
+See also: N36, GNU sparse pax keys.
 """
 
 VERDICT = "reject"
@@ -20,6 +20,6 @@ FEATURES = ["pax.SCHILY.realsize"]
 
 
 def build(a):
-    a.pax([(b"SCHILY.realsize", b"2")], note="a real size of 2")
+    a.pax([(b"SCHILY.realsize", b"2")], note="SCHILY.realsize=2")
     a.file(b"a", b"12345")
     a.end()

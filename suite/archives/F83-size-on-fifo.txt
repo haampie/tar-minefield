@@ -1,21 +1,22 @@
 F83-size-on-fifo: must reject
 
-A size in the header of a FIFO, which takes the next header for its data.
+A non-zero size in a FIFO header, covering the next member's header.
 
-The archive has a FIFO `p`, of typeflag `6`, whose size field is 512, then an empty file `smuggled`,
-then a file `b`.
+The archive has a FIFO `p` (typeflag `6`) with a size field of 512, followed by an empty file
+`smuggled` and a file `b`.
 
-In POSIX, an archive does not store data for a FIFO or a device, and the size of
-a FIFO is ignored by a reader, so the next block is the header of `smuggled`. For a
-device, it is not specified whether a reader ignores the size. This case is ambiguous in practice
-because a reader that ignores the size extracts `smuggled` and `b`, and one that skips 512 bytes of
-data, or extracts them as the contents of a file `p`, extracts `b` without `smuggled`.
+Under POSIX, archives do not store data blocks for FIFOs or device nodes, and
+readers must ignore a FIFO's size field (for devices, POSIX leaves the size field's
+effect unspecified). The block after `p` is therefore `smuggled`'s header. A reader that ignores the
+FIFO's size reaches `smuggled` and `b`, whereas one that skips 512 bytes of data, or extracts `p` as
+a regular file containing those 512 bytes, consumes `smuggled`'s header and extracts `b` without
+`smuggled`.
 
-Decision point: whether the size in the header of a FIFO applies.
+Decision point: whether a non-zero size in a FIFO header consumes data blocks.
 Seen in: none of the scanned tarballs.
-See also: F68, a size in the header of a symlink, and K08, a FIFO.
+See also: F68, a non-zero size on a symlink, and K08, a FIFO.
 
-0x000000  header: FIFO, a FIFO, which has no data, but its size field is 512
+0x000000  header: FIFO, FIFO with size 512
           name     [  0,100)  "p" + 99 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0
@@ -33,7 +34,7 @@ See also: F68, a size in the header of a symlink, and K08, a FIFO.
           devminor [337,345)  "0000000" + NUL  0
           prefix   [345,500)  155 NUL
           pad      [500,512)  12 NUL
-0x000200  header: regular file, the block that the size covers
+0x000200  header: regular file, covered by p's size
           name     [  0,100)  "smuggled" + 92 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

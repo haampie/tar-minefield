@@ -1,12 +1,12 @@
-"""A uid and a gid in base-256, as GNU tar writes those over 2097151.
+"""Base-256 uid and gid fields, as GNU tar writes for IDs over 2097151.
 
-The archive has a file `a` with GNU's magic, whose uid and gid fields are 3000000 in base-256: the
-byte `0x80`, followed by the number in binary.
+The archive has a file `a` with GNU magic whose uid and gid fields encode 3000000 in base-256: a
+leading `0x80` byte followed by a 7-byte big-endian integer.
 
-A uid or gid over 2097151 does not fit in the 7 octal digits of its field. In pax, it is written in
-a [record][uid-large] of the extended header. In GNU's format, it is written in base-256, as a size
-of 8 GiB and over is. The owner and the group of a file are not part of the tree, so a reader need
-not read those numbers, and every implementation must extract `a`.
+A user or group ID above 2097151 overflows a 7-digit octal field. The pax format stores large IDs in
+[extended header records][uid-large], whereas GNU tar encodes them in base-256, just like file sizes
+of 8 GiB or more. Because ownership is not part of the extracted tree, a reader need not use these
+values, and every implementation must extract `a`.
 
 Seen in: 214 of the scanned tarballs.
 See also: F56, a size in base-256.
@@ -22,5 +22,5 @@ TREE = [F("a", b"a\n")]
 def build(a):
     number = b"\x80" + (3000000).to_bytes(7, "big")
     a.file(b"a", b"a\n", uid=number, gid=number, magic=b"ustar ", version=b" \0",
-           note="uid and gid 3000000, in base-256")
+           note="uid and gid 3000000 in base-256")
     a.end()

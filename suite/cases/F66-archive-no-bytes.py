@@ -1,16 +1,15 @@
-"""A file of 0 bytes: an archive without members, or not an archive?
+"""A zero-byte file: an empty archive, or not an archive?
 
-The archive has 0 bytes.
+The archive is 0 bytes long.
 
-In [POSIX][end], an archive ends with two zero blocks, which this file does not have. Such a file
-can be what is left of a download that failed. This case is ambiguous in practice because a reader
-either takes the file for an archive without members, without an error, or rejects it as not an
-archive.
+A [POSIX][end] archive ends with two zero blocks, which an empty file lacks. A zero-byte file often
+results from a failed download or an aborted pipe. Some readers accept it as an archive with no
+members, while others reject it.
 
-Decision point: whether a file of 0 bytes is an archive.
+Decision point: whether a zero-byte file is a valid empty archive.
 Seen in: none of the scanned tarballs.
-See also: F65, an archive without members that ends with two zero blocks, and F04, an archive
-without an end-of-archive marker.
+See also: F65, an empty archive of two zero blocks, and F04, an archive without an end-of-archive
+marker.
 """
 
 VERDICT = "reject"

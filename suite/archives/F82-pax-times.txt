@@ -1,18 +1,18 @@
 F82-pax-times: must accept, and extract its tree
 
-A pax header with the times of a file, with fractions of a second, as GNU tar writes it.
+Subsecond `mtime`, `atime` and `ctime` records in a pax header, as written by GNU tar.
 
-The archive has a file `a`, whose pax header has the records `mtime=1700000000.123456789`,
-`atime=1700000001.5` and `ctime=1700000002.000000001`.
+The archive has a file `a` whose pax header sets `mtime=1700000000.123456789`, `atime=1700000001.5`
+and `ctime=1700000002.000000001`.
 
-In POSIX, the records `mtime` and `atime` are decimal numbers of seconds, which can
-have a decimal point and digits after it. The key `ctime` was removed from POSIX in 2004, and GNU
-tar writes it in the same format: in an archive in pax format, it writes `atime` and `ctime` for
-every member, and `mtime` when the time has a fraction of a second. Times are not part of the tree.
+In POSIX, `mtime` and `atime` are decimal seconds since the Epoch with an optional
+fractional part. Although POSIX removed `ctime` in 2004, GNU tar still writes `atime` and `ctime` in
+pax archives for every member, plus `mtime` whenever the modification time has a subsecond fraction.
+Timestamps are not part of the extracted tree.
 
-Seen in: hundreds of tarballs, produced by GNU tar in pax format.
+Seen in: hundreds of tarballs created by GNU tar in pax format.
 
-0x000000  header: pax extended header, times with fractions
+0x000000  header: pax extended header, subsecond timestamps
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

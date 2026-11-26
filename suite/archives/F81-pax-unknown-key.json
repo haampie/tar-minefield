@@ -1,7 +1,7 @@
 {
  "id": "F81",
  "verdict": "accept",
- "description": "A pax header with a key that readers do not know.",
+ "description": "A pax header with an unrecognized vendor key.",
  "features": [],
  "tree": [
   {

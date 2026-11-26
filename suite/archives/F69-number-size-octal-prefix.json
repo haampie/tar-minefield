@@ -1,7 +1,7 @@
 {
  "id": "F69",
  "verdict": "reject",
- "description": "A size with the prefix `0o`, `0o000001000`.",
+ "description": "A size field starting with the octal prefix `0o`.",
  "features": [
   "number.size.invalid-character"
  ]

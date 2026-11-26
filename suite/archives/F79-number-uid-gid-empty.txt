@@ -1,17 +1,16 @@
 F79-number-uid-gid-empty: must accept, and extract its tree
 
-Uid and gid fields without digits, as in most crates.
+All-NUL uid and gid fields, as written in most Rust crates.
 
-The archive has a file `a` with GNU's magic, whose uid and gid fields are 8 NULs each.
+The archive has a file `a` with GNU magic and 8 NUL bytes in both the uid and gid fields.
 
-In POSIX, the uid and gid fields are the owner and the group of a file, which are not
-part of the tree, and as numeric fields they are octal numbers, which an empty field
-is not. Some writers write them without digits, and a reader takes an empty field for 0, or does not
-read it.
+In POSIX, the uid and gid fields store the file's owner and group as zero-filled octal
+numbers. Ownership is not part of the extracted tree, and some archivers leave both
+fields all-NUL instead of writing octal digits. Readers treat the empty fields as 0 or ignore them.
 
 Seen in: 5394 of the scanned tarballs, most of them crates.
 
-0x000000  header: regular file, uid and gid of NULs
+0x000000  header: regular file, all-NUL uid and gid
           name     [  0,100)  "a" + 99 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  8 NUL

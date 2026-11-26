@@ -66,11 +66,11 @@ published there.</p>
 <tr><td><a href="F57.html"><code>F57</code></a></td><td>pax-newline-in-comment-path</td><td>A newline in a pax <code>comment</code>, which split on lines leaves a <code>path</code> record.</td><td class=n>none</td></tr>
 <tr><td><a href="F58.html"><code>F58</code></a></td><td>pax-newline-in-comment-then-size</td><td>A newline in a pax <code>comment</code>, which split on lines leaves a <code>size</code> record before the last one.</td><td class=n>none</td></tr>
 <tr><td><a href="F59.html"><code>F59</code></a></td><td>pax-nul-in-xattr</td><td>A NUL in the value of a pax xattr, before a <code>path</code> record.</td><td class=n>0.04%</td></tr>
-<tr><td><a href="F65.html"><code>F65</code></a></td><td>archive-without-members</td><td>An archive without members: only the two zero blocks that end it.</td><td class=n>not measured</td></tr>
-<tr><td><a href="F79.html"><code>F79</code></a></td><td>number-uid-gid-empty</td><td>Uid and gid fields without digits, as in most crates.</td><td class=n>6.53%</td></tr>
-<tr><td><a href="F80.html"><code>F80</code></a></td><td>number-uid-base256</td><td>A uid and a gid in base-256, as GNU tar writes those over 2097151.</td><td class=n>0.28%</td></tr>
-<tr><td><a href="F81.html"><code>F81</code></a></td><td>pax-unknown-key</td><td>A pax header with a key that readers do not know.</td><td class=n>not measured</td></tr>
-<tr><td><a href="F82.html"><code>F82</code></a></td><td>pax-times</td><td>A pax header with the times of a file, with fractions of a second, as GNU tar writes it.</td><td class=n>not measured</td></tr>
+<tr><td><a href="F65.html"><code>F65</code></a></td><td>archive-without-members</td><td>An archive with no members, containing only the two trailing zero blocks.</td><td class=n>not measured</td></tr>
+<tr><td><a href="F79.html"><code>F79</code></a></td><td>number-uid-gid-empty</td><td>All-NUL uid and gid fields, as written in most Rust crates.</td><td class=n>6.53%</td></tr>
+<tr><td><a href="F80.html"><code>F80</code></a></td><td>number-uid-base256</td><td>Base-256 uid and gid fields, as GNU tar writes for IDs over 2097151.</td><td class=n>0.28%</td></tr>
+<tr><td><a href="F81.html"><code>F81</code></a></td><td>pax-unknown-key</td><td>A pax header with an unrecognized vendor key.</td><td class=n>not measured</td></tr>
+<tr><td><a href="F82.html"><code>F82</code></a></td><td>pax-times</td><td>Subsecond <code>mtime</code>, <code>atime</code> and <code>ctime</code> records in a pax header, as written by GNU tar.</td><td class=n>not measured</td></tr>
 <tr><td><a href="K07.html"><code>K07</code></a></td><td>dir-name-empty-with-prefix</td><td>A directory with an empty name field and a prefix.</td><td class=n>7.65%</td></tr>
 <tr><td><a href="K09.html"><code>K09</code></a></td><td>file-executable</td><td>An executable file.</td><td class=n>not measured</td></tr>
 <tr><td><a href="K10.html"><code>K10</code></a></td><td>file-executable-group-other</td><td>Files executable by their group or others, but not by their owner.</td><td class=n>not measured</td></tr>
@@ -162,23 +162,23 @@ published there.</p>
 <tr><td><a href="F53.html"><code>F53</code></a></td><td>type-gnu-old-long-name</td><td>A header of typeflag <code>N</code>, which some readers take for a long name: a name, or a file?</td><td class=n>none</td></tr>
 <tr><td><a href="F54.html"><code>F54</code></a></td><td>format-pax-header-without-magic</td><td>A pax extended header without magic: a header, or a file?</td><td class=n>none</td></tr>
 <tr><td><a href="F61.html"><code>F61</code></a></td><td>number-uid-not-octal</td><td>A uid with the digit 8, in a header after the first member.</td><td class=n>none</td></tr>
-<tr><td><a href="F62.html"><code>F62</code></a></td><td>pax-schily-realsize</td><td>A <code>SCHILY.realsize</code> record on a file that is not sparse.</td><td class=n>none</td></tr>
-<tr><td><a href="F63.html"><code>F63</code></a></td><td>end-unpadded</td><td>An archive that ends after the data of a file, before the end of its block.</td><td class=n>≤0.03%<a href="#unmeasured">*</a></td></tr>
+<tr><td><a href="F62.html"><code>F62</code></a></td><td>pax-schily-realsize</td><td>A <code>SCHILY.realsize</code> pax record on a non-sparse file.</td><td class=n>none</td></tr>
+<tr><td><a href="F63.html"><code>F63</code></a></td><td>end-unpadded</td><td>An archive that ends right after a file&#x27;s data, without block padding.</td><td class=n>≤0.03%<a href="#unmeasured">*</a></td></tr>
 <tr><td><a href="F64.html"><code>F64</code></a></td><td>end-truncated-in-header</td><td>An archive that ends inside a header.</td><td class=n>not measured</td></tr>
-<tr><td><a href="F66.html"><code>F66</code></a></td><td>archive-no-bytes</td><td>A file of 0 bytes: an archive without members, or not an archive?</td><td class=n>none</td></tr>
-<tr><td><a href="F67.html"><code>F67</code></a></td><td>extended-without-member</td><td>An extended header without a member after it.</td><td class=n>none</td></tr>
-<tr><td><a href="F68.html"><code>F68</code></a></td><td>size-on-symlink</td><td>A size in the header of a symlink, which takes the next header for its data.</td><td class=n>none</td></tr>
-<tr><td><a href="F69.html"><code>F69</code></a></td><td>number-size-octal-prefix</td><td>A size with the prefix <code>0o</code>, <code>0o000001000</code>.</td><td class=n>none</td></tr>
-<tr><td><a href="F70.html"><code>F70</code></a></td><td>number-size-minus</td><td>A size with a minus sign, <code>-0000001000</code>.</td><td class=n>none</td></tr>
-<tr><td><a href="F71.html"><code>F71</code></a></td><td>number-size-base256-marker</td><td>A size whose first byte is <code>0x81</code>: base-256, or not a number?</td><td class=n>none</td></tr>
-<tr><td><a href="F72.html"><code>F72</code></a></td><td>pax-record-length-wraps</td><td>A pax record whose length is 2^32 + 24, which wraps around to 24 in 32 bits.</td><td class=n>none</td></tr>
+<tr><td><a href="F66.html"><code>F66</code></a></td><td>archive-no-bytes</td><td>A zero-byte file: an empty archive, or not an archive?</td><td class=n>none</td></tr>
+<tr><td><a href="F67.html"><code>F67</code></a></td><td>extended-without-member</td><td>A trailing pax extended header with no member after it.</td><td class=n>none</td></tr>
+<tr><td><a href="F68.html"><code>F68</code></a></td><td>size-on-symlink</td><td>A non-zero size in a symlink header, covering the next member&#x27;s header.</td><td class=n>none</td></tr>
+<tr><td><a href="F69.html"><code>F69</code></a></td><td>number-size-octal-prefix</td><td>A size field starting with the octal prefix <code>0o</code>.</td><td class=n>none</td></tr>
+<tr><td><a href="F70.html"><code>F70</code></a></td><td>number-size-minus</td><td>A size field starting with a minus sign.</td><td class=n>none</td></tr>
+<tr><td><a href="F71.html"><code>F71</code></a></td><td>number-size-base256-marker</td><td>A size field starting with <code>0x81</code>: base-256, or invalid?</td><td class=n>none</td></tr>
+<tr><td><a href="F72.html"><code>F72</code></a></td><td>pax-record-length-wraps</td><td>A pax record length of 2^32 + 24, which wraps to 24 in 32-bit arithmetic.</td><td class=n>none</td></tr>
 <tr><td><a href="F73.html"><code>F73</code></a></td><td>pax-record-without-equals</td><td>A pax record without <code>=</code>, before a <code>path</code> record.</td><td class=n>none</td></tr>
-<tr><td><a href="F74.html"><code>F74</code></a></td><td>pax-size-twice</td><td>A pax <code>size</code> twice in one header: the first, or the last?</td><td class=n>&lt;0.01%</td></tr>
-<tr><td><a href="F75.html"><code>F75</code></a></td><td>pax-size-decimal-point</td><td>A pax <code>size</code> with a decimal point, <code>512.0</code>.</td><td class=n>none</td></tr>
-<tr><td><a href="F76.html"><code>F76</code></a></td><td>checksum-byte-after-nul</td><td>A byte after the NUL that ends a checksum, in a header after the first member.</td><td class=n>&lt;0.01%<a href="#unmeasured">*</a></td></tr>
-<tr><td><a href="F77.html"><code>F77</code></a></td><td>checksum-leading-nul</td><td>A checksum with a NUL before its digits, in a header after the first member.</td><td class=n>none</td></tr>
-<tr><td><a href="F78.html"><code>F78</code></a></td><td>pax-nul-in-key</td><td>A NUL in a pax key, before a <code>path</code> record.</td><td class=n>≤0.01%<a href="#unmeasured">*</a></td></tr>
-<tr><td><a href="F83.html"><code>F83</code></a></td><td>size-on-fifo</td><td>A size in the header of a FIFO, which takes the next header for its data.</td><td class=n>none</td></tr>
+<tr><td><a href="F74.html"><code>F74</code></a></td><td>pax-size-twice</td><td>Two <code>size</code> records in one pax header: first wins, or last wins?</td><td class=n>&lt;0.01%</td></tr>
+<tr><td><a href="F75.html"><code>F75</code></a></td><td>pax-size-decimal-point</td><td>A pax <code>size</code> with a decimal point: <code>512.0</code>.</td><td class=n>none</td></tr>
+<tr><td><a href="F76.html"><code>F76</code></a></td><td>checksum-byte-after-nul</td><td>A non-space byte after a checksum&#x27;s NUL terminator, after the first member.</td><td class=n>&lt;0.01%<a href="#unmeasured">*</a></td></tr>
+<tr><td><a href="F77.html"><code>F77</code></a></td><td>checksum-leading-nul</td><td>A checksum with a leading NUL before its digits, after the first member.</td><td class=n>none</td></tr>
+<tr><td><a href="F78.html"><code>F78</code></a></td><td>pax-nul-in-key</td><td>A NUL byte inside a pax key, before a <code>path</code> record.</td><td class=n>≤0.01%<a href="#unmeasured">*</a></td></tr>
+<tr><td><a href="F83.html"><code>F83</code></a></td><td>size-on-fifo</td><td>A non-zero size in a FIFO header, covering the next member&#x27;s header.</td><td class=n>none</td></tr>
 <tr><td><a href="N48.html"><code>N48</code></a></td><td>magic-gnu-version-00</td><td>A prefix in a header with the magic <code>&quot;ustar &quot;</code> and the version <code>&quot;00&quot;</code>: part of the name, or not?</td><td class=n>none</td></tr></table></div>
 <h3 id="to-reject-names">To reject: names<a class="anchor" href="#to-reject-names" aria-label="Link to this section">¶</a></h3>
 <div class="wide"><table class="cases"><colgroup><col style="width: 14%"><col style="width: 24%"><col style="width: 48%"><col style="width: 14%"></colgroup><tr><th>identifier</th><th>name</th><th>what it is</th><th class=n>prevalence</th></tr>
@@ -288,6 +288,6 @@ published there.</p>
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-14">2026-11-14</time></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time></footer>
 </body>
 </html>

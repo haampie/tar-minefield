@@ -1,7 +1,7 @@
 {
  "id": "F70",
  "verdict": "reject",
- "description": "A size with a minus sign, `-0000001000`.",
+ "description": "A size field starting with a minus sign.",
  "features": [
   "number.size.invalid-character"
  ]

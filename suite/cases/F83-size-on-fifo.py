@@ -1,17 +1,18 @@
-"""A size in the header of a FIFO, which takes the next header for its data.
+"""A non-zero size in a FIFO header, covering the next member's header.
 
-The archive has a FIFO `p`, of typeflag `6`, whose size field is 512, then an empty file `smuggled`,
-then a file `b`.
+The archive has a FIFO `p` (typeflag `6`) with a size field of 512, followed by an empty file
+`smuggled` and a file `b`.
 
-In [POSIX][special-no-data], an archive does not store data for a FIFO or a device, and the size of
-a FIFO is [ignored][fifo-size] by a reader, so the next block is the header of `smuggled`. For a
-device, it is not specified whether a reader ignores the size. This case is ambiguous in practice
-because a reader that ignores the size extracts `smuggled` and `b`, and one that skips 512 bytes of
-data, or extracts them as the contents of a file `p`, extracts `b` without `smuggled`.
+Under [POSIX][special-no-data], archives do not store data blocks for FIFOs or device nodes, and
+readers [must ignore][fifo-size] a FIFO's size field (for devices, POSIX leaves the size field's
+effect unspecified). The block after `p` is therefore `smuggled`'s header. A reader that ignores the
+FIFO's size reaches `smuggled` and `b`, whereas one that skips 512 bytes of data, or extracts `p` as
+a regular file containing those 512 bytes, consumes `smuggled`'s header and extracts `b` without
+`smuggled`.
 
-Decision point: whether the size in the header of a FIFO applies.
+Decision point: whether a non-zero size in a FIFO header consumes data blocks.
 Seen in: none of the scanned tarballs.
-See also: F68, a size in the header of a symlink, and K08, a FIFO.
+See also: F68, a non-zero size on a symlink, and K08, a FIFO.
 """
 
 VERDICT = "reject"
@@ -20,7 +21,7 @@ FEATURES = ["size.on-fifo"]
 
 
 def build(a):
-    a.header(b"p", b"6", 512, note="a FIFO, which has no data, but its size field is 512")
-    a.file(b"smuggled", b"", note="the block that the size covers")
+    a.header(b"p", b"6", 512, note="FIFO with size 512")
+    a.file(b"smuggled", b"", note="covered by p's size")
     a.file(b"b", b"b\n")
     a.end()
