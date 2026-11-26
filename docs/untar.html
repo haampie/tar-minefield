@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>untar (PyPI) · Tar file extraction test suite</title>
+<meta name="description" content="The 3 of 188 cases of the tar-minefield test suite where untar (PyPI) does not follow the draft default policy, and what it makes of them.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="tar-minefield">
+<meta property="og:title" content="untar (PyPI) · Tar file extraction test suite">
+<meta property="og:description" content="The 3 of 188 cases of the tar-minefield test suite where untar (PyPI) does not follow the draft default policy, and what it makes of them.">
+<link rel="stylesheet" href="style.css?f8c77ac4">
+<link rel="canonical" href="https://stoppels.ch/tar/untar.html">
+<meta property="og:url" content="https://stoppels.ch/tar/untar.html">
+<meta property="og:image" content="https://stoppels.ch/tar/img/a69d796adbba9155.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="What implementations make of every case of the test suite">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="img/55924e22c3cb795c.png" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="draft" href="index.html#policy">Working draft</a>
+<nav class="wide"><a class="prev" href="julia-tar.html" rel="prev" title="Julia Tar.jl">‹ Julia Tar.jl</a><a href="index.html">tar-minefield</a><a class="next" href="live-bootstrap.html" rel="next" title="live-bootstrap untar">live-bootstrap untar ›</a></nav>
+<h1>untar (PyPI)</h1>
+<dl class="wide">
+<dt>Version</dt><dd>untar 0.5.0, extract, on CPython 3.15.2</dd>
+
+</dl>
+<p>This implementation follows the <a href="index.html#policy">default policy</a> in 185 of 188 cases:</p>
+<ul>
+<li>it rejects 127 of the 130 cases to reject</li>
+<li>it extracts the expected tree in all 36 cases to accept</li>
+<li>it accepts 18 and rejects 4 of the 22 tolerated cases</li>
+</ul>
+<p class="note">The default policy is a working draft. Where an implementation does not do as it
+says, that can be a choice rather than a bug.</p>
+<p>On the other 3, it does not:</p>
+<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (3)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
+<div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
+<tr><td><a href="F61.html"><code>F61</code></a> number-uid-not-octal</td><td>A uid with the digit 8, in a header after the first member.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>b</code> (2 B, 02638299), <code>c</code> (2 B, a3a5e715)</td></tr>
+<tr><td><a href="N52.html"><code>N52</code></a> extended-name-dotdot</td><td>A pax header whose own ustar name escapes the destination directory.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
+<tr><td><a href="S29.html"><code>S29</code></a> hardlink-mode-differs</td><td>A hardlink with mode 755 to a file with mode 644.</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>h</code> (2 B, 87428fc5)</td></tr></table></div>
+
+<hr class="wide">
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+</body>
+</html>

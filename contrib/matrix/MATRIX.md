@@ -35,206 +35,207 @@ extracted by every implementation.
 | Perl Archive::Tar | Archive::Tar 3.12 of Perl v5.44.0 |
 | Haskell tar | tar 0.7.2.0, extract, of GHC 9.14 |
 | Julia Tar.jl | Tar 1.10.0 of Julia 1.13.3 |
+| untar (PyPI) | untar 0.5.0, extract, on CPython 3.15.2 |
 | live-bootstrap untar | mescc-tools-extra a151c245e512, as live-bootstrap pins it |
 | live-bootstrap untar, --non-strict | mescc-tools-extra a151c245e512, as live-bootstrap pins it |
 
-| case | GNU tar | bsdtar | BusyBox tar | 7-Zip | Python tarfile, filter=data, as in pip | Python tarfile, filter=tar | Python tarfile, filter=fully_trusted | node-tar | node-tar, strict | tar-fs | Java Commons Compress | .NET System.Formats.Tar | PHP PharData, as in Composer | Go containerd archive.Apply | Rust tar | Rust astral-tokio-tar | Rust tar-codec, as in uv | RubyGems | R untar, internal | Perl Archive::Tar | Haskell tar | Julia Tar.jl | live-bootstrap untar | live-bootstrap untar, --non-strict |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| **to accept** | | | | | | | | | | | | | | | | | | | | | | | | |
-| [F17](https://stoppels.ch/tar/F17.html) pax-global-comment | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
-| [F28](https://stoppels.ch/tar/F28.html) pax-newline-in-comment | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ❌B | ❌B |
-| [F31](https://stoppels.ch/tar/F31.html) pax-xattr-not-utf8 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
-| [F57](https://stoppels.ch/tar/F57.html) pax-newline-in-comment-path | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A | ✅ | ✅ | ❌ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ❌B | ❌B |
-| [F58](https://stoppels.ch/tar/F58.html) pax-newline-in-comment-then-size | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ❌B | ❌B |
-| [F59](https://stoppels.ch/tar/F59.html) pax-nul-in-xattr | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌A | ❌ | ❌A | ✅ | ✅ | ❌B | ❌B |
-| [F65](https://stoppels.ch/tar/F65.html) archive-without-members | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ |
-| [F79](https://stoppels.ch/tar/F79.html) number-uid-gid-empty | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [F80](https://stoppels.ch/tar/F80.html) number-uid-base256 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
-| [F81](https://stoppels.ch/tar/F81.html) pax-unknown-key | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
-| [F82](https://stoppels.ch/tar/F82.html) pax-times | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
-| [K07](https://stoppels.ch/tar/K07.html) dir-name-empty-with-prefix | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ❌A | ❌A |
-| [K09](https://stoppels.ch/tar/K09.html) file-executable | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
-| [K10](https://stoppels.ch/tar/K10.html) file-executable-group-other | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [N01](https://stoppels.ch/tar/N01.html) gnu-long-name | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
-| [N02](https://stoppels.ch/tar/N02.html) name-fills-field | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
-| [N03](https://stoppels.ch/tar/N03.html) pax-long-name | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌A | ✅ | ✅ | ❌B | ❌B |
-| [N04](https://stoppels.ch/tar/N04.html) ustar-prefix | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
-| [N27](https://stoppels.ch/tar/N27.html) pax-long-symlink | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌B | ✅ | ✅ | ✅ | ✅ | ❌C | ✅ | ❌C | ❌D | ✅ | ❌E | ❌E |
-| [N28](https://stoppels.ch/tar/N28.html) pax-long-hardlink | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌B | ✅ | ✅ | ✅ | ✅ | ❌C | ✅ | ❌D | ❌E | ✅ | ❌ | ❌F |
-| [N42](https://stoppels.ch/tar/N42.html) gnu-long-name-dir | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌B | ✅ | ✅ | ✅ | ❌ | ❌ |
-| [N43](https://stoppels.ch/tar/N43.html) pax-long-dir | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌B | ❌C | ❌B | ✅ | ✅ | ❌D | ❌D |
-| [N44](https://stoppels.ch/tar/N44.html) pax-path-name-empty | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ❌A | ❌A |
-| [N45](https://stoppels.ch/tar/N45.html) gnu-long-name-field-slash | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌ | ✅ | ✅ | ✅ | ❌ | ❌ |
-| [N46](https://stoppels.ch/tar/N46.html) pax-linkpath-linkname-empty | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌ | ✅ | ❌B | ✅ | ❌B | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ❌ | ❌C |
-| [N47](https://stoppels.ch/tar/N47.html) gnu-long-link | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌B | ✅ | ❌C | ✅ | ✅ | ❌ | ❌ |
-| [N54](https://stoppels.ch/tar/N54.html) pax-path-not-ascii | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌A | ❌B | ✅ | ❌C | ❌C |
-| [N55](https://stoppels.ch/tar/N55.html) gnu-long-link-and-name | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌B | ✅ | ❌C | ✅ | ✅ | ❌ | ❌ |
-| [N56](https://stoppels.ch/tar/N56.html) pax-path-equals-sign | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌A | ✅ | ✅ | ❌B | ❌B |
-| [N57](https://stoppels.ch/tar/N57.html) ustar-prefix-fills-field | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
-| [N58](https://stoppels.ch/tar/N58.html) ustar-prefix-under-pax | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌B | ❌B |
-| [N59](https://stoppels.ch/tar/N59.html) symlink-target-dotdot-after-symlink | ✅ | ✅ | ✅ | ❌ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ❌B | ✅ | ❌C | ✅ | ✅ | ✅ | ❌ | ❌D | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [N60](https://stoppels.ch/tar/N60.html) pax-global-name-directory | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A | ❌A | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌B | ❌B |
-| [S01](https://stoppels.ch/tar/S01.html) tree-dir-after-contents | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [S02](https://stoppels.ch/tar/S02.html) tree-duplicate-dir | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [S25](https://stoppels.ch/tar/S25.html) tree-dir-not-writable | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ❌A | ❌A |
-| **tolerated** | | | | | | | | | | | | | | | | | | | | | | | | |
-| [F01](https://stoppels.ch/tar/F01.html) number-leading-space | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
-| [F02](https://stoppels.ch/tar/F02.html) end-data-after | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ |
-| [F04](https://stoppels.ch/tar/F04.html) end-missing | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➕ | ➖ | ➖ |
-| [F05](https://stoppels.ch/tar/F05.html) magic-version-nuls | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ |
-| [F14](https://stoppels.ch/tar/F14.html) pax-size-disagrees | ➕ | ➕ | ❌A | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ➕ | ➕ | ➕ | ➕ | ❌A | ➕ | ❌A | ❌A | ➕ | ❌B | ❌B |
-| [F18](https://stoppels.ch/tar/F18.html) pax-global-comment-after-members | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ❌A |
-| [F32](https://stoppels.ch/tar/F32.html) checksum-leading-space | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
-| [F42](https://stoppels.ch/tar/F42.html) pax-comment-not-utf8 | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ❌A |
-| [F43](https://stoppels.ch/tar/F43.html) pax-global-comment-not-utf8 | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ❌A |
-| [F55](https://stoppels.ch/tar/F55.html) type-contiguous | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ❌A | ➖ | ❌A | ➕ | ➖ | ➕ | ➕ |
-| [F56](https://stoppels.ch/tar/F56.html) number-size-base256 | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➖ | ➖ | ➕ | ➕ | ➕ | ➖ | ➖ |
-| [F66](https://stoppels.ch/tar/F66.html) archive-no-bytes | ➖ | ➕ | ➖ | ➖ | ➖ | ➖ | ➖ | ➖ | ➖ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➖ | ➖ | ➕ | ➖ | ➖ |
-| [K02](https://stoppels.ch/tar/K02.html) linkname-on-file | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ |
-| [K16](https://stoppels.ch/tar/K16.html) pax-linkpath-on-file | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➖ | ❌A | ❌A |
-| [N05](https://stoppels.ch/tar/N05.html) name-dot | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
-| [N06](https://stoppels.ch/tar/N06.html) name-leading-dot-slash | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
-| [N07](https://stoppels.ch/tar/N07.html) symlink-absolute | ➕ | ➕ | ➕ | ❌A | ➖ | ➕ | ➕ | ❌B | ➖ | ➖ | ❌C | ➖ | ❌C | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➖ | ➖ | ➕ | ➕ | ➕ |
-| [N15](https://stoppels.ch/tar/N15.html) name-control-character | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
-| [N35](https://stoppels.ch/tar/N35.html) symlink-escapes | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➕ | ❌A | ➖ | ➖ | ❌B | ➖ | ❌B | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➖ | ➖ | ➕ | ➕ | ➕ |
-| [N49](https://stoppels.ch/tar/N49.html) name-double-slash | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ❌A |
-| [N50](https://stoppels.ch/tar/N50.html) name-dot-component | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ |
-| [S16](https://stoppels.ch/tar/S16.html) hardlink-target-spelled-differently | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ❌B | ➕ | ➕ | ➕ | ➕ | ➖ | ❌B |
-| **to reject: framing** | | | | | | | | | | | | | | | | | | | | | | | | |
-| [F03](https://stoppels.ch/tar/F03.html) end-lone-zero-block | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A |
-| [F06](https://stoppels.ch/tar/F06.html) checksum-signed | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A |
-| [F07](https://stoppels.ch/tar/F07.html) end-archive-after | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A | ⚠️A |
-| [F08](https://stoppels.ch/tar/F08.html) end-truncated-in-member | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [F09](https://stoppels.ch/tar/F09.html) end-zero-block-then-member | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A | ⚠️A |
-| [F10](https://stoppels.ch/tar/F10.html) extended-pax-size-before-gnu-long | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️C | ⚠️C | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️D | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ |
-| [F11](https://stoppels.ch/tar/F11.html) magic-odd-version | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A |
-| [F12](https://stoppels.ch/tar/F12.html) number-size-gap | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A |
-| [F13](https://stoppels.ch/tar/F13.html) pax-newline-in-path | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️A | ✅ | ⚠️B | ⚠️ | ⚠️B | ⚠️A | ⚠️A | ⚠️C | ⚠️C |
-| [F15](https://stoppels.ch/tar/F15.html) pax-size-on-dir | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️A | ⚠️C | ⚠️A | ⚠️A | ✅ | ⚠️D | ⚠️D |
-| [F16](https://stoppels.ch/tar/F16.html) type-unknown | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A |
-| [F19](https://stoppels.ch/tar/F19.html) pax-global-between-extended-and-member | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️C | ⚠️C |
-| [F20](https://stoppels.ch/tar/F20.html) pax-global-size | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️C | ⚠️C | ⚠️C | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️D | ⚠️D |
-| [F21](https://stoppels.ch/tar/F21.html) pax-size-empty | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️B | ⚠️ | ⚠️B | ⚠️B | ✅ | ⚠️C | ⚠️C |
-| [F22](https://stoppels.ch/tar/F22.html) pax-size-negative | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️ | ⚠️A | ⚠️A | ✅ | ⚠️C | ⚠️C |
-| [F23](https://stoppels.ch/tar/F23.html) pax-size-plus | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️C | ⚠️C |
-| [F24](https://stoppels.ch/tar/F24.html) pax-size-leading-space | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️B | ✅ | ⚠️B | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️C | ⚠️C |
-| [F25](https://stoppels.ch/tar/F25.html) pax-size-not-ascii-digits | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️ | ⚠️A | ⚠️A | ✅ | ⚠️C | ⚠️C |
-| [F26](https://stoppels.ch/tar/F26.html) pax-size-leading-zero | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️C | ⚠️C |
-| [F27](https://stoppels.ch/tar/F27.html) pax-size-too-large | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️ | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B |
-| [F29](https://stoppels.ch/tar/F29.html) number-size-base256-negative | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ✅ |
-| [F30](https://stoppels.ch/tar/F30.html) number-size-base256-too-large | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ✅ |
-| [F33](https://stoppels.ch/tar/F33.html) size-on-dir | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A |
-| [F34](https://stoppels.ch/tar/F34.html) size-on-hardlink | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️C | ⚠️C | ⚠️C | ⚠️D | ✅ | ⚠️E | ⚠️A | ⚠️C | ⚠️C | ✅ | ⚠️F | ⚠️A | ⚠️A | ⚠️C | ✅ | ✅ | ⚠️G |
-| [F35](https://stoppels.ch/tar/F35.html) pax-size-on-hardlink | ⚠️A | ⚠️B | ⚠️A | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ⚠️C | ⚠️C | ⚠️C | ⚠️D | ✅ | ⚠️E | ⚠️A | ⚠️C | ⚠️C | ✅ | ⚠️F | ⚠️G | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️H |
-| [F36](https://stoppels.ch/tar/F36.html) pax-record-length-short | ✅ | ✅ | ⚠️A | ⚠️B | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️B | ✅ | ⚠️B | ✅ | ✅ | ⚠️B | ⚠️C | ⚠️B | ⚠️B | ✅ | ⚠️D | ⚠️D |
-| [F37](https://stoppels.ch/tar/F37.html) number-size-not-octal | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A |
-| [F38](https://stoppels.ch/tar/F38.html) size-on-hardlink-without-pax | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️C | ✅ | ⚠️D | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️E | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️E |
-| [F39](https://stoppels.ch/tar/F39.html) format-pax-after-v7 | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️C | ⚠️C |
-| [F40](https://stoppels.ch/tar/F40.html) number-size-no-terminator | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A |
-| [F41](https://stoppels.ch/tar/F41.html) number-size-leading-nul | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️A | ⚠️A |
-| [F44](https://stoppels.ch/tar/F44.html) pax-global-size-empty | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️C | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️D | ⚠️D |
-| [F45](https://stoppels.ch/tar/F45.html) type-gnu-sparse | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️C | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️C | ⚠️B | ✅ | ⚠️C | ⚠️C |
-| [F46](https://stoppels.ch/tar/F46.html) pax-size-on-symlink | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️C | ⚠️C | ⚠️C | ⚠️D | ✅ | ⚠️E | ⚠️A | ⚠️C | ⚠️C | ✅ | ⚠️F | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️G | ⚠️G |
-| [F47](https://stoppels.ch/tar/F47.html) checksum-wrong-after-first-member | ✅ | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️C | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️C | ⚠️C | ⚠️A | ✅ | ✅ | ✅ | ✅ |
-| [F48](https://stoppels.ch/tar/F48.html) pax-record-length-plus | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️A | ⚠️C | ⚠️A | ⚠️B | ✅ | ⚠️D | ⚠️D |
-| [F49](https://stoppels.ch/tar/F49.html) pax-record-empty-line | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️C | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️D | ⚠️D |
-| [F50](https://stoppels.ch/tar/F50.html) pax-size-underscore | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️C | ⚠️C | ⚠️C | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️B | ✅ | ⚠️B | ✅ | ✅ | ⚠️B | ⚠️ | ⚠️B | ⚠️B | ✅ | ⚠️D | ⚠️D |
-| [F51](https://stoppels.ch/tar/F51.html) number-size-plus | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ⚠️A | ⚠️A |
-| [F52](https://stoppels.ch/tar/F52.html) type-gnu-volume-label | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️B | ✅ | ⚠️B | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B |
-| [F53](https://stoppels.ch/tar/F53.html) type-gnu-old-long-name | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️C | ✅ | ⚠️A | ⚠️C | ✅ | ✅ | ✅ |
-| [F54](https://stoppels.ch/tar/F54.html) format-pax-header-without-magic | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️C | ⚠️C |
-| [F61](https://stoppels.ch/tar/F61.html) number-uid-not-octal | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A |
-| [F62](https://stoppels.ch/tar/F62.html) pax-schily-realsize | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B |
-| [F63](https://stoppels.ch/tar/F63.html) end-unpadded | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [F64](https://stoppels.ch/tar/F64.html) end-truncated-in-header | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ |
-| [F67](https://stoppels.ch/tar/F67.html) extended-without-member | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B |
-| [F68](https://stoppels.ch/tar/F68.html) size-on-symlink | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️C | ⚠️C | ⚠️C | ⚠️D | ✅ | ⚠️E | ⚠️A | ⚠️C | ⚠️C | ✅ | ⚠️F | ⚠️A | ⚠️A | ⚠️C | ✅ | ⚠️C | ⚠️C |
-| [F69](https://stoppels.ch/tar/F69.html) number-size-octal-prefix | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️B |
-| [F70](https://stoppels.ch/tar/F70.html) number-size-minus | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ⚠️A | ⚠️A |
-| [F71](https://stoppels.ch/tar/F71.html) number-size-base256-marker | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️C | ✅ | ✅ | ✅ | ✅ |
-| [F72](https://stoppels.ch/tar/F72.html) pax-record-length-wraps | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️C | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️C | ⚠️A | ⚠️C | ⚠️ | ⚠️D | ⚠️D |
-| [F73](https://stoppels.ch/tar/F73.html) pax-record-without-equals | ✅ | ✅ | ⚠️A | ⚠️B | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️B | ✅ | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️C | ⚠️C |
-| [F74](https://stoppels.ch/tar/F74.html) pax-size-twice | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️C | ⚠️C |
-| [F75](https://stoppels.ch/tar/F75.html) pax-size-decimal-point | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️B | ✅ | ⚠️B | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️C | ⚠️C |
-| [F76](https://stoppels.ch/tar/F76.html) checksum-byte-after-nul | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A |
-| [F77](https://stoppels.ch/tar/F77.html) checksum-leading-nul | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️C | ⚠️C | ⚠️C | ⚠️B | ✅ | ⚠️A | ⚠️A | ⚠️C | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️A | ⚠️A |
-| [F78](https://stoppels.ch/tar/F78.html) pax-nul-in-key | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️ | ⚠️B | ⚠️A | ⚠️A | ⚠️C | ⚠️C |
-| [F83](https://stoppels.ch/tar/F83.html) size-on-fifo | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A | ⚠️C | ✅ | ✅ | ⚠️B | ✅ | ⚠️D | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️C | ⚠️E | ⚠️A | ⚠️C | ✅ | ✅ | ⚠️C |
-| [N48](https://stoppels.ch/tar/N48.html) magic-gnu-version-00 | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️A | ⚠️A |
-| **to reject: names** | | | | | | | | | | | | | | | | | | | | | | | | |
-| [N08](https://stoppels.ch/tar/N08.html) extended-pax-path-and-gnu-long-name | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️C | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️C | ⚠️A | ⚠️C | ✅ | ⚠️A | ✅ | ✅ |
-| [N09](https://stoppels.ch/tar/N09.html) extended-two-pax-headers | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️C | ⚠️A | ✅ | ✅ | ✅ | ⚠️C | ⚠️A | ⚠️C | ✅ | ⚠️A | ⚠️D | ⚠️D |
-| [N10](https://stoppels.ch/tar/N10.html) format-star | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️C | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️D | ⚠️D |
-| [N11](https://stoppels.ch/tar/N11.html) gnu-prefix-field | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️ | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A |
-| [N12](https://stoppels.ch/tar/N12.html) name-absolute | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | 💥 | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | 💥 | 💥 |
-| [N13](https://stoppels.ch/tar/N13.html) name-backslash | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A |
-| [N14](https://stoppels.ch/tar/N14.html) name-bytes-after-nul | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A |
-| [N16](https://stoppels.ch/tar/N16.html) name-dotdot | ✅ | ✅ | ⚠️A | ⚠️B | ✅ | ✅ | 💥 | ⚠️C | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️C | ⚠️C | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 💥 | 💥 |
-| [N17](https://stoppels.ch/tar/N17.html) name-empty | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B |
-| [N18](https://stoppels.ch/tar/N18.html) name-not-utf8 | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️C | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ |
-| [N19](https://stoppels.ch/tar/N19.html) pax-nul-in-path | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️C | ⚠️B | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️ | ⚠️B | ✅ | ✅ | ⚠️D | ⚠️D |
-| [N20](https://stoppels.ch/tar/N20.html) pax-repeated-key | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️A | ⚠️C | ⚠️A | ✅ | ⚠️B | ⚠️ | ⚠️B | ⚠️C | ⚠️A | ⚠️D | ⚠️D |
-| [N21](https://stoppels.ch/tar/N21.html) pax-global-path | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️C | ⚠️C |
-| [N22](https://stoppels.ch/tar/N22.html) pax-path-empty | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ✅ | ✅ | ⚠️C | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️C | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️D | ⚠️D |
-| [N23](https://stoppels.ch/tar/N23.html) extended-gnu-long-then-pax | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ |
-| [N24](https://stoppels.ch/tar/N24.html) pax-hdrcharset-binary | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️C | ⚠️C | ⚠️C | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️D | ⚠️A | ⚠️E | ⚠️E |
-| [N25](https://stoppels.ch/tar/N25.html) symlink-empty-target | ✅ | ✅ | ⚠️ | ⚠️A | ⚠️B | ⚠️C | ⚠️C | ✅ | ✅ | ⚠️ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️ | ✅ | ✅ | ✅ | ✅ | ⚠️C |
-| [N26](https://stoppels.ch/tar/N26.html) pax-global-path-then-empty | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B |
-| [N29](https://stoppels.ch/tar/N29.html) extended-pax-path-before-gnu-long-name | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️C | ⚠️B | ⚠️B | ✅ | ⚠️B | ✅ | ✅ |
-| [N30](https://stoppels.ch/tar/N30.html) name-drive-letter | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A |
-| [N31](https://stoppels.ch/tar/N31.html) pax-linkpath-not-utf8 | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️C | ⚠️D | ⚠️C | ⚠️D | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️E | ⚠️B | ⚠️B | ⚠️F | ⚠️A | ⚠️G | ⚠️G |
-| [N32](https://stoppels.ch/tar/N32.html) linkname-not-utf8 | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️C | ⚠️B | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️D | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ |
-| [N33](https://stoppels.ch/tar/N33.html) type-solaris-extended | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️B | ⚠️A | ✅ | ⚠️C | ✅ | ⚠️B | ⚠️C | ✅ | ⚠️B | ⚠️B |
-| [N34](https://stoppels.ch/tar/N34.html) pax-linkpath-empty | ✅ | ⚠️A | ✅ | ⚠️B | ⚠️C | ⚠️D | ⚠️D | ⚠️D | ✅ | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ✅ | ⚠️D | ✅ | ⚠️A | ✅ | ✅ | ⚠️E | ⚠️E |
-| [N36](https://stoppels.ch/tar/N36.html) pax-gnu-sparse | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️C | ⚠️C | ⚠️C | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️D | ⚠️D |
-| [N37](https://stoppels.ch/tar/N37.html) extended-two-gnu-long-names | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️C | ⚠️A | ✅ | ✅ | ✅ | ⚠️D | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ |
-| [N38](https://stoppels.ch/tar/N38.html) gnu-long-name-empty | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️B | ✅ | ⚠️A | ⚠️C | ⚠️C | ✅ | ⚠️A | ⚠️ | ✅ | ✅ | ⚠️ | ✅ | ✅ |
-| [N39](https://stoppels.ch/tar/N39.html) gnu-long-name-size-without-nul | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️C | ⚠️A | ⚠️B | ⚠️B | ✅ | ✅ | ✅ |
-| [N40](https://stoppels.ch/tar/N40.html) pax-global-linkpath | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️C | ⚠️B | ⚠️C | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️D | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️E | ⚠️E |
-| [N41](https://stoppels.ch/tar/N41.html) pax-gnu-sparse-name | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️C | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️C | ⚠️B | ⚠️C | ⚠️B | ⚠️B | ⚠️D | ⚠️D |
-| [N51](https://stoppels.ch/tar/N51.html) linkname-bytes-after-nul | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A |
-| [N52](https://stoppels.ch/tar/N52.html) extended-name-dotdot | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️A | 💥 | 💥 |
-| [N53](https://stoppels.ch/tar/N53.html) name-dotdot-inside | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️C | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️D | ⚠️A | ⚠️C | ⚠️C | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A |
-| **to reject: kinds** | | | | | | | | | | | | | | | | | | | | | | | | |
-| [F60](https://stoppels.ch/tar/F60.html) trailing-slash-file-with-size | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️C | ⚠️C | ⚠️C | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️C | ⚠️C | ⚠️C | ⚠️C | ✅ | ⚠️C | ⚠️C | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️B |
-| [K01](https://stoppels.ch/tar/K01.html) kind-trailing-slash-file | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A |
-| [K03](https://stoppels.ch/tar/K03.html) symlink-trailing-slash | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️D |
-| [K04](https://stoppels.ch/tar/K04.html) name-empty-with-prefix | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️B | ✅ | ⚠️B | ✅ | ⚠️C | ⚠️C |
-| [K05](https://stoppels.ch/tar/K05.html) hardlink-trailing-slash | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️D | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️D |
-| [K06](https://stoppels.ch/tar/K06.html) symlink-named-dot | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B |
-| [K08](https://stoppels.ch/tar/K08.html) type-fifo | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A | ⚠️C | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️C | ⚠️C | ⚠️A | ⚠️C | ✅ | ✅ | ⚠️C |
-| [K11](https://stoppels.ch/tar/K11.html) pax-mode | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️C | ⚠️C |
-| [K12](https://stoppels.ch/tar/K12.html) pax-acl | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️C | ⚠️C |
-| [K13](https://stoppels.ch/tar/K13.html) number-mode-base256 | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ✅ |
-| [K14](https://stoppels.ch/tar/K14.html) file-named-dot | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B |
-| [K15](https://stoppels.ch/tar/K15.html) file-trailing-dot | ✅ | ⚠️A | ✅ | ⚠️B | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️C | ⚠️C |
-| **to reject: order and state** | | | | | | | | | | | | | | | | | | | | | | | | |
-| [S03](https://stoppels.ch/tar/S03.html) hardlink-missing-target | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️A |
-| [S04](https://stoppels.ch/tar/S04.html) hardlink-to-itself | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️C | ✅ | ⚠️C | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A |
-| [S05](https://stoppels.ch/tar/S05.html) hardlink-to-later-member | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ⚠️C | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️B |
-| [S06](https://stoppels.ch/tar/S06.html) hardlink-to-symlink | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️C | ✅ | ⚠️B | ⚠️D | ⚠️A | ⚠️D | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️C | ⚠️A | ⚠️E | ✅ | ✅ | ✅ | ⚠️C |
-| [S07](https://stoppels.ch/tar/S07.html) tree-duplicate-file-differs | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A |
-| [S08](https://stoppels.ch/tar/S08.html) tree-duplicate-file-dir | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️C | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️B |
-| [S09](https://stoppels.ch/tar/S09.html) tree-duplicate-file-identical | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A |
-| [S10](https://stoppels.ch/tar/S10.html) tree-symlink-then-file | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️B | ⚠️B |
-| [S11](https://stoppels.ch/tar/S11.html) tree-through-symlink | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 💥 | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 💥 | 💥 |
-| [S12](https://stoppels.ch/tar/S12.html) tree-under-file | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️A |
-| [S13](https://stoppels.ch/tar/S13.html) hardlink-empty-target | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️ | ✅ | ✅ | ⚠️ | ✅ | ⚠️B |
-| [S14](https://stoppels.ch/tar/S14.html) tree-symlink-then-dir | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️C | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️B |
-| [S15](https://stoppels.ch/tar/S15.html) tree-file-then-hardlink | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️C |
-| [S17](https://stoppels.ch/tar/S17.html) hardlink-then-file-again | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️B | ⚠️C | ✅ | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️D | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ✅ | ⚠️D |
-| [S18](https://stoppels.ch/tar/S18.html) hardlink-absolute | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️A | ✅ | ⚠️A | ⚠️C | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️D | ✅ | ✅ | ⚠️A | ✅ | ⚠️B |
-| [S19](https://stoppels.ch/tar/S19.html) tree-through-symlink-inside | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A |
-| [S20](https://stoppels.ch/tar/S20.html) tree-file-at-implied-dir | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️A |
-| [S21](https://stoppels.ch/tar/S21.html) tree-duplicate-dir-file | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️B |
-| [S22](https://stoppels.ch/tar/S22.html) tree-duplicate-dir-symlink | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ⚠️C | ✅ | ✅ | ⚠️A | ✅ | ⚠️D |
-| [S23](https://stoppels.ch/tar/S23.html) tree-duplicate-file-symlink | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️C |
-| [S24](https://stoppels.ch/tar/S24.html) tree-duplicate-symlink | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️C |
-| [S26](https://stoppels.ch/tar/S26.html) hardlink-to-dir | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️C | ✅ | ⚠️C | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️C | ⚠️D | ✅ | ✅ | ⚠️B |
-| [S27](https://stoppels.ch/tar/S27.html) hardlink-through-symlink | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️C | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️B |
-| [S28](https://stoppels.ch/tar/S28.html) hardlink-target-trailing-slash | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️C | ⚠️C | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️C |
-| [S29](https://stoppels.ch/tar/S29.html) hardlink-mode-differs | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️B | ⚠️C | ⚠️A | ⚠️D | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️E | ⚠️A | ⚠️F | ⚠️A | ⚠️F | ✅ | ⚠️E |
-| **total** | ✅80 ➕21 ➖1 ⚠️86 | ✅80 ➕21 ➖1 ⚠️86 | ✅63 ➕20 ➖1 ⚠️102 ❌2 | ✅62 ➕18 ➖3 ⚠️102 ❌3 | ✅73 ➕19 ➖3 ⚠️92 ❌1 | ✅68 ➕21 ➖1 ⚠️98 | ✅65 ➕21 ➖1 ⚠️98 💥3 | ✅38 ➕18 ➖2 ⚠️124 ❌6 | ✅62 ➕18 ➖4 ⚠️100 ❌4 | ✅77 ➕18 ➖4 ⚠️88 ❌1 | ✅65 ➕19 ⚠️94 ❌10 | ✅110 ➕19 ➖3 ⚠️52 ❌4 | ✅52 ➕15 ➖4 ⚠️101 ❌16 | ✅71 ➕21 ➖1 ⚠️93 ❌2 | ✅68 ➕22 ⚠️96 ❌2 | ✅85 ➕21 ➖1 ⚠️79 ❌2 | ✅143 ➕9 ➖13 ⚠️20 ❌3 | ✅52 ➕15 ➖4 ⚠️97 ❌20 | ✅56 ➕19 ➖3 ⚠️100 ❌10 | ✅50 ➕17 ➖3 ⚠️103 ❌15 | ✅85 ➕14 ➖7 ⚠️78 ❌4 | ✅104 ➕19 ➖3 ⚠️62 | ✅48 ➕12 ➖4 ⚠️84 ❌36 💥4 | ✅24 ➕12 ➖3 ⚠️108 ❌37 💥4 |
+| case | GNU tar | bsdtar | BusyBox tar | 7-Zip | Python tarfile, filter=data, as in pip | Python tarfile, filter=tar | Python tarfile, filter=fully_trusted | node-tar | node-tar, strict | tar-fs | Java Commons Compress | .NET System.Formats.Tar | PHP PharData, as in Composer | Go containerd archive.Apply | Rust tar | Rust astral-tokio-tar | Rust tar-codec, as in uv | RubyGems | R untar, internal | Perl Archive::Tar | Haskell tar | Julia Tar.jl | untar (PyPI) | live-bootstrap untar | live-bootstrap untar, --non-strict |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **to accept** | | | | | | | | | | | | | | | | | | | | | | | | | |
+| [F17](https://stoppels.ch/tar/F17.html) pax-global-comment | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
+| [F28](https://stoppels.ch/tar/F28.html) pax-newline-in-comment | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌B | ❌B |
+| [F31](https://stoppels.ch/tar/F31.html) pax-xattr-not-utf8 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
+| [F57](https://stoppels.ch/tar/F57.html) pax-newline-in-comment-path | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A | ✅ | ✅ | ❌ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌B | ❌B |
+| [F58](https://stoppels.ch/tar/F58.html) pax-newline-in-comment-then-size | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌B | ❌B |
+| [F59](https://stoppels.ch/tar/F59.html) pax-nul-in-xattr | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌A | ❌ | ❌A | ✅ | ✅ | ✅ | ❌B | ❌B |
+| [F65](https://stoppels.ch/tar/F65.html) archive-without-members | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [F79](https://stoppels.ch/tar/F79.html) number-uid-gid-empty | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [F80](https://stoppels.ch/tar/F80.html) number-uid-base256 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
+| [F81](https://stoppels.ch/tar/F81.html) pax-unknown-key | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
+| [F82](https://stoppels.ch/tar/F82.html) pax-times | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
+| [K07](https://stoppels.ch/tar/K07.html) dir-name-empty-with-prefix | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌A | ❌A |
+| [K09](https://stoppels.ch/tar/K09.html) file-executable | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
+| [K10](https://stoppels.ch/tar/K10.html) file-executable-group-other | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [N01](https://stoppels.ch/tar/N01.html) gnu-long-name | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
+| [N02](https://stoppels.ch/tar/N02.html) name-fills-field | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
+| [N03](https://stoppels.ch/tar/N03.html) pax-long-name | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌A | ✅ | ✅ | ✅ | ❌B | ❌B |
+| [N04](https://stoppels.ch/tar/N04.html) ustar-prefix | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
+| [N27](https://stoppels.ch/tar/N27.html) pax-long-symlink | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌B | ✅ | ✅ | ✅ | ✅ | ❌C | ✅ | ❌C | ❌D | ✅ | ✅ | ❌E | ❌E |
+| [N28](https://stoppels.ch/tar/N28.html) pax-long-hardlink | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌B | ✅ | ✅ | ✅ | ✅ | ❌C | ✅ | ❌D | ❌E | ✅ | ✅ | ❌ | ❌F |
+| [N42](https://stoppels.ch/tar/N42.html) gnu-long-name-dir | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌B | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
+| [N43](https://stoppels.ch/tar/N43.html) pax-long-dir | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌B | ❌C | ❌B | ✅ | ✅ | ✅ | ❌D | ❌D |
+| [N44](https://stoppels.ch/tar/N44.html) pax-path-name-empty | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ❌A | ❌A |
+| [N45](https://stoppels.ch/tar/N45.html) gnu-long-name-field-slash | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
+| [N46](https://stoppels.ch/tar/N46.html) pax-linkpath-linkname-empty | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌ | ✅ | ❌B | ✅ | ❌B | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ | ❌C |
+| [N47](https://stoppels.ch/tar/N47.html) gnu-long-link | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌B | ✅ | ❌C | ✅ | ✅ | ✅ | ❌ | ❌ |
+| [N54](https://stoppels.ch/tar/N54.html) pax-path-not-ascii | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌A | ❌B | ✅ | ✅ | ❌C | ❌C |
+| [N55](https://stoppels.ch/tar/N55.html) gnu-long-link-and-name | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌B | ✅ | ❌C | ✅ | ✅ | ✅ | ❌ | ❌ |
+| [N56](https://stoppels.ch/tar/N56.html) pax-path-equals-sign | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ❌A | ✅ | ✅ | ✅ | ❌B | ❌B |
+| [N57](https://stoppels.ch/tar/N57.html) ustar-prefix-fills-field | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
+| [N58](https://stoppels.ch/tar/N58.html) ustar-prefix-under-pax | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌B | ❌B |
+| [N59](https://stoppels.ch/tar/N59.html) symlink-target-dotdot-after-symlink | ✅ | ✅ | ✅ | ❌ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ❌B | ✅ | ❌C | ✅ | ✅ | ✅ | ❌ | ❌D | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [N60](https://stoppels.ch/tar/N60.html) pax-global-name-directory | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A | ❌A | ✅ | ❌A | ✅ | ✅ | ✅ | ✅ | ✅ | ❌B | ❌B |
+| [S01](https://stoppels.ch/tar/S01.html) tree-dir-after-contents | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [S02](https://stoppels.ch/tar/S02.html) tree-duplicate-dir | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [S25](https://stoppels.ch/tar/S25.html) tree-dir-not-writable | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌A | ❌A |
+| **tolerated** | | | | | | | | | | | | | | | | | | | | | | | | | |
+| [F01](https://stoppels.ch/tar/F01.html) number-leading-space | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
+| [F02](https://stoppels.ch/tar/F02.html) end-data-after | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➖ | ➕ | ➕ |
+| [F04](https://stoppels.ch/tar/F04.html) end-missing | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➖ | ➖ |
+| [F05](https://stoppels.ch/tar/F05.html) magic-version-nuls | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ |
+| [F14](https://stoppels.ch/tar/F14.html) pax-size-disagrees | ➕ | ➕ | ❌A | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ➕ | ➕ | ➕ | ➕ | ❌A | ➕ | ❌A | ❌A | ➕ | ➖ | ❌B | ❌B |
+| [F18](https://stoppels.ch/tar/F18.html) pax-global-comment-after-members | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ❌A |
+| [F32](https://stoppels.ch/tar/F32.html) checksum-leading-space | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
+| [F42](https://stoppels.ch/tar/F42.html) pax-comment-not-utf8 | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ❌A |
+| [F43](https://stoppels.ch/tar/F43.html) pax-global-comment-not-utf8 | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ❌A |
+| [F55](https://stoppels.ch/tar/F55.html) type-contiguous | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ❌A | ➖ | ❌A | ➕ | ➖ | ➖ | ➕ | ➕ |
+| [F56](https://stoppels.ch/tar/F56.html) number-size-base256 | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➖ | ➖ | ➕ | ➕ | ➕ | ➕ | ➖ | ➖ |
+| [F66](https://stoppels.ch/tar/F66.html) archive-no-bytes | ➖ | ➕ | ➖ | ➖ | ➖ | ➖ | ➖ | ➖ | ➖ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➖ | ➖ | ➕ | ➖ | ➖ | ➖ |
+| [K02](https://stoppels.ch/tar/K02.html) linkname-on-file | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ |
+| [K16](https://stoppels.ch/tar/K16.html) pax-linkpath-on-file | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ❌A | ❌A |
+| [N05](https://stoppels.ch/tar/N05.html) name-dot | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
+| [N06](https://stoppels.ch/tar/N06.html) name-leading-dot-slash | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
+| [N07](https://stoppels.ch/tar/N07.html) symlink-absolute | ➕ | ➕ | ➕ | ❌A | ➖ | ➕ | ➕ | ❌B | ➖ | ➖ | ❌C | ➖ | ❌C | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➖ | ➖ | ➕ | ➕ | ➕ | ➕ |
+| [N15](https://stoppels.ch/tar/N15.html) name-control-character | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
+| [N35](https://stoppels.ch/tar/N35.html) symlink-escapes | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➕ | ❌A | ➖ | ➖ | ❌B | ➖ | ❌B | ➕ | ➕ | ➕ | ➖ | ➖ | ➕ | ➖ | ➖ | ➕ | ➕ | ➕ | ➕ |
+| [N49](https://stoppels.ch/tar/N49.html) name-double-slash | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ❌A |
+| [N50](https://stoppels.ch/tar/N50.html) name-dot-component | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ |
+| [S16](https://stoppels.ch/tar/S16.html) hardlink-target-spelled-differently | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ➕ | ❌A | ➕ | ➖ | ➕ | ➕ | ➕ | ➕ | ❌B | ➕ | ➕ | ➕ | ➕ | ➕ | ➖ | ❌B |
+| **to reject: framing** | | | | | | | | | | | | | | | | | | | | | | | | | |
+| [F03](https://stoppels.ch/tar/F03.html) end-lone-zero-block | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A |
+| [F06](https://stoppels.ch/tar/F06.html) checksum-signed | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A |
+| [F07](https://stoppels.ch/tar/F07.html) end-archive-after | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A |
+| [F08](https://stoppels.ch/tar/F08.html) end-truncated-in-member | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [F09](https://stoppels.ch/tar/F09.html) end-zero-block-then-member | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A |
+| [F10](https://stoppels.ch/tar/F10.html) extended-pax-size-before-gnu-long | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️C | ⚠️C | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️D | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ | ✅ |
+| [F11](https://stoppels.ch/tar/F11.html) magic-odd-version | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A |
+| [F12](https://stoppels.ch/tar/F12.html) number-size-gap | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A |
+| [F13](https://stoppels.ch/tar/F13.html) pax-newline-in-path | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️A | ✅ | ⚠️B | ⚠️ | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️C | ⚠️C |
+| [F15](https://stoppels.ch/tar/F15.html) pax-size-on-dir | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️A | ⚠️C | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️D | ⚠️D |
+| [F16](https://stoppels.ch/tar/F16.html) type-unknown | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️A | ⚠️A |
+| [F19](https://stoppels.ch/tar/F19.html) pax-global-between-extended-and-member | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ✅ | ⚠️C | ⚠️C |
+| [F20](https://stoppels.ch/tar/F20.html) pax-global-size | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️C | ⚠️C | ⚠️C | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ✅ | ⚠️D | ⚠️D |
+| [F21](https://stoppels.ch/tar/F21.html) pax-size-empty | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️B | ⚠️ | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️C | ⚠️C |
+| [F22](https://stoppels.ch/tar/F22.html) pax-size-negative | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️ | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️C | ⚠️C |
+| [F23](https://stoppels.ch/tar/F23.html) pax-size-plus | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️C | ⚠️C |
+| [F24](https://stoppels.ch/tar/F24.html) pax-size-leading-space | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️B | ✅ | ⚠️B | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ✅ | ⚠️C | ⚠️C |
+| [F25](https://stoppels.ch/tar/F25.html) pax-size-not-ascii-digits | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️ | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️C | ⚠️C |
+| [F26](https://stoppels.ch/tar/F26.html) pax-size-leading-zero | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ✅ | ⚠️C | ⚠️C |
+| [F27](https://stoppels.ch/tar/F27.html) pax-size-too-large | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️ | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️B |
+| [F29](https://stoppels.ch/tar/F29.html) number-size-base256-negative | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ✅ | ✅ |
+| [F30](https://stoppels.ch/tar/F30.html) number-size-base256-too-large | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ✅ | ✅ |
+| [F33](https://stoppels.ch/tar/F33.html) size-on-dir | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️A | ⚠️A |
+| [F34](https://stoppels.ch/tar/F34.html) size-on-hardlink | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️C | ⚠️C | ⚠️C | ⚠️D | ✅ | ⚠️E | ⚠️A | ⚠️C | ⚠️C | ✅ | ⚠️F | ⚠️A | ⚠️A | ⚠️C | ✅ | ✅ | ✅ | ⚠️G |
+| [F35](https://stoppels.ch/tar/F35.html) pax-size-on-hardlink | ⚠️A | ⚠️B | ⚠️A | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ⚠️C | ⚠️C | ⚠️C | ⚠️D | ✅ | ⚠️E | ⚠️A | ⚠️C | ⚠️C | ✅ | ⚠️F | ⚠️G | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️H |
+| [F36](https://stoppels.ch/tar/F36.html) pax-record-length-short | ✅ | ✅ | ⚠️A | ⚠️B | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️B | ✅ | ⚠️B | ✅ | ✅ | ⚠️B | ⚠️C | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️D | ⚠️D |
+| [F37](https://stoppels.ch/tar/F37.html) number-size-not-octal | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️A | ⚠️A |
+| [F38](https://stoppels.ch/tar/F38.html) size-on-hardlink-without-pax | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️C | ✅ | ⚠️D | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️E | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ✅ | ⚠️E |
+| [F39](https://stoppels.ch/tar/F39.html) format-pax-after-v7 | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️C | ⚠️C |
+| [F40](https://stoppels.ch/tar/F40.html) number-size-no-terminator | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A |
+| [F41](https://stoppels.ch/tar/F41.html) number-size-leading-nul | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️A | ⚠️A |
+| [F44](https://stoppels.ch/tar/F44.html) pax-global-size-empty | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️C | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️D | ⚠️D |
+| [F45](https://stoppels.ch/tar/F45.html) type-gnu-sparse | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️C | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️C | ⚠️B | ✅ | ✅ | ⚠️C | ⚠️C |
+| [F46](https://stoppels.ch/tar/F46.html) pax-size-on-symlink | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️C | ⚠️C | ⚠️C | ⚠️D | ✅ | ⚠️E | ⚠️A | ⚠️C | ⚠️C | ✅ | ⚠️F | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️G | ⚠️G |
+| [F47](https://stoppels.ch/tar/F47.html) checksum-wrong-after-first-member | ✅ | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️C | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️C | ⚠️C | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [F48](https://stoppels.ch/tar/F48.html) pax-record-length-plus | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️A | ⚠️C | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️D | ⚠️D |
+| [F49](https://stoppels.ch/tar/F49.html) pax-record-empty-line | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️C | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️D | ⚠️D |
+| [F50](https://stoppels.ch/tar/F50.html) pax-size-underscore | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️C | ⚠️C | ⚠️C | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️B | ✅ | ⚠️B | ✅ | ✅ | ⚠️B | ⚠️ | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️D | ⚠️D |
+| [F51](https://stoppels.ch/tar/F51.html) number-size-plus | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ✅ | ⚠️A | ⚠️A |
+| [F52](https://stoppels.ch/tar/F52.html) type-gnu-volume-label | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️B | ✅ | ⚠️B | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️B |
+| [F53](https://stoppels.ch/tar/F53.html) type-gnu-old-long-name | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️C | ✅ | ⚠️A | ⚠️C | ✅ | ✅ | ✅ | ✅ |
+| [F54](https://stoppels.ch/tar/F54.html) format-pax-header-without-magic | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️C | ⚠️C |
+| [F61](https://stoppels.ch/tar/F61.html) number-uid-not-octal | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A |
+| [F62](https://stoppels.ch/tar/F62.html) pax-schily-realsize | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B |
+| [F63](https://stoppels.ch/tar/F63.html) end-unpadded | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [F64](https://stoppels.ch/tar/F64.html) end-truncated-in-header | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [F67](https://stoppels.ch/tar/F67.html) extended-without-member | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️B |
+| [F68](https://stoppels.ch/tar/F68.html) size-on-symlink | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️C | ⚠️C | ⚠️C | ⚠️D | ✅ | ⚠️E | ⚠️A | ⚠️C | ⚠️C | ✅ | ⚠️F | ⚠️A | ⚠️A | ⚠️C | ✅ | ✅ | ⚠️C | ⚠️C |
+| [F69](https://stoppels.ch/tar/F69.html) number-size-octal-prefix | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️B |
+| [F70](https://stoppels.ch/tar/F70.html) number-size-minus | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ✅ | ⚠️A | ⚠️A |
+| [F71](https://stoppels.ch/tar/F71.html) number-size-base256-marker | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️C | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [F72](https://stoppels.ch/tar/F72.html) pax-record-length-wraps | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️C | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️C | ⚠️A | ⚠️C | ⚠️ | ✅ | ⚠️D | ⚠️D |
+| [F73](https://stoppels.ch/tar/F73.html) pax-record-without-equals | ✅ | ✅ | ⚠️A | ⚠️B | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️B | ✅ | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️C | ⚠️C |
+| [F74](https://stoppels.ch/tar/F74.html) pax-size-twice | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ✅ | ⚠️C | ⚠️C |
+| [F75](https://stoppels.ch/tar/F75.html) pax-size-decimal-point | ✅ | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️B | ✅ | ⚠️B | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️C | ⚠️C |
+| [F76](https://stoppels.ch/tar/F76.html) checksum-byte-after-nul | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A |
+| [F77](https://stoppels.ch/tar/F77.html) checksum-leading-nul | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️C | ⚠️C | ⚠️C | ⚠️B | ✅ | ⚠️A | ⚠️A | ⚠️C | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ✅ | ⚠️A | ⚠️A |
+| [F78](https://stoppels.ch/tar/F78.html) pax-nul-in-key | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️ | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️C | ⚠️C |
+| [F83](https://stoppels.ch/tar/F83.html) size-on-fifo | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A | ⚠️C | ✅ | ✅ | ⚠️B | ✅ | ⚠️D | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️C | ⚠️E | ⚠️A | ⚠️C | ✅ | ✅ | ✅ | ⚠️C |
+| [N48](https://stoppels.ch/tar/N48.html) magic-gnu-version-00 | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ✅ | ⚠️A | ⚠️A |
+| **to reject: names** | | | | | | | | | | | | | | | | | | | | | | | | | |
+| [N08](https://stoppels.ch/tar/N08.html) extended-pax-path-and-gnu-long-name | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️C | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️C | ⚠️A | ⚠️C | ✅ | ⚠️A | ✅ | ✅ | ✅ |
+| [N09](https://stoppels.ch/tar/N09.html) extended-two-pax-headers | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️C | ⚠️A | ✅ | ✅ | ✅ | ⚠️C | ⚠️A | ⚠️C | ✅ | ⚠️A | ✅ | ⚠️D | ⚠️D |
+| [N10](https://stoppels.ch/tar/N10.html) format-star | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️C | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️D | ⚠️D |
+| [N11](https://stoppels.ch/tar/N11.html) gnu-prefix-field | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️ | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️A | ⚠️A |
+| [N12](https://stoppels.ch/tar/N12.html) name-absolute | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | 💥 | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | 💥 | 💥 |
+| [N13](https://stoppels.ch/tar/N13.html) name-backslash | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A |
+| [N14](https://stoppels.ch/tar/N14.html) name-bytes-after-nul | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A |
+| [N16](https://stoppels.ch/tar/N16.html) name-dotdot | ✅ | ✅ | ⚠️A | ⚠️B | ✅ | ✅ | 💥 | ⚠️C | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️C | ⚠️C | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 💥 | 💥 |
+| [N17](https://stoppels.ch/tar/N17.html) name-empty | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B |
+| [N18](https://stoppels.ch/tar/N18.html) name-not-utf8 | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️C | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ |
+| [N19](https://stoppels.ch/tar/N19.html) pax-nul-in-path | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️C | ⚠️B | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️ | ⚠️B | ✅ | ✅ | ✅ | ⚠️D | ⚠️D |
+| [N20](https://stoppels.ch/tar/N20.html) pax-repeated-key | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️A | ⚠️C | ⚠️A | ✅ | ⚠️B | ⚠️ | ⚠️B | ⚠️C | ⚠️A | ✅ | ⚠️D | ⚠️D |
+| [N21](https://stoppels.ch/tar/N21.html) pax-global-path | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ✅ | ⚠️C | ⚠️C |
+| [N22](https://stoppels.ch/tar/N22.html) pax-path-empty | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ✅ | ✅ | ⚠️C | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️C | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️D | ⚠️D |
+| [N23](https://stoppels.ch/tar/N23.html) extended-gnu-long-then-pax | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ | ✅ |
+| [N24](https://stoppels.ch/tar/N24.html) pax-hdrcharset-binary | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️C | ⚠️C | ⚠️C | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️D | ⚠️A | ✅ | ⚠️E | ⚠️E |
+| [N25](https://stoppels.ch/tar/N25.html) symlink-empty-target | ✅ | ✅ | ⚠️ | ⚠️A | ⚠️B | ⚠️C | ⚠️C | ✅ | ✅ | ⚠️ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️C |
+| [N26](https://stoppels.ch/tar/N26.html) pax-global-path-then-empty | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️B |
+| [N29](https://stoppels.ch/tar/N29.html) extended-pax-path-before-gnu-long-name | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️C | ⚠️B | ⚠️B | ✅ | ⚠️B | ✅ | ✅ | ✅ |
+| [N30](https://stoppels.ch/tar/N30.html) name-drive-letter | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A |
+| [N31](https://stoppels.ch/tar/N31.html) pax-linkpath-not-utf8 | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️C | ⚠️D | ⚠️C | ⚠️D | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️E | ⚠️B | ⚠️B | ⚠️F | ⚠️A | ✅ | ⚠️G | ⚠️G |
+| [N32](https://stoppels.ch/tar/N32.html) linkname-not-utf8 | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️C | ⚠️B | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️D | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ✅ |
+| [N33](https://stoppels.ch/tar/N33.html) type-solaris-extended | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️B | ⚠️A | ✅ | ⚠️C | ✅ | ⚠️B | ⚠️C | ✅ | ✅ | ⚠️B | ⚠️B |
+| [N34](https://stoppels.ch/tar/N34.html) pax-linkpath-empty | ✅ | ⚠️A | ✅ | ⚠️B | ⚠️C | ⚠️D | ⚠️D | ⚠️D | ✅ | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ✅ | ⚠️D | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️E | ⚠️E |
+| [N36](https://stoppels.ch/tar/N36.html) pax-gnu-sparse | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️C | ⚠️C | ⚠️C | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️D | ⚠️D |
+| [N37](https://stoppels.ch/tar/N37.html) extended-two-gnu-long-names | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️C | ⚠️A | ✅ | ✅ | ✅ | ⚠️D | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ |
+| [N38](https://stoppels.ch/tar/N38.html) gnu-long-name-empty | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️B | ✅ | ⚠️A | ⚠️C | ⚠️C | ✅ | ⚠️A | ⚠️ | ✅ | ✅ | ⚠️ | ✅ | ✅ | ✅ |
+| [N39](https://stoppels.ch/tar/N39.html) gnu-long-name-size-without-nul | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️C | ⚠️A | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ |
+| [N40](https://stoppels.ch/tar/N40.html) pax-global-linkpath | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️C | ⚠️B | ⚠️C | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️D | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ✅ | ⚠️E | ⚠️E |
+| [N41](https://stoppels.ch/tar/N41.html) pax-gnu-sparse-name | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️C | ⚠️B | ⚠️B | ✅ | ✅ | ⚠️C | ⚠️B | ⚠️C | ⚠️B | ⚠️B | ✅ | ⚠️D | ⚠️D |
+| [N51](https://stoppels.ch/tar/N51.html) linkname-bytes-after-nul | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A |
+| [N52](https://stoppels.ch/tar/N52.html) extended-name-dotdot | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | 💥 | 💥 |
+| [N53](https://stoppels.ch/tar/N53.html) name-dotdot-inside | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️C | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️D | ⚠️A | ⚠️C | ⚠️C | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️A |
+| **to reject: kinds** | | | | | | | | | | | | | | | | | | | | | | | | | |
+| [F60](https://stoppels.ch/tar/F60.html) trailing-slash-file-with-size | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️C | ⚠️C | ⚠️C | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️C | ⚠️C | ⚠️C | ⚠️C | ✅ | ⚠️C | ⚠️C | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️B |
+| [K01](https://stoppels.ch/tar/K01.html) kind-trailing-slash-file | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A |
+| [K03](https://stoppels.ch/tar/K03.html) symlink-trailing-slash | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️D |
+| [K04](https://stoppels.ch/tar/K04.html) name-empty-with-prefix | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️B | ⚠️B | ✅ | ⚠️B | ✅ | ✅ | ⚠️C | ⚠️C |
+| [K05](https://stoppels.ch/tar/K05.html) hardlink-trailing-slash | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ✅ | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️D | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️D |
+| [K06](https://stoppels.ch/tar/K06.html) symlink-named-dot | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B |
+| [K08](https://stoppels.ch/tar/K08.html) type-fifo | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️A | ⚠️C | ✅ | ✅ | ⚠️B | ⚠️A | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ✅ | ⚠️C | ⚠️C | ⚠️A | ⚠️C | ✅ | ✅ | ✅ | ⚠️C |
+| [K11](https://stoppels.ch/tar/K11.html) pax-mode | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️C | ⚠️C |
+| [K12](https://stoppels.ch/tar/K12.html) pax-acl | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️C | ⚠️C |
+| [K13](https://stoppels.ch/tar/K13.html) number-mode-base256 | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ⚠️B | ⚠️A | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ✅ | ✅ |
+| [K14](https://stoppels.ch/tar/K14.html) file-named-dot | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B |
+| [K15](https://stoppels.ch/tar/K15.html) file-trailing-dot | ✅ | ⚠️A | ✅ | ⚠️B | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️C | ⚠️C |
+| **to reject: order and state** | | | | | | | | | | | | | | | | | | | | | | | | | |
+| [S03](https://stoppels.ch/tar/S03.html) hardlink-missing-target | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A |
+| [S04](https://stoppels.ch/tar/S04.html) hardlink-to-itself | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️C | ✅ | ⚠️C | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A |
+| [S05](https://stoppels.ch/tar/S05.html) hardlink-to-later-member | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ⚠️C | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B |
+| [S06](https://stoppels.ch/tar/S06.html) hardlink-to-symlink | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️C | ✅ | ⚠️B | ⚠️D | ⚠️A | ⚠️D | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️C | ⚠️A | ⚠️E | ✅ | ✅ | ✅ | ✅ | ⚠️C |
+| [S07](https://stoppels.ch/tar/S07.html) tree-duplicate-file-differs | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A |
+| [S08](https://stoppels.ch/tar/S08.html) tree-duplicate-file-dir | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️C | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ⚠️B | ⚠️B |
+| [S09](https://stoppels.ch/tar/S09.html) tree-duplicate-file-identical | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A |
+| [S10](https://stoppels.ch/tar/S10.html) tree-symlink-then-file | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️B | ⚠️B |
+| [S11](https://stoppels.ch/tar/S11.html) tree-through-symlink | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 💥 | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 💥 | 💥 |
+| [S12](https://stoppels.ch/tar/S12.html) tree-under-file | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ✅ | ⚠️A | ⚠️A |
+| [S13](https://stoppels.ch/tar/S13.html) hardlink-empty-target | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ✅ | ⚠️ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️ | ✅ | ✅ | ⚠️ | ✅ | ✅ | ⚠️B |
+| [S14](https://stoppels.ch/tar/S14.html) tree-symlink-then-dir | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️C | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ⚠️B | ⚠️B |
+| [S15](https://stoppels.ch/tar/S15.html) tree-file-then-hardlink | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️C |
+| [S17](https://stoppels.ch/tar/S17.html) hardlink-then-file-again | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️B | ⚠️C | ✅ | ⚠️C | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️D | ⚠️A | ⚠️A | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️D |
+| [S18](https://stoppels.ch/tar/S18.html) hardlink-absolute | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️B | ⚠️A | ✅ | ⚠️A | ⚠️C | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️D | ✅ | ✅ | ⚠️A | ✅ | ✅ | ⚠️B |
+| [S19](https://stoppels.ch/tar/S19.html) tree-through-symlink-inside | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A |
+| [S20](https://stoppels.ch/tar/S20.html) tree-file-at-implied-dir | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B | ✅ | ⚠️A | ⚠️A |
+| [S21](https://stoppels.ch/tar/S21.html) tree-duplicate-dir-file | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ✅ | ✅ | ✅ | ⚠️A | ✅ | ⚠️B | ⚠️B |
+| [S22](https://stoppels.ch/tar/S22.html) tree-duplicate-dir-symlink | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ✅ | ✅ | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ⚠️A | ✅ | ⚠️C | ✅ | ✅ | ⚠️A | ✅ | ✅ | ⚠️D |
+| [S23](https://stoppels.ch/tar/S23.html) tree-duplicate-file-symlink | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️C |
+| [S24](https://stoppels.ch/tar/S24.html) tree-duplicate-symlink | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️A | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️C |
+| [S26](https://stoppels.ch/tar/S26.html) hardlink-to-dir | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️C | ✅ | ⚠️C | ✅ | ✅ | ✅ | ✅ | ⚠️B | ⚠️B | ⚠️C | ⚠️D | ✅ | ✅ | ✅ | ⚠️B |
+| [S27](https://stoppels.ch/tar/S27.html) hardlink-through-symlink | ⚠️A | ✅ | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ⚠️A | ⚠️C | ⚠️A | ✅ | ⚠️A | ⚠️A | ⚠️A | ✅ | ⚠️B | ⚠️A | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️B |
+| [S28](https://stoppels.ch/tar/S28.html) hardlink-target-trailing-slash | ✅ | ✅ | ✅ | ✅ | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ✅ | ✅ | ⚠️A | ✅ | ✅ | ⚠️A | ⚠️C | ⚠️C | ⚠️A | ✅ | ⚠️A | ✅ | ✅ | ⚠️C |
+| [S29](https://stoppels.ch/tar/S29.html) hardlink-mode-differs | ⚠️A | ⚠️A | ⚠️A | ⚠️A | ⚠️B | ⚠️B | ⚠️B | ⚠️A | ⚠️A | ⚠️B | ⚠️C | ⚠️A | ⚠️D | ⚠️B | ⚠️A | ⚠️A | ⚠️A | ⚠️E | ⚠️A | ⚠️F | ⚠️A | ⚠️F | ⚠️A | ✅ | ⚠️E |
+| **total** | ✅80 ➕21 ➖1 ⚠️86 | ✅80 ➕21 ➖1 ⚠️86 | ✅63 ➕20 ➖1 ⚠️102 ❌2 | ✅62 ➕18 ➖3 ⚠️102 ❌3 | ✅73 ➕19 ➖3 ⚠️92 ❌1 | ✅68 ➕21 ➖1 ⚠️98 | ✅65 ➕21 ➖1 ⚠️98 💥3 | ✅38 ➕18 ➖2 ⚠️124 ❌6 | ✅62 ➕18 ➖4 ⚠️100 ❌4 | ✅77 ➕18 ➖4 ⚠️88 ❌1 | ✅65 ➕19 ⚠️94 ❌10 | ✅110 ➕19 ➖3 ⚠️52 ❌4 | ✅52 ➕15 ➖4 ⚠️101 ❌16 | ✅71 ➕21 ➖1 ⚠️93 ❌2 | ✅68 ➕22 ⚠️96 ❌2 | ✅85 ➕21 ➖1 ⚠️79 ❌2 | ✅143 ➕9 ➖13 ⚠️20 ❌3 | ✅52 ➕15 ➖4 ⚠️97 ❌20 | ✅56 ➕19 ➖3 ⚠️100 ❌10 | ✅50 ➕17 ➖3 ⚠️103 ❌15 | ✅85 ➕14 ➖7 ⚠️78 ❌4 | ✅104 ➕19 ➖3 ⚠️62 | ✅163 ➕18 ➖4 ⚠️3 | ✅48 ➕12 ➖4 ⚠️84 ❌36 💥4 | ✅24 ➕12 ➖3 ⚠️108 ❌37 💥4 |
 
 ## Trees
 
