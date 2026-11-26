@@ -63,8 +63,7 @@ hardlinking it leaves `a` non-executable and makes `h` executable.
 
 Decision point: whether a hardlink header&#x27;s mode updates the linked file&#x27;s mode.
 Seen in: not measured, as the scanner does not record modes; 233 scanned tarballs contain hardlinks.
-See also: S17, a file followed by a hardlink and a second copy of the file, and K09, an executable
-file.
+See also: S17, a file, a hardlink to it, then the file again, and K09, an executable file.
 
 0x000000  header: regular file
           name     [  0,100)  &quot;a&quot; + 99 NUL
@@ -315,7 +314,7 @@ file.
 
 <h2 id="see-also">See also<a class="anchor" href="#see-also" aria-label="Link to this section">¶</a></h2>
 <ul>
-<li><a href="S17.html"><code>S17</code></a>: a file followed by a hardlink and a second copy of the file, and <a href="K09.html"><code>K09</code></a>, an executable file.</li>
+<li><a href="S17.html"><code>S17</code></a>: a file, a hardlink to it, then the file again, and <a href="K09.html"><code>K09</code></a>, an executable file.</li>
 </ul>
 
 <hr class="wide">

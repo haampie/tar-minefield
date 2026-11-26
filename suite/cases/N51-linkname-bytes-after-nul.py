@@ -5,8 +5,7 @@ The archive has a symlink `l` whose linkname field contains `safe`, a NUL byte, 
 Under [POSIX][name-full], the linkname field is NUL-terminated unless it fills all 100 bytes, so the
 link target is `safe`. A reader that copies the whole field instead of stopping at the first NUL
 sees `safe\0../x` in languages with length-delimited strings, whereas C system calls stop at the
-NUL. As a result, creating the symlink either fails or validates a different string from the one
-passed to the OS.
+NUL. Creating the symlink then fails, or the string that is checked is not the one that is used.
 
 Because normal archivers zero-fill the remainder of the field and trailing bytes after the NUL have
 no valid purpose, a strict parser rejects the archive.

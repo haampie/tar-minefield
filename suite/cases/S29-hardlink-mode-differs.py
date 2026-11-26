@@ -11,8 +11,7 @@ hardlinking it leaves `a` non-executable and makes `h` executable.
 
 Decision point: whether a hardlink header's mode updates the linked file's mode.
 Seen in: not measured, as the scanner does not record modes; 233 scanned tarballs contain hardlinks.
-See also: S17, a file followed by a hardlink and a second copy of the file, and K09, an executable
-file.
+See also: S17, a file, a hardlink to it, then the file again, and K09, an executable file.
 """
 
 VERDICT = "reject"

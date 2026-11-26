@@ -39,7 +39,7 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has three files, <code>a</code>, <code>b</code> and <code>c</code>. In <code>b</code>&#x27;s 8-byte checksum field, six valid octal digits and a NUL are followed by <code>x</code>.</p>
+<p>The archive has three files, <code>a</code>, <code>b</code> and <code>c</code>. In <code>b</code>&#x27;s 8-byte checksum field, the six octal digits of the correct sum and a NUL are followed by <code>x</code>.</p>
 <p>POSIX numeric fields are <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20numeric%20field%20is%20terminated%20by%20one%20or%20more%20%3Cspace%3E%20or%20NUL%20characters">terminated</a> by one or more spaces or NULs, and writers conventionally end the 8-byte checksum field with a NUL and a space. POSIX does not specify whether arbitrary bytes may follow a NUL terminator. A reader that stops at the NUL accepts the checksum and extracts <code>a</code>, <code>b</code> and <code>c</code>. A reader that validates all 8 bytes of the field rejects <code>b</code>&#x27;s header: if it then scans forward for the next valid header, it extracts only <code>a</code> and <code>c</code>; otherwise it reports an error.</p>
 <p><strong>Decision point:</strong> whether bytes after a checksum&#x27;s NUL terminator are checked.</p>
 <p><strong>Seen in:</strong> not measured, as earlier scanner versions did not record it; 7 scanned tarballs have a checksum byte other than an octal digit, space or NUL.</p>
@@ -52,8 +52,8 @@
 
 A non-space byte after a checksum&#x27;s NUL terminator, after the first member.
 
-The archive has three files, `a`, `b` and `c`. In `b`&#x27;s 8-byte checksum field, six valid octal
-digits and a NUL are followed by `x`.
+The archive has three files, `a`, `b` and `c`. In `b`&#x27;s 8-byte checksum field, the six octal digits
+of the correct sum and a NUL are followed by `x`.
 
 POSIX numeric fields are terminated by one or more spaces or NULs, and writers
 conventionally end the 8-byte checksum field with a NUL and a space. POSIX does not specify whether

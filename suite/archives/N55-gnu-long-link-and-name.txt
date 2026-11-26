@@ -4,7 +4,8 @@ A symlink with both a GNU long link target (`K`) and a GNU long name (`L`).
 
 The archive has a GNU long link header (typeflag `K`) containing 120 `t`s and a NUL, followed by a
 GNU long name header (typeflag `L`) containing 120 `l`s and a NUL, and then a symlink (typeflag `2`)
-with GNU magic whose ustar name and linkname fields hold the 100-byte prefixes.
+with GNU magic whose ustar name and linkname fields hold the first 100 bytes of the name and
+target.
 
 The `L` header overrides the ustar name field and the `K` header overrides the linkname field,
 producing a symlink named with 120 `l`s that points to 120 `t`s. GNU tar always emits `K` before `L`

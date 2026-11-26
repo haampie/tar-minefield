@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive consists solely of the end-of-archive marker: two 512-byte zero blocks, with no members.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros">POSIX</a>, an archive ends with two zero blocks and need not contain any members. GNU tar writes this 1024-byte archive when given an empty file list, as does RubyGems for a gem with no files. The extracted tree is empty.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_01:~:text=there%20shall%20be%20two%20512%2Dbyte%20blocks%20filled%20with%20binary%20zeros">POSIX</a>, an archive ends with two zero blocks and need not contain any members. GNU tar writes such an archive when given an empty file list, as does RubyGems for a gem with no files. The extracted tree is empty.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 </table></div>
@@ -57,8 +57,8 @@ An archive with no members, containing only the two trailing zero blocks.
 The archive consists solely of the end-of-archive marker: two 512-byte zero blocks, with no members.
 
 In POSIX, an archive ends with two zero blocks and need not contain any members. GNU tar
-writes this 1024-byte archive when given an empty file list, as does RubyGems for a gem with no
-files. The extracted tree is empty.
+writes such an archive when given an empty file list, as does RubyGems for a gem with no files. The
+extracted tree is empty.
 
 Seen in: 38 gems with no files, such as lil 0.0.4 and slds 0.1.1.
 See also: F66, a zero-byte file, which is rejected.

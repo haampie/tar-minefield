@@ -2,9 +2,9 @@
 
 The archive is 0 bytes long.
 
-A [POSIX][end] archive ends with two zero blocks, which an empty file lacks. A zero-byte file often
-results from a failed download or an aborted pipe. Some readers accept it as an archive with no
-members, while others reject it.
+A [POSIX][end] archive ends with two zero blocks, which an empty file lacks. A zero-byte file can
+be left behind by a failed download. Some readers accept it as an archive with no members, while
+others reject it.
 
 Decision point: whether a zero-byte file is a valid empty archive.
 Seen in: none of the scanned tarballs.

@@ -1,7 +1,7 @@
 """A non-space byte after a checksum's NUL terminator, after the first member.
 
-The archive has three files, `a`, `b` and `c`. In `b`'s 8-byte checksum field, six valid octal
-digits and a NUL are followed by `x`.
+The archive has three files, `a`, `b` and `c`. In `b`'s 8-byte checksum field, the six octal digits
+of the correct sum and a NUL are followed by `x`.
 
 POSIX numeric fields are [terminated][numeric] by one or more spaces or NULs, and writers
 conventionally end the 8-byte checksum field with a NUL and a space. POSIX does not specify whether

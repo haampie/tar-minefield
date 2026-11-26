@@ -7,7 +7,7 @@ A POSIX archive consists of [512-byte blocks][block-512], and file data occupies
 blocks][records-follow]. Even though all 5 bytes of `a` are present, the final block is incomplete.
 A reader that reads only the file's byte count extracts `a` with its 5 bytes, sometimes without
 reporting an error. A reader that requires full 512-byte blocks fails on the short read, leaving `a`
-empty or unextracted.
+empty or unextracted. Most readers report an error.
 
 Decision point: whether a file in an unpadded final block is extracted.
 Seen in: not measured, as earlier scanner versions grouped this with archives missing the

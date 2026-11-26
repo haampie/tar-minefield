@@ -13,7 +13,7 @@ record extending past the pax header: it either reports an error, drops the reco
 `header-name`, or takes the rest of the payload as the value and extracts `renamed` with a trailing
 newline.
 
-Decision point: whether a pax record length that overflows 32 bits is rejected.
+Decision point: whether a pax record whose length runs past its header is recognized as malformed.
 Seen in: none of the scanned tarballs.
 See also: F36, a pax record whose length is one byte short, and F30, a base-256 size that wraps
 around.

@@ -20,5 +20,5 @@ FEATURES = ["tree.duplicate.file-symlink"]
 def build(a):
     a.file(b"t", b"t\n")
     a.file(b"a", b"a file first\n")
-    a.symlink(b"a", b"t", note="symlink replacing file a")
+    a.symlink(b"a", b"t", note="a symlink, after a file")
     a.end()

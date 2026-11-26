@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a 5-byte file <code>a</code> and ends immediately after those 5 bytes, with no padding to 512 bytes and no zero blocks.</p>
-<p>A POSIX archive consists of <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20logical%20record%20shall%20be%20a%20fixed%2Dsize%20logical%20record%20of%20512%20octets">512-byte blocks</a>, and file data occupies <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20number%20of%20logical%20records%20written%20following%20the%20header%20shall%20be%20%28size%2B511%29%2F512">full blocks</a>. Even though all 5 bytes of <code>a</code> are present, the final block is incomplete. A reader that reads only the file&#x27;s byte count extracts <code>a</code> with its 5 bytes, sometimes without reporting an error. A reader that requires full 512-byte blocks fails on the short read, leaving <code>a</code> empty or unextracted.</p>
+<p>A POSIX archive consists of <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Each%20logical%20record%20shall%20be%20a%20fixed%2Dsize%20logical%20record%20of%20512%20octets">512-byte blocks</a>, and file data occupies <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=the%20number%20of%20logical%20records%20written%20following%20the%20header%20shall%20be%20%28size%2B511%29%2F512">full blocks</a>. Even though all 5 bytes of <code>a</code> are present, the final block is incomplete. A reader that reads only the file&#x27;s byte count extracts <code>a</code> with its 5 bytes, sometimes without reporting an error. A reader that requires full 512-byte blocks fails on the short read, leaving <code>a</code> empty or unextracted. Most readers report an error.</p>
 <p><strong>Decision point:</strong> whether a file in an unpadded final block is extracted.</p>
 <p><strong>Seen in:</strong> not measured, as earlier scanner versions grouped this with archives missing the end-of-archive marker; 22 scanned tarballs lack that marker and may end this way.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -59,7 +59,7 @@ A POSIX archive consists of 512-byte blocks, and file data occupies full
 blocks. Even though all 5 bytes of `a` are present, the final block is incomplete.
 A reader that reads only the file&#x27;s byte count extracts `a` with its 5 bytes, sometimes without
 reporting an error. A reader that requires full 512-byte blocks fails on the short read, leaving `a`
-empty or unextracted.
+empty or unextracted. Most readers report an error.
 
 Decision point: whether a file in an unpadded final block is extracted.
 Seen in: not measured, as earlier scanner versions grouped this with archives missing the

@@ -55,7 +55,7 @@ See also: S10, a symlink followed by a file of the same name.
 0x000600  data
           13 bytes, then 499 NUL to the end of the block
           "a file first\n"
-0x000800  header: symlink, symlink replacing file a
+0x000800  header: symlink, a symlink, after a file
           name     [  0,100)  "a" + 99 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

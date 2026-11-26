@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a symlink <code>l</code> whose linkname field contains <code>safe</code>, a NUL byte, and <code>../x</code>.</p>
-<p>Under <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=except%20when%20all%20characters%20in%20the%20array%20contain%20non%2DNUL%20characters%20including%20the%20last%20character">POSIX</a>, the linkname field is NUL-terminated unless it fills all 100 bytes, so the link target is <code>safe</code>. A reader that copies the whole field instead of stopping at the first NUL sees <code>safe\0../x</code> in languages with length-delimited strings, whereas C system calls stop at the NUL. As a result, creating the symlink either fails or validates a different string from the one passed to the OS.</p>
+<p>Under <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=except%20when%20all%20characters%20in%20the%20array%20contain%20non%2DNUL%20characters%20including%20the%20last%20character">POSIX</a>, the linkname field is NUL-terminated unless it fills all 100 bytes, so the link target is <code>safe</code>. A reader that copies the whole field instead of stopping at the first NUL sees <code>safe\0../x</code> in languages with length-delimited strings, whereas C system calls stop at the NUL. Creating the symlink then fails, or the string that is checked is not the one that is used.</p>
 <p>Because normal archivers zero-fill the remainder of the field and trailing bytes after the NUL have no valid purpose, a strict parser rejects the archive.</p>
 <p><strong>Decision point:</strong> whether a linkname ends at its first NUL.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
@@ -58,8 +58,7 @@ The archive has a symlink `l` whose linkname field contains `safe`, a NUL byte, 
 Under POSIX, the linkname field is NUL-terminated unless it fills all 100 bytes, so the
 link target is `safe`. A reader that copies the whole field instead of stopping at the first NUL
 sees `safe\0../x` in languages with length-delimited strings, whereas C system calls stop at the
-NUL. As a result, creating the symlink either fails or validates a different string from the one
-passed to the OS.
+NUL. Creating the symlink then fails, or the string that is checked is not the one that is used.
 
 Because normal archivers zero-fill the remainder of the field and trailing bytes after the NUL have
 no valid purpose, a strict parser rejects the archive.

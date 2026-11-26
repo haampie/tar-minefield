@@ -2,15 +2,15 @@ F78-pax-nul-in-key: must reject
 
 A NUL byte inside a pax key, before a `path` record.
 
-The archive has a file with two pax records: one whose key is `pa`, a NUL and `th` with value `x`,
-followed by `path=renamed`. The file's ustar header gives the name `header-name`.
+The archive has a file with two pax records. The first has the key `pa`, a NUL and `th`, and the
+value `x`; the second is `path=renamed`. The file's ustar header gives the name `header-name`.
 
 Because pax records are framed by their byte length, a length-based parser treats
 the first key as unknown and applies the following `path=renamed` record. A reader that stops
 parsing the pax payload at the first NUL, or discards any pax header containing a NUL, loses
-`path=renamed` and extracts `header-name`. Other readers report an error. Unlike binary xattr
-values, which legitimately contain NUL bytes in published tarballs, a pax key has no valid reason to
-contain a NUL.
+`path=renamed` and extracts `header-name`. Other readers report an error. Binary xattr values
+contain NUL bytes in some published tarballs, and a reader must still apply the records that follow
+them, but a NUL in a key has no meaning, so a strict parser rejects it.
 
 Decision point: whether a NUL in a pax key truncates or invalidates the pax header.
 Seen in: not measured, as the scanner records only the 8 most common pax keys per tarball; none of
