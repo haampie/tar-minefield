@@ -2,7 +2,7 @@
 
 The archive has one member whose pax header sets `GNU.sparse.major=1`, `GNU.sparse.minor=0`,
 `GNU.sparse.name=a`, `GNU.sparse.realsize=1026` and `path=GNUSparseFile.0/a`. Its data consists of a
-512-byte sparse map block (`1\n1024\n2\n` padded with NULs, describing a single 2-byte region at
+512-byte sparse map block (`1\\n1024\\n2\\n` padded with NULs, describing a single 2-byte region at
 offset 1024) followed by those 2 bytes, `ab`.
 
 Under POSIX, vendor keywords such as `GNU.sparse.*` are [implementation
