@@ -2,11 +2,11 @@
 
 The archive has a file `f`, a symlink `s` to `f`, and a hardlink `h` to `s`.
 
-In [POSIX][hardlink], the target of a hardlink is a file of any type, so `h` is a second name for
-the symlink `s` itself. But whether `link()` follows a symlink is
-[implementation-defined][link-follows]; `linkat()` takes a flag for it. This case is ambiguous in
-practice because `h` is either a hardlink to the symlink `s`, and so itself a symlink to `f`, or,
-with the symlink followed, a hardlink to the file `f`.
+Under [POSIX][hardlink], a hardlink can target a previously archived file of any type, making `h` a
+second name for the symlink `s`. However, whether `link()` follows a symlink is
+[implementation-defined][link-follows] (and controlled by a flag in `linkat()`). Depending on the
+reader and platform, `h` becomes either a hardlink to the symlink `s` (and thus itself a symlink to
+`f`) or a hardlink to the target file `f`.
 
 Decision point: whether a hardlink follows a symlink.
 Seen in: octa 8.4.

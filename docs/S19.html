@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has the directories <code>d</code> and <code>x</code>, a symlink <code>x/l</code> to <code>../d</code>, then a file <code>x/l/f</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a>, files are created by pathname resolution, which <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=In%20all%20other%20cases%2C%20the%20system%20shall%20prefix%20the%20remaining%20pathname">follows</a> the link, so the file is written to <code>d/f</code>, inside the destination. This case is ambiguous in practice because a reader that writes through the link extracts <code>d/f</code>, and one that does not either fails or skips <code>f</code>. A reader that creates symlinks after the other members writes <code>f</code> to a directory <code>x/l</code>, and then fails to create the link. It is rejected, as is writing through any symlink: a reader that writes through links stays inside the destination only if it resolves each link at every write.</p>
+<p>The archive has the directories <code>d</code> and <code>x</code>, a symlink <code>x/l</code> to <code>../d</code>, and a file <code>x/l/f</code>.</p>
+<p>Under <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a>, files are created by pathname resolution, which <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=In%20all%20other%20cases%2C%20the%20system%20shall%20prefix%20the%20remaining%20pathname">follows</a> <code>x/l</code> and writes <code>d/f</code> inside the destination directory. A reader that follows the symlink extracts <code>d/f</code>, whereas one that refuses to traverse symlinks either fails or skips <code>f</code>. A reader that defers creating symlinks until after regular files first creates <code>x/l</code> as a real directory for <code>x/l/f</code> and then fails when creating the symlink <code>x/l</code>. A strict parser rejects writing through any symlink, even one whose target stays inside the destination.</p>
 <p><strong>Decision point:</strong> whether a member may be written through a symlink.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,15 +52,14 @@
 
 A member written through a symlink that points inside the destination.
 
-The archive has the directories `d` and `x`, a symlink `x/l` to `../d`, then a file `x/l/f`.
+The archive has the directories `d` and `x`, a symlink `x/l` to `../d`, and a file `x/l/f`.
 
-In POSIX, files are created by pathname resolution, which follows
-the link, so the file is written to `d/f`, inside the destination. This case is ambiguous in
-practice because a reader that writes through the link extracts `d/f`, and one that does not either
-fails or skips `f`. A reader that creates symlinks after the other members writes `f` to a directory
-`x/l`, and then fails to create the link. It is rejected, as is writing through any symlink: a
-reader that writes through links stays inside the destination only if it resolves each link at every
-write.
+Under POSIX, files are created by pathname resolution, which
+follows `x/l` and writes `d/f` inside the destination directory. A reader that
+follows the symlink extracts `d/f`, whereas one that refuses to traverse symlinks either fails or
+skips `f`. A reader that defers creating symlinks until after regular files first creates `x/l` as a
+real directory for `x/l/f` and then fails when creating the symlink `x/l`. A strict parser rejects
+writing through any symlink, even one whose target stays inside the destination.
 
 Decision point: whether a member may be written through a symlink.
 Seen in: none of the scanned tarballs.
@@ -419,6 +418,6 @@ points out of the destination.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-10">2026-11-10</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

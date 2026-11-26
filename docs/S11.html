@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a symlink <code>d</code> to <code>..</code>, then a file <code>d/tar-minefield-through-symlink</code>.</p>
-<p>The case is rejected because the file, written through the link, lands in the parent of the destination, not because it is ambiguous. In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a>, files are created by pathname resolution, which follows the link. The file is harmless.</p>
+<p>The archive has a symlink <code>d</code> to <code>..</code>, followed by a file <code>d/tar-minefield-through-symlink</code>.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=The%20extracted%20files%20shall%20be%20created%20performing%20pathname%20resolution">POSIX</a>, files are created by pathname resolution, which follows symlinks and writes <code>d/tar-minefield-through-symlink</code> into the parent of the destination directory. A strict parser rejects the archive to prevent escaping the destination via a symlink. The test payload is harmless.</p>
 <p><strong>Decision point:</strong> whether a member may be written through a symlink.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,11 +52,11 @@
 
 A member written through a symlink, which points out of the destination.
 
-The archive has a symlink `d` to `..`, then a file `d/tar-minefield-through-symlink`.
+The archive has a symlink `d` to `..`, followed by a file `d/tar-minefield-through-symlink`.
 
-The case is rejected because the file, written through the link, lands in the parent of the
-destination, not because it is ambiguous. In POSIX, files are created by pathname
-resolution, which follows the link. The file is harmless.
+In POSIX, files are created by pathname resolution, which follows symlinks and writes
+`d/tar-minefield-through-symlink` into the parent of the destination directory. A strict parser
+rejects the archive to prevent escaping the destination via a symlink. The test payload is harmless.
 
 Decision point: whether a member may be written through a symlink.
 Seen in: none of the scanned tarballs.
@@ -309,6 +309,6 @@ Seen in: none of the scanned tarballs.
 
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

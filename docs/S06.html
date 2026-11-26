@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>f</code>, a symlink <code>s</code> to <code>f</code>, and a hardlink <code>h</code> to <code>s</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, the target of a hardlink is a file of any type, so <code>h</code> is a second name for the symlink <code>s</code> itself. But whether <code>link()</code> follows a symlink is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/link.html#:~:text=If%20path1%20names%20a%20symbolic%20link%2C%20it%20is%20implementation%2Ddefined">implementation-defined</a>; <code>linkat()</code> takes a flag for it. This case is ambiguous in practice because <code>h</code> is either a hardlink to the symlink <code>s</code>, and so itself a symlink to <code>f</code>, or, with the symlink followed, a hardlink to the file <code>f</code>.</p>
+<p>Under <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">POSIX</a>, a hardlink can target a previously archived file of any type, making <code>h</code> a second name for the symlink <code>s</code>. However, whether <code>link()</code> follows a symlink is <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/link.html#:~:text=If%20path1%20names%20a%20symbolic%20link%2C%20it%20is%20implementation%2Ddefined">implementation-defined</a> (and controlled by a flag in <code>linkat()</code>). Depending on the reader and platform, <code>h</code> becomes either a hardlink to the symlink <code>s</code> (and thus itself a symlink to <code>f</code>) or a hardlink to the target file <code>f</code>.</p>
 <p><strong>Decision point:</strong> whether a hardlink follows a symlink.</p>
 <p><strong>Seen in:</strong> octa 8.4.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -54,11 +54,11 @@ A hardlink to a symlink: a link to the symlink, or to its target?
 
 The archive has a file `f`, a symlink `s` to `f`, and a hardlink `h` to `s`.
 
-In POSIX, the target of a hardlink is a file of any type, so `h` is a second name for
-the symlink `s` itself. But whether `link()` follows a symlink is
-implementation-defined; `linkat()` takes a flag for it. This case is ambiguous in
-practice because `h` is either a hardlink to the symlink `s`, and so itself a symlink to `f`, or,
-with the symlink followed, a hardlink to the file `f`.
+Under POSIX, a hardlink can target a previously archived file of any type, making `h` a
+second name for the symlink `s`. However, whether `link()` follows a symlink is
+implementation-defined (and controlled by a flag in `linkat()`). Depending on the
+reader and platform, `h` becomes either a hardlink to the symlink `s` (and thus itself a symlink to
+`f`) or a hardlink to the target file `f`.
 
 Decision point: whether a hardlink follows a symlink.
 Seen in: octa 8.4.
@@ -361,6 +361,6 @@ Seen in: octa 8.4.
 <p>See <a href="seen-in.html#S06">the tarball</a>, with its sha256 and an example.</p>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

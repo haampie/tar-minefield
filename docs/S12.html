@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a file <code>a</code>, then a file <code>a/b</code>, whose name refers to <code>a</code> as a directory.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=if%20intermediate%20directories%20are%20necessary%20to%20extract%20an%20archive%20member">POSIX</a>, the directory <code>a</code> that <code>a/b</code> needs is made as with <code>mkdir()</code>, which fails as <code>a</code> exists, so <code>a</code> is kept, <code>a/b</code> is not created, and a <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">&quot;diagnostic message&quot;</a> is written. This case is ambiguous in practice because a reader that replaces the file <code>a</code> with a directory extracts <code>a/b</code> as well.</p>
+<p>The archive has a file <code>a</code>, followed by a file <code>a/b</code> whose path treats <code>a</code> as a directory.</p>
+<p>Under <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=if%20intermediate%20directories%20are%20necessary%20to%20extract%20an%20archive%20member">POSIX</a>, creating the parent directory <code>a</code> for <code>a/b</code> (as with <code>mkdir()</code>) fails because <code>a</code> already exists as a regular file, so <code>a</code> is kept, <code>a/b</code> is not created, and the extractor writes a <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">diagnostic message</a>. A reader that instead unlinks the regular file <code>a</code> and replaces it with a directory extracts <code>a/b</code>.</p>
 <p><strong>Decision point:</strong> whether a member under a file replaces it.</p>
 <p><strong>Seen in:</strong> sendmail 8.18.2 and unclutter 8, where the file is a v7 directory named <code>a/</code>.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,12 +52,12 @@
 
 A member under a file.
 
-The archive has a file `a`, then a file `a/b`, whose name refers to `a` as a directory.
+The archive has a file `a`, followed by a file `a/b` whose path treats `a` as a directory.
 
-In POSIX, the directory `a` that `a/b` needs is made as with `mkdir()`, which fails
-as `a` exists, so `a` is kept, `a/b` is not created, and a &quot;diagnostic message&quot; is
-written. This case is ambiguous in practice because a reader that replaces the file `a` with a
-directory extracts `a/b` as well.
+Under POSIX, creating the parent directory `a` for `a/b` (as with `mkdir()`) fails
+because `a` already exists as a regular file, so `a` is kept, `a/b` is not created, and the
+extractor writes a diagnostic message. A reader that instead unlinks the regular
+file `a` and replaces it with a directory extracts `a/b`.
 
 Decision point: whether a member under a file replaces it.
 Seen in: sendmail 8.18.2 and unclutter 8, where the file is a v7 directory named `a/`.
@@ -345,6 +345,6 @@ Seen in: sendmail 8.18.2 and unclutter 8, where the file is a v7 directory named
 <p>See <a href="seen-in.html#S12">the list of these 5 tarballs</a>, with the sha256 of each and an example from it.</p>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

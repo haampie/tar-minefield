@@ -1,12 +1,13 @@
 """A symlink to a directory, then a directory of the same name.
 
-The archive has a directory `target/`, then a symlink `a` to `target`, then a directory `a/`.
+The archive has a directory `target/`, a symlink `a` to `target`, and a directory `a/`.
 
-The name `a/` can be seen as a pathname that [resolves][symlink-followed] through the symlink, as
-the name ends in a slash, to the directory `target`, which [already exists][dir-exists], so
-extracting it changes nothing. It can also be seen as the name of a directory `a`, of the member's
-[own type][file-type], which either replaces the symlink, or results in a failure, as it cannot be
-created where the symlink is.
+Because `a/` ends in a slash, pathname resolution [follows][symlink-followed] the symlink `a` to the
+existing directory `target`, where extracting an [already existing directory][dir-exists] is a
+no-op, leaving `a` as a symlink to `target`. On the other hand, [POSIX][file-type] also says each
+member is extracted with its archived file type: a reader that checks `a` without following the
+symlink either replaces the symlink with a directory `a/` or fails because the symlink already
+occupies that path.
 
 Decision point: whether a directory member follows a symlink in its place.
 Seen in: none of the scanned tarballs.

@@ -1,11 +1,11 @@
 """A file, then a directory of the same name.
 
-The archive has a file `a`, then a directory `a/`.
+The archive has a file `a`, followed by a directory `a/`.
 
-In [POSIX][file-type], a member is extracted as a file of its own type, and existing files [can be
-overwritten][overwritten], but POSIX does not say whether overwriting a file includes replacing it
-with a directory. This case is ambiguous because the tree has either the directory, which replaces
-the file, or the file, with an error for the directory.
+In [POSIX][file-type], each member is extracted with its archived file type and existing files [may
+be overwritten][overwritten], but POSIX does not specify whether a directory can replace an existing
+regular file. A reader that removes the file extracts the directory `a/`, whereas one that refuses
+to replace a file with a directory leaves the file `a` in place (or reports an error).
 
 Decision point: whether a later member replaces an earlier one of another kind.
 Seen in: none of the scanned tarballs.

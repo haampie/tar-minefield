@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has the files <code>a</code> and <code>b</code>, then a hardlink <code>a</code> to <code>b</code>.</p>
-<p>The hardlink <code>a</code> either replaces the file <code>a</code>, as existing files <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">can be overwritten</a>, so that <code>a</code> becomes a link to <code>b</code>, or results in a failure, as a link <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/link.html#:~:text=The%20path2%20argument%20resolves%20to%20an%20existing%20directory%20entry">cannot be created</a> where a file already is, which is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=it%20shall%20be%20an%20error%20if%20these%20files%20cannot%20be%20linked%20when%20the%20archive%20is%20extracted">error</a>, and <code>a</code> keeps its own contents.</p>
+<p>The archive has the files <code>a</code> and <code>b</code>, followed by a hardlink <code>a</code> to <code>b</code>.</p>
+<p>Because POSIX permits <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">overwriting existing files</a>, a reader that unlinks <code>a</code> before creating the hardlink replaces <code>a</code> with a link to <code>b</code>. A reader that calls <code>link()</code> directly fails because the destination path <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/link.html#:~:text=The%20path2%20argument%20resolves%20to%20an%20existing%20directory%20entry">already exists</a>, which is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_03:~:text=it%20shall%20be%20an%20error%20if%20these%20files%20cannot%20be%20linked%20when%20the%20archive%20is%20extracted">error</a> and leaves <code>a</code> with its original contents.</p>
 <p><strong>Decision point:</strong> whether a hardlink replaces an existing file of its name.</p>
 <p><strong>Seen in:</strong> 27 tarballs have a file, then a hardlink of the same name, such as xscreensaver 6.12 and atari++ 1.85, but each links to itself; none links to another file.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,12 +52,12 @@
 
 A file, then a hardlink of the same name to another file.
 
-The archive has the files `a` and `b`, then a hardlink `a` to `b`.
+The archive has the files `a` and `b`, followed by a hardlink `a` to `b`.
 
-The hardlink `a` either replaces the file `a`, as existing files can be overwritten,
-so that `a` becomes a link to `b`, or results in a failure, as a link cannot be
-created where a file already is, which is an error, and `a` keeps its
-own contents.
+Because POSIX permits overwriting existing files, a reader that unlinks `a` before
+creating the hardlink replaces `a` with a link to `b`. A reader that calls `link()` directly fails
+because the destination path already exists, which is an error and
+leaves `a` with its original contents.
 
 Decision point: whether a hardlink replaces an existing file of its name.
 Seen in: 27 tarballs have a file, then a hardlink of the same name, such as xscreensaver 6.12 and
@@ -401,6 +401,6 @@ See also: S04, a hardlink to itself, and S07, the same file twice.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>
