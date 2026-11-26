@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a file <code>a</code>, then a hardlink <code>b/</code> to <code>a</code>.</p>
-<p>A <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">hardlink</a> is a link to a file archived before it. A name that ends in a slash <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=ends%20with%20one%20or%20more%20trailing%20%3Cslash%3E%20characters%20shall%20not%20be%20resolved%20successfully%20unless">resolves only to a directory</a>, and a link to the regular file <code>a</code> cannot be one, so this is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">error</a>. This case is ambiguous in practice because a reader can take the member in one of three ways. A reader that drops the slash extracts a hardlink <code>b</code>. One that goes by the slash extracts a directory <code>b</code>. One that makes a regular file of a link it cannot create extracts an empty file <code>b</code>.</p>
+<p>The archive has a file <code>a</code>, followed by a hardlink <code>b/</code> to <code>a</code>.</p>
+<p>A <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=Represents%20a%20file%20linked%20to%20another%20file%2C%20of%20any%20type%2C%20previously%20archived">hardlink</a> links to a previously archived file. Because a pathname ending in a slash <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html#tag_04_16:~:text=ends%20with%20one%20or%20more%20trailing%20%3Cslash%3E%20characters%20shall%20not%20be%20resolved%20successfully%20unless">resolves only to a directory</a>, a link to the regular file <code>a</code> cannot be a directory, resulting in an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">error</a>. A reader that strips the trailing slash extracts a hardlink <code>b</code>. A reader that classifies the member by its trailing slash extracts a directory <code>b</code>, while one that falls back to creating an empty regular file when <code>link()</code> fails extracts an empty file <code>b</code>.</p>
 <p><strong>Decision point:</strong> whether the typeflag or the trailing slash decides the kind of a link.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,14 +52,14 @@
 
 A hardlink whose name ends in a slash: a link, or a directory?
 
-The archive has a file `a`, then a hardlink `b/` to `a`.
+The archive has a file `a`, followed by a hardlink `b/` to `a`.
 
-A hardlink is a link to a file archived before it. A name that ends in a slash resolves
-only to a directory, and a link to the regular file `a` cannot be one, so this is
-an error. This case is ambiguous in practice because a reader can take the member
-in one of three ways. A reader that drops the slash extracts a hardlink `b`. One that goes by the
-slash extracts a directory `b`. One that makes a regular file of a link it cannot create extracts an
-empty file `b`.
+A hardlink links to a previously archived file. Because a pathname ending in a slash
+resolves only to a directory, a link to the regular file `a` cannot be a
+directory, resulting in an error. A reader that strips the trailing slash extracts
+a hardlink `b`. A reader that classifies the member by its trailing slash extracts a directory `b`,
+while one that falls back to creating an empty regular file when `link()` fails extracts an empty
+file `b`.
 
 Decision point: whether the typeflag or the trailing slash decides the kind of a link.
 Seen in: none of the scanned tarballs.
@@ -318,6 +318,6 @@ slash.
 </ul>
 
 <hr class="wide">
-<footer class="wide">Last updated <time datetime="2026-11-07">2026-11-07</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
+<footer class="wide">Last updated <time datetime="2026-11-26">2026-11-26</time><span class="sep">·</span><a class="repo" href="https://github.com/haampie/tar-minefield"><span>GitHub</span><span>haampie/tar-minefield</span></a> <a class="doi" href="https://doi.org/10.5281/zenodo.23617964"><span>DOI</span><span>10.5281/zenodo.23617964</span></a></footer>
 </body>
 </html>

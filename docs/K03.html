@@ -39,8 +39,8 @@
 </table></dd>
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
-<p>The archive has a directory <code>target/</code>, then a symlink <code>link/</code> to <code>target</code>. With the slash, the name refers to what the link points to.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">POSIX</a>, a member is extracted as a file of its own type, here a symlink, but <code>symlink()</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/symlink.html#:~:text=The%20path2%20argument%20contains%20at%20least%20one%20non%2D%3Cslash%3E%20character%20and%20ends%20with%20one%20or%20more%20trailing%20%3Cslash%3E%20characters">fails on a name</a> that ends in a slash, so this is an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">error</a>. This case is ambiguous in practice because the member is either a symlink <code>link</code>, by its typeflag, or a directory <code>link</code>, by its trailing slash.</p>
+<p>The archive has a directory <code>target/</code>, followed by a symlink <code>link/</code> to <code>target</code>. With the trailing slash, the name refers to what the link points to.</p>
+<p>Under <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">POSIX</a>, a member is extracted with its archived file type (here a symlink), yet <code>symlink()</code> <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/symlink.html#:~:text=The%20path2%20argument%20contains%20at%20least%20one%20non%2D%3Cslash%3E%20character%20and%20ends%20with%20one%20or%20more%20trailing%20%3Cslash%3E%20characters">fails on a path</a> ending in a slash, resulting in an <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_15:~:text=If%20pax%20cannot%20create%20a%20file%20or%20a%20link%20when%20reading%20an%20archive">error</a>. A reader that strips the trailing slash extracts a symlink <code>link</code>, whereas one that classifies the member by its trailing slash extracts a directory <code>link</code>.</p>
 <p><strong>Decision point:</strong> what a trailing slash on a link means.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -52,13 +52,13 @@
 
 A symlink whose name ends in a slash.
 
-The archive has a directory `target/`, then a symlink `link/` to `target`. With the slash, the name
-refers to what the link points to.
+The archive has a directory `target/`, followed by a symlink `link/` to `target`. With the trailing
+slash, the name refers to what the link points to.
 
-In POSIX, a member is extracted as a file of its own type, here a symlink, but
-`symlink()` fails on a name that ends in a slash, so this is an
-error. This case is ambiguous in practice because the member is either a symlink
-`link`, by its typeflag, or a directory `link`, by its trailing slash.
+Under POSIX, a member is extracted with its archived file type (here a symlink), yet
+`symlink()` fails on a path ending in a slash, resulting in an
+error. A reader that strips the trailing slash extracts a symlink `link`, whereas
+one that classifies the member by its trailing slash extracts a directory `link`.
 
 Decision point: what a trailing slash on a link means.
 Seen in: none of the scanned tarballs.

@@ -1,12 +1,12 @@
 """A regular file whose name ends in a slash: a file, or a directory?
 
-The archive has one regular file, of typeflag `0`, with size 0, but the name `a/`.
+The archive has one regular file (typeflag `0`) with size 0 and the name `a/`.
 
-In [POSIX][file-type], a member is extracted as a file of its own type, but a name that ends in a
-slash [resolves only to a directory][trailing-slash], so this is an [error][cannot-create]. A name
-that ends in a slash was the [old way][slash-convention] to archive a directory. This case is
-ambiguous in practice because the member is either a directory `a`, by its trailing slash, or an
-empty file `a`, by its typeflag.
+Under [POSIX][file-type], a member is extracted with its archived file type, yet a pathname ending
+in a slash [resolves only to a directory][trailing-slash], resulting in an [error][cannot-create].
+Before ustar added a directory typeflag, a trailing slash was the [historical
+convention][slash-convention] for directories. A reader that follows the trailing slash extracts a
+directory `a`, whereas one that follows the typeflag extracts an empty regular file `a`.
 
 Decision point: whether the typeflag or the trailing slash decides the kind.
 Seen in: archives in the old v7 format, such as sendmail 8.18.2, tcp_wrappers 7.6 and

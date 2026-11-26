@@ -1,16 +1,16 @@
 """A regular file with an empty name and a prefix: `dir/`, or no name?
 
-The archive has one regular file, of typeflag `0`, with size 0, an empty name field and the prefix
-`dir`.
+The archive has one regular file (typeflag `0`) with size 0, an empty name field, and `dir` in its
+prefix field.
 
-In [POSIX][prefix], the pathname is the prefix, followed by `/`, followed by the name, which here is
-empty, so the pathname is `dir/`. A member is extracted as a file of its [own type][file-type], here
-a regular file, but a name that ends in a slash [resolves only to a directory][trailing-slash], so
-this is an [error][cannot-create]. A name that ends in a slash was the [old way][slash-convention]
-to archive a directory, before the typeflag of a directory existed. This case is ambiguous in
-practice because the member is either a directory `dir`, by its trailing slash, an empty file `dir`,
-by its typeflag, or no file at all, if the empty name field is taken for a missing name before the
-prefix is applied.
+Under [POSIX][prefix], the pathname is formed by joining the prefix, `/`, and the name, yielding
+`dir/`. A member is extracted with its [archived file type][file-type] (a regular file), yet a
+pathname ending in a slash [resolves only to a directory][trailing-slash], resulting in an
+[error][cannot-create]. Before ustar added a directory typeflag, a trailing slash was the
+[historical convention][slash-convention] for directories. Depending on the reader, the member is
+extracted as a directory `dir` (by its trailing slash), as an empty regular file `dir` (by its
+typeflag), or skipped as nameless if the reader checks for an empty name field before applying the
+prefix.
 
 Decision point: whether a prefix makes a name of an empty name field, and whether the typeflag or
 the trailing slash decides the kind.
