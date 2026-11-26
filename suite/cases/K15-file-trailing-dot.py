@@ -1,19 +1,19 @@
-"""A regular file whose name ends in `/.`: a file `a`, or a directory?
+"""A regular file named `a/.`: a file `a`, or a directory?
 
-The archive has one regular file, of typeflag `0`, with the name `a/.`.
+The archive has one regular file (typeflag `0`) named `a/.`.
 
-The special filename [dot][dot] refers to the directory that it is in, so `a/.` is `a`, and resolves
-only if `a` is a directory. In [POSIX][file-type], a member is extracted as a file of its own type,
-so this is an [error][cannot-create]. This case is ambiguous in practice because a reader can take
-the member in one of four ways. A reader that normalizes the name extracts a file `a`. One that
-first creates the parent directories of a member extracts an empty directory `a`. One that renames a
-component that it cannot create extracts the file under another name in that directory, such as
-`a/_`. Other readers report an error.
+Because [dot][dot] refers to its enclosing directory, `a/.` resolves only if `a` is a directory, yet
+[POSIX][file-type] requires extracting the member as a regular file, resulting in an
+[error][cannot-create]. A reader that strips the trailing `/.` before extraction creates a regular
+file `a`. A reader that first creates parent directories makes `a` a directory and then fails or
+skips the file, leaving an empty directory `a`. A reader that renames the final `.` component
+extracts a regular file inside `a`, such as `a/_`, while other readers report an error.
 
-Decision point: whether a name that ends in `/.` is normalized.
-Seen in: not measured, as earlier versions of the scanner did not tell such a name apart from others
-with a `.` component: 10 of the scanned tarballs have a name with such a component.
-See also: K01, a regular file whose name ends in a slash, and N50, a name with a `.` component.
+Decision point: whether a trailing `/.` on a regular file's name is stripped before extraction.
+Seen in: not measured, as earlier scanner versions grouped trailing `/.` with inner `.` components;
+10 scanned tarballs have a `.` component.
+See also: K01, a regular file whose name ends in a slash, and N50, a name with an inner `.`
+component.
 """
 
 VERDICT = "reject"

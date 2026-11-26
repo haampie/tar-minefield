@@ -119,11 +119,11 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="K03.html"><code>K03</code></a> symlink-trailing-slash</td><td>A symlink whose name ends in a slash.</td><td>extracts <code>link</code> → <code>target</code>, <code>target/</code></td></tr>
 <tr><td><a href="K04.html"><code>K04</code></a> name-empty-with-prefix</td><td>A regular file with an empty name and a prefix: <code>dir/</code>, or no name?</td><td>extracts <code>dir</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="K05.html"><code>K05</code></a> hardlink-trailing-slash</td><td>A hardlink whose name ends in a slash: a link, or a directory?</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="K08.html"><code>K08</code></a> type-fifo</td><td>A FIFO: created, an empty file, or skipped?</td><td>extracts <code>b</code> (2 B, 02638299)</td></tr>
-<tr><td><a href="K11.html"><code>K11</code></a> pax-mode</td><td>A pax <code>mode</code> record on a file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="K12.html"><code>K12</code></a> pax-acl</td><td>An ACL in a pax header with the execute permission for the owner of a file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="K15.html"><code>K15</code></a> file-trailing-dot</td><td>A regular file whose name ends in <code>/.</code>: a file <code>a</code>, or a directory?</td><td>extracts <code>a</code> (27 B, a75c49d7)</td></tr>
-<tr><td><a href="K16.html"><code>K16</code></a> pax-linkpath-on-file</td><td>A regular file with a link target in its pax header.</td><td>extracts <code>a</code> (19 B, bc345849)</td></tr>
+<tr><td><a href="K08.html"><code>K08</code></a> type-fifo</td><td>A FIFO member: created, extracted as an empty file, or skipped?</td><td>extracts <code>b</code> (2 B, 02638299)</td></tr>
+<tr><td><a href="K11.html"><code>K11</code></a> pax-mode</td><td>A non-standard pax <code>mode</code> record on a file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
+<tr><td><a href="K12.html"><code>K12</code></a> pax-acl</td><td>A pax ACL record that grants owner execute permission on a mode-644 file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
+<tr><td><a href="K15.html"><code>K15</code></a> file-trailing-dot</td><td>A regular file named <code>a/.</code>: a file <code>a</code>, or a directory?</td><td>extracts <code>a</code> (27 B, a75c49d7)</td></tr>
+<tr><td><a href="K16.html"><code>K16</code></a> pax-linkpath-on-file</td><td>A regular file with a <code>linkpath</code> record in its pax header.</td><td>extracts <code>a</code> (19 B, bc345849)</td></tr>
 <tr><td><a href="S03.html"><code>S03</code></a> hardlink-missing-target</td><td>A hardlink to a member that is not in the archive.</td><td>extracts nothing</td></tr>
 <tr><td><a href="S04.html"><code>S04</code></a> hardlink-to-itself</td><td>A hardlink to itself.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="S05.html"><code>S05</code></a> hardlink-to-later-member</td><td>A hardlink to a member that comes later.</td><td>extracts <code>f</code> (2 B, 092fcfbb)</td></tr>

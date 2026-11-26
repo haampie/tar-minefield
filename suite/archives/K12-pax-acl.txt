@@ -1,24 +1,23 @@
 K12-pax-acl: must reject
 
-An ACL in a pax header with the execute permission for the owner of a file.
+A pax ACL record that grants owner execute permission on a mode-644 file.
 
-The archive has a file `a` with the mode 644, whose pax header has the record
-`SCHILY.acl.access=user::rwx,group::r-x,other::r-x`.
+The archive has a file `a` with mode 644 in its ustar header and
+`SCHILY.acl.access=user::rwx,group::r-x,other::r-x` in its pax header.
 
-The key `SCHILY.acl.access`, for the access control list of a file, is star's, and libarchive and
-GNU tar write it too. The entries `user::`, `group::` and `other::` of such a list are the
-permissions of the owner, the group and others, which are also in the mode. Writers write both as
-they are on the filesystem, where they are the same; in this archive the mode is 644, and the list
-says 755. This case is ambiguous because a reader that does not apply ACLs extracts `a` with the
-mode 644, and one that applies them extracts `a` as an executable file.
+Star introduced `SCHILY.acl.access` for POSIX access control lists, and libarchive and GNU tar use
+it as well. Its `user::`, `group::` and `other::` entries mirror the traditional owner, group and
+other mode bits. Normal archivers write consistent permissions in both places, whereas this archive
+pairs a ustar mode of 644 with an ACL equivalent to 755. A reader that ignores ACLs leaves `a` at
+mode 644, while one that applies the ACL makes `a` executable.
 
-Decision point: whether an ACL in a pax header is applied.
-Seen in: not measured, as the scans do not record all pax keys of a tarball, only its 8 most common,
-and do not record the names of xattrs: a key `SCHILY.acl.*` is not among those of any tarball, and
-45 of the scanned tarballs have more keys, or xattrs, which an ACL can be in.
+Decision point: whether a pax ACL record is applied on extraction.
+Seen in: not measured, as the scanner records only the 8 most common pax keys per tarball and does
+not record xattr names; no tarball has `SCHILY.acl.*` among its top 8 keys, and 45 scanned tarballs
+have additional keys or xattrs where an ACL could live.
 See also: K09, an executable file, and F31, an xattr in a pax header.
 
-0x000000  header: pax extended header, an ACL equal to the mode 755
+0x000000  header: pax extended header, ACL granting mode 755
           name     [  0,100)  "PaxHeader" + 91 NUL
           mode     [100,108)  "0000644" + NUL  644 (octal)
           uid      [108,116)  "0000000" + NUL  0

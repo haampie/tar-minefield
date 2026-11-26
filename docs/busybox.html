@@ -124,11 +124,11 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="K03.html"><code>K03</code></a> symlink-trailing-slash</td><td>A symlink whose name ends in a slash.</td><td>extracts <code>link</code> → <code>target</code>, <code>target/</code></td></tr>
 <tr><td><a href="K04.html"><code>K04</code></a> name-empty-with-prefix</td><td>A regular file with an empty name and a prefix: <code>dir/</code>, or no name?</td><td>extracts <code>dir/</code></td></tr>
 <tr><td><a href="K05.html"><code>K05</code></a> hardlink-trailing-slash</td><td>A hardlink whose name ends in a slash: a link, or a directory?</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>b</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="K08.html"><code>K08</code></a> type-fifo</td><td>A FIFO: created, an empty file, or skipped?</td><td>extracts <code>b</code> (2 B, 02638299), <code>p</code> (other)</td></tr>
-<tr><td><a href="K11.html"><code>K11</code></a> pax-mode</td><td>A pax <code>mode</code> record on a file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="K12.html"><code>K12</code></a> pax-acl</td><td>An ACL in a pax header with the execute permission for the owner of a file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="K13.html"><code>K13</code></a> number-mode-base256</td><td>A mode in base-256.</td><td>extracts <code>a</code> (2 B, 87428fc5, executable)</td></tr>
-<tr><td><a href="K16.html"><code>K16</code></a> pax-linkpath-on-file</td><td>A regular file with a link target in its pax header.</td><td>extracts <code>a</code> (19 B, bc345849)</td></tr>
+<tr><td><a href="K08.html"><code>K08</code></a> type-fifo</td><td>A FIFO member: created, extracted as an empty file, or skipped?</td><td>extracts <code>b</code> (2 B, 02638299), <code>p</code> (other)</td></tr>
+<tr><td><a href="K11.html"><code>K11</code></a> pax-mode</td><td>A non-standard pax <code>mode</code> record on a file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
+<tr><td><a href="K12.html"><code>K12</code></a> pax-acl</td><td>A pax ACL record that grants owner execute permission on a mode-644 file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
+<tr><td><a href="K13.html"><code>K13</code></a> number-mode-base256</td><td>A file mode encoded in base-256.</td><td>extracts <code>a</code> (2 B, 87428fc5, executable)</td></tr>
+<tr><td><a href="K16.html"><code>K16</code></a> pax-linkpath-on-file</td><td>A regular file with a <code>linkpath</code> record in its pax header.</td><td>extracts <code>a</code> (19 B, bc345849)</td></tr>
 <tr><td><a href="S04.html"><code>S04</code></a> hardlink-to-itself</td><td>A hardlink to itself.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="S05.html"><code>S05</code></a> hardlink-to-later-member</td><td>A hardlink to a member that comes later.</td><td>extracts <code>f</code> (2 B, 092fcfbb), <code>h</code> (2 B, 092fcfbb)</td></tr>
 <tr><td><a href="S06.html"><code>S06</code></a> hardlink-to-symlink</td><td>A hardlink to a symlink: a link to the symlink, or to its target?</td><td>extracts <code>f</code> (2 B, 092fcfbb), <code>h</code> → <code>f</code>, <code>s</code> → <code>f</code></td></tr>

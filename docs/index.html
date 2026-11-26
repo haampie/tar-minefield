@@ -73,7 +73,7 @@ published there.</p>
 <tr><td><a href="F82.html"><code>F82</code></a></td><td>pax-times</td><td>Subsecond <code>mtime</code>, <code>atime</code> and <code>ctime</code> records in a pax header, as written by GNU tar.</td><td class=n>not measured</td></tr>
 <tr><td><a href="K07.html"><code>K07</code></a></td><td>dir-name-empty-with-prefix</td><td>A directory with an empty name field and a prefix.</td><td class=n>7.65%</td></tr>
 <tr><td><a href="K09.html"><code>K09</code></a></td><td>file-executable</td><td>An executable file.</td><td class=n>not measured</td></tr>
-<tr><td><a href="K10.html"><code>K10</code></a></td><td>file-executable-group-other</td><td>Files executable by their group or others, but not by their owner.</td><td class=n>not measured</td></tr>
+<tr><td><a href="K10.html"><code>K10</code></a></td><td>file-executable-group-other</td><td>Files executable by group or others, but not by their owner.</td><td class=n>not measured</td></tr>
 <tr><td><a href="N01.html"><code>N01</code></a></td><td>gnu-long-name</td><td>A name over 100 bytes, in a GNU long name.</td><td class=n>not measured</td></tr>
 <tr><td><a href="N02.html"><code>N02</code></a></td><td>name-fills-field</td><td>A name of exactly 100 bytes, which fills the name field without a NUL.</td><td class=n>9.53%</td></tr>
 <tr><td><a href="N03.html"><code>N03</code></a></td><td>pax-long-name</td><td>A name over 100 bytes, in a pax <code>path</code>.</td><td class=n>not measured</td></tr>
@@ -224,13 +224,13 @@ published there.</p>
 <tr><td><a href="K04.html"><code>K04</code></a></td><td>name-empty-with-prefix</td><td>A regular file with an empty name and a prefix: <code>dir/</code>, or no name?</td><td class=n>&lt;0.01%</td></tr>
 <tr><td><a href="K05.html"><code>K05</code></a></td><td>hardlink-trailing-slash</td><td>A hardlink whose name ends in a slash: a link, or a directory?</td><td class=n>none</td></tr>
 <tr><td><a href="K06.html"><code>K06</code></a></td><td>symlink-named-dot</td><td>A symlink <code>.</code>: dropped, renamed, or an error?</td><td class=n>≤0.08%<a href="#unmeasured">*</a></td></tr>
-<tr><td><a href="K08.html"><code>K08</code></a></td><td>type-fifo</td><td>A FIFO: created, an empty file, or skipped?</td><td class=n>&lt;0.01%<a href="#unmeasured">*</a></td></tr>
-<tr><td><a href="K11.html"><code>K11</code></a></td><td>pax-mode</td><td>A pax <code>mode</code> record on a file.</td><td class=n>≤0.01%<a href="#unmeasured">*</a></td></tr>
-<tr><td><a href="K12.html"><code>K12</code></a></td><td>pax-acl</td><td>An ACL in a pax header with the execute permission for the owner of a file.</td><td class=n>≤0.05%<a href="#unmeasured">*</a></td></tr>
-<tr><td><a href="K13.html"><code>K13</code></a></td><td>number-mode-base256</td><td>A mode in base-256.</td><td class=n>none</td></tr>
-<tr><td><a href="K14.html"><code>K14</code></a></td><td>file-named-dot</td><td>A regular file <code>.</code>: dropped, renamed, or an error?</td><td class=n>≤0.08%<a href="#unmeasured">*</a></td></tr>
-<tr><td><a href="K15.html"><code>K15</code></a></td><td>file-trailing-dot</td><td>A regular file whose name ends in <code>/.</code>: a file <code>a</code>, or a directory?</td><td class=n>≤0.01%<a href="#unmeasured">*</a></td></tr>
-<tr><td><a href="K16.html"><code>K16</code></a></td><td>pax-linkpath-on-file</td><td>A regular file with a link target in its pax header.</td><td class=n>none</td></tr></table></div>
+<tr><td><a href="K08.html"><code>K08</code></a></td><td>type-fifo</td><td>A FIFO member: created, extracted as an empty file, or skipped?</td><td class=n>&lt;0.01%<a href="#unmeasured">*</a></td></tr>
+<tr><td><a href="K11.html"><code>K11</code></a></td><td>pax-mode</td><td>A non-standard pax <code>mode</code> record on a file.</td><td class=n>≤0.01%<a href="#unmeasured">*</a></td></tr>
+<tr><td><a href="K12.html"><code>K12</code></a></td><td>pax-acl</td><td>A pax ACL record that grants owner execute permission on a mode-644 file.</td><td class=n>≤0.05%<a href="#unmeasured">*</a></td></tr>
+<tr><td><a href="K13.html"><code>K13</code></a></td><td>number-mode-base256</td><td>A file mode encoded in base-256.</td><td class=n>none</td></tr>
+<tr><td><a href="K14.html"><code>K14</code></a></td><td>file-named-dot</td><td>A regular file named <code>.</code>: skipped, renamed, or an error?</td><td class=n>≤0.08%<a href="#unmeasured">*</a></td></tr>
+<tr><td><a href="K15.html"><code>K15</code></a></td><td>file-trailing-dot</td><td>A regular file named <code>a/.</code>: a file <code>a</code>, or a directory?</td><td class=n>≤0.01%<a href="#unmeasured">*</a></td></tr>
+<tr><td><a href="K16.html"><code>K16</code></a></td><td>pax-linkpath-on-file</td><td>A regular file with a <code>linkpath</code> record in its pax header.</td><td class=n>none</td></tr></table></div>
 <h3 id="to-reject-order-and-state">To reject: order and state<a class="anchor" href="#to-reject-order-and-state" aria-label="Link to this section">¶</a></h3>
 <div class="wide"><table class="cases"><colgroup><col style="width: 14%"><col style="width: 24%"><col style="width: 48%"><col style="width: 14%"></colgroup><tr><th>identifier</th><th>name</th><th>what it is</th><th class=n>prevalence</th></tr>
 <tr><td><a href="S03.html"><code>S03</code></a></td><td>hardlink-missing-target</td><td>A hardlink to a member that is not in the archive.</td><td class=n>none</td></tr>

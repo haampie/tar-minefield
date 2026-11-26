@@ -1,16 +1,16 @@
-"""A regular file with a link target in its pax header.
+"""A regular file with a `linkpath` record in its pax header.
 
-The archive has one regular file, `a`, of typeflag `0`, whose pax header has the record
-`linkpath=target`.
+The archive has a regular file `a` (typeflag `0`) whose pax header contains `linkpath=target`.
 
-A `linkpath` record [overrides][linkpath] the linkname field, and in [POSIX][linkname] a linkname
-has a meaning only for links. A member is extracted as a file of its [own type][file-type], so the
-member is a file. This case is ambiguous only to a reader that goes by the link target, and makes a
-link to `target`. Other readers extract the file, or report an error.
+A pax `linkpath` record [overrides][linkpath] the ustar linkname field, which [POSIX][linkname]
+defines only for hardlinks and symlinks. Because a member is extracted according to its
+[typeflag][file-type], `a` is a regular file. Most readers either ignore `linkpath` and extract the
+file or reject the inconsistent header, but a reader that infers the member kind from the presence
+of a link target creates a link to `target` instead.
 
-Decision point: whether a link target makes a member a link.
+Decision point: whether a pax `linkpath` turns a regular file into a link.
 Seen in: none of the scanned tarballs.
-See also: K02, a regular file with a linkname.
+See also: K02, a regular file with a ustar linkname.
 """
 
 VERDICT = "reject"
@@ -19,6 +19,6 @@ FEATURES = ["extended.linkpath-on-file"]
 
 
 def build(a):
-    a.pax([(b"linkpath", b"target")], note="a link target for a file")
+    a.pax([(b"linkpath", b"target")], note="linkpath on a regular file")
     a.file(b"a", b"a file, or a link?\n")
     a.end()

@@ -1,7 +1,7 @@
 {
  "id": "K11",
  "verdict": "reject",
- "description": "A pax `mode` record on a file.",
+ "description": "A non-standard pax `mode` record on a file.",
  "features": [
   "pax.mode"
  ]

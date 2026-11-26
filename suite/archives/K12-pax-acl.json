@@ -1,7 +1,7 @@
 {
  "id": "K12",
  "verdict": "reject",
- "description": "An ACL in a pax header with the execute permission for the owner of a file.",
+ "description": "A pax ACL record that grants owner execute permission on a mode-644 file.",
  "features": [
   "pax.acl"
  ]

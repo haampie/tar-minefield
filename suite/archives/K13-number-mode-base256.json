@@ -1,7 +1,7 @@
 {
  "id": "K13",
  "verdict": "reject",
- "description": "A mode in base-256.",
+ "description": "A file mode encoded in base-256.",
  "features": [
   "number.mode.base256"
  ]
