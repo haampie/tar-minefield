@@ -1,4 +1,4 @@
-K02-linkname-on-file: must reject
+K02-linkname-on-file: tolerated: a strict parser may reject it; if it accepts it, it must extract its tree, and the default policy accepts it
 
 A regular file with a link target.
 
@@ -6,7 +6,8 @@ The archive has one regular file, `a`, of typeflag `0`, with the linkname `targe
 
 POSIX gives a linkname meaning only for links, and a member is extracted as a file of
 its own type, so the member is a file. This case is ambiguous only to a reader that
-goes by the linkname, and makes a link to `target`.
+goes by the linkname, and makes a link to `target`. The default policy tolerates it, as the readers
+that accept it ignore the linkname and extract the same regular file.
 
 Decision point: whether a linkname makes a member a link.
 Seen in: bgen 1.1.7.

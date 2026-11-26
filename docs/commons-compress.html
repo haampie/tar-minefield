@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Java Commons Compress · Tar file extraction test suite</title>
-<meta name="description" content="The 107 of 188 cases of the tar-minefield test suite where Java Commons Compress does not follow the draft default policy, and what it makes of them.">
+<meta name="description" content="The 104 of 188 cases of the tar-minefield test suite where Java Commons Compress does not follow the draft default policy, and what it makes of them.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="Java Commons Compress · Tar file extraction test suite">
-<meta property="og:description" content="The 107 of 188 cases of the tar-minefield test suite where Java Commons Compress does not follow the draft default policy, and what it makes of them.">
+<meta property="og:description" content="The 104 of 188 cases of the tar-minefield test suite where Java Commons Compress does not follow the draft default policy, and what it makes of them.">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/commons-compress.html">
 <meta property="og:url" content="https://stoppels.ch/tar/commons-compress.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/8a1f80e00797de5c.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/b3a0a84d83b477ec.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of every case of the test suite">
@@ -28,16 +28,16 @@
 <dt>Version</dt><dd>Commons Compress 1.28.0, Expander, on Java 27.0.1.0.2</dd>
 
 </dl>
-<p>This implementation follows the <a href="index.html#policy">default policy</a> in 81 of 188 cases:</p>
+<p>This implementation follows the <a href="index.html#policy">default policy</a> in 84 of 188 cases:</p>
 <ul>
-<li>it rejects 36 of the 133 cases to reject</li>
+<li>it rejects 36 of the 130 cases to reject</li>
 <li>it extracts the expected tree in 29 of the 36 cases to accept</li>
-<li>it accepts 16 of the 19 tolerated cases</li>
+<li>it accepts 19 of the 22 tolerated cases</li>
 </ul>
 <p class="note">The default policy is a working draft. Where an implementation does not do as it
 says, that can be a choice rather than a bug.</p>
-<p>On the other 107, it does not:</p>
-<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (97)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
+<p>On the other 104, it does not:</p>
+<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (94)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
 <tr><td><a href="F03.html"><code>F03</code></a> end-lone-zero-block</td><td>An end-of-archive marker of one zero block, not two.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="F06.html"><code>F06</code></a> checksum-signed</td><td>A checksum that only matches as the signed sum of the header.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
@@ -71,7 +71,6 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="F54.html"><code>F54</code></a> format-pax-header-without-magic</td><td>A pax extended header without magic: a header, or a file?</td><td>extracts <code>renamed</code> (12 B, a578eb49)</td></tr>
 <tr><td><a href="F62.html"><code>F62</code></a> pax-schily-realsize</td><td>A <code>SCHILY.realsize</code> pax record on a non-sparse file.</td><td>extracts <code>a</code> (5 B, 5994471a)</td></tr>
 <tr><td><a href="F64.html"><code>F64</code></a> end-truncated-in-header</td><td>An archive that ends inside a header.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
-<tr><td><a href="F66.html"><code>F66</code></a> archive-no-bytes</td><td>A zero-byte file: an empty archive, or not an archive?</td><td>extracts nothing</td></tr>
 <tr><td><a href="F68.html"><code>F68</code></a> size-on-symlink</td><td>A non-zero size in a symlink header, covering the next member&#x27;s header.</td><td>extracts <code>b</code> (2 B, 02638299), <code>l</code> (512 B, 917dba8e)</td></tr>
 <tr><td><a href="F71.html"><code>F71</code></a> number-size-base256-marker</td><td>A size field starting with <code>0x81</code>: base-256, or invalid?</td><td>extracts <code>a</code> (512 B, 917dba8e)</td></tr>
 <tr><td><a href="F72.html"><code>F72</code></a> pax-record-length-wraps</td><td>A pax record length of 2^32 + 24, which wraps to 24 in 32-bit arithmetic.</td><td>extracts <code>renamed</code> (12 B, a578eb49)</td></tr>
@@ -109,7 +108,6 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="N53.html"><code>N53</code></a> name-dotdot-inside</td><td>A name with <code>..</code> that stays inside the destination: <code>a/../b</code>.</td><td>extracts <code>a/</code>, <code>b</code> (2 B, 02638299)</td></tr>
 <tr><td><a href="F60.html"><code>F60</code></a> trailing-slash-file-with-size</td><td>A regular file <code>a/</code> with a size: a directory without data, or a file with data?</td><td>extracts <code>a/</code>, <code>b</code> (2 B, 02638299)</td></tr>
 <tr><td><a href="K01.html"><code>K01</code></a> kind-trailing-slash-file</td><td>A regular file whose name ends in a slash: a file, or a directory?</td><td>extracts <code>a/</code></td></tr>
-<tr><td><a href="K02.html"><code>K02</code></a> linkname-on-file</td><td>A regular file with a link target.</td><td>extracts <code>a</code> (19 B, bc345849)</td></tr>
 <tr><td><a href="K03.html"><code>K03</code></a> symlink-trailing-slash</td><td>A symlink whose name ends in a slash.</td><td>extracts <code>link/</code>, <code>target/</code></td></tr>
 <tr><td><a href="K04.html"><code>K04</code></a> name-empty-with-prefix</td><td>A regular file with an empty name and a prefix: <code>dir/</code>, or no name?</td><td>extracts <code>dir/</code></td></tr>
 <tr><td><a href="K05.html"><code>K05</code></a> hardlink-trailing-slash</td><td>A hardlink whose name ends in a slash: a link, or a directory?</td><td>extracts <code>a</code> (2 B, 87428fc5), <code>b/</code></td></tr>
@@ -118,7 +116,6 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="K12.html"><code>K12</code></a> pax-acl</td><td>A pax ACL record that grants owner execute permission on a mode-644 file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="K13.html"><code>K13</code></a> number-mode-base256</td><td>A file mode encoded in base-256.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>
 <tr><td><a href="K15.html"><code>K15</code></a> file-trailing-dot</td><td>A regular file named <code>a/.</code>: a file <code>a</code>, or a directory?</td><td>extracts <code>a</code> (27 B, a75c49d7)</td></tr>
-<tr><td><a href="K16.html"><code>K16</code></a> pax-linkpath-on-file</td><td>A regular file with a <code>linkpath</code> record in its pax header.</td><td>extracts <code>a</code> (19 B, bc345849)</td></tr>
 <tr><td><a href="S03.html"><code>S03</code></a> hardlink-missing-target</td><td>A hardlink to a member that is not in the archive.</td><td>extracts <code>h</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="S04.html"><code>S04</code></a> hardlink-to-itself</td><td>A hardlink to itself.</td><td>extracts <code>a</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="S05.html"><code>S05</code></a> hardlink-to-later-member</td><td>A hardlink to a member that comes later.</td><td>extracts <code>f</code> (2 B, 092fcfbb), <code>h</code> (0 B, e3b0c442)</td></tr>

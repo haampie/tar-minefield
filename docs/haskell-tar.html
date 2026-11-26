@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Haskell tar · Tar file extraction test suite</title>
-<meta name="description" content="The 83 of 188 cases of the tar-minefield test suite where Haskell tar does not follow the draft default policy, and what it makes of them.">
+<meta name="description" content="The 82 of 188 cases of the tar-minefield test suite where Haskell tar does not follow the draft default policy, and what it makes of them.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="tar-minefield">
 <meta property="og:title" content="Haskell tar · Tar file extraction test suite">
-<meta property="og:description" content="The 83 of 188 cases of the tar-minefield test suite where Haskell tar does not follow the draft default policy, and what it makes of them.">
+<meta property="og:description" content="The 82 of 188 cases of the tar-minefield test suite where Haskell tar does not follow the draft default policy, and what it makes of them.">
 <link rel="stylesheet" href="style.css?f8c77ac4">
 <link rel="canonical" href="https://stoppels.ch/tar/haskell-tar.html">
 <meta property="og:url" content="https://stoppels.ch/tar/haskell-tar.html">
-<meta property="og:image" content="https://stoppels.ch/tar/img/8a1f80e00797de5c.png">
+<meta property="og:image" content="https://stoppels.ch/tar/img/b3a0a84d83b477ec.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="What implementations make of every case of the test suite">
@@ -28,16 +28,16 @@
 <dt>Version</dt><dd>tar 0.7.2.0, extract, of GHC 9.14</dd>
 
 </dl>
-<p>This implementation follows the <a href="index.html#policy">default policy</a> in 105 of 188 cases:</p>
+<p>This implementation follows the <a href="index.html#policy">default policy</a> in 106 of 188 cases:</p>
 <ul>
-<li>it rejects 54 of the 133 cases to reject</li>
+<li>it rejects 52 of the 130 cases to reject</li>
 <li>it extracts the expected tree in 33 of the 36 cases to accept</li>
-<li>it accepts 13 and rejects 5 of the 19 tolerated cases</li>
+<li>it accepts 14 and rejects 7 of the 22 tolerated cases</li>
 </ul>
 <p class="note">The default policy is a working draft. Where an implementation does not do as it
 says, that can be a choice rather than a bug.</p>
-<p>On the other 83, it does not:</p>
-<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (79)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
+<p>On the other 82, it does not:</p>
+<h2 id="accepts"><span class="mark warn" title="accepts a case to reject, or crashes on it" role="img" aria-label="accepts a case to reject, or crashes on it">!</span>Accepts cases to reject (78)<a class="anchor" href="#accepts" aria-label="Link to this section">¶</a></h2>
 <div class="wide"><table class="differences"><colgroup><col style="width: 24%"><col style="width: 38%"><col style="width: 38%"></colgroup><tr><th>case</th><th>what it is</th><th>what it makes of it</th></tr>
 <tr><td><a href="F10.html"><code>F10</code></a> extended-pax-size-before-gnu-long</td><td>A pax <code>size</code> followed by a GNU long name: which of them does the size apply to?</td><td>extracts <code>long-name</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="F12.html"><code>F12</code></a> number-size-gap</td><td>A size with a space among its digits, which reads as two sizes.</td><td>extracts <code>a</code> (0 B, e3b0c442), <code>smuggled</code> (0 B, e3b0c442)</td></tr>
@@ -104,7 +104,6 @@ says, that can be a choice rather than a bug.</p>
 <tr><td><a href="N41.html"><code>N41</code></a> pax-gnu-sparse-name</td><td>A pax <code>GNU.sparse.name</code> on a file that is not sparse, after a <code>path</code>.</td><td>extracts <code>path-name</code> (12 B, a578eb49)</td></tr>
 <tr><td><a href="N51.html"><code>N51</code></a> linkname-bytes-after-nul</td><td>Trailing bytes after the NUL terminator in a symlink target.</td><td>extracts <code>l</code> → <code>safe</code></td></tr>
 <tr><td><a href="N53.html"><code>N53</code></a> name-dotdot-inside</td><td>A name with <code>..</code> that stays inside the destination: <code>a/../b</code>.</td><td>extracts <code>a/</code>, <code>b</code> (2 B, 02638299)</td></tr>
-<tr><td><a href="K02.html"><code>K02</code></a> linkname-on-file</td><td>A regular file with a link target.</td><td>extracts <code>a</code> (19 B, bc345849)</td></tr>
 <tr><td><a href="K04.html"><code>K04</code></a> name-empty-with-prefix</td><td>A regular file with an empty name and a prefix: <code>dir/</code>, or no name?</td><td>extracts <code>dir</code> (0 B, e3b0c442)</td></tr>
 <tr><td><a href="K08.html"><code>K08</code></a> type-fifo</td><td>A FIFO member: created, extracted as an empty file, or skipped?</td><td>extracts <code>b</code> (2 B, 02638299)</td></tr>
 <tr><td><a href="K11.html"><code>K11</code></a> pax-mode</td><td>A non-standard pax <code>mode</code> record on a file.</td><td>extracts <code>a</code> (2 B, 87428fc5)</td></tr>

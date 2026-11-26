@@ -1,4 +1,4 @@
-K16-pax-linkpath-on-file: must reject
+K16-pax-linkpath-on-file: tolerated: a strict parser may reject it; if it accepts it, it must extract its tree, and the default policy accepts it
 
 A regular file with a `linkpath` record in its pax header.
 
@@ -6,9 +6,9 @@ The archive has a regular file `a` (typeflag `0`) whose pax header contains `lin
 
 A pax `linkpath` record overrides the ustar linkname field, which POSIX
 defines only for hardlinks and symlinks. Because a member is extracted according to its
-typeflag, `a` is a regular file. Most readers either ignore `linkpath` and extract the
-file or reject the inconsistent header, but a reader that infers the member kind from the presence
-of a link target creates a link to `target` instead.
+typeflag, `a` is a regular file. A reader that infers the member kind from the presence
+of a link target would create a link to `target` instead. The default policy tolerates it, as the
+readers that accept it ignore `linkpath` and extract the same regular file.
 
 Decision point: whether a pax `linkpath` turns a regular file into a link.
 Seen in: none of the scanned tarballs.

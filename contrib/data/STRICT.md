@@ -77,6 +77,9 @@ The strict criteria that the default policy lets through, and how; it rejects al
 | `symlink.escapes` | accept | the symlink is created as it is, and writing through a symlink is rejected | 2 |
 | `end.data-after` | accept | junk after the two zero blocks is ignored | 25 |
 | `end.missing` | accept | implementations that extract it extract the same tree | 22 |
+| `archive.empty` | accept | implementations that accept it extract the same empty tree | 0 |
+| `linkname.on-file` | accept | the member is extracted as a regular file, the kind its typeflag gives | 1 |
+| `extended.linkpath-on-file` | accept | the member is extracted as a regular file, the kind its typeflag gives | 0 |
 | `pax-global.after-members` | accept | only if every global header has only a `comment` | 82 |
 | `magic.posix-version-nuls` | accept | some Java archivers write `"ustar\0\0\0"` | 60 |
 | `name.control-character` | accept | the name is created as it is, as every implementation reads it alike, and the risk is in its use | 11 |
@@ -122,7 +125,7 @@ Tarballs that each criterion rejects, per ecosystem. Default: what the default p
 | name | `pax.repeated-key`: a pax key twice in one extended header | reject | 0 | 1 (0.01%) | 0 | 0 | 0 | 0 | 0 | 0 | libmygpo-qt.1.2.0 |
 | kind | `name.trailing-slash-on-file`: a regular file named like a directory, `a/` | reject | 0 | 1 (0.01%) | 0 | 4 (0.02%) | 0 | 1 (0.02%) | 2 (0.01%) | 1 | tcp_wrappers_7.6, sendmail.8.18.2, unclutter@8 |
 | kind | `linkname.on-dir`: a link target on a member that is not a link | reject | 0 | 0 | 0 | 0 | 0 | 0 | 1 (0.00%) | 0 | bgen@1.1.7 |
-| kind | `linkname.on-file`: a link target on a member that is not a link | reject | 0 | 0 | 0 | 0 | 0 | 0 | 1 (0.00%) | 0 | bgen@1.1.7 |
+| kind | `linkname.on-file`: a link target on a member that is not a link | accept | 0 | 0 | 0 | 0 | 0 | 0 | 1 (0.00%) | 0 | bgen@1.1.7 |
 | order and state | `tree.duplicate.file-file`: the same file twice | reject | 0 | 17 (0.17%) | 0 | 59 (0.31%) | 3 (0.03%) | 4 (0.08%) | 17 (0.05%) | 80 | string-conversions@0.4.0.1, notmuch@0.40, multipart@0.2.1 |
 | order and state | `hardlink.to-itself`: a hardlink to itself | reject | 0 | 2 (0.02%) | 0 | 1 (0.01%) | 0 | 0 | 24 (0.06%) | 0 | xscreensaver@6.12, ghc@7.8.4-x86_64-unknown-linux-deb7, atari++_1.85 |
 | order and state | `tree.duplicate.file-hardlink`: one path as two members | reject | 0 | 2 (0.02%) | 0 | 1 (0.01%) | 0 | 0 | 24 (0.06%) | 0 | xscreensaver@6.12, ghc@7.8.4-x86_64-unknown-linux-deb7, atari++_1.85 |
@@ -143,8 +146,8 @@ It does not rule out all strict criteria. These are not measured in some tarball
 | `linkname.not-utf8` | 5,051 |
 | `tree.duplicate.dir-symlink` | 4,850 |
 | `extended.name-dotdot` | 1,003 |
-| `tree.duplicate.dir-hardlink` | 233 |
 | `hardlink.mode-differs` | 233 |
+| `tree.duplicate.dir-hardlink` | 233 |
 | `name.dot-on-*` | 67 |
 | `pax.acl` | 45 |
 | `hardlink.absolute` | 28 |
@@ -154,8 +157,8 @@ It does not rule out all strict criteria. These are not measured in some tarball
 | `pax.mode` | 9 |
 | `number.*.invalid-character` | 7 |
 | `hardlink.target-trailing-slash` | 2 |
-| `tree.duplicate.dir-fifo` | 1 |
 | `type.fifo` | 1 |
+| `tree.duplicate.dir-fifo` | 1 |
 
 It does not rule out these allowed features, in fields outside the tree, which the table below counts only where they were reported: `pax.value-not-utf8.mtime` in 10,787, `pax.value-not-utf8.atime` in 703, `pax.value-not-utf8.ctime` in 687, `number.uid.base256-too-large` in 143, `number.gid.base256-too-large` in 136, `pax.value-not-utf8.uid` in 100, `pax.value-not-utf8.gid` in 67.
 

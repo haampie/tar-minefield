@@ -228,6 +228,10 @@ costs. The tolerated cases are:
   tarballs do: the implementations that extract it all extract the same tree, and whether an
   archive is complete is known by other means, such as a published checksum, or the decompression
   of a compressed archive.
+- a file of 0 bytes, as an archive without members: the implementations that accept it all extract
+  the same empty tree, and whether a download is complete is known by other means.
+- a link target on a regular file, in its linkname field or in a pax `linkpath`, which is extracted
+  as the regular file its typeflag gives: the implementations that accept it all do so.
 - a global pax header with only a `comment` after the first member.
 - the POSIX magic with NULs for its version, `"ustar\0\0\0"`, which some Java archivers write,
   as in the tarballs of Apache's commons-lang, Solr and Hadoop. Any other version is rejected.
