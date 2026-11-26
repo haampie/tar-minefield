@@ -3,10 +3,11 @@
 The archive has a file `a` whose pax header sets `size` to `٥١٢` (512 in UTF-8 Arabic-Indic digits,
 U+0665 U+0661 U+0662) and whose ustar header has size 0, followed by an empty file `smuggled`.
 
-In [POSIX][size-decimal], a pax size uses ASCII decimal digits. Number parsers that accept any
-Unicode decimal digit, such as Python's `int` and Java's `Long.parseLong`, parse `٥١٢` as 512 and
-consume the next block as `a`'s data. A reader that rejects non-ASCII digits and falls back to the
-ustar size of 0 reads the next block as `smuggled`'s header.
+In [POSIX][size-decimal], a pax size uses ASCII decimal digits. Read leniently, number parsers that
+accept any Unicode decimal digit, such as Python's `int` and Java's `Long.parseLong`, parse `٥١٢` as
+512 and consume the next block as `a`'s data, while a reader that rejects non-ASCII digits and falls
+back to the ustar size of 0 reads the next block as `smuggled`'s header. Neither follows from POSIX,
+which does not say what a `size` record that is not a decimal number means.
 
 Decision point: which digits a pax number may have.
 Seen in: none of the scanned tarballs.

@@ -8,8 +8,8 @@ The file's ustar header gives the name `header-name`.
 A POSIX extended header consists of records that each begin with a decimal
 byte length, leaving no room for blank lines between records. A reader that skips
 the blank line applies `path=renamed`. A reader that stops parsing at the blank line or discards the
-pax header extracts `header-name`. A reader that advances by the declared length plus one extra byte
-starts reading the second record one byte late and truncates the name to `rename`.
+pax header extracts `header-name`. A reader that takes the newline for the start of the next record
+reads its length from one byte too early and cuts the name to `rename`.
 
 Decision point: whether a pax header may have bytes between its records.
 Seen in: none of the scanned tarballs.

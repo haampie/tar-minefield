@@ -6,9 +6,9 @@ The archive has a file `a`, a single zero block, a file `hidden`, and finally th
 that end the archive.
 
 In POSIX, an archive ends with two zero blocks, so a single zero block is neither a valid
-header nor a complete end-of-archive marker. A reader that treats a lone zero block as the end of
-the archive stops after `a`, whereas one that skips a single zero block continues and extracts
-`hidden`.
+header nor a complete end-of-archive marker. Read leniently, a reader that treats a lone zero block
+as the end of the archive stops after `a`, whereas one that skips a single zero block continues and
+extracts `hidden`.
 
 Decision point: whether one zero block ends the archive.
 Seen in: 7 tarballs have a zero block followed by non-zero blocks, such as jakarta-oro 2.0.8 and

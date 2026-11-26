@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code> with <code>size=+512</code> in its pax header and size 0 in its ustar header, followed by an empty file <code>smuggled</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a>, a pax size consists of decimal digits without a sign, and POSIX does not define a fallback for a malformed <code>size</code> record. However, standard number parsers such as Python&#x27;s <code>int</code>, Go&#x27;s <code>strconv.ParseInt</code> and Rust&#x27;s <code>u64::from_str</code> accept a leading <code>+</code> and parse <code>+512</code> as 512, consuming the next block as <code>a</code>&#x27;s data. A reader that rejects <code>+512</code> as malformed and falls back to the ustar size of 0 reads the next block as <code>smuggled</code>&#x27;s header.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20size%20of%20the%20file%20in%20octets%2C%20expressed%20as%20a%20decimal%20number">POSIX</a>, a pax size consists of decimal digits without a sign. Read leniently, standard number parsers such as Python&#x27;s <code>int</code>, Go&#x27;s <code>strconv.ParseInt</code> and Rust&#x27;s <code>u64::from_str</code> accept a leading <code>+</code> and parse <code>+512</code> as 512, consuming the next block as <code>a</code>&#x27;s data, while a reader that rejects <code>+512</code> and falls back to the ustar size of 0 reads the next block as <code>smuggled</code>&#x27;s header. Neither follows from POSIX, which does not say what a <code>size</code> record that is not a decimal number means.</p>
 <p><strong>Decision point:</strong> whether a pax size may have a sign.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,11 +55,12 @@ A pax `size` with a plus sign, `+512`, which conversions of strings to numbers a
 The archive has a file `a` with `size=+512` in its pax header and size 0 in its ustar header,
 followed by an empty file `smuggled`.
 
-In POSIX, a pax size consists of decimal digits without a sign, and POSIX does not
-define a fallback for a malformed `size` record. However, standard number parsers such as Python&#x27;s
-`int`, Go&#x27;s `strconv.ParseInt` and Rust&#x27;s `u64::from_str` accept a leading `+` and parse `+512` as
-512, consuming the next block as `a`&#x27;s data. A reader that rejects `+512` as malformed and falls
-back to the ustar size of 0 reads the next block as `smuggled`&#x27;s header.
+In POSIX, a pax size consists of decimal digits without a sign. Read leniently,
+standard number parsers such as Python&#x27;s `int`, Go&#x27;s `strconv.ParseInt` and Rust&#x27;s `u64::from_str`
+accept a leading `+` and parse `+512` as 512, consuming the next block as `a`&#x27;s data, while a reader
+that rejects `+512` and falls back to the ustar size of 0 reads the next block as `smuggled`&#x27;s
+header. Neither follows from POSIX, which does not say what a `size` record that is not a decimal
+number means.
 
 Decision point: whether a pax size may have a sign.
 Seen in: none of the scanned tarballs.

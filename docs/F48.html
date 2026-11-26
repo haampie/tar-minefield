@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file with a single 17-byte pax record, <code>+17 path=renamed</code> followed by a newline, and <code>header-name</code> in its ustar name field.</p>
-<p>In POSIX, a pax record&#x27;s <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">length</a> is formatted as an unsigned decimal integer (<code>%d</code>) without a leading sign. A lenient reader that accepts <code>+17</code> as 17 applies <code>path=renamed</code>, whereas one that ignores the malformed record or discards the pax header falls back to <code>header-name</code>.</p>
+<p>In POSIX, a pax record&#x27;s <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">length</a> is its decimal length in octets, as <code>%d</code> writes it, without a sign. A lenient reader that accepts <code>+17</code> as 17 applies <code>path=renamed</code>, whereas one that ignores the malformed record or discards the pax header falls back to <code>header-name</code>.</p>
 <p><strong>Decision point:</strong> whether the length of a pax record may have a sign.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,9 +55,9 @@ A pax record whose length has a plus sign, `+17`.
 The archive has a file with a single 17-byte pax record, `+17 path=renamed` followed by a newline,
 and `header-name` in its ustar name field.
 
-In POSIX, a pax record&#x27;s length is formatted as an unsigned decimal integer (`%d`)
-without a leading sign. A lenient reader that accepts `+17` as 17 applies `path=renamed`, whereas
-one that ignores the malformed record or discards the pax header falls back to `header-name`.
+In POSIX, a pax record&#x27;s length is its decimal length in octets, as `%d` writes
+it, without a sign. A lenient reader that accepts `+17` as 17 applies `path=renamed`, whereas one
+that ignores the malformed record or discards the pax header falls back to `header-name`.
 
 Decision point: whether the length of a pax record may have a sign.
 Seen in: none of the scanned tarballs.

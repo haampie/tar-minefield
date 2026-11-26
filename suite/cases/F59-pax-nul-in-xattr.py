@@ -3,10 +3,10 @@
 The archive has a file with two pax records: `SCHILY.xattr.user.a` (whose value is `x`, a NUL, and
 `y`) followed by `path=renamed`. The file's ustar header gives the name `header-name`.
 
-Because pax records are delimited by their [byte length][record-length] and [all bytes][value-data]
-of a value are data, the NUL is part of the xattr value and the file is extracted as `renamed`. A
-reader that stops parsing the pax payload at the first NUL, or discards any pax header containing a
-NUL, loses `path=renamed` and extracts `header-name`.
+Because pax records are delimited by their [byte length][record-length] and [all
+characters][value-data] of a value are data, the NUL is part of the xattr value and the file is
+extracted as `renamed`. A reader that stops parsing the pax payload at the first NUL, or discards
+any pax header containing a NUL, loses `path=renamed` and extracts `header-name`.
 
 Seen in: 32 of the scanned tarballs have a NUL in the value of an xattr, such as those of qd,
 sundials and pacparser in Spack.

@@ -5,11 +5,11 @@ The archive has a symlink `link` with an empty `linkpath=` record in its pax hea
 
 In POSIX, `linkpath` [overrides][linkpath] the ustar `linkname` field, an empty value
 [deletes][empty-value] any header field of the same name, and any header field overridden or deleted
-by a pax record [is ignored][corresponding]. Because the ustar field is named `linkname` rather than
-`linkpath`, `linkpath=` can be read in three ways: if it only clears a previous `linkpath`, the
-target [falls back to the ustar header][header-fallback] (`from-header`); if it deletes the
-overridden `linkname` field as well, the symlink is left without a target; and if the empty value is
-[assigned directly][x-assigned], the symlink gets an empty target `""`.
+by a pax record [is ignored][corresponding]. The ustar header has no field named `linkpath`. If
+deletion goes by the keyword's name, `linkpath=` deletes nothing in the header and the target [comes
+from the header][header-fallback] (`from-header`). If it goes by the header field that the keyword
+overrides, `linkname` is deleted too and the symlink is left without a target. If the record is
+applied like any other, its empty value [becomes the target][x-assigned].
 
 Decision point: what an empty pax link path means: no target, an empty target, or the header's.
 Seen in: none of the scanned tarballs.

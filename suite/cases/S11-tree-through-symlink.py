@@ -2,9 +2,9 @@
 
 The archive has a symlink `d` to `..`, followed by a file `d/tar-minefield-through-symlink`.
 
-In [POSIX][resolution], files are created by pathname resolution, which follows symlinks and writes
-`d/tar-minefield-through-symlink` into the parent of the destination directory. A strict parser
-rejects the archive to prevent escaping the destination via a symlink. The test payload is harmless.
+The case is rejected because the file, written through the link, lands in the parent of the
+destination, not because it is ambiguous. In [POSIX][resolution], files are created by pathname
+resolution, which follows the symlink. The test payload is harmless.
 
 Decision point: whether a member may be written through a symlink.
 Seen in: none of the scanned tarballs.

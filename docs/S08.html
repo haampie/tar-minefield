@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code>, followed by a directory <code>a/</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">POSIX</a>, each member is extracted with its archived file type and existing files <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">may be overwritten</a>, but POSIX does not specify whether a directory can replace an existing regular file. A reader that removes the file extracts the directory <code>a/</code>, whereas one that refuses to replace a file with a directory leaves the file <code>a</code> in place (or reports an error).</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=In%20read%20mode%2C%20the%20extracted%20output%20files%20shall%20be%20of%20the%20archived%20file%20type">POSIX</a>, each member is extracted with its archived file type and existing files <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_12:~:text=existing%20files%20in%20the%20destination%20hierarchy%20shall%20be%20overwritten%20only%20when%20all%20permission">may be overwritten</a>, but POSIX does not specify whether a directory can replace an existing regular file. A reader that removes the file extracts the directory <code>a/</code>, whereas one that refuses to replace a file with a directory leaves the file <code>a</code> in place, with or without an error.</p>
 <p><strong>Decision point:</strong> whether a later member replaces an earlier one of another kind.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -57,7 +57,7 @@ The archive has a file `a`, followed by a directory `a/`.
 In POSIX, each member is extracted with its archived file type and existing files may
 be overwritten, but POSIX does not specify whether a directory can replace an existing
 regular file. A reader that removes the file extracts the directory `a/`, whereas one that refuses
-to replace a file with a directory leaves the file `a` in place (or reports an error).
+to replace a file with a directory leaves the file `a` in place, with or without an error.
 
 Decision point: whether a later member replaces an earlier one of another kind.
 Seen in: none of the scanned tarballs.

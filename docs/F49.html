@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file whose pax header contains <code>comment=x</code>, an extra newline, and <code>path=renamed</code>. The file&#x27;s ustar header gives the name <code>header-name</code>.</p>
-<p>A POSIX extended header <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=An%20extended%20header%20shall%20consist%20of%20one%20or%20more%20records">consists of records</a> that each begin with a decimal <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">byte length</a>, leaving no room for blank lines between records. A reader that skips the blank line applies <code>path=renamed</code>. A reader that stops parsing at the blank line or discards the pax header extracts <code>header-name</code>. A reader that advances by the declared length plus one extra byte starts reading the second record one byte late and truncates the name to <code>rename</code>.</p>
+<p>A POSIX extended header <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=An%20extended%20header%20shall%20consist%20of%20one%20or%20more%20records">consists of records</a> that each begin with a decimal <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">byte length</a>, leaving no room for blank lines between records. A reader that skips the blank line applies <code>path=renamed</code>. A reader that stops parsing at the blank line or discards the pax header extracts <code>header-name</code>. A reader that takes the newline for the start of the next record reads its length from one byte too early and cuts the name to <code>rename</code>.</p>
 <p><strong>Decision point:</strong> whether a pax header may have bytes between its records.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -58,8 +58,8 @@ The file&#x27;s ustar header gives the name `header-name`.
 A POSIX extended header consists of records that each begin with a decimal
 byte length, leaving no room for blank lines between records. A reader that skips
 the blank line applies `path=renamed`. A reader that stops parsing at the blank line or discards the
-pax header extracts `header-name`. A reader that advances by the declared length plus one extra byte
-starts reading the second record one byte late and truncates the name to `rename`.
+pax header extracts `header-name`. A reader that takes the newline for the start of the next record
+reads its length from one byte too early and cuts the name to `rename`.
 
 Decision point: whether a pax header may have bytes between its records.
 Seen in: none of the scanned tarballs.

@@ -7,8 +7,8 @@ Solaris tar writes extended headers with typeflag `X` instead of POSIX's `x`. Un
 typeflags `A` to `Z` are reserved for [custom implementations][custom-type], and a reader that does
 not recognize one extracts it [as a regular file][unknown-type]. A reader that treats `X` as a pax
 extended header extracts the file as `from-x`. A reader that treats `X` as an unknown regular file
-extracts `PaxHeader` (containing `15 path=from-x\n`) followed by `from-header`, while one that skips
-unknown typeflags extracts `from-header` alone.
+extracts `PaxHeader` containing the record, followed by `from-header`, while one that skips unknown
+typeflags extracts `from-header` alone.
 
 Decision point: whether typeflag `X` is an extended header.
 Seen in: none of the scanned tarballs.

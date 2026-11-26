@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file <code>a</code> with <code>+0000001000</code> in its size field, followed by an empty file <code>smuggled</code>.</p>
-<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are unsigned octal numbers filled with leading zeros. A reader that skips the leading <code>+</code> reads octal 1000 (512) and consumes the next block as <code>a</code>&#x27;s data. A reader that stops at the <code>+</code> reads a size of 0 and treats the next block as <code>smuggled</code>&#x27;s header. A reader that interprets a leading sign as the marker for a base-64 number, as early test releases of GNU tar did, decodes a huge size and consumes the rest of the archive as <code>a</code>&#x27;s data.</p>
+<p>In <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_06:~:text=All%20other%20fields%20are%20leading%20zero%2Dfilled%20octal%20numbers">POSIX</a>, numeric fields are unsigned octal numbers filled with leading zeros. Read leniently, a reader that skips the leading <code>+</code> reads octal 1000 (512) and consumes the next block as <code>a</code>&#x27;s data. A reader that stops at the <code>+</code> reads a size of 0 and treats the next block as <code>smuggled</code>&#x27;s header. A reader that takes a leading sign for the start of a base-64 number, as some early test versions of GNU tar wrote them, decodes a huge size and consumes the rest of the archive as <code>a</code>&#x27;s data.</p>
 <p><strong>Decision point:</strong> whether a numeric field may have a sign.</p>
 <p><strong>Seen in:</strong> none of the scanned tarballs.</p>
 <h2 id="the-archive">The archive<a class="anchor" href="#the-archive" aria-label="Link to this section">¶</a></h2>
@@ -55,11 +55,12 @@ A size with a plus sign, `+0000001000`.
 The archive has a file `a` with `+0000001000` in its size field, followed by an empty file
 `smuggled`.
 
-In POSIX, numeric fields are unsigned octal numbers filled with leading zeros. A
-reader that skips the leading `+` reads octal 1000 (512) and consumes the next block as `a`&#x27;s data.
-A reader that stops at the `+` reads a size of 0 and treats the next block as `smuggled`&#x27;s header. A
-reader that interprets a leading sign as the marker for a base-64 number, as early test releases of
-GNU tar did, decodes a huge size and consumes the rest of the archive as `a`&#x27;s data.
+In POSIX, numeric fields are unsigned octal numbers filled with leading zeros. Read
+leniently, a reader that skips the leading `+` reads octal 1000 (512) and consumes the next block as
+`a`&#x27;s data. A reader that stops at the `+` reads a size of 0 and treats the next block as
+`smuggled`&#x27;s header. A reader that takes a leading sign for the start of a base-64 number, as some
+early test versions of GNU tar wrote them, decodes a huge size and consumes the rest of the archive
+as `a`&#x27;s data.
 
 Decision point: whether a numeric field may have a sign.
 Seen in: none of the scanned tarballs.

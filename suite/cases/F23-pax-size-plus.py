@@ -3,11 +3,12 @@
 The archive has a file `a` with `size=+512` in its pax header and size 0 in its ustar header,
 followed by an empty file `smuggled`.
 
-In [POSIX][size-decimal], a pax size consists of decimal digits without a sign, and POSIX does not
-define a fallback for a malformed `size` record. However, standard number parsers such as Python's
-`int`, Go's `strconv.ParseInt` and Rust's `u64::from_str` accept a leading `+` and parse `+512` as
-512, consuming the next block as `a`'s data. A reader that rejects `+512` as malformed and falls
-back to the ustar size of 0 reads the next block as `smuggled`'s header.
+In [POSIX][size-decimal], a pax size consists of decimal digits without a sign. Read leniently,
+standard number parsers such as Python's `int`, Go's `strconv.ParseInt` and Rust's `u64::from_str`
+accept a leading `+` and parse `+512` as 512, consuming the next block as `a`'s data, while a reader
+that rejects `+512` and falls back to the ustar size of 0 reads the next block as `smuggled`'s
+header. Neither follows from POSIX, which does not say what a `size` record that is not a decimal
+number means.
 
 Decision point: whether a pax size may have a sign.
 Seen in: none of the scanned tarballs.

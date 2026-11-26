@@ -5,10 +5,11 @@ The archive has a file whose pax header contains `path=path-name` followed by
 name `header-name`.
 
 In GNU's pax sparse format, `GNU.sparse.name` holds the real filename of a sparse member. Under
-POSIX, vendor keywords are [optional extensions][keyword-extension]. A reader that applies
-`GNU.sparse.name` unconditionally (either because it takes priority over `path` or because it comes
-later in the header) extracts `sparse-name`. A reader that ignores `GNU.sparse.name` on a non-sparse
-file extracts `path-name`, while one that discards both records extracts `header-name`.
+POSIX, vendor keywords are [implementation extensions][keyword-extension], which are not defined. A
+reader that applies `GNU.sparse.name` unconditionally (either because it takes priority over `path`
+or because it comes later in the header) extracts `sparse-name`. A reader that applies
+`GNU.sparse.name` only to a sparse file extracts `path-name`, while one that ignores both records
+extracts `header-name`.
 
 Decision point: whether `GNU.sparse.name` applies to a file that is not sparse.
 Seen in: none of the scanned tarballs.

@@ -5,9 +5,9 @@ whose ustar header gives the name `from-header`.
 
 In POSIX, an [extended header][extended] applies to the file that follows it. Because typeflag `L`
 is [reserved for custom implementations][custom-type], a pure POSIX reader extracts the `L` header
-[as a regular file][unknown-type] named `from-pax` (containing `from-gnu\0`), followed by the file
-`from-header`. Readers that support both extensions instead apply either `from-pax` or `from-gnu` to
-the file member.
+[as a regular file][unknown-type] named `from-pax` that contains the long name, followed by the file
+`from-header`. Most readers that know GNU long names instead give the file member one of the two
+long names, `from-pax` or `from-gnu`.
 
 Decision point: which of several sources gives a member its name, and whether a pax header applies
 to a GNU long name.

@@ -7,8 +7,8 @@ Some readers treat typeflag `N` as a GNU long name, like typeflag `L`. In POSIX,
 `Z` are reserved for [custom implementations][custom-type], and a reader that does not recognize one
 extracts it [as a regular file][unknown-type]. A reader that treats `N` as a long name extracts the
 following member as `long-name`. A reader that extracts `N` as a regular file creates `@LongLink`
-(containing `long-name\0`) followed by `header-name`, whereas one that skips unknown typeflags
-extracts `header-name` alone.
+containing the name, followed by `header-name`, whereas one that skips unknown typeflags extracts
+`header-name` alone.
 
 Decision point: whether typeflag `N` is a long name.
 Seen in: none of the scanned tarballs.

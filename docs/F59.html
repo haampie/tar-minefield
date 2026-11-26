@@ -40,7 +40,7 @@
 </dl>
 <h2 id="the-case">The case<a class="anchor" href="#the-case" aria-label="Link to this section">¶</a></h2>
 <p>The archive has a file with two pax records: <code>SCHILY.xattr.user.a</code> (whose value is <code>x</code>, a NUL, and <code>y</code>) followed by <code>path=renamed</code>. The file&#x27;s ustar header gives the name <code>header-name</code>.</p>
-<p>Because pax records are delimited by their <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">byte length</a> and <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=all%20characters%20within%20the%20%3Cvalue%3E%20field%20shall%20be%20considered%20data%20for%20the%20field">all bytes</a> of a value are data, the NUL is part of the xattr value and the file is extracted as <code>renamed</code>. A reader that stops parsing the pax payload at the first NUL, or discards any pax header containing a NUL, loses <code>path=renamed</code> and extracts <code>header-name</code>.</p>
+<p>Because pax records are delimited by their <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=The%20%3Clength%3E%20field%20shall%20be%20the%20decimal%20length%20of%20the%20extended%20header%20record%20in%20octets">byte length</a> and <a href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/pax.html#tag_20_94_13_03:~:text=all%20characters%20within%20the%20%3Cvalue%3E%20field%20shall%20be%20considered%20data%20for%20the%20field">all characters</a> of a value are data, the NUL is part of the xattr value and the file is extracted as <code>renamed</code>. A reader that stops parsing the pax payload at the first NUL, or discards any pax header containing a NUL, loses <code>path=renamed</code> and extracts <code>header-name</code>.</p>
 <p>The expected tree:</p>
 <div class="wide"><table class="tree"><colgroup><col style="width: 40%"><col style="width: 20%"><col style="width: 40%"></colgroup><tr><th>path</th><th>kind</th><th>contents</th></tr>
 <tr><td><code>renamed</code></td><td>file</td><td>12 bytes, sha256 <code title="a578eb499fb3e6e7b3cf1a53e6f0574968909fde18a8cb8b1e05ef91cd5c3dee">a578eb49</code></td></tr></table></div>
@@ -57,10 +57,10 @@ A NUL in the value of a pax xattr, before a `path` record.
 The archive has a file with two pax records: `SCHILY.xattr.user.a` (whose value is `x`, a NUL, and
 `y`) followed by `path=renamed`. The file&#x27;s ustar header gives the name `header-name`.
 
-Because pax records are delimited by their byte length and all bytes
-of a value are data, the NUL is part of the xattr value and the file is extracted as `renamed`. A
-reader that stops parsing the pax payload at the first NUL, or discards any pax header containing a
-NUL, loses `path=renamed` and extracts `header-name`.
+Because pax records are delimited by their byte length and all
+characters of a value are data, the NUL is part of the xattr value and the file is
+extracted as `renamed`. A reader that stops parsing the pax payload at the first NUL, or discards
+any pax header containing a NUL, loses `path=renamed` and extracts `header-name`.
 
 Seen in: 32 of the scanned tarballs have a NUL in the value of an xattr, such as those of qd,
 sundials and pacparser in Spack.

@@ -6,8 +6,9 @@ Under [POSIX][resolution], files are created by pathname resolution, which
 [follows][symlink-followed] `x/l` and writes `d/f` inside the destination directory. A reader that
 follows the symlink extracts `d/f`, whereas one that refuses to traverse symlinks either fails or
 skips `f`. A reader that defers creating symlinks until after regular files first creates `x/l` as a
-real directory for `x/l/f` and then fails when creating the symlink `x/l`. A strict parser rejects
-writing through any symlink, even one whose target stays inside the destination.
+real directory for `x/l/f` and then fails when creating the symlink `x/l`. It is rejected, as is
+writing through any symlink: a reader that writes through links stays inside the destination only if
+it resolves each link at every write.
 
 Decision point: whether a member may be written through a symlink.
 Seen in: none of the scanned tarballs.
